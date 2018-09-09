@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_OrgChartLayout";
+}
+
+<div class="well">
+    <div id="people"></div>
+    <script type="text/javascript">        
+            var peopleElement = document.getElementById("people");
+            var orgChart = new getOrgChart(peopleElement, {
+                theme: "helen",
+                primaryFields: ["Name", "Title"],
+                photoFields: ["Image"],
+                linkType: "M",
+                enableEdit: false,
+                enableDetailsView: false,
+                dataSource: {}
+            });
+
+    </script>
+</div>
