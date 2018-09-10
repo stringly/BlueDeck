@@ -6,17 +6,135 @@
 
 <div class="well">
     <div id="people"></div>
-    <script type="text/javascript">        
-            var peopleElement = document.getElementById("people");
-            var orgChart = new getOrgChart(peopleElement, {
-                theme: "helen",
-                primaryFields: ["Name", "Title"],
-                photoFields: ["Image"],
-                linkType: "M",
-                enableEdit: false,
-                enableDetailsView: false,
-                dataSource: {}
-            });
-
-    </script>
 </div>
+<script type="text/javascript">
+    var peopleElement = document.getElementById("people");
+    var orgChart = new getOrgChart(peopleElement, {
+        primaryFields: ["componentName"],
+        expandToLevel: 100,
+        layout: getOrgChart.MIXED_HIERARCHY_RIGHT_LINKS,
+        dataSource: [
+            {
+                "id": 50,
+                "parentId": 16,
+                "componentName": "District I"
+            },
+            {
+                "id": 49,
+                "parentId": 50,
+                "componentName": "District I Commander's Office"
+            },
+            {
+                "id": 73,
+                "parentId": 49,
+                "componentName": "District I, Shift I"
+            },
+            {
+                "id": 79,
+                "parentId": 73,
+                "componentName": "Squad 11"
+            },
+            {
+                "id": 80,
+                "parentId": 73,
+                "componentName": "Squad 12"
+            },
+            {
+                "id": 74,
+                "parentId": 49,
+                "componentName": "District I, Shift II"
+            },
+            {
+                "id": 81,
+                "parentId": 74,
+                "componentName": "Squad 21"
+            },
+            {
+                "id": 82,
+                "parentId": 74,
+                "componentName": "Squad 22"
+            },
+            {
+                "id": 75,
+                "parentId": 49,
+                "componentName": "District I, Shift III"
+            },
+            {
+                "id": 83,
+                "parentId": 75,
+                "componentName": "Squad 31"
+            },
+            {
+                "id": 84,
+                "parentId": 75,
+                "componentName": "Squad 32"
+            },
+            {
+                "id": 76,
+                "parentId": 49,
+                "componentName": "District I, Shift IV"
+            },
+            {
+                "id": 85,
+                "parentId": 76,
+                "componentName": "Squad 41"
+            },
+            {
+                "id": 86,
+                "parentId": 76,
+                "componentName": "Squad 42"
+            },
+            {
+                "id": 77,
+                "parentId": 49,
+                "componentName": "District I, Shift V"
+            },
+            {
+                "id": 87,
+                "parentId": 77,
+                "componentName": "Squad 51"
+            },
+            {
+                "id": 88,
+                "parentId": 77,
+                "componentName": "Squad 52"
+            },
+            {
+                "id": 78,
+                "parentId": 49,
+                "componentName": "District I, COPS/Enforcement"
+            },
+            {
+                "id": 221,
+                "parentId": 78,
+                "componentName": "SRO, B-Sector"
+            },
+            {
+                "id": 218,
+                "parentId": 78,
+                "componentName": "District I, SAT-A"
+            },
+            {
+                "id": 219,
+                "parentId": 78,
+                "componentName": "District I, SAT-B"
+            },
+            {
+                "id": 216,
+                "parentId": 78,
+                "componentName": "COPS-A"
+            },
+            {
+                "id": 217,
+                "parentId": 78,
+                "componentName": "COPS-B"
+            },
+            {
+                "id": 226,
+                "parentId": 78,
+                "componentName": "College Park Liaison Unit"
+            }
+        ]
+    });
+
+</script>
