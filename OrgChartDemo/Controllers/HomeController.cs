@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
+using OrgChartDemo.Models.ViewModels;
 using Newtonsoft.Json;
 
 namespace OrgChartDemo.Controllers
@@ -19,14 +20,16 @@ namespace OrgChartDemo.Controllers
         [HttpGet]
         public JsonResult GetComponents() 
         {
-            return Json(repository.OrgChartComponents.ToArray());
+            return Json(repository.ChartableComponents.ToArray());
         }
 
 
 
-        public IActionResult Index()
+        public IActionResult Index() => View(new OrgChartOptionsViewModel
         {
-            return View();
-        }
+            Components = repository.Components.OrderBy(p => p.ComponentId).ToList(),
+            Members = repository.Members.OrderBy(p => p.IdNumber).ToList(),
+        });
+        
     }
 }

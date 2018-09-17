@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models {
 
-    public class OrgChartComponentWithMember {
+    // extends Chartable to add Member fields to pass to a view
+    // using GetOrgChart as implemented in this project
 
-        public int id { get; set; }
-        public int? parentid { get; set; }
-        public string componentName { get; set; }        
+    public class ChartableComponentWithManager : ChartableComponent {
+
         public int? memberId { get; set; }
         public string memberName { get; set; }
         public string email { get; set; }
-        public string contactNumber { get; set; }
-        
+        public string contactNumber { get; set; }        
     }
 }

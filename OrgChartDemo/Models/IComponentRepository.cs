@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models {
     public interface IComponentRepository {
-        IEnumerable<OrgChartComponentWithMember> OrgChartComponents { get; }
-    }
+        IEnumerable<ChartableComponent> ChartableComponents { get; }
+        IEnumerable<Component> Components { get; }
+        IEnumerable<Position> Positions { get; }
+        IEnumerable<Member> Members { get; }
+}
 }

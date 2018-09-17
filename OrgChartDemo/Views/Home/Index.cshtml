@@ -1,9 +1,11 @@
-﻿
-@{
+﻿@{ 
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
 
+<div class="options">
+
+</div>
 <div class="well">
     <div id="people"></div>
 </div>
@@ -14,7 +16,7 @@
         var orgChart = new getOrgChart(peopleElement, {
             primaryFields: ["componentName", "memberName", "contactNumber", "email"],
             expandToLevel: 100,
-            enableDetailsView: false,
+            enableDetailsView: true,
             clickNodeEvent: clickHandler,
             enableEdit: false,
             layout: getOrgChart.MIXED_HIERARCHY_RIGHT_LINKS,

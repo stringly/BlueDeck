@@ -10,7 +10,12 @@
     
 </head>
 <body>
-    <div>
+    <div class="row-panel">
+        <div id="categories" class="col-xs-3">
+            @await Component.InvokeAsync("OrgChartOptionsMenu")
+        </div>
+    </div>
+    <div class="col-xs-8">
         @RenderBody()
     </div>
 </body>

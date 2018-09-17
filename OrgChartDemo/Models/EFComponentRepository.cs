@@ -10,24 +10,32 @@ namespace OrgChartDemo.Models {
         public EFComponentRepository(ApplicationDbContext ctx) {
             context = ctx;
         }
-        public IEnumerable<OrgChartComponentWithMember> OrgChartComponents { get; }
-
-        // Re-wire OrgComponents to map to entities
-
-        //public IEnumerable<OrgChartComponentWithMember> OrgChartComponents => new List<OrgChartComponentWithMember> {
-        //    new OrgChartComponentWithMember {
-        //        id = 1,
-        //        parentid = null,
-        //        componentName = "District I Commander's Office",
-        //        memberId = 1,
-        //        memberName = "Maj. Rosa Guixens #2013",
-        //        contactNumber = "(301) 699-2630",
-        //        email = "rmguixens@co.pg.md.us"
-        //    },
-
-
+        public IEnumerable<ChartableComponent> ChartableComponents => GetOrgChartComponentsWithoutMembers();                     
         public IEnumerable<Component> Components => context.Components;
         public IEnumerable<Position> Positions => context.Positions;
         public IEnumerable<Member> Members => context.Members;
+
+        // not implemented
+        //public IEnumerable<ChartableComponentWithManager> GetChartableComponentsWithManagers() { }
+
+
+        public IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers()
+        {
+            List<Component> components = context.Components.ToList();
+            List<ChartableComponent> results = new List<ChartableComponent>();
+            foreach (Component c in components)
+            {
+                ChartableComponent n = new ChartableComponent
+                {
+                    id = c.ComponentId,
+                    parentid = c?.ParentComponent?.ComponentId,
+                    componentName = c.Name
+                };
+                results.Add(n);
+            }
+            return results;
+        }
+
+
     }
 }
