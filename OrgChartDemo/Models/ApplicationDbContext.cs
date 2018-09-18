@@ -8,5 +8,7 @@ namespace OrgChartDemo.Models {
         public DbSet<Component> Components { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Position> Positions { get; set; }
+
+
     }
 }

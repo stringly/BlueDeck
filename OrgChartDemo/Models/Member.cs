@@ -15,6 +15,7 @@ namespace OrgChartDemo.Models {
         public string MiddleName { get; set; }
         public string IdNumber { get; set; }
         public string Email {get; set; }
+        public virtual Position Position { get; set; }
         public string GetTitleName() => $"{this.Rank.RankShort}. {this.FirstName} {this.LastName} #{this.IdNumber}";        
         public string GetLastNameFirstName() => $"{this.LastName}, {this.FirstName}";
     }

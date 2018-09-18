@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models.ViewModels
 {
-    public class OrgChartOptionsViewModel
+    public class PositionWithComponentListViewModel
     {
+        public Position Position { get; set; }
         public List<Component> Components { get; set; }
-        public List<Member> Members { get; set; }
     }
 }

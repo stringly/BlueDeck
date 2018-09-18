@@ -8,9 +8,9 @@ namespace OrgChartDemo.Models {
     public class Component {
         [Key]
         public int ComponentId { get; set; }
-        public Component ParentComponent { get; set; }
+        public virtual Component ParentComponent { get; set; }
         public string Name { get; set; }
         public string Acronym { get; set; }
-        public List<Position> Positions { get; set; }
+        public virtual ICollection<Position> Positions { get; set; }
     }
 }

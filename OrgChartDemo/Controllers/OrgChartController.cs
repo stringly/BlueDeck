@@ -8,11 +8,11 @@ using Newtonsoft.Json;
 
 namespace OrgChartDemo.Controllers
 {
-    public class HomeController : Controller
+    public class OrgChartController : Controller
     {
         private IComponentRepository repository;
 
-        public HomeController(IComponentRepository repo) {
+        public OrgChartController(IComponentRepository repo) {
             repository = repo;
         }
 

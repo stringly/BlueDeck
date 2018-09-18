@@ -1,0 +1,12 @@
+﻿@model IEnumerable<string>
+
+
+@foreach (string category in Model)
+{
+    <a class="btn btn-block
+        @(category == ViewBag.SelectedCategory ? "btn-primary": "btn-default")"
+       asp-action="Index"
+       asp-controller="@category">
+        @category
+    </a>
+}

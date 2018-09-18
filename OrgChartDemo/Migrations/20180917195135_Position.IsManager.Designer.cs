@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180917195135_Position.IsManager")]
+    partial class PositionIsManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,13 +56,13 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<string>("MiddleName");
 
-                    b.Property<int?>("PositionId");
+                    b.Property<int?>("PositionPostionId");
 
                     b.Property<int?>("RankId");
 
                     b.HasKey("MemberId");
 
-                    b.HasIndex("PositionId");
+                    b.HasIndex("PositionPostionId");
 
                     b.HasIndex("RankId");
 
@@ -69,7 +71,7 @@ namespace OrgChartDemo.Migrations
 
             modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
                 {
-                    b.Property<int>("PositionId")
+                    b.Property<int>("PostionId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -83,7 +85,7 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<int?>("ParentComponentComponentId");
 
-                    b.HasKey("PositionId");
+                    b.HasKey("PostionId");
 
                     b.HasIndex("ParentComponentComponentId");
 
@@ -116,9 +118,9 @@ namespace OrgChartDemo.Migrations
 
             modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Position", "Position")
+                    b.HasOne("OrgChartDemo.Models.Position")
                         .WithMany("Members")
-                        .HasForeignKey("PositionId");
+                        .HasForeignKey("PositionPostionId");
 
                     b.HasOne("OrgChartDemo.Models.Types.MemberRank", "Rank")
                         .WithMany()
