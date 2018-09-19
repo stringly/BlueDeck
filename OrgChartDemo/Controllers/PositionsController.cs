@@ -24,7 +24,7 @@ namespace OrgChartDemo.Controllers
         // GET: Positions
         public async Task<IActionResult> Index()
         {
-            
+
             return View(await _context.Positions
                 .Include(m => m.Members)
                 .Include(p => p.ParentComponent)
@@ -52,10 +52,7 @@ namespace OrgChartDemo.Controllers
         // GET: Positions/Create
         public IActionResult Create()
         {
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel
-            {
-                Components = _context.Components.ToList()
-            };
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
             return View(vm);
         }
 
@@ -64,16 +61,33 @@ namespace OrgChartDemo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             Position p = new Position
             {
-                ParentComponent = _context.Components.Where(c => c.ComponentId == Convert.ToInt32(collection["Position.ParentComponent.ComponentId"])).FirstOrDefault(),
-                Name = collection["Position.Name"],
-                IsUnique = collection["Position.IsUnique"].Contains("true"),
-                JobTitle = collection["Position.JobTitle"],
-                IsManager = collection["Position.IsManager"].Contains("true")
-            };   
+                ParentComponent = _context.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault(),
+                Name = form.PositionName,
+                IsUnique = form.IsUnique,
+                JobTitle = form.JobTitle,
+                IsManager = form.IsManager
+            };
+            
+            // check if a position with the Name provided already exists and reject if so
+            if (_context.Positions.Any(x => x.Name == form.PositionName))
+            {
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
+                return View(vm);
+            }
+            // check if user is attempting to add "Manager" position to the ParentComponent
+            else if (form.IsManager)
+            {
+                // check if the Parent Component of the position already has a Position designated as "Manager"
+                if (_context.Positions.Where(c => (c.ParentComponent.ComponentId == form.ParentComponentId))
+                                     .Any(c => (c.IsManager == true))) {
+                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
+                    return View(vm);
+                }
+            }
             _context.Add(p);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index)); 
@@ -94,11 +108,7 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel
-            {
-                Position = position,
-                Components = _context.Components.ToList()
-            };
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
             return View(vm);
         }
 
