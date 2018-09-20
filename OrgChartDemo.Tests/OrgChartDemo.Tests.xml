@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OrgChartDemo.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:OrgChartDemo.Tests.PositionControllerTests">
+            <summary>
+            Unit tests for the PositionController
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Tests.PositionControllerTests"/> class.
+            <remarks>
+            This will constructor initializes a <see cref="T:OrgChartDemo.Models.FakeRepository"/>
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanGetPositionListWithMemberCount">
+            <summary>
+            Determines whether this instance [can get position list with member count].
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanAddPosition">
+            <summary>
+            Determines whether this instance [can add position].
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanAddPositionFromController">
+            <summary>
+            Determines whether this instance [can add position from PositionController.Create()].
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanDetectExistingPositionName">
+            <summary>
+            Determines whether this instance [can detect existing position name] and prevent a duplicate add.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanDetectComponentPositionManagerDuplicate">
+            <summary>
+            Determines whether this instance [can detect component position manager duplicate].
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanEditPosition">
+            <summary>
+            Determines whether this instance [can edit component].
+            </summary>
+        </member>
+    </members>
+</doc>

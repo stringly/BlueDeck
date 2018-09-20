@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models
 {
-    // this is a base class for creating an Org Chart using GetOrgChart
-    // as implemented in this project, these are the minimum fields required
 
+    /// <summary>
+    /// Base class for creating an Organization Chart using GetOrgChart
+    /// </summary>
     public class ChartableComponent
     {
         public int id { get; set; }

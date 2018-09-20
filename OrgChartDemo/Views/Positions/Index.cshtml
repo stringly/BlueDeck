@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrgChartDemo.Models.Position>
+﻿@model IEnumerable<OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ParentComponent.Name)
+                @Html.DisplayFor(modelItem => item.ParentComponentName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsUnique)
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.IsManager)
             </td>
             <td>
-                @item.Members.Count()
+                @item.MembersCount
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PositionId">Edit</a> |

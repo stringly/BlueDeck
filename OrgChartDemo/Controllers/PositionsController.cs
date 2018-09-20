@@ -12,26 +12,39 @@ using OrgChartDemo.Models.ViewModels;
 
 namespace OrgChartDemo.Controllers
 {
+    /// <summary>
+    /// Controller for Position CRUD actions
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class PositionsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public PositionsController(ApplicationDbContext context)
+        private IComponentRepository repository;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PositionsController"/> class.
+        /// </summary>
+        /// <param name="repo">An <see cref="IComponentRepository"/>.</param>
+        public PositionsController(IComponentRepository repo)
         {
-            _context = context;
+            repository = repo;
         }
 
-        // GET: Positions
-        public async Task<IActionResult> Index()
-        {
-
-            return View(await _context.Positions
-                .Include(m => m.Members)
-                .Include(p => p.ParentComponent)
-                .ToListAsync());
+        /// <summary>
+        /// GET: Positions
+        /// </summary>
+        /// <remarks>
+        /// This View requires an <see cref="IEnumerable{T}"/> list of <see cref="PositionWithMemberCountItem"/>
+        /// </remarks>
+        /// <returns></returns>
+        public IActionResult Index()
+        {            
+            return View(repository.GetPositionListWithMemberCount());
         }
 
-        // GET: Positions/Details/5
+        /// <summary>
+        /// GET: Positions/Details/5.
+        /// </summary>
+        /// <param name="id">The identifier for a Position.</param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -39,8 +52,8 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = await _context.Positions
-                .FirstOrDefaultAsync(m => m.PositionId == id);
+            var position = repository.Positions
+                .FirstOrDefault(m => m.PositionId == id);
             if (position == null)
             {
                 return NotFound();
@@ -49,104 +62,127 @@ namespace OrgChartDemo.Controllers
             return View(position);
         }
 
-        // GET: Positions/Create
+        /// <summary>
+        /// GET: Positions/Create.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
             return View(vm);
         }
 
-        // POST: Positions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Positions/Create.
+        /// </summary>
+        /// <param name="form">A <see cref="PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
-            Position p = new Position
+            if (!ModelState.IsValid)
             {
-                ParentComponent = _context.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault(),
-                Name = form.PositionName,
-                IsUnique = form.IsUnique,
-                JobTitle = form.JobTitle,
-                IsManager = form.IsManager
-            };
-            
-            // check if a position with the Name provided already exists and reject if so
-            if (_context.Positions.Any(x => x.Name == form.PositionName))
-            {
-                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
-                return View(vm);
+                return BadRequest(ModelState);
             }
-            // check if user is attempting to add "Manager" position to the ParentComponent
-            else if (form.IsManager)
+            else
             {
-                // check if the Parent Component of the position already has a Position designated as "Manager"
-                if (_context.Positions.Where(c => (c.ParentComponent.ComponentId == form.ParentComponentId))
-                                     .Any(c => (c.IsManager == true))) {
-                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
+                Position p = new Position
+                {
+                    ParentComponent = repository.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault(),
+                    Name = form.PositionName,
+                    IsUnique = form.IsUnique,
+                    JobTitle = form.JobTitle,
+                    IsManager = form.IsManager
+                };
+            
+                // check if a position with the Name provided already exists and reject if so
+                if (repository.Positions.Any(x => x.Name == form.PositionName))
+                {
+                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
+                    ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
                     return View(vm);
                 }
+                // check if user is attempting to add "Manager" position to the ParentComponent
+                else if (form.IsManager)
+                {
+                    // check if the Parent Component of the position already has a Position designated as "Manager"
+                    if (repository.Positions.Any(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true)) {
+                        PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
+                        ViewBag.Message = $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.";
+                        return View(vm);
+                    }
+                }            
+                repository.AddPosition(p);            
+                return RedirectToAction(nameof(Index)); 
             }
-            _context.Add(p);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index)); 
+
         }
 
-        // GET: Positions/Edit/5
+        /// <summary>
+        /// Positions/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-
-            var position = await _context.Positions.FindAsync(id);
-
+            Position position = repository.Positions.Where(x => x.PositionId == id).FirstOrDefault();
             if (position == null)
             {
                 return NotFound();
             }
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), _context.Components.ToList());
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position, repository.Components.ToList());
             return View(vm);
         }
 
-        // POST: Positions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Positions/Edit/5
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="collection">The collection.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("PositionId,PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
-            if (id != Convert.ToInt32(collection["position.PositionId"])) {
+            Position p = repository.Positions.Where(x => x.PositionId == id).FirstOrDefault();
+            Component targetParentComponent = repository.Components.Find(x => x.ComponentId == form.ParentComponentId);
+            if (id != form.PositionId) {
                 return NotFound();
             }
-
-            Position p = _context.Positions.Where(x => x.PositionId == id).FirstOrDefault();
-
-            p.ParentComponent = _context.Components.Where(c => c.ComponentId == Convert.ToInt32(collection["Position.ParentComponent.ComponentId"])).FirstOrDefault();
-            p.Name = collection["Position.Name"];
-            p.IsUnique = collection["Position.IsUnique"].Contains("true");
-            p.JobTitle = collection["Position.JobTitle"];
-            p.IsManager = collection["Position.IsManager"].Contains("true");
-            
-            try {
-                _context.Update(p);
-                await _context.SaveChangesAsync();
+            else if (form.IsManager && repository.Positions.Any(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId)) {
+                // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager
+                
+                ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
+                return View(vm);                
             }
-            catch (DbUpdateConcurrencyException) {
-                if (!PositionExists(p.PositionId)) {
-                    return NotFound();
-                }
-                else {
-                    throw;
-                }
+            else if (form.IsUnique == true && p.IsUnique == false && p.Members.Count() > 1) {
+                // user is attempting to make Position unique when multiple members are assigned
+                ViewBag.Message = $"{p.Name} has {p.Members.Count()} current Members. You can't set this Position to Unique with multiple members.";
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
+                return View(vm);
+            }
+            else {
+                p.ParentComponent = repository.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
+                p.Name = form.PositionName;
+                p.IsUnique = form.IsUnique;
+                p.JobTitle = form.JobTitle;
+                p.IsManager = form.IsManager;
+                repository.EditPosition(p);
             }
             return RedirectToAction(nameof(Index));
         }
-
-        // GET: Positions/Delete/5
+        
+        /// <summary>
+        /// GET: Positions/Delete/5
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="Position"/> being deleted</param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -154,8 +190,8 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = await _context.Positions
-                .FirstOrDefaultAsync(m => m.PositionId == id);
+            var position = repository.Positions
+                .FirstOrDefault(m => m.PositionId == id);
             if (position == null)
             {
                 return NotFound();
@@ -163,21 +199,28 @@ namespace OrgChartDemo.Controllers
 
             return View(position);
         }
-
-        // POST: Positions/Delete/5
+        /// TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
+        /// <summary>
+        /// POST: Positions/Delete/5
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="Position"/> being deleted</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var position = await _context.Positions.FindAsync(id);
-            _context.Positions.Remove(position);
-            await _context.SaveChangesAsync();
+        {            
+            repository.RemovePosition(id);            
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Determines if a Position exists with the provided PositionId .
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="Position"/></param>
+        /// <returns></returns>
         private bool PositionExists(int id)
         {
-            return _context.Positions.Any(e => e.PositionId == id);
+            return repository.Positions.Any(e => e.PositionId == id);
         }
     }
 }

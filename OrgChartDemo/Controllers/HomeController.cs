@@ -18,8 +18,8 @@ namespace OrgChartDemo.Controllers
 
         [HttpGet]
         public JsonResult GetComponents() 
-        {
-            return Json(repository.ChartableComponents.ToArray());
+        {            
+            return Json(repository.GetOrgChartComponentsWithoutMembers());
         }
 
         public IActionResult Index() => View();

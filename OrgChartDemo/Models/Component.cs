@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models {
+    /// <summary>
+    /// Component Entity
+    /// </summary>
     public class Component {
         [Key]
         public int ComponentId { get; set; }

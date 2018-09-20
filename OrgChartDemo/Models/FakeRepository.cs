@@ -1,49 +1,41 @@
-﻿using OrgChartDemo.Models.ViewModels;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using OrgChartDemo.Models.ViewModels;
+using OrgChartDemo.Models.ExtensionMethods;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+
 
 namespace OrgChartDemo.Models {
     /// <summary>
-    /// IComponentRepository derivative used to create Entity Framework context-based repositories for dependency injection.
+    /// IComponentRepository derivative used to create repositories for testing.
     /// </summary>
     /// <seealso cref="OrgChartDemo.Models.IComponentRepository" />
-    public class EFComponentRepository : IComponentRepository {
-        private ApplicationDbContext context;
+    public class FakeRepository : IComponentRepository {
         /// <summary>
-        /// Initializes a new instance of the <see cref="EFComponentRepository"/> class.
-        /// </summary>
-        /// <param name="ctx">The an instance of <see cref="ApplicationDbContext"/></param>
-        public EFComponentRepository(ApplicationDbContext ctx) {
-            context = ctx;
-        }
-        /// <summary>
-        /// Gets the list of <see cref="Position"/>s.
+        /// Gets or sets the collection of Position Entites.
         /// </summary>
         /// <value>
-        /// The <see cref="IEnumerable{T}"/> list of <see cref="Position"/>s in the repository.
+        /// The Position Entities collection.
         /// </value>
-        public List<Position> Positions => context.Positions.Include(x => x.ParentComponent).ToList();
+        public virtual List<Position> Positions { get; set; }
         /// <summary>
-        /// Gets the list of <see cref="Component"/>s.
+        /// Gets or sets the collection of Component Entities.
         /// </summary>
         /// <value>
-        /// The <see cref="IEnumerable{T}"/> list of <see cref="Component"/>s in the repository.
+        /// The Component Entities collection.
         /// </value>
-        public List<Component> Components => context.Components.Include(x => x.Positions).ToList();
+        public virtual List<Component> Components { get; set; }
         /// <summary>
-        /// Gets the list of <see cref="Member"/>s.
+        /// Gets or sets the collection of Member Entities.
         /// </summary>
         /// <value>
-        /// The <see cref="IEnumerable{T}"/> list of <see cref="Member"/>s in the repository.
+        /// The Member Entities collection
         /// </value>
-        public List<Member> Members => context.Members.ToList();
+        public virtual List<Member> Members { get; set; }
         /// <summary>
-        /// Gets the list of <see cref="ChartableComponent"/>s.
+        /// Gets a list of ChartableComponents without Member info.
         /// </summary>
-        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponent"/> objects</returns>
+        /// <returns>A List of ChartableComponent types</returns>
         public IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers()
         {
             List<ChartableComponent> results = new List<ChartableComponent>();
@@ -60,11 +52,10 @@ namespace OrgChartDemo.Models {
             return results;
         }
         /// <summary>
-        /// Gets the list of <see cref="ChartableComponentWithMember"/>s.
+        /// Gets a list of ChartableComponents Member info.
         /// </summary>
-        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponentWithMember"/> objects</returns>
-        public IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers()
-        {
+        /// <returns>A List of ChartableComponentWithMember types</returns>
+        public IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers() {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId            
             List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
             foreach (Component c in Components)
@@ -112,7 +103,7 @@ namespace OrgChartDemo.Models {
                 }                
             }
             return results;
-        }
+        }// End method GetOrgChartComponentsWithMembers
         /// <summary>
         /// Gets the list of <see cref="PositionWithMemberCountItem"/>.
         /// </summary>
@@ -122,7 +113,7 @@ namespace OrgChartDemo.Models {
             var results = new List<PositionWithMemberCountItem>();
             
             foreach (Position p in Positions)
-            {                
+            {
                 results.Add(new PositionWithMemberCountItem(p));
             }
             return results;
@@ -136,34 +127,20 @@ namespace OrgChartDemo.Models {
         /// <param name="p">A <see cref="Position"/> to add to the Positions collection.</param>
         public void AddPosition(Position p)
         {
-            context.Positions.Add(p);
-            context.SaveChanges();
+            Positions.Add(p);
         }
-        /// <summary>
-        /// Removes the position.
-        /// </summary>
-        /// <param name="PositionIdToRemove">The position identifier to remove.</param>
         public void RemovePosition(int PositionIdToRemove)
         {            
-            context.Positions.Remove(Positions.SingleOrDefault(x => x.PositionId == PositionIdToRemove));            
-            context.SaveChanges();
+            Positions.Remove(Positions.Where(x => x.PositionId == PositionIdToRemove).FirstOrDefault());            
         }
-        /// <summary>
-        /// Edits the position.
-        /// </summary>
-        /// <param name="p">The <see cref="Position"/> to edit</param>
         public void EditPosition(Position p)
         {
-            Position old = context.Positions.SingleOrDefault(x => x.PositionId == p.PositionId);
-            if (old != null)
-            {
-                old.ParentComponent = p.ParentComponent;
-                old.Name = p.Name;
-                old.JobTitle = p.JobTitle;
-                old.IsUnique = p.IsUnique;
-                old.IsManager = p.IsManager;
-                context.SaveChanges();
-            }            
+            Position old = Positions.Find(x => x.PositionId == p.PositionId);
+            old.ParentComponent = p.ParentComponent;
+            old.Name = p.Name;
+            old.JobTitle = p.JobTitle;
+            old.IsUnique = p.IsUnique;
+            old.IsManager = p.IsManager;
         }
-    }
+    }// End class FakeRepository
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Models {
+    /// <summary>
+    /// Member Entity
+    /// </summary>
     public class Member {
         [Key]
         public int MemberId { get; set; }
@@ -18,6 +21,7 @@ namespace OrgChartDemo.Models {
         public virtual Position Position { get; set; }
         public string GetTitleName() => $"{this.Rank.RankShort}. {this.FirstName} {this.LastName} #{this.IdNumber}";        
         public string GetLastNameFirstName() => $"{this.LastName}, {this.FirstName}";
+                
     }
 }
 

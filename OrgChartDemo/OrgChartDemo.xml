@@ -1,0 +1,393 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OrgChartDemo</name>
+    </assembly>
+    <members>
+        <member name="T:OrgChartDemo.Controllers.PositionsController">
+            <summary>
+            Controller for Position CRUD actions
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.#ctor(OrgChartDemo.Models.IComponentRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
+            </summary>
+            <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/>.</param>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Index">
+            <summary>
+            GET: Positions
+            </summary>
+            <remarks>
+            This View requires an <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            GET: Positions/Details/5.
+            </summary>
+            <param name="id">The identifier for a Position.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Create">
+            <summary>
+            GET: Positions/Create.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Create(OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
+            <summary>
+            POST: Positions/Create.
+            </summary>
+            <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Positions/Edit/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
+            <summary>
+            POST: Positions/Edit/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="collection">The collection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            GET: Positions/Delete/5
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(System.Int32)">
+            TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
+            <summary>
+            POST: Positions/Delete/5
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.PositionsController.PositionExists(System.Int32)">
+            <summary>
+            Determines if a Position exists with the provided PositionId .
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.ApplicationDbContext">
+            <summary>
+            Entity Framework DbContext Class
+            </summary>
+            <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+        </member>
+        <member name="T:OrgChartDemo.Models.ChartableComponent">
+            <summary>
+            Base class for creating an Organization Chart using GetOrgChart
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.Component">
+            <summary>
+            Component Entity
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.EFComponentRepository">
+            <summary>
+            IComponentRepository derivative used to create Entity Framework context-based repositories for dependency injection.
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.IComponentRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.EFComponentRepository"/> class.
+            </summary>
+            <param name="ctx">The an instance of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
+        <member name="P:OrgChartDemo.Models.EFComponentRepository.Positions">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.Position"/>s.
+            </summary>
+            <value>
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Position"/>s in the repository.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.EFComponentRepository.Components">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.Component"/>s.
+            </summary>
+            <value>
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Component"/>s in the repository.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.EFComponentRepository.Members">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.Member"/>s.
+            </summary>
+            <value>
+            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Member"/>s in the repository.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetOrgChartComponentsWithoutMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetOrgChartComponentsWithMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetPositionListWithMemberCount">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.AddPosition(OrgChartDemo.Models.Position)">
+            <summary>
+            Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
+            </summary>
+            <remarks>
+            This depends on <see cref="M:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add``1(System.Collections.Generic.IEnumerable{``0},``0)"/> to add an item to an <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            </remarks>
+            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.RemovePosition(System.Int32)">
+            <summary>
+            Removes the position.
+            </summary>
+            <param name="PositionIdToRemove">The position identifier to remove.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.EFComponentRepository.EditPosition(OrgChartDemo.Models.Position)">
+            <summary>
+            Edits the position.
+            </summary>
+            <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> to edit</param>
+        </member>
+        <member name="T:OrgChartDemo.Models.FakeRepository">
+            <summary>
+            IComponentRepository derivative used to create repositories for testing.
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.IComponentRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Models.FakeRepository.Positions">
+            <summary>
+            Gets or sets the collection of Position Entites.
+            </summary>
+            <value>
+            The Position Entities collection.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.FakeRepository.Components">
+            <summary>
+            Gets or sets the collection of Component Entities.
+            </summary>
+            <value>
+            The Component Entities collection.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.FakeRepository.Members">
+            <summary>
+            Gets or sets the collection of Member Entities.
+            </summary>
+            <value>
+            The Member Entities collection
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.FakeRepository.GetOrgChartComponentsWithoutMembers">
+            <summary>
+            Gets a list of ChartableComponents without Member info.
+            </summary>
+            <returns>A List of ChartableComponent types</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.FakeRepository.GetOrgChartComponentsWithMembers">
+            <summary>
+            Gets a list of ChartableComponents Member info.
+            </summary>
+            <returns>A List of ChartableComponentWithMember types</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.FakeRepository.GetPositionListWithMemberCount">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.FakeRepository.AddPosition(OrgChartDemo.Models.Position)">
+            <summary>
+            Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
+            </summary>
+            <remarks>
+            This depends on <see cref="M:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add``1(System.Collections.Generic.IEnumerable{``0},``0)"/> to add an item to an <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            </remarks>
+            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
+        </member>
+        <member name="T:OrgChartDemo.Models.IComponentRepository">
+            <summary>
+            Interface for OrgChartDemo Repository to facilitate dependency injection
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.Member">
+            <summary>
+            Member Entity
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.Position">
+            <summary>
+            Position Entity
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.PositionId">
+            <summary>
+            Gets or sets the position identifier.
+            </summary>
+            <value>
+            The PositionId PK.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.ParentComponent">
+            <summary>
+            Gets or sets the ParentComponentId.
+            </summary>
+            <value>
+            The ComponentId (PK) of the Parent Component (FK)
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.Name">
+            <summary>
+            Gets or sets the Position name.
+            </summary>
+            <value>
+            The name of the Position.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.IsUnique">
+            <summary>
+            Gets or sets a value indicating whether the Position is unique.
+            </summary>
+            <value>
+              <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.JobTitle">
+            <summary>
+            Gets or sets the Job Title.
+            </summary>
+            <value>
+            The Job Title of a Member assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.Members">
+            <summary>
+            Gets or sets the Members.
+            </summary>
+            <value>
+            A collection of Member Entities that represent the members assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.IsManager">
+            <summary>
+            Gets or sets a value indicating whether this Position is the manager.
+            A Component must have exactly one position designated as manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem">
+            <summary>
+            A flattened object derived from a Position Entity and used in <see cref="M:OrgChartDemo.Controllers.PositionsController.Index"/>/>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.PositionId">
+            <summary>
+            Gets or sets the position identifier.
+            </summary>
+            <value>
+            The PositionId PK.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.ParentComponentId">
+            <summary>
+            Gets or sets the id of the parent component.
+            </summary>
+            <value>
+            The Id of the Component to which this Position Instance is assigned
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.ParentComponentName">
+            <summary>
+            Gets or sets the name of the parent component.
+            </summary>
+            <value>
+            The name of the parent component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.Name">
+            <summary>
+            Gets or sets the Position name.
+            </summary>
+            <value>
+            The name of the Position.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.IsUnique">
+            <summary>
+            Gets or sets a value indicating whether the Position is unique.
+            </summary>
+            <value>
+              <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.JobTitle">
+            <summary>
+            Gets or sets the Job Title.
+            </summary>
+            <value>
+            The Job Title of a Member assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.MembersCount">
+            <summary>
+            Gets or sets the count of Position Members
+            </summary>
+            <value>
+            A count of Member Entities that are assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.IsManager">
+            <summary>
+            Gets or sets a value indicating whether this Position is the manager.
+            A Component must have exactly one position designated as manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.#ctor(OrgChartDemo.Models.Position)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/> class.
+            </summary>
+            <remarks>
+            This constructor requires a <see cref="T:OrgChartDemo.Models.Position"/> to be passed as a parameter.
+            </remarks>
+            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> object.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>.
+            <remarks>
+            This is a parameterless constructor used to create new objects
+            </remarks>
+            </summary>
+        </member>
+    </members>
+</doc>
