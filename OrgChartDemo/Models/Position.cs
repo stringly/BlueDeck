@@ -9,6 +9,7 @@ namespace OrgChartDemo.Models {
     /// Position Entity
     /// </summary>
     public class Position {
+
         /// <summary>
         /// Gets or sets the position identifier.
         /// </summary>
@@ -17,6 +18,7 @@ namespace OrgChartDemo.Models {
         /// </value>
         [Key]
         public int PositionId { get; set;}
+
         /// <summary>
         /// Gets or sets the ParentComponentId.
         /// </summary>
@@ -24,6 +26,7 @@ namespace OrgChartDemo.Models {
         /// The ComponentId (PK) of the Parent Component (FK)
         /// </value>
         public virtual Component ParentComponent { get; set; }
+
         /// <summary>
         /// Gets or sets the Position name.
         /// </summary>
@@ -31,6 +34,7 @@ namespace OrgChartDemo.Models {
         /// The name of the Position.
         /// </value>
         public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the Position is unique.
         /// </summary>
@@ -38,6 +42,7 @@ namespace OrgChartDemo.Models {
         ///   <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
         /// </value>
         public bool IsUnique { get; set; } = false;
+
         /// <summary>
         /// Gets or sets the Job Title.
         /// </summary>
@@ -45,6 +50,7 @@ namespace OrgChartDemo.Models {
         /// The Job Title of a Member assigned to this Position
         /// </value>
         public string JobTitle { get; set; }
+
         /// <summary>
         /// Gets or sets the Members.
         /// </summary>
@@ -52,6 +58,7 @@ namespace OrgChartDemo.Models {
         /// A collection of Member Entities that represent the members assigned to this Position
         /// </value>
         public virtual List<Member> Members { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether this Position is the manager.
         /// A Component must have exactly one position designated as manager.
@@ -61,6 +68,12 @@ namespace OrgChartDemo.Models {
         /// </value>
         public bool IsManager { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Position"/> class.
+        /// <remarks>
+        /// Parameter-less constructor used to ensure that the <see cref="Position.Members"/> <see cref="List{T}"/> is initialized.
+        /// </remarks>
+        /// </summary>
         public Position()
         {
             Members = new List<Member>();

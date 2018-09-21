@@ -4,6 +4,30 @@
         <name>OrgChartDemo</name>
     </assembly>
     <members>
+        <member name="T:OrgChartDemo.Controllers.HomeController">
+            <summary>
+            Default Controller, generates orgchart landing page. (Needs to be reassigned)
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:OrgChartDemo.Controllers.HomeController.#ctor(OrgChartDemo.Models.IComponentRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
+            </summary>
+            <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.HomeController.GetComponents">
+            <summary>
+            Gets the components. (async, JSON result from the GetOrgChart JQuery Library
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.HomeController.Index">
+            <summary>
+            /port####/
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:OrgChartDemo.Controllers.PositionsController">
             <summary>
             Controller for Position CRUD actions
@@ -17,6 +41,7 @@
             <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/>.</param>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Index">
+            TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
             <summary>
             GET: Positions
             </summary>

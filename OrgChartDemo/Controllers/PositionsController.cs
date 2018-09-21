@@ -27,7 +27,7 @@ namespace OrgChartDemo.Controllers
         {
             repository = repo;
         }
-
+        /// TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
         /// <summary>
         /// GET: Positions
         /// </summary>
@@ -45,7 +45,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Position.</param>
         /// <returns></returns>
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -79,7 +79,7 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Create([Bind("PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             if (!ModelState.IsValid)
             {
@@ -124,7 +124,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -142,12 +142,12 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Edit/5
         /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <param name="collection">The collection.</param>
+        /// <param name="id">The PositionId for the <see cref="Position"/> being edited</param>
+        /// <param name="form">The <see cref="PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PositionId,PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Edit(int id, [Bind("PositionId,PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             Position p = repository.Positions.Where(x => x.PositionId == id).FirstOrDefault();
             Component targetParentComponent = repository.Components.Find(x => x.ComponentId == form.ParentComponentId);
@@ -183,7 +183,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The PositionId of the <see cref="Position"/> being deleted</param>
         /// <returns></returns>
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -199,6 +199,7 @@ namespace OrgChartDemo.Controllers
 
             return View(position);
         }
+
         /// TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
         /// <summary>
         /// POST: Positions/Delete/5
@@ -207,7 +208,7 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {            
             repository.RemovePosition(id);            
             return RedirectToAction(nameof(Index));

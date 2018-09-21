@@ -12,6 +12,7 @@ namespace OrgChartDemo.Models {
     /// <seealso cref="OrgChartDemo.Models.IComponentRepository" />
     public class EFComponentRepository : IComponentRepository {
         private ApplicationDbContext context;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EFComponentRepository"/> class.
         /// </summary>
@@ -19,6 +20,7 @@ namespace OrgChartDemo.Models {
         public EFComponentRepository(ApplicationDbContext ctx) {
             context = ctx;
         }
+
         /// <summary>
         /// Gets the list of <see cref="Position"/>s.
         /// </summary>
@@ -26,6 +28,7 @@ namespace OrgChartDemo.Models {
         /// The <see cref="IEnumerable{T}"/> list of <see cref="Position"/>s in the repository.
         /// </value>
         public List<Position> Positions => context.Positions.Include(x => x.ParentComponent).ToList();
+
         /// <summary>
         /// Gets the list of <see cref="Component"/>s.
         /// </summary>
@@ -33,6 +36,7 @@ namespace OrgChartDemo.Models {
         /// The <see cref="IEnumerable{T}"/> list of <see cref="Component"/>s in the repository.
         /// </value>
         public List<Component> Components => context.Components.Include(x => x.Positions).ToList();
+
         /// <summary>
         /// Gets the list of <see cref="Member"/>s.
         /// </summary>
@@ -40,6 +44,7 @@ namespace OrgChartDemo.Models {
         /// The <see cref="IEnumerable{T}"/> list of <see cref="Member"/>s in the repository.
         /// </value>
         public List<Member> Members => context.Members.ToList();
+
         /// <summary>
         /// Gets the list of <see cref="ChartableComponent"/>s.
         /// </summary>
@@ -59,6 +64,7 @@ namespace OrgChartDemo.Models {
             }
             return results;
         }
+
         /// <summary>
         /// Gets the list of <see cref="ChartableComponentWithMember"/>s.
         /// </summary>
@@ -113,6 +119,7 @@ namespace OrgChartDemo.Models {
             }
             return results;
         }
+
         /// <summary>
         /// Gets the list of <see cref="PositionWithMemberCountItem"/>.
         /// </summary>
@@ -127,6 +134,7 @@ namespace OrgChartDemo.Models {
             }
             return results;
         }
+
         /// <summary>
         /// Adds a <see cref="Position"/> to the Positions collection.
         /// </summary>
@@ -139,6 +147,7 @@ namespace OrgChartDemo.Models {
             context.Positions.Add(p);
             context.SaveChanges();
         }
+
         /// <summary>
         /// Removes the position.
         /// </summary>
@@ -148,6 +157,7 @@ namespace OrgChartDemo.Models {
             context.Positions.Remove(Positions.SingleOrDefault(x => x.PositionId == PositionIdToRemove));            
             context.SaveChanges();
         }
+
         /// <summary>
         /// Edits the position.
         /// </summary>

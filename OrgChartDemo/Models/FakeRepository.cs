@@ -11,6 +11,7 @@ namespace OrgChartDemo.Models {
     /// </summary>
     /// <seealso cref="OrgChartDemo.Models.IComponentRepository" />
     public class FakeRepository : IComponentRepository {
+
         /// <summary>
         /// Gets or sets the collection of Position Entites.
         /// </summary>
@@ -18,6 +19,7 @@ namespace OrgChartDemo.Models {
         /// The Position Entities collection.
         /// </value>
         public virtual List<Position> Positions { get; set; }
+
         /// <summary>
         /// Gets or sets the collection of Component Entities.
         /// </summary>
@@ -25,6 +27,7 @@ namespace OrgChartDemo.Models {
         /// The Component Entities collection.
         /// </value>
         public virtual List<Component> Components { get; set; }
+
         /// <summary>
         /// Gets or sets the collection of Member Entities.
         /// </summary>
@@ -32,6 +35,7 @@ namespace OrgChartDemo.Models {
         /// The Member Entities collection
         /// </value>
         public virtual List<Member> Members { get; set; }
+
         /// <summary>
         /// Gets a list of ChartableComponents without Member info.
         /// </summary>
@@ -51,6 +55,7 @@ namespace OrgChartDemo.Models {
             }
             return results;
         }
+
         /// <summary>
         /// Gets a list of ChartableComponents Member info.
         /// </summary>
@@ -103,7 +108,8 @@ namespace OrgChartDemo.Models {
                 }                
             }
             return results;
-        }// End method GetOrgChartComponentsWithMembers
+        }
+
         /// <summary>
         /// Gets the list of <see cref="PositionWithMemberCountItem"/>.
         /// </summary>
@@ -118,6 +124,7 @@ namespace OrgChartDemo.Models {
             }
             return results;
         }
+
         /// <summary>
         /// Adds a <see cref="Position"/> to the Positions collection.
         /// </summary>
@@ -129,10 +136,20 @@ namespace OrgChartDemo.Models {
         {
             Positions.Add(p);
         }
+
+        /// <summary>
+        /// Removes the Position with the provieded Id.
+        /// </summary>
+        /// <param name="PositionIdToRemove">The PositionId of the Position to remove.</param>
         public void RemovePosition(int PositionIdToRemove)
         {            
             Positions.Remove(Positions.Where(x => x.PositionId == PositionIdToRemove).FirstOrDefault());            
         }
+
+        /// <summary>
+        /// Edits the position.
+        /// </summary>
+        /// <param name="p">The <see cref="Position"/> to edit/update</param>
         public void EditPosition(Position p)
         {
             Position old = Positions.Find(x => x.PositionId == p.PositionId);
@@ -142,5 +159,6 @@ namespace OrgChartDemo.Models {
             old.IsUnique = p.IsUnique;
             old.IsManager = p.IsManager;
         }
-    }// End class FakeRepository
+
+    }
 }

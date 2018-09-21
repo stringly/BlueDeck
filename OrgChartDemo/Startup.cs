@@ -11,18 +11,26 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 
 namespace OrgChartDemo {
+    /// <summary>
+    /// Startup Class
+    /// </summary>
     public class Startup {
         IConfigurationRoot Configuration;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="env">An <see cref="IHostingEnvironment"/> object.</param>
         public Startup(IHostingEnvironment env) {
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
         }
 
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940   
+        /// </summary>
+        /// <param name="services">An <see cref="IServiceCollection"/></param>
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IComponentRepository, EFComponentRepository>();
@@ -31,12 +39,15 @@ namespace OrgChartDemo {
             
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app">An <see cref="IApplicationBuilder"/> object.</param>
+        /// <param name="env">An <see cref="IHostingEnvironment"/> object.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseStaticFiles();
 
             app.UseMvc(routes => {

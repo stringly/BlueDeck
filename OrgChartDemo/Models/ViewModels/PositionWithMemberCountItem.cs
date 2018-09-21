@@ -17,6 +17,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The PositionId PK.
         /// </value>
         public int PositionId { get; set;}
+
         /// <summary>
         /// Gets or sets the id of the parent component.
         /// </summary>
@@ -24,13 +25,15 @@ namespace OrgChartDemo.Models.ViewModels
         /// The Id of the Component to which this Position Instance is assigned
         /// </value>
         public int? ParentComponentId { get; set; }
+
         /// <summary>
         /// Gets or sets the name of the parent component.
         /// </summary>
         /// <value>
         /// The name of the parent component.
         /// </value>
-        public string ParentComponentName { get; set; }        
+        public string ParentComponentName { get; set; }  
+        
         /// <summary>
         /// Gets or sets the Position name.
         /// </summary>
@@ -38,6 +41,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The name of the Position.
         /// </value>
         public string Name { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether the Position is unique.
         /// </summary>
@@ -45,6 +49,7 @@ namespace OrgChartDemo.Models.ViewModels
         ///   <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
         /// </value>
         public bool IsUnique { get; set; } = false;
+
         /// <summary>
         /// Gets or sets the Job Title.
         /// </summary>
@@ -52,6 +57,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The Job Title of a Member assigned to this Position
         /// </value>
         public string JobTitle { get; set; }
+
         /// <summary>
         /// Gets or sets the count of Position Members
         /// </summary>
@@ -59,6 +65,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// A count of Member Entities that are assigned to this Position
         /// </value>
         public int MembersCount { get; set; }
+
         /// <summary>
         /// Gets or sets a value indicating whether this Position is the manager.
         /// A Component must have exactly one position designated as manager.
@@ -67,6 +74,7 @@ namespace OrgChartDemo.Models.ViewModels
         ///   <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
         /// </value>
         public bool IsManager { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionWithMemberCountItem"/> class.
         /// </summary>
@@ -84,6 +92,7 @@ namespace OrgChartDemo.Models.ViewModels
             JobTitle = p.JobTitle;
             MembersCount = p?.Members?.Count() ?? 0;
         }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionWithMemberCountItem"/>.
         /// <remarks>
