@@ -19,10 +19,10 @@ namespace OrgChartDemo.Models {
         public int ComponentId { get; set; }
 
         /// <summary>
-        /// Gets or sets the component's parent <see cref="Component"/>.
+        /// Gets or sets the component's parent <see cref="T:OrgChartDemo.Models.Component"/>.
         /// </summary>
         /// <value>
-        /// The Component's parent <see cref="Component"/>
+        /// The Component's parent <see cref="T:OrgChartDemo.Models.Component"/>
         /// </value>
         public virtual Component ParentComponent { get; set; }
 
@@ -43,10 +43,10 @@ namespace OrgChartDemo.Models {
         public string Acronym { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of the <see cref="Position"/>s assinged to this Component.
+        /// Gets or sets the list of the <see cref="T:OrgChartDemo.Models.Position"/>s assinged to this Component.
         /// </summary>
         /// <value>
-        /// An <see cref="ICollection{T}"/> of <see cref="Position"/>s.
+        /// An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
         /// </value>
         public virtual ICollection<Position> Positions { get; set; }
     }

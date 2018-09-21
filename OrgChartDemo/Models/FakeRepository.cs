@@ -9,7 +9,7 @@ namespace OrgChartDemo.Models {
     /// <summary>
     /// IComponentRepository derivative used to create repositories for testing.
     /// </summary>
-    /// <seealso cref="OrgChartDemo.Models.IComponentRepository" />
+    /// <seealso cref="T:OrgChartDemo.Models.IComponentRepository" />
     public class FakeRepository : IComponentRepository {
 
         /// <summary>
@@ -111,9 +111,9 @@ namespace OrgChartDemo.Models {
         }
 
         /// <summary>
-        /// Gets the list of <see cref="PositionWithMemberCountItem"/>.
+        /// Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s.
         /// </summary>
-        /// <returns>An <see cref="IEnumerable{T}"/> list of <see cref="PositionWithMemberCountItem"/>s/></returns>
+        /// <returns>An <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
         public IEnumerable<PositionWithMemberCountItem> GetPositionListWithMemberCount()
         {
             var results = new List<PositionWithMemberCountItem>();
@@ -126,12 +126,12 @@ namespace OrgChartDemo.Models {
         }
 
         /// <summary>
-        /// Adds a <see cref="Position"/> to the Positions collection.
+        /// Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
         /// </summary>
         /// <remarks>
-        /// This depends on <see cref="OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add{T}(IEnumerable{T}, T)"/> to add an item to an <see cref="IEnumerable{T}"/>
+        /// This depends on <see cref="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add{T}(IEnumerable{T}, T)"/> to add an item to an <see cref="T:IEnumerable{T}"/>
         /// </remarks>
-        /// <param name="p">A <see cref="Position"/> to add to the Positions collection.</param>
+        /// <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
         public void AddPosition(Position p)
         {
             Positions.Add(p);
@@ -149,7 +149,7 @@ namespace OrgChartDemo.Models {
         /// <summary>
         /// Edits the position.
         /// </summary>
-        /// <param name="p">The <see cref="Position"/> to edit/update</param>
+        /// <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> to edit/update</param>
         public void EditPosition(Position p)
         {
             Position old = Positions.Find(x => x.PositionId == p.PositionId);

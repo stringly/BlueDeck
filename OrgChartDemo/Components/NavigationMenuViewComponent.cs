@@ -8,11 +8,11 @@ namespace OrgChartDemo.Components
     /// <summary>
     /// A ViewComponent that renders the Navigation Sidebar
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.ViewComponent" />
+    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
     public class NavigationMenuViewComponent : ViewComponent
     {
         /// <summary>
-        /// Invokes the default <see cref="NavigationMenuViewComponent" />
+        /// Invokes the default <see cref="T:OrgChartDemo.Components.NavigationMenuViewComponent" />
         /// </summary>
         /// <returns></returns>
         public IViewComponentResult Invoke()

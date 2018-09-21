@@ -17,9 +17,9 @@ namespace OrgChartDemo.Controllers
         private IComponentRepository repository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="IComponentRepository"/></param>
+        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/></param>
         public HomeController(IComponentRepository repo) {
             repository = repo;
         }

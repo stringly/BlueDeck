@@ -8,7 +8,7 @@ namespace OrgChartDemo.Models.Types
     /// <summary>
     /// A type that represents the Name and Id of any entity. This is used to create select lists in views.
     /// <remarks>
-    /// This was initially created for a <see cref="Component"/>, but can be used for any Name/Id combination.
+    /// This was initially created for a <see cref="T:OrgChartDemo.Models.Component"/>, but can be used for any Name/Id combination.
     /// </remarks>
     /// </summary>
     public class ComponentSelectListItem

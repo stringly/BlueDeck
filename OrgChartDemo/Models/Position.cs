@@ -69,9 +69,9 @@ namespace OrgChartDemo.Models {
         public bool IsManager { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Position"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Position"/> class.
         /// <remarks>
-        /// Parameter-less constructor used to ensure that the <see cref="Position.Members"/> <see cref="List{T}"/> is initialized.
+        /// Parameter-less constructor used to ensure that the <see cref="T:OrgChartDemo.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
         /// </remarks>
         /// </summary>
         public Position()

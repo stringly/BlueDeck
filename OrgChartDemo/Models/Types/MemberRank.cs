@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models.Types {
     /// <summary>
-    /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="Member"/>
+    /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>
     public class MemberRank {
 

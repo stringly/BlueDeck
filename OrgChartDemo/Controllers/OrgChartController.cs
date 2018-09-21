@@ -11,23 +11,23 @@ namespace OrgChartDemo.Controllers
     /// <summary>
     /// Serves Views and data that renders in <a href="http://www.getorgchart.com/Documentation#separationMixedHierarchyNodes" >GetOrgChart</a> Plugin
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class OrgChartController : Controller
     {
         private IComponentRepository repository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OrgChartController"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.OrgChartController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="IComponentRepository"/> injected dependency</param>
+        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/> injected dependency</param>
         public OrgChartController(IComponentRepository repo) {
             repository = repo;
         }
 
         /// <summary>
-        /// Gets a list of <see cref="ChartableComponent"/>s 
+        /// Gets a list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s 
         /// </summary>
-        /// <returns>a JSON-formatted list of <see cref="ChartableComponent"/>s</returns>
+        /// <returns>a JSON-formatted list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s</returns>
         [HttpGet]
         public JsonResult GetComponents() 
         {
@@ -37,7 +37,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET /OrgChart/
         /// </summary>
-        /// <returns>An <see cref="IActionResult"/></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Index() => View();       
         
     }

@@ -15,24 +15,25 @@ namespace OrgChartDemo.Controllers
     /// <summary>
     /// Controller for Position CRUD actions
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class PositionsController : Controller
     {
         private IComponentRepository repository;
         /// <summary>
-        /// Initializes a new instance of the <see cref="PositionsController"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="IComponentRepository"/>.</param>
+        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/>.</param>
         public PositionsController(IComponentRepository repo)
         {
             repository = repo;
         }
+
         /// TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
         /// <summary>
         /// GET: Positions
         /// </summary>
         /// <remarks>
-        /// This View requires an <see cref="IEnumerable{T}"/> list of <see cref="PositionWithMemberCountItem"/>
+        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns></returns>
         public IActionResult Index()
@@ -75,7 +76,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Create.
         /// </summary>
-        /// <param name="form">A <see cref="PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
+        /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,7 +100,7 @@ namespace OrgChartDemo.Controllers
                 // check if a position with the Name provided already exists and reject if so
                 if (repository.Positions.Any(x => x.Name == form.PositionName))
                 {
-                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
+                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
                     ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
                     return View(vm);
                 }
@@ -108,7 +109,7 @@ namespace OrgChartDemo.Controllers
                 {
                     // check if the Parent Component of the position already has a Position designated as "Manager"
                     if (repository.Positions.Any(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true)) {
-                        PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
+                        PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
                         ViewBag.Message = $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.";
                         return View(vm);
                     }
@@ -142,8 +143,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Edit/5
         /// </summary>
-        /// <param name="id">The PositionId for the <see cref="Position"/> being edited</param>
-        /// <param name="form">The <see cref="PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
+        /// <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> being edited</param>
+        /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -154,9 +155,15 @@ namespace OrgChartDemo.Controllers
             if (id != form.PositionId) {
                 return NotFound();
             }
+            else if (repository.Positions.Any(x => x.Name == form.PositionName && x.PositionId != id))
+            {
+                // user is attempting to change the name of the position to a name which already exists
+                ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());                
+                return View(vm);
+            }
             else if (form.IsManager && repository.Positions.Any(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId)) {
-                // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager
-                
+                // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager                
                 ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";
                 PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
                 return View(vm);                
@@ -181,7 +188,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="Position"/> being deleted</param>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
         /// <returns></returns>
         public IActionResult Delete(int? id)
         {
@@ -204,7 +211,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="Position"/> being deleted</param>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
         /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -217,7 +224,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Determines if a Position exists with the provided PositionId .
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="Position"/></param>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/></param>
         /// <returns></returns>
         private bool PositionExists(int id)
         {
