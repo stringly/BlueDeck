@@ -20,7 +20,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="DbSet{TEntity}"/> of <see cref="Component"/>s.
         /// </value>
-        public DbSet<Component> Components { get; set; }
+        public virtual DbSet<Component> Components { get; set; }
 
         /// <summary>
         /// Gets or sets the Members.
@@ -28,7 +28,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="DbSet{TEntity}"/> of <see cref="Member"/>s
         /// </value>
-        public DbSet<Member> Members { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
 
         /// <summary>
         /// Gets or sets the Positions.
@@ -36,6 +36,6 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="DbSet{TEntity}"/> of <see cref="Position"/>s
         /// </value>
-        public DbSet<Position> Positions { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
     }
 }
