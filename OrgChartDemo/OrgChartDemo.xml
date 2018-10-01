@@ -22,11 +22,11 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:OrgChartDemo.Controllers.HomeController.#ctor(OrgChartDemo.Models.IComponentRepository)">
+        <member name="M:OrgChartDemo.Controllers.HomeController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
             </summary>
-            <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/></param>
+            <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
         </member>
         <member name="M:OrgChartDemo.Controllers.HomeController.GetComponents">
             <summary>
@@ -46,17 +46,17 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:OrgChartDemo.Controllers.OrgChartController.#ctor(OrgChartDemo.Models.IComponentRepository)">
+        <member name="M:OrgChartDemo.Controllers.OrgChartController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
             <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.OrgChartController"/> class.
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
             </summary>
-            <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/> injected dependency</param>
+            <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
         </member>
         <member name="M:OrgChartDemo.Controllers.OrgChartController.GetComponents">
             <summary>
-            Gets a list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s 
+            Gets the components. (async, JSON result from the GetOrgChart JQuery Library
             </summary>
-            <returns>a JSON-formatted list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s</returns>
+            <returns></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.OrgChartController.Index">
             <summary>
@@ -70,11 +70,11 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.#ctor(OrgChartDemo.Models.IComponentRepository)">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
             </summary>
-            <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/>.</param>
+            <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Index">
             TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
@@ -313,81 +313,6 @@
             An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
             </value>
         </member>
-        <member name="T:OrgChartDemo.Models.EFComponentRepository">
-            <summary>
-            IComponentRepository derivative used to create Entity Framework context-based repositories for dependency injection.
-            </summary>
-            <seealso cref="T:OrgChartDemo.Models.IComponentRepository" />
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
-            <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.EFComponentRepository"/> class.
-            </summary>
-            <param name="ctx">The an instance of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
-        </member>
-        <member name="P:OrgChartDemo.Models.EFComponentRepository.Positions">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.Position"/>s.
-            </summary>
-            <value>
-            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Position"/>s in the repository.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.EFComponentRepository.Components">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.Component"/>s.
-            </summary>
-            <value>
-            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Component"/>s in the repository.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.EFComponentRepository.Members">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.Member"/>s.
-            </summary>
-            <value>
-            The <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.Member"/>s in the repository.
-            </value>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetOrgChartComponentsWithoutMembers">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
-            </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetOrgChartComponentsWithMembers">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
-            </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.GetPositionListWithMemberCount">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>.
-            </summary>
-            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.AddPosition(OrgChartDemo.Models.Position)">
-            <summary>
-            Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
-            </summary>
-            <remarks>
-            This depends on <see cref="M:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add``1(System.Collections.Generic.IEnumerable{``0},``0)"/> to add an item to an <see cref="T:System.Collections.Generic.IEnumerable`1"/>
-            </remarks>
-            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.RemovePosition(System.Int32)">
-            <summary>
-            Removes the position.
-            </summary>
-            <param name="PositionIdToRemove">The position identifier to remove.</param>
-        </member>
-        <member name="M:OrgChartDemo.Models.EFComponentRepository.EditPosition(OrgChartDemo.Models.Position)">
-            <summary>
-            Edits the position.
-            </summary>
-            <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> to edit</param>
-        </member>
         <member name="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods">
             <summary>
             Class containing custom extensions
@@ -402,81 +327,12 @@
             <param name="value">The object of T type to add to the <see cref="T:System.Collections.Generic.IEnumerable`1"/>parameter.</param>
             <returns></returns>
         </member>
-        <member name="T:OrgChartDemo.Models.FakeRepository">
-            <summary>
-            IComponentRepository derivative used to create repositories for testing.
-            </summary>
-            <seealso cref="T:OrgChartDemo.Models.IComponentRepository" />
-        </member>
-        <member name="P:OrgChartDemo.Models.FakeRepository.Positions">
-            <summary>
-            Gets or sets the collection of Position Entites.
-            </summary>
-            <value>
-            The Position Entities collection.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.FakeRepository.Components">
-            <summary>
-            Gets or sets the collection of Component Entities.
-            </summary>
-            <value>
-            The Component Entities collection.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.FakeRepository.Members">
-            <summary>
-            Gets or sets the collection of Member Entities.
-            </summary>
-            <value>
-            The Member Entities collection
-            </value>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.GetOrgChartComponentsWithoutMembers">
-            <summary>
-            Gets a list of ChartableComponents without Member info.
-            </summary>
-            <returns>A List of ChartableComponent types</returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.GetOrgChartComponentsWithMembers">
-            <summary>
-            Gets a list of ChartableComponents Member info.
-            </summary>
-            <returns>A List of ChartableComponentWithMember types</returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.GetPositionListWithMemberCount">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s.
-            </summary>
-            <returns>An <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.AddPosition(OrgChartDemo.Models.Position)">
-            <summary>
-            Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
-            </summary>
-            <remarks>
-            This depends on <see cref="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.Add{T}(IEnumerable{T}, T)"/> to add an item to an <see cref="T:IEnumerable{T}"/>
-            </remarks>
-            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.RemovePosition(System.Int32)">
-            <summary>
-            Removes the Position with the provieded Id.
-            </summary>
-            <param name="PositionIdToRemove">The PositionId of the Position to remove.</param>
-        </member>
-        <member name="M:OrgChartDemo.Models.FakeRepository.EditPosition(OrgChartDemo.Models.Position)">
-            <summary>
-            Edits the position.
-            </summary>
-            <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> to edit/update</param>
-        </member>
-        <member name="T:OrgChartDemo.Models.IComponentRepository">
+        <member name="T:OrgChartDemo.Models.IBlobRepository">
             <summary>
             Interface for OrgChartDemo Repository to facilitate dependency injection
             </summary>
         </member>
-        <member name="P:OrgChartDemo.Models.IComponentRepository.Positions">
+        <member name="P:OrgChartDemo.Models.IBlobRepository.Positions">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.Position"/>s 
             </summary>
@@ -484,7 +340,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:OrgChartDemo.Models.Position"/>
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.IComponentRepository.Components">
+        <member name="P:OrgChartDemo.Models.IBlobRepository.Components">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.Component"/>s.
             </summary>
@@ -492,7 +348,7 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:OrgChartDemo.Models.Component"/>s
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.IComponentRepository.Members">
+        <member name="P:OrgChartDemo.Models.IBlobRepository.Members">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.Member"/>s.
             </summary>
@@ -500,25 +356,25 @@
             A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:OrgChartDemo.Models.Member"/>s
             </value>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.GetOrgChartComponentsWithoutMembers">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.GetOrgChartComponentsWithoutMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.GetOrgChartComponentsWithMembers">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.GetOrgChartComponentsWithMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.GetPositionListWithMemberCount">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.GetPositionListWithMemberCount">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>.
             </summary>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>s/></returns>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.AddPosition(OrgChartDemo.Models.Position)">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.AddPosition(OrgChartDemo.Models.Position)">
             <summary>
             Adds a <see cref="T:OrgChartDemo.Models.Position"/> to the Positions collection.
             </summary>
@@ -527,13 +383,13 @@
             </remarks>
             <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> to add to the Positions collection.</param>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.RemovePosition(System.Int32)">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.RemovePosition(System.Int32)">
             <summary>
             Removes the position.
             </summary>
             <param name="PositionIdToRemove">The position identifier to remove.</param>
         </member>
-        <member name="M:OrgChartDemo.Models.IComponentRepository.EditPosition(OrgChartDemo.Models.Position)">
+        <member name="M:OrgChartDemo.Models.IBlobRepository.EditPosition(OrgChartDemo.Models.Position)">
             <summary>
             Edits the position.
             </summary>
@@ -692,6 +548,18 @@
             Parameter-less constructor used to ensure that the <see cref="T:OrgChartDemo.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
             </remarks>
             </summary>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithoutMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
         <member name="T:OrgChartDemo.Models.Types.ComponentSelectListItem">
             <summary>
@@ -926,6 +794,18 @@
             This is a parameterless constructor used to create new objects
             </remarks>
             </summary>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
         <member name="T:OrgChartDemo.Program">
             <summary>

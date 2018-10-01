@@ -14,14 +14,15 @@ namespace OrgChartDemo.Controllers
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     public class HomeController : Controller
     {
-        private IComponentRepository repository;
+        private IUnitOfWork unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/></param>
-        public HomeController(IComponentRepository repo) {
-            repository = repo;
+        /// <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+        public HomeController(IUnitOfWork unit)
+        {
+            unitOfWork = unit;
         }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace OrgChartDemo.Controllers
         [HttpGet]
         public JsonResult GetComponents() 
         {            
-            return Json(repository.GetOrgChartComponentsWithoutMembers());
+            return Json(unitOfWork.Components.GetOrgChartComponentsWithoutMembers());
         }
 
         /// <summary>

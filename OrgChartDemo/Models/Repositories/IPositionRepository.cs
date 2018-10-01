@@ -1,13 +1,9 @@
-﻿using OrgChartDemo.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OrgChartDemo.Models.Repositories
 {
     public interface IPositionRepository : IRepository<Position>
     {
-        IEnumerable<Position> GetPositionsWithMemberCount();
+        IEnumerable<Position> GetPositionsWithMembers();
     }
 }

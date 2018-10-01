@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Repositories;
+using OrgChartDemo.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

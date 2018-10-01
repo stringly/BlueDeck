@@ -14,24 +14,25 @@ namespace OrgChartDemo.Controllers
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class OrgChartController : Controller
     {
-        private IComponentRepository repository;
+        private IUnitOfWork unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.OrgChartController"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/> injected dependency</param>
-        public OrgChartController(IComponentRepository repo) {
-            repository = repo;
+        /// <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+        public OrgChartController(IUnitOfWork unit)
+        {
+            unitOfWork = unit;
         }
 
         /// <summary>
-        /// Gets a list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s 
+        /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library
         /// </summary>
-        /// <returns>a JSON-formatted list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s</returns>
+        /// <returns></returns>
         [HttpGet]
-        public JsonResult GetComponents() 
+        public JsonResult GetComponents()
         {
-            return Json(repository.GetOrgChartComponentsWithoutMembers());
+            return Json(unitOfWork.Components.GetOrgChartComponentsWithoutMembers());
         }
 
         /// <summary>

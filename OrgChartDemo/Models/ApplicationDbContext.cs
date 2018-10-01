@@ -13,7 +13,10 @@ namespace OrgChartDemo.Models {
         /// </summary>
         /// <param name="options">A <see cref="DbContextOptions"/> of <see cref="ApplicationDbContext"/></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){ }
+        public ApplicationDbContext()
+        {
 
+        }
         /// <summary>
         /// Gets or sets the Components.
         /// </summary>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.ViewModels;
+using OrgChartDemo.Persistence;
 
 namespace OrgChartDemo.Controllers
 {
@@ -11,14 +12,14 @@ namespace OrgChartDemo.Controllers
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class PositionsController : Controller
     {
-        private IComponentRepository repository;
+        private IUnitOfWork unitOfWork;
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
         /// </summary>
-        /// <param name="repo">An <see cref="T:OrgChartDemo.Models.IComponentRepository"/>.</param>
-        public PositionsController(IComponentRepository repo)
+        /// <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        public PositionsController(IUnitOfWork unit)
         {
-            repository = repo;
+            unitOfWork = unit;
         }
 
         /// TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
@@ -31,7 +32,7 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {            
-            return View(repository.GetPositionListWithMemberCount());
+            return View(unitOfWork.Positions.GetPositionsWithMembers());
         }
 
         /// <summary>
@@ -46,8 +47,8 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = repository.Positions
-                .FirstOrDefault(m => m.PositionId == id);
+            var position = unitOfWork.Positions
+                .SingleOrDefault(m => m.PositionId == id);
             if (position == null)
             {
                 return NotFound();
@@ -62,8 +63,8 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), repository.Components.ToList());
-            return View(vm);
+            // TODO : FIX THIS, it needs a ComponentList
+            return View();
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace OrgChartDemo.Controllers
             {
                 Position p = new Position
                 {
-                    ParentComponent = repository.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault(),
+                    ParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId),
                     Name = form.PositionName,
                     IsUnique = form.IsUnique,
                     JobTitle = form.JobTitle,
@@ -91,23 +92,22 @@ namespace OrgChartDemo.Controllers
                 };
             
                 // check if a position with the Name provided already exists and reject if so
-                if (repository.Positions.Any(x => x.Name == form.PositionName))
-                {
-                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
+                if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null)
+                {                    
                     ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
-                    return View(vm);
+                    return View();
                 }
                 // check if user is attempting to add "Manager" position to the ParentComponent
                 else if (form.IsManager)
                 {
                     // check if the Parent Component of the position already has a Position designated as "Manager"
-                    if (repository.Positions.Any(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true)) {
-                        PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
+                    if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true) != null) {                        
                         ViewBag.Message = $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.";
-                        return View(vm);
+                        return View();
                     }
                 }            
-                repository.AddPosition(p);            
+                unitOfWork.Positions.Add(p);
+                unitOfWork.Complete();
                 return RedirectToAction(nameof(Index)); 
             }
 
@@ -124,13 +124,12 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            Position position = repository.Positions.Where(x => x.PositionId == id).FirstOrDefault();
+            Position position = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == id);
             if (position == null)
             {
                 return NotFound();
-            }
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position, repository.Components.ToList());
-            return View(vm);
+            }            
+            return View();
         }
 
         /// <summary>
@@ -143,37 +142,35 @@ namespace OrgChartDemo.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("PositionId,PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
-            Position p = repository.Positions.Where(x => x.PositionId == id).FirstOrDefault();
-            Component targetParentComponent = repository.Components.Find(x => x.ComponentId == form.ParentComponentId);
+            Position p = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == id);
+            Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
             if (id != form.PositionId) {
                 return NotFound();
             }
-            else if (repository.Positions.Any(x => x.Name == form.PositionName && x.PositionId != id))
+            else if (unitOfWork.Positions.Find(x => x.Name == form.PositionName && x.PositionId != id).FirstOrDefault() != null)
             {
                 // user is attempting to change the name of the position to a name which already exists
-                ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
-                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());                
-                return View(vm);
+                ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";                
+                return View();
             }
-            else if (form.IsManager && repository.Positions.Any(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId)) {
+            else if (form.IsManager && unitOfWork.Positions.Find(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId).FirstOrDefault() != null) {
                 // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager                
-                ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";
-                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
-                return View(vm);                
+                ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";                
+                return View();                
             }
             else if (form.IsUnique == true && p.IsUnique == false && p.Members.Count() > 1) {
                 // user is attempting to make Position unique when multiple members are assigned
                 ViewBag.Message = $"{p.Name} has {p.Members.Count()} current Members. You can't set this Position to Unique with multiple members.";
-                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, repository.Components.ToList());
-                return View(vm);
+                
+                return View();
             }
             else {
-                p.ParentComponent = repository.Components.Where(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
+                p.ParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
                 p.Name = form.PositionName;
                 p.IsUnique = form.IsUnique;
                 p.JobTitle = form.JobTitle;
                 p.IsManager = form.IsManager;
-                repository.EditPosition(p);
+                unitOfWork.Complete();
             }
             return RedirectToAction(nameof(Index));
         }
@@ -191,8 +188,8 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = repository.Positions
-                .FirstOrDefault(m => m.PositionId == id);
+            var position = unitOfWork.Positions
+                .SingleOrDefault(m => m.PositionId == id);
             if (position == null)
             {
                 return NotFound();
@@ -211,7 +208,9 @@ namespace OrgChartDemo.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {            
-            repository.RemovePosition(id);            
+            Position p = unitOfWork.Positions.Get(id);
+            unitOfWork.Positions.Remove(p);
+            unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }
 
@@ -222,7 +221,7 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         private bool PositionExists(int id)
         {
-            return repository.Positions.Any(e => e.PositionId == id);
+            return (unitOfWork.Positions.Find(e => e.PositionId == id) != null);
         }
     }
 }

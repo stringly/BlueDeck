@@ -9,7 +9,7 @@ namespace OrgChartDemo.Models {
     /// <summary>
     /// Interface for OrgChartDemo Repository to facilitate dependency injection
     /// </summary>
-    public interface IComponentRepository {
+    public interface IBlobRepository {
 
         /// <summary>
         /// Gets the list of <see cref="Position"/>s 

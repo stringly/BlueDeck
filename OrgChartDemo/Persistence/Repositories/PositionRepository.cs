@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Persistence.Repositories;
 
-namespace OrgChartDemo.Models
+namespace OrgChartDemo.Persistence.Repositories
 {
     public class PositionRepository : Repository<Position>, IPositionRepository
     {
@@ -14,9 +13,13 @@ namespace OrgChartDemo.Models
         {
         }
 
-        public IEnumerable<Position> GetPositionsWithMemberCount()
+        public IEnumerable<Position> GetPositionsWithMembers()
         {
             return ApplicationDbContext.Positions.Include(c => c.Members).ToList();
+        }
+
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
         }
     }
 }
