@@ -14,11 +14,13 @@ namespace OrgChartDemo.Persistence
             Positions = new PositionRepository(_context);
             Components = new ComponentRepository(_context);
             Members = new MemberRepository(_context);
+            MemberRanks = new MemberRankRepository(_context);
         }
 
         public IPositionRepository Positions { get; private set; }
         public IComponentRepository Components { get; private set; }
         public IMemberRepository Members { get; private set; }
+        public IMemberRankRepository MemberRanks { get; private set; }
 
         public int Complete()
         {

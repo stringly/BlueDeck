@@ -77,11 +77,11 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ComponentId,ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form)
+        public IActionResult Create([Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form)
         {        
             if (!ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                return BadRequest(ModelState);
             }
             else
             {
@@ -89,58 +89,80 @@ namespace OrgChartDemo.Controllers
                 {
                     Name = form.ComponentName,
                     Acronym = form.Acronym,
+                    // TODO: How will this handle a null ParentComponentId?
                     ParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId),
                 };
                 // check if a Component with the Name provided already exists and reject if so
                 if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
                 {
                     ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c,)
+                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
                 }
-                unitOfWork.Components.Add(component);
+                unitOfWork.Components.Add(c);
                 unitOfWork.Complete();
             }
-            return View(component);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: Components/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        /// <summary>
+        /// Components/Edit/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var component = await _context.Components.FindAsync(id);
+            Component component = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
             if (component == null)
             {
                 return NotFound();
             }
-            return View(component);
+            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetAll().ToList());
+            return View(vm);
         }
 
-        // POST: Components/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Components/Edit/5
+        /// </summary>
+        /// <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
+        /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ComponentId,Name,Acronym")] Component component)
+        public IActionResult Edit(int id, [Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form )
         {
-            if (id != component.ComponentId)
+            Component c = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
+            Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
+            if (id != form.ComponentId)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                return BadRequest(ModelState);
+            }
+            else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
+            {
+                ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
+                return View(vm);
+            }
+            else { 
                 try
                 {
-                    _context.Update(component);
-                    await _context.SaveChangesAsync();
+                    c.Name = form.ComponentName;
+                    c.ParentComponent = targetParentComponent;
+                    c.Acronym = form.Acronym;
+                    unitOfWork.Complete();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ComponentExists(component.ComponentId))
+                    if (!ComponentExists(id))
                     {
                         return NotFound();
                     }
@@ -151,19 +173,21 @@ namespace OrgChartDemo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(component);
         }
 
-        // GET: Components/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        /// <summary>
+        /// GET: Components/Delete/5
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
+        /// <returns></returns>
+        public IActionResult Delete(int? id)
         {
+            // TODO: Warn or Prevent User from Deleting a Component with assigned Positions? Or auto-reassign members to the General Pool?
             if (id == null)
             {
                 return NotFound();
             }
-
-            var component = await _context.Components
-                .FirstOrDefaultAsync(m => m.ComponentId == id);
+            Component component = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == id);
             if (component == null)
             {
                 return NotFound();
@@ -172,20 +196,41 @@ namespace OrgChartDemo.Controllers
             return View(component);
         }
 
-        // POST: Components/Delete/5
+        /// <summary>
+        /// POST: Components/Delete/5
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var component = await _context.Components.FindAsync(id);
-            _context.Components.Remove(component);
-            await _context.SaveChangesAsync();
+            Component c = unitOfWork.Components.Get(id);
+            foreach (Position p in c.Positions)
+            {
+                if (p.Members.Count() > 0)
+                {
+                    Position unassigned = unitOfWork.Positions.Find(x => x.Name == "Unassigned").FirstOrDefault();
+                    foreach (Member m in p.Members)
+                    {
+                        m.Position = unassigned;
+                    }
+                }
+                unitOfWork.Positions.Remove(p);               
+            }
+            unitOfWork.Components.Remove(c);
+            unitOfWork.Complete();            
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Determines if a Component exists with the provided PositionId .
+        /// </summary>
+        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
+        /// <returns></returns>
         private bool ComponentExists(int id)
         {
-            return _context.Components.Any(e => e.ComponentId == id);
+            return (unitOfWork.Components.Find(e => e.ComponentId == id) != null);
         }
     }
 }

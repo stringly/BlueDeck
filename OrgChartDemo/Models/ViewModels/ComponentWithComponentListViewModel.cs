@@ -32,6 +32,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The Id of the Component's Parent Component.
         /// </value>
+        [Required]
         public int? ParentComponentId { get; set; }
 
         /// <summary>

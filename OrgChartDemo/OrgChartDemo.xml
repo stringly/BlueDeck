@@ -16,28 +16,124 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:OrgChartDemo.Controllers.HomeController">
+        <member name="T:OrgChartDemo.Controllers.ComponentsController">
             <summary>
-            Default Controller, generates orgchart landing page. (Needs to be reassigned)
+            Controller for Position CRUD actions
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:OrgChartDemo.Controllers.HomeController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
             <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.ComponentsController"/> class.
             </summary>
-            <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+            <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.HomeController.GetComponents">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Index">
             <summary>
-            Gets the components. (async, JSON result from the GetOrgChart JQuery Library
+            GET: Components
+            </summary>
+            <remarks>
+            This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.Component"/>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            GET: Components/Details/5.
+            </summary>
+            <param name="id">The identifier for a Component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create">
+            <summary>
+            GET: Component/Create.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.HomeController.Index">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create(OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
             <summary>
-            /localhost/ root matches here
+            POST: Positions/Create.
             </summary>
+            <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Components/Edit/5
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
+            <summary>
+            POST: Components/Edit/5
+            </summary>
+            <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
+            <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            GET: Components/Delete/5
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            POST: Components/Delete/5
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.ComponentExists(System.Int32)">
+            <summary>
+            Determines if a Component exists with the provided PositionId .
+            </summary>
+            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OrgChartDemo.Controllers.MembersController" -->
+        <member name="M:OrgChartDemo.Controllers.MembersController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.MembersController"/> class.
+            </summary>
+            <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Index">
+            <summary>
+            GET: Members
+            </summary>
+            <remarks>
+            This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Details(System.Nullable{System.Int32})">
+            <summary>
+            GET: Members/Details/5.
+            </summary>
+            <param name="id">The identifier for a Member.</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Create">
+            <summary>
+            GET: Component/Create.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Create(OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel)">
+            <summary>
+            POST: Members/Create.
+            </summary>
+            <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> with certain fields bound on submit</param>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Members/Edit/5
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:OrgChartDemo.Controllers.OrgChartController">
@@ -177,6 +273,14 @@
             </summary>
             <value>
             A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Position"/>s
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ApplicationDbContext.MemberRanks">
+            <summary>
+            Gets or sets the Positions.
+            </summary>
+            <value>
+            A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Types.MemberRank"/>s
             </value>
         </member>
         <member name="T:OrgChartDemo.Models.ChartableComponent">
@@ -563,9 +667,106 @@
             The pay grade for the rank.
             </value>
         </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionName">
+            <summary>
+            Gets or sets the Rank Name
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionId">
+            <summary>
+            Gets or sets the Rank Id
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel">
+            <summary>
+            ViewModel used to display a Component and populate a selectlist of Component Names/Ids to facilitate adding a Component or changing the Component to which a Component is assigned. 
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.ComponentId">
+            <summary>
+            Gets or sets the Id of the Component.
+            </summary>
+            <value>
+            The component id.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.ComponentName">
+            <summary>
+            Gets or sets the Component Name.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.ParentComponentId">
+            <summary>
+            Gets or sets the Id of the Component's Parent Component
+            </summary>
+            <value>
+            The Id of the Component's Parent Component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.Acronym">
+            <summary>
+            Gets or sets the Component's acronym.
+            </summary>
+            <value>
+            The acronym of the Component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.Components">
+            <summary>
+            Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
+            </summary>
+            <value>
+            The <see cref="T:List{T}"/> of <see cref="T:OrgChartDemo.Types.ComponentSelectListItem"/>s.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
+            <remarks>
+            This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel(Component, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.#ctor(OrgChartDemo.Models.Component,System.Collections.Generic.List{OrgChartDemo.Models.Component})">
+            TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
+            </summary>
+            <param name="p">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
+            <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
+        </member>
+        <member name="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel">
+            <summary>
+            ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.MemberId">
+            <summary>
+            Gets or sets the Id of the Member.
+            </summary>
+            <value>
+            The Member's Id.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.MemberRank">
+            <summary>
+            Gets or sets the Rank of the Member.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
+            <remarks>
+            This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel(Member, List{Position})"/> constructor overrode the default, and the form POST model-binding failed
+            </remarks>
+            </summary>
+        </member>
         <member name="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel">
             <summary>
-            ViewModel used to display a Positions and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
+            ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
             </summary>
         </member>
         <member name="P:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.PositionId">

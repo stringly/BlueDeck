@@ -8,6 +8,7 @@ namespace OrgChartDemo.Models
         IPositionRepository Positions { get; }
         IComponentRepository Components { get; }
         IMemberRepository Members { get; }
+        IMemberRankRepository MemberRanks { get; }
         int Complete();
     }
 }

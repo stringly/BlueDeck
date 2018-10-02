@@ -40,7 +40,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The job title.
         /// </value>
-        [StringLength(75), Required]
+        [Required]
         public string JobTitle { get; set; }
 
         /// <summary>

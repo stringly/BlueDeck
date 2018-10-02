@@ -10,7 +10,7 @@
     <div id="people"></div>
 </div>
 <script type="text/javascript">
-    $.getJSON("/Home/GetComponents", function (source) {
+    $.getJSON("/OrgChart/GetComponents", function (source) {
         console.log(source);
         var peopleElement = document.getElementById("people");
         var orgChart = new getOrgChart(peopleElement, {

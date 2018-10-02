@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Models {
 
@@ -40,5 +41,13 @@ namespace OrgChartDemo.Models {
         /// A <see cref="DbSet{TEntity}"/> of <see cref="Position"/>s
         /// </value>
         public virtual DbSet<Position> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Positions.
+        /// </summary>
+        /// <value>
+        /// A <see cref="DbSet{TEntity}"/> of <see cref="MemberRank"/>s
+        /// </value>
+        public virtual DbSet<MemberRank> MemberRanks { get; set; }
     }
 }

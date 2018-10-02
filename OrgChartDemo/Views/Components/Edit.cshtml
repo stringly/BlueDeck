@@ -1,14 +1,4 @@
-﻿@model OrgChartDemo.Models.Component
-
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
-</head>
-<body>
+﻿@model ComponentWithComponentListViewModel
 
 <h4>Component</h4>
 <hr />
@@ -18,9 +8,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ComponentId" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="ComponentName" class="control-label"></label>
+                <input asp-for="ComponentName" class="form-control" />
+                <span asp-validation-for="ComponentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentComponentId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ParentComponentId,
+                                                new SelectList(Model.Components, "Id", "ComponentName"),
+                                                "Choose Parent Component",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="ParentComponentId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Acronym" class="control-label"></label>
@@ -33,10 +31,7 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-</body>
-</html>
