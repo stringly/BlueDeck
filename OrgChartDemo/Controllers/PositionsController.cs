@@ -63,8 +63,8 @@ namespace OrgChartDemo.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
-            // TODO : FIX THIS, it needs a ComponentList
-            return View();
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position(), unitOfWork.Components.GetAll().ToList());            
+            return View(vm);
         }
 
         /// <summary>
@@ -95,7 +95,8 @@ namespace OrgChartDemo.Controllers
                 if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null)
                 {                    
                     ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
-                    return View();
+                    PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, unitOfWork.Components.GetAll().ToList());            
+                    return View(vm);
                 }
                 // check if user is attempting to add "Manager" position to the ParentComponent
                 else if (form.IsManager)
@@ -103,7 +104,8 @@ namespace OrgChartDemo.Controllers
                     // check if the Parent Component of the position already has a Position designated as "Manager"
                     if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true) != null) {                        
                         ViewBag.Message = $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.";
-                        return View();
+                        PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, unitOfWork.Components.GetAll().ToList()); 
+                        return View(vm);
                     }
                 }            
                 unitOfWork.Positions.Add(p);
@@ -128,8 +130,9 @@ namespace OrgChartDemo.Controllers
             if (position == null)
             {
                 return NotFound();
-            }            
-            return View();
+            }
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position, unitOfWork.Components.GetAll().ToList());
+            return View(vm);
         }
 
         /// <summary>
@@ -150,19 +153,21 @@ namespace OrgChartDemo.Controllers
             else if (unitOfWork.Positions.Find(x => x.Name == form.PositionName && x.PositionId != id).FirstOrDefault() != null)
             {
                 // user is attempting to change the name of the position to a name which already exists
-                ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";                
-                return View();
+                ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.";
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, unitOfWork.Components.GetAll().ToList());
+                return View(vm);
             }
             else if (form.IsManager && unitOfWork.Positions.Find(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId).FirstOrDefault() != null) {
                 // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager                
-                ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";                
-                return View();                
+                ViewBag.Message = $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.";
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, unitOfWork.Components.GetAll().ToList());
+                return View(vm);                
             }
             else if (form.IsUnique == true && p.IsUnique == false && p.Members.Count() > 1) {
                 // user is attempting to make Position unique when multiple members are assigned
                 ViewBag.Message = $"{p.Name} has {p.Members.Count()} current Members. You can't set this Position to Unique with multiple members.";
-                
-                return View();
+                PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(p, unitOfWork.Components.GetAll().ToList());                
+                return View(vm);
             }
             else {
                 p.ParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();

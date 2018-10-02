@@ -3,37 +3,55 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OrgChartDemo.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Controllers
 {
+    /// <summary>
+    /// Controller for Position CRUD actions
+    /// </summary>
+    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class ComponentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private IUnitOfWork unitOfWork;
 
-        public ComponentsController(ApplicationDbContext context)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.ComponentsController"/> class.
+        /// </summary>
+        /// <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        public ComponentsController(IUnitOfWork unit)
         {
-            _context = context;
+            unitOfWork = unit;
+        }
+                
+        /// <summary>
+        /// GET: Components
+        /// </summary>
+        /// <remarks>
+        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.Component"/>
+        /// </remarks>
+        /// <returns></returns>
+        public IActionResult Index()
+        {
+            return View(unitOfWork.Components.GetAll());
         }
 
-        // GET: Components
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Components.ToListAsync());
-        }
-
-        // GET: Components/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /// <summary>
+        /// GET: Components/Details/5.
+        /// </summary>
+        /// <param name="id">The identifier for a Component.</param>
+        /// <returns></returns>
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var component = await _context.Components
-                .FirstOrDefaultAsync(m => m.ComponentId == id);
+            var component = unitOfWork.Components.SingleOrDefault(m => m.ComponentId == id);
             if (component == null)
             {
                 return NotFound();
@@ -41,25 +59,46 @@ namespace OrgChartDemo.Controllers
 
             return View(component);
         }
-
-        // GET: Components/Create
+        // TODO: This will need a Component List View Model for the ParentComponent
+        /// <summary>
+        /// GET: Component/Create.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
-            return View();
+            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetAll().ToList());
+            return View(vm);
         }
 
-        // POST: Components/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Positions/Create.
+        /// </summary>
+        /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ComponentId,Name,Acronym")] Component component)
-        {
-            if (ModelState.IsValid)
+        public IActionResult Create([Bind("ComponentId,ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form)
+        {        
+            if (!ModelState.IsValid)
             {
-                _context.Add(component);
-                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                Component c = new Component
+                {
+                    Name = form.ComponentName,
+                    Acronym = form.Acronym,
+                    ParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId),
+                };
+                // check if a Component with the Name provided already exists and reject if so
+                if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
+                {
+                    ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
+                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c,)
+                }
+                unitOfWork.Components.Add(component);
+                unitOfWork.Complete();
             }
             return View(component);
         }

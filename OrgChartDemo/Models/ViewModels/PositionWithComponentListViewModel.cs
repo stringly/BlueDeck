@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OrgChartDemo.Models.ViewModels
 {
     /// <summary>
-    /// ViewModel used to display a Positions and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
+    /// ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
     /// </summary>
     public class PositionWithComponentListViewModel
     {
