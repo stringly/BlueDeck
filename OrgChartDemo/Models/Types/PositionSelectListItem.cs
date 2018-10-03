@@ -5,6 +5,12 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models.Types
 {
+    /// <summary>
+    /// A Type that includes the PositionName and PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> Entity.
+    /// <remarks>
+    /// This type is used to populate a Position select list.
+    /// </remarks>
+    /// </summary>
     public class PositionSelectListItem
     {
         /// <summary>

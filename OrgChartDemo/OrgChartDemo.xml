@@ -18,7 +18,7 @@
         </member>
         <member name="T:OrgChartDemo.Controllers.ComponentsController">
             <summary>
-            Controller for Position CRUD actions
+            Controller for Component CRUD actions
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
@@ -35,65 +35,70 @@
             <remarks>
             This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.Component"/>
             </remarks>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Details(System.Nullable{System.Int32})">
             <summary>
             GET: Components/Details/5.
             </summary>
             <param name="id">The identifier for a Component.</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Create">
             <summary>
             GET: Component/Create.
             </summary>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Create(OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
             <summary>
-            POST: Positions/Create.
+            POST: Components/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Nullable{System.Int32})">
             <summary>
             Components/Edit/5
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
             <summary>
             POST: Components/Edit/5
             </summary>
-            <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
+            <param name="id">The ComponentId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
             <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.Delete(System.Nullable{System.Int32})">
             <summary>
             GET: Components/Delete/5
             </summary>
-            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
-            <returns></returns>
+            <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.DeleteConfirmed(System.Int32)">
             <summary>
             POST: Components/Delete/5
             </summary>
-            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
-            <returns></returns>
+            <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.ComponentsController.ComponentExists(System.Int32)">
             <summary>
-            Determines if a Component exists with the provided PositionId .
+            Determines if a Component exists with the provided ComponentId .
             </summary>
-            <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
-            <returns></returns>
+            <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:OrgChartDemo.Controllers.MembersController" -->
+        <member name="T:OrgChartDemo.Controllers.MembersController">
+            <summary>
+            Controller for Member CRUD actions
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.MembersController"/> class.
@@ -107,34 +112,63 @@
             <remarks>
             This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
             </remarks>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.Details(System.Nullable{System.Int32})">
             <summary>
             GET: Members/Details/5.
             </summary>
             <param name="id">The identifier for a Member.</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.Create">
             <summary>
-            GET: Component/Create.
+            GET: Members/Create.
             </summary>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.Create(OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel)">
             <summary>
             POST: Members/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> with certain fields bound on submit</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Nullable{System.Int32})">
             <summary>
             Members/Edit/5
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel)">
+            <summary>
+            POST: Members/Edit/5
+            </summary>
+            <param name="id">The MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> being edited</param>
+            <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> object to which the POSTed form is Bound</param>
+            <returns>An <see cref="T:IActionResult"/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            GET: Member/Delete/5
+            </summary>
+            <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
+            <returns>An <see cref="T:IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            POST: Members/Delete/5
+            </summary>
+            <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
+            <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:OrgChartDemo.Controllers.MembersController.Index"/> on successful deletion of a Member.</returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.MembersController.MemberExists(System.Int32)">
+            <summary>
+            Determines if a Member exists with the provided MemberId .
+            </summary>
+            <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/></param>
+            <returns>True if a <see cref="T:OrgChartDemo.Models.Member"/> with the given id exists</returns>
         </member>
         <member name="T:OrgChartDemo.Controllers.OrgChartController">
             <summary>
@@ -180,34 +214,34 @@
             <remarks>
             This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
             </remarks>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Details(System.Nullable{System.Int32})">
             <summary>
             GET: Positions/Details/5.
             </summary>
             <param name="id">The identifier for a Position.</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Create">
             <summary>
             GET: Positions/Create.
             </summary>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Create(OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
             <summary>
             POST: Positions/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Nullable{System.Int32})">
             <summary>
             Positions/Edit/5
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
             <summary>
@@ -215,14 +249,14 @@
             </summary>
             <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> being edited</param>
             <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Delete(System.Nullable{System.Int32})">
             <summary>
             GET: Positions/Delete/5
             </summary>
             <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(System.Int32)">
             TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
@@ -230,14 +264,14 @@
             POST: Positions/Delete/5
             </summary>
             <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
-            <returns></returns>
+            <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:OrgChartDemo.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.PositionExists(System.Int32)">
             <summary>
             Determines if a Position exists with the provided PositionId .
             </summary>
             <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/></param>
-            <returns></returns>
+            <returns>True if a <see cref="T:OrgChartDemo.Models.Position"/> with the given id exists</returns>
         </member>
         <member name="T:OrgChartDemo.Models.ApplicationDbContext">
             <summary>
@@ -249,14 +283,22 @@
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
             </summary>
-            <param name="options">A <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions"/> of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+            <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Models.ApplicationDbContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
+            </summary>
+            <remarks>
+            Parameterless Constructor
+            </remarks>
         </member>
         <member name="P:OrgChartDemo.Models.ApplicationDbContext.Components">
             <summary>
             Gets or sets the Components.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Component"/>s.
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Component"/>s.
             </value>
         </member>
         <member name="P:OrgChartDemo.Models.ApplicationDbContext.Members">
@@ -264,7 +306,7 @@
             Gets or sets the Members.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Member"/>s
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Member"/>s
             </value>
         </member>
         <member name="P:OrgChartDemo.Models.ApplicationDbContext.Positions">
@@ -272,7 +314,7 @@
             Gets or sets the Positions.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Position"/>s
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s
             </value>
         </member>
         <member name="P:OrgChartDemo.Models.ApplicationDbContext.MemberRanks">
@@ -280,7 +322,7 @@
             Gets or sets the Positions.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1"/> of <see cref="T:OrgChartDemo.Models.Types.MemberRank"/>s
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
             </value>
         </member>
         <member name="T:OrgChartDemo.Models.ChartableComponent">
@@ -288,7 +330,7 @@
             Base class for creating an Organization Chart using GetOrgChart
             </summary>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponent.id">
+        <member name="P:OrgChartDemo.Models.ChartableComponent.Id">
             <summary>
             Gets or sets the id.
             </summary>
@@ -296,15 +338,15 @@
             The id of the component.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponent.parentid">
+        <member name="P:OrgChartDemo.Models.ChartableComponent.Parentid">
             <summary>
-            Gets or sets the parentid. Combined with <see cref="P:OrgChartDemo.Models.ChartableComponent.id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+            Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
             </summary>
             <value>
             The parentid of the component.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponent.componentName">
+        <member name="P:OrgChartDemo.Models.ChartableComponent.ComponentName">
             <summary>
             Gets or sets the name of the component.
             </summary>
@@ -324,7 +366,7 @@
             </remarks>
             <seealso cref="T:OrgChartDemo.Models.ChartableComponent" />
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.positionId">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.PositionId">
             <summary>
             Gets or sets the position id.
             </summary>
@@ -332,7 +374,7 @@
             The position identifier.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.positionName">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.PositionName">
             <summary>
             Gets or sets the name of the position.
             </summary>
@@ -340,7 +382,7 @@
             The name of the position.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.memberId">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.MemberId">
             <summary>
             Gets or sets the member identifier.
             </summary>
@@ -348,7 +390,7 @@
             The member identifier.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.memberName">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.MemberName">
             <summary>
             Gets or sets the name of the member.
             </summary>
@@ -356,7 +398,7 @@
             The name of the member.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.email">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.Email">
             <summary>
             Gets or sets the email.
             </summary>
@@ -364,7 +406,7 @@
             The email.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.contactNumber">
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.ContactNumber">
             <summary>
             Gets or sets the contact number.
             </summary>
@@ -429,6 +471,58 @@
             <typeparam name="T">The type of Object in the <see cref="T:System.Collections.Generic.IEnumerable`1"/> to which you are adding.</typeparam>
             <param name="e">The <see cref="T:System.Collections.Generic.IEnumerable`1"/> to which you are adding.</param>
             <param name="value">The object of T type to add to the <see cref="T:System.Collections.Generic.IEnumerable`1"/>parameter.</param>
+            <returns></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.IUnitOfWork">
+            <summary>
+            An interface that represents the encapsulated Entity Repository Interfaces 
+            </summary>
+            <seealso cref="T:System.IDisposable" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository"/> 
+        </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.Positions">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
+            </summary>
+            <value>
+            The Interface representing the Position Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
+        </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.Components">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IComponentRepository"/>
+            </summary>
+            <value>
+            The Interface representing the Component Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository"/>
+        </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.Members">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRepository"/>
+            </summary>
+            <value>
+            The Interface representing the Member Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository"/>
+        </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.MemberRanks">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository"/>
+            </summary>
+            <value>
+            The Interface representing the MemberRanks Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
+        </member>
+        <member name="M:OrgChartDemo.Models.IUnitOfWork.Complete">
+            <summary>
+            Saves changes made in the Unit of Work to ensure consistent updates
+            </summary>
             <returns></returns>
         </member>
         <member name="T:OrgChartDemo.Models.Member">
@@ -585,17 +679,139 @@
             </remarks>
             </summary>
         </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IComponentRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Component}" />
+        </member>
         <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithoutMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+            <remarks>
+            This method is used to seed the GetOrgChart JQuery chart with a list of Components without Member details .
+            </remarks>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         </member>
         <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+            <remarks>
+            This method is used to seed the GetOrgChart JQuery chart with a list of Components with Member details.
+            </remarks>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetComponentSelectListItems">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
+            </summary>
+            <returns>A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}"/></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IMemberRankRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.MemberRank}" />
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IMemberRankRepository.GetMemberRankSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberRankSelectListItem"/>s.
+            </summary>
+            <remarks>
+            This method is used to populate Rank select lists.
+            </remarks>
+            <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}"/></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IMemberRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Member}" />
+        </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IPositionRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Position}" />
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IPositionRepository.GetPositionsWithMembers">
+            <summary>
+            Gets the Positions with their Members.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IRepository`1">
+            <summary>
+            An interface that encapsulates data store interactions common to all Domain Entity Interactions. 
+            </summary>
+            <remarks>
+            This interface should not be implemented directly, but rather a Entity-specific interface that implements this interface should be created,
+            and specific implementations of Repositories should be derived from Entity-specific interface 
+            </remarks>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository"/>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository"/>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.Get(System.Int32)">
+            <summary>
+            Gets the Entity with the given identifier.
+            </summary>
+            <param name="id">The identifier for the desired entity.</param>
+            <returns>A <see cref="T:TEntity"/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.GetAll">
+            <summary>
+            Gets Entities in the Repository
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerable{T}"/> of the Entity.</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Finds the Entities that match the specified predicate.
+            </summary>
+            <remarks>
+            This Method can accept LINQ Lambda Expression delegates
+            </remarks>
+            <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
+            <returns>An <see cref="T:System.Collections.IEnumerable{T}"/> of the Entity.</returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.SingleOrDefault(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Finds a Single Entity based on the predicate.
+            </summary>
+            <remarks>
+            This Method can accept LINQ Lambda Expression delegates
+            </remarks>
+            <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
+            <returns>A <see cref="T:TEntity"/></returns>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.Add(`0)">
+            <summary>
+            Adds the specified entity.
+            </summary>
+            <param name="entity">The Entity to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds a range of Entities.
+            </summary>
+            <param name="entities">An <see cref="T:IEnumerable{T}"/> of entities to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.Remove(`0)">
+            <summary>
+            Removes the specified entity.
+            </summary>
+            <param name="entity">The <see cref="T:TEntity:"/> to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IRepository`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Removes a range of <see cref="T:TEntity"/>.
+            </summary>
+            <param name="entities">An <see cref="T:IEnumerable{T}"/> of entities to remove.</param>
         </member>
         <member name="T:OrgChartDemo.Models.Types.ComponentSelectListItem">
             <summary>
@@ -667,6 +883,38 @@
             The pay grade for the rank.
             </value>
         </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberRankSelectListItem">
+            <summary>
+            A Type that includes the MemberRankId and RankFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRank"/> Entity.
+            <remarks>
+            This type is used to populate a MemberRank select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.MemberRankId">
+            <summary>
+            Gets or sets the member rank identifier.
+            </summary>
+            <value>
+            The member rank identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.RankName">
+            <summary>
+            Gets or sets the name of the rank.
+            </summary>
+            <value>
+            The name of the rank.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.PositionSelectListItem">
+            <summary>
+            A Type that includes the PositionName and PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> Entity.
+            <remarks>
+            This type is used to populate a Position select list.
+            </remarks>
+            </summary>
+        </member>
         <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionName">
             <summary>
             Gets or sets the Rank Name
@@ -735,7 +983,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
             </summary>
-            <param name="p">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
+            <param name="c">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
             <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
         </member>
         <member name="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel">
@@ -756,6 +1004,73 @@
             Gets or sets the Rank of the Member.
             </summary>
         </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.FirstName">
+            <summary>
+            Gets or sets the First Name of the Member.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.LastName">
+            <summary>
+            Gets or sets the Last Name of the Member.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.MiddleName">
+            <summary>
+            Gets or sets the Middle Name of the Member.
+            </summary>
+            <value>
+            The name of the middle.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.IdNumber">
+            <summary>
+            Gets or sets the Member's IDNumber.
+            </summary>
+            <remarks>
+            This is NOT the Member Entity Id. This is the Member's employee Id number
+            </remarks>
+            <value>
+            The identifier number.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.Email">
+            <summary>
+            Gets or sets the Member's email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.PositionId">
+            <summary>
+            Gets or sets the Position identifier.
+            </summary>
+            <value>
+            The position identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.RankList">
+            <summary>
+            Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>s.
+            </summary>
+            <value>
+            The rank list.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.Positions">
+            <summary>
+            Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.PositionSelectListItem"/>.
+            </summary>
+            <value>
+            The positions.
+            </value>
+        </member>
         <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
@@ -763,6 +1078,14 @@
             This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel(Member, List{Position})"/> constructor overrode the default, and the form POST model-binding failed
             </remarks>
             </summary>
+        </member>
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Position},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem})">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> class.
+            </summary>
+            <param name="m">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
+            <param name="l">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
+            <param name="r">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
         </member>
         <member name="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel">
             <summary>
@@ -825,7 +1148,7 @@
             The <see cref="T:List{T}"/> of <see cref="T:OrgChartDemo.Types.ComponentSelectListItem"/>s.
             </value>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.#ctor(OrgChartDemo.Models.Position,System.Collections.Generic.List{OrgChartDemo.Models.Component})">
+        <member name="M:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.#ctor(OrgChartDemo.Models.Position)">
             TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel"/> class.
@@ -928,22 +1251,255 @@
             </remarks>
             </summary>
         </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.ComponentRepository">
+            <summary>
+            A repository for the Component Entity
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Component}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.ComponentRepository"/> class.
+            </summary>
+            <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetComponentSelectListItems">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem" />s to populate a Component select list
+            </summary>
+            <returns>
+            A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}" />
+            </returns>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository">
+            <summary>
+            A repository for the MemberRank entity.
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberRank}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRankRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository"/> class.
+            </summary>
+            <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRankRepository.GetMemberRankSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberRankSelectListItem" />s.
+            </summary>
+            <returns>
+            A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}" />
+            </returns>
+            <remarks>
+            This method is used to populate Rank select lists.
+            </remarks>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.MemberRepository">
+            <summary>
+            A repository for the Member entity
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Member}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRepository"/> class.
+            </summary>
+            <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.PositionRepository">
+            <summary>
+            A repository for the Position entity
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Position}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.PositionRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.PositionRepository"/> class.
+            </summary>
+            <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.PositionRepository.GetPositionsWithMembers">
+            <summary>
+            Gets the Positions with their Members.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OrgChartDemo.Persistence.Repositories.PositionRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.Repository`1">
+            <summary>
+            Represents CRUD actions common to DbContext entities
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{TEntity}" />
+        </member>
+        <member name="F:OrgChartDemo.Persistence.Repositories.Repository`1.Context">
+            <summary>
+            An <see cref="T:DbContext"/> context
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.Repository{TEntity}"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.Get(System.Int32)">
+            <summary>
+            Gets the Entity with the given identifier.
+            </summary>
+            <param name="id">The identifier for the desired entity.</param>
+            <returns>
+            A <see cref="T:TEntity" />
+            </returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.GetAll">
+            <summary>
+            Gets Entities in the Repository
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerable{T}" /> of the Entity.
+            </returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Finds the Entities that match the specified predicate.
+            </summary>
+            <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerable{T}" /> of the Entity.
+            </returns>
+            <remarks>
+            This Method can accept LINQ Lambda Expression delegates
+            </remarks>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.SingleOrDefault(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Finds a Single Entity based on the predicate.
+            </summary>
+            <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
+            <returns>
+            A <see cref="T:TEntity" />
+            </returns>
+            <remarks>
+            This Method can accept LINQ Lambda Expression delegates
+            </remarks>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.Add(`0)">
+            <summary>
+            Adds the specified entity.
+            </summary>
+            <param name="entity">The Entity to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds a range of Entities.
+            </summary>
+            <param name="entities">An <see cref="T:IEnumerable{T}" /> of entities to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.Remove(`0)">
+            <summary>
+            Removes the specified entity.
+            </summary>
+            <param name="entity">The <see cref="T:TEntity:" /> to add.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.Repository`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Removes a range of <see cref="T:TEntity" />.
+            </summary>
+            <param name="entities">An <see cref="T:IEnumerable{T}" /> of entities to remove.</param>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.UnitOfWork">
+            <summary>
+            An instance of <see cref="T:OrgChartDemo.Models.IUnitOfWork"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.IUnitOfWork" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.UnitOfWork.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
+            </summary>
+            <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.Positions">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+            </summary>
+            <value>
+            The Interface representing the Position Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.Components">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+            </summary>
+            <value>
+            The Interface representing the Component Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.Members">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+            </summary>
+            <value>
+            The Interface representing the Member Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.MemberRanks">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository" />
+            </summary>
+            <value>
+            The Interface representing the MemberRanks Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.UnitOfWork.Complete">
+            <summary>
+            Saves changes made in the Unit of Work to ensure consistent updates
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.UnitOfWork.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
         </member>
         <member name="T:OrgChartDemo.Program">
             <summary>
             Program Starting Routine
             </summary>
+        </member>
+        <member name="M:OrgChartDemo.Program.Main(System.String[])">
+            <summary>
+            Defines the entry point of the application.
+            </summary>
+            <param name="args">The arguments.</param>
         </member>
         <member name="M:OrgChartDemo.Program.CreateWebHostBuilder(System.String[])">
             <summary>

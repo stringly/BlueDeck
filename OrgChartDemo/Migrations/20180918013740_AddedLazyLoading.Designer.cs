@@ -13,6 +13,7 @@ namespace OrgChartDemo.Migrations
     [Migration("20180918013740_AddedLazyLoading")]
     partial class AddedLazyLoading
     {
+#pragma warning disable 1591
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
@@ -134,6 +135,7 @@ namespace OrgChartDemo.Migrations
                         .HasForeignKey("ParentComponentComponentId");
                 });
 #pragma warning restore 612, 618
+#pragma warning restore 1591
         }
     }
 }

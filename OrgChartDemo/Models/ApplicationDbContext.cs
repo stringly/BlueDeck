@@ -6,23 +6,29 @@ namespace OrgChartDemo.Models {
     /// <summary>
     /// Entity Framework DbContext Class
     /// </summary>
-    /// <seealso cref="Microsoft.EntityFrameworkCore.DbContext" />
+    /// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
     public class ApplicationDbContext : DbContext {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
         /// </summary>
-        /// <param name="options">A <see cref="DbContextOptions"/> of <see cref="ApplicationDbContext"/></param>
+        /// <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){ }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
+        /// </summary>
+        /// <remarks>
+        /// Parameterless Constructor
+        /// </remarks>
         public ApplicationDbContext()
         {
-
         }
         /// <summary>
         /// Gets or sets the Components.
         /// </summary>
         /// <value>
-        /// A <see cref="DbSet{TEntity}"/> of <see cref="Component"/>s.
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Component"/>s.
         /// </value>
         public virtual DbSet<Component> Components { get; set; }
 
@@ -30,7 +36,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Members.
         /// </summary>
         /// <value>
-        /// A <see cref="DbSet{TEntity}"/> of <see cref="Member"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Member"/>s
         /// </value>
         public virtual DbSet<Member> Members { get; set; }
 
@@ -38,7 +44,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Positions.
         /// </summary>
         /// <value>
-        /// A <see cref="DbSet{TEntity}"/> of <see cref="Position"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s
         /// </value>
         public virtual DbSet<Position> Positions { get; set; }
 
@@ -46,7 +52,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Positions.
         /// </summary>
         /// <value>
-        /// A <see cref="DbSet{TEntity}"/> of <see cref="MemberRank"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
         /// </value>
         public virtual DbSet<MemberRank> MemberRanks { get; set; }
     }

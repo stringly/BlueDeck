@@ -9,6 +9,7 @@ using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
+#pragma warning disable 1591
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20180918031823_PositionMisspelled")]
     partial class PositionMisspelled
@@ -134,6 +135,7 @@ namespace OrgChartDemo.Migrations
                         .HasForeignKey("ParentComponentComponentId");
                 });
 #pragma warning restore 612, 618
+#pragma warning restore 1591
         }
     }
 }

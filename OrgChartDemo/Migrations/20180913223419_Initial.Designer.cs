@@ -9,6 +9,7 @@ using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
+#pragma warning disable 1591
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20180913223419_Initial")]
     partial class Initial
@@ -134,4 +135,5 @@ namespace OrgChartDemo.Migrations
 #pragma warning restore 612, 618
         }
     }
+#pragma warning restore 1591
 }

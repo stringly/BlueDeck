@@ -65,7 +65,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
         /// </summary>
-        /// <param name="p">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
+        /// <param name="c">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
         /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
         public ComponentWithComponentListViewModel(Component c, List<Component> l)
         {

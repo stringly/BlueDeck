@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrgChartDemo.Migrations
 {
+#pragma warning disable 1591
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -132,4 +133,5 @@ namespace OrgChartDemo.Migrations
                 name: "Components");
         }
     }
+#pragma warning restore 1591
 }

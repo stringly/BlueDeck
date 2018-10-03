@@ -74,7 +74,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// </summary>
         /// <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> being displayed by the view</param>
         /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
-        public PositionWithComponentListViewModel(Position p, List<Component> l) {
+        public PositionWithComponentListViewModel(Position p) {
 
             PositionId = p?.PositionId;
             PositionName = p.Name;
@@ -82,7 +82,7 @@ namespace OrgChartDemo.Models.ViewModels
             JobTitle = p.JobTitle;
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
-            Components = l.ConvertAll(x => new ComponentSelectListItem { Id = x.ComponentId, ComponentName = x.Name });                  
+            Components = new List<ComponentSelectListItem>();
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// </remarks>
         /// </summary>
         public PositionWithComponentListViewModel() {
-
+            Components = new List<ComponentSelectListItem>();
         }
     }
 }

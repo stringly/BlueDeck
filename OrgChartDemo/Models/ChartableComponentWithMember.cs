@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 namespace OrgChartDemo.Models {
 
     /// <summary>
-    /// An extension of <see cref="ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
+    /// An extension of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
     /// </summary>
     /// <remarks>
-    /// This is not a direct representation of a <see cref="Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
+    /// This is not a direct representation of a <see cref="T:OrgChartDemo.Models.Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
     /// GetOrgChart</a> cannot render a component with multiple positions or multiple members.
-    /// This class is used to map GetOrgChart Components, NOT domain <see cref="Component"/>s.
-    /// When rendering <see cref="Member"/> information into GetOrgChart, an instance of this class will be generated for each.
+    /// This class is used to map GetOrgChart Components, NOT domain <see cref="T:OrgChartDemo.Models.Component"/>s.
+    /// When rendering <see cref="T:OrgChartDemo.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
     /// </remarks>
-    /// <seealso cref="OrgChartDemo.Models.ChartableComponent" />
+    /// <seealso cref="T:OrgChartDemo.Models.ChartableComponent" />
     public class ChartableComponentWithMember : ChartableComponent {
         /// <summary>
         /// Gets or sets the position id.
@@ -22,7 +22,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The position identifier.
         /// </value>
-        public int positionId { get; set; }
+        public int PositionId { get; set; }
         
         /// <summary>
         /// Gets or sets the name of the position.
@@ -30,7 +30,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the position.
         /// </value>
-        public string positionName { get; set; }
+        public string PositionName { get; set; }
 
         /// <summary>
         /// Gets or sets the member identifier.
@@ -38,7 +38,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The member identifier.
         /// </value>
-        public int? memberId { get; set; }
+        public int? MemberId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the member.
@@ -46,7 +46,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the member.
         /// </value>
-        public string memberName { get; set; }
+        public string MemberName { get; set; }
 
         /// <summary>
         /// Gets or sets the email.
@@ -54,7 +54,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The email.
         /// </value>
-        public string email { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the contact number.
@@ -62,6 +62,6 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The contact number.
         /// </value>
-        public string contactNumber { get; set; }        
+        public string ContactNumber { get; set; }        
     }
 }

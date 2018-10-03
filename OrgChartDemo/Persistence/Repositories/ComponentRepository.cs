@@ -1,21 +1,31 @@
 ﻿using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
+using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OrgChartDemo.Persistence.Repositories
 {
+    /// <summary>
+    /// A repository for the Component Entity
+    /// </summary>
+    /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Component}" />
+    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
     public class ComponentRepository : Repository<Component>, IComponentRepository
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.ComponentRepository"/> class.
+        /// </summary>
+        /// <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
         public ComponentRepository(ApplicationDbContext context)
             : base(context)
         {
         }
 
         /// <summary>
-        /// Gets the list of <see cref="ChartableComponent"/>s.
+        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
         /// </summary>
-        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponent"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         public IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers()
         {
             List<ChartableComponent> results = new List<ChartableComponent>();
@@ -23,9 +33,9 @@ namespace OrgChartDemo.Persistence.Repositories
             {
                 ChartableComponent n = new ChartableComponent
                 {
-                    id = c.ComponentId,
-                    parentid = c?.ParentComponent?.ComponentId,
-                    componentName = c.Name
+                    Id = c.ComponentId,
+                    Parentid = c?.ParentComponent?.ComponentId,
+                    ComponentName = c.Name
                 };
                 results.Add(n);
             }
@@ -33,9 +43,9 @@ namespace OrgChartDemo.Persistence.Repositories
         }
 
         /// <summary>
-        /// Gets the list of <see cref="ChartableComponentWithMember"/>s.
+        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
         /// </summary>
-        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         public IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers()
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId            
@@ -51,14 +61,14 @@ namespace OrgChartDemo.Persistence.Repositories
                         Member m = p.Members.FirstOrDefault(); // EVERY MANAGER POSITION MUST HAVE A MEMBER
                         ChartableComponentWithMember n = new ChartableComponentWithMember
                         {
-                            id = c.ComponentId,
-                            parentid = c?.ParentComponent?.ComponentId,
-                            componentName = c.Name,
-                            positionId = p.PositionId,
-                            positionName = p.Name,
-                            memberId = m.MemberId,
-                            memberName = m.GetTitleName(),
-                            email = m.Email
+                            Id = c.ComponentId,
+                            Parentid = c?.ParentComponent?.ComponentId,
+                            ComponentName = c.Name,
+                            PositionId = p.PositionId,
+                            PositionName = p.Name,
+                            MemberId = m.MemberId,
+                            MemberName = m.GetTitleName(),
+                            Email = m.Email
                         };
                         results.Add(n);
                     }
@@ -69,14 +79,14 @@ namespace OrgChartDemo.Persistence.Repositories
                         {
                             ChartableComponentWithMember n = new ChartableComponentWithMember
                             {
-                                id = dynamicUniqueId,
-                                parentid = c.ComponentId,
-                                componentName = c.Name,
-                                positionId = p.PositionId,
-                                positionName = p.Name,
-                                memberId = m.MemberId,
-                                memberName = m.GetTitleName(),
-                                email = m.Email
+                                Id = dynamicUniqueId,
+                                Parentid = c.ComponentId,
+                                ComponentName = c.Name,
+                                PositionId = p.PositionId,
+                                PositionName = p.Name,
+                                MemberId = m.MemberId,
+                                MemberName = m.GetTitleName(),
+                                Email = m.Email
                             };
                             results.Add(n);
                             dynamicUniqueId--;
@@ -87,5 +97,15 @@ namespace OrgChartDemo.Persistence.Repositories
             return results;
         }
 
+        /// <summary>
+        /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem" />s to populate a Component select list
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}" />
+        /// </returns>
+        public List<ComponentSelectListItem> GetComponentSelectListItems()
+        {
+            return GetAll().ToList().ConvertAll(x => new ComponentSelectListItem { ComponentName = x.Name, Id = x.ComponentId });
+        }
     }
 }

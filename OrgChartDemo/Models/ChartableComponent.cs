@@ -17,15 +17,15 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The id of the component.
         /// </value>
-        public int id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the parentid. Combined with <see cref="ChartableComponent.id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+        /// Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
         /// </summary>
         /// <value>
         /// The parentid of the component.
         /// </value>
-        public int? parentid { get; set; }
+        public int? Parentid { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the component.
@@ -33,6 +33,6 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The name of the component.
         /// </value>
-        public string componentName { get; set; }
+        public string ComponentName { get; set; }
     }
 }

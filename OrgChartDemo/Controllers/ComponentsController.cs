@@ -11,7 +11,7 @@ using OrgChartDemo.Models;
 namespace OrgChartDemo.Controllers
 {
     /// <summary>
-    /// Controller for Position CRUD actions
+    /// Controller for Component CRUD actions
     /// </summary>
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
     public class ComponentsController : Controller
@@ -33,7 +33,7 @@ namespace OrgChartDemo.Controllers
         /// <remarks>
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.Component"/>
         /// </remarks>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Index()
         {
             return View(unitOfWork.Components.GetAll());
@@ -43,7 +43,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Components/Details/5.
         /// </summary>
         /// <param name="id">The identifier for a Component.</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -59,11 +59,11 @@ namespace OrgChartDemo.Controllers
 
             return View(component);
         }
-        // TODO: This will need a Component List View Model for the ParentComponent
+        
         /// <summary>
         /// GET: Component/Create.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Create()
         {
             ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetAll().ToList());
@@ -71,10 +71,10 @@ namespace OrgChartDemo.Controllers
         }
 
         /// <summary>
-        /// POST: Positions/Create.
+        /// POST: Components/Create.
         /// </summary>
         /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form)
@@ -108,7 +108,7 @@ namespace OrgChartDemo.Controllers
         /// Components/Edit/5
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -128,9 +128,9 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Components/Edit/5
         /// </summary>
-        /// <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
+        /// <param name="id">The ComponentId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
         /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-        /// <returns></returns>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form )
@@ -178,8 +178,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET: Components/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
-        /// <returns></returns>
+        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Delete(int? id)
         {
             // TODO: Warn or Prevent User from Deleting a Component with assigned Positions? Or auto-reassign members to the General Pool?
@@ -199,11 +199,11 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Components/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
-        /// <returns></returns>
+        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             Component c = unitOfWork.Components.Get(id);
             foreach (Position p in c.Positions)
@@ -224,10 +224,10 @@ namespace OrgChartDemo.Controllers
         }
 
         /// <summary>
-        /// Determines if a Component exists with the provided PositionId .
+        /// Determines if a Component exists with the provided ComponentId .
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
-        /// <returns></returns>
+        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
+        /// <returns>An <see cref="T:IActionResult"/></returns>
         private bool ComponentExists(int id)
         {
             return (unitOfWork.Components.Find(e => e.ComponentId == id) != null);

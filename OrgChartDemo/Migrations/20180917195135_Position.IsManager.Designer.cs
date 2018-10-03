@@ -13,6 +13,7 @@ namespace OrgChartDemo.Migrations
     [Migration("20180917195135_Position.IsManager")]
     partial class PositionIsManager
     {
+#pragma warning disable 1591
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
@@ -134,6 +135,7 @@ namespace OrgChartDemo.Migrations
                         .HasForeignKey("ParentComponentComponentId");
                 });
 #pragma warning restore 612, 618
+#pragma warning restore 1591
         }
     }
 }
