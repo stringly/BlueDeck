@@ -1,274 +1,310 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Moq;
 using OrgChartDemo.Controllers;
 using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 using OrgChartDemo.Persistence;
+using OrgChartDemo.Tests.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace OrgChartDemo.Tests
 {
     /// <summary>
     /// Unit tests for the PositionController
     /// </summary>
-    public class PositionControllerTests
+    public class PositionControllerTests : UnitTestFrame
     {
         /// <summary>
-        /// Determines whether this instance [can get position list with member count].
+        /// Determines whether a position can be added to the Context using <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
         /// </summary>
         [Fact]
-        public void Can_Get_Member_Count_From_Position()
+        public void Can_Add_Position_To_Context_Via_Controller()
         {
-            // Arrange - Create 2 positions and a list of 
-            var position1 = new Position {
-                PositionId = 1,
-                Name = "Position2",
-                ParentComponent = new Component {
-                    ComponentId = 1,
-                    ParentComponent = null,
-                    Name = "Component1"
-                },
-                IsManager = false,
-                Members = new List<Member> { }
-            };
-            var position2 = new Position {
-                PositionId = 2,
-                Name = "Position2",
-                ParentComponent = new Component {
-                    ComponentId = 1,
-                    ParentComponent = null,
-                    Name = "Component1" },
-                IsManager = false,
-                Members = new List<Member> {
-                    new Member {
-                        FirstName = "Adam",
-                        LastName = "One",
-                        MemberId = 1,
-                        Position = position1,
-                        Email = "AdamOne@test.mail"
-                    },
-                    new Member {
-                        FirstName = "Bob",
-                        LastName = "Two",
-                        MemberId = 2,
-                        Position = position1,
-                        Email = "BobTwo@test.mail"
-                    }
-                }
-            };
-            var positions = new List<Position> { position1, position2 };
-            var positionRepositoryMock = new Mock<IPositionRepository>();
-            positionRepositoryMock.Setup(m => m.GetPositionsWithMembers()).Returns(positions).Verifiable();
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(m => m.Positions).Returns(positionRepositoryMock.Object);
-
-            // Act - Assign each member to the Members collection of Position => PositionId == 2
-            var actual = unitOfWorkMock.Object.Positions.GetPositionsWithMembers().ToList();
-
-            // Assert - test that the count of Members is correct for two of the Positions
-            positionRepositoryMock.Verify();
-            Assert.NotNull(actual);
-            Assert.Empty(actual[0].Members);
-            Assert.Equal(2, actual[1].Members.Count());
-        }
-
-        [Fact]
-        public void Given_PositionId_Can_Get_Position()
-        {
-            // Arrange
-            var positionId = 1;
-            var expectedPositionName = "PositionName";
-            var position = new Position { Name = expectedPositionName, PositionId = positionId };
-            var positionRepositoryMock = new Mock<IPositionRepository>();
-            positionRepositoryMock.Setup(m => m.Get(positionId)).Returns(position).Verifiable();
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(m => m.Positions).Returns(positionRepositoryMock.Object);
-
-            // Act
-            var actual = unitOfWorkMock.Object.Positions.Get(positionId);
-
-            // Assert
-            positionRepositoryMock.Verify();
-            Assert.NotNull(actual);
-            Assert.Equal(position, actual);
-        }
-
-        [Fact]
-        public void Given_Form_Can_Add_Position_From_Controller_Method()
-        {
-            // Arrange
-            var positionId = 1;
-            var expectedPositionName = "PositionName";
-            var position = new Position { Name = expectedPositionName, PositionId = positionId };
-            var positionRepositoryMock = new Mock<IPositionRepository>();
-            positionRepositoryMock.Setup(m => m.Get(positionId)).Returns(position).Verifiable();
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(m => m.Positions).Returns(positionRepositoryMock.Object);
-            PositionsController controller = new PositionsController(unitOfWorkMock.Object);
-            PositionWithComponentListViewModel form = new PositionWithComponentListViewModel
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
             {
-                PositionName = "New Position",
-                ParentComponentId = 1,
-                JobTitle = "Add New Position Test",
-                IsManager = false,
-                IsUnique = false
-            };
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();                
+                int expectedPositionCount = context.Positions.Count() + 1;
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
-            // Act
-            unitOfWorkMock.Object.Positions.Add(new Position { PositionId = 10 });
-            unitOfWorkMock.Object.Complete();
-            //controller.Create(form);
+                // Create a new ViewModel from a new Position to mimic user data entry                
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(new Position 
+                    {
+                        Name = "New Position",
+                        IsManager = false,
+                        IsUnique = false,
+                        JobTitle = "Test",                        
+                    });
 
-            // Assert
-            positionRepositoryMock.Verify();
-            Assert.True(unitOfWorkMock.Object.Positions.GetAll().Count() == 2);
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Create(form);
+
+                // Assert - verify the position was added
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
         }
 
+        /// <summary>
+        /// Determines whether a position can be removed via <see cref="T:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(int)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Remove_Position_Via_Controller()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count() - 1;
 
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
+                // Act - Attempt to remove the Position with PositionId = 3
+                mockController.Object.DeleteConfirmed(3);
 
+                // Assert - verify the position was removed
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
 
+        /// <summary>
+        /// Tests editing a Position using <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Given_Position_Id_Can_Edit_Position_In_Context_Via_Controller()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                Position initialPosition = context.Positions.Where(x => x.PositionId == 3).FirstOrDefault();
+                var expectedName = "Expected Name";
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(initialPosition) {
+                    PositionName = expectedName
+                };
+                
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
+                // Act - Attempt to remove the Position with PositionId = 3
+                mockController.Object.Edit(3, form);
 
+                // Assert - verify the position was removed
+                Assert.True(context.Positions.Where(x => x.PositionId == 3).First().Name == expectedName);
+            }
+        }
 
+        /// <summary>
+        /// Determines whether this instance can detect duplicate position name when adding a new Position
+        /// via <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Detect_Duplicate_Position_Name_For_New_Position()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count();
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
+                // Create a new ViewModel from a new Position to mimic user data entry. The position name                 
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(new Position
+                {
+                    Name = "Position1",
+                    IsManager = false,
+                    IsUnique = false,
+                    JobTitle = "Test",
+                });
 
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Create(form);
 
-        ///// <summary>
-        ///// Determines whether this instance [can add position].
-        ///// </summary>
-        //[Fact]
-        //public void CanAddPosition()
-        //{
-        //    // Arrange
-        //    int startPositionsCount = unitOfWork.Object.Positions.GetAll().Count(); // get the count of positions in Repo at the start
-        //    int finalPositionsCount = startPositionsCount + 1;
-        //    Position p = new Position
-        //    {
-        //        Name = "New Position",
-        //        ParentComponent = new Component { ComponentId = 1 },
-        //        JobTitle = "Add New Position Test",
-        //        IsManager = false,
-        //        IsUnique = false
-        //    };
+                // Assert - verify the position was added
+                Assert.True(mockController.Object.ViewBag.Message == "A Position with the name Position1 already exists. Use a different Name.\n");
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
 
-        //    // Act
-        //    unitOfWork.Object.Positions.Add(p);
-        //    unitOfWork.Object.Complete();
-        //    // Assert
-        //    Assert.True(unitOfWork.Object.Positions.GetAll().Count() == finalPositionsCount);
-        //}
-        ///// <summary>
-        ///// Determines whether this instance [can add position from PositionController.Create()].
-        ///// </summary>
-        //[Fact]
-        //public void CanAddPositionFromController()
-        //{
-        //    // Arrange
-        //    int startPositionsCount = unitOfWork.Object.Positions.GetAll().Count(); // get the count of positions in Repo at the start
-        //    int finalPositionsCount = startPositionsCount + 1;
-        //    PositionsController controller = new PositionsController(unitOfWork.Object);
-        //    PositionWithComponentListViewModel form = new PositionWithComponentListViewModel
-        //    {
-        //        PositionName = "New Position",
-        //        ParentComponentId = 1,
-        //        JobTitle = "Add New Position Test",
-        //        IsManager = false,
-        //        IsUnique = false
-        //    };
+        /// <summary>
+        /// Determines whether this instance can detect duplicate position name when adding a new Position
+        /// via <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Detect_Duplicate_Position_Name_For_Existing_Position()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count();
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
-        //    // Act 
-        //    controller.Create(form);
+                // Create a new ViewModel from the Position with id = 2 to mimic user data entry. The position name                 
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(context.Positions.Where(x => x.PositionId == 2).FirstOrDefault());
 
-        //    // Assert
+                // Change the Position name to that of another position
+                form.PositionName = "Position1";
 
-        //    Assert.True(unitOfWork.Object.Positions.GetAll().Count() == finalPositionsCount);
-        //}
-        ///// <summary>
-        ///// Determines whether this instance [can detect existing position name] and prevent a duplicate add.
-        ///// </summary>
-        //[Fact]
-        //public void CanDetectExistingPositionName()
-        //{
-        //    // Arrange
-        //    int startPositionsCount = unitOfWork.Object.Positions.GetAll().Count(); // get the count of positions in Repo at the start
-        //    PositionsController controller = new PositionsController(unitOfWork.Object);
-        //    PositionWithComponentListViewModel form = new PositionWithComponentListViewModel
-        //    {
-        //        PositionName = "Position1",
-        //        JobTitle = "Position1 Test Job"
-        //    };
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Edit(2, form);
 
-        //    // Act - this should NOT add a Position - the name "Position1" already exists in the repo
-        //    controller.Create(form);
+                // Assert - verify the position was added
+                Assert.True(mockController.Object.ViewBag.Message == "A Position with the name Position1 already exists. Use a different Name.\n");
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
 
-        //    // Assert
-        //    Assert.Equal(startPositionsCount, unitOfWork.Object.Positions.GetAll().Count());
+        /// <summary>
+        /// Determines whether this instance can detect existing manager in parent component via 
+        /// <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Detect_Existing_Manager_In_Parent_Component_Via_Controller_Create()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count();
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
-        //}
-        ///// <summary>
-        ///// Determines whether this instance [can detect component position manager duplicate].
-        ///// </summary>
-        //[Fact]
-        //public void CanDetectComponentPositionManagerDuplicate()
-        //{
-        //    // Arrange
-        //    Component c = unitOfWork.Object.Components.Find(x => x.ComponentId == 4).FirstOrDefault();
-        //    Position p = new Position
-        //    {
-        //        Name = "Test Position",
-        //        ParentComponent = c,
-        //        IsManager = true,
-        //        IsUnique = true,
-        //        JobTitle = "Test Duplicate Manager Job Title"
-        //    };
-        //    unitOfWork.Object.Positions.Add(p);
+                // Create a new ViewModel from a new Position to mimic user data entry. The position name                 
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(new Position
+                {
+                    Name = "Duplicate Manager",
+                    IsManager = true,
+                    IsUnique = false,
+                    JobTitle = "Test",
+                });
 
-        //    int startPositionsCount = unitOfWork.Object.Positions.GetAll().Count(); // get the count of positions in Repo at the start
-        //    int finalPositionsCount = startPositionsCount + 1;
+                // set the form's ParentComponentId to a component that is already assigned a Manager Position
+                form.ParentComponentId = 1;
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Create(form);
 
-        //    PositionsController controller = new PositionsController(unitOfWork.Object);
-        //    PositionWithComponentListViewModel form = new PositionWithComponentListViewModel
-        //    {
-        //        PositionName = "New Position",
-        //        ParentComponentId = 4,
-        //        JobTitle = "Add New Position Test",
-        //        IsManager = true,
-        //        IsUnique = false
-        //    };
+                // Assert - verify the position was added
+                Assert.True(mockController.Object.ViewBag.Message == "Component1 already has a Position designated as Manager. Only one Manager Position is permitted.\n");
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
 
-        //    // Act - This should NOT add a Position to the repo
-        //    controller.Create(form);
+        /// <summary>
+        /// Determines whether this instance can detect existing manager in parent component via 
+        /// <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Detect_Existing_Manager_In_Parent_Component_Via_Controller_Edit()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count();
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
-        //    // Assert            
-        //    Assert.True(unitOfWork.Object.Positions.GetAll().Count() == startPositionsCount);
-        //}
-        ///// <summary>
-        ///// Determines whether this instance [can edit component].
-        ///// </summary>
-        //[Fact]
-        //public void CanEditPosition()
-        //{
-        //    // Arrange
-        //    Position oldPosition = unitOfWork.Object.Positions.Find(x => x.PositionId == 1).FirstOrDefault();
-        //    oldPosition.Name = "NewPosition1";
-        //    oldPosition.IsManager = false;
-        //    oldPosition.IsUnique = false;
-        //    oldPosition.ParentComponent = new Component
-        //    {
-        //        ComponentId = 10,
-        //        Name = "Added from CanEditPosition()",
-        //    };
-        //    // Act
-        //    unitOfWork.Object.Complete();
+                // Create a new ViewModel from a Position assigned to the same ParentComponent as another Manager Position to mimic user data entry. 
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(context.Positions.Where(x => x.PositionId == 2).FirstOrDefault());
 
-        //    // Assert
-        //    Position updatedPosition = unitOfWork.Object.Positions.Find(x => x.PositionId == 1).FirstOrDefault();
-        //    Assert.True(updatedPosition.Name == "NewPosition1");
-        //    Assert.True(updatedPosition.ParentComponent.ComponentId == 10);
-        //}
+                // Change the form's position to Manager
+                form.IsManager = true;
+
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Edit(2, form);
+
+                // Assert - verify the position was added
+                Assert.True(mockController.Object.ViewBag.Message == "Component1 already has a Position designated as Manager. You can not elevate this Position.\n");
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
+
+        /// <summary>
+        /// Determines whether this instance can prevent changing existing position to unique when multiple members are assigned via 
+        /// <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Prevent_Existing_Position_To_Unique_When_Multiple_Members_Via_Controller_Edit()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count();
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
+
+                // Create a new ViewModel from a Position assigned to the same ParentComponent as another Manager Position to mimic user data entry. 
+                PositionWithComponentListViewModel form = new PositionWithComponentListViewModel(context.Positions.Where(x => x.PositionId == 2).FirstOrDefault());
+
+                // Change the form's position to Manager
+                form.IsUnique = true;
+
+                // Act - attempt to add the position using the controller Method
+                mockController.Object.Edit(2, form);
+
+                // Assert - verify the position was added
+                Assert.True(mockController.Object.ViewBag.Message == "Position2 has 2 current Members. You can't set this Position to Unique with multiple members.\n");
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+            }
+        }
+
+        /// <summary>
+        /// Determines whether this instance can move members of deleted position to the Unassigned pool 
+        /// via <see cref="T:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(int)"/>.
+        /// </summary>
+        [Fact]
+        public void Can_Unassign_Members_Of_Deleted_Position_Via_Delete()
+        {
+            // Arrange - create the testing DbContext
+            using (ApplicationDbContext context = new ApplicationDbContext(options))
+            {
+                // Ensure the test Db is Clear
+                context.Database.EnsureCreated();
+                context.ResetDatabase();
+                context.SeedDatabaseForTesting();
+                int expectedPositionCount = context.Positions.Count() - 1;
+                // Create a mock controller with a UnitOfWork created from the testing context
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));                
+
+                // Act - attempt to delete the position using the controller Method, which should reassign members id = 2 and 3 to "Unassigned."
+                mockController.Object.DeleteConfirmed(2);
+
+                // Assert - verify the position was deleted and the members were reassigned
+                Assert.True(context.Positions.Count() == expectedPositionCount);
+                Position p = context.Positions.Where(x => x.PositionId == 6).Include(x => x.Members).First();
+                Assert.True(p.Members.Count() == 2);
+                //Assert.True(context.Members.Include(p => p.Position).First(x => x.MemberId == 3).Position.Name == "Unassigned");
+            }
+        }
     }
 }

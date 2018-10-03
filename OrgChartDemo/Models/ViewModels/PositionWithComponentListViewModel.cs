@@ -73,7 +73,6 @@ namespace OrgChartDemo.Models.ViewModels
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel"/> class.
         /// </summary>
         /// <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> being displayed by the view</param>
-        /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
         public PositionWithComponentListViewModel(Position p) {
 
             PositionId = p?.PositionId;

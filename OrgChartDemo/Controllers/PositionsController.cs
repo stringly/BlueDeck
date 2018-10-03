@@ -100,7 +100,7 @@ namespace OrgChartDemo.Controllers
             else if (form.IsManager) {
                 // check if the Parent Component of the position already has a Position designated as "Manager"
                 if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true) != null) {                        
-                    ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.";
+                    ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.\n";
                     errors++;
                 }
             }            
@@ -227,6 +227,14 @@ namespace OrgChartDemo.Controllers
         public IActionResult DeleteConfirmed(int id)
         {            
             Position p = unitOfWork.Positions.Get(id);
+            if (p.Members.Count() > 0)
+            {
+                Position unAssigned = unitOfWork.Positions.SingleOrDefault(x => x.Name == "Unassigned");
+                foreach (Member m in p.Members)
+                {
+                    m.Position = unAssigned;
+                }
+            }
             unitOfWork.Positions.Remove(p);
             unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
