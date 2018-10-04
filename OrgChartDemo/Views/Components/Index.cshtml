@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrgChartDemo.Models.Component>
+﻿@model ComponentIndexListViewModel
 
 <!DOCTYPE html>
 
@@ -8,38 +8,73 @@
     <title>Index</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Acronym)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Acronym)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <form asp-page="/Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name:
+                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-page="/Index">Back to full List</a>
+            </p>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <a asp-page="/Index" asp-route-sortOrder="@Model.ComponentNameSort"
+                       asp-route-searchString="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(model => model.Components.First().ComponentName)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Components.First().Acronym)
+                </th>
+                <th>
+                    <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
+                       asp-route-searchString="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(model => model.Components.First().ParentComponentName)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Components.First().PositionCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Components.First().MemberCount)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Components)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComponentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Acronym)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentComponentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PositionCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MemberCount)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </body>
 </html>

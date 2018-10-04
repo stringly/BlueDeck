@@ -26,17 +26,47 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork = unit;
         }
-                
+
         /// <summary>
         /// GET: Components
         /// </summary>
         /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.Component"/>
+        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel"/>
         /// </remarks>
+        /// <param name="sortOrder">The sort order.</param>
+        /// <param name="searchString">The search string.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            return View(unitOfWork.Components.GetAll());
+            ComponentIndexListViewModel vm = new ComponentIndexListViewModel(unitOfWork.Components.GetComponentsWithChildren().ToList());
+            vm.CurrentSort = sortOrder;
+            vm.ComponentNameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            vm.ParentComponentNameSort = sortOrder == "ParentComponentName" ? "parentName_desc" : "ParentComponentName";
+            vm.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vm.Components = vm.Components
+                    .Where(x => x.ComponentName.Contains(searchString) || x.ParentComponentName.Contains(searchString) || x.Acronym.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vm.Components = vm.Components.OrderByDescending(x => x.ComponentName);
+                    break;
+                case "ParentComponentName":
+                    vm.Components = vm.Components.OrderBy(x => x.ParentComponentName);
+                    break;
+                case "parentName_desc":
+                    vm.Components = vm.Components.OrderByDescending(x => x.ParentComponentName);
+                    break;
+                default:
+                    vm.Components = vm.Components.OrderBy(x => x.ComponentName);
+                    break;
+            }
+
+            return View(vm);
         }
 
         /// <summary>
@@ -89,7 +119,6 @@ namespace OrgChartDemo.Controllers
                 {
                     Name = form.ComponentName,
                     Acronym = form.Acronym,
-                    // TODO: How will this handle a null ParentComponentId?
                     ParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId),
                 };
                 // check if a Component with the Name provided already exists and reject if so
@@ -182,15 +211,25 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Delete(int? id)
         {
-            // TODO: Warn or Prevent User from Deleting a Component with assigned Positions? Or auto-reassign members to the General Pool?
             if (id == null)
             {
                 return NotFound();
-            }
-            Component component = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == id);
+            }            
+            Component component = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(id));
+            
             if (component == null)
             {
                 return NotFound();
+            }
+            else if (component.Positions.Count() > 0)
+            {
+                int totalMembers = 0;
+                foreach (Position p in component.Positions)
+                {
+                    totalMembers += p.Members.Count();
+                }
+                ViewBag.Message = $"WARNING: This Component includes {component.Positions.Count()} Positions with a total of {totalMembers} Members.\n"
+                                        + "Deleting this Component will also delete all of it's assigned Positions and reassign all Members to 'Unassigned.'";
             }
 
             return View(component);
@@ -210,13 +249,8 @@ namespace OrgChartDemo.Controllers
             {
                 if (p.Members.Count() > 0)
                 {
-                    Position unassigned = unitOfWork.Positions.Find(x => x.Name == "Unassigned").FirstOrDefault();
-                    foreach (Member m in p.Members)
-                    {
-                        m.Position = unassigned;
-                    }
-                }
-                unitOfWork.Positions.Remove(p);               
+                    unitOfWork.Positions.RemovePositionAndReassignMembers(p.PositionId);
+                }                         
             }
             unitOfWork.Components.Remove(c);
             unitOfWork.Complete();            

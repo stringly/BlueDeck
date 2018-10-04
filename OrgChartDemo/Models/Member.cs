@@ -27,7 +27,7 @@ namespace OrgChartDemo.Models {
         /// The <see cref="Rank"/> of the Member
         /// </value>
         [Display(Name = "Rank")]
-        public MemberRank Rank { get; set; }
+        public virtual MemberRank Rank { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's first name.

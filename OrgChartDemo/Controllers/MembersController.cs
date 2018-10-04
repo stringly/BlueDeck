@@ -34,9 +34,50 @@ namespace OrgChartDemo.Controllers
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
-            return View(unitOfWork.Members.GetMembersWithPositions());
+            MemberIndexListViewModel vm = new MemberIndexListViewModel(unitOfWork.Members.GetMembersWithPositions().ToList());
+            vm.CurrentSort = sortOrder;
+            vm.MemberLastNameSort = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
+            vm.MemberFirstNameSort = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
+            vm.IdNumberSort = sortOrder == "IDNumber" ? "idNumber_desc" : "IDNumber";
+            vm.PositionNameSort = sortOrder == "PositionName" ? "positionName_desc" : "PositionName";
+            vm.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                vm.Members = vm.Members
+                    .Where(x => x.LastName.Contains(searchString) || x.FirstName.Contains(searchString) || x.PositionName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "lastName_desc":
+                    vm.Members = vm.Members.OrderByDescending(x => x.LastName);
+                    break;
+                case "firstName_desc":
+                    vm.Members = vm.Members.OrderByDescending(x => x.FirstName);
+                    break;
+                case "FirstName":
+                    vm.Members = vm.Members.OrderBy(x => x.FirstName);
+                    break;
+                case "idNumber_desc":
+                    vm.Members = vm.Members.OrderByDescending(x => x.IdNumber);
+                    break;
+                case "IDNumber":
+                    vm.Members = vm.Members.OrderBy(x => x.IdNumber);
+                    break;
+                case "PositionName":
+                    vm.Members = vm.Members.OrderBy(x => x.PositionName);
+                    break;
+                case "positionName_desc":
+                    vm.Members = vm.Members.OrderByDescending(x => x.PositionName);
+                    break;
+                default:
+                    vm.Members = vm.Members.OrderBy(x => x.LastName);
+                    break;
+            }
+            return View(vm);
         }
 
         /// <summary>

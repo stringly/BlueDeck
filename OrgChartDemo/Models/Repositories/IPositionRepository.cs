@@ -13,5 +13,12 @@ namespace OrgChartDemo.Models.Repositories
         /// </summary>
         /// <returns></returns>
         IEnumerable<Position> GetPositionsWithMembers();
+
+        /// <summary>
+        /// Removes the position and reassign members.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newPositionName">New name of the position.</param>
+        void RemovePositionAndReassignMembers(int id, string newPositionName = "Unassigned");
     }
 }

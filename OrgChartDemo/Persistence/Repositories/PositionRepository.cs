@@ -28,7 +28,11 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <returns></returns>
         public IEnumerable<Position> GetPositionsWithMembers()
         {
-            return ApplicationDbContext.Positions.Include(c => c.Members).Include(c => c.ParentComponent).ToList();
+            return ApplicationDbContext.Positions.Include(c => c.Members)
+                .ThenInclude(c => c.Rank)
+                .Include(c => c.ParentComponent)
+                .Where(c => c.ParentComponent != null)
+                .ToList();
         }
 
         /// <summary>
@@ -39,6 +43,19 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </value>
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }
+        }
+
+        /// <summary>
+        /// Removes the position and reassigns any members.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="newPositionName">New name of the position.</param>
+        public void RemovePositionAndReassignMembers(int id, string newPositionName = "Unassigned")
+        {
+            Position toDelete = ApplicationDbContext.Positions.Include(x => x.Members).First(x => x.PositionId == id);
+            Position toReassign = ApplicationDbContext.Positions.First(x => x.Name == newPositionName);
+            toReassign.Members.AddRange(toDelete.Members);            
+            ApplicationDbContext.Positions.Remove(toDelete);
         }
     }
 }

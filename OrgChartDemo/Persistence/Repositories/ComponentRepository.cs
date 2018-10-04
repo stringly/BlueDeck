@@ -24,9 +24,35 @@ namespace OrgChartDemo.Persistence.Repositories
         {
         }
 
+        /// <summary>
+        /// Gets the list components with all member children.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}" />
+        /// </returns>
         public IEnumerable<Component> GetComponentsWithChildren()
         {
-            return ApplicationDbContext.Components.Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank).ToList(); 
+            return ApplicationDbContext.Components.Include(x => x.Positions)
+                .ThenInclude(x => x.Members)
+                .ThenInclude(x => x.Rank)
+                .Where(x => x.ParentComponent != null)
+                .ToList(); 
+        }
+
+        /// <summary>
+        /// Gets the component with all of it's member children.
+        /// </summary>
+        /// <param name="id">The Component identifier.</param>
+        /// <returns>
+        /// A <see cref="T:OrgChartDemo.Models.Component" />
+        /// </returns>
+        public Component GetComponentWithChildren(int id)
+        {
+            return ApplicationDbContext.Components.Include(x => x.Positions)
+                .ThenInclude(x => x.Members)
+                .ThenInclude(x => x.Rank)
+                .Where(x => x.ComponentId == id)
+                .Single();
         }
 
         /// <summary>
@@ -71,6 +97,7 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
             List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
+            IEnumerable<Component> TestList = GetComponentsWithChildren();
             foreach (Component c in GetComponentsWithChildren())
             {
                 // All components will render this at minimum

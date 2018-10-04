@@ -35,5 +35,18 @@ namespace OrgChartDemo.Models.Repositories
         /// </summary>
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}"/></returns>
         List<ComponentSelectListItem> GetComponentSelectListItems();
+
+        /// <summary>
+        /// Gets the component with all of it's member children.
+        /// </summary>
+        /// <param name="id">The Component identifier.</param>
+        /// <returns>A <see cref="T:OrgChartDemo.Models.Component"/></returns>
+        Component GetComponentWithChildren(int id);
+
+        /// <summary>
+        /// Gets the list components with all member children.
+        /// </summary>
+        /// <returns>A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}"/></returns>
+        IEnumerable<Component> GetComponentsWithChildren();
     }
 }

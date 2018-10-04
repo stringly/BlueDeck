@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.Repositories;
+using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace OrgChartDemo.Persistence.Repositories
@@ -30,7 +30,11 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <returns></returns>
         public IEnumerable<Member> GetMembersWithPositions()
         {
-            return ApplicationDbContext.Members.Include(c => c.Position).ToList();
+            return ApplicationDbContext.Members
+                .Include(c => c.Rank)
+                .Include(c => c.Position)
+                .ThenInclude(c => c.ParentComponent)
+                .ToList();
         }
 
         /// <summary>

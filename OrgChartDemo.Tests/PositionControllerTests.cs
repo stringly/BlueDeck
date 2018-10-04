@@ -294,15 +294,16 @@ namespace OrgChartDemo.Tests
                 context.SeedDatabaseForTesting();
                 int expectedPositionCount = context.Positions.Count() - 1;
                 // Create a mock controller with a UnitOfWork created from the testing context
-                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));                
+                Mock<PositionsController> mockController = new Mock<PositionsController>(new UnitOfWork(context));
 
                 // Act - attempt to delete the position using the controller Method, which should reassign members id = 2 and 3 to "Unassigned."
                 mockController.Object.DeleteConfirmed(2);
 
                 // Assert - verify the position was deleted and the members were reassigned
                 Assert.True(context.Positions.Count() == expectedPositionCount);
-                Position p = context.Positions.Where(x => x.PositionId == 6).Include(x => x.Members).First();
-                Assert.True(p.Members.Count() == 2);
+                
+                Position resultPosition = context.Positions.Where(x => x.PositionId == 6).Include(x => x.Members).First();
+                Assert.True(resultPosition.Members.Count() == 2);
                 //Assert.True(context.Members.Include(p => p.Position).First(x => x.MemberId == 3).Position.Name == "Unassigned");
             }
         }

@@ -1,60 +1,77 @@
-﻿@model IEnumerable<OrgChartDemo.Models.Position>
+﻿@model PositionIndexListViewModel
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-page="/Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="/Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Positions.First().PositionName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ParentComponent.Name)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Positions.First().ParentComponentName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsUnique)
+                @Html.DisplayNameFor(model => model.Positions.First().IsUnique)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.JobTitle)
+                @Html.DisplayNameFor(model => model.Positions.First().JobTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsManager)
+                @Html.DisplayNameFor(model => model.Positions.First().IsManager)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Members)
+                @Html.DisplayNameFor(model => model.Positions.First().MembersCount)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParentComponent.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsUnique)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsManager)
-            </td>
-            <td>
-                @item.Members.Count()
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PositionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PositionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PositionId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Positions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParentComponentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsUnique)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsManager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembersCount)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PositionId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PositionId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PositionId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 

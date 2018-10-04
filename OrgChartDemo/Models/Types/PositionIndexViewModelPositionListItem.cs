@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.ViewModels
+
+namespace OrgChartDemo.Models.Types
 {
-    /// <summary>
-    /// A flattened object derived from a Position Entity and used in <see cref="OrgChartDemo.Controllers.PositionsController.Index"/>/>
-    /// </summary>
-    public class PositionWithMemberCountItem
+    public class PositionIndexViewModelPositionListItem
     {
         /// <summary>
         /// Gets or sets the position identifier.
@@ -17,7 +12,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The PositionId PK.
         /// </value>
-        public int PositionId { get; set;}
+        public int PositionId { get; set; }
 
         /// <summary>
         /// Gets or sets the id of the parent component.
@@ -34,16 +29,16 @@ namespace OrgChartDemo.Models.ViewModels
         /// The name of the parent component.
         /// </value>
         [Display(Name = "Parent Component")]
-        public string ParentComponentName { get; set; }  
-        
+        public string ParentComponentName { get; set; }
+
         /// <summary>
         /// Gets or sets the Position name.
         /// </summary>
         /// <value>
         /// The name of the Position.
         /// </value>
-        [Display(Name = "Component Name")]
-        public string Name { get; set; }
+        [Display(Name = "Name")]
+        public string PositionName { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the Position is unique.
@@ -83,17 +78,18 @@ namespace OrgChartDemo.Models.ViewModels
         public bool IsManager { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PositionWithMemberCountItem"/> class.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/> class.
         /// </summary>
         /// <remarks>
-        /// This constructor requires a <see cref="Position"/> to be passed as a parameter.
+        /// This constructor requires a <see cref="T:OrgChartDemo.Models.Position"/> to be passed as a parameter.
         /// </remarks>
-        /// <param name="p">A <see cref="Position"/> object.</param>
-        public PositionWithMemberCountItem(Position p) {
+        /// <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> object.</param>
+        public PositionIndexViewModelPositionListItem(Position p)
+        {
             PositionId = p.PositionId;
-            ParentComponentId = p.ParentComponent.ComponentId;
-            ParentComponentName = p.ParentComponent.Name;
-            Name = p.Name;
+            ParentComponentId = p?.ParentComponent?.ComponentId ?? 0;
+            ParentComponentName = p?.ParentComponent?.Name ?? "Police Department";
+            PositionName = p.Name;
             IsUnique = p.IsUnique;
             IsManager = p.IsManager;
             JobTitle = p.JobTitle;
@@ -101,12 +97,12 @@ namespace OrgChartDemo.Models.ViewModels
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PositionWithMemberCountItem"/>.
+        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/>.
         /// <remarks>
         /// This is a parameterless constructor used to create new objects
         /// </remarks>
         /// </summary>
-        public PositionWithMemberCountItem()
+        public PositionIndexViewModelPositionListItem()
         {
 
         }

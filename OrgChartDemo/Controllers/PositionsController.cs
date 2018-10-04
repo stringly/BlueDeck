@@ -31,9 +31,36 @@ namespace OrgChartDemo.Controllers
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index()
-        {            
-            return View(unitOfWork.Positions.GetPositionsWithMembers());
+        public IActionResult Index(string sortOrder, string searchString)
+        {
+            PositionIndexListViewModel vm = new PositionIndexListViewModel(unitOfWork.Positions.GetPositionsWithMembers().ToList());
+            vm.CurrentSort = sortOrder;
+            vm.PositionNameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            vm.ParentComponentNameSort = sortOrder == "ParentComponentName" ? "parentName_desc" : "ParentComponentName";
+            vm.CurrentFilter = searchString;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                vm.Positions = vm.Positions
+                    .Where(x => x.PositionName.Contains(searchString) || x.ParentComponentName.Contains(searchString) || x.JobTitle.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vm.Positions = vm.Positions.OrderByDescending(x => x.PositionName);
+                    break;
+                case "ParentComponentName":
+                    vm.Positions = vm.Positions.OrderBy(x => x.ParentComponentName);
+                    break;
+                case "parentName_desc":
+                    vm.Positions = vm.Positions.OrderByDescending(x => x.ParentComponentName);
+                    break;
+                default:
+                    vm.Positions = vm.Positions.OrderBy(x => x.PositionName);
+                    break;
+            }
+            return View(vm);
         }
 
         /// <summary>
@@ -225,17 +252,8 @@ namespace OrgChartDemo.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
-        {            
-            Position p = unitOfWork.Positions.Get(id);
-            if (p.Members.Count() > 0)
-            {
-                Position unAssigned = unitOfWork.Positions.SingleOrDefault(x => x.Name == "Unassigned");
-                foreach (Member m in p.Members)
-                {
-                    m.Position = unAssigned;
-                }
-            }
-            unitOfWork.Positions.Remove(p);
+        {
+            unitOfWork.Positions.RemovePositionAndReassignMembers(id);
             unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }
