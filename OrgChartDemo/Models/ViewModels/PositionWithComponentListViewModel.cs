@@ -24,6 +24,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The name of the position.
         /// </value>
         [StringLength(75), Required]
+        [Display(Name = "Position Name")]
         public string PositionName { get; set; }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The parent's ComponentId.
         /// </value>
+        [Display(Name = "Parent Component")] 
         public int? ParentComponentId { get; set; }
 
         /// <summary>
@@ -41,6 +43,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The job title.
         /// </value>
         [Required]
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is manager; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Manager of Component")] 
         public bool IsManager { get; set; }
 
         /// <summary>
@@ -57,6 +61,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is unique; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Unique")]
         public bool IsUnique { get; set; }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
         public PositionRepository(ApplicationDbContext context)
             : base(context)
-        {
+        {            
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <returns></returns>
         public IEnumerable<Position> GetPositionsWithMembers()
         {
-            return ApplicationDbContext.Positions.Include(c => c.Members).ToList();
+            return ApplicationDbContext.Positions.Include(c => c.Members).Include(c => c.ParentComponent).ToList();
         }
 
         /// <summary>

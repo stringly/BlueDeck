@@ -15,7 +15,31 @@ namespace OrgChartDemo.Models {
     /// When rendering <see cref="T:OrgChartDemo.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
     /// </remarks>
     /// <seealso cref="T:OrgChartDemo.Models.ChartableComponent" />
-    public class ChartableComponentWithMember : ChartableComponent {
+    public class ChartableComponentWithMember {
+        /// <summary>
+        /// Gets or sets the id.
+        /// </summary>
+        /// <value>
+        /// The id of the component.
+        /// </value>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+        /// </summary>
+        /// <value>
+        /// The parentid of the component.
+        /// </value>
+        public int? Parentid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the component.
+        /// </summary>
+        /// <value>
+        /// The name of the component.
+        /// </value>
+        public string ComponentName { get; set; }
+
         /// <summary>
         /// Gets or sets the position id.
         /// </summary>

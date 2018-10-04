@@ -32,7 +32,7 @@ namespace OrgChartDemo.Controllers
         [HttpGet]
         public JsonResult GetComponents()
         {
-            return Json(unitOfWork.Components.GetOrgChartComponentsWithoutMembers());
+            return Json(unitOfWork.Components.GetOrgChartComponentsWithMembers());
         }
 
         /// <summary>

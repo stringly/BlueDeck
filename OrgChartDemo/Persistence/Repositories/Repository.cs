@@ -26,7 +26,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <param name="context">The context.</param>
         public Repository(DbContext context)
         {
-            Context = context;
+            Context = context;            
         }
 
         /// <summary>

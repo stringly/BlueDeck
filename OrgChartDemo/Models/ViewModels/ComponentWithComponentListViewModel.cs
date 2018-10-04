@@ -23,7 +23,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The name of the component.
         /// </value>
-        [StringLength(75), Required]
+        [StringLength(75), Required]        
+        [Display(Name = "Component Name")]
         public string ComponentName { get; set; }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The Id of the Component's Parent Component.
         /// </value>
         [Required]
+        [Display(Name = "Parent Component")]
         public int? ParentComponentId { get; set; }
 
         /// <summary>
@@ -41,6 +43,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The acronym of the Component.
         /// </value>
+        [Display(Name = "Acronym")]
+        [StringLength(10)]
         public string Acronym { get; set; }
 
         /// <summary>

@@ -36,7 +36,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Index()
         {
-            return View(unitOfWork.Members.GetAll());
+            return View(unitOfWork.Members.GetMembersWithPositions());
         }
 
         /// <summary>
@@ -140,11 +140,6 @@ namespace OrgChartDemo.Controllers
             Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
             MemberRank r = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
 
-            if (id != form.MemberId)
-            {
-                return NotFound();
-            }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -159,6 +154,7 @@ namespace OrgChartDemo.Controllers
                     m.IdNumber = form.IdNumber;
                     m.Email = form.Email;
                     m.Rank = r;
+                    m.Position = targetPosition;
                     unitOfWork.Complete();
                 }
                 catch (DbUpdateConcurrencyException)

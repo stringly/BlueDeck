@@ -9,6 +9,6 @@ namespace OrgChartDemo.Models.Repositories
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Member}" />
     public interface IMemberRepository : IRepository<Member>
     {
-
+        IEnumerable<Member> GetMembersWithPositions();
     }
 }

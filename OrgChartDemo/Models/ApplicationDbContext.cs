@@ -13,7 +13,8 @@ namespace OrgChartDemo.Models {
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
         /// </summary>
         /// <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){ }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {   
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.

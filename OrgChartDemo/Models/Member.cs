@@ -26,6 +26,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The <see cref="Rank"/> of the Member
         /// </value>
+        [Display(Name = "Rank")]
         public MemberRank Rank { get; set; }
 
         /// <summary>
@@ -34,6 +35,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The first name of the Member.
         /// </value>
+        [Display(Name = "First Name")]
         public string FirstName{ get; set; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The last name of the Member.
         /// </value>
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         /// <summary>
@@ -50,6 +53,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the middle.
         /// </value>
+        [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
         /// <summary>
@@ -58,6 +62,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Departmental Id Number of the Member.
         /// </value>
+        [Display(Name = "ID Number")]
         public string IdNumber { get; set; }
 
         /// <summary>
@@ -66,6 +71,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Member's email.
         /// </value>
+        [Display(Name = "Email Address")]
         public string Email {get; set; }
 
         /// <summary>
@@ -74,6 +80,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The position.
         /// </value>
+        [Display(Name = "Current Assignment")]
         public virtual Position Position { get; set; }
 
         /// <summary>
@@ -83,7 +90,7 @@ namespace OrgChartDemo.Models {
         /// e.g. "POFC Foo Bar #1234"
         /// </remarks>
         /// <returns>A <see cref="string"/> with the formal display name for the Member</returns>
-        public string GetTitleName() => $"{this.Rank.RankShort}. {this.FirstName} {this.LastName} #{this.IdNumber}";
+        public string GetTitleName() => $"{this.Rank.RankShort} {this.FirstName} {this.LastName} #{this.IdNumber}";
 
         /// <summary>
         /// Gets the Member's name in "LastName, FirstName" format.

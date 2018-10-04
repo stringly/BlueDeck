@@ -23,5 +23,24 @@ namespace OrgChartDemo.Persistence.Repositories
          : base(context)
         {
         }
+
+        /// <summary>
+        /// Gets the members with positions.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Member> GetMembersWithPositions()
+        {
+            return ApplicationDbContext.Members.Include(c => c.Position).ToList();
+        }
+
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
     }
 }

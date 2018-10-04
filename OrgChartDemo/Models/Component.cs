@@ -24,6 +24,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Component's parent <see cref="T:OrgChartDemo.Models.Component"/>
         /// </value>
+        [Display(Name = "Parent Component")]
         public virtual Component ParentComponent { get; set; }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the Component.
         /// </value>
+        [Display(Name = "Component Name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -39,7 +41,8 @@ namespace OrgChartDemo.Models {
         /// </summary>
         /// <value>
         /// The acronym of the Component
-        /// </value>
+        /// </value>        
+        [Display(Name = "Acronym")]
         public string Acronym { get; set; }
 
         /// <summary>

@@ -366,6 +366,30 @@
             </remarks>
             <seealso cref="T:OrgChartDemo.Models.ChartableComponent" />
         </member>
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id of the component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.Parentid">
+            <summary>
+            Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+            </summary>
+            <value>
+            The parentid of the component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.ComponentName">
+            <summary>
+            Gets or sets the name of the component.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
         <member name="P:OrgChartDemo.Models.ChartableComponentWithMember.PositionId">
             <summary>
             Gets or sets the position id.
@@ -449,7 +473,7 @@
             </summary>
             <value>
             The acronym of the Component
-            </value>
+            </value>        
         </member>
         <member name="P:OrgChartDemo.Models.Component.Positions">
             <summary>
@@ -1182,7 +1206,7 @@
             </summary>
             <value>
             The Id of the Component to which this Position Instance is assigned
-            </value>
+            </value>        
         </member>
         <member name="P:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem.ParentComponentName">
             <summary>
@@ -1269,12 +1293,6 @@
             </summary>
             <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         </member>
-        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers">
-            <summary>
-            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
-            </summary>
-            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
-        </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetComponentSelectListItems">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem" />s to populate a Component select list
@@ -1282,6 +1300,12 @@
             <returns>
             A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}" />
             </returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+            </summary>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository">
             <summary>
@@ -1319,6 +1343,20 @@
             Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRepository"/> class.
             </summary>
             <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetMembersWithPositions">
+            <summary>
+            Gets the members with positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OrgChartDemo.Persistence.Repositories.MemberRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.PositionRepository">
             <summary>

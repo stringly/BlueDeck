@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,7 +24,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// </summary>
         /// <value>
         /// The Id of the Component to which this Position Instance is assigned
-        /// </value>
+        /// </value>        
         public int? ParentComponentId { get; set; }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The name of the parent component.
         /// </value>
+        [Display(Name = "Parent Component")]
         public string ParentComponentName { get; set; }  
         
         /// <summary>
@@ -40,6 +42,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The name of the Position.
         /// </value>
+        [Display(Name = "Component Name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Unique")]
         public bool IsUnique { get; set; } = false;
 
         /// <summary>
@@ -56,6 +60,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The Job Title of a Member assigned to this Position
         /// </value>
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
 
         /// <summary>
@@ -64,6 +69,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// A count of Member Entities that are assigned to this Position
         /// </value>
+        [Display(Name = "Current Members")]
         public int MembersCount { get; set; }
 
         /// <summary>
@@ -73,6 +79,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Manager of Component")]
         public bool IsManager { get; set; }
 
         /// <summary>

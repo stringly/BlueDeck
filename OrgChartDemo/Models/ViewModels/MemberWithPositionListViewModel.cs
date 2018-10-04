@@ -21,6 +21,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <summary>
         /// Gets or sets the Rank of the Member.
         /// </summary>
+        [Display(Name = "Rank")]
         public int? MemberRank { get; set; }
 
         /// <summary>
@@ -30,6 +31,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The first name.
         /// </value>
         [StringLength(50), Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         /// <summary>
@@ -39,6 +41,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The last name.
         /// </value>
         [StringLength(50), Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         /// <summary>
@@ -47,7 +50,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The name of the middle.
         /// </value>
-        [StringLength(50), Required]
+        [StringLength(50)]
+        [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
         /// <summary>
@@ -60,6 +64,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The identifier number.
         /// </value>
         [StringLength(50), Required]
+        [Display(Name = "ID Number")]
         public string IdNumber { get; set; }
 
         /// <summary>
@@ -69,6 +74,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The email.
         /// </value>
         [StringLength(50), Required]
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         /// <summary>
@@ -77,6 +83,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The position identifier.
         /// </value>
+        [Display(Name = "Current Assignment")]
         public int? PositionId { get; set; }
 
         /// <summary>
