@@ -8,7 +8,7 @@
 <form asp-page="/Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by name:
+            Find:
             <input type="text" name="SearchString" value="@Model.CurrentFilter" />
             <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-page="/Index">Back to full List</a>
@@ -65,8 +65,10 @@
                 @Html.DisplayFor(modelItem => item.PositionName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+                <a href="mailto:@item.Email" target="_top">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </a>
+</td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |

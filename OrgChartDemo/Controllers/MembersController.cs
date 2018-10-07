@@ -44,7 +44,7 @@ namespace OrgChartDemo.Controllers
             vm.PositionNameSort = sortOrder == "PositionName" ? "positionName_desc" : "PositionName";
             vm.CurrentFilter = searchString;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 vm.Members = vm.Members
                     .Where(x => x.LastName.Contains(searchString) || x.FirstName.Contains(searchString) || x.PositionName.Contains(searchString));

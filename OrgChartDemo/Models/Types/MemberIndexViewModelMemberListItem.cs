@@ -20,7 +20,7 @@ namespace OrgChartDemo.Models.Types
         public string PositionName { get; set; }
         public int PositionId { get; set; }
         public string ParentComponentName { get; set; }
-        public int ParetnComponentId { get; set; }
+        public int ParentComponentId { get; set; }
 
         public MemberIndexViewModelMemberListItem()
         {
@@ -35,8 +35,8 @@ namespace OrgChartDemo.Models.Types
             Email = m.Email;
             PositionName = m.Position.Name;
             PositionId = m.Position.PositionId;
-            ParentComponentName = m.Position.ParentComponent.Name;
-            ParetnComponentId = m.Position.ParentComponent.ComponentId;
+            ParentComponentName = m.Position?.ParentComponent?.Name ?? "None";
+            ParentComponentId = m.Position?.ParentComponent?.ComponentId ?? 0;
         }
     }
 }

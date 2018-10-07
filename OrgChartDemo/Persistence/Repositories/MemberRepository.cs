@@ -33,7 +33,7 @@ namespace OrgChartDemo.Persistence.Repositories
             return ApplicationDbContext.Members
                 .Include(c => c.Rank)
                 .Include(c => c.Position)
-                .ThenInclude(c => c.ParentComponent)
+                .ThenInclude(c => c.ParentComponent.ComponentId)
                 .ToList();
         }
 
