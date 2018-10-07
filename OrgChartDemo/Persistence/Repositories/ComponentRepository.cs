@@ -118,14 +118,17 @@ namespace OrgChartDemo.Persistence.Repositories
                             // if no member is assigned to a Position designated as Manager, then we want to render "Vacant" details in the Parent Node
                             if (p.Members.Count == 0)
                             {
+                                n.PositionName = p.Name;                                
                                 n.MemberName = "Vacant";
                                 n.MemberId = -1;
-                                n.Email = "Admin@BlueDeck.com";
+                                n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
                             }
                             else
                             {
+                                n.PositionName = p.Name;
+                                n.PositionId = p.PositionId;
                                 n.MemberName = p.Members.First().GetTitleName();
-                                n.Email = p.Members.First().Email;
+                                n.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
                                 n.MemberId = p.Members.First().MemberId;
                             }
                         }
@@ -136,16 +139,18 @@ namespace OrgChartDemo.Persistence.Repositories
                             {
                                 Id = dynamicUniqueId,
                                 Parentid = n.Id,
-                                ComponentName = p.Name
+                                ComponentName = p.Name,                                
                             };
                             if (p.Members.Count == 0)
                             {
+                                d.PositionId = p.PositionId;
                                 d.MemberName = "Vacant";
                                 d.MemberId = -1;
                                 d.Email = "Admin@BlueDeck.com";
                             }
                             else
                             {
+                                d.PositionId = p.PositionId;
                                 d.MemberName = p.Members.First().GetTitleName();
                                 d.Email = p.Members.First().Email;
                                 d.MemberId = p.Members.First().MemberId;
@@ -164,7 +169,8 @@ namespace OrgChartDemo.Persistence.Repositories
                                     ComponentName = p.Name, // TODO: Change this to "Node Name" in GetOrgChart?
                                     MemberName = m.GetTitleName(),
                                     Email = m.Email,
-                                    MemberId = m.MemberId
+                                    MemberId = m.MemberId,
+                                    PositionId = p.PositionId
                                     };                                    
                                 results.Add(x);
                             }

@@ -3,28 +3,90 @@
     Layout = "_OrgChartLayout";
 }
 
-<div class="options">
-
-</div>
-<div class="well">
     <div id="people"></div>
-</div>
-<script type="text/javascript">
-    $.getJSON("/OrgChart/GetComponents", function (source) {
-        console.log(source);
-        var peopleElement = document.getElementById("people");
-        var orgChart = new getOrgChart(peopleElement, {
-            primaryFields: ["componentName", "memberName", "contactNumber", "email"],
-            expandToLevel: 2,
-            enableDetailsView: true,
-            clickNodeEvent: clickHandler,
-            enableEdit: false,
-            layout: getOrgChart.MIXED_HIERARCHY_RIGHT_LINKS,
-            dataSource: source
+    <script type="text/javascript">
+        var orgChart;
+        getOrgChart.themes.myTheme =
+        {
+            size: [330, 260],
+            toolbarHeight: 46,
+            //textPoints: 
+            textPointsNoImage: [
+                { x: 20, y: 45, width: 300 },
+                { x: 20, y: 100, width: 300 },
+                { x: 20, y: 125, width: 300 },
+                { x: 20, y: 150, width: 300 }
+            ],
+            box: '<rect x="0" y="0" height="260" width="330" rx="10" ry="10" class="get-box"></rect>'
+                + '<g transform="matrix(1,0,0,1,20,190)" class="btn btn-success" onclick="btnClicked(this)" data-action="member"><text x="35" y="27" width="90">Person</text></g>'
+                + '<g transform="matrix(1,0,0,1,214,190)" class="btn btn-success" onclick="btnClicked(this)" data-action="component"><text x="25" y="27" width="90">Component</text></g>',
+            text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
+            //image: '<clipPath id="clip"><circle cx="60" cy="120" r="40" /></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#clip)" xlink:href="[href]" x="20" y="80" height="80" width="80"/>',
+            expandCollapseBtnRadius: 20
+        };
+        $.getJSON("/OrgChart/GetComponents", function (source) {
+            orgChart = new getOrgChart(document.getElementById("people"), {
+                theme: "myTheme",
+                enableEdit: false,
+                enableDetailsView: false,
+                primaryFields: ["componentName", "positionName", "memberName", "email", "positionId", "memberId"],
+                color: "blue",
+                expandToLevel: 2,
+                updatedEvent: function () {
+                    init();
+                },
+                dataSource: source
+            });
         });
-    });
-    function clickHandler(sender, args) {
-        alert(args.node.data["id"]);
-    }
 
-</script>
+
+
+        function getNodeByClickedBtn(el) {
+            while (el.parentNode) {
+                el = el.parentNode;
+                if (el.getAttribute("data-node-id"))
+                    return el;
+            }
+            return null;
+        }
+        function btnClicked(sender) {
+            var nodeElement = getNodeByClickedBtn(sender);
+            var action = sender.getAttribute("data-action");
+            var id = nodeElement.getAttribute("data-node-id");
+            var node = orgChart.nodes[id];
+            var memberId = node.data["memberId"];
+            var positionId = node.data["positionId"];
+            switch (action) {
+                case "member":
+                    window.location.href = "/Members/Details?id=" + memberId;
+                    break;
+                case "component":
+                    window.location.href = "/Positions/Details?id=" + positionId;
+                    break;
+            }
+        }
+
+        var init = function () {
+            var btns = document.getElementsByClassName("btn btn-org");
+            for (var i = 0; i < btns.length; i++) {
+
+                btns[i].addEventListener("click", function () {
+                    var nodeElement = getNodeByClickedBtn(this);
+                    var action = this.getAttribute("data-action");
+                    var id = nodeElement.getAttribute("data-node-id");
+                    var node = orgChart.nodes[id];
+
+                    switch (action) {
+                        case "edit":
+                            alert(id);
+                            break;
+                        case "preview":
+                            orgChart.showDetailsView(id);
+                            break;
+                    }
+                });
+            }
+        }
+        init();
+
+    </script>
