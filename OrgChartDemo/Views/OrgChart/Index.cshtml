@@ -6,30 +6,11 @@
     <div id="people"></div>
     <script type="text/javascript">
         var orgChart;
-        getOrgChart.themes.myTheme =
-        {
-            size: [330, 260],
-            toolbarHeight: 46,
-            //textPoints: 
-            textPointsNoImage: [
-                { x: 20, y: 45, width: 300 },
-                { x: 20, y: 100, width: 300 },
-                { x: 20, y: 125, width: 300 },
-                { x: 20, y: 150, width: 300 }
-            ],
-            box: '<rect x="0" y="0" height="260" width="330" rx="10" ry="10" class="get-box"></rect>'
-                + '<g transform="matrix(1,0,0,1,20,190)" class="btn btn-success" onclick="btnClicked(this)" data-action="member"><text x="35" y="27" width="90">Person</text></g>'
-                + '<g transform="matrix(1,0,0,1,214,190)" class="btn btn-success" onclick="btnClicked(this)" data-action="component"><text x="25" y="27" width="90">Component</text></g>',
-            text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
-            //image: '<clipPath id="clip"><circle cx="60" cy="120" r="40" /></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#clip)" xlink:href="[href]" x="20" y="80" height="80" width="80"/>',
-            expandCollapseBtnRadius: 20
-        };
         $.getJSON("/OrgChart/GetComponents", function (source) {
             orgChart = new getOrgChart(document.getElementById("people"), {
-                theme: "myTheme",
                 enableEdit: false,
                 enableDetailsView: false,
-                primaryFields: ["componentName", "positionName", "memberName", "email", "positionId", "memberId"],
+                primaryFields: ["componentName", "positionName", "memberName", "email"],
                 color: "blue",
                 expandToLevel: 2,
                 updatedEvent: function () {

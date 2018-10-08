@@ -2494,10 +2494,17 @@ getOrgChart.util._7 = function (a) {
 };
 getOrgChart.util._5 = function (a) {
     var b = a.getAttribute("transform");
-    // replace all spaces with commas to ensure compatibility in IE
-    b = b.replace("matrix", "").replace("(", "").replace(")", "").replace(/ /g, ",");
-    b = getOrgChart.util._zJ(b);
+    
+    if (/*@cc_on!@*/false || !!document.documentMode) {
+        // replace all spaces with commas to ensure compatibility in IE
+        b = b.replace("matrix", "").replace("(", "").replace(")", "").replace(/ /g, ",");
+    }
+    else {
+        b = b.replace("matrix", "").replace("(", "").replace(")", "");
+    }    
+    b = getOrgChart.util._zJ(b);    
     b = "[" + b + "]";
+    console.log(b)
     b = JSON.parse(b);
     return b
   };

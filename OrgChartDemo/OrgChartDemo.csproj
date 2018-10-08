@@ -5,15 +5,21 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\jcsmith1\source\repos\OrgChartDemo\OrgChartDemo\OrgChartDemo.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\jcs30\source\repos\OrgChartDemo\OrgChartDemo\OrgChartDemo.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\lib\getorgchart\js\getorgchart.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\lib\getorgchart\js\getorgchart.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="wwwroot\lib\getorgchart\js\getorgchart.min.js" />
   </ItemGroup>
 
   <ItemGroup>
