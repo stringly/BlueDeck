@@ -73,10 +73,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 results.Add(n);
             }
             return results;
-        }
-
-        
-        
+        }       
 
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem" />s to populate a Component select list
@@ -88,6 +85,32 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return GetAll().ToList().ConvertAll(x => new ComponentSelectListItem { ComponentName = x.Name, Id = x.ComponentId });
         }
+
+        public List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl){
+            //List<Component> children = Find(x => x.ParentComponent.ComponentId == parentComponentId).ToList();
+
+            // This query ONLY determines if we have reached the bottom of the depth chart
+            // there are no includes because we retrieve the full component details when we cascade back up the recursion chain            
+            List<Component> children = ApplicationDbContext.Components
+                .Where(x => x.ParentComponent.ComponentId == parentComponentId).ToList();
+            if (children.Count() != 0){
+                foreach(Component c in children){
+                    GetComponentAndChildren(c.ComponentId, ccl);     
+                } 
+            }
+            Component parent = ApplicationDbContext.Components
+                .Where(x => x.ComponentId == parentComponentId)
+                .Include(x => x.ParentComponent)
+                .Include(x => x.Positions)
+                .ThenInclude(x => x.Members)
+                .ThenInclude(x => x.Rank)
+                .FirstOrDefault();
+            if (parent != null){
+                ccl.Add(parent);    
+            }            
+            return ccl;
+        }
+        
 
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.

@@ -30,6 +30,8 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers();
 
+        List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
+
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
         /// </summary>

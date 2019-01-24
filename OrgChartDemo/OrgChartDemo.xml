@@ -4,18 +4,6 @@
         <name>OrgChartDemo</name>
     </assembly>
     <members>
-        <member name="T:OrgChartDemo.Components.NavigationMenuViewComponent">
-            <summary>
-            A ViewComponent that renders the Navigation Sidebar
-            </summary>
-            <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
-        </member>
-        <member name="M:OrgChartDemo.Components.NavigationMenuViewComponent.Invoke">
-            <summary>
-            Invokes the default <see cref="T:OrgChartDemo.Components.NavigationMenuViewComponent" />
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:OrgChartDemo.Controllers.ComponentsController">
             <summary>
             Controller for Component CRUD actions
@@ -274,6 +262,18 @@
             </summary>
             <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/></param>
             <returns>True if a <see cref="T:OrgChartDemo.Models.Position"/> with the given id exists</returns>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.RosterController.#ctor(OrgChartDemo.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.RosterController"/> class.
+            </summary>
+            <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Controllers.RosterController.GetComponents(System.Int32)">
+            <summary>
+            Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:OrgChartDemo.Models.ApplicationDbContext">
             <summary>
@@ -1610,6 +1610,18 @@
             </summary>
             <param name="app">An <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/> object.</param>
             <param name="env">An <see cref="T:Microsoft.AspNetCore.Hosting.IHostingEnvironment"/> object.</param>
+        </member>
+        <member name="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent">
+            <summary>
+            A ViewComponent that renders the Navigation Sidebar
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
+        </member>
+        <member name="M:OrgChartDemo.ViewComponents.NavigationMenuViewComponent.Invoke">
+            <summary>
+            Invokes the default <see cref="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent" />
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

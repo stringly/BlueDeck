@@ -1,0 +1,118 @@
+﻿@model RosterManagerViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_OrgChartLayout";
+}
+
+<h3>Manage Roster</h3>
+<div class="form-inline">
+    <div class="form-group">
+        @Html.LabelFor(x => Model.SelectedComponentId, htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { @class = "form -control", id = "Component" })
+        @Html.ValidationMessageFor(x => x.SelectedComponentId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <input type="button" value="Submit" class="get-btn btn-default" id="getComponentButton" />
+    </div>
+</div>
+<br />
+<div id="chartContainer">
+
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Drag and Drop
+        var dragSrcEl = null;
+
+        function handleDragStart(e) {
+            // Target (this) element is the source node.
+            dragSrcEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+            this.classList.add('dragElem');
+        }
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault(); // Necessary. Allows us to drop.
+            }
+            this.classList.add('over');
+
+            e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+            return false;
+        }
+        function handleDragEnter(e) {
+            // this / e.target is the current hover target.
+        }
+        function handleDragLeave(e) {
+            this.classList.remove('over');  // this / e.target is previous target element.
+        }
+        function handleDrop(e) {
+            // this/e.target is current target element.
+            if (e.stopPropagation) {
+                e.stopPropagation(); // Stops some browsers from redirecting.
+            }
+            // Don't do anything if dropping the same column we're dragging.
+            if (dragSrcEl != this) {
+                // Set the source column's HTML to the HTML of the column we dropped on.
+                dragSrcEl.parentNode.removeChild(dragSrcEl);
+                var dropHTML = e.dataTransfer.getData('text/html');
+                this.insertAdjacentHTML('beforeend', dropHTML);
+                
+                var dropElem = document.getElementById(this.id).lastChild;
+                addDnDHandlers(dropElem);
+            }
+            this.classList.remove('over');
+            return false;
+        }
+        function handleDragEnd(e) {
+            // this/e.target is the source node.
+            this.classList.remove('over');
+        }
+        function addDnDHandlers(elem) {
+            console.log("Adding handlers to: " + elem);
+            elem.addEventListener('dragstart', handleDragStart, false);
+            elem.addEventListener('dragenter', handleDragEnter, false)
+            elem.addEventListener('dragover', handleDragOver, false);
+            elem.addEventListener('dragleave', handleDragLeave, false);
+            elem.addEventListener('drop', handleDrop, false);
+            elem.addEventListener('dragend', handleDragEnd, false);
+        }
+        var cols = document.querySelectorAll('.members .member');
+        [].forEach.call(cols, addDnDHandlers);
+
+
+        $("#getComponentButton").click(function () {
+            var selectedComponentId = $("#Component").children("option:selected").val();
+            //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
+            var container = $("#chartContainer");
+            $.get("/Roster/GetRosterViewComponent", { componentId: selectedComponentId }, function (data) {
+                container.html(data);
+                console.log("Grabbing new elements");
+                var draggables = document.querySelectorAll('.members .member');
+                console.log("Attempting to register click events: " + draggables);
+                [].forEach.call(draggables, function (elem) {
+                    console.log("Adding handlers to: " + elem);
+                    elem.addEventListener('dragstart', handleDragStart, false);
+                    elem.addEventListener('dragenter', handleDragEnter, false)
+                    elem.addEventListener('dragover', handleDragOver, false);
+                    elem.addEventListener('dragleave', handleDragLeave, false);
+                    elem.addEventListener('drop', handleDrop, false);
+                    elem.addEventListener('dragend', handleDragEnd, false);
+                });
+                var droppables = document.querySelectorAll('.members .insertable');
+                [].forEach.call(droppables, function (elem) {
+                    elem.addEventListener('dragenter', handleDragEnter, false)
+                    elem.addEventListener('dragover', handleDragOver, false);
+                    elem.addEventListener('dragleave', handleDragLeave, false);
+                    elem.addEventListener('drop', handleDrop, false);
+                    elem.addEventListener('dragend', handleDragEnd, false);
+                })
+            });
+        });
+    
+    
+    });
+
+</script>

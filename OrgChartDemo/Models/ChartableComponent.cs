@@ -34,5 +34,6 @@ namespace OrgChartDemo.Models
         /// The name of the component.
         /// </value>
         public string ComponentName { get; set; }
+        public string CustomHTML { get; set; }
     }
 }

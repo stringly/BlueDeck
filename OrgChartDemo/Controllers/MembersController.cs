@@ -120,7 +120,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRankId,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
         {
             if (!ModelState.IsValid)
             {
@@ -175,7 +175,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRankId,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
         {
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
             Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);

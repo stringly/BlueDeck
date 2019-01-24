@@ -1,0 +1,48 @@
+﻿@model List<OrgChartDemo.Models.Component>
+@{ var uniquePositionId = 0;}
+@foreach (Component c in Model)
+{
+    <div class="componentContainer" data-componentid="@c.ComponentId">
+        <h3>@c.Name</h3>
+
+        @foreach (Position p in c.Positions)
+        {
+            <ul>
+                @if (!p.IsUnique)
+                {
+                    <li>@p.Name:</li>
+                    <ul class="members">
+                        @foreach (Member m in p.Members)
+                        {
+                            uniquePositionId++;
+                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"><span id="member-id-@m.MemberId" class="member" draggable="true">@m.GetTitleName()</span></li>
+                        }
+                        @for (var i = p.Members.Count(); i < 15; i++)
+                        {
+                            uniquePositionId++;
+                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <ul class="members">
+                        @if (p.Members.Count() > 0)
+                        {
+                            uniquePositionId++;
+                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">@p.Name: <span id="member-id-@p.Members[0].MemberId" class="member" draggable="true">@p.Members[0].GetTitleName()</span></li>
+                        }
+                        else
+                        {
+                            uniquePositionId++;
+                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></li>
+                        }
+                    </ul>
+
+                }
+            </ul>
+        }
+    </div>
+    <br />
+}
+
