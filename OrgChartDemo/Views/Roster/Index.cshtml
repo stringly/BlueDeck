@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
-
+<link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
 <h3>Manage Roster</h3>
 <div class="form-inline">
     <div class="form-group">
@@ -16,7 +16,7 @@
     </div>
 </div>
 <br />
-<div id="chartContainer">
+<div id="rosterContainer">
 
 
 </div>
@@ -86,7 +86,7 @@
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
-            var container = $("#chartContainer");
+            var container = $("#rosterContainer");
             $.get("/Roster/GetRosterViewComponent", { componentId: selectedComponentId }, function (data) {
                 container.html(data);
                 console.log("Grabbing new elements");
