@@ -4,45 +4,76 @@
 {
     <div class="componentContainer" data-componentid="@c.ComponentId">
         <h4>@c.Name</h4>
-
-        @foreach (Position p in c.Positions)
-        {
-            <ul>
-                @if (!p.IsUnique)
+        <table style="width: 100%">
+            <tr class="row justify-content-md-right">
+                <th class="col-xs-3">Position</th>
+                <th class="col-xs-6">Member</th>
+            </tr>
+            @foreach (Position p in c.Positions)
+            {
+                if (p.IsUnique)
                 {
-                    <li>@p.Name:</li>
-                    <ul class="members">
-                        @foreach (Member m in p.Members)
-                        {
-                            uniquePositionId++;
-                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"><span id="member-id-@m.MemberId" class="member" draggable="true">@m.GetTitleName()</span></li>
-                        }
-                        @for (var i = p.Members.Count(); i < 15; i++)
-                        {
-                            uniquePositionId++;
-                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></li>
-                        }
-                    </ul>
+                    <tr class="row row justify-content-md-right">
+                        <td class="col-md-2">@p.Name</td>
+                        <td class="members col-md-3">
+                            @if (p.Members.Count() > 0)
+                            {
+                                uniquePositionId++;
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">
+                                    <span id="member-id-@p.Members[0].MemberId" class="member" draggable="true">
+                                        <img class="@p.Members[0].Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
+                                        @p.Members[0].GetTitleName()
+                                        <a href="#" class="pull-right">
+                                            <span class="glyphicon glyphicon-option-vertical"></span>
+                                        </a>
+                                    </span>
+                                </div>
+                            }
+                            else
+                            {
+                                uniquePositionId++;
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></div>
+                            }
+                        </td>
+                    </tr>
                 }
                 else
                 {
-                    <ul class="members">
-                        @if (p.Members.Count() > 0)
+                    @if (p.Members.Count() > 0)
+                    {
+                        foreach (Member m in p.Members)
                         {
-                            uniquePositionId++;
-                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">@p.Name: <span id="member-id-@p.Members[0].MemberId" class="member" draggable="true">@p.Members[0].GetTitleName()</span></li>
+                            <tr class="row justify-content-md-right">
+                                <td class="col-md-2">@p.Name</td>
+                                <td class="members col-md-3">
+                                    @{uniquePositionId++;}
+                                    <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">
+                                        <span id="member-id-@m.MemberId" class="member" draggable="true">
+                                            <img class="@m.Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
+                                            @m.GetTitleName()
+                                            <a href="#" class="pull-right">
+                                                <span class="glyphicon glyphicon-option-vertical"></span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
                         }
-                        else
-                        {
-                            uniquePositionId++;
-                            <li id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></li>
-                        }
-                    </ul>
-
+                    }
+                    else
+                    {
+                        <tr class="row justify-content-md-right">
+                            <td class="col-md-2">@p.Name</td>
+                            <td class="members col-md-4">
+                                @{uniquePositionId++;}
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></div>
+                            </td>
+                        </tr>
+                    }
                 }
-            </ul>
-        }
-    </div>
+            }
+            </table>
+        </div>
     <br />
 }
 

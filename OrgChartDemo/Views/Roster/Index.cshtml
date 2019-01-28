@@ -4,6 +4,8 @@
     Layout = "_OrgChartLayout";
 }
 <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 <h3>Manage Roster</h3>
 <div class="form-inline">
     <div class="form-group">
@@ -16,7 +18,7 @@
     </div>
 </div>
 <br />
-<div id="rosterContainer">
+<div id="rosterContainer" class="container">
 
 
 </div>
@@ -54,12 +56,12 @@
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
             // Don't do anything if dropping the same column we're dragging.
-            if (dragSrcEl != this) {
+            if (dragSrcEl != this && e.target.childElementCount == 0) {
                 // Set the source column's HTML to the HTML of the column we dropped on.
                 dragSrcEl.parentNode.removeChild(dragSrcEl);
                 var dropHTML = e.dataTransfer.getData('text/html');
                 this.insertAdjacentHTML('beforeend', dropHTML);
-                
+
                 var dropElem = document.getElementById(this.id).lastChild;
                 addDnDHandlers(dropElem);
             }
@@ -82,7 +84,30 @@
         var cols = document.querySelectorAll('.members .member');
         [].forEach.call(cols, addDnDHandlers);
 
+        // attempt drag scroll
+        var stop = true;
+        $(".draggable").on("drag", function (e) {
+            stop = true;
+            if (e.originalEvent.clientY < 150) {
+                stop = false;
+                scroll(-1)
+            }
+            if (e.originalEvent.clientY > ($(window).height() - 150)) {
+                stop = false;
+                scroll(1)
+            }
+        });
 
+        $(".draggable").on("dragend", function (e) {
+            stop = true;
+        });
+        var scroll = function (step) {
+            var scrollY = $(window).scrollTop();
+            $(window).scrollTop(scrollY + step);
+            if (!stop) {
+                setTimeout(function () { scroll(step) }, 20);
+            }
+        }
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
@@ -111,8 +136,5 @@
                 })
             });
         });
-    
-    
     });
-
 </script>

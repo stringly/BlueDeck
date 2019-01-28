@@ -600,7 +600,7 @@
 }
 
     .get-blue.get-org-chart .get-oc-tb {
-        background-color: #0072C6
+        background-color: #3b5998
     }
 
     .get-blue.get-org-chart .get-user-logo {
@@ -608,7 +608,7 @@
     }
 
     .get-blue.get-org-chart .get-oc-g th {
-        background-color: #0072C6
+        background-color: #3b5998
     }
 
     .get-blue.get-org-chart .get-def-stop-1 {
@@ -616,11 +616,11 @@
     }
 
     .get-blue.get-org-chart .get-def-stop-2 {
-        stop-color: #0072C6
+        stop-color: #3b5998
     }
 
 .get-blue .get-box, g.get-blue .get-box {
-    fill: #0072C6;
+    fill: #3b5998;
     stroke: #0081D8
 }
 
@@ -898,7 +898,7 @@
 }
 
 .get-cassandra.get-blue .get-text.get-cassandra-text {
-    fill: #0072C6
+    fill: #3b5998
 }
 
 .get-cassandra.get-darkpurple .get-text.get-cassandra-text {
@@ -984,7 +984,7 @@
 }
 
 .get-deborah.get-blue .get-text-pane {
-    fill: #0072C6;
+    fill: #3b5998;
     fill-opacity: .5
 }
 
@@ -1065,7 +1065,7 @@
 }
 
 .get-helen.get-blue .get-text.get-helen-text {
-    fill: #0072C6
+    fill: #3b5998
 }
 
 .get-helen.get-darkpurple .get-text.get-helen-text {
