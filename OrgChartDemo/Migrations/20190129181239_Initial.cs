@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrgChartDemo.Migrations
 {
-#pragma warning disable 1591
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +29,35 @@ namespace OrgChartDemo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MemberRank",
+                name: "MemberGender",
+                columns: table => new
+                {
+                    GenderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    GenderFullName = table.Column<string>(nullable: true),
+                    Abbreviation = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MemberGender", x => x.GenderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MemberRace",
+                columns: table => new
+                {
+                    MemberRaceId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MemberRaceFullName = table.Column<string>(nullable: true),
+                    Abbreviation = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MemberRace", x => x.MemberRaceId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MemberRanks",
                 columns: table => new
                 {
                     RankId = table.Column<int>(nullable: false)
@@ -41,23 +68,24 @@ namespace OrgChartDemo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MemberRank", x => x.RankId);
+                    table.PrimaryKey("PK_MemberRanks", x => x.RankId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Positions",
                 columns: table => new
                 {
-                    PostionId = table.Column<int>(nullable: false)
+                    PositionId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ParentComponentComponentId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     IsUnique = table.Column<bool>(nullable: false),
-                    JobTitle = table.Column<string>(nullable: true)
+                    JobTitle = table.Column<string>(nullable: true),
+                    IsManager = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Positions", x => x.PostionId);
+                    table.PrimaryKey("PK_Positions", x => x.PositionId);
                     table.ForeignKey(
                         name: "FK_Positions_Components_ParentComponentComponentId",
                         column: x => x.ParentComponentComponentId,
@@ -77,22 +105,36 @@ namespace OrgChartDemo.Migrations
                     LastName = table.Column<string>(nullable: true),
                     MiddleName = table.Column<string>(nullable: true),
                     IdNumber = table.Column<string>(nullable: true),
+                    GenderId = table.Column<int>(nullable: true),
+                    RaceMemberRaceId = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    PositionPostionId = table.Column<int>(nullable: true)
+                    PositionId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Members", x => x.MemberId);
                     table.ForeignKey(
-                        name: "FK_Members_Positions_PositionPostionId",
-                        column: x => x.PositionPostionId,
-                        principalTable: "Positions",
-                        principalColumn: "PostionId",
+                        name: "FK_Members_MemberGender_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "MemberGender",
+                        principalColumn: "GenderId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Members_MemberRank_RankId",
+                        name: "FK_Members_Positions_PositionId",
+                        column: x => x.PositionId,
+                        principalTable: "Positions",
+                        principalColumn: "PositionId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_MemberRace_RaceMemberRaceId",
+                        column: x => x.RaceMemberRaceId,
+                        principalTable: "MemberRace",
+                        principalColumn: "MemberRaceId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_MemberRanks_RankId",
                         column: x => x.RankId,
-                        principalTable: "MemberRank",
+                        principalTable: "MemberRanks",
                         principalColumn: "RankId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -103,9 +145,19 @@ namespace OrgChartDemo.Migrations
                 column: "ParentComponentComponentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_PositionPostionId",
+                name: "IX_Members_GenderId",
                 table: "Members",
-                column: "PositionPostionId");
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Members_PositionId",
+                table: "Members",
+                column: "PositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Members_RaceMemberRaceId",
+                table: "Members",
+                column: "RaceMemberRaceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Members_RankId",
@@ -124,14 +176,19 @@ namespace OrgChartDemo.Migrations
                 name: "Members");
 
             migrationBuilder.DropTable(
+                name: "MemberGender");
+
+            migrationBuilder.DropTable(
                 name: "Positions");
 
             migrationBuilder.DropTable(
-                name: "MemberRank");
+                name: "MemberRace");
+
+            migrationBuilder.DropTable(
+                name: "MemberRanks");
 
             migrationBuilder.DropTable(
                 name: "Components");
         }
     }
-#pragma warning restore 1591
 }

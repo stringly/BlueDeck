@@ -86,6 +86,16 @@ namespace OrgChartDemo.Models {
         public virtual MemberRace Race { get; set; }
 
         /// <summary>
+        /// Gets or sets the Member's duty status.
+        /// </summary>
+        /// <value>
+        /// The Member's race.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/>
+        [Display(Name = "Duty Status")]
+        public virtual MemberDutyStatus DutyStatus { get; set; }
+
+        /// <summary>
         /// Gets or sets the Member's email.
         /// </summary>
         /// <value>

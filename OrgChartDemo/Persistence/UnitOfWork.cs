@@ -25,6 +25,7 @@ namespace OrgChartDemo.Persistence
             MemberRanks = new MemberRankRepository(_context);
             MemberGenders = new MemberGenderRepository(_context);
             MemberRaces = new MemberRaceRepository(_context);
+            MemberDutyStatus = new MemberDutyStatusRepository(_context);
         }
 
         /// <summary>
@@ -80,6 +81,15 @@ namespace OrgChartDemo.Persistence
         /// </value>
         /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
         public IMemberRaceRepository MemberRaces { get; private set; }
+
+        /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberRace Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository" />
+        public IMemberDutyStatusRepository MemberDutyStatus { get; private set; }
 
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates

@@ -72,5 +72,13 @@ namespace OrgChartDemo.Models {
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberGender"/>s
         /// </value>
         public virtual DbSet<MemberGender> MemberGender { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberGenders.
+        /// </summary>
+        /// <value>
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberDutyStatus"/>s
+        /// </value>
+        public virtual DbSet<MemberDutyStatus> DutyStatus { get; set; }
     }
 }

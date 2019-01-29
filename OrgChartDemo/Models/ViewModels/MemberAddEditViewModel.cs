@@ -8,7 +8,7 @@ namespace OrgChartDemo.Models.ViewModels
     /// <summary>
     /// ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
     /// </summary>
-    public class MemberWithPositionListViewModel
+    public class MemberAddEditViewModel
     {
         /// <summary>
         /// Gets or sets the Id of the Member.
@@ -68,7 +68,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// Gets or sets the Middle Name of the Member.
         /// </summary>
         /// <value>
-        /// The name of the middle.
+        /// The Member's middle name.
         /// </value>
         [StringLength(50)]
         [Display(Name = "Middle Name")]
@@ -81,11 +81,21 @@ namespace OrgChartDemo.Models.ViewModels
         /// This is NOT the Member Entity Id. This is the Member's employee Id number
         /// </remarks>
         /// <value>
-        /// The identifier number.
+        /// The Member's Departmental ID Number.
         /// </value>
         [StringLength(50), Required]
         [Display(Name = "ID Number")]
         public string IdNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's Duty Status.
+        /// </summary>
+        /// <value>
+        /// The Member's Duty Status Index.
+        /// </value>
+        [Required]
+        [Display(Name = "Duty Status")]
+        public int? DutyStatusId { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's email.
@@ -139,39 +149,55 @@ namespace OrgChartDemo.Models.ViewModels
         public List<MemberRaceSelectListItem> RaceList { get; set; }
 
         /// <summary>
+        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem"/>.
+        /// </summary>
+        /// <value>
+        /// The races.
+        /// </value>
+        public List<MemberDutyStatusSelectListItem> DutyStatus { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
         /// <remarks>
         /// This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel(Member, List{Position})"/> constructor overrode the default, and the form POST model-binding failed
         /// </remarks>
         /// </summary>
-        public MemberWithPositionListViewModel()
+        public MemberAddEditViewModel()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemberWithPositionListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
         /// </summary>
-        /// <param name="m">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
-        /// <param name="l">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
-        /// <param name="r">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
-        /// <param name="g">A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}}"/>.</param>
-        /// <param name="rl">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}}"/>.</param>
-        public MemberWithPositionListViewModel(Member m, List<Position> l, List<MemberRankSelectListItem> r, List<MemberGenderSelectListItem> g, List<MemberRaceSelectListItem> rl)
+        /// <param name="_member">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
+        /// <param name="_positionList">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
+        /// <param name="_rankList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
+        /// <param name="_genderList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}}"/>.</param>
+        /// <param name="_raceList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}}"/>.</param>
+        /// <param name="_dutyStatusList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem}}"/>.</param>
+        public MemberAddEditViewModel(Member _member, 
+            List<Position> _positionList, 
+            List<MemberRankSelectListItem> _rankList, 
+            List<MemberGenderSelectListItem> _genderList, 
+            List<MemberRaceSelectListItem> _raceList,
+            List<MemberDutyStatusSelectListItem> _dutyStatusList)
         {
-            MemberId = m?.MemberId;
-            MemberRank = m?.Rank?.RankId;
-            FirstName = m.FirstName;
-            LastName = m.LastName;
-            MiddleName = m.MiddleName;
-            IdNumber = m.IdNumber;
-            Email = m.Email;
-            PositionId = m?.Position?.PositionId;
-            MemberGender = m?.Gender?.GenderId;
-            MemberRace = m?.Race?.MemberRaceId;
-            RankList = r;
-            GenderList = g;
-            RaceList = rl;
-            Positions = l.ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name });
+            MemberId = _member?.MemberId;
+            MemberRank = _member?.Rank?.RankId;
+            FirstName = _member.FirstName;
+            LastName = _member.LastName;
+            MiddleName = _member.MiddleName;
+            IdNumber = _member.IdNumber;
+            DutyStatusId = _member?.DutyStatus?.DutyStatusId;
+            Email = _member.Email;
+            PositionId = _member?.Position?.PositionId;
+            MemberGender = _member?.Gender?.GenderId;
+            MemberRace = _member?.Race?.MemberRaceId;
+            RankList = _rankList;
+            GenderList = _genderList;
+            RaceList = _raceList;
+            DutyStatus = _dutyStatusList;
+            Positions = _positionList.ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name });
 
         }
     }

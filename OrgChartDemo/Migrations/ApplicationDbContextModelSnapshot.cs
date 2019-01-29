@@ -15,7 +15,7 @@ namespace OrgChartDemo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -44,6 +44,8 @@ namespace OrgChartDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("DutyStatusId");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
@@ -63,6 +65,8 @@ namespace OrgChartDemo.Migrations
                     b.Property<int?>("RankId");
 
                     b.HasKey("MemberId");
+
+                    b.HasIndex("DutyStatusId");
 
                     b.HasIndex("GenderId");
 
@@ -96,6 +100,25 @@ namespace OrgChartDemo.Migrations
                     b.HasIndex("ParentComponentComponentId");
 
                     b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberDutyStatus", b =>
+                {
+                    b.Property<int>("DutyStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("DutyStatusName");
+
+                    b.Property<bool>("HasPolicePower");
+
+                    b.HasKey("DutyStatusId");
+
+                    b.ToTable("DutyStatus");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Types.MemberGender", b =>
@@ -158,6 +181,10 @@ namespace OrgChartDemo.Migrations
 
             modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
                 {
+                    b.HasOne("OrgChartDemo.Models.Types.MemberDutyStatus", "DutyStatus")
+                        .WithMany()
+                        .HasForeignKey("DutyStatusId");
+
                     b.HasOne("OrgChartDemo.Models.Types.MemberGender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");

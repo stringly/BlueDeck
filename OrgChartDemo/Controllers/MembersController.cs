@@ -107,11 +107,12 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Create()
         {
-            MemberWithPositionListViewModel vm = new MemberWithPositionListViewModel(new Member(),
+            MemberAddEditViewModel vm = new MemberAddEditViewModel(new Member(),
                 unitOfWork.Positions.GetAll().ToList(),
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
-                unitOfWork.MemberRaces.GetMemberRaceSelectListItems());
+                unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
             return View(vm);
         }
 
@@ -122,7 +123,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,MemberRace,MemberGender,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email")] MemberAddEditViewModel form)
         {
             if (!ModelState.IsValid)
             {
@@ -140,6 +141,7 @@ namespace OrgChartDemo.Controllers
                     Race = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace),
                     Gender = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender),
                     Position = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId),
+                    DutyStatus = unitOfWork.MemberDutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId),
                     IdNumber = form.IdNumber,
                     Email = form.Email
                 };
@@ -167,11 +169,12 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            MemberWithPositionListViewModel vm = new MemberWithPositionListViewModel(member, 
+            MemberAddEditViewModel vm = new MemberAddEditViewModel(member, 
                 unitOfWork.Positions.GetAll().ToList(), 
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
-                unitOfWork.MemberRaces.GetMemberRaceSelectListItems());
+                unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
             return View(vm);
         }
 
@@ -183,14 +186,14 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,MemberGender,MemberRace,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email")] MemberAddEditViewModel form)
         {
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
             Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
             MemberRank r = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
             MemberGender g = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender);
             MemberRace rc = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
-
+            MemberDutyStatus ds = unitOfWork.MemberDutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -207,6 +210,7 @@ namespace OrgChartDemo.Controllers
                     m.Rank = r;
                     m.Gender = g;
                     m.Race = rc;
+                    m.DutyStatus = ds;
                     m.Position = targetPosition;
                     unitOfWork.Complete();
                 }

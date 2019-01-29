@@ -9,9 +9,8 @@ using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
-#pragma warning disable 1591
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180913223419_Initial")]
+    [Migration("20190129181239_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,19 +50,27 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<int?>("GenderId");
+
                     b.Property<string>("IdNumber");
 
                     b.Property<string>("LastName");
 
                     b.Property<string>("MiddleName");
 
-                    b.Property<int?>("PositionPostionId");
+                    b.Property<int?>("PositionId");
+
+                    b.Property<int?>("RaceMemberRaceId");
 
                     b.Property<int?>("RankId");
 
                     b.HasKey("MemberId");
 
-                    b.HasIndex("PositionPostionId");
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("PositionId");
+
+                    b.HasIndex("RaceMemberRaceId");
 
                     b.HasIndex("RankId");
 
@@ -72,9 +79,11 @@ namespace OrgChartDemo.Migrations
 
             modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
                 {
-                    b.Property<int>("PostionId")
+                    b.Property<int>("PositionId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsManager");
 
                     b.Property<bool>("IsUnique");
 
@@ -84,11 +93,45 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<int?>("ParentComponentComponentId");
 
-                    b.HasKey("PostionId");
+                    b.HasKey("PositionId");
 
                     b.HasIndex("ParentComponentComponentId");
 
                     b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberGender", b =>
+                {
+                    b.Property<int>("GenderId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("GenderFullName");
+
+                    b.HasKey("GenderId");
+
+                    b.ToTable("MemberGender");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberRace", b =>
+                {
+                    b.Property<int>("MemberRaceId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("MemberRaceFullName");
+
+                    b.HasKey("MemberRaceId");
+
+                    b.ToTable("MemberRace");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Types.MemberRank", b =>
@@ -105,7 +148,7 @@ namespace OrgChartDemo.Migrations
 
                     b.HasKey("RankId");
 
-                    b.ToTable("MemberRank");
+                    b.ToTable("MemberRanks");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
@@ -117,9 +160,17 @@ namespace OrgChartDemo.Migrations
 
             modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Position")
+                    b.HasOne("OrgChartDemo.Models.Types.MemberGender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId");
+
+                    b.HasOne("OrgChartDemo.Models.Position", "Position")
                         .WithMany("Members")
-                        .HasForeignKey("PositionPostionId");
+                        .HasForeignKey("PositionId");
+
+                    b.HasOne("OrgChartDemo.Models.Types.MemberRace", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceMemberRaceId");
 
                     b.HasOne("OrgChartDemo.Models.Types.MemberRank", "Rank")
                         .WithMany()
@@ -135,5 +186,4 @@ namespace OrgChartDemo.Migrations
 #pragma warning restore 612, 618
         }
     }
-#pragma warning restore 1591
 }

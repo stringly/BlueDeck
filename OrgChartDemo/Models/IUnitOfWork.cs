@@ -68,6 +68,15 @@ namespace OrgChartDemo.Models
         IMemberRaceRepository MemberRaces { get; }
 
         /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository"/>
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberRace Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository"/>
+        IMemberDutyStatusRepository MemberDutyStatus { get; }
+
+        /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates
         /// </summary>
         /// <returns></returns>
