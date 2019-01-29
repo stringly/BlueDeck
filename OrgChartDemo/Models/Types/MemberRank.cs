@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.Types {
+namespace OrgChartDemo.Models.Types
+{
     /// <summary>
     /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>

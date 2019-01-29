@@ -25,6 +25,26 @@ namespace OrgChartDemo.Models.ViewModels
         public int? MemberRank { get; set; }
 
         /// <summary>
+        /// Gets or sets the member gender.
+        /// </summary>
+        /// <value>
+        /// The member gender.
+        /// </value>
+        [Required]
+        [Display(Name = "Gender")]
+        public int? MemberGender { get; set; }
+
+        /// <summary>
+        /// Gets or sets the member race.
+        /// </summary>
+        /// <value>
+        /// The member race.
+        /// </value>
+        [Required]
+        [Display(Name = "Race")]
+        public int? MemberRace { get; set; }
+
+        /// <summary>
         /// Gets or sets the First Name of the Member.
         /// </summary>
         /// <value>
@@ -103,6 +123,22 @@ namespace OrgChartDemo.Models.ViewModels
         public List<PositionSelectListItem> Positions { get; set; }
 
         /// <summary>
+        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem"/>.
+        /// </summary>
+        /// <value>
+        /// The genders.
+        /// </value>
+        public List<MemberGenderSelectListItem> GenderList { get; set; }
+
+        /// <summary>
+        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.
+        /// </summary>
+        /// <value>
+        /// The races.
+        /// </value>
+        public List<MemberRaceSelectListItem> RaceList { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
         /// <remarks>
         /// This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel(Member, List{Position})"/> constructor overrode the default, and the form POST model-binding failed
@@ -118,7 +154,9 @@ namespace OrgChartDemo.Models.ViewModels
         /// <param name="m">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
         /// <param name="l">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
         /// <param name="r">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
-        public MemberWithPositionListViewModel(Member m, List<Position> l, List<MemberRankSelectListItem> r)
+        /// <param name="g">A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}}"/>.</param>
+        /// <param name="rl">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}}"/>.</param>
+        public MemberWithPositionListViewModel(Member m, List<Position> l, List<MemberRankSelectListItem> r, List<MemberGenderSelectListItem> g, List<MemberRaceSelectListItem> rl)
         {
             MemberId = m?.MemberId;
             MemberRank = m?.Rank?.RankId;
@@ -128,7 +166,11 @@ namespace OrgChartDemo.Models.ViewModels
             IdNumber = m.IdNumber;
             Email = m.Email;
             PositionId = m?.Position?.PositionId;
+            MemberGender = m?.Gender?.GenderId;
+            MemberRace = m?.Race?.MemberRaceId;
             RankList = r;
+            GenderList = g;
+            RaceList = rl;
             Positions = l.ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name });
 
         }

@@ -50,11 +50,27 @@ namespace OrgChartDemo.Models {
         public virtual DbSet<Position> Positions { get; set; }
 
         /// <summary>
-        /// Gets or sets the Positions.
+        /// Gets or sets the MemberRanks.
         /// </summary>
         /// <value>
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
         /// </value>
         public virtual DbSet<MemberRank> MemberRanks { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberRaces.
+        /// </summary>
+        /// <value>
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRace"/>s
+        /// </value>
+        public virtual DbSet<MemberRace> MemberRace { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberGenders.
+        /// </summary>
+        /// <value>
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberGender"/>s
+        /// </value>
+        public virtual DbSet<MemberGender> MemberGender { get; set; }
     }
 }

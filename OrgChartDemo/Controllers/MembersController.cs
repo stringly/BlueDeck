@@ -109,7 +109,9 @@ namespace OrgChartDemo.Controllers
         {
             MemberWithPositionListViewModel vm = new MemberWithPositionListViewModel(new Member(),
                 unitOfWork.Positions.GetAll().ToList(),
-                unitOfWork.MemberRanks.GetMemberRankSelectListItems());
+                unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
+                unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
+                unitOfWork.MemberRaces.GetMemberRaceSelectListItems());
             return View(vm);
         }
 
@@ -120,7 +122,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,MemberRace,MemberGender,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
         {
             if (!ModelState.IsValid)
             {
@@ -135,6 +137,8 @@ namespace OrgChartDemo.Controllers
                     LastName = form.LastName,
                     MiddleName = form.MiddleName,
                     Rank = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank),
+                    Race = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace),
+                    Gender = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender),
                     Position = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId),
                     IdNumber = form.IdNumber,
                     Email = form.Email
@@ -163,7 +167,11 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            MemberWithPositionListViewModel vm = new MemberWithPositionListViewModel(member, unitOfWork.Positions.GetAll().ToList(), unitOfWork.MemberRanks.GetMemberRankSelectListItems());
+            MemberWithPositionListViewModel vm = new MemberWithPositionListViewModel(member, 
+                unitOfWork.Positions.GetAll().ToList(), 
+                unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
+                unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
+                unitOfWork.MemberRaces.GetMemberRaceSelectListItems());
             return View(vm);
         }
 
@@ -175,11 +183,13 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,MemberGender,MemberRace,PositionId,IdNumber,Email")] MemberWithPositionListViewModel form)
         {
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
             Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
             MemberRank r = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
+            MemberGender g = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender);
+            MemberRace rc = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
 
             if (!ModelState.IsValid)
             {
@@ -195,6 +205,8 @@ namespace OrgChartDemo.Controllers
                     m.IdNumber = form.IdNumber;
                     m.Email = form.Email;
                     m.Rank = r;
+                    m.Gender = g;
+                    m.Race = rc;
                     m.Position = targetPosition;
                     unitOfWork.Complete();
                 }

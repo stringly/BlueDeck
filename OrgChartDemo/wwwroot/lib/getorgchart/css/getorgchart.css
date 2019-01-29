@@ -590,14 +590,14 @@
         stop-color: #5DB2FF
     }
 
-.get-lightblue .get-box, g.get-lightblue .get-box {
-    fill: #5DB2FF;
-    stroke: #0073D8
-}
+    .get-lightblue .get-box, g.get-lightblue .get-box {
+        fill: #5DB2FF;
+        stroke: #0073D8
+    }
 
-.get-blue.get-org-chart {
-    background-color: #E5F4FF
-}
+    .get-blue.get-org-chart {
+        background-color: #E5F4FF
+    }
 
     .get-blue.get-org-chart .get-oc-tb {
         background-color: #3b5998

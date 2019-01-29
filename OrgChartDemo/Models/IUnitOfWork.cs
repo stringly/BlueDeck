@@ -50,6 +50,24 @@ namespace OrgChartDemo.Models
         IMemberRankRepository MemberRanks { get; }
 
         /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository"/>
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberGender Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository"/>
+        IMemberGenderRepository MemberGenders { get; }
+
+        /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository"/>
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberRace Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository"/>
+        IMemberRaceRepository MemberRaces { get; }
+
+        /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates
         /// </summary>
         /// <returns></returns>

@@ -66,6 +66,26 @@ namespace OrgChartDemo.Models {
         public string IdNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the Member's gender.
+        /// </summary>
+        /// <value>
+        /// The Member's gender.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberGender"/>
+        [Display(Name = "Gender")]
+        public virtual MemberGender Gender { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's race.
+        /// </summary>
+        /// <value>
+        /// The Member's race.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberRace"/>
+        [Display(Name = "Race")]
+        public virtual MemberRace Race { get; set; }
+
+        /// <summary>
         /// Gets or sets the Member's email.
         /// </summary>
         /// <value>

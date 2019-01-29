@@ -23,6 +23,8 @@ namespace OrgChartDemo.Persistence
             Components = new ComponentRepository(_context);
             Members = new MemberRepository(_context);
             MemberRanks = new MemberRankRepository(_context);
+            MemberGenders = new MemberGenderRepository(_context);
+            MemberRaces = new MemberRaceRepository(_context);
         }
 
         /// <summary>
@@ -60,6 +62,24 @@ namespace OrgChartDemo.Persistence
         /// </value>
         /// <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
         public IMemberRankRepository MemberRanks { get; private set; }
+
+        /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberGender Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        public IMemberGenderRepository MemberGenders { get; private set; }
+
+        /// <summary>
+        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberRace Entity.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+        public IMemberRaceRepository MemberRaces { get; private set; }
 
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates

@@ -321,10 +321,26 @@
         </member>
         <member name="P:OrgChartDemo.Models.ApplicationDbContext.MemberRanks">
             <summary>
-            Gets or sets the Positions.
+            Gets or sets the MemberRanks.
             </summary>
             <value>
             A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ApplicationDbContext.MemberRace">
+            <summary>
+            Gets or sets the MemberRaces.
+            </summary>
+            <value>
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRace"/>s
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ApplicationDbContext.MemberGender">
+            <summary>
+            Gets or sets the MemberGenders.
+            </summary>
+            <value>
+            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberGender"/>s
             </value>
         </member>
         <member name="T:OrgChartDemo.Models.ChartableComponent">
@@ -545,6 +561,24 @@
             </value>
             <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
         </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.MemberGenders">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository"/>
+            </summary>
+            <value>
+            The Interface representing the MemberGender Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository"/>
+        </member>
+        <member name="P:OrgChartDemo.Models.IUnitOfWork.MemberRaces">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository"/>
+            </summary>
+            <value>
+            The Interface representing the MemberRace Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository"/>
+        </member>
         <member name="M:OrgChartDemo.Models.IUnitOfWork.Complete">
             <summary>
             Saves changes made in the Unit of Work to ensure consistent updates
@@ -603,6 +637,24 @@
             <value>
             The Departmental Id Number of the Member.
             </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Member.Gender">
+            <summary>
+            Gets or sets the Member's gender.
+            </summary>
+            <value>
+            The Member's gender.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Types.MemberGender"/>
+        </member>
+        <member name="P:OrgChartDemo.Models.Member.Race">
+            <summary>
+            Gets or sets the Member's race.
+            </summary>
+            <value>
+            The Member's race.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Types.MemberRace"/>
         </member>
         <member name="P:OrgChartDemo.Models.Member.Email">
             <summary>
@@ -748,6 +800,36 @@
             </summary>
             <returns>A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}"/></returns>
         </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Types.MemberGender}" />
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IMemberGenderRepository.GetMemberGenderSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberGenderSelectListItem"/>s.
+            </summary>
+            <remarks>
+            This method is used to populate Gender select lists.
+            </remarks>
+            <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}"/></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository">
+            <summary>
+            An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+            </summary>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Types.MemberRace}" />
+        </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IMemberRaceRepository.GetMemberRaceSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberRaceSelectListItem"/>s.
+            </summary>
+            <remarks>
+            This method is used to populate Rank select lists.
+            </remarks>
+            <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}"/></returns>
+        </member>
         <member name="T:OrgChartDemo.Models.Repositories.IMemberRankRepository">
             <summary>
             An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
@@ -881,6 +963,128 @@
             </summary>
             <value>
             The identifier.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberGender">
+            <summary>
+            A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGender.GenderId">
+            <summary>
+            Gets or sets the gender's Id.
+            </summary>
+            <value>
+            The gender Id.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGender.GenderFullName">
+            <summary>
+            Gets or sets the full name of the gender.
+            </summary>
+            <value>
+            The full name of the gender.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGender.Abbreviation">
+            <summary>
+            Gets or sets the gender's single-character abbreviation.
+            </summary>
+            <value>
+            The gender's single-character abbreviation.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem">
+            <summary>
+            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberGender"/> Entity.
+            /// <remarks>
+            This type is used to populate a MemberGender select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderId">
+            <summary>
+            Gets or sets the member gender identifier.
+            </summary>
+            <value>
+            The member gender identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderFullName">
+            <summary>
+            Gets or sets the full name of the member gender.
+            </summary>
+            <value>
+            The full name of the member gender.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberRace">
+            <summary>
+            A Class that represents racial demographic group.  Contains properties and methods used in displaying the race of a <see cref="T:OrgChartDemo.Models.Member"/>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRace.MemberRaceId">
+            <summary>
+            Gets or sets the member race identifier.
+            </summary>
+            <value>
+            The member race identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRace.MemberRaceFullName">
+            <summary>
+            Gets or sets the full name of the member race.
+            </summary>
+            <value>
+            The full name of the member race.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRace.Abbreviation">
+            <summary>
+            Gets or sets the race's abbreviation.
+            </summary>
+            <value>
+            The race's abbreviation.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem">
+            <summary>
+            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRace"/> Entity.
+            /// <remarks>
+            This type is used to populate a MemberRace select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.MemberRaceId">
+            <summary>
+            Gets or sets the member race identifier.
+            </summary>
+            <value>
+            The member race identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.RaceFullName">
+            <summary>
+            Gets or sets the name of the race.
+            </summary>
+            <value>
+            The name of the race.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
             </value>
         </member>
         <member name="T:OrgChartDemo.Models.Types.MemberRank">
@@ -1132,6 +1336,22 @@
             Gets or sets the Rank of the Member.
             </summary>
         </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.MemberGender">
+            <summary>
+            Gets or sets the member gender.
+            </summary>
+            <value>
+            The member gender.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.MemberRace">
+            <summary>
+            Gets or sets the member race.
+            </summary>
+            <value>
+            The member race.
+            </value>
+        </member>
         <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.FirstName">
             <summary>
             Gets or sets the First Name of the Member.
@@ -1199,6 +1419,22 @@
             The positions.
             </value>
         </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.GenderList">
+            <summary>
+            Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem"/>.
+            </summary>
+            <value>
+            The genders.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.RaceList">
+            <summary>
+            Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.
+            </summary>
+            <value>
+            The races.
+            </value>
+        </member>
         <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
@@ -1207,13 +1443,15 @@
             </remarks>
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Position},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem})">
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Position},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> class.
             </summary>
             <param name="m">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
             <param name="l">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
             <param name="r">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
+            <param name="g">A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}}"/>.</param>
+            <param name="rl">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}}"/>.</param>
         </member>
         <member name="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel">
             <summary>
@@ -1340,6 +1578,54 @@
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
             <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.MemberGenderRepository">
+            <summary>
+            A repository for the MemberGender entity.
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberGender}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberGenderRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberGenderRepository"/> class.
+            </summary>
+            <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberGenderRepository.GetMemberGenderSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberGenderSelectListItem" />s.
+            </summary>
+            <remarks>
+            This method is used to populate Gender select lists.
+            </remarks>
+            <returns>
+            A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}" />
+            </returns>
+        </member>
+        <member name="T:OrgChartDemo.Persistence.Repositories.MemberRaceRepository">
+            <summary>
+            A repository for the MemberRace entity.
+            </summary>
+            <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberRace}" />
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRaceRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRaceRepository"/> class.
+            </summary>
+            <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRaceRepository.GetMemberRaceSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:OrgChartDemo.Types.MemberRaceSelectListItem" />s.
+            </summary>
+            <remarks>
+            This method is used to populate Rank select lists.
+            </remarks>
+            <returns>
+            A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}" />
+            </returns>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository">
             <summary>
@@ -1556,6 +1842,24 @@
             The Interface representing the MemberRanks Entity.
             </value>
             <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.MemberGenders">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+            </summary>
+            <value>
+            The Interface representing the MemberGender Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        </member>
+        <member name="P:OrgChartDemo.Persistence.UnitOfWork.MemberRaces">
+            <summary>
+            Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+            </summary>
+            <value>
+            The Interface representing the MemberRace Entity.
+            </value>
+            <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
         </member>
         <member name="M:OrgChartDemo.Persistence.UnitOfWork.Complete">
             <summary>
