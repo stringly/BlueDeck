@@ -13,16 +13,15 @@ body {
 .componentContainer {
     /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;*/
-    padding: 2px 5px 20px 5px;
+    padding: 0px 0px 20px 0px;
     background-color: #dfe3ee;
 }
 
     .componentContainer h4 {
         font-size: 14px;
         color: white;
-        margin-left: 2px;
         padding: 10px;
-        margin-top: 5px;
+        margin-top: 0px;
         background-color: #3b5998
     }
 
@@ -49,9 +48,13 @@ body {
     }
 
     .componentContainer a {
-        color: white;
+        margin: 5px 0px 5px 10px;
     }
-
+    .componentContainer .form-group {        
+        margin: 0px 5px 0px 10px;
+    }
+    
+    
     .componentContainer .member .L01 {
         content: url();
     }
@@ -88,3 +91,45 @@ body {
     .componentContainer .member .L10 {
         content: url("../../images/rankicons/L08.png");
     }
+
+.drag-options {
+    float: left;
+    position: absolute;
+    padding: 5px;
+    right: 24px;
+    background-color: #5d7cbf;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    margin-top: 5px;
+    opacity: 0;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+    .drag-options.active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+.drag-options-label {
+    display: block;
+    margin: 0 0 2px 0;
+}
+
+    .drag-options-label input {
+        opacity: 0.6;
+    }
+
+    .drag-options-label a {
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: white;
+        margin: 0px;
+    }
+
+
+
+
+

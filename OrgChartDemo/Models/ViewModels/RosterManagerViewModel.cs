@@ -14,4 +14,6 @@ namespace OrgChartDemo.Models.ViewModels
         public int SelectedComponentId {get;set;}
         public List<ComponentSelectListItem> Components {get; set;}
     }
+
+
 }

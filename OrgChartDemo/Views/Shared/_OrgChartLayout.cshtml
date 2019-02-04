@@ -7,18 +7,12 @@
     <title>@ViewBag.Title</title>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/getorgchart/js/getorgchart.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
 
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Org Chart Demo</a>
-    </div>
-    <div class="row-panel">
-        <div id="categories" class="col-xs-1">
-            @await Component.InvokeAsync("NavigationMenu")
-        </div>
-    </div>
+    @await Component.InvokeAsync("NavigationMenu")
     <div class="col-xs-11">
         <h3 class="text-danger">@ViewBag.Message</h3>
         @RenderBody()

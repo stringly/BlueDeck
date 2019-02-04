@@ -3,8 +3,8 @@
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
-<link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
 
 <h3>Manage Roster</h3>
 <div class="form-inline">
@@ -27,10 +27,11 @@
 
         // Drag and Drop
         var dragSrcEl = null;
-
+        var dragSrcParentComponentId = null;
         function handleDragStart(e) {
             // Target (this) element is the source node.
             dragSrcEl = this;
+            dragSrcParentComponentId = this.parentElement.dataset.parentcomponentid;
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text/html', this.outerHTML);
             this.classList.add('dragElem');
@@ -64,6 +65,12 @@
 
                 var dropElem = document.getElementById(this.id).lastChild;
                 addDnDHandlers(dropElem);
+                var moreOptionsButton = dropElem.querySelectorAll('.moreOptions')[0];
+                addShowMoreOptionsHandler(moreOptionsButton);
+                // find: MemberID of dragged member, PositionID of new position.
+                var newPositionId = e.target.dataset.positionid;
+                var memberId = dragSrcEl.dataset.memberid;
+                reassignMember(memberId, newPositionId);
             }
             this.classList.remove('over');
             return false;
@@ -108,6 +115,28 @@
                 setTimeout(function () { scroll(step) }, 20);
             }
         }
+        function addShowMoreOptionsHandler(elem) {
+            elem.addEventListener('click', showMoreOptions, false);
+            elem.parentElement.parentElement.querySelectorAll(".drag-options")[0].addEventListener('mouseleave', handleMouseOut, false);
+        }
+        function showMoreOptions(e) {
+            var memberId = $(e.target).data('memberid');
+            console.log('More options clicked for Member: ' + memberId);
+            $("#options_" + memberId).toggleClass("active");
+        }
+        function handleMouseOut(elem) {
+            this.classList.remove("active");
+        }
+        function reassignMember(memberId, newPositionId) {
+            console.log("Reassigning Member " + memberId + " to Position " + newPositionId);
+            
+            $.get("/Roster/ReassignMember", { memberId : memberId, positionId : newPositionId }, function (data) {
+                const entries = Object.entries(data);
+                for (const [key, value] of entries) {
+                    $(key).html(value);
+                }
+            });
+        }
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
@@ -126,6 +155,14 @@
                     elem.addEventListener('drop', handleDrop, false);
                     elem.addEventListener('dragend', handleDragEnd, false);
                 });
+                var moreOptionButtons = document.querySelectorAll('.moreOptions');
+                [].forEach.call(moreOptionButtons, function (elem) {
+                    elem.addEventListener('click', showMoreOptions, false);                    
+                });
+                var moreOptionDivs = document.querySelectorAll('.drag-options');
+                [].forEach.call(moreOptionDivs, function (elem) {
+                    elem.addEventListener('mouseleave', handleMouseOut, false);
+                })
                 var droppables = document.querySelectorAll('.members .insertable');
                 [].forEach.call(droppables, function (elem) {
                     elem.addEventListener('dragenter', handleDragEnter, false)

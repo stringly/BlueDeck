@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -52,5 +53,56 @@ namespace OrgChartDemo.Models {
         /// An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
         /// </value>
         public virtual ICollection<Position> Positions { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<Component> Children { get; set; }
+
+        public Component()
+        {
+        }
+
+        public int GetComponentMemberGenderCountFemale()
+        {
+            int totalCount = 0;
+            if (Positions != null)
+            {
+                foreach(Position p in Positions)
+                {   
+                    if (p.Members != null)
+                    {
+                        foreach (Member m in p.Members)
+                        {
+                            if (m.Gender.GenderFullName == "Female")
+                            {
+                                totalCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            return totalCount;
+        }
+
+        public int GetComponentMemberGenderCountMale()
+        {
+            int totalCount = 0;
+            if (Positions != null)
+            {
+                foreach(Position p in Positions)
+                {   
+                    if (p.Members != null)
+                    {
+                        foreach (Member m in p.Members)
+                        {
+                            if (m.Gender.GenderFullName == "Male")
+                            {
+                                totalCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            return totalCount;
+        }
     }
 }

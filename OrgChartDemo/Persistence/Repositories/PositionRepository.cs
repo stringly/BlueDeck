@@ -57,5 +57,12 @@ namespace OrgChartDemo.Persistence.Repositories
             toReassign.Members.AddRange(toDelete.Members);            
             ApplicationDbContext.Positions.Remove(toDelete);
         }
+        public Position GetPositionWithParentComponent(int positionId)
+        {
+            return ApplicationDbContext.Positions
+                .Include(x => x.ParentComponent)
+                .Where(x => x.PositionId == positionId)
+                .FirstOrDefault();
+        }
     }
 }

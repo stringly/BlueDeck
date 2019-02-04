@@ -37,6 +37,13 @@ namespace OrgChartDemo.Persistence.Repositories
                 .ToList();
         }
 
+        public Member GetMemberWithPosition(int memberId)
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.Position)
+                .Where(x => x.MemberId == memberId)
+                .FirstOrDefault();
+        }
         /// <summary>
         /// Gets the application database context.
         /// </summary>

@@ -10,5 +10,6 @@ namespace OrgChartDemo.Models.Repositories
     public interface IMemberRepository : IRepository<Member>
     {
         IEnumerable<Member> GetMembersWithPositions();
+        Member GetMemberWithPosition(int memberId);
     }
 }

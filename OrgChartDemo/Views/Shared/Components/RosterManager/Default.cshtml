@@ -1,41 +1,46 @@
-﻿@model List<OrgChartDemo.Models.Component>
+﻿@model RosterManagerViewComponentViewModel
 @{ var uniquePositionId = 0;}
-@foreach (Component c in Model)
+@foreach (RosterManagerViewModelComponent c in Model.ComponentList)
 {
-    <div class="componentContainer" data-componentid="@c.ComponentId">
-        <h4>@c.Name</h4>
-        <table style="width: 100%">
-            <tr class="row justify-content-md-right">
-                <th class="col-xs-3">Position</th>
-                <th class="col-xs-6">Member</th>
-            </tr>
+<div class="componentContainer container" data-componentid="@c.ComponentId">
+    <h4>@c.Name</h4>
+    <div class="row">
+        <div class="col-sm-8">
             @foreach (Position p in c.Positions)
             {
                 if (p.IsUnique)
                 {
-                    <tr class="row row justify-content-md-right">
-                        <td class="col-md-2">@p.Name</td>
-                        <td class="members col-md-3">
+                    <div class="form-group">
+                        <strong>@p.Name</strong>
+                        <div class="members">
                             @if (p.Members.Count() > 0)
                             {
                                 uniquePositionId++;
-                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">
-                                    <span id="member-id-@p.Members[0].MemberId" class="member" draggable="true">
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                    <div id="member-id-@p.Members[0].MemberId" class="member" draggable="true" data-memberId="@p.Members[0].MemberId">
                                         <img class="@p.Members[0].Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
                                         @p.Members[0].GetTitleName()
-                                        <a href="#" class="pull-right">
-                                            <span class="glyphicon glyphicon-option-vertical"></span>
-                                        </a>
-                                    </span>
+                                        <div class="pull-right" style="margin-left:20px; cursor:pointer">
+                                            <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@p.Members[0].MemberId"></span>
+                                        </div>
+                                        <span style="margin: 0px 5px 0px 5px" class="pull-right">@p.Members[0].DutyStatus.DutyStatusName</span>
+                                        <span style="margin: 0px 20px 0px 5px" class="pull-right">@p.Members[0].Race.Abbreviation/@p.Members[0].Gender.Abbreviation</span>
+                                        <div class="drag-options" id="options_@p.Members[0].MemberId">
+                                            <label class="drag-options-label">
+                                                <a href="/Members/Edit/@p.Members[0].MemberId">Edit Employee Info</a>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             }
                             else
                             {
                                 uniquePositionId++;
-                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></div>
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable"></div>
                             }
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
+
                 }
                 else
                 {
@@ -43,37 +48,57 @@
                     {
                         foreach (Member m in p.Members)
                         {
-                            <tr class="row justify-content-md-right">
-                                <td class="col-md-2">@p.Name</td>
-                                <td class="members col-md-3">
+                            <div class="form-group">
+                                <strong>@p.Name</strong>
+                                <div class="members">
                                     @{uniquePositionId++;}
-                                    <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable">
-                                        <span id="member-id-@m.MemberId" class="member" draggable="true">
+                                    <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                        <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">
                                             <img class="@m.Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
                                             @m.GetTitleName()
-                                            <a href="#" class="pull-right">
-                                                <span class="glyphicon glyphicon-option-vertical"></span>
-                                            </a>
-                                        </span>
+                                            <div class="pull-right" style="margin-left:20px; cursor:pointer">
+                                                <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@m.MemberId"></span>
+                                            </div>
+                                            <span style="margin: 0px 5px 0px 5px" class="pull-right">@m.DutyStatus.DutyStatusName</span>
+                                            <span style="margin: 0px 20px 0px 5px" class="pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
+                                            <div class="drag-options" id="options_@m.MemberId">
+                                                <label class="drag-options-label">
+                                                    <a href="/Members/Edit/@m.MemberId">Edit Employee Info</a>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </div>
                         }
                     }
                     else
                     {
-                        <tr class="row justify-content-md-right">
-                            <td class="col-md-2">@p.Name</td>
-                            <td class="members col-md-4">
+                        <div class="form-group">
+                            <strong>@p.Name</strong>
+                            <div class="members">
                                 @{uniquePositionId++;}
-                                <div id="@uniquePositionId" data-positionid="@p.PositionId" class="insertable"></div>
-                            </td>
-                        </tr>
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable"></div>
+                            </div>
+                        </div>
                     }
                 }
             }
-            </table>
         </div>
+        <div class="col-sm-4">
+            <div class="form-group" id="demographicsgroup_@c.ComponentId">                
+                @c.GetDemographicTableForComponentAndChildren()
+            </div>
+
+        </div>
+    </div>
+    <div style="padding: 10px 0 5px 10px">
+        <a href="" style="font-weight:bold">
+            <span class="glyphicon glyphicon-plus"></span> Add New Position to @c.Name
+        </a>        
+    </div>    
+</div>
+    
     <br />
 }
 

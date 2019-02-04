@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
+using OrgChartDemo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace OrgChartDemo.ViewComponents
     public class RosterManagerViewComponent : ViewComponent
     {
         public IViewComponentResult Invoke(List<Component> componentList)
-        {           
-            return View(componentList);
+        {
+            RosterManagerViewComponentViewModel vm = new RosterManagerViewComponentViewModel(componentList);
+            return View(vm);
         }
     }
 }
