@@ -43,7 +43,7 @@ namespace OrgChartDemo.Controllers
             return ViewComponent("RosterManager", result.OrderBy(x => x.ComponentId).ToList());    
         }
 
-        public JsonResult ReassignMember(int memberId, int positionId)
+        public JsonResult ReassignMember(int memberId, int positionId, int selectedComponentId)
         {
             Dictionary<string, string> result = new Dictionary<string, string>();
             if (memberId != 0 && positionId != 0)
@@ -58,11 +58,9 @@ namespace OrgChartDemo.Controllers
                 }
                 if (newPosition.ParentComponent.ComponentId != oldPosition.ParentComponent.ComponentId)
                 {                    
-                    RosterManagerViewModelComponent newComponent = new RosterManagerViewModelComponent(unitOfWork.Components.GetComponentWithChildren(newPosition.ParentComponent.ComponentId));
-                    RosterManagerViewModelComponent oldComponent = new RosterManagerViewModelComponent(unitOfWork.Components.GetComponentWithChildren(oldPosition.ParentComponent.ComponentId));
-                    result.Add("#demographicsgroup_" + newComponent.ComponentId, newComponent.GetDemographicTableForComponentAndChildren().ToString());
-                    result.Add("#demographicsgroup_" + oldComponent.ComponentId, oldComponent.GetDemographicTableForComponentAndChildren().ToString());
-                    
+                    List<Component> componentList = unitOfWork.Components.GetComponentAndChildren(selectedComponentId, new List<Component>());
+                    RosterManagerViewComponentViewModel vm = new RosterManagerViewComponentViewModel(componentList);
+                    result = vm.GetDemoTableDictionaryForAllComponents();
                 }
             }
 

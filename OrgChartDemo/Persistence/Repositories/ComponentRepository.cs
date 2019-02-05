@@ -55,6 +55,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)                                
                 .FirstOrDefault();
+            
         }
 
         /// <summary>
@@ -114,17 +115,7 @@ namespace OrgChartDemo.Persistence.Repositories
             return ccl;
         }
         
-        public Component GetComponentWithAllChildComponents(Component c)
-        {
-            c.Children = ApplicationDbContext.Components
-                .Where(x => x.ParentComponent.ComponentId == c.ComponentId)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Gender)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)                                
-                .ToList();
-            return c;
-        }
+        
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
         /// </summary>
@@ -217,6 +208,8 @@ namespace OrgChartDemo.Persistence.Repositories
             }
             return results;
         }
+
+        
 
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }

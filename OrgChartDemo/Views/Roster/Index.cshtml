@@ -130,7 +130,7 @@
         function reassignMember(memberId, newPositionId) {
             console.log("Reassigning Member " + memberId + " to Position " + newPositionId);
             
-            $.get("/Roster/ReassignMember", { memberId : memberId, positionId : newPositionId }, function (data) {
+            $.get("/Roster/ReassignMember", { memberId : memberId, positionId : newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
                 const entries = Object.entries(data);
                 for (const [key, value] of entries) {
                     $(key).html(value);
