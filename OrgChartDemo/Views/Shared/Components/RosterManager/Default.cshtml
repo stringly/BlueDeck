@@ -3,9 +3,15 @@
 @foreach (RosterManagerViewModelComponent c in Model.ComponentList)
 {
 <div class="componentContainer container" data-componentid="@c.ComponentId">
-    <h4>@c.Name</h4>
+    <div class="componentHeaderDiv">
+        <div class="logoDiv pull-left">
+           <img src="~/lib/bluedeck/css/images/cb3cb-d0grf.svg" />
+        </div>
+        <h4>@c.Name</h4>
+    </div>
+    
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-md-6">
             @foreach (Position p in c.Positions)
             {
                 if (p.IsUnique)
@@ -18,7 +24,7 @@
                                 uniquePositionId++;
                                 <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
                                     <div id="member-id-@p.Members[0].MemberId" class="member" draggable="true" data-memberId="@p.Members[0].MemberId">
-                                        <img class="@p.Members[0].Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
+                                        <img class="@p.Members[0].Rank.PayGrade" src="~/lib/bluedeck/css/@p.Members[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
                                         @p.Members[0].GetTitleName()
                                         <div class="pull-right" style="margin-left:20px; cursor:pointer">
                                             <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@p.Members[0].MemberId"></span>
@@ -27,7 +33,9 @@
                                         <span style="margin: 0px 20px 0px 5px" class="pull-right">@p.Members[0].Race.Abbreviation/@p.Members[0].Gender.Abbreviation</span>
                                         <div class="drag-options" id="options_@p.Members[0].MemberId">
                                             <label class="drag-options-label">
-                                                <a href="/Members/Edit/@p.Members[0].MemberId">Edit Employee Info</a>
+                                                <a href="#" class="drag-options-edit" data-memberId="@p.Members[0].MemberId">Edit Employee Info</a><br />
+                                                <a href="#" class="drag-options-reassign" data-memberId="@p.Members[0].MemberId">Reassign Employee</a><br />
+                                                <a href="#" class="drag-options-changestatus" data-memberId="@p.Members[0].MemberId">Change Duty Status</a><br />
                                             </label>
                                         </div>
                                     </div>
@@ -54,7 +62,7 @@
                                     @{uniquePositionId++;}
                                     <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
                                         <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">
-                                            <img class="@m.Rank.PayGrade" style="height:16px; width:16px; margin-right:5px" />
+                                            <img class="@m.Rank.PayGrade" src="~/lib/bluedeck/css/@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
                                             @m.GetTitleName()
                                             <div class="pull-right" style="margin-left:20px; cursor:pointer">
                                                 <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@m.MemberId"></span>
@@ -63,7 +71,9 @@
                                             <span style="margin: 0px 20px 0px 5px" class="pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
                                             <div class="drag-options" id="options_@m.MemberId">
                                                 <label class="drag-options-label">
-                                                    <a href="/Members/Edit/@m.MemberId">Edit Employee Info</a>
+                                                    <a href="#" class="drag-options-edit" data-memberId="@m.MemberId">Edit Employee Info</a><br />
+                                                    <a href="#" class="drag-options-reassign" data-memberId="@m.MemberId">Reassign Employee</a><br />
+                                                    <a href="#" class="drag-options-changestatus" data-memberId="@m.MemberId">Change Duty Status</a><br />
                                                 </label>
                                             </div>
                                         </div>
@@ -71,6 +81,14 @@
                                 </div>
                             </div>
                         }
+                        <!--Render an empty insertable so that a member can be added to the Non-Unique position-->
+                        <div class="form-group">
+                            <strong>@p.Name</strong>
+                            <div class="members">
+                                @{uniquePositionId++;}
+                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable"></div>
+                            </div>
+                        </div>                        
                     }
                     else
                     {
@@ -84,19 +102,21 @@
                     }
                 }
             }
+
+            <div class="newPositionInsert" data-componentid="@c.ComponentId"></div>
+            <div style="padding: 10px 0 5px 10px">
+                <div style="font-weight:bold" id="addNewPositionButton" data-componentid="@c.ComponentId">
+                    <span class="glyphicon glyphicon-plus"></span> Add New Position to @c.Name
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4">
+         <div class="col-md-6">
             <div class="form-group" id="demographicsgroup_@c.ComponentId">                
                 @c.GetDemographicTableForComponentAndChildren()
             </div>
-
         </div>
     </div>
-    <div style="padding: 10px 0 5px 10px">
-        <a href="" style="font-weight:bold">
-            <span class="glyphicon glyphicon-plus"></span> Add New Position to @c.Name
-        </a>        
-    </div>    
+
 </div>
     
     <br />

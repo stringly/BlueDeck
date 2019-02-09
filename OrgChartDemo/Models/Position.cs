@@ -83,6 +83,6 @@ namespace OrgChartDemo.Models {
         public Position()
         {
             Members = new List<Member>();
-        }
+        }      
     }
 }

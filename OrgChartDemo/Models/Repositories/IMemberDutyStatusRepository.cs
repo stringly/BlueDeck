@@ -17,5 +17,7 @@ namespace OrgChartDemo.Models.Repositories
         /// </remarks>
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem}"/></returns>
         List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems();
+        
+        MemberDutyStatus GetStatusById(int memberDutyStatus);
     }
 }

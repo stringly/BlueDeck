@@ -1,0 +1,86 @@
+﻿@model EditMemberModalViewComponentViewModel
+
+<div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#editMemberModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="editMemberModalLabel">Edit Info for @Model.Member.GetTitleName()</h4>
+
+                </div>
+                <div style="padding: 10px 30px 5px 30px">
+                    <h6 class="text-danger" id="warning">@ViewBag.Message</h6>
+                    <form asp-action="EditMemberModal" id="editMemberModalForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @Html.HiddenFor(model => model.MemberId)
+                        <div class="form-group">
+                            <label asp-for="MemberRank" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberRank,
+                                                            new SelectList(Model.RankList, "MemberRankId", "RankName"),
+                                                            "Choose Rank",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="MemberRank" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MiddleName" class="control-label"></label>
+                            <input asp-for="MiddleName" class="form-control" />
+                            <span asp-validation-for="MiddleName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdNumber" class="control-label"></label>
+                            <input asp-for="IdNumber" class="form-control" />
+                            <span asp-validation-for="IdNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DutyStatusId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.DutyStatusId,
+                                                            new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
+                                                            "Choose Duty Status",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="DutyStatusId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MemberGender" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberGender,
+                                                            new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
+                                                            "Choose Gender",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="MemberGender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MemberRace" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberRace,
+                                                            new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
+                                                            "Choose Race",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="MemberRace" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#editMemberModal">Close</button>
+                    <button type="button" id="editMemberModalSubmit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

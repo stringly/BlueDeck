@@ -23,10 +23,7 @@ namespace OrgChartDemo.Models.ViewModels
                     {
                         parent.Children.Add(c);
                     }
-                }
-                    
-                
-                                
+                }      
             }
         }
 
@@ -56,103 +53,8 @@ namespace OrgChartDemo.Models.ViewModels
             this.Positions = c.Positions;
             this.Children = new List<RosterManagerViewModelComponent>();
         }
-        public HtmlString GetDemographicTableForComponentAndChildren()
-        {
-            List<GenderRankDemoCollectionObject> rankGenders = new List<GenderRankDemoCollectionObject>()
-            {
-                {new GenderRankDemoCollectionObject("P/O")},
-                {new GenderRankDemoCollectionObject("POFC")},
-                {new GenderRankDemoCollectionObject("Cpl.")},
-                {new GenderRankDemoCollectionObject("Sgt.")},
-                {new GenderRankDemoCollectionObject("Lt.")},
-                {new GenderRankDemoCollectionObject("Capt.")},
-                {new GenderRankDemoCollectionObject("Exec")}
-            };
 
-            Dictionary<string, BundledGenderRankDemoCollectionObject> demoEmpty = new Dictionary<string, BundledGenderRankDemoCollectionObject>(){
-                {"B", new BundledGenderRankDemoCollectionObject()},
-                {"W", new BundledGenderRankDemoCollectionObject()},
-                {"A", new BundledGenderRankDemoCollectionObject()},
-                {"I", new BundledGenderRankDemoCollectionObject()},
-                {"U", new BundledGenderRankDemoCollectionObject()},
-                {"H", new BundledGenderRankDemoCollectionObject()}
-            };
-            Dictionary<string, List<GenderRankDemoCollectionObject>> demoTotals = RecurseForChildComponentDemoTotals(this, demoEmpty);
-            
-            return new HtmlString( "<strong>Unit Demographics:</strong><table class='table componentDemoTable' data-componentId='" + this.ComponentId + "'>" +
-                "<tr>" +
-                    "<th>" +
-                    "<th>P/O" +
-                    "<th>POFC" +
-                    "<th>Cpl." +
-                    "<th>Sgt." +
-                    "<th>Lt." +
-                    "<th>Capt" +
-                    "<th>Exec" +
-                "</tr>" +
-                "<tr>" +
-                    "<td>Race</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                    "<td>M/F</td>" +
-                "</tr>" +                    
-                    "<td>Black: </td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["B"].First(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals["B"].First(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
-                "</tr>" +
-                "<tr>" +
-                    "<td>White: </td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["W"].First(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals["W"].First(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
-                "</tr>" +
-                "<tr>" +
-                    "<td>Asian: </td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["A"].First(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals["A"].First(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
-                "</tr>" +
-                "<tr>" +
-                    "<td>Am/Indian: </td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["I"].First(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals["I"].First(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
-                "</tr>" +
-                "<tr>" +
-                    "<td>Hispanic: </td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
-                    "<td>" + demoTotals["H"].First(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals["H"].First(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
-                "</tr>" +
-                "</table>");
-        }
-        
-        private Dictionary<string, BundledGenderRankDemoCollectionObject> RecurseForChildComponentDemoTotals(RosterManagerViewModelComponent c, Dictionary<string, BundledGenderRankDemoCollectionObject> demos)
+        private List<BundledGenderRankDemoCollectionObject> RecurseForChildComponentDemoTotals(RosterManagerViewModelComponent c, List<BundledGenderRankDemoCollectionObject> demos)
         {
             if (c.Children.Count() > 0)
             {
@@ -165,14 +67,124 @@ namespace OrgChartDemo.Models.ViewModels
             {
                 foreach (Member m in p.Members)
                 {
-                    //var race = demos[m.Race.Abbreviation.ToString()];
-                    //GenderRankDemoCollectionObject rank = race.First(x => x.RankName == m.Rank.RankShort);
-                    //rank.GenderCount[m.Gender.GenderFullName]++;
-                    demos[m.Race.Abbreviation.ToString()].Where(x => x.RankName == m.Rank.RankShort).First().addToGenderCount(m.Gender.GenderFullName);
+                    try
+                    {
+                        demos.Single(x => x.RaceAbbreviation == m.Race.Abbreviation.ToString()).RankList.Single(x => x.RankName == m.Rank.RankShort).addToGenderCount(m.Gender.GenderFullName);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Write(e.InnerException);
+                    }
                 }
             }
             return demos;
         }
 
+        public HtmlString GetDemographicTableForComponentAndChildren()
+        {  
+            List<BundledGenderRankDemoCollectionObject> demoEmpty = new List<BundledGenderRankDemoCollectionObject>(){
+                {new BundledGenderRankDemoCollectionObject("B")},
+                {new BundledGenderRankDemoCollectionObject("W")},
+                {new BundledGenderRankDemoCollectionObject("A")},
+                {new BundledGenderRankDemoCollectionObject("I")},
+                {new BundledGenderRankDemoCollectionObject("O")},
+                {new BundledGenderRankDemoCollectionObject("H")}
+            };
+            List<BundledGenderRankDemoCollectionObject> demoTotals = RecurseForChildComponentDemoTotals(this, demoEmpty);
+            DemoTableDataObject obj = new DemoTableDataObject(demoTotals);
+            return new HtmlString( "<table class='componentDemoTable' data-componentId='" + this.ComponentId + "'>" +
+                "<tr class='componentDemoTableHeaderRow' >" +
+                    "<td colspan=9>" + this.Name + " Demographics" + "</td>" +
+                "</tr>" +
+                "<tr class='componentDemoTableSubHeaderRow' >" +
+                    "<th>" +
+                    "<th>P/O" +
+                    "<th>POFC" +
+                    "<th>Cpl." +
+                    "<th>Sgt." +
+                    "<th>Lt." +
+                    "<th>Capt" +
+                    "<th>Exec" +
+                    "<th>Total" +
+                "</tr>" +
+                "<tr class='componentDemoTableSubSubHeaderRow'>" +
+                    "<td></td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                    "<td>M/F</td>" +
+                "</tr>" +                    
+                    "<td class='firstRow'>B </td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "B").RankList.Single(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
+                    "<td style='font-weight:bold'>" + demoTotals.Single(x => x.RaceAbbreviation == "B").TotalGenderCount("Male") + "/"  + demoTotals.Single(x => x.RaceAbbreviation == "B").TotalGenderCount("Female") + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td class='firstRow'>W </td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "W").RankList.Single(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
+                    "<td style='font-weight:bold'>" + demoTotals.Single(x => x.RaceAbbreviation == "W").TotalGenderCount("Male") + "/"  + demoTotals.Single(x => x.RaceAbbreviation == "W").TotalGenderCount("Female") + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td class='firstRow'>A </td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "A").RankList.Single(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
+                    "<td style='font-weight:bold'>" + demoTotals.Single(x => x.RaceAbbreviation == "A").TotalGenderCount("Male") + "/"  + demoTotals.Single(x => x.RaceAbbreviation == "A").TotalGenderCount("Female") + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td class='firstRow'>I </td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "I").RankList.Single(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
+                    "<td style='font-weight:bold'>" + demoTotals.Single(x => x.RaceAbbreviation == "I").TotalGenderCount("Male") + "/"  + demoTotals.Single(x => x.RaceAbbreviation == "I").TotalGenderCount("Female") + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td class='firstRow'>H </td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "P/O").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "P/O").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "POFC").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "POFC").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Cpl.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Sgt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Lt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Lt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Capt.").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Capt.").GenderCount["Female"] + "</td>" +
+                    "<td>" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Exec").GenderCount["Male"] + "/" + demoTotals.Single(x => x.RaceAbbreviation == "H").RankList.Single(x => x.RankName == "Exec").GenderCount["Female"] + "</td>" +
+                    "<td style='font-weight:bold'>" + demoTotals.Single(x => x.RaceAbbreviation == "H").TotalGenderCount("Male") + "/"  + demoTotals.Single(x => x.RaceAbbreviation == "H").TotalGenderCount("Female") + "</td>" +
+                "</tr>" +
+                "<tr>" +
+                    "<td class='firstRow'>Total</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("P/O", "Male") + "/" + obj.GetRankTotalCount("P/O", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("POFC", "Male") + "/" + obj.GetRankTotalCount("POFC", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("Cpl.", "Male") + "/" + obj.GetRankTotalCount("Cpl.", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("Sgt.", "Male") + "/" + obj.GetRankTotalCount("Sgt.", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("Lt.", "Male") + "/" + obj.GetRankTotalCount("Lt.", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("Capt.", "Male") + "/" + obj.GetRankTotalCount("Capt.", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetRankTotalCount("Exec", "Male") + "/" + obj.GetRankTotalCount("Exec", "Female") + "</td>" +
+                    "<td style='font-weight:bold'>" + obj.GetTotalGenderCount("Male") + "/" + obj.GetTotalGenderCount("Female") + "</td>" +
+
+                "</tr>" +
+                "</table>");
+        }
     }
 }

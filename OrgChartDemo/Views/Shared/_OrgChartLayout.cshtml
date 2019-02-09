@@ -7,15 +7,22 @@
     <title>@ViewBag.Title</title>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/getorgchart/js/getorgchart.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
 
 </head>
 <body>
     @await Component.InvokeAsync("NavigationMenu")
-    <div class="col-xs-11">
+    <div class="col-xs-12">
         <h3 class="text-danger">@ViewBag.Message</h3>
         @RenderBody()
     </div>
+    <!-- Modal -->
+    <div id="modalTarget">
+
+    </div>
+
+
 </body>
 </html>

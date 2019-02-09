@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace OrgChartDemo.Persistence.Repositories
@@ -19,8 +19,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository"/> class.
         /// </summary>
         /// <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
-        public MemberRankRepository(ApplicationDbContext context)
-            : base(context)
+        public MemberRankRepository(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -34,10 +33,24 @@ namespace OrgChartDemo.Persistence.Repositories
         /// This method is used to populate Rank select lists.
         /// </remarks>
         public List<MemberRankSelectListItem> GetMemberRankSelectListItems()
-        {            
+        {   
             return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem { MemberRankId = x.RankId, RankName = x.RankFullName });
         }
-    }
 
-   
+        public MemberRank GetRankById(int memberRankId)
+        {
+            return ApplicationDbContext.MemberRanks
+                .Where(x => x.RankId == memberRankId)
+                .FirstOrDefault();
+        }
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
+    }   
 }

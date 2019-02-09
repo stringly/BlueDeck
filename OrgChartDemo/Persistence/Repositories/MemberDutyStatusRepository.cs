@@ -30,5 +30,21 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return GetAll().ToList().ConvertAll(x => new MemberDutyStatusSelectListItem { MemberDutyStatusId = x.DutyStatusId, MemberDutyStatusName = x.DutyStatusName });
         }
+
+        public MemberDutyStatus GetStatusById(int memberDutyStatus)
+        {
+            return ApplicationDbContext.DutyStatus
+                .Where(x => x.DutyStatusId == memberDutyStatus)
+                .FirstOrDefault();
+        }
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
     }
 }

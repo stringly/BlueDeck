@@ -35,5 +35,21 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return GetAll().ToList().ConvertAll(x => new MemberGenderSelectListItem { MemberGenderId = x.GenderId, MemberGenderFullName = x.GenderFullName , Abbreviation = x.Abbreviation });
         }
+
+        public MemberGender GetGenderById(int memberGenderId)
+        {
+            return ApplicationDbContext.MemberGender
+                .Where(x => x.GenderId == memberGenderId)
+                .FirstOrDefault();
+        }
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
     }
 }

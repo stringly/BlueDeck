@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
 
 namespace OrgChartDemo.Models.Repositories
 {
@@ -14,6 +15,8 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns></returns>
         IEnumerable<Position> GetPositionsWithMembers();
 
+        IEnumerable<PositionSelectListItem> GetAllPositionSelectListItems();
+        IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems();
         /// <summary>
         /// Removes the position and reassign members.
         /// </summary>

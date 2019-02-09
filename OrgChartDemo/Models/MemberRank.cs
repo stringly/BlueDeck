@@ -48,5 +48,33 @@ namespace OrgChartDemo.Models.Types
         /// The pay grade for the rank.
         /// </value>
         public string PayGrade { get; set; }
+
+        public string GetRankImageSource()
+        {
+            switch (this.RankId)
+            {
+                case 1:
+                    return "";                    
+                case 2:
+                    return "images/rankicons/L02.png";
+                case 3:
+                    return "images/rankicons/L03.png";
+                case 4:
+                    return "images/rankicons/L04.png";
+                case 5:
+                    return "images/rankicons/L05.png";
+                case 6:
+                    return "images/rankicons/L06.png";
+                case 7:
+                    return "images/rankicons/L07.png";
+                case 8:
+                case 9:
+                case 10:
+                    return "images/rankicons/L08.png";
+                default:
+                    return "";                 
+            }
+
+        }
     }
 }

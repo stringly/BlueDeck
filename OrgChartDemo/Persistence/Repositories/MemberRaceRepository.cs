@@ -36,5 +36,21 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return GetAll().ToList().ConvertAll(x => new MemberRaceSelectListItem { MemberRaceId = x.MemberRaceId, RaceFullName = x.MemberRaceFullName, Abbreviation = x.Abbreviation });
         }
+
+        public MemberRace GetRaceById(int memberRaceId)
+        {
+            return ApplicationDbContext.MemberRace
+                .Where(x => x.MemberRaceId == memberRaceId)
+                .FirstOrDefault();
+        }
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
     }
 }

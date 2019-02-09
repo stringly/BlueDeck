@@ -27,10 +27,12 @@ namespace OrgChartDemo.Models.Types
 
     public class BundledGenderRankDemoCollectionObject
     {
-        List<GenderRankDemoCollectionObject> RankList { get; set; }
+        public string RaceAbbreviation {get;set;}
+        public List<GenderRankDemoCollectionObject> RankList { get; set; }
 
-        public BundledGenderRankDemoCollectionObject()
+        public BundledGenderRankDemoCollectionObject(string race)
         {
+            RaceAbbreviation = race;
             RankList = new List<GenderRankDemoCollectionObject>()
             {
                 {new GenderRankDemoCollectionObject("P/O")},
@@ -41,6 +43,57 @@ namespace OrgChartDemo.Models.Types
                 {new GenderRankDemoCollectionObject("Capt.")},
                 {new GenderRankDemoCollectionObject("Exec")}
             };
+        }
+        public int TotalGenderCount(string gender)
+        {
+            int result = 0;
+            foreach(GenderRankDemoCollectionObject g in RankList)
+            {
+                result = result + g.GenderCount[gender];
+            }
+
+            return result;
+        }
+        public int TotalRankCount(string rank, string gender)
+        {
+            int result = 0;
+            foreach(GenderRankDemoCollectionObject g in RankList)
+            {
+                if (g.RankName == rank)
+                {
+                    result = result + g.GenderCount[gender];
+                }
+            }
+            return result;
+        }
+    }
+    public class DemoTableDataObject
+    {
+        List<BundledGenderRankDemoCollectionObject> Bundles {get;set;}
+
+        public DemoTableDataObject(List<BundledGenderRankDemoCollectionObject> bundles)
+        {
+            Bundles = bundles;
+        }
+        public int GetRankTotalCount(string rank, string gender)
+        {
+            int result = 0;
+            foreach(BundledGenderRankDemoCollectionObject b in Bundles)
+            {
+                result = result + b.TotalRankCount(rank, gender);
+            }
+
+
+            return result;
+        }
+        public int GetTotalGenderCount(string Gender)
+        {
+            int result = 0;
+            foreach(BundledGenderRankDemoCollectionObject b in Bundles)
+            {
+                result = result + b.TotalGenderCount(Gender);
+            }
+            return result;
         }
     }
     

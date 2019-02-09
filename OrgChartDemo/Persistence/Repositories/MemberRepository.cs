@@ -40,8 +40,23 @@ namespace OrgChartDemo.Persistence.Repositories
         public Member GetMemberWithPosition(int memberId)
         {
             return ApplicationDbContext.Members
-                .Include(x => x.Position)
                 .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.Rank)
+                .Include(x => x.DutyStatus)                
+                .FirstOrDefault();
+        }
+
+        public Member GetMemberWithDemographicsAndDutyStatus(int memberId)
+        {
+            return ApplicationDbContext.Members
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.DutyStatus)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.Rank)
                 .FirstOrDefault();
         }
         /// <summary>

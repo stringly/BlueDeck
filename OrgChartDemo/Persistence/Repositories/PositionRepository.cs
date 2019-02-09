@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Persistence.Repositories
 {
@@ -34,6 +35,19 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(c => c.ParentComponent != null)
                 .ToList();
         }
+
+        public IEnumerable<PositionSelectListItem> GetAllPositionSelectListItems(){
+            return GetAll().ToList().ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name});
+        }
+
+        public IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems()
+        {
+            return ApplicationDbContext.Positions
+                        .Include(x => x.Members)
+                        .Where(x => x.IsUnique == false || x.Members.Count() == 0).ToList()
+                        .ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name});
+        }
+       
 
         /// <summary>
         /// Gets the application database context.

@@ -17,5 +17,6 @@ namespace OrgChartDemo.Models.Repositories
         /// </remarks>
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}"/></returns>
         List<MemberRankSelectListItem> GetMemberRankSelectListItems();
+        MemberRank GetRankById(int memberRankId);
     }
 }
