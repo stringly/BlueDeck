@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <strong>@p.Name</strong><small> @(p.IsManager ? "(Component Supervisor)" : "(Unique Position)")</small>
                     <div class="editPositionButton" data-positionid="@p.PositionId">
-                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
                         <span class="tooltiptext">Edit @p.Name</span>
                     </div>
                     <div class="members">
@@ -60,7 +60,7 @@
                     <div class="nonUniquePositionWrapper" data-positionid="@p.PositionId">
                         <strong>@p.Name</strong><small> (Multiple Membership)</small>
                         <div class="editPositionButton" data-positionid="@p.PositionId">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
                             <span class="tooltiptext">Edit @p.Name</span>
                         </div>
                         @if (p.Members.Count() > 0)

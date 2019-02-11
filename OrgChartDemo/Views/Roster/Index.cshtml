@@ -237,6 +237,23 @@
                 $("#changeEmployeeStatusModal").modal("show");
             })
         }
+
+        function handleEditPositionButtonClick(e) {
+            // retrieve the PositionId of the position we want to edit
+            var position = e.target.dataset.positionid;
+            // clear any modals from the container
+            var container = $("#modalTarget").empty();
+            // retrieve the EditPositionModal from the server
+            $.get('Roster/GetAddPositionToComponentViewComponent', { componentId: '0', positionId: position }, function (data) {
+                // inject the viewcomponent HTML into the container
+                container.html(data);
+                // register the modal's submit button handler
+                var submitButton = document.getElementById('addPositionToComponentModalSubmit');
+                submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
+                // show the modal
+                $("#addPositionToComponentModal").modal("show");
+            })
+        }
         function handleReassignEmployeeModalSubmit() {
             var form = $("#reassignEmployeeModalForm");
             if ($("#PositionId").children("option:selected").val() == ""){
@@ -435,6 +452,10 @@
                 var moreOptionsEdit = document.querySelectorAll('.drag-options-edit');
                 [].forEach.call(moreOptionsEdit, function (elem) {
                     elem.addEventListener('click', handleMoreOptionsEditMemberClick, false);
+                })
+                var editPositionButtons = document.querySelectorAll('.editPositionButton');
+                [].forEach.call(editPositionButtons, function (elem) {
+                    elem.addEventListener('click', handleEditPositionButtonClick, false);
                 })
             });
         });        

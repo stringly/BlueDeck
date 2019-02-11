@@ -16,6 +16,7 @@
                     <h6 class="text-danger">@ViewBag.Message</h6>
                     <form asp-action="AddPositionToComponent" id="addPositionToComponentModalForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @Html.HiddenFor(model => model.PositionId)
                         <div class="form-group">
                             <label asp-for="PositionName" class="control-label"></label>
                             <input asp-for="PositionName" class="form-control" />

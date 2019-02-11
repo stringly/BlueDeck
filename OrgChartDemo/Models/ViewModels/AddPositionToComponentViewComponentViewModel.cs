@@ -70,5 +70,16 @@ namespace OrgChartDemo.Models.ViewModels
             ParentComponentId = parent.ComponentId;
             ParentComponent = parent;
         }
+
+        public AddPositionToComponentViewComponentViewModel(Position p)
+        {
+            ParentComponent = p.ParentComponent;
+            ParentComponentId = p.ParentComponent.ComponentId;
+            PositionId = p.PositionId;
+            PositionName = p.Name;
+            JobTitle = p.JobTitle;
+            IsManager = p.IsManager;
+            IsUnique = p.IsUnique;
+        }
     }
 }

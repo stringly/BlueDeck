@@ -311,7 +311,7 @@
             </summary>
             <param name="form">A POSTed <see cref="T:OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel"></see></param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.RosterController.GetAddPositionToComponentViewComponent(System.Int32)">
+        <member name="M:OrgChartDemo.Controllers.RosterController.GetAddPositionToComponentViewComponent(System.Int32,System.Nullable{System.Int32})">
             <summary>
             Gets the AddPositionToComponentViewComponent.
             </summary>

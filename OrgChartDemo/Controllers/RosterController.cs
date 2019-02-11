@@ -144,11 +144,21 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="componentId">The ComponentId of the Component to which a Position is being added</param>
         /// <returns>A <see cref="T:OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent"/></returns>
-        public IActionResult GetAddPositionToComponentViewComponent(int componentId)
+        public IActionResult GetAddPositionToComponentViewComponent(int componentId, int? positionId = null)
         { 
-            Component parent = unitOfWork.Components.Get(componentId);
-            AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(parent);
-            return ViewComponent("AddPositionToComponent", new { vm = viewModel });
+            if (positionId != null)
+            {
+                Position position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(positionId));
+                AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position);
+                return ViewComponent("AddPositionToComponent", new {vm = viewModel });
+            }
+            else
+            {
+                Component parent = unitOfWork.Components.Get(componentId);
+                AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(parent);
+                return ViewComponent("AddPositionToComponent", new { vm = viewModel });
+            }
+            
         }
 
         /// <summary>
@@ -157,7 +167,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="form">The POSTed <see cref="T:OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddPositionToComponent([Bind("ParentComponentId,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
+        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
         {
             // populate the Form object's ParentComponent property with it's ParentComponent
             form.ParentComponent = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(form.ParentComponentId));
@@ -195,14 +205,27 @@ namespace OrgChartDemo.Controllers
                 if (errors == 0)
                 {
                     // add the position via unitOfWork
-                    Position newPosition = new Position(){
-                        ParentComponent = form.ParentComponent,
-                        Name = form.PositionName,
-                        JobTitle = form.JobTitle,
-                        IsManager = form.IsManager,
-                        IsUnique = form.IsUnique
-                    };
-                    unitOfWork.Positions.Add(newPosition);
+                    if (form.PositionId == null)
+                    {
+                        Position newPosition = new Position(){
+                            ParentComponent = form.ParentComponent,
+                            Name = form.PositionName,
+                            JobTitle = form.JobTitle,
+                            IsManager = form.IsManager,
+                            IsUnique = form.IsUnique
+                        };
+                        unitOfWork.Positions.Add(newPosition);
+                    }
+                    else
+                    {
+                        Position positionToUpdate = unitOfWork.Positions.Get(Convert.ToInt32(form.PositionId));
+                        positionToUpdate.ParentComponent = form.ParentComponent;
+                        positionToUpdate.Name = form.PositionName;
+                        positionToUpdate.JobTitle = form.JobTitle;
+                        positionToUpdate.IsManager = form.IsManager;
+                        positionToUpdate.IsUnique = form.IsUnique;
+                    }
+                    
                     unitOfWork.Complete();
                     // return a JSON object to the Ajax POST so that it can hide the Modal
                     return Json(new { Status = "Success" });
