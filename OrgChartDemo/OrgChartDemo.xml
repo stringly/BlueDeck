@@ -1247,6 +1247,13 @@
             <param name="id">The Component identifier.</param>
             <returns>A <see cref="T:OrgChartDemo.Models.Component"/></returns>
         </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetComponentWithPositions(System.Int32)">
+            <summary>
+            Gets the Component with it's Positions.
+            </summary>
+            <param name="id">The ComponentId of the requested Component.</param>
+            <returns></returns>
+        </member>
         <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetComponentsWithChildren">
             <summary>
             Gets the list components with all member children.
@@ -1905,6 +1912,13 @@
             <returns>
             A <see cref="T:OrgChartDemo.Models.Component" />
             </returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetComponentWithPositions(System.Int32)">
+            <summary>
+            Gets the Component with it's Positions.
+            </summary>
+            <param name="id">The ComponentId of the requested Component.</param>
+            <returns></returns>
         </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers">
             <summary>

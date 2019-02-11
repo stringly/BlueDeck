@@ -17,6 +17,7 @@ body {
     color: #0000EE;
     cursor: pointer;
 }
+
 .modal-header {
     background-color: #3b5998;
     color: azure;
@@ -29,7 +30,7 @@ body {
     background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
 }
     .componentContainer .componentHeaderDiv {
-        height: 64px;
+        height: 60px;
         background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.2));
         margin-bottom: 15px;
     }
@@ -39,7 +40,7 @@ body {
         margin-left: 3px;
     }
     .componentContainer .logoDiv img {
-        height: 60px;
+        height: 55px;
         width: 40px;
     }
 
@@ -51,7 +52,20 @@ body {
         /*background-color: #3b5998;*/
         /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
     }
+    .componentContainer .nonUniquePositionWrapper {
+        margin: 10px 18px 10px 18px;
+        border: 1px solid black;
+    }
 
+    .componentContainer .nonUniquePositionWrapper strong {
+        margin: 2px;
+    }
+    .componentContainer .nonUniquePositionWrapper .form-group {
+        margin: 2px;
+    }
+    .componentContainer .nonUniquePositionWrapper .glyphicon {
+        margin-left: 2px;
+    }
     .componentContainer .member {
         float: right;
         margin-left: 5px;
@@ -71,7 +85,7 @@ body {
     .componentContainer .insertable {
         height: 36px;
         vertical-align: middle;
-        border: inset 2px;
+        border: 1px solid black;
         padding: 2px;
         background-color: white;
     }
@@ -80,7 +94,7 @@ body {
         margin: 5px 0px 5px 10px;
     }
     .componentContainer .form-group {        
-        margin: 0px 20px 0px 20px;
+        margin: 10px 20px 10px 20px;
     }
     
     
@@ -266,4 +280,55 @@ body {
     .dragGhost-member .L10 {
         content: url("images/rankicons/L08.png");
     }
-}
+    .editPositionButton {
+        position: relative;
+        display: inline-block;    
+        color: black;
+        cursor: pointer;
+    }
+
+    .editPositionButton .tooltiptext {
+        visibility: hidden;
+        width: 120px;        
+        color: black;
+        background-color: #f3f3d5;
+        text-align: center;
+        padding: 2px;
+        /* Position the tooltip */
+        position: absolute;
+        border: 1px solid #bfbfbf;
+        border-radius: 4px;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    .editPositionButton:hover .tooltiptext {
+        visibility: visible;
+    }
+    .moreOptionsButtonGroup {
+        position: relative;
+        display: inline-block;
+        color: white;
+        cursor: pointer;
+    }
+    .moreOptionsButtonGroup .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        color: black;
+        background-color: #f3f3d5;
+        text-align: center;
+        padding: 2px;
+        /* Position the tooltip */
+        position: absolute;
+        border: 1px solid #bfbfbf;
+        border-radius: 4px;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+    .moreOptionsButtonGroup:hover .tooltiptext {
+        visibility: visible;
+    }

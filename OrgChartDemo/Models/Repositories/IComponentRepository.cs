@@ -46,6 +46,12 @@ namespace OrgChartDemo.Models.Repositories
         Component GetComponentWithChildren(int id);
 
         /// <summary>
+        /// Gets the Component with it's Positions.
+        /// </summary>
+        /// <param name="id">The ComponentId of the requested Component.</param>
+        /// <returns></returns>
+        Component GetComponentWithPositions(int id);
+        /// <summary>
         /// Gets the list components with all member children.
         /// </summary>
         /// <returns>A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}"/></returns>

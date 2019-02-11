@@ -77,6 +77,8 @@
                 addMoreOptionsReassignEmployeeHandler(moreOptionsReassignEmployee);
                 var moreOptionsEditMember = dropElem.querySelectorAll('.drag-options-edit')[0];
                 addMoreOptionsEditMemberHandler(moreOptionsEditMember);
+                var moreOptionsChangeDutyStatus = dropElem.querySelectorAll('.drag-options-changestatus')[0];
+                addMoreOptionsChangeDutyStatusHandler(moreOptionsChangeDutyStatus);
                 // find: MemberID of dragged member, PositionID of new position.
                 var newPositionId = e.target.dataset.positionid;
                 var memberId = dragSrcEl.dataset.memberid;
@@ -135,6 +137,9 @@
         }
         function addMoreOptionsReassignEmployeeHandler(elem) {
             elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
+        }
+        function addMoreOptionsChangeDutyStatusHandler(elem) {
+            elem.addEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
         }
         function addMoreOptionsEditMemberHandler(elem) {
             elem.addEventListener('click', handleMoreOptionsEditMemberClick, false);
@@ -216,7 +221,22 @@
                 $("#editMemberModal").modal("show");
             })
         }
-
+        function handleMoreOptionsChangeDutyStatusClick(e) {
+            // retrive the MemberId of the member we want to edit
+            var member = e.target.dataset.memberid;
+            // clear any existing modals from the container
+            var container = $("#modalTarget").empty();
+            // retrieve the ChangeDutyStatus modal from the server
+            $.get('Roster/GetChangeEmployeeStatusModalViewComponent', { memberId: member }, function (data) {
+                // inject the ViewComponent HTML into the container
+                container.html(data);
+                // register the Modal's control's event handlers
+                var submitButton = document.getElementById('changeEmployeeStatusModalSubmit');
+                submitButton.addEventListener('click', handleChangeDutyStatusSubmitButtonClick, false);
+                // show the modal
+                $("#changeEmployeeStatusModal").modal("show");
+            })
+        }
         function handleReassignEmployeeModalSubmit() {
             var form = $("#reassignEmployeeModalForm");
             if ($("#PositionId").children("option:selected").val() == ""){
@@ -322,7 +342,49 @@
                     }
                 },
             });
-        }        
+        }
+
+        function handleChangeDutyStatusSubmitButtonClick() {
+            var form = $("#changeEmployeeStatusModalForm");
+            if ($("#DutyStatus").children("option:selected").val() == "") {
+                $("#warning").text("Please select a Duty Status.")
+                return;
+            }
+            else if ($("#DutyStatus").children("option:selected").val() == $("#Member_DutyStatus_DutyStatusId").val()) {
+                $("warning").text("The employee is already in the selected status");
+                return;
+            }
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                dataType: 'html',
+                data: form.serialize(),
+                success: function (response) {
+                    var responseObj = JSON.parse(response);
+                    if (responseObj["status"] === "Success") {
+                        // TODO: return new Member info
+                        $("#changeEmployeeStatusModal").modal("hide");
+                        $("#getComponentButton").trigger('click');
+                    }
+                    else {
+                        // hide the original modal
+                        $("#changeEmployeeStatusModal").modal("hide");
+                        // manually remove the modal backdrop... i don't know why it isn't removed via .modal("hide")
+                        var backdrop = document.getElementsByClassName("modal-backdrop fade in");
+                        [].forEach.call(backdrop, function (elem) {
+                            elem.parentNode.removeChild(elem);
+                        })
+                        // re-inject the new Modal content
+                        $("#modalTarget").html(response);
+                        // register the new Modal submit button handler
+                        var submitButton = document.getElementById("editMemberModalSubmit");
+                        submitButton.addEventListener('click', handleChangeDutyStatusSubmitButtonClick, false);
+                        // show the Modal
+                        $("#changeEmployeeStatusModal").modal("show");
+                    }
+                }
+            })
+        }
 
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
@@ -361,6 +423,10 @@
                 var moreOptionsReassign = document.querySelectorAll('.drag-options-reassign');
                 [].forEach.call(moreOptionsReassign, function (elem) {
                     elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
+                })
+                var moreOptionsChangeStatus = document.querySelectorAll('.drag-options-changestatus');
+                [].forEach.call(moreOptionsChangeStatus, function (elem) {
+                    elem.addEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
                 })
                 var addNewPositionButtons = document.querySelectorAll('#addNewPositionButton');
                 [].forEach.call(addNewPositionButtons, function (elem) {

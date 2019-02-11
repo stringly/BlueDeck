@@ -220,7 +220,7 @@ namespace OrgChartDemo.Controllers
             
         }
 
-        // EditEmployeeModalViewModel
+        // EditEmployeeModalViewModalViewComponent
         public IActionResult GetEditEmployeeModalViewComponent(int memberId)
         {
             Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(memberId);            
@@ -232,6 +232,7 @@ namespace OrgChartDemo.Controllers
                 
         }
 
+        [HttpPost]
         public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,DutyStatusId,Email")] EditMemberModalViewComponentViewModel form)
         {
             Member m = unitOfWork.Members.Get(Convert.ToInt32(form.MemberId));
@@ -259,5 +260,57 @@ namespace OrgChartDemo.Controllers
             }
         }
 
+        // ChangeEmployeeDutyStatusModalViewComponent
+
+        public IActionResult GetChangeEmployeeStatusModalViewComponent(int memberId)
+        {
+            Member m = unitOfWork.Members.GetMemberWithPosition(memberId);
+            if (m != null)
+            {
+                List<MemberDutyStatusSelectListItem> statusList = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                ChangeEmployeeStatusModalViewComponentViewModel vm = new ChangeEmployeeStatusModalViewComponentViewModel(m, statusList);
+                return ViewComponent("ChangeEmployeeStatusModal", vm);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult ChangeEmployeeStatus([Bind("MemberId,DutyStatus,ParentComponentId")] ChangeEmployeeStatusModalViewComponentViewModel form)
+        {
+            // validate the ModelState
+            if (ModelState.IsValid)
+            {
+                // retrieve the member from the Repo
+                Member m = unitOfWork.Members.GetMemberWithPosition(Convert.ToInt32(form.MemberId));
+                // retrieve the DutyStatus
+                MemberDutyStatus status = unitOfWork.MemberDutyStatus.Get(Convert.ToInt32(form.DutyStatus));
+                // check if Member needs to be reassigned to the "Exception to Duty" Position in his ParentComponent
+                if (status.DutyStatusName != "Full Duty")
+                {
+                    Position p = unitOfWork.Components.GetComponentWithPositions(Convert.ToInt32(form.ParentComponentId)).Positions.Where(x => x.Name == "Exception To Duty").FirstOrDefault();
+                    if (p != null)
+                    {                        
+                        m.Position = p; 
+                    }
+                }
+                // set the Member status to the new Status
+                m.DutyStatus = status;
+                // save changes to the repo
+                unitOfWork.Complete();
+                // return success object so Client can refresh the RosterManager
+                return Json(new { Status = "Success" });
+            }
+            else
+            {
+                // Invalid ModelState, re-populate VM lists and return the ViewComponent
+                form.StatusList = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                form.Member = unitOfWork.Members.Get(Convert.ToInt32(form.MemberId));
+                return ViewComponent("ChangeEmployeeStatus", form);
+            }
+            
+        }
     }
 }

@@ -42,6 +42,7 @@ namespace OrgChartDemo.Persistence.Repositories
             return ApplicationDbContext.Members
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
                 .Include(x => x.Rank)

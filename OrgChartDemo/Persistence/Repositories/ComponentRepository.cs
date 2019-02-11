@@ -59,6 +59,19 @@ namespace OrgChartDemo.Persistence.Repositories
         }
 
         /// <summary>
+        /// Gets the Component with it's Positions.
+        /// </summary>
+        /// <param name="id">The ComponentId of the requested Component.</param>
+        /// <returns></returns>
+        public Component GetComponentWithPositions(int id)
+        {
+            return ApplicationDbContext.Components
+                .Where(x => x.ComponentId == id)
+                .Include(x => x.Positions)
+                .FirstOrDefault();
+        }
+
+        /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
         /// </summary>
         /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
