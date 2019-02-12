@@ -62,10 +62,53 @@
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
-            // Don't do anything if dropping the same column we're dragging.
-            if (dragSrcEl != this && e.target.childElementCount == 0) {
+            // Don't do anything if dropping the same element we're dragging.
+            if (dragSrcEl != this) {
+                // ensure the target is droppable by checking for the ".insertable" class
+                var droppable = false;
+                for (var i = 0; i < this.classList.length; i++) {
+                    if (this.classList[i] == "insertable") {
+                        droppable = true;
+                    }
+                }
+                // exit the function if target is not an ".insertable" class
+                if (!droppable) { return; }
+                //  ensure that the droppable target has no class="member" elements
+                var dropTargetChildren = this.childNodes
+                for (var i = 0; i < dropTargetChildren.length; i++) {
+                    if (dropTargetChildren[i].className == "member") {
+                        // target element already has a member
+                        return;
+                    }
+                }
+                // all current children of target insertable
+                while (this.hasChildNodes()) {
+                    this.removeChild(this.lastChild);
+                }
+                // Now, we are ready to drop
+
+                // We need the original position's id to set the data-positionid attribute on the
+                // class=".insertableInner" element we will add into the emptied position
+                var originalPositionId = dragSrcEl.parentElement.dataset.positionid;
+                // insert a "insertableInner" element into the vacated position
+                // setting the parentNode's innerHTML in this manner also clears the dragSrcEl from the parent
+                var oldParentNode = dragSrcEl.parentNode;
+                while (oldParentNode.hasChildNodes()) {
+                    oldParentNode.removeChild(oldParentNode.lastChild);
+                }
+                var newDiv = document.createElement("div");
+                    newDiv.dataset.positionid = originalPositionId;
+                    newDiv.classList.add("insertableInner");
+                    newDiv.textContent = "Drag & Drop or ";
+                var newSpan = document.createElement("span");
+                    newSpan.classList.add("insertableInnerSelectMember");
+                    newSpan.dataset.positionid = originalPositionId;
+                    newSpan.addEventListener('click', HandleAssignMemberClick, false);
+                    newSpan.textContent = "click to select member.";
+                    newDiv.appendChild(newSpan);
+                oldParentNode.appendChild(newDiv);
+                
                 // Set the source column's HTML to the HTML of the column we dropped on.
-                dragSrcEl.parentNode.removeChild(dragSrcEl);
                 var dropHTML = e.dataTransfer.getData('text');
                 this.insertAdjacentHTML('beforeend', dropHTML);
 
@@ -80,7 +123,7 @@
                 var moreOptionsChangeDutyStatus = dropElem.querySelectorAll('.drag-options-changestatus')[0];
                 addMoreOptionsChangeDutyStatusHandler(moreOptionsChangeDutyStatus);
                 // find: MemberID of dragged member, PositionID of new position.
-                var newPositionId = e.target.dataset.positionid;
+                var newPositionId = this.dataset.positionid;
                 var memberId = dragSrcEl.dataset.memberid;
                 reassignMember(memberId, newPositionId);
             }
@@ -164,12 +207,12 @@
                         $(key).html(obj);
                     }
                 }
-                // check if we need to refresh the entire RosterManager 
+                // check if we need to refresh the entire RosterManager
                 else if (data.status == "RefreshRosterManager") {
                     // if so, manually trigger the click event for the getComponentButton
                     console.log("Refreshing RosterManager");
                     $("#getComponentButton").trigger('click');
-                }                
+                }
             });
         }
         function handleMoreOptionsReassignEmployeeClick(e) {
@@ -185,12 +228,12 @@
                 var submitButton = document.getElementById("reassignEmployeeModalSubmit");
                 submitButton.addEventListener('click', handleReassignEmployeeModalSubmit, false);
                 $("#reassignEmployeeModal").modal("show");
-            })            
+            })
         }
 
         function handleAddNewPositionButtonClick(e) {
             // retrieve the Component to which we want to add a position
-            var componentId = e.target.dataset.componentid;           
+            var componentId = e.target.dataset.componentid;
             // clear any extant modal from the modal container
             var container =$("#modalTarget").empty();
             // retrieve the AddPositionModal from the server
@@ -254,6 +297,11 @@
                 $("#addPositionToComponentModal").modal("show");
             })
         }
+        
+        function HandleAssignMemberClick(e) {
+            var positionId = e.target.dataset.positionid;
+            alert("Assign member to position # " + positionId);
+        }
         function handleReassignEmployeeModalSubmit() {
             var form = $("#reassignEmployeeModalForm");
             if ($("#PositionId").children("option:selected").val() == ""){
@@ -274,7 +322,7 @@
 
         function handleAddPositionToComponentModalSubmit() {
             var form = $("#addPositionToComponentModalForm");
-            
+
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
@@ -301,8 +349,8 @@
                         var submitButton = document.getElementById("addPositionToComponentModalSubmit");
                         submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
                         $("#addPositionToComponentModal").modal("show");
-                    }                    
-                },                
+                    }
+                },
             });
         }
 
@@ -334,7 +382,7 @@
                     // this is passed from a method with an IActionResult return type, which means
                     // it needs to be parsed before the properties are accessible
                     var responseObj = JSON.parse(response);
-                    if (responseObj["status"] === "Success") {                    
+                    if (responseObj["status"] === "Success") {
                         // TODO: return new Member info
                         $("#editMemberModal").modal("hide");
                         $("#getComponentButton").trigger('click');
@@ -423,7 +471,7 @@
                 });
                 var moreOptionButtons = document.querySelectorAll('.moreOptions');
                 [].forEach.call(moreOptionButtons, function (elem) {
-                    elem.addEventListener('click', showMoreOptions, false);                    
+                    elem.addEventListener('click', showMoreOptions, false);
                 });
                 var moreOptionDivs = document.querySelectorAll('.drag-options');
                 [].forEach.call(moreOptionDivs, function (elem) {
@@ -457,7 +505,11 @@
                 [].forEach.call(editPositionButtons, function (elem) {
                     elem.addEventListener('click', handleEditPositionButtonClick, false);
                 })
+                var insertableInnerAssignMemberSpans = document.querySelectorAll('.insertableInnerSelectMember');
+                [].forEach.call(insertableInnerAssignMemberSpans, function (elem) {
+                    elem.addEventListener('click', HandleAssignMemberClick, false);
+                });
             });
-        });        
+        });
     });
 </script>

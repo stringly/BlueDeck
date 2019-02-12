@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
                     </button>
-                    <h4 class="modal-title" id="addPositionToComponentModalLabel">Add a Position to  @Model.ParentComponent.Name</h4>
+                    <h4 class="modal-title" id="addPositionToComponentModalLabel">@(Model.PositionId != null ? "Edit " + Model.PositionName : "Add Position to " + @Model.ParentComponent.Name)  </h4>
 
                 </div>
                 <div style="padding: 10px 30px 5px 30px">
