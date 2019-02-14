@@ -56,8 +56,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="selectedComponentId">The selected component identifier.</param>
         /// <returns></returns>
         public JsonResult ReassignMember(int memberId, int positionId, int selectedComponentId)
-        { 
-                   
+        {                   
             // ensure member/position isn't 0
             if (memberId != 0 && positionId != 0)
             {
@@ -80,12 +79,17 @@ namespace OrgChartDemo.Controllers
                 // here we check for that condition AND if the new position is Unique... if these conditions are met, we only want to return the 
                 // updated demotables to the client. If the
                 if (newPosition.ParentComponent.ComponentId != oldPosition.ParentComponent.ComponentId && newPosition.IsUnique == true)
-                {   
-                    Dictionary<string, string> demoTableDictionary = new Dictionary<string, string>();     
+                {
+                    /*Dictionary<string, string> demoTableDictionary = new Dictionary<string, string>();     
                     List<Component> componentList = unitOfWork.Components.GetComponentAndChildren(selectedComponentId, new List<Component>());
                     RosterManagerViewComponentViewModel vm = new RosterManagerViewComponentViewModel(componentList);
                     demoTableDictionary = vm.GetDemoTableDictionaryForAllComponents();
-                    return Json(new { Status = "Success", DemoDictionary = demoTableDictionary});
+                    return Json(new { Status = "Success", DemoDictionary = demoTableDictionary});*/
+
+                    // when I implemented the "AssignMember" modal, if a member from outside the RosterManager's component scope is assigned to a "unique" position, the 
+                    // RosterManager would'nt refresh... only the demotable, so the result would be that a new "member" draggable wouldn't be rendered.
+                    // Considering that the above is doing 90% of all of the work of refreshing the RosterManager anyways, I figure fuck it, refresh the whole damn thing.
+                    return Json(new { Status = "RefreshRosterManager" });
                 }
                 // if thhe above condition isn't true, then we need to check if we have added the member to a "non-unique" position and re-render 
                 // the RosterManager ViewComponent so that an empty "insertable" can be appended to the component. 
@@ -99,7 +103,20 @@ namespace OrgChartDemo.Controllers
             // with the same ParentComponent as his original Position
             return Json(new {});
         }
+
+        public JsonResult SwapMemberPositions(int dragMemberId, int dropMemberId)
+        {
+            Member dragMember = unitOfWork.Members.GetMemberWithPosition(dragMemberId);
+            Member dropMember = unitOfWork.Members.GetMemberWithPosition(dropMemberId);
+            Position dragPosition = dragMember.Position;
+            Position dropPosition = dropMember.Position;
+            dragMember.Position = dropPosition;
+            dropMember.Position = dragPosition;
+            unitOfWork.Complete();
         
+            return Json(new { Status = "Success" });
+        }
+
         // RosterManagerViewComponent
         /// <summary>
         /// Gets the RosterManager ViewComponent.
@@ -138,7 +155,10 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.Complete();                        
         }
 
-        // AddPositionToComponentModalViewComponent
+        /* 
+         * AddPositionToComponentModalViewComponent
+         * This modal handles Adding, Editing, and Deleting a Position via the RosterManager UI
+        */
         /// <summary>
         /// Gets the AddPositionToComponentViewComponent.
         /// </summary>
@@ -243,6 +263,13 @@ namespace OrgChartDemo.Controllers
             
         }
 
+        [HttpPost]
+        public IActionResult DeletePosition(int PositionId)
+        {
+            unitOfWork.Positions.RemovePositionAndReassignMembers(PositionId);
+            unitOfWork.Complete();
+            return Json(new { Status = "Success" });
+        }
         // EditEmployeeModalViewModalViewComponent
         public IActionResult GetEditEmployeeModalViewComponent(int memberId)
         {
@@ -255,6 +282,7 @@ namespace OrgChartDemo.Controllers
                 
         }
 
+        
         [HttpPost]
         public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,DutyStatusId,Email")] EditMemberModalViewComponentViewModel form)
         {
@@ -334,6 +362,16 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("ChangeEmployeeStatus", form);
             }
             
+        }
+
+        // AssignMemberModalViewComponent
+        [HttpGet]
+        public IActionResult GetAssignMemberModalViewComponent(int positionId, int selectedComponentId)
+        {
+            Position p = unitOfWork.Positions.Get(positionId);
+            List<MemberSelectListItem> members = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+            AssignMemberModalViewComponentViewModel vm = new AssignMemberModalViewComponentViewModel(p, members, selectedComponentId);
+            return ViewComponent("AssignMemberModal", vm);
         }
     }
 }

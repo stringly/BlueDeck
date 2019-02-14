@@ -1040,6 +1040,24 @@
             The name of the rank.
             </value>
         </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberSelectListItem">
+            <summary>
+            A Type that includes the MemberDisplayName and MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> Entity.
+            <remarks>
+            This type is used to populate a Position select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberName">
+            <summary>
+            Gets or sets the Member Name
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberId">
+            <summary>
+            Gets or sets the Member Id
+            </summary>
+        </member>
         <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.PositionId">
             <summary>
             Gets or sets the position identifier.
@@ -1462,6 +1480,55 @@
             </summary>
             <value>
               <c>true</c> if this instance is unique; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.MemberId">
+            <summary>
+            Gets or sets the member identifier.
+            </summary>
+            <remarks>
+            This is used to store the selection from the ViewComponent's Select list
+            and POST to the handler. It will be null until a selection is made.
+            </remarks>
+            <value>
+            The member identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.PositionId">
+            <summary>
+            Gets or sets the position identifier.
+            </summary>
+            <remarks>
+            This is the PositionId of the Position wherein the user clicked the "assign a member" on the RosterManager
+            It will be populated via the viewmodel's constructor when the RosterController invokes the ViewComponent
+            </remarks>
+            <value>
+            The position identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.SelectedComponentId">
+            <summary>
+            Gets or sets the selected component identifier.
+            </summary>
+            <remarks>
+            This will be set in the Ajax POST for the AssignMember modal. It is used to store the current value of the 
+            Component selection box on Roster/Index. We need this in case the Member assignment requires a full refresh 
+            of the RosterManager ViewComponent as determined in RosterController/ReassignMember
+            </remarks>
+            <value>
+            The selected component identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.Members">
+            <summary>
+            Gets or sets the List of Members.
+            </summary>
+            <remarks>
+            This list is used to populate a Select List from which a user can select a Member to assign.
+            See <see cref="T:OrgChartDemo.Models.Types.MemberSelectListItem"/>
+            </remarks>
+            <value>
+            The members.
             </value>
         </member>
         <member name="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel">
@@ -2086,7 +2153,7 @@
             </summary>
             <value>
             The application database context.
-            </value>
+            </value>        
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.PositionRepository">
             <summary>

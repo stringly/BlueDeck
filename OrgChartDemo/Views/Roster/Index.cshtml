@@ -66,22 +66,40 @@
             if (dragSrcEl != this) {
                 // ensure the target is droppable by checking for the ".insertable" class
                 var droppable = false;
+                var swappable = false;
                 for (var i = 0; i < this.classList.length; i++) {
                     if (this.classList[i] == "insertable") {
+                        // i need to address the drop targeting... it appears possible that 
+                        // the "drop" event can fire on an insertable even if the insertable has a member, so
+                        // i need to make sure that the insertable doesn't have members... if it does, i need to swap, not drop
+                        for (var i = 0; i < this.childNodes.length; i++) {
+                            if (this.childNodes[i].classList) {
+                                if (this.childNodes[i].classList.contains("member")) {
+                                    swappable = true;
+                                }
+                            }                            
+                        }
                         droppable = true;
+                    }
+                    else if (this.classList[i] == "member") {
+                        swappable = true;
                     }
                 }
                 // exit the function if target is not an ".insertable" class
-                if (!droppable) { return; }
-                //  ensure that the droppable target has no class="member" elements
-                var dropTargetChildren = this.childNodes
-                for (var i = 0; i < dropTargetChildren.length; i++) {
-                    if (dropTargetChildren[i].className == "member") {
-                        // target element already has a member
-                        return;
-                    }
+                if (!droppable && !swappable) { return; }
+                //  check whether we are dropping or swapping
+                if (swappable) {
+                    // target element IS a member - we need to swap
+                    // swapping invokes a Roster refresh, so we return after this                        
+                    var dragMemberId = dragSrcEl.dataset.memberid;                            
+                    var dropMemberId = this.dataset.memberid;
+                    DragAndSwap(dragMemberId, dropMemberId);
+                    return;                   
                 }
-                // all current children of target insertable
+                
+                // We wont get here unless we are dropping instead of swapping
+
+                // Remove all current children of target insertable
                 while (this.hasChildNodes()) {
                     this.removeChild(this.lastChild);
                 }
@@ -195,6 +213,14 @@
         function handleMouseOut(elem) {
             this.classList.remove("active");
         }
+        function DragAndSwap(dragMId, dropMId) {
+            $.get("Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
+                
+                if (data.status == "Success") {
+                    $("#getComponentButton").trigger('click');
+                }
+            })
+        }
         function reassignMember(memberId, newPositionId) {
             $.get("/Roster/ReassignMember", { memberId : memberId, positionId : newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
                 // check if a DemoRefresh has been returned
@@ -242,10 +268,15 @@
                 container.html(data);
                 // register the Modal's event handlers
                 var submitButton = document.getElementById("addPositionToComponentModalSubmit");
-                submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
+                submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);               
+
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
+        }
+
+        function handleShowDeletePositionConfirm() {
+            $("#deletePositionSubModal").modal("show");
         }
 
         function handleMoreOptionsEditMemberClick(e) {
@@ -293,19 +324,49 @@
                 // register the modal's submit button handler
                 var submitButton = document.getElementById('addPositionToComponentModalSubmit');
                 submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
+                var showDeleteButton = document.getElementById("deletePositionModalButton");
+                showDeleteButton.addEventListener('click', handleShowDeletePositionConfirm, false);
+                var deletePositionConfirmButton = document.getElementById("deletePositionConfirm");
+                deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
         }
         
         function HandleAssignMemberClick(e) {
-            var positionId = e.target.dataset.positionid;
-            alert("Assign member to position # " + positionId);
+            // retrieve the PositionId of the Position to which we want to assign a member
+            var position = e.target.dataset.positionid;
+            // retrieve the current Selected Component
+            var selectedComponent = $("#Component").children("option:selected").val();
+            // clear any existing modals from the container
+            var container = $("#modalTarget").empty();
+            // retrieve the AssignMemberModal from the server
+            $.get('Roster/GetAssignMemberModalViewComponent', { positionId: position, selectedComponentId: selectedComponent }, function (data) {
+                // inject the viewcomponent HTML into the container
+                container.html(data);
+                // register the modal's submit button handler
+                var submitButton = document.getElementById('assignMemberModalSubmit');
+                submitButton.addEventListener('click', handleAssignMemberModalSubmit, false);
+                // show the modal
+                $("#assignMemberModal").modal("show");
+            })
         }
+
+        function handleAssignMemberModalSubmit() {
+            var member = $("#assignMemberModal").find("[name=MemberId]").val();
+            var position = $("#assignMemberModal").find("[name=PositionId]").val();
+            if ($("MemberId").children("option:selected").val() == "") {
+                $("#warning").text("Please select a Member to assign.");
+                return;
+            }
+            $("#assignMemberModal").modal("hide");
+            reassignMember(member, position);
+        }
+
         function handleReassignEmployeeModalSubmit() {
             var form = $("#reassignEmployeeModalForm");
             if ($("#PositionId").children("option:selected").val() == ""){
-                $("#warning").text("Please select a Position")
+                $("#warning").text("Please select a Position.")
                 return;
             }
             $.ajax({
@@ -407,6 +468,20 @@
                     }
                 },
             });
+        }
+        function handleDeletePosition() {
+            var form = $("#deletePositionSubModalForm");
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                dataType: 'html',
+                data: form.serialize(),
+                success: function () {
+                    $("#deletePositionSubModal").modal("hide");
+                    $("#addPositionToComponentModal").modal("hide");
+                    $("#getComponentButton").trigger('click');
+                }
+            })
         }
 
         function handleChangeDutyStatusSubmitButtonClick() {

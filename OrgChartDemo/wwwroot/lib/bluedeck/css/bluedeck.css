@@ -88,7 +88,7 @@ body {
         padding: 10px;
     }
     .componentContainer .insertable {
-        height: 36px;
+        height: 33px;
         vertical-align: middle;
         border: 1px solid black;
         padding: 2px;
@@ -97,7 +97,7 @@ body {
     .componentContainer .insertable .insertableInner {
         font-size: 10px;
         color:darkgray;
-        line-height: 32px;
+        line-height: 29px;
         text-align: center;
     }
     .componentContainer .insertable .insertableInner .insertableInnerSelectMember {

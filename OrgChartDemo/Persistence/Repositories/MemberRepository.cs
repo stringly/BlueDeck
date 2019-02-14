@@ -60,12 +60,20 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Rank)
                 .FirstOrDefault();
         }
+
+        public IEnumerable<MemberSelectListItem> GetAllMemberSelectListItems()
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.Rank)
+                .ToList().ConvertAll(x => new MemberSelectListItem { MemberId = x.MemberId, MemberName = x.GetTitleName() });
+        }
+
         /// <summary>
         /// Gets the application database context.
         /// </summary>
         /// <value>
         /// The application database context.
-        /// </value>
+        /// </value>        
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }
         }

@@ -12,5 +12,6 @@ namespace OrgChartDemo.Models.Repositories
         IEnumerable<Member> GetMembersWithPositions();
         Member GetMemberWithPosition(int memberId);
         Member GetMemberWithDemographicsAndDutyStatus(int memberId);
+        IEnumerable<MemberSelectListItem> GetAllMemberSelectListItems();
     }
 }

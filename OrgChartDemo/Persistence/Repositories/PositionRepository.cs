@@ -48,6 +48,10 @@ namespace OrgChartDemo.Persistence.Repositories
                         .ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name});
         }
        
+        public Position GetPositionAndAllCurrentMembers(int positionId)
+        {
+            return ApplicationDbContext.Positions.Where(x => x.PositionId == positionId).Include(x => x.Members).SingleOrDefault();
+        }
 
         /// <summary>
         /// Gets the application database context.

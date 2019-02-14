@@ -17,6 +17,7 @@ namespace OrgChartDemo.Models.Repositories
 
         IEnumerable<PositionSelectListItem> GetAllPositionSelectListItems();
         IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems();
+        Position GetPositionAndAllCurrentMembers(int positionId);
         /// <summary>
         /// Removes the position and reassign members.
         /// </summary>
