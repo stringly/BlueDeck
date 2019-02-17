@@ -12,7 +12,7 @@
     
     <div class="row">
         <div class="col-md-6">
-            @foreach (Position p in c.Positions)
+            @foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
             {
                 if (p.IsUnique)
                 {

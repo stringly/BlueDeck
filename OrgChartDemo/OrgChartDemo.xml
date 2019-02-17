@@ -1203,14 +1203,6 @@
             The Job Title of a Member assigned to this Position
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.Position.Members">
-            <summary>
-            Gets or sets the Members.
-            </summary>
-            <value>
-            A collection of Member Entities that represent the members assigned to this Position
-            </value>
-        </member>
         <member name="P:OrgChartDemo.Models.Position.IsManager">
             <summary>
             Gets or sets a value indicating whether this Position is the manager.
@@ -1218,6 +1210,25 @@
             </summary>
             <value>
               <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.LineupPosition">
+            <summary>
+            Gets or sets the lineup position.
+            </summary>
+            <remarks>
+            This indicates the current Position's display order among it's Parent Component's Positions
+            </remarks>
+            <value>
+            The lineup position.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Position.Members">
+            <summary>
+            Gets or sets the Members.
+            </summary>
+            <value>
+            A collection of Member Entities that represent the members assigned to this Position
             </value>
         </member>
         <member name="M:OrgChartDemo.Models.Position.#ctor">
@@ -2168,12 +2179,6 @@
             </summary>
             <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Persistence.Repositories.PositionRepository.GetPositionsWithMembers">
-            <summary>
-            Gets the Positions with their Members.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:OrgChartDemo.Persistence.Repositories.PositionRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -2181,6 +2186,12 @@
             <value>
             The application database context.
             </value>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.PositionRepository.GetPositionsWithMembers">
+            <summary>
+            Gets the Positions with their Members.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.PositionRepository.RemovePositionAndReassignMembers(System.Int32,System.String)">
             <summary>

@@ -56,5 +56,7 @@ namespace OrgChartDemo.Models.Repositories
         /// </summary>
         /// <returns>A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}"/></returns>
         IEnumerable<Component> GetComponentsWithChildren();
+
+        List<PositionLineupItem> GetPositionLineupItemsForComponent(int componentId);
     }
 }

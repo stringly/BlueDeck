@@ -17,12 +17,13 @@
                     <form asp-action="AddPositionToComponent" id="addPositionToComponentModalForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         @Html.HiddenFor(model => model.PositionId)
+                        @Html.HiddenFor(model => model.LineupPosition)
                         <div class="form-group">
                             <label asp-for="PositionName" class="control-label"></label>
                             <input asp-for="PositionName" class="form-control" />
                             <span asp-validation-for="PositionName" class="text-danger"></span>
                         </div>
-                        @Html.HiddenFor(model => model.ParentComponentId)
+
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
@@ -31,17 +32,34 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label asp-for="JobTitle" class="control-label"></label>
-                            <input asp-for="JobTitle" class="form-control" />
-                            <span asp-validation-for="JobTitle" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <div class="checkbox">
                                 <label>
                                     <input asp-for="IsManager" /> @Html.DisplayNameFor(model => model.IsManager)
                                 </label>
                             </div>
                         </div>
+                        @if (Model.PositionId != null)
+                        {
+                            <div class="form-group">
+                                <label asp-for="ParentComponentId" class="control-label"></label>
+                                @Html.DropDownListFor(model => model.ParentComponentId,
+                                                                new SelectList(Model.ComponentList, "Id", "ComponentName"),
+                                                                "Choose Parent Component",
+                                                                new { @class = "form-control" })
+                                <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                            </div>
+                        }
+                        else
+                        {
+                            @Html.HiddenFor(model => model.ParentComponentId)
+                        }
+                        <div id="lineupSelectionTarget"></div>
+                        <div class="form-group">
+                            <label asp-for="JobTitle" class="control-label"></label>
+                            <input asp-for="JobTitle" class="form-control" />
+                            <span asp-validation-for="JobTitle" class="text-danger"></span>
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

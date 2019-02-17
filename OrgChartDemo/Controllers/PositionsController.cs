@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.ViewModels;
+using OrgChartDemo.Models.Types;
 using OrgChartDemo.Persistence;
+using System.Collections.Generic;
+using System;
 
 namespace OrgChartDemo.Controllers
 {
@@ -104,7 +107,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
@@ -113,7 +116,8 @@ namespace OrgChartDemo.Controllers
                 Name = form.PositionName,
                 IsUnique = form.IsUnique,
                 JobTitle = form.JobTitle,
-                IsManager = form.IsManager
+                IsManager = form.IsManager,
+                LineupPosition = form.LineupPosition               
                 };
 
             if (!ModelState.IsValid) {
@@ -133,7 +137,7 @@ namespace OrgChartDemo.Controllers
             }            
             if (errors == 0) {
                 targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
-                unitOfWork.Positions.Add(p);
+                unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index)); 
             }
@@ -154,7 +158,7 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            Position position = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == id);
+            Position position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(id));
             if (position == null)
             {
                 return NotFound();
@@ -173,11 +177,12 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PositionId,PositionName,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
-            Position p = unitOfWork.Positions.Get(id); 
+            Position p = new Position();
+            
             if (!ModelState.IsValid) {
                 errors++;
             }
@@ -204,12 +209,15 @@ namespace OrgChartDemo.Controllers
                 }
             }
             // 0 errors should mean all conditions passed
-            if (errors == 0) {                               
+            if (errors == 0) {
+                p.PositionId = Convert.ToInt32(form.PositionId);
                 p.ParentComponent = targetParentComponent;
                 p.Name = form.PositionName;
                 p.IsUnique = form.IsUnique;
                 p.JobTitle = form.JobTitle;
                 p.IsManager = form.IsManager;
+                p.LineupPosition = form.LineupPosition;
+                unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             } else
@@ -266,6 +274,21 @@ namespace OrgChartDemo.Controllers
         private bool PositionExists(int id)
         {
             return (unitOfWork.Positions.Find(e => e.PositionId == id) != null);
+        }
+
+        public IActionResult GetPositionLineupViewComponent(int componentId, int positionBeingEditedId = 0)
+        {
+            List<PositionLineupItem> positions = unitOfWork.Components.GetPositionLineupItemsForComponent(componentId);
+            if (positionBeingEditedId == 0){ 
+                PositionLineupViewComponentViewModel vm = new PositionLineupViewComponentViewModel(positions);
+                return ViewComponent("PositionLineup", vm);
+            }
+            else
+            {
+                Position positionToEdit = unitOfWork.Positions.GetPositionWithParentComponent(positionBeingEditedId);
+                PositionLineupViewComponentViewModel vm = new PositionLineupViewComponentViewModel(positions, positionToEdit);
+                return ViewComponent("PositionLineup", vm);
+            }
         }
     }
 }

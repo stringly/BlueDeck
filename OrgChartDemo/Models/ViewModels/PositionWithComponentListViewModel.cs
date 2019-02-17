@@ -64,6 +64,8 @@ namespace OrgChartDemo.Models.ViewModels
         [Display(Name = "Unique")]
         public bool IsUnique { get; set; }
 
+        public int? LineupPosition { get; set; }
+
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
@@ -86,6 +88,7 @@ namespace OrgChartDemo.Models.ViewModels
             JobTitle = p.JobTitle;
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
+            LineupPosition = p.LineupPosition;
             Components = new List<ComponentSelectListItem>();
         }
 

@@ -58,7 +58,7 @@
             this.classList.remove('over');  // this / e.target is previous target element.
         }
         function handleDrop(e) {
-            // this/e.target is current target element.
+        // this/e.target is current target element.
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
@@ -93,6 +93,10 @@
                     // swapping invokes a Roster refresh, so we return after this                        
                     var dragMemberId = dragSrcEl.dataset.memberid;                            
                     var dropMemberId = this.dataset.memberid;
+                    if (dropMemberId == null) {
+                        // if the drop event fired on the "insertable", the memberId will be in the dataset of it's first class="member" child
+                        dropMemberId = this.getElementsByClassName("member")[0].dataset.memberid;
+                    }
                     DragAndSwap(dragMemberId, dropMemberId);
                     return;                   
                 }
@@ -268,8 +272,14 @@
                 container.html(data);
                 // register the Modal's event handlers
                 var submitButton = document.getElementById("addPositionToComponentModalSubmit");
-                submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);               
-
+                submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
+                var parentComponentSelect = document.getElementById('ParentComponentId');
+                parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
+                    $("#lineupSelectionTarget").html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                });
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -311,7 +321,12 @@
                 $("#changeEmployeeStatusModal").modal("show");
             })
         }
+        /*
+         * Edit a Position 
+         * 
+         */
 
+        // Retrieve Edit Position Modal
         function handleEditPositionButtonClick(e) {
             // retrieve the PositionId of the position we want to edit
             var position = e.target.dataset.positionid;
@@ -328,11 +343,87 @@
                 showDeleteButton.addEventListener('click', handleShowDeletePositionConfirm, false);
                 var deletePositionConfirmButton = document.getElementById("deletePositionConfirm");
                 deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
+                var parentComponentSelect = document.getElementById('ParentComponentId');
+                parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    $("#lineupSelectionTarget").html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                });
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
         }
+        function handleParentComponentChange (e) {
+            if (this.value != null && !document.getElementById('IsManager').checked) {
+                // retrieve the Lineup Interface view Component
+                var container = $("#lineupSelectionTarget").empty();
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: this.value, positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                });
+            }
+        }
+
         
+        $("#IsManager").on('change', function () {
+            console.log("ParentComponent value is: " + $("#ParentComponentId").val());
+            console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            if (this.checked) {
+                $("#lineupSelectionTarget").empty();
+            }
+            else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
+                var container = $("#lineupSelectionTarget").empty();
+                console.log("Attempting to repoll ViewComponent");
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").value }, function (data) {
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                });
+            }
+        })
+        function handleLineupMoveUp() {
+            // Grab the <ul>, 
+            // Find the "newPositionInsert"
+            // move it up on the <ul>
+            // update the #LineupPosition value to the new value
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newPositionInsert');
+            var previousItem = newItem.previousElementSibling;
+            console.log("Manager dataset is : " + previousItem.dataset.ismanager);
+            if (previousItem.dataset.ismanager != "True") {
+                // move the newInsert item up the list
+                list.insertBefore(newItem, previousItem);
+                // set the form field to the new position index
+                $("#LineupPosition").val($("#newPositionInsert").index());
+                console.log("New item is now at position: " + $("#newPositionInsert").index());
+            } else {
+                console.log("Cant move above manager");
+            }
+
+        }
+
+        function handleLineupMoveDown() {
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newPositionInsert');
+            var nextItem = newItem.nextElementSibling;
+            // check if the item is already at the bottom of the list
+            if (nextItem) {
+                // move the newInsert item up the list
+                list.insertBefore(nextItem, newItem);
+                // set the form field to the new position index
+                $("#LineupPosition").val($("#newPositionInsert").index());
+                console.log("New item is now at position: " + $("#newPositionInsert").index());
+            } else {
+                console.log("Item is already at the bottom of the list at position: " + $("#newPositionInsert").index());
+            }
+        }
+        
+        
+
         function HandleAssignMemberClick(e) {
             // retrieve the PositionId of the Position to which we want to assign a member
             var position = e.target.dataset.positionid;

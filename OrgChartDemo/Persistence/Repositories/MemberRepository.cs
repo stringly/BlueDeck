@@ -65,6 +65,7 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Include(x => x.Rank)
+                .OrderByDescending(x => x.IdNumber)
                 .ToList().ConvertAll(x => new MemberSelectListItem { MemberId = x.MemberId, MemberName = x.GetTitleName() });
         }
 

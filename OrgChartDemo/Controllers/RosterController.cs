@@ -169,7 +169,8 @@ namespace OrgChartDemo.Controllers
             if (positionId != null)
             {
                 Position position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(positionId));
-                AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position);
+                List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
+                AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position, componentList);
                 return ViewComponent("AddPositionToComponent", new {vm = viewModel });
             }
             else
@@ -187,7 +188,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="form">The POSTed <see cref="T:OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
+        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
         {
             // populate the Form object's ParentComponent property with it's ParentComponent
             form.ParentComponent = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(form.ParentComponentId));
@@ -203,7 +204,7 @@ namespace OrgChartDemo.Controllers
                 foreach(Position p in allPositions)
                 {
                     // check for conflict in Position Name
-                    if (p.Name == form.PositionName)
+                    if (p.Name == form.PositionName && p.PositionId != form.PositionId)
                     {
                         errors++;
                         ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";                            
@@ -212,7 +213,7 @@ namespace OrgChartDemo.Controllers
                 // check for conflict in "IsManager" for all Positions in the ParentComponent
                 foreach(Position p in form.ParentComponent.Positions)
                 {   
-                    if (form.IsManager == true)
+                    if (form.IsManager == true && p.PositionId != form.PositionId)
                     {
                         if (p.IsManager == true)
                         {
@@ -227,37 +228,44 @@ namespace OrgChartDemo.Controllers
                     // add the position via unitOfWork
                     if (form.PositionId == null)
                     {
-                        Position newPosition = new Position(){
+                        Position p = new Position(){
                             ParentComponent = form.ParentComponent,
                             Name = form.PositionName,
                             JobTitle = form.JobTitle,
                             IsManager = form.IsManager,
-                            IsUnique = form.IsUnique
+                            IsUnique = form.IsUnique,
+                            LineupPosition = form.LineupPosition
                         };
-                        unitOfWork.Positions.Add(newPosition);
+                        unitOfWork.Positions.UpdatePositionAndSetLineup(p);
+                        unitOfWork.Complete();
                     }
                     else
                     {
-                        Position positionToUpdate = unitOfWork.Positions.Get(Convert.ToInt32(form.PositionId));
-                        positionToUpdate.ParentComponent = form.ParentComponent;
-                        positionToUpdate.Name = form.PositionName;
-                        positionToUpdate.JobTitle = form.JobTitle;
-                        positionToUpdate.IsManager = form.IsManager;
-                        positionToUpdate.IsUnique = form.IsUnique;
-                    }
-                    
-                    unitOfWork.Complete();
+                        Position p = new Position() {
+                            PositionId = Convert.ToInt32(form.PositionId),
+                            ParentComponent = form.ParentComponent,
+                            Name = form.PositionName,
+                            JobTitle = form.JobTitle,
+                            IsManager = form.IsManager,
+                            IsUnique = form.IsUnique,
+                            LineupPosition = form.LineupPosition
+                        };
+                        unitOfWork.Positions.UpdatePositionAndSetLineup(p);
+                        unitOfWork.Complete();
+                    }                                        
                     // return a JSON object to the Ajax POST so that it can hide the Modal
                     return Json(new { Status = "Success" });
                 }
                 // validation errors, return the ViewModel with the ViewBag.Message showing
                 else 
                 {
+                    form.ComponentList = unitOfWork.Components.GetComponentSelectListItems();
                     return ViewComponent("AddPositionToComponent", form);
                 }
             }
             else // ModelState invalid
             {   
+                form.ComponentList = unitOfWork.Components.GetComponentSelectListItems();
                 return ViewComponent("AddPositionToComponent", form);
             }
             
@@ -373,5 +381,6 @@ namespace OrgChartDemo.Controllers
             AssignMemberModalViewComponentViewModel vm = new AssignMemberModalViewComponentViewModel(p, members, selectedComponentId);
             return ViewComponent("AssignMemberModal", vm);
         }
+
     }
 }

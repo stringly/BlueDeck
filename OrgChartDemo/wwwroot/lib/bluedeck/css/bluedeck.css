@@ -187,9 +187,10 @@ body {
     float: left;
     position: absolute;
     padding: 5px;
-    right: 24px;
-    /*background-color: #5d7cbf;*/
-    background-color: #94a4c8;
+    right: 38px;
+    /*background-color: #3d5c9f;*/
+    /*background-color: #94a4c8;*/
+    background-image: linear-gradient(to bottom, rgba(61, 92, 159, 1), rgba(148, 164, 200, 1));
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
     margin-top: 5px;
@@ -345,4 +346,23 @@ body {
     }
     .moreOptionsButtonGroup:hover .tooltiptext {
         visibility: visible;
+    }
+
+    #lineupSelection {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #lineupSelection .disabled {
+        pointer-events: none;
+    }
+
+    #lineupSelection .active {        
+        color: cornflowerblue;
+    }
+
+    #lineupSelection .glyphicon {
+        margin-top: 3px;
     }

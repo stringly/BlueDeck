@@ -24,6 +24,9 @@ namespace OrgChartDemo.Persistence.Repositories
         {
         }
 
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
         /// <summary>
         /// Gets the list components with all member children.
         /// </summary>
@@ -116,18 +119,17 @@ namespace OrgChartDemo.Persistence.Repositories
             }
             Component parent = ApplicationDbContext.Components
                 .Where(x => x.ComponentId == parentComponentId)
-                .Include(x => x.ParentComponent)
+                .Include(x => x.ParentComponent)                
                 .Include(x => x.Positions).ThenInclude(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(x => x.Positions).ThenInclude(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(x => x.Positions).ThenInclude(y => y.Members).ThenInclude(x => x.Race)
-                .Include(x => x.Positions).ThenInclude(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(x => x.Positions).ThenInclude(y => y.Members).ThenInclude(x => x.DutyStatus)                
                 .FirstOrDefault();
             if (parent != null){
                 ccl.Add(parent);    
             }            
             return ccl;
-        }
-        
+        }        
         
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
@@ -220,12 +222,16 @@ namespace OrgChartDemo.Persistence.Repositories
                 results.Add(n);
             }
             return results;
-        }
+        }        
 
-        
-
-        public ApplicationDbContext ApplicationDbContext {
-            get { return Context as ApplicationDbContext; }
+        public List<PositionLineupItem> GetPositionLineupItemsForComponent(int componentId)
+        {
+            return ApplicationDbContext.Positions
+                .Where(x => x.ParentComponent.ComponentId == componentId) 
+                .OrderByDescending(x => x.LineupPosition)
+                .ToList()
+                .ConvertAll(x => new PositionLineupItem(x));
         }
+       
     }
 }

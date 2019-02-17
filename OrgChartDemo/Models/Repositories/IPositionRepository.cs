@@ -25,5 +25,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <param name="newPositionName">New name of the position.</param>
         void RemovePositionAndReassignMembers(int id, string newPositionName = "Unassigned");
         Position GetPositionWithParentComponent(int positionId);
+        void UpdatePositionAndSetLineup(Position p);
     }
 }

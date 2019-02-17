@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrgChartDemo.Models.ViewModels
 {
@@ -59,7 +61,11 @@ namespace OrgChartDemo.Models.ViewModels
         [Display(Name = "Unique")]
         public bool IsUnique { get; set; }
 
+        public int? LineupPosition { get; set; }
+
         public Component ParentComponent { get; set; }
+
+        public List<ComponentSelectListItem> ComponentList { get; set; }
         
         public AddPositionToComponentViewComponentViewModel()
         {
@@ -71,15 +77,17 @@ namespace OrgChartDemo.Models.ViewModels
             ParentComponent = parent;
         }
 
-        public AddPositionToComponentViewComponentViewModel(Position p)
+        public AddPositionToComponentViewComponentViewModel(Position position, List<ComponentSelectListItem> componentList)
         {
-            ParentComponent = p.ParentComponent;
-            ParentComponentId = p.ParentComponent.ComponentId;
-            PositionId = p.PositionId;
-            PositionName = p.Name;
-            JobTitle = p.JobTitle;
-            IsManager = p.IsManager;
-            IsUnique = p.IsUnique;
+            ParentComponent = position.ParentComponent;
+            ParentComponentId = position.ParentComponent.ComponentId;
+            PositionId = position.PositionId;
+            PositionName = position.Name;
+            JobTitle = position.JobTitle;
+            IsManager = position.IsManager;
+            IsUnique = position.IsUnique;
+            LineupPosition = position.LineupPosition;
+            ComponentList = componentList;
         }
     }
 }

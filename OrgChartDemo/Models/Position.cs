@@ -53,16 +53,7 @@ namespace OrgChartDemo.Models {
         /// The Job Title of a Member assigned to this Position
         /// </value>
         [Display(Name = "Job Title")]
-        public string JobTitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Members.
-        /// </summary>
-        /// <value>
-        /// A collection of Member Entities that represent the members assigned to this Position
-        /// </value>
-        [Display(Name = "Members")]
-        public virtual List<Member> Members { get; set; }
+        public string JobTitle { get; set; }        
 
         /// <summary>
         /// Gets or sets a value indicating whether this Position is the manager.
@@ -73,6 +64,27 @@ namespace OrgChartDemo.Models {
         /// </value>
         [Display(Name = "Manager")]
         public bool IsManager { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lineup position.
+        /// </summary>
+        /// <remarks>
+        /// This indicates the current Position's display order among it's Parent Component's Positions
+        /// </remarks>
+        /// <value>
+        /// The lineup position.
+        /// </value>
+        [Display(Name = "Queue Position")]
+        public int? LineupPosition {get;set;}
+
+        /// <summary>
+        /// Gets or sets the Members.
+        /// </summary>
+        /// <value>
+        /// A collection of Member Entities that represent the members assigned to this Position
+        /// </value>
+        [Display(Name = "Members")]
+        public virtual List<Member> Members { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Position"/> class.
