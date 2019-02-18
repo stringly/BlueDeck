@@ -114,7 +114,7 @@ namespace OrgChartDemo.Controllers
             dropMember.Position = dragPosition;
             unitOfWork.Complete();
         
-            return Json(new { Status = "Success" });
+            return Json(new { success = true });
         }
 
         // RosterManagerViewComponent
@@ -254,7 +254,7 @@ namespace OrgChartDemo.Controllers
                         unitOfWork.Complete();
                     }                                        
                     // return a JSON object to the Ajax POST so that it can hide the Modal
-                    return Json(new { Status = "Success" });
+                    return Json(new { success = true });
                 }
                 // validation errors, return the ViewModel with the ViewBag.Message showing
                 else 
@@ -276,7 +276,7 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork.Positions.RemovePositionAndReassignMembers(PositionId);
             unitOfWork.Complete();
-            return Json(new { Status = "Success" });
+            return Json(new { success = true });
         }
         // EditEmployeeModalViewModalViewComponent
         public IActionResult GetEditEmployeeModalViewComponent(int memberId)
@@ -307,7 +307,7 @@ namespace OrgChartDemo.Controllers
                 m.DutyStatus = unitOfWork.MemberDutyStatus.GetStatusById(Convert.ToInt32(form.DutyStatus));
                 m.Email = form.Email;
                 unitOfWork.Complete();
-                return Json(new { Status = "Success" });
+                return Json(new { success = true });
             }
             else
             {
@@ -360,7 +360,7 @@ namespace OrgChartDemo.Controllers
                 // save changes to the repo
                 unitOfWork.Complete();
                 // return success object so Client can refresh the RosterManager
-                return Json(new { Status = "Success" });
+                return Json(new { success = true });
             }
             else
             {

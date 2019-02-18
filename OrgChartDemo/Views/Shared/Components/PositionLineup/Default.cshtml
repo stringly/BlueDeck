@@ -1,6 +1,6 @@
-﻿@model PositionLineupViewComponentViewModel
+﻿    @model PositionLineupViewComponentViewModel
 
-<div class="form-group">
+    <div class="form-group">
     <label asp-for="Positions" class="control-label"></label>
     <ul id="lineupSelection" role="listbox" class="list-unstyled">
         @foreach (var item in Model.Positions)
@@ -28,4 +28,4 @@
         <div class="btn btn-small" id="lineupMoveUp"><span class="glyphicon glyphicon-arrow-up"></span> Move Up</div>
         <div class="btn btn-small" id="lineupMoveDown"><span class="glyphicon glyphicon-arrow-down"></span> Move Down</div>
     </div>
-</div>
+    </div>

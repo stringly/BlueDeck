@@ -220,7 +220,7 @@
         function DragAndSwap(dragMId, dropMId) {
             $.get("Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
                 
-                if (data.status == "Success") {
+                if (data.success == true) {
                     $("#getComponentButton").trigger('click');
                 }
             })
@@ -275,6 +275,8 @@
                 submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
                 var parentComponentSelect = document.getElementById('ParentComponentId');
                 parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
+                var isManagerCheckBox = document.getElementById('IsManager');
+                isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
                     $("#lineupSelectionTarget").html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
@@ -345,6 +347,8 @@
                 deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
                 var parentComponentSelect = document.getElementById('ParentComponentId');
                 parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
+                var isManagerCheckBox = document.getElementById('IsManager');
+                isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
                     $("#lineupSelectionTarget").html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
@@ -368,7 +372,7 @@
         }
 
         
-        $("#IsManager").on('change', function () {
+        function handleIsManagerChange(e) {
             console.log("ParentComponent value is: " + $("#ParentComponentId").val());
             console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
             if (this.checked) {
@@ -377,14 +381,14 @@
             else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
                 var container = $("#lineupSelectionTarget").empty();
                 console.log("Attempting to repoll ViewComponent");
-                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").value }, function (data) {
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
                     $("#LineupPosition").val($("#newPositionInsert").index());
                 });
             }
-        })
+        }
         function handleLineupMoveUp() {
             // Grab the <ul>, 
             // Find the "newPositionInsert"
@@ -463,7 +467,6 @@
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
-                dataType: 'html',
                 data: form.serialize(),
                 success: function () {
                     $("#reassignEmployeeModal").modal("hide");
@@ -478,17 +481,16 @@
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
-                dataType: 'html',
                 data: form.serialize(),
                 success: function (response) {
                     // the server will return a {Status = "Success"} object if validation passes.
                     // this is passed from a method with an IActionResult return type, which means
                     // it needs to be parsed before the properties are accessible
-                    var responseObj = JSON.parse(response);
-                    if (responseObj["status"] === "Success") {
+                    
+                    if (response.success == true) {                                                
                         $("#addPositionToComponentModal").modal("hide");
-                        $("#getComponentButton").trigger('click');
-                    }
+                        $("#getComponentButton").trigger('click');                                                
+                    }                    
                     else {
                         // hide the original modal
                         $("#addPositionToComponentModal").modal("hide");
@@ -527,14 +529,13 @@
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
-                dataType: 'html',
                 data: form.serialize(),
                 success: function (response) {
-                    // the server will return a {Status = "Success"} object if validation passes.
+                    // the server will return a {success = true} object if validation passes.
                     // this is passed from a method with an IActionResult return type, which means
                     // it needs to be parsed before the properties are accessible
-                    var responseObj = JSON.parse(response);
-                    if (responseObj["status"] === "Success") {
+                    
+                    if (response.success == true) {
                         // TODO: return new Member info
                         $("#editMemberModal").modal("hide");
                         $("#getComponentButton").trigger('click');
@@ -588,11 +589,9 @@
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
-                dataType: 'html',
                 data: form.serialize(),
-                success: function (response) {
-                    var responseObj = JSON.parse(response);
-                    if (responseObj["status"] === "Success") {
+                success: function (response) {                    
+                    if (response.success == true) {
                         // TODO: return new Member info
                         $("#changeEmployeeStatusModal").modal("hide");
                         $("#getComponentButton").trigger('click');
