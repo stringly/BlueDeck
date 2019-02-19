@@ -551,6 +551,17 @@
             The acronym of the Component
             </value>        
         </member>
+        <member name="P:OrgChartDemo.Models.Component.LineupPosition">
+            <summary>
+            Gets or sets the lineup position.
+            </summary>
+            <remarks>
+            This property is used to control the order in which the component is displayed among it's sibling components
+            </remarks>
+            <value>
+            The lineup position.
+            </value>
+        </member>
         <member name="P:OrgChartDemo.Models.Component.Positions">
             <summary>
             Gets or sets the list of the <see cref="T:OrgChartDemo.Models.Position"/>s assinged to this Component.

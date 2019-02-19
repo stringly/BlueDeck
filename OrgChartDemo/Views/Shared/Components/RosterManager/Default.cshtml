@@ -2,7 +2,7 @@
 @{ var uniquePositionId = 0;}
 @foreach (RosterManagerViewModelComponent c in Model.ComponentList)
 {
-<div class="componentContainer container" data-componentid="@c.ComponentId">
+<div class="componentContainer-nested-@c.NestedLevel componentContainer container" data-componentid="@c.ComponentId">
     <div class="componentHeaderDiv">
         <div class="logoDiv pull-left">
            <img src="~/lib/bluedeck/css/images/Patch.png" />

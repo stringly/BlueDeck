@@ -47,6 +47,17 @@ namespace OrgChartDemo.Models {
         public string Acronym { get; set; }
 
         /// <summary>
+        /// Gets or sets the lineup position.
+        /// </summary>
+        /// <remarks>
+        /// This property is used to control the order in which the component is displayed among it's sibling components
+        /// </remarks>
+        /// <value>
+        /// The lineup position.
+        /// </value>
+        public int? LineupPosition { get; set; }
+
+        /// <summary>
         /// Gets or sets the list of the <see cref="T:OrgChartDemo.Models.Position"/>s assinged to this Component.
         /// </summary>
         /// <value>

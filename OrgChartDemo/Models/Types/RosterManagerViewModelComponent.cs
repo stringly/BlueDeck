@@ -9,6 +9,7 @@ namespace OrgChartDemo.Models.Types
     public class RosterManagerViewModelComponent : Component
     {
         public List<RosterManagerViewModelComponent> Children { get; set; }
+        public int NestedLevel { get; set; }
 
         public RosterManagerViewModelComponent(Component c) : base()
         {
@@ -18,6 +19,7 @@ namespace OrgChartDemo.Models.Types
             this.ParentComponent = c.ParentComponent;
             this.Positions = c.Positions;
             this.Children = new List<RosterManagerViewModelComponent>();
+            this.LineupPosition = c.LineupPosition;
         }
 
         public int GetNestedChildrenDepth(RosterManagerViewModelComponent parent, int depth = 0)
