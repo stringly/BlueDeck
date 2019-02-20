@@ -4,13 +4,10 @@
 {
 <div class="componentContainer-nested-@c.NestedLevel componentContainer container" data-componentid="@c.ComponentId">
     <div class="componentHeaderDiv">
-        <div class="logoDiv pull-left">
-           <img src="~/lib/bluedeck/css/images/Patch.png" />
-        </div>
-        <h4>@c.Name</h4>
+        <p class="headerSpan">@c.Name <span class="glyphicon glyphicon-expand" data></span></p>        
     </div>
     
-    <div class="row">
+    <div class="row" id="componentDetail" data-componentid="@c.ComponentId">
         <div class="col-md-6">
             @foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
             {
