@@ -304,7 +304,7 @@ namespace OrgChartDemo.Controllers
                 m.MiddleName = form.MiddleName;
                 m.LastName = form.LastName;
                 m.IdNumber = form.IdNumber;
-                m.DutyStatus = unitOfWork.MemberDutyStatus.GetStatusById(Convert.ToInt32(form.DutyStatus));
+                m.DutyStatus = unitOfWork.MemberDutyStatus.GetStatusById(Convert.ToInt32(form.DutyStatusId));
                 m.Email = form.Email;
                 unitOfWork.Complete();
                 return Json(new { success = true });

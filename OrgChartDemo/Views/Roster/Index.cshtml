@@ -25,7 +25,7 @@
 
         // Drag and Drop
         var dragSrcEl = null;
-        var dragSrcParentComponentId = null;
+        var dragSrcParentComponentId = null;        
         function handleDragStart(e) {
             // Target (this) element is the source node.
             dragSrcEl = this;
@@ -47,14 +47,23 @@
                 e.preventDefault(); // Necessary. Allows us to drop.
             }
             this.classList.add('over');
+            if (this.classList.contains('componentHeaderMenuItem')) {
+                var componentid = this.dataset.componentid;
+                if ($("#componentDetailSection" + componentid).is(":hidden")) {
+                    handleComponentShowHide(e);
+                    //$("#componentDetailSection" + componentid).show();
+                }
+            }
 
             e.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
             return false;
         }
         function handleDragEnter(e) {
             // this / e.target is the current hover target.
+           
         }
         function handleDragLeave(e) {
+
             this.classList.remove('over');  // this / e.target is previous target element.
         }
         function handleDrop(e) {
@@ -616,6 +625,28 @@
             })
         }
 
+        function handleComponentShowHide(e) {
+            // find the component detail section to hide
+            var componentId = e.target.dataset.componentid;
+            var state = e.target.dataset.state;
+            switch (state) {
+                case 'expanded':
+                    $("#componentDetailSection" + componentId).hide();
+                    e.target.dataset.state = 'collapsed';
+                    e.target.childNodes[1].classList.remove('glyphicon-chevron-up');
+                    e.target.childNodes[1].classList.add('glyphicon-chevron-down');
+                    e.target.childNodes[2].textContent = "Expand"
+                    break;
+                case 'collapsed':
+                    e.target.dataset.state = 'expanded';
+                    e.target.childNodes[1].classList.remove('glyphicon-chevron-down');
+                    e.target.childNodes[1].classList.add('glyphicon-chevron-up');
+                    e.target.childNodes[2].textContent = "Collapse"
+                    $("#componentDetailSection" + componentId).show();
+                    break;
+            }            
+        }
+
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
@@ -650,6 +681,13 @@
                     elem.addEventListener('drop', handleDrop, false);
                     elem.addEventListener('dragend', handleDragEnd, false);
                 })
+                var componentExpandHeaders = document.querySelectorAll('.componentHeaderMenuItem');
+                [].forEach.call(componentExpandHeaders, function (elem) {
+                    elem.addEventListener('dragenter', handleDragEnter, false)
+                    elem.addEventListener('dragover', handleDragOver, false);
+                    elem.addEventListener('dragleave', handleDragLeave, false);
+                    elem.addEventListener('dragend', handleDragEnd, false);
+                })
                 var moreOptionsReassign = document.querySelectorAll('.drag-options-reassign');
                 [].forEach.call(moreOptionsReassign, function (elem) {
                     elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
@@ -673,7 +711,11 @@
                 var insertableInnerAssignMemberSpans = document.querySelectorAll('.insertableInnerSelectMember');
                 [].forEach.call(insertableInnerAssignMemberSpans, function (elem) {
                     elem.addEventListener('click', HandleAssignMemberClick, false);
-                });
+                })
+                var componentMenuItems = document.querySelectorAll('.componentHeaderMenuItem');
+                [].forEach.call(componentMenuItems, function (elem) {
+                    elem.addEventListener('click', handleComponentShowHide, false);
+                })
             });
         });
     });

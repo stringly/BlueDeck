@@ -30,7 +30,7 @@ body {
 .componentContainer {
     /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;*/
-    padding: 0px 0px 20px 0px;
+    margin: 0px 0px 20px 0px;
     /* background-color: #dfe3ee; */
     background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
 }
@@ -63,11 +63,12 @@ body {
      background-color: #dfe3ee; 
     background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
 }*/
-    .componentHeaderDiv {
-        height: 40px;
-        background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.2));
-        margin-bottom: 15px;
-    }
+.componentHeaderDiv {
+    height: 40px;
+    background-image: linear-gradient(to right, rgba(59,89,152,1), rgba(59,89,152, 0.2));
+    margin: 0 -15px 15px -15px;
+    border: 1px solid #3b5998;
+}
     .componentContainer .logoDiv {        
         margin-right: 3px;
         margin-left: 3px;
@@ -83,15 +84,25 @@ body {
         line-height: 36px;
         
     }
+    .componentHeaderMenuItem .glyphicon {
+        margin: 0px 5px 0px 5px;
+    }
 
-    .headerSpan {
-        font-size: 22px;
-        color: white;
-        padding: 0px 0px 0px 10px;
-        margin-top: 0px;
+.headerSpan {
+    font-size: 16px;
+    color: white;
+    padding: 0px 0px 0px 10px;
+    margin-top: 0px;
+    line-height: 40px;
+    /*background-color: #3b5998;*/
+    /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
+}
+    .componentHeaderMenuItem {
+        font-size: 12px;
+        color: white;        
         line-height: 40px;
-        /*background-color: #3b5998;*/
-        /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
+        margin: 0px 10px 0px 10px;
+        cursor: pointer;
     }
     .headerSpan .glyphicon {
         margin-left: 10px;
@@ -187,58 +198,60 @@ body {
     .componentContainer .member .L10 {
         content: url("images/rankicons/L08.png");
     }
-    .componentDemoTable {
-        margin: 0 auto;
-    }
+.componentDemoTable {
+    margin: 0 auto;
+    /*background-image: linear-gradient(to bottom, rgba(59,89,152,0.3), rgba(59,89,152, 0));*/
+}
 
     .componentDemoTable .componentDemoTableHeaderRow td {
-        color: white;
+        color: white;        
         background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.2));
-        padding: 2px;
+        padding: 5px;
+        border: 1px solid #4d68a1;
     }
-    .componentDemoTable .componentDemoTableSubHeaderRow th {
-        /*background-color: #808080; */
-        background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));
+        .componentDemoTable .componentDemoTableSubHeaderRow th {
+            /*background-color: #808080; */
+            /*background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));*/
+            text-align: center;
+            padding: 3px 2px 0px 0px;
+            border-bottom: 1px solid #4d68a1;
+        }
+    .componentDemoTable .componentDemoTableSubSubHeaderRow td {
+        /*background-color: #d4d4d4;*/
+        /*background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));*/
+        border-bottom: 1px solid #4d68a1;
+    }
+
+    .componentDemoTable th {
+    }
+    .componentDemoTable td {
         text-align: center;
-        padding: 3px 2px 0px 2px;
-        border-bottom: 1px solid #bfbfbf;
-        
+        padding: 4px;
+        background-color: transparent;
     }
-.componentDemoTable .componentDemoTableSubSubHeaderRow td {
-    /*background-color: #d4d4d4;*/
-    background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));
-}
 
-.componentDemoTable th {
-}
-.componentDemoTable td {
-    text-align: center;
-    padding: 0px 2px 2px 2px;
-    background-color: transparent;
-}
+    .componentContainer .firstRow {
+        text-align: left;
+        font-weight: bold;
+        background-color: transparent;
+        padding-left: 5px;
+    }
 
-.componentContainer .firstRow {
-    text-align: left;
-    font-weight: bold;
-    background-color: transparent;
-    padding-left: 5px;
-}
-
-.drag-options {
-    float: left;
-    position: absolute;
-    padding: 5px;
-    right: 38px;
-    /*background-color: #3d5c9f;*/
-    /*background-color: #94a4c8;*/
-    background-image: linear-gradient(to bottom, rgba(61, 92, 159, 1), rgba(148, 164, 200, 1));
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-    margin-top: 5px;
-    opacity: 0;
-    z-index: 10;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-}
+    .drag-options {
+        float: left;
+        position: absolute;
+        padding: 5px;
+        right: 38px;
+        /*background-color: #3d5c9f;*/
+        /*background-color: #94a4c8;*/
+        background-image: linear-gradient(to bottom, rgba(61, 92, 159, 1), rgba(148, 164, 200, 1));
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        margin-top: 5px;
+        opacity: 0;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
 
     .drag-options.active {
         -webkit-transform: translateX(0);
@@ -246,10 +259,10 @@ body {
         opacity: 1;
     }
 
-.drag-options-label {
-    display: block;
-    margin: 0 0 2px 0;
-}
+    .drag-options-label {
+        display: block;
+        margin: 0 0 2px 0;
+    }
 
     .drag-options-label input {
         opacity: 0.6;
@@ -263,44 +276,44 @@ body {
         margin: 0px;
     }
 
-.vertical-alignment-helper {
-    display: table;
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-}
+    .vertical-alignment-helper {
+        display: table;
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+    }
 
-.vertical-align-center {
-    /* To center vertically */
-    display: table-cell;
-    vertical-align: middle;
-    pointer-events: none;
-}
+    .vertical-align-center {
+        /* To center vertically */
+        display: table-cell;
+        vertical-align: middle;
+        pointer-events: none;
+    }
 
-.modal-content {
-    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
-    width: inherit;
-    max-width: inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
-    height: inherit;
-    /* To center horizontally */
-    margin: 0 auto;
-    pointer-events: all;
-    border-radius: 0px;
-}
+    .modal-content {
+        /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+        width: inherit;
+        max-width: inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+        height: inherit;
+        /* To center horizontally */
+        margin: 0 auto;
+        pointer-events: all;
+        border-radius: 0px;
+    }
 
-.dragGhost-member {
-    position: absolute;
-    top: -100px;
-    right: 0px;
-    padding: 5px;
-    color: white;
-    background-color: #072158;
-    opacity: 1;
-}
+    .dragGhost-member {
+        position: absolute;
+        top: -100px;
+        right: 0px;
+        padding: 5px;
+        color: white;
+        background-color: #072158;
+        opacity: 1;
+    }
 
-.dragGhost-member .L01 {
-    content: url();
-}
+    .dragGhost-member .L01 {
+        content: url();
+    }
 
     .dragGhost-member .L02 {
         content: url("images/rankicons/L02.png");
