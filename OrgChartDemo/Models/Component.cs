@@ -64,6 +64,8 @@ namespace OrgChartDemo.Models {
         /// An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
         /// </value>
         public ICollection<Position> Positions { get; set; }
+        
+        public virtual ICollection<Component> ChildComponents { get; set; }
 
         public Component()
         {

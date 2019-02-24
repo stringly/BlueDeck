@@ -58,5 +58,7 @@ namespace OrgChartDemo.Models.Repositories
         IEnumerable<Component> GetComponentsWithChildren();
 
         List<PositionLineupItem> GetPositionLineupItemsForComponent(int componentId);
+
+        List<ComponentPositionLineupItem> GetComponentLineupItemsForComponent(int componentId);
     }
 }

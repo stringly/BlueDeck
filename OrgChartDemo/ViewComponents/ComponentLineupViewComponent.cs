@@ -3,9 +3,9 @@ using OrgChartDemo.Models.ViewModels;
 
 namespace OrgChartDemo.ViewComponents
 {
-    public class PositionLineupViewComponent : ViewComponent
+    public class ComponentLineupViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(PositionLineupViewComponentViewModel vm)
+        public IViewComponentResult Invoke(ComponentLineupViewComponentViewModel vm)
         {
             return View(vm);
         }

@@ -1,0 +1,32 @@
+﻿@model ComponentLineupViewComponentViewModel
+
+<div class="form-group">
+    <label asp-for="Components" class="control-label"></label>
+    <ul id="lineupSelection" role="listbox" class="list-unstyled">
+        @foreach (var item in Model.Components)
+        {
+            if (item.ComponentId != Model.ComponentToEdit.ComponentId)
+            {
+                <li role="option" class="disabled" data-lineupposition="@item.LineupPosition" data-componentid="@item.ComponentId">@item.ComponentName</li>
+            }
+            else
+            {
+                <li id="newComponentInsert" role="option" class="active disabled" data-lineupposition="@item.LineupPosition" data-componentid="@item.ComponentId">@item.ComponentName</li>
+            }
+
+        }
+        @if (Model.ComponentToEdit.ComponentId == 0)
+        {
+            <li id="newComponentInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-menu-right"></span> Insert Component Here <span class="glyphicon glyphicon-menu-left"></span></li>
+        }
+        else if (!Model.Components.Exists(x => x.ComponentId == Model.ComponentToEdit.ComponentId))
+        {
+            <li id="newComponentInsert" role="option" class="active disabled" data-lineupposition="@Model.ComponentToEdit.LineupPosition" data-componentid="@Model.ComponentToEdit.ComponentId">@Model.ComponentToEdit.Name</li>
+        }
+
+    </ul>
+    <div id="lineupToolBar" class="btn-group">
+        <div class="btn btn-small" id="lineupMoveUp"><span class="glyphicon glyphicon-arrow-up"></span> Move Up</div>
+        <div class="btn btn-small" id="lineupMoveDown"><span class="glyphicon glyphicon-arrow-down"></span> Move Down</div>
+    </div>
+</div>

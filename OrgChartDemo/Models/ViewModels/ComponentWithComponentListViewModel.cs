@@ -47,6 +47,8 @@ namespace OrgChartDemo.Models.ViewModels
         [StringLength(10)]
         public string Acronym { get; set; }
 
+        public int? LineupPosition { get; set; }
+
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
@@ -77,6 +79,7 @@ namespace OrgChartDemo.Models.ViewModels
             ComponentName = c.Name;
             ParentComponentId = c?.ParentComponent?.ComponentId;
             Acronym = c.Acronym;
+            LineupPosition = c.LineupPosition;
             Components = l.ConvertAll(x => new ComponentSelectListItem { Id = x.ComponentId, ComponentName = x.Name }); 
         }
 

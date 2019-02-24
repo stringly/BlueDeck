@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Controllers
 {
@@ -107,7 +106,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form)
+        public IActionResult Create([Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form)
         {        
             if (!ModelState.IsValid)
             {
@@ -127,6 +126,7 @@ namespace OrgChartDemo.Controllers
                     ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
                     ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
                 }
+                // TODO: rewire to repo method to control setting lineup
                 unitOfWork.Components.Add(c);
                 unitOfWork.Complete();
             }
@@ -162,7 +162,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ParentComponentId,ComponentName,Acronym")] ComponentWithComponentListViewModel form )
+        public IActionResult Edit(int id, [Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form )
         {
             Component c = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
@@ -184,6 +184,7 @@ namespace OrgChartDemo.Controllers
             else { 
                 try
                 {
+                    // TODO: rewire to Repo method to set sibling lineup
                     c.Name = form.ComponentName;
                     c.ParentComponent = targetParentComponent;
                     c.Acronym = form.Acronym;
@@ -265,6 +266,24 @@ namespace OrgChartDemo.Controllers
         private bool ComponentExists(int id)
         {
             return (unitOfWork.Components.Find(e => e.ComponentId == id) != null);
+        }
+
+        public IActionResult GetComponentLineupViewComponent(int parentComponentId, int componentBeingEditedId = 0)
+        {
+            // the Ajax request will sent the ComponentId of the desired Parent Component when a component is being created
+            List<ComponentPositionLineupItem> components = unitOfWork.Components.GetComponentLineupItemsForComponent(parentComponentId);
+            
+            if (componentBeingEditedId == 0)
+            {                
+                ComponentLineupViewComponentViewModel vm = new ComponentLineupViewComponentViewModel(components);
+                return ViewComponent("ComponentLineup", vm);
+            }
+            else
+            {
+                Component componentToEdit = unitOfWork.Components.Get(componentBeingEditedId);
+                ComponentLineupViewComponentViewModel vm = new ComponentLineupViewComponentViewModel(components, componentToEdit);
+                return ViewComponent("ComponentLineup", vm);
+            }
         }
     }
 }
