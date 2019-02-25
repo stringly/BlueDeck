@@ -119,6 +119,7 @@ namespace OrgChartDemo.Controllers
                     Name = form.ComponentName,
                     Acronym = form.Acronym,
                     ParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId),
+                    LineupPosition = form.LineupPosition
                 };
                 // check if a Component with the Name provided already exists and reject if so
                 if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
@@ -126,8 +127,8 @@ namespace OrgChartDemo.Controllers
                     ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
                     ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
                 }
-                // TODO: rewire to repo method to control setting lineup
-                unitOfWork.Components.Add(c);
+                // add Component to repo via method that controls setting lineup
+                unitOfWork.Components.UpdateComponentAndSetLineup(c);
                 unitOfWork.Complete();
             }
             return RedirectToAction(nameof(Index));
@@ -162,7 +163,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form )
+        public IActionResult Edit(int id, [Bind("ComponentId,ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form )
         {
             Component c = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
@@ -175,19 +176,27 @@ namespace OrgChartDemo.Controllers
             {
                 return BadRequest(ModelState);
             }
-            else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
+            else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
             {
-                ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
+                ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
                 return View(vm);
             }
             else { 
                 try
                 {
-                    // TODO: rewire to Repo method to set sibling lineup
-                    c.Name = form.ComponentName;
-                    c.ParentComponent = targetParentComponent;
-                    c.Acronym = form.Acronym;
+                    // Note: the repo method to control setting the ComponentLineup for sibling components requires that the component
+                    // that we are editing be passed as a "new" component because the repo method needs to be able to refer to the existing LineupPosition
+                    // of the edited component prior to it being changed
+                    Component componentToEdit = new Component()
+                    {
+                        ComponentId = c.ComponentId,
+                        Acronym = form.Acronym,
+                        Name = form.ComponentName,
+                        LineupPosition = form.LineupPosition,
+                        ParentComponent = targetParentComponent
+                    };
+                    unitOfWork.Components.UpdateComponentAndSetLineup(componentToEdit);
                     unitOfWork.Complete();
                 }
                 catch (DbUpdateConcurrencyException)

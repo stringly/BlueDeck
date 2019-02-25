@@ -75,7 +75,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
         public ComponentWithComponentListViewModel(Component c, List<Component> l)
         {
-            ComponentId = c?. ComponentId;
+            ComponentId = c?.ComponentId;
             ComponentName = c.Name;
             ParentComponentId = c?.ParentComponent?.ComponentId;
             Acronym = c.Acronym;

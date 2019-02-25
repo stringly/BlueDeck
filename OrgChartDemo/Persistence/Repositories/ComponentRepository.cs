@@ -243,78 +243,73 @@ namespace OrgChartDemo.Persistence.Repositories
                 .ConvertAll(x => new ComponentPositionLineupItem(x));
         }
 
+        /// <summary>
+        /// Adds a new Component or Updates an existing Component and adjusts the LineupPosition of all sibling Components within the ParentComponent
+        /// </summary>
+        /// <remarks>
+        /// If this method is used to edit an existing component, then the Component parameter must be a new Component instance set to the form values of the existing component.
+        /// This is because the method needs to know the "unedited" value of the Component's LineupPosition to determine whether the Component has been moved up or down
+        /// in it's ParentComponent's Lineup.
+        /// /// </remarks>
+        /// <param name="c">The <seealso cref="T:OrgChartDemo.Models.Component"/> being added or edited.</param>
         public void UpdateComponentAndSetLineup(Component c)
         {
-            // assume that the Position's ParentComponent is set? It has to be, right? Hmmm...
-            // I don't assume that the Position's ParentComponent's Child Positions collection will be set...
-            List<Component> siblings = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == x.ParentComponent.ComponentId).ToList();
+            // assume that the Component's ParentComponent is set? It has to be, right? Hmmm...
+        
 
-            // if the new position is managerial, add it to the top of the Lineup and move all others down
-            foreach (Position sibling in siblings)
-            {
-                // this shouldn't happen, but just in case the new position is manager and the parent component already has a managerial position                 
-                if (sibling.PositionId != p.PositionId)
-                {
-                    sibling.LineupPosition++;
+            /* What needs to happen here: 
+            *  If the c parameter is a new Component: get the LineupPosition of the new Component, and then adjust all of the current siblings based on the new lineup
+            */
+
+            if (c.ComponentId == 0) { // ComponentId = 0 is a new Component
+                // get a list of only sibling Components that will be "pushed up" the Lineup because we are adding a new position
+                List<Component> siblings = ApplicationDbContext.Components
+                    .Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId && x.LineupPosition >= c.LineupPosition)
+                    .ToList();
+                foreach (Component sibling in siblings)
+                {                
+                    sibling.LineupPosition++;  
                 }
+                // add the new Component to the Context
+                ApplicationDbContext.Components.Add(c);
             }
-                // ensure the LineupPosition of a Managerial Position is set to 0
-                p.LineupPosition = 0;
-                ApplicationDbContext.Positions.Add(p);
-            
-            if (p.LineupPosition == null)
+            else // Component parameter is an existing component
             {
-                // if this isn't set, we assume we are just adding the new Position to the end of the line
-                int lastPositionQueuePosition = p.ParentComponent.Positions.Count();
-                p.LineupPosition = lastPositionQueuePosition;
-                ApplicationDbContext.Positions.Add(p);
-            }
-            else
-            {
-                if (p.PositionId == 0)
+                // retrieve the old LineupPosition of the Component being edited to determine if the Component has moved up or down the lineup list
+                int? oldLineupPosition = ApplicationDbContext.Components.FirstOrDefault(x => x.ComponentId == c.ComponentId).LineupPosition;
+
+                if (oldLineupPosition > c.LineupPosition) // Component has been moved "up" the list
                 {
-                    // if the Position's LineupPosition is set, we need to update all of the existing Position's lineup positions to reflect this.
-                    // we need all Positions in the ParentComponent whose .LineupPositions are >= the new Position's Lineup Position
-                    List<Position> positionsToAdjust = p.ParentComponent.Positions.Where(x => x.LineupPosition >= p.LineupPosition).ToList();
-                    foreach (Position child in positionsToAdjust)
+                    // retrieve the sibling list... remember, this will include the Component being edited, so it needs to be skipped
+                    List<Component> siblingsToAdjust = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId && x.LineupPosition < oldLineupPosition).ToList();
+                    foreach(Component sibling in siblingsToAdjust)
                     {
-                        child.LineupPosition++;
-                    }
-                    ApplicationDbContext.Positions.Add(p);
-                }
-                else
-                {
-                    int? oldLineupIndex = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == p.PositionId).LineupPosition;
-                    if (oldLineupIndex > p.LineupPosition) // position has been moved "up" in the lineup
-                    {
-                        List<Position> positionsToAdjust = p.ParentComponent.Positions.Where(x => x.LineupPosition >= p.LineupPosition && x.LineupPosition < oldLineupIndex).ToList();
-                        foreach (Position child in positionsToAdjust)
+                        if (sibling.ComponentId != c.ComponentId) // skip if the sibling is the Component being edited
                         {
-                            if (child.PositionId != p.PositionId)
-                            {
-                                child.LineupPosition++;
-                            }
+                            sibling.LineupPosition++;
                         }
                     }
-                    else if (oldLineupIndex < p.LineupPosition) // position has been moved "down" the lineup
+                }
+                else if (oldLineupPosition < c.LineupPosition) // Component has been moved "down" the list
+                {
+                    // retrieve the sibling list... remember, this will include the Component being edited, so it needs to be skipped
+                    List<Component> siblingsToAdjust = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId && x.LineupPosition > oldLineupPosition).ToList();
+
+                    foreach(Component sibling in siblingsToAdjust)
                     {
-                        List<Position> positionsToAdjust = p.ParentComponent.Positions.Where(x => x.LineupPosition <= p.LineupPosition && x.LineupPosition > oldLineupIndex).ToList();
-                        foreach (Position child in positionsToAdjust)
+                        if (sibling.ComponentId != c.ComponentId)
                         {
-                            if (child.PositionId != p.PositionId)
-                            {
-                                child.LineupPosition--;
-                            }
+                            sibling.LineupPosition--;
                         }
                     }
-                    Position positionToUpdate = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == p.PositionId);
-                    positionToUpdate.IsManager = p.IsManager;
-                    positionToUpdate.IsUnique = p.IsUnique;
-                    positionToUpdate.JobTitle = p.JobTitle;
-                    positionToUpdate.LineupPosition = p.LineupPosition;
-                    positionToUpdate.Name = p.Name;
-                    positionToUpdate.ParentComponent = p.ParentComponent;
                 }
+
+                // finally, update the Component being edited
+                Component componentBeingEdited = ApplicationDbContext.Components.FirstOrDefault(x => x.ComponentId == c.ComponentId);
+                componentBeingEdited.Acronym = c.Acronym;
+                componentBeingEdited.LineupPosition = c.LineupPosition;
+                componentBeingEdited.Name = c.Name;
+                componentBeingEdited.ParentComponent = c.ParentComponent;
             }
         }
     }
