@@ -70,9 +70,24 @@ namespace OrgChartDemo.Persistence.Repositories
         /// <param name="newPositionName">New name of the position.</param>
         public void RemovePositionAndReassignMembers(int id, string newPositionName = "Unassigned")
         {
-            Position toDelete = ApplicationDbContext.Positions.Include(x => x.Members).First(x => x.PositionId == id);
+            // first, reassign all members in the position to the General Pool
+            Position toDelete = ApplicationDbContext.Positions
+                .Include(x => x.ParentComponent)
+                .Include(x => x.Members)
+                .First(x => x.PositionId == id);
             Position toReassign = ApplicationDbContext.Positions.First(x => x.Name == newPositionName);
-            toReassign.Members.AddRange(toDelete.Members);            
+            toReassign.Members.AddRange(toDelete.Members);
+            // adjust lineup for siblings here... if I am removing a Position, I only need to decrement the LineupPositions of all Positions "after" the
+            // deleted Component's LineupPosition
+            List<Position> siblings = ApplicationDbContext.Positions
+                .Where(x => x.ParentComponent.ComponentId == toDelete.ParentComponent.ComponentId 
+                && x.LineupPosition > toDelete.LineupPosition 
+                && x.PositionId != toDelete.PositionId)
+                .ToList();
+            foreach(Position sibling in siblings)
+            {
+                sibling.LineupPosition--;
+            }
             ApplicationDbContext.Positions.Remove(toDelete);
         }
         

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using OrgChartDemo.Models.Types;
 
@@ -6,6 +7,7 @@ namespace OrgChartDemo.Models.ViewModels
 {
     public class ComponentLineupViewComponentViewModel
     {
+        [Display(Name = "Display Order")]
         public List<ComponentPositionLineupItem> Components { get; set; }
         public Component ComponentToEdit { get; set; }
         public ComponentLineupViewComponentViewModel(List<ComponentPositionLineupItem> components, Component componentBeingEdited = null)

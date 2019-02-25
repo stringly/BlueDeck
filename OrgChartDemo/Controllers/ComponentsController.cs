@@ -95,7 +95,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Create()
         {
-            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetAll().ToList());
+            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetComponentSelectListItems());
             return View(vm);
         }
 
@@ -125,7 +125,7 @@ namespace OrgChartDemo.Controllers
                 if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
                 {
                     ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
+                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetComponentSelectListItems());
                 }
                 // add Component to repo via method that controls setting lineup
                 unitOfWork.Components.UpdateComponentAndSetLineup(c);
@@ -151,7 +151,7 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetAll().ToList());
+            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
             return View(vm);
         }
 
@@ -179,7 +179,7 @@ namespace OrgChartDemo.Controllers
             else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
             {
                 ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetAll().ToList());
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetComponentSelectListItems());
                 return View(vm);
             }
             else { 

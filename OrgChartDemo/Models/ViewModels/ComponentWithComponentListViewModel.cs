@@ -73,15 +73,14 @@ namespace OrgChartDemo.Models.ViewModels
         /// </summary>
         /// <param name="c">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
         /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
-        public ComponentWithComponentListViewModel(Component c, List<Component> l)
+        public ComponentWithComponentListViewModel(Component c, List<ComponentSelectListItem> l)
         {
             ComponentId = c?.ComponentId;
             ComponentName = c.Name;
             ParentComponentId = c?.ParentComponent?.ComponentId;
             Acronym = c.Acronym;
             LineupPosition = c.LineupPosition;
-            Components = l.ConvertAll(x => new ComponentSelectListItem { Id = x.ComponentId, ComponentName = x.Name }); 
+            Components = l; 
         }
-
     }
 }

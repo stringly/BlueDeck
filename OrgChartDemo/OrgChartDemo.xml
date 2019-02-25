@@ -1606,7 +1606,7 @@
             </remarks>
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.#ctor(OrgChartDemo.Models.Component,System.Collections.Generic.List{OrgChartDemo.Models.Component})">
+        <member name="M:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.#ctor(OrgChartDemo.Models.Component,System.Collections.Generic.List{OrgChartDemo.Models.Types.ComponentSelectListItem})">
             TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
@@ -2028,6 +2028,17 @@
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
             <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.UpdateComponentAndSetLineup(OrgChartDemo.Models.Component)">
+            <summary>
+            Adds a new Component or Updates an existing Component and adjusts the LineupPosition of all sibling Components within the ParentComponent
+            </summary>
+            <remarks>
+            If this method is used to edit an existing component, then the Component parameter must be a new Component instance set to the form values of the existing component.
+            This is because the method needs to know the "unedited" value of the Component's LineupPosition to determine whether the Component has been moved up or down
+            in it's ParentComponent's Lineup.
+            /// </remarks>
+            <param name="c">The <seealso cref="T:OrgChartDemo.Models.Component"/> being added or edited.</param>
         </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.MemberDutyStatusRepository.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
             <summary>

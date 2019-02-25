@@ -55,22 +55,22 @@
                 $("#LineupPosition").val($("#newComponentInsert").index());
             });
         });
-function handleLineupMoveUp() {
-    // Grab the <ul>,
-    // Find the "newPositionInsert"
-    // move it up on the <ul>
-    // update the #LineupPosition value to the new value
-    var list = document.getElementById("lineupSelection");
-    var newItem = document.getElementById('newComponentInsert');
-    var previousItem = newItem.previousElementSibling;
-    if (previousItem) {
-        list.insertBefore(newItem, previousItem);
-        $("#LineupPosition").val($("#newComponentInsert").index());
-        console.log("New item is now at position: " + $("#newComponentInsert").index());
-    } else {
-        console.log("Item is already at the top of the list at position: " + $("#newComponentInsert").index());
-    }
-}
+        function handleLineupMoveUp() {
+            // Grab the <ul>,
+            // Find the "newPositionInsert"
+            // move it up on the <ul>
+            // update the #LineupPosition value to the new value
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newComponentInsert');
+            var previousItem = newItem.previousElementSibling;
+            if (previousItem) {
+                list.insertBefore(newItem, previousItem);
+                $("#LineupPosition").val($("#newComponentInsert").index());
+                console.log("New item is now at position: " + $("#newComponentInsert").index());
+            } else {
+                console.log("Item is already at the top of the list at position: " + $("#newComponentInsert").index());
+            }
+        }
 
         function handleLineupMoveDown() {
             var list = document.getElementById("lineupSelection");

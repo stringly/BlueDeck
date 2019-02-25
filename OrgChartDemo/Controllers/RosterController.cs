@@ -382,5 +382,75 @@ namespace OrgChartDemo.Controllers
             return ViewComponent("AssignMemberModal", vm);
         }
 
+        public IActionResult GetAddEditComponentViewComponent(int componentId = 0, int parentComponentId = 0)
+        {
+            Component c = new Component();
+            List<ComponentSelectListItem> components = unitOfWork.Components.GetComponentSelectListItems();
+            if (componentId != 0)
+            {
+                c = unitOfWork.Components.Get(componentId);                                
+            }
+            if (parentComponentId != 0)
+            {
+                Component parent = unitOfWork.Components.Get(parentComponentId);
+                c.ParentComponent = parent;
+            }
+            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, components);
+            return ViewComponent("ComponentAddEditModal", vm);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateComponent([Bind("ComponentId,ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                if (form.ComponentId != 0)
+                {
+                    if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != form.ComponentId) != null)
+                    {
+                        ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
+                        form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                        return ViewComponent("ComponentAddEditModal", form);
+                    }
+                    else
+                    {
+                        Component parentComponent = unitOfWork.Components.Get(Convert.ToInt32(form.ParentComponentId));
+                        Component c = new Component()
+                        {
+                            ComponentId = Convert.ToInt32(form.ComponentId),
+                            Acronym = form.Acronym,
+                            Name = form.ComponentName,
+                            LineupPosition = form.LineupPosition,
+                            ParentComponent = parentComponent
+                        };
+                        unitOfWork.Components.UpdateComponentAndSetLineup(c);
+                        unitOfWork.Complete();
+                        return Json(new { Success = true });
+                    }
+                    
+                }
+                else
+                {
+                    Component parentComponent = unitOfWork.Components.Get(Convert.ToInt32(form.ParentComponentId));
+                    Component c = new Component()
+                    {                        
+                        Acronym = form.Acronym,
+                        Name = form.ComponentName,
+                        LineupPosition = form.LineupPosition,
+                        ParentComponent = parentComponent
+                    };
+                    unitOfWork.Components.UpdateComponentAndSetLineup(c);
+                    unitOfWork.Complete();
+                    return Json(new { Success = true });
+                }
+
+            }
+            else
+            {
+                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                return ViewComponent("ComponentAddEditModal", form);
+            }
+        }
     }
 }

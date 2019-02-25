@@ -25,11 +25,10 @@
 
         // Drag and Drop
         var dragSrcEl = null;
-        var dragSrcParentComponentId = null;        
+               
         function handleDragStart(e) {
             // Target (this) element is the source node.
-            dragSrcEl = this;
-            dragSrcParentComponentId = this.parentElement.dataset.parentcomponentid;
+            dragSrcEl = this;            
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text', this.outerHTML);
             this.classList.add('dragElem');
@@ -434,6 +433,38 @@
                 console.log("Item is already at the bottom of the list at position: " + $("#newPositionInsert").index());
             }
         }
+        function handleComponentLineupMoveUp() {
+            // Grab the <ul>,
+            // Find the "newPositionInsert"
+            // move it up on the <ul>
+            // update the #LineupPosition value to the new value
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newComponentInsert');
+            var previousItem = newItem.previousElementSibling;
+            if (previousItem) {
+                list.insertBefore(newItem, previousItem);
+                $("#LineupPosition").val($("#newComponentInsert").index());
+                console.log("New item is now at position: " + $("#newComponentInsert").index());
+            } else {
+                console.log("Item is already at the top of the list at position: " + $("#newComponentInsert").index());
+            }
+        }
+
+        function handleComponentLineupMoveDown() {
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newComponentInsert');
+            var nextItem = newItem.nextElementSibling;
+            // check if the item is already at the bottom of the list
+            if (nextItem) {
+                // move the newInsert item up the list
+                list.insertBefore(nextItem, newItem);
+                // set the form field to the new position index
+                $("#LineupPosition").val($("#newComponentInsert").index());
+                console.log("New item is now at position: " + $("#newComponentInsert").index());
+            } else {
+                console.log("Item is already at the bottom of the list at position: " + $("#newComponentInsert").index());
+            }
+        }
         
         
 
@@ -625,6 +656,39 @@
             })
         }
 
+        function handleAddEditComponentSubmit() {
+            var form = $("#addEditComponentModalForm");
+            // TODO: add Component Validation here
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.success == true) {
+                        $("#addEditComponentModal").modal("hide");
+                        $("#getComponentButton").trigger('click');
+                    }
+                    else {
+                        $("#addEditComponentModal").modal("hide");
+                        var backdrop = document.getElementsByClassName("modal-backdrop fade in");
+                        [].forEach.call(backdrop, function (elem) {
+                            elem.parentNode.removeChild(elem);
+                        })
+                        $("#modalTarget").html(response);
+                        document.getElementById('addEditComponentModalSubmit').addEventListener('click', handleAddEditComponentSubmit, false);
+                        $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: $("#ParentComponentId").val(), componentBeingEditedId: $("#ComponentId").val() }, function (data) {
+                            $("#lineupSelectionTarget").html(data);
+                            document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                            document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                            document.getElementById('ParentComponentId').addEventListener('change', handleParentComponentChange, false);
+                        });
+                        // show the modal
+                        $("#addEditComponentModal").modal("show");
+                    }
+                }
+            })
+        }
+
         function handleComponentShowHide(e) {
             // find the component detail section to hide
             var componentId = e.target.dataset.componentid;
@@ -635,18 +699,68 @@
                     e.target.dataset.state = 'collapsed';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-up');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-down');
-                    e.target.childNodes[2].textContent = "Expand"
+                    e.target.childNodes[0].textContent = "Expand"
                     break;
                 case 'collapsed':
                     e.target.dataset.state = 'expanded';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-down');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-up');
-                    e.target.childNodes[2].textContent = "Collapse"
+                    e.target.childNodes[0].textContent = "Collapse"
                     $("#componentDetailSection" + componentId).show();
                     break;
             }            
         }
 
+        function handleEditComponentClick(e) {
+            var componentId = e.target.dataset.componentid;
+            var container = $("#modalTarget").empty();
+            $.get('Roster/GetAddEditComponentViewComponent', { componentId: componentId }, function (data) {
+                // inject the ViewComponent HTML into the modal container
+                container.html(data);
+                // register the Modal's event handlers
+                document.getElementById('addEditComponentModalSubmit').addEventListener('click', handleAddEditComponentSubmit, false);
+                // retrieve the "Lineup" ViewComponent
+                $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: $("#ParentComponentId").val(), componentBeingEditedId: componentId }, function (data) {
+                    $("#lineupSelectionTarget").html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleComponentLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleComponentLineupMoveDown, false);
+                    document.getElementById('ParentComponentId').addEventListener('change', handleParentComponentChange, false);
+                });
+                // show the modal
+                $("#addEditComponentModal").modal("show");
+            })
+        }
+        function handleParentComponentChange (e) {
+            // retrieve the Lineup Interface view Component
+            var container = $("#lineupSelectionTarget").empty();
+            $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: this.value, componentBeingEditedId: $("#ComponentId").val() }, function (data) {
+                container.html(data);
+                document.getElementById('lineupMoveUp').addEventListener('click', handleComponentLineupMoveUp, false);
+                document.getElementById('lineupMoveDown').addEventListener('click', handleComponentLineupMoveDown, false);
+                $("#LineupPosition").val($("#newComponentInsert").index());
+            });
+        };
+
+        function handleAddComponentClick(e) {
+            var parentComponentId = e.target.dataset.parentcomponentid;
+            var container = $("#modalTarget").empty();
+            $.get('Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
+                // inject the ViewComponent HTML into the modal container
+                container.html(data);
+                // register the Modal's event handlers
+                document.getElementById('addEditComponentModalSubmit').addEventListener('click', handleAddEditComponentSubmit, false);
+                // retrieve the "Lineup" ViewComponent
+                $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: $("#ParentComponentId").val() }, function (data) {
+                    $("#lineupSelectionTarget").html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleComponentLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleComponentLineupMoveDown, false);
+                    document.getElementById('ParentComponentId').addEventListener('change', handleParentComponentChange, false);
+                });
+                // show the modal
+                $("#addEditComponentModal").modal("show");
+            })
+        }
+        
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
@@ -712,10 +826,15 @@
                 [].forEach.call(insertableInnerAssignMemberSpans, function (elem) {
                     elem.addEventListener('click', HandleAssignMemberClick, false);
                 })
-                var componentMenuItems = document.querySelectorAll('.componentHeaderMenuItem');
-                [].forEach.call(componentMenuItems, function (elem) {
+                var expandCollapseComponentButtons = document.querySelectorAll('.expandCollapseButton');
+                [].forEach.call(expandCollapseComponentButtons, function (elem) {
                     elem.addEventListener('click', handleComponentShowHide, false);
                 })
+                var editComponentButtons = document.querySelectorAll('.editComponentButton');
+                [].forEach.call(editComponentButtons, function (elem) {
+                    elem.addEventListener('click', handleEditComponentClick, false);
+                })
+                document.getElementById('addNewComponentButton').addEventListener('click', handleAddComponentClick, false);
             });
         });
     });
