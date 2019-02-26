@@ -95,6 +95,7 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Positions
                 .Include(x => x.ParentComponent)
+                .Include(x => x.Members)
                 .Where(x => x.PositionId == positionId)
                 .FirstOrDefault();
         }
@@ -105,44 +106,63 @@ namespace OrgChartDemo.Persistence.Repositories
             // I don't assume that the Position's ParentComponent's Child Positions collection will be set...
             p.ParentComponent.Positions = ApplicationDbContext.Positions.Where(x => x.ParentComponent.ComponentId == p.ParentComponent.ComponentId).ToList();
             
-            // if the new position is managerial, add it to the top of the Lineup and move all others down
-            if (p.IsManager == true)
+            if (p.PositionId == 0) // new Position
             {
-                foreach (Position child in p.ParentComponent.Positions)
+                // if Manager, then push new Position to the top of the sibling list
+                if (p.IsManager == true)
                 {
-                    // this shouldn't happen, but just in case the new position is manager and the parent component already has a managerial position 
-                    child.IsManager = false;
-                    if (child.PositionId != p.PositionId)
+                    foreach (Position child in p.ParentComponent.Positions)
                     {
+                        // this shouldn't happen, but just in case the new position is manager and the parent component already has a managerial position 
+                        child.IsManager = false;
                         child.LineupPosition++;
-                    }                        
+                        
+                    }
+                    // ensure the LineupPosition of a Managerial Position is set to 0
+                    p.LineupPosition = 0;
+                    
                 }
-                // ensure the LineupPosition of a Managerial Position is set to 0
-                p.LineupPosition = 0;
-                ApplicationDbContext.Positions.Add(p);
-            }
-            if (p.LineupPosition == null)
-            {
-                // if this isn't set, we assume we are just adding the new Position to the end of the line
-                int lastPositionQueuePosition = p.ParentComponent.Positions.Count();
-                p.LineupPosition = lastPositionQueuePosition;
-                ApplicationDbContext.Positions.Add(p);
-            }
-            else
-            {
-                if (p.PositionId == 0)
+                else if (p.LineupPosition == null)
                 {
-                    // if the Position's LineupPosition is set, we need to update all of the existing Position's lineup positions to reflect this.
-                    // we need all Positions in the ParentComponent whose .LineupPositions are >= the new Position's Lineup Position
+                    // if no LineupPosition set, then assume we add the new Position to the end of the sibling list
+                    p.LineupPosition = p.ParentComponent.Positions.Count();
+                }
+                else // new Position has been assigned a specific Lineup Position, and others must be adjusted
+                {
+                    // We need to update all of the existing Position's lineup positions to reflect this.
+                    // We need all Positions in the ParentComponent whose LineupPositions are >= the new Position's Lineup Position
                     List<Position> positionsToAdjust = p.ParentComponent.Positions.Where(x => x.LineupPosition >= p.LineupPosition).ToList();
                     foreach (Position child in positionsToAdjust)
-                    {   
+                    {
                         child.LineupPosition++;
                     }
-                    ApplicationDbContext.Positions.Add(p);
                 }
-                else
-                {                    
+                ApplicationDbContext.Positions.Add(p);
+            }
+            else // existing Position
+            {
+                // if Manager, then push the Position to the top of the sibling list
+                if (p.IsManager == true)
+                {
+                    foreach (Position child in p.ParentComponent.Positions)
+                    {
+                        // this shouldn't happen, but just in case the new position is manager and the parent component already has a managerial position 
+                        child.IsManager = false;
+                        if (child.PositionId != p.PositionId)
+                        {
+                            child.LineupPosition++;
+                        }
+                    }
+                    // ensure the LineupPosition of a Managerial Position is set to 0
+                    p.LineupPosition = 0;                    
+                }
+                else if (p.LineupPosition == null)
+                {
+                    // if this isn't set, we assume we are just adding the new Position to the end of the line
+                    p.LineupPosition = p.ParentComponent.Positions.Count();
+                }
+                else // the Position has been assigned a specific Lineup Position, and others must be adjusted
+                {
                     int? oldLineupIndex = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == p.PositionId).LineupPosition;
                     if (oldLineupIndex > p.LineupPosition) // position has been moved "up" in the lineup
                     {
@@ -166,14 +186,29 @@ namespace OrgChartDemo.Persistence.Repositories
                             }
                         }
                     }
-                    Position positionToUpdate = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == p.PositionId);
-                    positionToUpdate.IsManager = p.IsManager;
-                    positionToUpdate.IsUnique = p.IsUnique;
-                    positionToUpdate.JobTitle = p.JobTitle;
-                    positionToUpdate.LineupPosition = p.LineupPosition;
-                    positionToUpdate.Name = p.Name;
-                    positionToUpdate.ParentComponent = p.ParentComponent;                    
                 }
+                // now, we check to see if the Position has been changed from Non-Unique to Unique and reassign it's current members if so
+                
+                // first, retrieve the existing Position from the repo
+                Position positionToUpdate = ApplicationDbContext.Positions
+                    .Include(x => x.Members)
+                    .FirstOrDefault(x => x.PositionId == p.PositionId);
+                if(p.IsUnique == true && positionToUpdate.Members.Count() > 1)
+                {
+                    Position unassigned = ApplicationDbContext.Positions.FirstOrDefault(x => x.Name == "Unassigned");
+                    foreach (Member m in positionToUpdate.Members)
+                    {
+                        m.Position = unassigned;
+                    }
+                }
+                // Finally, update the Position with the new values
+                positionToUpdate.IsManager = p.IsManager;
+                positionToUpdate.IsUnique = p.IsUnique;
+                positionToUpdate.JobTitle = p.JobTitle;
+                positionToUpdate.LineupPosition = p.LineupPosition;
+                positionToUpdate.Name = p.Name;
+                positionToUpdate.ParentComponent = p.ParentComponent;
+
             }
         }
     }

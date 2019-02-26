@@ -362,6 +362,10 @@
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
                 });
+                var isUniqueCheckBox = document.getElementById("IsUnique");
+                isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
+                var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
+                uniqueWarningCancelButton.addEventListener('click', handleUniqueWarningSubModalCancel, false);
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -397,6 +401,19 @@
                 });
             }
         }
+
+        function handleIsUniqueChange(e) {
+            var memberCount = e.target.dataset.membercount;
+            if (e.target.checked && memberCount > 1) {
+                $("#uniqueWarningSubModal").modal('show');
+            }
+        }
+
+        function handleUniqueWarningSubModalCancel(e) {
+            $("#IsUnique").prop('checked', false);
+            $("#uniqueWarningSubModal").modal('hide');
+        }
+
         function handleLineupMoveUp() {
             // Grab the <ul>, 
             // Find the "newPositionInsert"
@@ -542,6 +559,23 @@
                         $("#modalTarget").html(response);
                         var submitButton = document.getElementById("addPositionToComponentModalSubmit");
                         submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
+                        var showDeleteButton = document.getElementById("deletePositionModalButton");
+                        showDeleteButton.addEventListener('click', handleShowDeletePositionConfirm, false);
+                        var deletePositionConfirmButton = document.getElementById("deletePositionConfirm");
+                        deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
+                        var parentComponentSelect = document.getElementById('ParentComponentId');
+                        parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
+                        var isManagerCheckBox = document.getElementById('IsManager');
+                        isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
+                        $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                            $("#lineupSelectionTarget").html(data);
+                            document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                            document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                        });
+                        var isUniqueCheckBox = document.getElementById("IsManager");
+                        isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
+                        var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
+                        uniqueWarningButton.addEventListener('click', handleUniqueWarningSubModalCancel, false);
                         $("#addPositionToComponentModal").modal("show");
                     }
                 },

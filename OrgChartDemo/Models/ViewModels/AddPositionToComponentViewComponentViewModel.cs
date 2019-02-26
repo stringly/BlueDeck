@@ -63,6 +63,8 @@ namespace OrgChartDemo.Models.ViewModels
 
         public int? LineupPosition { get; set; }
 
+        public int MemberCount { get; set; }
+
         public Component ParentComponent { get; set; }
 
         public List<ComponentSelectListItem> ComponentList { get; set; }
@@ -88,6 +90,7 @@ namespace OrgChartDemo.Models.ViewModels
             IsUnique = position.IsUnique;
             LineupPosition = position.LineupPosition;
             ComponentList = componentList;
+            MemberCount = position.Members.Count;
         }
     }
 }
