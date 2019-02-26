@@ -1,27 +1,30 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link href="~/lib/getorgchart/css/getorgchart.css" rel="stylesheet" />
     <link asp-href-include="lib/bootstrap/css/*.min.css" rel="stylesheet" />
-    <title>@ViewBag.Title</title>
+    @*<title>@ViewBag.Title</title>*@
+    <title>BlueDeck - Beta Version</title>
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/getorgchart/js/getorgchart.js"></script>
-    
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
+
 </head>
 <body>
-    <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="#">Org Chart Demo</a>
-    </div>
-    <div class="row-panel">
-        <div id="categories" class="col-xs-1">
-            @await Component.InvokeAsync("NavigationMenu")
-        </div>
-    </div>
-    <div class="col-xs-11">
+    @await Component.InvokeAsync("NavigationMenu")
+    <div class="col-xs-12">
         <h3 class="text-danger">@ViewBag.Message</h3>
         @RenderBody()
     </div>
+    <!-- Modal -->
+    <div id="modalTarget">
+
+    </div>
+
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿@model OrgChartDemo.Models.Member
+﻿@model MemberAddEditViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,6 +12,14 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MemberRank" class="control-label"></label>
+                @Html.DropDownListFor(model => model.MemberRank,
+                                                new SelectList(Model.RankList, "MemberRankId", "RankName"),
+                                                "Choose Rank",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="MemberRank" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -33,9 +41,41 @@
                 <span asp-validation-for="IdNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DutyStatusId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.DutyStatusId,
+                                                new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
+                                                "Choose Duty Status",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="DutyStatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberGender" class="control-label"></label>
+                @Html.DropDownListFor(model => model.MemberGender,
+                                                new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
+                                                "Choose Gender",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="MemberGender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberRace" class="control-label"></label>
+                @Html.DropDownListFor(model => model.MemberRace,
+                                                new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
+                                                "Choose Race",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="MemberRace" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PositionId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.PositionId,
+                                                new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                "Assign to Position",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="PositionId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

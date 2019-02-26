@@ -8,18 +8,11 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="PositionId" />
+            @Html.HiddenFor(model => model.LineupPosition)
             <div class="form-group">
                 <label asp-for="PositionName" class="control-label"></label>
                 <input asp-for="PositionName" class="form-control" />
                 <span asp-validation-for="PositionName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ParentComponentId" class="control-label"></label>
-                @Html.DropDownListFor(model => model.ParentComponentId,
-                                                new SelectList(Model.Components, "Id", "ComponentName"),
-                                                "Choose Parent Component",
-                                                new { @class = "form-control" })
-                <span asp-validation-for="ParentComponentId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div class="checkbox">
@@ -29,16 +22,27 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="JobTitle" class="control-label"></label>
-                <input asp-for="JobTitle" class="form-control" />
-                <span asp-validation-for="JobTitle" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <div class="checkbox">
                     <label>
                         <input asp-for="IsManager" /> @Html.DisplayNameFor(model => model.IsManager)
                     </label>
                 </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentComponentId" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ParentComponentId,
+                                                new SelectList(Model.Components, "Id", "ComponentName"),
+                                                "Choose Parent Component",
+                                                new { @class = "form-control" })
+                <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+            </div>
+            <div id="lineupSelectionTarget">
+                
+            </div>
+            <div class="form-group">
+                <label asp-for="JobTitle" class="control-label"></label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -50,3 +54,89 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // invoke the Lineup selector on page load
+        $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {            
+            $("#lineupSelectionTarget").html(data);
+            document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+            document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+        });
+
+        $("#ParentComponentId").on('change', function () {
+            if (this.value != null && !document.getElementById('IsManager').checked) {
+                // retrieve the Lineup Interface view Component
+                var container = $("#lineupSelectionTarget").empty();
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: this.value, positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                });
+            }
+        });
+        $("#IsManager").on('change', function () {
+            console.log("ParentComponent value is: " + $("#ParentComponentId").val());
+            console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            if (this.checked) {
+                $("#lineupSelectionTarget").empty();
+                $("#LineupPosition").val(0);
+            }
+            else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
+                var container = $("#lineupSelectionTarget").empty();
+                console.log("Attempting to repoll ViewComponent");
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                });
+            }
+
+        })
+
+        function handleLineupMoveUp() {
+            // Grab the <ul>, 
+            // Find the "newPositionInsert"
+            // move it up on the <ul>
+            // update the #LineupPosition value to the new value
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newPositionInsert');
+            var previousItem = newItem.previousElementSibling;
+            console.log("Manager dataset is : " + previousItem.dataset.ismanager);
+            if (previousItem.dataset.ismanager != "True") {
+                // move the newInsert item up the list
+                list.insertBefore(newItem, previousItem);
+                // set the form field to the new position index
+                $("#LineupPosition").val($("#newPositionInsert").index());
+                console.log("New item is now at position: " + $("#newPositionInsert").index());
+            } else {
+                console.log("Cant move above manager");
+            }
+
+        }
+
+        function handleLineupMoveDown() {
+            var list = document.getElementById("lineupSelection");
+            var newItem = document.getElementById('newPositionInsert');
+            var nextItem = newItem.nextElementSibling;
+            // check if the item is already at the bottom of the list
+            if (nextItem) {
+                // move the newInsert item up the list
+                list.insertBefore(nextItem, newItem);
+                // set the form field to the new position index
+                $("#LineupPosition").val($("#newPositionInsert").index());
+                console.log("New item is now at position: " + $("#newPositionInsert").index());
+            } else {
+                console.log("Item is already at the bottom of the list at position: " + $("#newPositionInsert").index());
+            }
+        }
+
+
+
+
+
+
+    });
+
+</script>

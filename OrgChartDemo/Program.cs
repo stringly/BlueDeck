@@ -13,6 +13,10 @@ namespace OrgChartDemo {
     /// Program Starting Routine
     /// </summary>
     public class Program {
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
         public static void Main(string[] args) {
             CreateWebHostBuilder(args).Build().Run();
         }
@@ -24,6 +28,7 @@ namespace OrgChartDemo {
         /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseApplicationInsights()
                 .UseStartup<Startup>();
     }
 }

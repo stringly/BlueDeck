@@ -4,47 +4,145 @@
         <name>OrgChartDemo.Tests</name>
     </assembly>
     <members>
+        <member name="T:OrgChartDemo.Tests.Helpers.DatabaseHelpers">
+            <summary>
+            Extension methods use to provision an in-Memory test SQLite Db used in unit testing
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.Helpers.DatabaseHelpers.SeedDatabaseForTesting(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Seeds the database for testing.
+            </summary>
+            <param name="context">The instance of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> we are extending.</param>
+        </member>
+        <member name="M:OrgChartDemo.Tests.Helpers.DatabaseHelpers.ResetDatabase(OrgChartDemo.Models.ApplicationDbContext)">
+            <summary>
+            Resets the database.
+            </summary>
+            <param name="context">The instance of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> being extended.</param>
+        </member>
+        <member name="T:OrgChartDemo.Tests.Helpers.UnitTestFrame">
+            <summary>
+            A Generic class that encapsulates creating test DbContext for Unit Testing Modules
+            </summary>
+        </member>
+        <member name="F:OrgChartDemo.Tests.Helpers.UnitTestFrame.options">
+            <summary>
+            A <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions{ApplicationDbContext}"/>
+            <remarks>
+            This member should
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.Helpers.UnitTestFrame.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Tests.TestingProvisioning"/> class.
+            <remarks>
+            This constructor uses the <a href="https://github.com/JonPSmith/EfCore.TestSupport/wiki">EFCore.TestSupport</a> package
+            and creates a <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions"/> object that will create and 
+            in-memory SQLite Db based on the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> 
+            Every Testing Clasas must have a Constructor that assigns this <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions"/> object. 
+            </remarks>
+            </summary>
+        </member>
         <member name="T:OrgChartDemo.Tests.PositionControllerTests">
             <summary>
             Unit tests for the PositionController
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.#ctor">
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Add_Position_To_Context_Via_Controller">
             <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Tests.PositionControllerTests"/> class.
+            Determines whether a position can be added to the Context using <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Remove_Position_Via_Controller">
+            <summary>
+            Determines whether a position can be removed via <see cref="T:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(int)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Given_Position_Id_Can_Edit_Position_In_Context_Via_Controller">
+            <summary>
+            Tests editing a Position using <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Detect_Duplicate_Position_Name_For_New_Position">
+            <summary>
+            Determines whether this instance can detect duplicate position name when adding a new Position
+            via <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Detect_Duplicate_Position_Name_For_Existing_Position">
+            <summary>
+            Determines whether this instance can detect duplicate position name when adding a new Position
+            via <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Detect_Existing_Manager_In_Parent_Component_Via_Controller_Create">
+            <summary>
+            Determines whether this instance can detect existing manager in parent component via 
+            <see cref="T:OrgChartDemo.Controllers.PositionsController.Create(PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Detect_Existing_Manager_In_Parent_Component_Via_Controller_Edit">
+            <summary>
+            Determines whether this instance can detect existing manager in parent component via 
+            <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Prevent_Existing_Position_To_Unique_When_Multiple_Members_Via_Controller_Edit">
+            <summary>
+            Determines whether this instance can prevent changing existing position to unique when multiple members are assigned via 
+            <see cref="T:OrgChartDemo.Controllers.PositionsController.Edit(int, PositionWithComponentListViewModel)"/>.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.PositionControllerTests.Can_Unassign_Members_Of_Deleted_Position_Via_Delete">
+            <summary>
+            Determines whether this instance can move members of deleted position to the Unassigned pool 
+            via <see cref="T:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(int)"/>.
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Tests.RepositoryTests">
+            <summary>
+            This class contains unit tests for the Repository Interfaces
             <remarks>
-            This will constructor initializes a <see cref="T:OrgChartDemo.Models.FakeRepository"/>
+            These tests should NOT implement the test SQLite DbContext
             </remarks>
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanGetPositionListWithMemberCount">
+        <member name="M:OrgChartDemo.Tests.RepositoryTests.Given_Component_Id_Should_Get_Component_Name">
             <summary>
-            Determines whether this instance [can get position list with member count].
+            Tests whether a component identifier will return the corresponding component's name.
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanAddPosition">
+        <member name="M:OrgChartDemo.Tests.RepositoryTests.Given_Position_Id_Should_Get_Position_Name">
             <summary>
-            Determines whether this instance [can add position].
+            Tests if the position identifier will return the corresponding get position's name.
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanAddPositionFromController">
+        <member name="M:OrgChartDemo.Tests.RepositoryTests.Given_Member_Id_Should_Get_Member_Name">
             <summary>
-            Determines whether this instance [can add position from PositionController.Create()].
+            Tests if the member identifier will return the corresponding member's name.
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanDetectExistingPositionName">
+        <member name="M:OrgChartDemo.Tests.RepositoryTests.Position_With_Members_Should_Get_Members">
             <summary>
-            Determines whether this instance [can detect existing position name] and prevent a duplicate add.
+            Tests the <see cref="T:OrgChartDemo.Models.Repositories.IPositionRepository.GetPositionsWithMembers"/> 
+            to ensure that the list of positions successfully includes it's corresponding members.
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanDetectComponentPositionManagerDuplicate">
+        <member name="T:OrgChartDemo.Tests.TestingProvisioning">
             <summary>
-            Determines whether this instance [can detect component position manager duplicate].
+            Class containing tests for ensuring the OrgChartDemo Test environment is correctly configured for testing
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Tests.PositionControllerTests.CanEditPosition">
+        <member name="M:OrgChartDemo.Tests.TestingProvisioning.Can_Create_Sqlite_Db">
             <summary>
-            Determines whether this instance [can edit component].
+            Determines whether this instance can create the SQlite database.
+            </summary>
+        </member>
+        <member name="M:OrgChartDemo.Tests.TestingProvisioning.Can_Reset_Db">
+            <summary>
+            Determines whether this instance can reset the SQLite database.
             </summary>
         </member>
     </members>

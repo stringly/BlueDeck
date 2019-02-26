@@ -1,0 +1,36 @@
+﻿
+namespace OrgChartDemo.Models.Types
+{
+    /// <summary>
+    /// A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRace"/> Entity.
+    /// /// <remarks>
+    /// This type is used to populate a MemberRace select list.
+    /// </remarks>
+    /// </summary>
+    public class MemberRaceSelectListItem
+    {
+        /// <summary>
+        /// Gets or sets the member race identifier.
+        /// </summary>
+        /// <value>
+        /// The member race identifier.
+        /// </value>
+        public int MemberRaceId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the race.
+        /// </summary>
+        /// <value>
+        /// The name of the race.
+        /// </value>
+        public string RaceFullName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the abbreviation.
+        /// </summary>
+        /// <value>
+        /// The abbreviation.
+        /// </value>
+        public char Abbreviation { get; set; }
+    }
+}

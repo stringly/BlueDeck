@@ -1,0 +1,33 @@
+﻿@model ReassignEmployeeModalViewComponentViewModel
+
+<div class="modal fade" id="reassignEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#reassignEmployeeModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="reassignEmployeeModalLabel">Reassign @Model.Member.GetTitleName()</h4>
+                </div>
+                
+                <form asp-action="ReassignMemberViaModal" id="reassignEmployeeModalForm">
+                    <div class="modal-body">
+                        <h6 class="text-danger" id="warning">@ViewBag.Message</h6>
+                        @Html.HiddenFor(model => model.MemberId)
+                        @Html.LabelFor(model => model.PositionId)
+                        @Html.DropDownListFor(model => model.PositionId,
+                                                    new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                    "Select Position",
+                                                    new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.SelectedComponentId)
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#reassignEmployeeModal">Close</button>
+                    <button type="button" id="reassignEmployeeModalSubmit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

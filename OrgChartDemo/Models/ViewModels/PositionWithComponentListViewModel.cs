@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace OrgChartDemo.Models.ViewModels
 {
     /// <summary>
-    /// ViewModel used to display a Positions and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
+    /// ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
     /// </summary>
     public class PositionWithComponentListViewModel
     {
@@ -24,6 +24,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The name of the position.
         /// </value>
         [StringLength(75), Required]
+        [Display(Name = "Position Name")]
         public string PositionName { get; set; }
 
         /// <summary>
@@ -32,6 +33,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The parent's ComponentId.
         /// </value>
+        [Display(Name = "Parent Component")] 
         public int? ParentComponentId { get; set; }
 
         /// <summary>
@@ -40,7 +42,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The job title.
         /// </value>
-        [StringLength(75), Required]
+        [Required]
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
 
         /// <summary>
@@ -49,6 +52,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is manager; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Manager of Component")] 
         public bool IsManager { get; set; }
 
         /// <summary>
@@ -57,7 +61,10 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this instance is unique; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Unique")]
         public bool IsUnique { get; set; }
+
+        public int? LineupPosition { get; set; }
 
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
@@ -73,8 +80,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel"/> class.
         /// </summary>
         /// <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> being displayed by the view</param>
-        /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
-        public PositionWithComponentListViewModel(Position p, List<Component> l) {
+        public PositionWithComponentListViewModel(Position p) {
 
             PositionId = p?.PositionId;
             PositionName = p.Name;
@@ -82,7 +88,8 @@ namespace OrgChartDemo.Models.ViewModels
             JobTitle = p.JobTitle;
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
-            Components = l.ConvertAll(x => new ComponentSelectListItem { Id = x.ComponentId, ComponentName = x.Name });                  
+            LineupPosition = p.LineupPosition;
+            Components = new List<ComponentSelectListItem>();
         }
 
         /// <summary>
@@ -92,7 +99,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// </remarks>
         /// </summary>
         public PositionWithComponentListViewModel() {
-
+            Components = new List<ComponentSelectListItem>();
         }
     }
 }

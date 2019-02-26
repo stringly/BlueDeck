@@ -1,55 +1,80 @@
-﻿@model IEnumerable<OrgChartDemo.Models.Member>
+﻿@model MemberIndexListViewModel
 
-<h2>Index</h2>
+<h2>Members Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-page="/Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="/Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Members.First().LastName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.MemberFirstNameSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Members.First().FirstName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MiddleName)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.IdNumberSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Members.First().IdNumber)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNumber)
+                <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
+                   asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Members.First().PositionName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.Members.First().Email)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model.Members)
+        {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MiddleName)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.PositionName)
             </td>
+            <td>
+                <a href="mailto:@item.Email" target="_top">
+                    @Html.DisplayFor(modelItem => item.Email)
+                </a>
+</td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OrgChartDemo.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Persistence;
 
 namespace OrgChartDemo {
     /// <summary>
@@ -33,8 +34,7 @@ namespace OrgChartDemo {
         /// <param name="services">An <see cref="IServiceCollection"/></param>
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
-            services.AddTransient<IComponentRepository, EFComponentRepository>();
-            // services.AddTransient<IComponentRepository, FakeComponentRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddMvc();
             
         }
@@ -53,7 +53,7 @@ namespace OrgChartDemo {
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=OrgChart}/{action=Index}/{id?}");
             });
         }
     }

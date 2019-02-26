@@ -26,7 +26,8 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The <see cref="Rank"/> of the Member
         /// </value>
-        public MemberRank Rank { get; set; }
+        [Display(Name = "Rank")]
+        public virtual MemberRank Rank { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's first name.
@@ -34,6 +35,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The first name of the Member.
         /// </value>
+        [Display(Name = "First Name")]
         public string FirstName{ get; set; }
 
         /// <summary>
@@ -42,6 +44,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The last name of the Member.
         /// </value>
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         /// <summary>
@@ -50,6 +53,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the middle.
         /// </value>
+        [Display(Name = "Middle Name")]
         public string MiddleName { get; set; }
 
         /// <summary>
@@ -58,7 +62,38 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Departmental Id Number of the Member.
         /// </value>
+        [Display(Name = "ID Number")]
         public string IdNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's gender.
+        /// </summary>
+        /// <value>
+        /// The Member's gender.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberGender"/>
+        [Display(Name = "Gender")]
+        public virtual MemberGender Gender { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's race.
+        /// </summary>
+        /// <value>
+        /// The Member's race.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberRace"/>
+        [Display(Name = "Race")]
+        public virtual MemberRace Race { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's duty status.
+        /// </summary>
+        /// <value>
+        /// The Member's race.
+        /// </value>
+        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/>
+        [Display(Name = "Duty Status")]
+        public virtual MemberDutyStatus DutyStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's email.
@@ -66,6 +101,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Member's email.
         /// </value>
+        [Display(Name = "Email Address")]
         public string Email {get; set; }
 
         /// <summary>
@@ -74,6 +110,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The position.
         /// </value>
+        [Display(Name = "Current Assignment")]
         public virtual Position Position { get; set; }
 
         /// <summary>
@@ -83,7 +120,7 @@ namespace OrgChartDemo.Models {
         /// e.g. "POFC Foo Bar #1234"
         /// </remarks>
         /// <returns>A <see cref="string"/> with the formal display name for the Member</returns>
-        public string GetTitleName() => $"{this.Rank.RankShort}. {this.FirstName} {this.LastName} #{this.IdNumber}";
+        public string GetTitleName() => $"{this.Rank.RankShort} {this.FirstName} {this.LastName} #{this.IdNumber}";
 
         /// <summary>
         /// Gets the Member's name in "LastName, FirstName" format.

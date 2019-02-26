@@ -1,0 +1,426 @@
+﻿
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+}
+
+/* Bootstrap Overrides*/
+
+.navbar {
+    border-radius: 0px;
+}
+#rosterContainer {
+    background-color: #f7f7f7;
+    padding: 5px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+#addNewPositionButton {
+    color: #0000EE;
+    cursor: pointer;
+}
+#addNewComponentButton {
+    color: #0000EE;
+    cursor: pointer;
+    margin: 5px 0px 5px 10px;
+}
+.modal-header {
+    background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.4));
+    color: azure;
+}
+.componentContainer {
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;*/
+    margin: 0px 0px 20px 0px;
+    /* background-color: #dfe3ee; */
+    background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
+}
+/*.componentContainer-nested-1 {
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-left: 30px;
+    padding: 0px 0px 20px 0px;
+     background-color: #dfe3ee; 
+    background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
+}*/
+/*.componentContainer-nested-1::before {
+    content: "";
+    width: 15px;
+    height: 100%;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    position: relative;
+    float: left;
+    margin-right: 15px;
+    left: -15px;
+    top: -20px;
+}*/
+
+/*.componentContainer-nested-2 {
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-left: 60px;
+    padding: 0px 0px 20px 0px;
+     background-color: #dfe3ee; 
+    background-image: linear-gradient(to bottom, rgba(152,167,200,1), rgba(152,167,200, 0));
+}*/
+.componentHeaderDiv {
+    height: 40px;
+    background-image: linear-gradient(to right, rgba(59,89,152,1), rgba(59,89,152, 0.2));
+    margin: 0 -15px 15px -15px;
+    border: 1px solid #3b5998;
+}
+    .componentContainer .logoDiv {        
+        margin-right: 3px;
+        margin-left: 3px;
+        padding-right: 5px;
+    }
+    .componentContainer .logoDiv img {
+        height: 55px;
+        width: 40px;
+    }
+    .componentContainer .logoDiv span {
+        color: whitesmoke;
+        font-size: 22px;
+        line-height: 36px;
+        
+    }
+    .componentHeaderMenuItem .glyphicon {
+        margin: 0px 5px 0px 5px;
+    }
+
+.headerSpan {
+    font-size: 16px;
+    color: white;
+    padding: 0px 20px 0px 10px;
+    margin-top: 0px;
+    line-height: 40px;
+    /*background-color: #3b5998;*/
+    /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
+}
+    .componentHeaderMenuItem {
+        font-size: 12px;
+        color: white;        
+        line-height: 40px;
+        margin: 0px 5px 0px 5px;
+        cursor: pointer;
+    }
+    .headerSpan .glyphicon {
+        margin-left: 10px;
+        color: whitesmoke;
+        font-size: 20px;
+    }
+    .componentContainer .nonUniquePositionWrapper {
+        margin: 10px 15px 10px 15px;
+        border: 1px solid black;
+        padding: 5px 0px 5px 0px;
+    }
+
+    .componentContainer .nonUniquePositionWrapper strong {
+        margin: 2px 5px 2px 5px;
+        
+    }
+    .componentContainer .nonUniquePositionWrapper .form-group {
+        margin: 2px 5px 2px 5px;
+    }
+    .componentContainer .nonUniquePositionWrapper .glyphicon {
+        margin-left: 2px;
+    }
+    .componentContainer .member {
+        float: right;
+        margin-left: 5px;
+        padding: 5px;
+        color: white;
+        /*background-color: #3b5998;*/
+        background-image: linear-gradient(to bottom right, rgba(59,89,152,1), rgba(59,89,152, 0.5));
+        cursor: grab;
+        width: 100%;
+    }    
+    .componentContainer ul {
+        list-style-type: none;
+        padding: 10px;
+    }
+    .componentContainer .insertable {
+        height: 33px;
+        vertical-align: middle;
+        border: 1px solid black;
+        padding: 2px;
+        background-color: white;
+    }
+    .componentContainer .insertable .insertableInner {
+        font-size: 10px;
+        color:darkgray;
+        line-height: 29px;
+        text-align: center;
+    }
+    .componentContainer .insertable .insertableInner .insertableInnerSelectMember {
+        margin: 0px;
+        color: #337ab7;
+        cursor: pointer;
+    }
+    .componentContainer a {
+        margin: 5px 0px 5px 10px;
+    }
+    .componentContainer .form-group {        
+        margin: 10px 20px 10px 20px;
+    }
+    .componentContainer .member .L01 {
+        content: url();
+    }
+    .componentContainer .member .L02 {
+        content: url("images/rankicons/L02.png");
+    }
+
+    .componentContainer .member .L03 {
+        content: url("images/rankicons/L03.png");
+    }
+
+    .componentContainer .member .L04 {
+        content: url("images/rankicons/L04.png");
+    }
+
+    .componentContainer .member .L05 {
+        content: url("images/rankicons/L05.png");
+    }
+
+    .componentContainer .member .L06 {
+        content: url("images/rankicons/L06.png");
+    }
+
+    .componentContainer .member .L07 {
+        content: url("images/rankicons/L07.png");
+    }
+    .componentContainer .member .L08 {
+        content: url("images/rankicons/L08.png");
+    }
+    .componentContainer .member .L09 {
+        content: url("images/rankicons/L08.png");
+    }
+    .componentContainer .member .L10 {
+        content: url("images/rankicons/L08.png");
+    }
+.componentDemoTable {
+    margin: 0 auto;
+    /*background-image: linear-gradient(to bottom, rgba(59,89,152,0.3), rgba(59,89,152, 0));*/
+}
+
+    .componentDemoTable .componentDemoTableHeaderRow td {
+        color: white;        
+        background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.2));
+        padding: 5px;
+        border: 1px solid #4d68a1;
+    }
+        .componentDemoTable .componentDemoTableSubHeaderRow th {
+            /*background-color: #808080; */
+            /*background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));*/
+            text-align: center;
+            padding: 3px 2px 0px 0px;
+            border-bottom: 1px solid #4d68a1;
+        }
+    .componentDemoTable .componentDemoTableSubSubHeaderRow td {
+        /*background-color: #d4d4d4;*/
+        /*background-image: linear-gradient(to bottom, rgba(128,128,128,0.5), rgba(128,128,128,0));*/
+        border-bottom: 1px solid #4d68a1;
+    }
+
+    .componentDemoTable th {
+    }
+    .componentDemoTable td {
+        text-align: center;
+        padding: 4px;
+        background-color: transparent;
+    }
+
+    .componentContainer .firstRow {
+        text-align: left;
+        font-weight: bold;
+        background-color: transparent;
+        padding-left: 5px;
+    }
+
+    .drag-options {
+        float: left;
+        position: absolute;
+        padding: 5px;
+        right: 38px;
+        /*background-color: #3d5c9f;*/
+        /*background-color: #94a4c8;*/
+        background-image: linear-gradient(to bottom, rgba(61, 92, 159, 1), rgba(148, 164, 200, 1));
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        margin-top: 5px;
+        opacity: 0;
+        z-index: 10;
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .drag-options.active {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .drag-options-label {
+        display: block;
+        margin: 0 0 2px 0;
+    }
+
+    .drag-options-label input {
+        opacity: 0.6;
+    }
+
+    .drag-options-label a {
+        display: inline-block;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: white;
+        margin: 0px;
+    }
+
+    .vertical-alignment-helper {
+        display: table;
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+    }
+
+    .vertical-align-center {
+        /* To center vertically */
+        display: table-cell;
+        vertical-align: middle;
+        pointer-events: none;
+    }
+
+    .modal-content {
+        /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+        width: inherit;
+        max-width: inherit; /* For Bootstrap 4 - to avoid the modal window stretching full width */
+        height: inherit;
+        /* To center horizontally */
+        margin: 0 auto;
+        pointer-events: all;
+        border-radius: 0px;
+    }
+
+    .dragGhost-member {
+        position: absolute;
+        top: -100px;
+        right: 0px;
+        padding: 5px;
+        color: white;
+        background-color: #072158;
+        opacity: 1;
+    }
+
+    .dragGhost-member .L01 {
+        content: url();
+    }
+
+    .dragGhost-member .L02 {
+        content: url("images/rankicons/L02.png");
+    }
+
+    .dragGhost-member .L03 {
+        content: url("images/rankicons/L03.png");
+    }
+
+    .dragGhost-member .L04 {
+        content: url("images/rankicons/L04.png");
+    }
+    .dragGhost-member .L05 {
+        content: url("images/rankicons/L05.png");
+    }
+
+    .dragGhost-member.L06 {
+        content: url("images/rankicons/L06.png");
+    }
+
+    .dragGhost-member .L07 {
+        content: url("images/rankicons/L07.png");
+    }
+
+    .dragGhost-member .L08 {
+        content: url("images/rankicons/L08.png");
+    }
+
+    .dragGhost-member .L09 {
+        content: url("images/rankicons/L08.png");
+    }
+
+    .dragGhost-member .L10 {
+        content: url("images/rankicons/L08.png");
+    }
+    .editPositionButton {
+        position: relative;
+        display: inline-block;    
+        color: black;
+        cursor: pointer;
+    }
+
+    .editPositionButton .tooltiptext {
+        visibility: hidden;
+        width: 120px;        
+        color: black;
+        background-color: #f3f3d5;
+        text-align: center;
+        padding: 2px;
+        /* Position the tooltip */
+        position: absolute;
+        border: 1px solid #bfbfbf;
+        border-radius: 4px;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    .editPositionButton:hover .tooltiptext {
+        visibility: visible;
+    }
+    .moreOptionsButtonGroup {
+        position: relative;
+        display: inline-block;
+        color: white;
+        cursor: pointer;
+    }
+    .moreOptionsButtonGroup .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        color: black;
+        background-color: #f3f3d5;
+        text-align: center;
+        padding: 2px;
+        /* Position the tooltip */
+        position: absolute;
+        border: 1px solid #bfbfbf;
+        border-radius: 4px;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+    }
+    .moreOptionsButtonGroup:hover .tooltiptext {
+        visibility: visible;
+    }
+
+    #lineupSelection {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #lineupSelection .disabled {
+        pointer-events: none;
+    }
+
+    #lineupSelection .active {        
+        color: cornflowerblue;
+    }
+
+    #lineupSelection .glyphicon {
+        margin-top: 3px;
+    }

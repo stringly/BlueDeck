@@ -1,0 +1,80 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OrgChartDemo.Models.Types
+{
+    /// <summary>
+    /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:OrgChartDemo.Models.Member"/>
+    /// </summary>
+    public class MemberRank {
+
+        /// <summary>
+        /// Gets or sets the rank Id.
+        /// </summary>
+        /// <value>
+        /// The rank Id.
+        /// </value>
+        [Key]
+        public int RankId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the full name of the rank.
+        /// </summary>
+        /// <remarks>
+        /// e.g. "Police Officer First Class" 
+        /// </remarks>
+        /// <value>
+        /// The full name of the rank.
+        /// </value>
+        public string RankFullName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rank abbreviation.
+        /// </summary>
+        /// <remarks>
+        /// e.g. "POFC"
+        /// </remarks>
+        /// <value>
+        /// The rank abbreviation.
+        /// </value>
+        public string RankShort { get; set; }
+
+        /// <summary>
+        /// Gets or sets the pay grade for a rank.
+        /// </summary>
+        /// <remarks>
+        /// e.g. "L02"
+        /// </remarks>
+        /// <value>
+        /// The pay grade for the rank.
+        /// </value>
+        public string PayGrade { get; set; }
+
+        public string GetRankImageSource()
+        {
+            switch (this.RankId)
+            {
+                case 1:
+                    return "";                    
+                case 2:
+                    return "images/rankicons/L02.png";
+                case 3:
+                    return "images/rankicons/L03.png";
+                case 4:
+                    return "images/rankicons/L04.png";
+                case 5:
+                    return "images/rankicons/L05.png";
+                case 6:
+                    return "images/rankicons/L06.png";
+                case 7:
+                    return "images/rankicons/L07.png";
+                case 8:
+                case 9:
+                case 10:
+                    return "images/rankicons/L08.png";
+                default:
+                    return "";                 
+            }
+
+        }
+    }
+}

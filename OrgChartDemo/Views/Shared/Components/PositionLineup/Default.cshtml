@@ -1,0 +1,31 @@
+﻿    @model PositionLineupViewComponentViewModel
+
+    <div class="form-group">
+    <label asp-for="Positions" class="control-label"></label>
+    <ul id="lineupSelection" role="listbox" class="list-unstyled">
+        @foreach (var item in Model.Positions)
+        {
+            if (item.PositionId != Model.PositionToEdit.PositionId)
+            {
+                <li role="option" data-ismanager="@item.IsManager" class="disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : "" )</li>
+            }
+            else
+            {
+                <li id="newPositionInsert" role="option" data-ismanager="@item.IsManager" class="active disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : "" )</li>
+            }
+
+        }
+        @if (Model.PositionToEdit.PositionId == 0)
+        {
+            <li id="newPositionInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-menu-right"></span> Insert Position Here <span class="glyphicon glyphicon-menu-left"></span></li>
+        }
+        else if (!Model.Positions.Exists(x => x.PositionId == Model.PositionToEdit.PositionId)) {
+            <li id="newPositionInsert" role="option" data-ismanager="@Model.PositionToEdit.IsManager" class="active disabled" data-lineupposition="@Model.PositionToEdit.LineupPosition" data-positionid="@Model.PositionToEdit.PositionId">@Model.PositionToEdit.Name @(Model.PositionToEdit.IsManager ? "(Manager)" : "" )</li>
+        }
+
+    </ul>
+    <div id="lineupToolBar" class="btn-group">
+        <div class="btn btn-small" id="lineupMoveUp"><span class="glyphicon glyphicon-arrow-up"></span> Move Up</div>
+        <div class="btn btn-small" id="lineupMoveDown"><span class="glyphicon glyphicon-arrow-down"></span> Move Down</div>
+    </div>
+    </div>

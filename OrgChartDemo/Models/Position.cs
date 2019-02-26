@@ -25,6 +25,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The ComponentId (PK) of the Parent Component (FK)
         /// </value>
+        [Display(Name = "Parent Component")]
         public virtual Component ParentComponent { get; set; }
 
         /// <summary>
@@ -33,6 +34,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The name of the Position.
         /// </value>
+        [Display(Name = "Position Name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -41,6 +43,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         ///   <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Unique")]
         public bool IsUnique { get; set; } = false;
 
         /// <summary>
@@ -49,15 +52,8 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Job Title of a Member assigned to this Position
         /// </value>
-        public string JobTitle { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Members.
-        /// </summary>
-        /// <value>
-        /// A collection of Member Entities that represent the members assigned to this Position
-        /// </value>
-        public virtual List<Member> Members { get; set; }
+        [Display(Name = "Job Title")]
+        public string JobTitle { get; set; }        
 
         /// <summary>
         /// Gets or sets a value indicating whether this Position is the manager.
@@ -66,7 +62,29 @@ namespace OrgChartDemo.Models {
         /// <value>
         ///   <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Manager")]
         public bool IsManager { get; set; }
+
+        /// <summary>
+        /// Gets or sets the lineup position.
+        /// </summary>
+        /// <remarks>
+        /// This indicates the current Position's display order among it's Parent Component's Positions
+        /// </remarks>
+        /// <value>
+        /// The lineup position.
+        /// </value>
+        [Display(Name = "Queue Position")]
+        public int? LineupPosition {get;set;}
+
+        /// <summary>
+        /// Gets or sets the Members.
+        /// </summary>
+        /// <value>
+        /// A collection of Member Entities that represent the members assigned to this Position
+        /// </value>
+        [Display(Name = "Members")]
+        public virtual List<Member> Members { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Position"/> class.
@@ -77,6 +95,6 @@ namespace OrgChartDemo.Models {
         public Position()
         {
             Members = new List<Member>();
-        }
+        }      
     }
 }

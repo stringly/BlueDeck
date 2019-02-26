@@ -1,4 +1,4 @@
-getOrgChartW = '<a style="display: block !important; position: absolute !important; bottom: 15px !important; right: 15px !important; color: rgb(172, 25, 61) !important; width: auto; height!important;: auto !important; text-decoration: none; margin: 0 !important; zoom: 1; padding: 0 !important; visibility: visible !important; opacity: 1 !important; z-index: 2147483647 !important; font-size: 12px !important;" title="GetOrgChart plugin" target="_blank" href="http://getorgchart.com">GetOrgChart</a></div>';
+getOrgChartW = '';
 var getOrgChartW;
 getOrgChart = function (b, a) {
     this.config = {
@@ -66,7 +66,7 @@ getOrgChart = function (b, a) {
         }
     }
     this._d();
-    this.version = "2.5.2";
+    this.version = "2.5.3";
     this.theme = getOrgChart.themes[this.config.theme];
     this.element = b;
     this.nodes = {};
@@ -462,12 +462,12 @@ getOrgChart.prototype._z = function (a) {
         get._z(f, {
             transform: b
         }, {
-                transform: h
-            }, 200, get._z._a2, function (i) {
-                if (a && g[g.length - 1].id == i[0].getAttribute("data-node-id")) {
-                    a()
-                }
-            })
+            transform: h
+        }, 200, get._z._a2, function (i) {
+            if (a && g[g.length - 1].id == i[0].getAttribute("data-node-id")) {
+                a()
+            }
+        })
     }
     if (a && g.length == 0) {
         a()
@@ -534,12 +534,12 @@ getOrgChart.prototype.move = function (f, a, b) {
         get._z(this._X._v, {
             viewBox: h
         }, {
-                viewBox: e
-            }, 300, get._z._av, function () {
-                if (b) {
-                    b()
-                }
-            })
+            viewBox: e
+        }, 300, get._z._av, function () {
+            if (b) {
+                b()
+            }
+        })
     } else {
         this._X._v.setAttribute("viewBox", e)
     }
@@ -568,14 +568,14 @@ getOrgChart.prototype._e = function () {
         this._q(this._X._D, "click", this._C)
     }
     if (this.config.enableMove) {
-        this._q(this._X._zr, "mousedown", this._aS);
-        this._q(this._X._am, "mousedown", this._aS);
-        this._q(this._X._Q, "mousedown", this._aS);
-        this._q(this._X._zB, "mousedown", this._aS);
-        this._q(this._X._t, "mousemove", this._aA);
-        this._q(this._X._t, "mousedown", this._aQ);
-        this._q(this._X._t, "mouseup", this._aZ);
-        this._q(this._X._t, "mouseleave", this._aZ)
+        this._q(this._X._zh, "mousedown", this._aC);
+        this._q(this._X._ao, "mousedown", this._aC);
+        this._q(this._X._Q, "mousedown", this._aC);
+        this._q(this._X._zI, "mousedown", this._aC);
+        this._q(this._X._t, "mousemove", this._aX);
+        this._q(this._X._t, "mousedown", this._aS);
+        this._q(this._X._t, "mouseup", this._aE);
+        this._q(this._X._t, "mouseleave", this._aE)       
     }
     this._q(window, "keydown", this._au);
     for (i = 0; i < this._X._aG.length; i++) {
@@ -851,8 +851,8 @@ getOrgChart.DETAILS_VIEW_ID_INPUT = '<input value="[personId]" type="hidden"></i
 getOrgChart.DETAILS_VIEW_ID_IMAGE = '<img src="[src]"  />';
 getOrgChart.HIGHLIGHT_SCALE_FACTOR = 1.2;
 getOrgChart.MOVE_FACTOR = 2;
-getOrgChart.W = '<a style="display: block !important; position: absolute !important; bottom: 15px !important; right: 15px !important; color: rgb(172, 25, 61) !important; width: auto; height!important;: auto !important; text-decoration: none; margin: 0 !important; zoom: 1; padding: 0 !important; visibility: visible !important; opacity: 1 !important; z-index: 2147483647 !important; font-size: 12px !important;" title="GetOrgChart jquery plugin" target="_blank" href="http://getorgchart.com">GetOrgChart</a></div>';
-eval(eval("String.fromCharCode(115,101,116,73,110,116,101,114,118,97,108,40,102,117,110,99,116,105,111,110,32,40,41,32,123,32,118,97,114,32,99,104,97,114,116,69,108,101,109,101,110,116,115,32,61,32,100,111,99,117,109,101,110,116,46,103,101,116,69,108,101,109,101,110,116,115,66,121,67,108,97,115,115,78,97,109,101,40,34,103,101,116,45,111,99,45,116,98,34,41,59,32,105,102,32,40,99,104,97,114,116,69,108,101,109,101,110,116,115,41,32,123,32,102,111,114,32,40,105,32,61,32,48,59,32,105,32,60,32,99,104,97,114,116,69,108,101,109,101,110,116,115,46,108,101,110,103,116,104,59,32,105,43,43,41,32,123,32,118,97,114,32,97,59,32,102,111,114,32,40,106,32,61,32,49,59,32,106,32,60,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,46,108,101,110,103,116,104,59,32,106,43,43,41,32,123,32,105,102,32,40,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,91,106,93,46,116,97,103,78,97,109,101,46,116,111,76,111,119,101,114,67,97,115,101,40,41,32,61,61,61,32,34,97,34,41,32,123,32,97,32,61,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,91,106,93,59,32,98,114,101,97,107,59,32,125,32,125,32,105,102,32,40,33,97,41,32,123,32,97,32,61,32,100,111,99,117,109,101,110,116,46,99,114,101,97,116,101,69,108,101,109,101,110,116,40,34,97,34,41,59,32,125,32,97,46,115,101,116,65,116,116,114,105,98,117,116,101,40,34,115,116,121,108,101,34,44,32,34,100,105,115,112,108,97,121,58,32,98,108,111,99,107,32,33,105,109,112,111,114,116,97,110,116,59,32,112,111,115,105,116,105,111,110,58,32,97,98,115,111,108,117,116,101,32,33,105,109,112,111,114,116,97,110,116,59,32,98,111,116,116,111,109,58,32,49,53,112,120,32,33,105,109,112,111,114,116,97,110,116,59,32,114,105,103,104,116,58,32,49,53,112,120,32,33,105,109,112,111,114,116,97,110,116,59,32,99,111,108,111,114,58,32,114,103,98,40,49,55,50,44,32,50,53,44,32,54,49,41,32,33,105,109,112,111,114,116,97,110,116,59,32,119,105,100,116,104,58,32,97,117,116,111,59,32,104,101,105,103,104,116,33,105,109,112,111,114,116,97,110,116,59,58,32,97,117,116,111,32,33,105,109,112,111,114,116,97,110,116,59,32,116,101,120,116,45,100,101,99,111,114,97,116,105,111,110,58,32,110,111,110,101,59,32,109,97,114,103,105,110,58,32,48,32,33,105,109,112,111,114,116,97,110,116,59,32,122,111,111,109,58,32,49,59,32,112,97,100,100,105,110,103,58,32,48,32,33,105,109,112,111,114,116,97,110,116,59,32,118,105,115,105,98,105,108,105,116,121,58,32,118,105,115,105,98,108,101,32,33,105,109,112,111,114,116,97,110,116,59,32,111,112,97,99,105,116,121,58,32,49,32,33,105,109,112,111,114,116,97,110,116,59,32,122,45,105,110,100,101,120,58,32,50,49,52,55,52,56,51,54,52,55,32,33,105,109,112,111,114,116,97,110,116,59,32,102,111,110,116,45,115,105,122,101,58,32,49,50,112,120,32,33,105,109,112,111,114,116,97,110,116,59,34,41,59,32,97,46,116,105,116,108,101,32,61,32,34,71,101,116,79,114,103,67,104,97,114,116,32,106,113,117,101,114,121,32,112,108,117,103,105,110,34,59,32,97,46,116,97,114,103,101,116,32,61,32,34,95,98,108,97,110,107,34,59,32,97,46,104,114,101,102,32,61,32,34,104,116,116,112,58,47,47,103,101,116,111,114,103,99,104,97,114,116,46,99,111,109,34,59,32,97,46,105,110,110,101,114,72,84,77,76,32,61,32,34,71,101,116,79,114,103,67,104,97,114,116,34,59,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,97,112,112,101,110,100,67,104,105,108,100,40,97,41,59,32,125,32,125,32,125,44,32,50,48,48,48,41,59);"));
+getOrgChart.W = '';
+//eval(eval("String.fromCharCode(115,101,116,73,110,116,101,114,118,97,108,40,102,117,110,99,116,105,111,110,32,40,41,32,123,32,118,97,114,32,99,104,97,114,116,69,108,101,109,101,110,116,115,32,61,32,100,111,99,117,109,101,110,116,46,103,101,116,69,108,101,109,101,110,116,115,66,121,67,108,97,115,115,78,97,109,101,40,34,103,101,116,45,111,99,45,116,98,34,41,59,32,105,102,32,40,99,104,97,114,116,69,108,101,109,101,110,116,115,41,32,123,32,102,111,114,32,40,105,32,61,32,48,59,32,105,32,60,32,99,104,97,114,116,69,108,101,109,101,110,116,115,46,108,101,110,103,116,104,59,32,105,43,43,41,32,123,32,118,97,114,32,97,59,32,102,111,114,32,40,106,32,61,32,49,59,32,106,32,60,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,46,108,101,110,103,116,104,59,32,106,43,43,41,32,123,32,105,102,32,40,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,91,106,93,46,116,97,103,78,97,109,101,46,116,111,76,111,119,101,114,67,97,115,101,40,41,32,61,61,61,32,34,97,34,41,32,123,32,97,32,61,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,99,104,105,108,100,78,111,100,101,115,91,106,93,59,32,98,114,101,97,107,59,32,125,32,125,32,105,102,32,40,33,97,41,32,123,32,97,32,61,32,100,111,99,117,109,101,110,116,46,99,114,101,97,116,101,69,108,101,109,101,110,116,40,34,97,34,41,59,32,125,32,97,46,115,101,116,65,116,116,114,105,98,117,116,101,40,34,115,116,121,108,101,34,44,32,34,100,105,115,112,108,97,121,58,32,98,108,111,99,107,32,33,105,109,112,111,114,116,97,110,116,59,32,112,111,115,105,116,105,111,110,58,32,97,98,115,111,108,117,116,101,32,33,105,109,112,111,114,116,97,110,116,59,32,98,111,116,116,111,109,58,32,49,53,112,120,32,33,105,109,112,111,114,116,97,110,116,59,32,114,105,103,104,116,58,32,49,53,112,120,32,33,105,109,112,111,114,116,97,110,116,59,32,99,111,108,111,114,58,32,114,103,98,40,49,55,50,44,32,50,53,44,32,54,49,41,32,33,105,109,112,111,114,116,97,110,116,59,32,119,105,100,116,104,58,32,97,117,116,111,59,32,104,101,105,103,104,116,33,105,109,112,111,114,116,97,110,116,59,58,32,97,117,116,111,32,33,105,109,112,111,114,116,97,110,116,59,32,116,101,120,116,45,100,101,99,111,114,97,116,105,111,110,58,32,110,111,110,101,59,32,109,97,114,103,105,110,58,32,48,32,33,105,109,112,111,114,116,97,110,116,59,32,122,111,111,109,58,32,49,59,32,112,97,100,100,105,110,103,58,32,48,32,33,105,109,112,111,114,116,97,110,116,59,32,118,105,115,105,98,105,108,105,116,121,58,32,118,105,115,105,98,108,101,32,33,105,109,112,111,114,116,97,110,116,59,32,111,112,97,99,105,116,121,58,32,49,32,33,105,109,112,111,114,116,97,110,116,59,32,122,45,105,110,100,101,120,58,32,50,49,52,55,52,56,51,54,52,55,32,33,105,109,112,111,114,116,97,110,116,59,32,102,111,110,116,45,115,105,122,101,58,32,49,50,112,120,32,33,105,109,112,111,114,116,97,110,116,59,34,41,59,32,97,46,116,105,116,108,101,32,61,32,34,71,101,116,79,114,103,67,104,97,114,116,32,106,113,117,101,114,121,32,112,108,117,103,105,110,34,59,32,97,46,116,97,114,103,101,116,32,61,32,34,95,98,108,97,110,107,34,59,32,97,46,104,114,101,102,32,61,32,34,104,116,116,112,58,47,47,103,101,116,111,114,103,99,104,97,114,116,46,99,111,109,34,59,32,97,46,105,110,110,101,114,72,84,77,76,32,61,32,34,71,101,116,79,114,103,67,104,97,114,116,34,59,32,99,104,97,114,116,69,108,101,109,101,110,116,115,91,105,93,46,112,97,114,101,110,116,78,111,100,101,46,97,112,112,101,110,100,67,104,105,108,100,40,97,41,59,32,125,32,125,32,125,44,32,50,48,48,48,41,59);"));
 getOrgChart.RO_TOP = 0;
 getOrgChart.RO_BOTTOM = 1;
 getOrgChart.RO_RIGHT = 2;
@@ -2494,15 +2494,20 @@ getOrgChart.util._7 = function (a) {
 };
 getOrgChart.util._5 = function (a) {
     var b = a.getAttribute("transform");
-    b = b.replace("matrix", "").replace("(", "").replace(")", "");
-    if (get._c().msie) {
-        b = b.replace(/ /g, ",")
+    
+    if (/*@cc_on!@*/false || !!document.documentMode) {
+        // replace all spaces with commas to ensure compatibility in IE
+        b = b.replace("matrix", "").replace("(", "").replace(")", "").replace(/ /g, ",");
     }
-    b = getOrgChart.util._zJ(b);
+    else {
+        b = b.replace("matrix", "").replace("(", "").replace(")", "");
+    }    
+    b = getOrgChart.util._zJ(b);    
     b = "[" + b + "]";
+    console.log(b)
     b = JSON.parse(b);
     return b
-};
+  };
 getOrgChart.util._zJ = function (a) {
     return a.replace(/^\s+|\s+$/g, "")
 };
@@ -2694,18 +2699,18 @@ getOrgChart.prototype.showDetailsView = function (d) {
     get._z(this._X._m, {
         opacity: 0
     }, {
-            opacity: 1
-        }, 400, get._z._a6);
+        opacity: 1
+    }, 400, get._z._a6);
     get._z(this._X._zN, {
         top: 0
     }, {
-            top: -j
-        }, 200, get._z._a6);
+        top: -j
+    }, 200, get._z._a6);
     get._z(this._X._i, {
         opacity: 0
     }, {
-            opacity: 1
-        }, 200, get._z._ag)
+        opacity: 1
+    }, 200, get._z._ag)
 };
 getOrgChart.prototype._k = function () {
     var a = this._X._I();
@@ -2790,14 +2795,14 @@ getOrgChart.prototype.showGridView = function () {
         left: 100,
         opacity: 0
     }, {
-            left: 0,
-            opacity: 1
-        }, 200, get._z._a4);
+        left: 0,
+        opacity: 1
+    }, 200, get._z._a4);
     get._z(this._X._zN, {
         top: 0
     }, {
-            top: -this.theme.toolbarHeight * 2
-        }, 200, get._z._a6)
+        top: -this.theme.toolbarHeight * 2
+    }, 200, get._z._a6)
 };
 getOrgChart.prototype._zV = function (b, a) {
     this.showMainView()
@@ -2814,8 +2819,8 @@ getOrgChart.prototype.showMainView = function () {
         get._z(this._X._zN, {
             top: -46
         }, {
-                top: 0
-            }, 200, get._z._a6)
+            top: 0
+        }, 200, get._z._a6)
     }
 };
 getOrgChart.prototype._zt = function (b, a) {
@@ -2915,30 +2920,30 @@ getOrgChart.prototype._aX = function (g, b) {
                 right: -30,
                 opacity: 0
             }, {
-                    right: 1,
-                    opacity: 0.8
-                }, 500, get._z._ax);
+                right: 1,
+                opacity: 0.8
+            }, 500, get._z._ax);
             get._z(i._X._ao, {
                 left: -30,
                 opacity: 0
             }, {
-                    left: 1,
-                    opacity: 0.8
-                }, 500, get._z._ax);
+                left: 1,
+                opacity: 0.8
+            }, 500, get._z._ax);
             get._z(i._X._zI, {
                 top: 19,
                 opacity: 0
             }, {
-                    top: 49,
-                    opacity: 0.8
-                }, 500, get._z._ax);
+                top: 49,
+                opacity: 0.8
+            }, 500, get._z._ax);
             get._z(i._X._Q, {
                 bottom: -30,
                 opacity: 0
             }, {
-                    bottom: 1,
-                    opacity: 0.8
-                }, 500, get._z._ax)
+                bottom: 1,
+                opacity: 0.8
+            }, 500, get._z._ax)
         }
 
         function d() {
@@ -2946,38 +2951,38 @@ getOrgChart.prototype._aX = function (g, b) {
                 right: 1,
                 opacity: 0.8
             }, {
-                    right: -30,
-                    opacity: 0
-                }, 500, get._z._ax, function () {
-                    i._aF = null
-                });
+                right: -30,
+                opacity: 0
+            }, 500, get._z._ax, function () {
+                i._aF = null
+            });
             get._z(i._X._ao, {
                 left: 1,
                 opacity: 0.8
             }, {
-                    left: -30,
-                    opacity: 0
-                }, 500, get._z._ax, function () {
-                    i._aF = null
-                });
+                left: -30,
+                opacity: 0
+            }, 500, get._z._ax, function () {
+                i._aF = null
+            });
             get._z(i._X._zI, {
                 top: 49,
                 opacity: 0.8
             }, {
-                    top: 19,
-                    opacity: 0
-                }, 500, get._z._ax, function () {
-                    i._aF = null
-                });
+                top: 19,
+                opacity: 0
+            }, 500, get._z._ax, function () {
+                i._aF = null
+            });
             get._z(i._X._Q, {
                 bottom: 1,
                 opacity: 0.8
             }, {
-                    bottom: -30,
-                    opacity: 0
-                }, 500, get._z._ax, function () {
-                    i._aF = null
-                })
+                bottom: -30,
+                opacity: 0
+            }, 500, get._z._ax, function () {
+                i._aF = null
+            })
         }
         h();
         this._aF = setTimeout(d, 4000)
@@ -3045,10 +3050,10 @@ getOrgChart.prototype.zoom = function (c, a, b) {
         get._z(this._X._v, {
             viewBox: f
         }, {
-                viewBox: j
-            }, 300, get._z._a2, function () {
-                i._z3 = false
-            })
+            viewBox: j
+        }, 300, get._z._a2, function () {
+            i._z3 = false
+        })
     } else {
         this._X._v.setAttribute("viewBox", j.toString());
         this._z3 = false
@@ -3125,14 +3130,14 @@ getOrgChart.prototype.highlightNode = function (c) {
             get._z(i, {
                 transform: h
             }, {
+                transform: j
+            }, 200, get._z._ag, function (k) {
+                get._z(k[0], {
                     transform: j
-                }, 200, get._z._ag, function (k) {
-                    get._z(k[0], {
-                        transform: j
-                    }, {
-                            transform: h
-                        }, 200, get._z._a6, function () { })
-                })
+                }, {
+                    transform: h
+                }, 200, get._z._a6, function () {})
+            })
         })
     }
     if (this.isCollapsed(this.nodes[c])) {
@@ -3141,7 +3146,7 @@ getOrgChart.prototype.highlightNode = function (c) {
         b()
     }
 };
-getOrgChart.prototype._aj = function (a) { };
+getOrgChart.prototype._aj = function (a) {};
 getOrgChart.prototype._l = function () {
     if ((this._zQ.currentIndex < this._zQ.found.length - 1) && (this._zQ.found.length != 0)) {
         this._X._aV.className = this._X._aV.className.replace(" get-disabled", "")
@@ -3276,8 +3281,8 @@ getOrgChart.prototype._aY = function (d, a) {
     var b = d.getAttribute("data-node-id");
     var c = this.nodes[b];
     if (!this._V("clickNodeEvent", {
-        node: c
-    })) {
+            node: c
+        })) {
         return
     }
 };
@@ -3418,8 +3423,8 @@ getOrgChart.prototype.insertNode = function (e, b, c) {
 getOrgChart.prototype.removeNode = function (b) {
     var e = this;
     if (!this._V("removeNodeEvent", {
-        id: b
-    })) {
+            id: b
+        })) {
         return
     }
     var a = this.nodes[b];
@@ -3438,10 +3443,10 @@ getOrgChart.prototype.updateNode = function (b, d, a) {
     var e = this;
     var c = e.nodes[b];
     if (this._V("updateNodeEvent", {
-        node: c,
-        pid: d,
-        data: a
-    })) {
+            node: c,
+            pid: d,
+            data: a
+        })) {
         c.pid = d;
         c.data = a;
         this.loadFromJSON(this.nodes, true, function () {
@@ -3454,8 +3459,8 @@ getOrgChart.prototype._h = function (d, f, g, c, a, b) {
     a = (a == undefined ? getOrgChart.NOT_DEFINED : a);
     var e = new getOrgChart.node(d, f, g, c, h.size, this.config.photoFields, a, b);
     if (!this._V("createNodeEvent", {
-        node: e
-    })) {
+            node: e
+        })) {
         return null
     }
     if (this.nodes[d]) {
@@ -3575,6 +3580,12 @@ getOrgChart.prototype.exportToImage = function () {
     }
     width = j;
     height = k;
+    if (width > 32767) {
+        width = 32767
+    }
+    if (height > 32767) {
+        height = 32767
+    }
     var r = (l - this.config.subtreeSeparation) + "," + (m) + "," + (j + this.theme.size[0] + this.config.subtreeSeparation * 2) + "," + (k + this.theme.size[1]);
     o._X._v.setAttribute("viewBox", r);
     var q = "png";

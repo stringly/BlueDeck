@@ -28,5 +28,6 @@ namespace OrgChartDemo.Models.Types
         /// The identifier.
         /// </value>
         public int Id { get; set; }
+
     }
 }
