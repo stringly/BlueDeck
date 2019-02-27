@@ -51,14 +51,19 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </returns>
         public Component GetComponentWithChildren(int id)
         {
-            return ApplicationDbContext.Components
+            Component result = ApplicationDbContext.Components
                 .Where(x => x.ComponentId == id)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Gender)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)                                
                 .FirstOrDefault();
-            
+            if (result != null)
+            {
+                result.ChildComponents = new List<Component>();
+                result.ChildComponents = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == result.ComponentId).ToList();
+            }
+            return result;
         }
 
         /// <summary>
@@ -311,6 +316,41 @@ namespace OrgChartDemo.Persistence.Repositories
                 componentBeingEdited.Name = c.Name;
                 componentBeingEdited.ParentComponent = c.ParentComponent;
             }
+        }
+
+        public void RemoveComponent(int componentId)
+        {
+            // Prevent deleting Components with Children Components
+            if (ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == componentId) != null)
+            {
+                return;
+            }
+            else
+            {
+                Component toRemove = ApplicationDbContext.Components.SingleOrDefault(x => x.ComponentId == componentId);
+
+                if (toRemove != null)
+                {
+                    List<Position> cPositions = ApplicationDbContext.Positions
+                        .Where(x => x.ParentComponent.ComponentId == componentId)
+                        .Include(x => x.Members)
+                        .ToList();
+                    Position unassigned = ApplicationDbContext.Positions
+                        .Where(x => x.Name == "Unassigned").SingleOrDefault();
+                    foreach (Position p in cPositions)
+                    {
+                        foreach (Member m in p.Members)
+                        {
+                            m.Position = unassigned;
+
+                        }
+
+                    }
+                    ApplicationDbContext.SaveChanges();
+                    ApplicationDbContext.Positions.RemoveRange(cPositions);
+                    ApplicationDbContext.Components.Remove(toRemove);
+                }
+            }                            
         }
     }
 }

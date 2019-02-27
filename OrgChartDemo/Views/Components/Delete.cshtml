@@ -1,38 +1,33 @@
 ﻿@model OrgChartDemo.Models.Component
 
-<!DOCTYPE html>
+@if (Model.ChildComponents.Count() == 0)
+{
+    <h3>Are you sure you want to delete this?</h3>
+    <div>        
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Acronym)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Acronym)
+            </dd>
+        </dl>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Component</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Acronym)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Acronym)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ComponentId" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
-</body>
-</html>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ComponentId" />
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </form>
+    </div>
+}
+else
+{
+    <a asp-action="Index">Back to List</a>
+}

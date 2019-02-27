@@ -794,6 +794,25 @@
                 $("#addEditComponentModal").modal("show");
             })
         }
+
+        function handleDeleteComponentClick(e) {
+            var componentId = e.target.dataset.componentid;
+            var container = $("#modalTarget").empty();
+            $.get('/Roster/GetConfirmComponentDeleteModal', { componentId: componentId }, function (data) {
+                // inject the ViewComponent markup into the Modal Target
+                container.html(data);
+                // register the Confirm Delete Yes button
+                document.getElementById('confirmDeleteComponentYesButton').addEventListener('click', function (e) {
+                    $.get('/Roster/DeleteComponent', { componentId: e.target.dataset.componentid }, function (response) {
+                        if (response.success == true) {
+                            $("#ConfirmComponentDeleteModal").modal("hide");
+                            $("#getComponentButton").trigger('click');
+                        }                        
+                    })
+                }, false)
+                $("#ConfirmComponentDeleteModal").modal("show");
+            })
+        }
         
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
@@ -867,6 +886,10 @@
                 var editComponentButtons = document.querySelectorAll('.editComponentButton');
                 [].forEach.call(editComponentButtons, function (elem) {
                     elem.addEventListener('click', handleEditComponentClick, false);
+                })
+                var deleteComponentButtons = document.querySelectorAll('.deleteComponentButton');
+                [].forEach.call(deleteComponentButtons, function (elem) {
+                    elem.addEventListener('click', handleDeleteComponentClick, false);
                 })
                 document.getElementById('addNewComponentButton').addEventListener('click', handleAddComponentClick, false);
             });

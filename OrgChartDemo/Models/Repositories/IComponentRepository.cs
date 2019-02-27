@@ -61,5 +61,6 @@ namespace OrgChartDemo.Models.Repositories
 
         List<ComponentPositionLineupItem> GetComponentLineupItemsForComponent(int componentId);
         void UpdateComponentAndSetLineup(Component c);
+        void RemoveComponent(int componentId);
     }
 }

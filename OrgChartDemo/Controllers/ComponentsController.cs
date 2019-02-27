@@ -225,11 +225,14 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }            
-            Component component = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(id));
-            
+            Component component = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(id));             
             if (component == null)
             {
                 return NotFound();
+            }
+            if(component.ChildComponents.Count() > 0)
+            {
+                ViewBag.Message = $"WARNING: This Component currently has {component.ChildComponents.Count()} child Components. You cannot delete a Component that has active child Components.";
             }
             else if (component.Positions.Count() > 0)
             {
@@ -254,15 +257,7 @@ namespace OrgChartDemo.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            Component c = unitOfWork.Components.Get(id);
-            foreach (Position p in c.Positions)
-            {
-                if (p.Members.Count() > 0)
-                {
-                    unitOfWork.Positions.RemovePositionAndReassignMembers(p.PositionId);
-                }                         
-            }
-            unitOfWork.Components.Remove(c);
+            unitOfWork.Components.RemoveComponent(id);
             unitOfWork.Complete();            
             return RedirectToAction(nameof(Index));
         }
