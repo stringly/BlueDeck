@@ -3,6 +3,7 @@ using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 
@@ -135,7 +136,22 @@ namespace OrgChartDemo.Persistence.Repositories
                 ccl.Add(parent);    
             }            
             return ccl;
-        }        
+        }
+        
+        public List<Component> GetComponentsAndChildrenSP(int parentComponentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+            
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Load();
+
+            return components;
+        }
         
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.

@@ -115,6 +115,7 @@ namespace OrgChartDemo.Controllers
             unitOfWork.Complete();
         
             return Json(new { success = true });
+            
         }
 
         // RosterManagerViewComponent
@@ -124,7 +125,8 @@ namespace OrgChartDemo.Controllers
         /// <param name="componentId">The ComponentId of the top-level component</param>
         /// <returns></returns>
         public IActionResult GetRosterViewComponent(int componentId){
-            List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());            
+            //List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
+            List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
             return ViewComponent("RosterManager", result.OrderBy(x => x.ComponentId).ToList());    
         }
 
