@@ -1,0 +1,25 @@
+﻿@model Component
+
+<div class="modal fade" id="ConfirmComponentDeleteModal" tabindex="-1" role="dialog" aria-labelledby="ConfirmComponentDeleteModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#ConfirmComponentDeleteModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="ConfirmComponentDeleteModalTitle">Delete @Model.Name?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>If you delete this Component, all of its Positions will be deleted and all Members will be reassigned to the general pool. This operation cannot be undone.</p>
+                    <p>Are you sure you want to delete @Model.Name?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" data-target="#ConfirmComponentDeleteModal" class="btn btn-danger">Cancel</button>
+                    <button type="button" id="confirmDeleteComponentYesButton" class="btn btn-success" data-componentid="@Model.ComponentId">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

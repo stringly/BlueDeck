@@ -207,6 +207,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 positionToUpdate.JobTitle = p.JobTitle;
                 positionToUpdate.LineupPosition = p.LineupPosition;
                 positionToUpdate.Name = p.Name;
+                positionToUpdate.Callsign = p.Callsign;
                 positionToUpdate.ParentComponent = p.ParentComponent;
 
             }

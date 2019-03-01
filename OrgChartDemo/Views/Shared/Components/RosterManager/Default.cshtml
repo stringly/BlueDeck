@@ -15,6 +15,12 @@
                 <span class="componentHeaderMenuItem editComponentButton" data-componentid="@c.ComponentId">
                     Edit<span class="glyphicon glyphicon-pencil"></span>
                 </span>
+                @if (c.Children.Count() == 0)
+                {
+                    <span class="componentHeaderMenuItem deleteComponentButton" data-componentid="@c.ComponentId">
+                        Delete<span class="glyphicon glyphicon-trash"></span>
+                    </span>
+                }
             </div>
         </div>
 
@@ -35,6 +41,7 @@
                                 <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
                                 <span class="tooltiptext">Edit @p.Name</span>
                             </div>
+                            <strong class="pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                             <div class="members">
                                 @if (p.Members.Count() > 0)
                                 {
@@ -76,8 +83,9 @@
                             <strong>@p.Name</strong><small> (Multiple Membership)</small>
                             <div class="editPositionButton" data-positionid="@p.PositionId">
                                 <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
-                                <span class="tooltiptext">Edit @p.Name</span>
+                                <span class="tooltiptext">Edit @p.Name</span>                                
                             </div>
+                            <strong class="pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                             @if (p.Members.Count() > 0)
                             {
                                 foreach (Member m in p.Members)
@@ -141,7 +149,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 }
 

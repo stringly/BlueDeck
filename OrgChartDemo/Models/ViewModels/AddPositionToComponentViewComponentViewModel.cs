@@ -63,6 +63,10 @@ namespace OrgChartDemo.Models.ViewModels
 
         public int? LineupPosition { get; set; }
 
+        [Display(Name = "Call Sign")]
+        [StringLength(20)]
+        public string Callsign { get; set; }
+
         public int MemberCount { get; set; }
 
         public Component ParentComponent { get; set; }
@@ -89,6 +93,7 @@ namespace OrgChartDemo.Models.ViewModels
             IsManager = position.IsManager;
             IsUnique = position.IsUnique;
             LineupPosition = position.LineupPosition;
+            Callsign = position.Callsign;
             ComponentList = componentList;
             MemberCount = position.Members.Count;
         }

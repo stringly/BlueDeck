@@ -115,6 +115,7 @@ namespace OrgChartDemo.Controllers
             unitOfWork.Complete();
         
             return Json(new { success = true });
+            
         }
 
         // RosterManagerViewComponent
@@ -124,7 +125,8 @@ namespace OrgChartDemo.Controllers
         /// <param name="componentId">The ComponentId of the top-level component</param>
         /// <returns></returns>
         public IActionResult GetRosterViewComponent(int componentId){
-            List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());            
+            //List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
+            List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
             return ViewComponent("RosterManager", result.OrderBy(x => x.ComponentId).ToList());    
         }
 
@@ -188,13 +190,13 @@ namespace OrgChartDemo.Controllers
         /// <param name="form">The POSTed <see cref="T:OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
+        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
         {
             // populate the Form object's ParentComponent property with it's ParentComponent
             form.ParentComponent = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(form.ParentComponentId));
             // pull a list of all Positions in the Repo to use to check name conflict
             IEnumerable<Position> allPositions = unitOfWork.Positions.GetAll();
-
+            form.Callsign = form.Callsign.ToUpper();
             // check Model validation first
             if (ModelState.IsValid)
             {
@@ -208,7 +210,12 @@ namespace OrgChartDemo.Controllers
                     {
                         errors++;
                         ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";                            
-                    }                    
+                    }
+                    else if (p.Callsign == form.Callsign && p.PositionId != form.PositionId)
+                    {
+                        errors++;
+                        ViewBag.Message = $"The callsign '{form.Callsign}' is in use by {p.Name}. Choose another.";
+                    }
                 }
                 // check for conflict in "IsManager" for all Positions in the ParentComponent
                 foreach(Position p in form.ParentComponent.Positions)
@@ -219,9 +226,11 @@ namespace OrgChartDemo.Controllers
                         {
                             errors++;
                             ViewBag.Message +=  $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.\n";
-                        }
+                        }                        
                     }
-                }                
+                }
+                
+                
                 // no validation errors, safe to add position
                 if (errors == 0)
                 {
@@ -234,7 +243,8 @@ namespace OrgChartDemo.Controllers
                             JobTitle = form.JobTitle,
                             IsManager = form.IsManager,
                             IsUnique = form.IsUnique,
-                            LineupPosition = form.LineupPosition
+                            LineupPosition = form.LineupPosition,
+                            Callsign = form.Callsign
                         };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();
@@ -248,7 +258,8 @@ namespace OrgChartDemo.Controllers
                             JobTitle = form.JobTitle,
                             IsManager = form.IsManager,
                             IsUnique = form.IsUnique,
-                            LineupPosition = form.LineupPosition
+                            LineupPosition = form.LineupPosition,
+                            Callsign = form.Callsign
                         };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();
@@ -452,5 +463,19 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("ComponentAddEditModal", form);
             }
         }
+
+        public IActionResult GetConfirmComponentDeleteModal(int componentId)
+        {
+            Component componentToDelete = unitOfWork.Components.GetComponentWithChildren(componentId);
+            return ViewComponent("ConfirmComponentDeleteModal", componentToDelete);
+        }
+
+        public JsonResult DeleteComponent(int componentId)
+        {
+            unitOfWork.Components.RemoveComponent(componentId);
+            unitOfWork.Complete();
+            return Json(new { success = true });
+        }
+
     }
 }

@@ -68,7 +68,7 @@ namespace OrgChartDemo.Models {
         public virtual ICollection<Component> ChildComponents { get; set; }
 
         public Component()
-        {
+        {            
         }
 
 

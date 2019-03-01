@@ -65,6 +65,9 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Manager")]
         public bool IsManager { get; set; }
 
+        [Display(Name = "Call Sign")]
+        public string Callsign { get; set; }
+
         /// <summary>
         /// Gets or sets the lineup position.
         /// </summary>

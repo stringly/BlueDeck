@@ -66,6 +66,10 @@ namespace OrgChartDemo.Models.ViewModels
 
         public int? LineupPosition { get; set; }
 
+        [Display(Name = "Call Sign")]
+        [StringLength(20)]
+        public string Callsign { get; set; }
+
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
@@ -89,6 +93,7 @@ namespace OrgChartDemo.Models.ViewModels
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
             LineupPosition = p.LineupPosition;
+            Callsign = p.Callsign;
             Components = new List<ComponentSelectListItem>();
         }
 

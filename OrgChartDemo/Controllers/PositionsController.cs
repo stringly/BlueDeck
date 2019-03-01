@@ -107,7 +107,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
@@ -117,7 +117,8 @@ namespace OrgChartDemo.Controllers
                 IsUnique = form.IsUnique,
                 JobTitle = form.JobTitle,
                 IsManager = form.IsManager,
-                LineupPosition = form.LineupPosition               
+                LineupPosition = form.LineupPosition,
+                Callsign = form.Callsign.ToUpper()
                 };
 
             if (!ModelState.IsValid) {
@@ -126,6 +127,10 @@ namespace OrgChartDemo.Controllers
             else if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null) {                    
                 ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                 errors++;
+            }
+            else if (unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign) != null ) {
+                errors++;
+                ViewBag.Message = $"The callsign '{p.Callsign}' is in use. Choose another.";
             }
             // check if user is attempting to add "Manager" position to the ParentComponent
             else if (form.IsManager) {
@@ -177,7 +182,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
@@ -197,6 +202,11 @@ namespace OrgChartDemo.Controllers
                     ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                     errors++;
                 }
+                else if (unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign.ToUpper() && x.PositionId != form.PositionId) != null)
+                {
+                    errors++;
+                    ViewBag.Message = $"The callsign {form.Callsign} is in use. Choose another.";
+                }
                 else if (form.IsManager && unitOfWork.Positions.Find(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId).FirstOrDefault() != null) {
                     // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager
                     ViewBag.Message += $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.\n";
@@ -215,6 +225,7 @@ namespace OrgChartDemo.Controllers
                 p.Name = form.PositionName;
                 p.IsUnique = form.IsUnique;
                 p.JobTitle = form.JobTitle;
+                p.Callsign = form.Callsign.ToUpper();
                 p.IsManager = form.IsManager;
                 p.LineupPosition = form.LineupPosition;
                 unitOfWork.Positions.UpdatePositionAndSetLineup(p);

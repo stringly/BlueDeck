@@ -31,6 +31,7 @@ namespace OrgChartDemo.Models.Repositories
         IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers();
 
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
+        List<Component> GetComponentsAndChildrenSP(int parentComponentId);
 
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
@@ -61,5 +62,6 @@ namespace OrgChartDemo.Models.Repositories
 
         List<ComponentPositionLineupItem> GetComponentLineupItemsForComponent(int componentId);
         void UpdateComponentAndSetLineup(Component c);
+        void RemoveComponent(int componentId);
     }
 }
