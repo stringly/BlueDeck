@@ -1,0 +1,1267 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/jcs30/source/repos/OrgChartDemo/OrgChartDemo/docfx_project",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.ComponentsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.ComponentsController.html",
+          "hash": "3yBqzqmhC18yv24BqRVwBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.MembersController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.MembersController.html",
+          "hash": "Z6qI1SUzDcF487WXi+E6sg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.OrgChartController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.OrgChartController.html",
+          "hash": "2J4OHU9jP6r3hxfkm7arEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.PositionsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.PositionsController.html",
+          "hash": "s11ixm2cZFaOT4+oM0KzNA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.RosterController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.RosterController.html",
+          "hash": "V1M1uKibV62X/+OherE51g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Controllers.html",
+          "hash": "QYAVT+g1qu3A62Rmfxdjew=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.AddLineupPositionToComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.AddLineupPositionToComponent.html",
+          "hash": "4E4+cp7nrv5Cf5ub7fo3Yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.Initial.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.Initial.html",
+          "hash": "uuc/hfQDg+cc8JjM/YdAYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.PositionCallSign.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.PositionCallSign.html",
+          "hash": "6Oe4xMV9te7cXHRzTP9fKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.addDutyStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.addDutyStatus.html",
+          "hash": "Pp0AlW31fnqzvh9W0o73ug=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.addLineupToPosition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.addLineupToPosition.html",
+          "hash": "uiJ8XdHf3PK0A6K5VO1whw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Migrations.html",
+          "hash": "X9NSb+ItK4qRACJw4bvnlw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ApplicationDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ApplicationDbContext.html",
+          "hash": "043GuhcwhW+SGM5OTApssA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ChartableComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ChartableComponent.html",
+          "hash": "AEZLuDSEK8Wquksk3cF4Qg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ChartableComponentWithMember.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ChartableComponentWithMember.html",
+          "hash": "dE1yEoQ208Jlze4tHuvdsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Component.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Component.html",
+          "hash": "ZwlJ7KekOI4as/+MXlSdYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.html",
+          "hash": "F0FkplYGvu2x8hTLCTjNcA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ExtensionMethods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ExtensionMethods.html",
+          "hash": "qwTCUuAeQu9dmHt+Emf4Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.IUnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.IUnitOfWork.html",
+          "hash": "sJkZNovh3qpV0ZG2YCIc9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Member.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Member.html",
+          "hash": "t6JnHuJjd7T26xvFNoU6WQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Position.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Position.html",
+          "hash": "0lOTaut6eaAkzUI4Rb40Zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IComponentRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IComponentRepository.html",
+          "hash": "dQ1UA9gkkO+V89oLW0SPlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository.html",
+          "hash": "rRpzGYNABlL83GqNqq+64Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberGenderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberGenderRepository.html",
+          "hash": "ei6q9OkWiZkzbW1SPXVacw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRaceRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRaceRepository.html",
+          "hash": "aNktzUTxabYYvqnabiCOKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRankRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRankRepository.html",
+          "hash": "3yrWy+aRMIgaSgB8cHKIUg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRepository.html",
+          "hash": "0LmJVtcWoESv2hZg6E4ebg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IPositionRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IPositionRepository.html",
+          "hash": "e9tzLSDgqU7IcxaYNhGM9g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IRepository-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.IRepository-1.html",
+          "hash": "KhAlGgxX4asjD7JoEY/w3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Repositories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Repositories.html",
+          "hash": "xXHWiWN+NJDjmBK30dIRTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.BundledGenderRankDemoCollectionObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.BundledGenderRankDemoCollectionObject.html",
+          "hash": "6UY4aN4BryoyYH8NQA7GRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.ChartablePosition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.ChartablePosition.html",
+          "hash": "leMkA7Q7TqPwJWJxixdhrg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentIndexViewModelComponentListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.ComponentIndexViewModelComponentListItem.html",
+          "hash": "EmfN1gO3nbSr7qJ1yijTng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentPositionLineupItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.ComponentPositionLineupItem.html",
+          "hash": "n7WXGysmYpL/FCvhfPAFXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.ComponentSelectListItem.html",
+          "hash": "MtSM6oySsFuLWwUFojyb6w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.DemoTableDataObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.DemoTableDataObject.html",
+          "hash": "hWOh8YJEtK34K7v4lGWOEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.GenderRankDemoCollectionObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.GenderRankDemoCollectionObject.html",
+          "hash": "dtQSXHepR7gD5KeZDJxfBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatus.html",
+          "hash": "GNfSBsMYO++yIYvHxsISDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.html",
+          "hash": "ZCFe/Ogqbt6bL2Y2xO0CUA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberGender.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberGender.html",
+          "hash": "NZru4Eltil45T8S7RU+Biw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberGenderSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberGenderSelectListItem.html",
+          "hash": "kaKJbHEjSonIq413l0+vkQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberIndexViewModelMemberListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberIndexViewModelMemberListItem.html",
+          "hash": "+ZPxL6rI7VgoiaYGm19q1Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRace.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberRace.html",
+          "hash": "aw7Mk6+IZNMUsMI4Oh3NAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRaceSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberRaceSelectListItem.html",
+          "hash": "guxc9myn0dfDkDixaBtWqQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRank.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberRank.html",
+          "hash": "ugHBtoAOnZkHRpN3tzmQRQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRankSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberRankSelectListItem.html",
+          "hash": "ZfA6ZTfhcVfxfgBp2CJR2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.MemberSelectListItem.html",
+          "hash": "6YspTctWaBEjUiEzUOU5Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.html",
+          "hash": "/KIXldPBoT0um3Te+cuztw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionLineupItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.PositionLineupItem.html",
+          "hash": "uKGIA8UA90ny9ZEyUN5/NQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionSelectListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.PositionSelectListItem.html",
+          "hash": "uAs4XKaSIp09bIk5gkKWzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.RosterManagerViewModelComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.RosterManagerViewModelComponent.html",
+          "hash": "3W/gLyfYNTRdfC7dJvFVLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.Types.html",
+          "hash": "Gqx0WyHmGFj4tky0LtQULQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html",
+          "hash": "a5XSW3aCZh32Zy8VHxklNg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.html",
+          "hash": "i/qH64ptNRg4VOiSfS0YGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.html",
+          "hash": "W1jTmfcUbmSRyf72qVfuUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel.html",
+          "hash": "R2vbfTA4wGDGcWOLTK/9mQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentLineupViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentLineupViewComponentViewModel.html",
+          "hash": "9OLLusY9GmwGYbarXnLtTA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.html",
+          "hash": "XhMaGhFuIkWH2wT59wOlag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.html",
+          "hash": "FG6m9/Z3aHga2hHwdPdgoA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.html",
+          "hash": "8450GCgH8Ls0uBlA9EOJPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.MemberIndexListViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.MemberIndexListViewModel.html",
+          "hash": "kbHm27zvUye3HfYq5dDPjw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionIndexListViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionIndexListViewModel.html",
+          "hash": "K3xFCIcZ+1TI0Gs9Z0x2iA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionLineupViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionLineupViewComponentViewModel.html",
+          "hash": "a6M7szvX9JmMFgG4oa0ruQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.html",
+          "hash": "8YDn5TebCMpchjVCJP105A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html",
+          "hash": "c/anNQpwv4BC1RbbESQSsg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewComponentViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewComponentViewModel.html",
+          "hash": "xAi26pu8rTVhOKPfk+MvsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewModel.html",
+          "hash": "JKI07keotR4QUPQWtf32jg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.ViewModels.html",
+          "hash": "H3S2b6GGx2aMJH8Fr3iAEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Models.html",
+          "hash": "m4oXGr0OcbLFQJAF8E2wPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.ComponentRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.ComponentRepository.html",
+          "hash": "HZQiWvrJ1peNGUvF/ULnOw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberDutyStatusRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberDutyStatusRepository.html",
+          "hash": "7i2yxWK9g6ZFXMg9+jNgig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberGenderRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberGenderRepository.html",
+          "hash": "n5IhAaDN4y8G2yUH5aZqOA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRaceRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRaceRepository.html",
+          "hash": "wxn14Ot+BtJ+u+xlDf8z0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRankRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRankRepository.html",
+          "hash": "Wco4PIO0GYNoIj/xufzm0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRepository.html",
+          "hash": "Rw8SJ+pWbnodwl2xef1LXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.PositionRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.PositionRepository.html",
+          "hash": "F+CeG5wC9YkVCbNAil0MFg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.Repository-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.Repository-1.html",
+          "hash": "sQM4/uQxd3/bIGnRz7x95w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.Repositories.html",
+          "hash": "aBDpArT/tDB4UHpidlxhYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.UnitOfWork.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.UnitOfWork.html",
+          "hash": "qrzLnJN6jg28qArMhwtluw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Persistence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Persistence.html",
+          "hash": "B6zZ2GjaW+4Z7aOlg3bc+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Program.html",
+          "hash": "r3zg7ZcU+ltHyBWdaImdXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.Startup.html",
+          "hash": "qbd804V5g7sNKrSKm+gmPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent.html",
+          "hash": "F21t7e2+4TcCbEkEE/atlg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.AssignMemberModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.AssignMemberModalViewComponent.html",
+          "hash": "tSpIyyT0iLkD473mADH1sA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.ChangeEmployeeStatusModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.ChangeEmployeeStatusModalViewComponent.html",
+          "hash": "f3v1tJXpLfoHkv/nodQu2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.ComponentAddEditModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.ComponentAddEditModalViewComponent.html",
+          "hash": "90oWcn7y8U6Kdj27qpXsjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.ComponentLineupViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.ComponentLineupViewComponent.html",
+          "hash": "AZzINvH5xaxa/ArczdcB3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.ConfirmComponentDeleteModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.ConfirmComponentDeleteModalViewComponent.html",
+          "hash": "Wj7rZAJENJa+mP5mIJIKag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.EditMemberModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.EditMemberModalViewComponent.html",
+          "hash": "QqddM5eX76IH9E4B/Nl8qw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.NavigationMenuViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.NavigationMenuViewComponent.html",
+          "hash": "BcpTi0cKYiEs5NNPsE741A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.PositionLineupViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.PositionLineupViewComponent.html",
+          "hash": "kfWJqsFo/1piVBj4dAF5cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.ReassignEmployeeModalViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.ReassignEmployeeModalViewComponent.html",
+          "hash": "hVSVL0zeK75GoCN2onzp2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.RosterManagerViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.RosterManagerViewComponent.html",
+          "hash": "GXZ0eVBITAGak02yj9Et+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.ViewComponents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.ViewComponents.html",
+          "hash": "8vEBwqbDQ7xH/ikHFVorrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OrgChartDemo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OrgChartDemo.html",
+          "hash": "qRcigkqPv6FfTNMxWHSBhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "ylp9uRDzX40wzJokToVN6g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "MRnLek70C20pUB5pzw7YlQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "NLNjDSQk1lujzpttVDJX2A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "t7iiFrmuYmrKWisdq+lN6Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "L5B5aXolhacWVXIMPdRVMA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "k+/dkjFuwAVS32HduMpmBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 3
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ManagedReferenceDocumentProcessor disable incremental build because last build doesn't contain version .",
+          "incrementalPhase": "build",
+          "total_file_count": 95,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
