@@ -10,18 +10,7 @@
         @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component" })                
         <a title="Get Component" class="get-next" id="getComponentButton">&nbsp;</a>
 </div>
-@*<div class="form-inline">
-    <div class="form-group">
-        @Html.LabelFor(x => Model.SelectedComponentId, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { @class = "form-control", id = "Component" })
-        @Html.ValidationMessageFor(x => x.SelectedComponentId, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        <input type="button" value="Submit" class="get-btn btn-default" id="getComponentButton" />
-    </div>
-</div>*@
-<br />
-<div id="rosterContainer" class="container">
+<div id="rosterContainer" class="container-fluid">
 
 
 </div>
