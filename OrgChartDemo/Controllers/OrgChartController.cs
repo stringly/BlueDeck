@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
+using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
 
 namespace OrgChartDemo.Controllers
 {
@@ -25,11 +27,19 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public JsonResult GetComponents()
+        public JsonResult GetComponents(int parentComponentId)
         {
-            return Json(unitOfWork.Components.GetOrgChartComponentsWithMembers());
+            List<ChartableComponentWithMember> components = unitOfWork.Components.GetOrgChartComponentsWithMembers(parentComponentId);
+            List<ComponentSelectListItem> items = unitOfWork.Components.GetComponentSelectListItems();
+            
+            return Json( new { data = components, selectComponents = items, selectedComponent = parentComponentId });
         }
 
+        [HttpGet]
+        public JsonResult GetComponentSelectListItems()
+        {            
+            return Json(unitOfWork.Components.GetComponentSelectListItems());
+        }
         /// <summary>
         /// GET /OrgChart/
         /// </summary>

@@ -196,7 +196,15 @@ namespace OrgChartDemo.Controllers
             form.ParentComponent = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(form.ParentComponentId));
             // pull a list of all Positions in the Repo to use to check name conflict
             IEnumerable<Position> allPositions = unitOfWork.Positions.GetAll();
-            form.Callsign = form.Callsign.ToUpper();
+            
+            if (form.Callsign != null)
+            {
+                form.Callsign = form.Callsign.ToUpper();
+            }
+            else
+            {
+                form.Callsign = "NONE";
+            }
             // check Model validation first
             if (ModelState.IsValid)
             {
@@ -211,11 +219,14 @@ namespace OrgChartDemo.Controllers
                         errors++;
                         ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";                            
                     }
-                    else if (p.Callsign == form.Callsign && p.PositionId != form.PositionId)
+                    else if (form.Callsign != "NONE")
                     {
-                        errors++;
-                        ViewBag.Message = $"The callsign '{form.Callsign}' is in use by {p.Name}. Choose another.";
-                    }
+                        if (p.Callsign == form.Callsign && p.PositionId != form.PositionId)
+                        {
+                            errors++;
+                            ViewBag.Message = $"The callsign '{form.Callsign}' is in use by {p.Name}. Choose another.";
+                        }
+                    }                    
                 }
                 // check for conflict in "IsManager" for all Positions in the ParentComponent
                 foreach(Position p in form.ParentComponent.Positions)

@@ -1,73 +1,156 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
+<h3>Organization Chart</h3>
+<h6>Select a Component to view its Organization Chart:</h6>
+<div id="people"></div>
+<hidden id="currentComponentId"></hidden>
+<script type="text/javascript">
 
-    <div id="people"></div>
-    <script type="text/javascript">
-        var orgChart;
-        $.getJSON("/OrgChart/GetComponents", function (source) {
-            orgChart = new getOrgChart(document.getElementById("people"), {
-                enableEdit: false,
-                enableDetailsView: false,
-                primaryFields: ["componentName", "positionName", "memberName", "email"],
-                color: "blue",
-                expandToLevel: 2,
-                updatedEvent: function () {
-                    init();
-                },
-                dataSource: source
-            });
-        });
+    var orgChart;
+    getOrgChart.themes.BlueDeckTheme =
+        {
+            size: [500, 220],
+            toolbarHeight: 46,
+            textPointsNoImage: [
+                { x: 10, y: 40, width: 490 },
+                { x: 10, y: 80, width: 490 },
+                { x: 10, y: 105, width: 490 },
+                { x: 10, y: 130, width: 490 }
+            ],
+            expandCollapseBtnRadius: 20,
+            box: '<path class="get-box" d="M0 0 L500 0 L500 220 L0 220 Z"/>',
+            text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',            
+        };
+    orgChart = new getOrgChart(document.getElementById("people"), {
+        theme: "BlueDeckTheme",
+        enableEdit: false,
+        enablePrint: true,
+        enableDetailsView: false,
+        primaryFields: ["componentName", "positionName", "memberName", "email"],
+        color: "blue",
+        expandToLevel: 2,
+        updatedEvent: function () {
+            init();
+        },
+    });
+
+    initSelectList();
 
 
 
-        function getNodeByClickedBtn(el) {
-            while (el.parentNode) {
-                el = el.parentNode;
-                if (el.getAttribute("data-node-id"))
-                    return el;
+
+    function initSelectList() {
+        document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
+        var list = document.getElementById("componentSelectList");
+        $.getJSON("/OrgChart/GetComponentSelectListItems", function (response) {
+
+            list.options.length = 0;
+            for (var i = 0; i < response.length; i++) {
+                var option = document.createElement("option");
+                option.text = response[i].componentName;
+                option.setAttribute("value", response[i].id);
+                list.add(option, list[i]);
             }
-            return null;
-        }
-        function btnClicked(sender) {
-            var nodeElement = getNodeByClickedBtn(sender);
-            var action = sender.getAttribute("data-action");
-            var id = nodeElement.getAttribute("data-node-id");
-            var node = orgChart.nodes[id];
-            var memberId = node.data["memberId"];
-            var positionId = node.data["positionId"];
-            switch (action) {
-                case "member":
-                    window.location.href = "/Members/Details?id=" + memberId;
-                    break;
-                case "component":
-                    window.location.href = "/Positions/Details?id=" + positionId;
-                    break;
-            }
-        }
+        })
+    }
 
-        var init = function () {
-            var btns = document.getElementsByClassName("btn btn-org");
-            for (var i = 0; i < btns.length; i++) {
-
-                btns[i].addEventListener("click", function () {
-                    var nodeElement = getNodeByClickedBtn(this);
-                    var action = this.getAttribute("data-action");
-                    var id = nodeElement.getAttribute("data-node-id");
-                    var node = orgChart.nodes[id];
-
-                    switch (action) {
-                        case "edit":
-                            alert(id);
-                            break;
-                        case "preview":
-                            orgChart.showDetailsView(id);
-                            break;
+    function handleComponentSelect(e) {
+        var current = $("#currentComponentId").val();
+        var id = e.target.value;
+        if (current != id) {
+            $.getJSON("/OrgChart/GetComponents", { parentComponentId: id }, function (response) {
+                orgChart = new getOrgChart(document.getElementById("people"), {
+                    theme: "BlueDeckTheme",
+                    enableEdit: false,
+                    enablePrint: true,
+                    enableDetailsView: false,
+                    primaryFields: ["componentName", "positionName", "memberName", "email"],
+                    color: "blue",
+                    expandToLevel: 3,
+                    layout: getOrgChart.MIXED_HIERARCHY_RIGHT_LINKS,
+                    updatedEvent: function () {
+                        init();
                     }
                 });
-            }
+                orgChart.loadFromJSON(response.data, false);
+                document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
+                var list = document.getElementById("componentSelectList");
+                list.options.length = 0;
+                for (var i = 0; i < response.selectComponents.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = response.selectComponents[i].componentName;
+                    option.setAttribute("value", response.selectComponents[i].id);
+                    list.add(option, list[i]);
+                }
+                list.value = response.selectedComponent;
+                $("#currentComponentId").val(response.selectedComponent);
+            });
         }
-        init();
+    }
 
-    </script>
+
+    function getNodeByClickedBtn(el) {
+        while (el.parentNode) {
+            el = el.parentNode;
+            if (el.getAttribute("data-node-id"))
+                return el;
+        }
+        return null;
+    }
+    function btnClicked(sender) {
+        var nodeElement = getNodeByClickedBtn(sender);
+        var action = sender.getAttribute("data-action");
+        var id = nodeElement.getAttribute("data-node-id");
+        var node = orgChart.nodes[id];
+        var memberId = node.data["memberId"];
+        var positionId = node.data["positionId"];
+        switch (action) {
+            case "member":
+                window.location.href = "/Members/Details?id=" + memberId;
+                break;
+            case "component":
+                window.location.href = "/Positions/Details?id=" + positionId;
+                break;
+        }
+    }
+
+    var init = function () {
+        var btns = document.getElementsByClassName("btn btn-org");
+        for (var i = 0; i < btns.length; i++) {
+
+            btns[i].addEventListener("click", function () {
+                var nodeElement = getNodeByClickedBtn(this);
+                var action = this.getAttribute("data-action");
+                var id = nodeElement.getAttribute("data-node-id");
+                var node = orgChart.nodes[id];
+
+                switch (action) {
+                    case "edit":
+                        alert(id);
+                        break;
+                    case "preview":
+                        orgChart.showDetailsView(id);
+                        break;
+                }
+            });
+        }
+        //document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
+
+    }
+    init();
+        //document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
+        //var list = document.getElementById("componentSelectList");
+        //$.getJSON("/OrgChart/GetComponentSelectListItems", function (response) {
+
+        //    list.options.length = 0;
+        //    for (var i = 0; i < response.length; i++) {
+        //        var option = document.createElement("option");
+        //        option.text = response[i].componentName;
+        //        option.setAttribute("value", response[i].id);
+        //        list.add(option, list[i]);
+        //    }
+        //})
+
+</script>

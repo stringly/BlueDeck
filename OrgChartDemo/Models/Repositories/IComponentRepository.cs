@@ -28,7 +28,7 @@ namespace OrgChartDemo.Models.Repositories
         /// This method is used to seed the GetOrgChart JQuery chart with a list of Components with Member details.
         /// </remarks>
         /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
-        IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers();
+        List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId);
 
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
         List<Component> GetComponentsAndChildrenSP(int parentComponentId);

@@ -157,24 +157,32 @@ namespace OrgChartDemo.Persistence.Repositories
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
         /// </summary>
         /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
-        public IEnumerable<ChartableComponentWithMember> GetOrgChartComponentsWithMembers()
+        public List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId)
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
             List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
-            IEnumerable<Component> TestList = GetComponentsWithChildren();
-            foreach (Component c in GetComponentsWithChildren())
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+            
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).OrderBy(x => x.LineupPosition).ToList();            
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Load();
+            foreach (Component c in components)
             {
                 // All components will render this at minimum
                 ChartableComponentWithMember n = new ChartableComponentWithMember  {
                     Id = c.ComponentId,
-                    Parentid = c?.ParentComponent?.ComponentId,
+                    Parentid = c?.ParentComponent?.ComponentId ?? 0,
                     ComponentName = c.Name
                     };  
                 // Check if component has child positions
-                if (c.Positions.Count > 0)
+                if (c.Positions != null)
                 {
                     // has child positions, so we need chartables for all
-                    foreach (Position p in c.Positions)
+                    foreach (Position p in c.Positions.OrderByDescending(x => x.LineupPosition))
                     {
                         // first, check if Position is Manager. If so, we want to render member details in the Parent Component Node
                         if (p.IsManager)
@@ -207,21 +215,23 @@ namespace OrgChartDemo.Persistence.Repositories
                             };
                             if (p.Members.Count == 0)
                             {
+                                d.PositionName = p.Name;
                                 d.PositionId = p.PositionId;
                                 d.MemberName = "Vacant";
                                 d.MemberId = -1;
-                                d.Email = "Admin@BlueDeck.com";
+                                d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
                             }
                             else
                             {
+                                d.PositionName = p.Name;
                                 d.PositionId = p.PositionId;
                                 d.MemberName = p.Members.First().GetTitleName();
-                                d.Email = p.Members.First().Email;
+                                d.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
                                 d.MemberId = p.Members.First().MemberId;
                             }
                             results.Add(d);
                         }
-                        else if (p.Members.Count() > 0 ) 
+                        else if (p.Members != null ) 
                             // if position is not manager/unique and has members, we need a new Chartable for each member
                         {
                             foreach (Member m in p.Members)
@@ -229,10 +239,11 @@ namespace OrgChartDemo.Persistence.Repositories
                                 dynamicUniqueId--;
                                 ChartableComponentWithMember x = new ChartableComponentWithMember {
                                     Id = dynamicUniqueId,
+                                    PositionName = p.Name,
                                     Parentid = n.Id,
                                     ComponentName = p.Name, // TODO: Change this to "Node Name" in GetOrgChart?
                                     MemberName = m.GetTitleName(),
-                                    Email = m.Email,
+                                    Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
                                     MemberId = m.MemberId,
                                     PositionId = p.PositionId
                                     };                                    
@@ -240,6 +251,12 @@ namespace OrgChartDemo.Persistence.Repositories
                             }
                         }
                     }
+                }
+                else
+                {
+                    n.PositionName = "";
+                    n.MemberName = "";
+                    n.Email = "";
                 }
                 results.Add(n);
             }
@@ -283,13 +300,30 @@ namespace OrgChartDemo.Persistence.Repositories
             */
 
             if (c.ComponentId == 0) { // ComponentId = 0 is a new Component
-                // get a list of only sibling Components that will be "pushed up" the Lineup because we are adding a new position
-                List<Component> siblings = ApplicationDbContext.Components
-                    .Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId && x.LineupPosition >= c.LineupPosition)
-                    .ToList();
-                foreach (Component sibling in siblings)
-                {                
-                    sibling.LineupPosition++;  
+                if (c.LineupPosition != null) // null LineupPosition means new Component should simply be added to the end of the list
+                {
+                    // get a list of only sibling Components that will be "pushed up" the Lineup because we are adding a new position
+                    List<Component> siblings = ApplicationDbContext.Components
+                        .Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId && x.LineupPosition >= c.LineupPosition)
+                        .ToList();
+                    foreach (Component sibling in siblings)
+                    {                
+                        sibling.LineupPosition++;  
+                    }
+                    
+                }
+                else
+                {
+                    int? endOfLineup = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == c.ParentComponent.ComponentId).Max(x => x.LineupPosition);
+                    if (endOfLineup == null) // if endOfLineup is null, then no siblings exist. The new Component is the first child, so it's LineupPosition should be 0
+                    {
+                        c.LineupPosition = 0;
+                    }
+                    else
+                    {
+                        // set the new Component's LineupPosition to one greater than the end of lineup
+                        c.LineupPosition = endOfLineup + 1;
+                    }
                 }
                 // add the new Component to the Context
                 ApplicationDbContext.Components.Add(c);
@@ -337,16 +371,20 @@ namespace OrgChartDemo.Persistence.Repositories
         public void RemoveComponent(int componentId)
         {
             // Prevent deleting Components with Children Components
-            if (ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == componentId) != null)
+            if (ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == componentId).Count() != 0)
             {
                 return;
             }
             else
             {
-                Component toRemove = ApplicationDbContext.Components.SingleOrDefault(x => x.ComponentId == componentId);
+                Component toRemove = ApplicationDbContext.Components
+                    .Include(x => x.ParentComponent)
+                    .SingleOrDefault(x => x.ComponentId == componentId);
 
                 if (toRemove != null)
                 {
+                    // We need to Remove all Positions that belong to the Component to be deleted and reassign
+                    // any members assigned to those Positions to the Default "Unassigned" pool.
                     List<Position> cPositions = ApplicationDbContext.Positions
                         .Where(x => x.ParentComponent.ComponentId == componentId)
                         .Include(x => x.Members)
@@ -362,8 +400,19 @@ namespace OrgChartDemo.Persistence.Repositories
                         }
 
                     }
+                    // first, save the Members reassignments in the Context 
+                    // if this isn't done, EF will still associate the Member's Position with it's
+                    // previous value, and when the target Position is removed, the Member's Position will be "null"
                     ApplicationDbContext.SaveChanges();
+                    // now, remove all of the Component's Positions
                     ApplicationDbContext.Positions.RemoveRange(cPositions);
+                    // next, we need to adjust the LineupPositions of all of the target Component's sibling components.
+                    List<Component> siblings = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == toRemove.ParentComponent.ComponentId && x.ComponentId != toRemove.ComponentId && x.LineupPosition > toRemove.LineupPosition).ToList();
+                    foreach (Component sibling in siblings)
+                    {
+                        sibling.LineupPosition--;
+                    }
+
                     ApplicationDbContext.Components.Remove(toRemove);
                 }
             }                            

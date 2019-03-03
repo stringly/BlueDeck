@@ -40,7 +40,7 @@
     // I need an onchange event for the ParentComponentId select
     $(document).ready(function () {
         // invoke the Lineup selector on page load
-        $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: $("#ParentComponentId").val(), componentBeingEditedId: $("#ComponentId").val() }, function (data) {
+        $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: $("#ParentComponentId").val(), componentBeingEditedId: $("#ComponentId").val() }, function (data) {            
             $("#lineupSelectionTarget").html(data);
             document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
             document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);

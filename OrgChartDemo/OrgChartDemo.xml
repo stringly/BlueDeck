@@ -172,7 +172,7 @@
             </summary>
             <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.OrgChartController.GetComponents">
+        <member name="M:OrgChartDemo.Controllers.OrgChartController.GetComponents(System.Int32)">
             <summary>
             Gets the components. (async, JSON result from the GetOrgChart JQuery Library
             </summary>
@@ -1265,7 +1265,7 @@
             </remarks>
             <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
         </member>
-        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembers">
+        <member name="M:OrgChartDemo.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
@@ -2023,7 +2023,7 @@
             A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}" />
             </returns>
         </member>
-        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers">
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">
             <summary>
             Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
             </summary>
