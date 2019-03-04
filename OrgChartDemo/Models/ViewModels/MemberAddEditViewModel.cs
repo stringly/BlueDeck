@@ -115,7 +115,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         [Display(Name = "Current Assignment")]
         public int? PositionId { get; set; }
-                
+        
+        [Display(Name = "Contact Numbers")]
         public List<MemberContactNumber> ContactNumbers { get; set; } 
 
         /// <summary>
@@ -158,6 +159,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         public List<MemberDutyStatusSelectListItem> DutyStatus { get; set; }
 
+        public List<PhoneNumberTypeSelectListItem> PhoneNumberTypes { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
         /// <remarks>
@@ -182,7 +185,8 @@ namespace OrgChartDemo.Models.ViewModels
             List<MemberRankSelectListItem> _rankList, 
             List<MemberGenderSelectListItem> _genderList, 
             List<MemberRaceSelectListItem> _raceList,
-            List<MemberDutyStatusSelectListItem> _dutyStatusList)
+            List<MemberDutyStatusSelectListItem> _dutyStatusList,
+            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes)
         {
             MemberId = _member?.MemberId;
             MemberRank = _member?.Rank?.RankId;
@@ -195,13 +199,40 @@ namespace OrgChartDemo.Models.ViewModels
             PositionId = _member?.Position?.PositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
-            ContactNumbers = _member.PhoneNumbers;
+            ContactNumbers = _member?.PhoneNumbers ?? new List<MemberContactNumber>();
             RankList = _rankList;
             GenderList = _genderList;
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
+            PhoneNumberTypes = _phoneNumberTypes;
             Positions = _positionList.ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name });
 
+        }
+
+        public MemberAddEditViewModel(Member _member,
+            List<MemberRankSelectListItem> _rankList,
+            List<MemberGenderSelectListItem> _genderList,
+            List<MemberRaceSelectListItem> _raceList,
+            List<MemberDutyStatusSelectListItem> _dutyStatusList,
+            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes)
+        {
+            MemberId = _member?.MemberId;
+            MemberRank = _member?.Rank?.RankId;
+            FirstName = _member.FirstName;
+            LastName = _member.LastName;
+            MiddleName = _member.MiddleName;
+            IdNumber = _member.IdNumber;
+            DutyStatusId = _member?.DutyStatus?.DutyStatusId;
+            Email = _member.Email;
+            PositionId = _member?.Position?.PositionId;
+            MemberGender = _member?.Gender?.GenderId;
+            MemberRace = _member?.Race?.MemberRaceId;
+            ContactNumbers = _member?.PhoneNumbers ?? new List<MemberContactNumber>();
+            RankList = _rankList;
+            GenderList = _genderList;
+            RaceList = _raceList;
+            DutyStatus = _dutyStatusList;
+            PhoneNumberTypes = _phoneNumberTypes;
         }
     }
 }

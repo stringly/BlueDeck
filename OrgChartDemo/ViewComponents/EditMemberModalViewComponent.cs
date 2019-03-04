@@ -5,7 +5,7 @@ namespace OrgChartDemo.ViewComponents
 {
     public class EditMemberModalViewComponent : ViewComponent
     {
-        public IViewComponentResult Invoke(EditMemberModalViewComponentViewModel vm)
+        public IViewComponentResult Invoke(MemberAddEditViewModel vm)
         {
             return View(vm);
         }        

@@ -1366,6 +1366,16 @@
             </summary>
             <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Member}" />
         </member>
+        <member name="M:OrgChartDemo.Models.Repositories.IMemberRepository.Remove(System.Int32)">
+            <summary>
+            Removes the specified member identifier.
+            </summary>
+            <remarks>
+            This is an override of the IRepository's Remove method. This override removes all MemberContact entries 
+            when removing a Member.
+            </remarks>
+            <param name="memberId">The member identifier.</param>
+        </member>
         <member name="T:OrgChartDemo.Models.Repositories.IPositionRepository">
             <summary>
             An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
@@ -1734,7 +1744,7 @@
             </remarks>
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem})">
+        <member name="M:OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel"/> class.
             </summary>
@@ -1885,7 +1895,7 @@
             </remarks>
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Position},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem})">
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Position},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>

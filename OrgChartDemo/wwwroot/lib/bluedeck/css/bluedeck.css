@@ -48,6 +48,14 @@ body {
         background-color: transparent;
         background-position: 0 0;
     }
+    .btn-default:focus {
+        color: white;
+        border: 1px solid darkblue;
+        background-image: linear-gradient(to bottom, rgba(34, 69, 124, 1), rgba(72, 152, 223, 1));
+        text-shadow: none;
+        background-color: transparent;
+        background-position: 0 0;
+    }
 .rosterIndex-tb {
     position: relative;
     height: 100%;

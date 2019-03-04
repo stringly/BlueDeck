@@ -304,39 +304,34 @@ namespace OrgChartDemo.Controllers
         public IActionResult GetEditEmployeeModalViewComponent(int memberId)
         {
             Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(memberId);            
-            EditMemberModalViewComponentViewModel vm = new EditMemberModalViewComponentViewModel(m, unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
+            MemberAddEditViewModel vm = new MemberAddEditViewModel(m, unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
-                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
             return ViewComponent("EditMemberModal", vm);
                 
         }
 
         
         [HttpPost]
-        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,DutyStatusId,Email")] EditMemberModalViewComponentViewModel form)
+        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
-            Member m = unitOfWork.Members.Get(Convert.ToInt32(form.MemberId));
+            
             if (ModelState.IsValid)
             {
-                m.Rank = unitOfWork.MemberRanks.GetRankById(Convert.ToInt32(form.MemberRank));
-                m.Gender = unitOfWork.MemberGenders.GetGenderById(Convert.ToInt32(form.MemberGender));
-                m.Race = unitOfWork.MemberRaces.GetRaceById(Convert.ToInt32(form.MemberRace));
-                m.FirstName = form.FirstName;
-                m.MiddleName = form.MiddleName;
-                m.LastName = form.LastName;
-                m.IdNumber = form.IdNumber;
-                m.DutyStatus = unitOfWork.MemberDutyStatus.GetStatusById(Convert.ToInt32(form.DutyStatusId));
-                m.Email = form.Email;
+                unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
                 return Json(new { success = true });
             }
             else
             {
-                EditMemberModalViewComponentViewModel vm = new EditMemberModalViewComponentViewModel(m, unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
+                Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(Convert.ToInt32(form.MemberId));
+                MemberAddEditViewModel vm = new MemberAddEditViewModel(m, unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
-                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
                 return ViewComponent("EditMemberModal", vm);
             }
         }

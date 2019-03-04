@@ -70,6 +70,22 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="ContactNumbers" class="control-label"></label>
+                <div class="input-group" id="contactGroup-@Model.ContactNumbers.Count">
+                    <div class="input-group-addon">
+                        @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                new { @class = "defaultPhoneTypeSelect phoneNumberTypeList" })
+                    </div>
+                    <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                    <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                </div>
+                <div id="newPhoneTarget">
+
+                </div>
+                <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
+            </div>
+            <div class="form-group">
                 <label asp-for="PositionId" class="control-label"></label>
                 @Html.DropDownListFor(model => model.PositionId,
                                                 new SelectList(Model.Positions, "PositionId", "PositionName"),
@@ -88,3 +104,71 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script>
+    $(document).ready(function () {
+        document.getElementById('defaultNewPhone').addEventListener("change", handleAddPhoneNumberClick, false);
+        document.querySelectorAll(".deleteNumber").forEach(function (elem) {
+            elem.addEventListener("click", handleDeletePhoneNumberClick, false);
+        })
+    })
+
+    function handleAddPhoneNumberClick(e) {
+        var currentContactCount = parseInt($("#contactsCount").val()) + 1;
+        var target = document.getElementById('newPhoneTarget');
+        var newFormGroup = document.createElement('div');
+        newFormGroup.classList.add("input-group");
+        var newInputGroup = document.createElement('div');
+        newInputGroup.classList.add("input-group-addon");
+
+        var options = document.getElementsByClassName("phoneNumberTypeList")[0].innerHTML;
+        var newSelect = document.createElement("select");
+        newSelect.classList = ["phoneNumberTypeList"]
+        newSelect.innerHTML = options;
+        newSelect.name = "ContactNumbers[" + currentContactCount + "].Type.PhoneNumberTypeId";
+        var newInput = document.createElement("input");
+        newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
+        newInput.classList.add("form-control");
+        var newDelete = document.createElement("span");
+        newDelete.classList.add("input-group-addon");
+        newDelete.classList.add("deleteNumber");
+        newDelete.dataset.contactid = currentContactCount -1;
+        var newDeleteIcon = document.createElement("i");
+        newDeleteIcon.classList.add("glyphicon");
+        newDeleteIcon.classList.add("glyphicon-trash");
+        newDeleteIcon.dataset.contactid = currentContactCount - 1;
+        newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
+        newDelete.appendChild(newDeleteIcon);
+        e.target.parentNode.appendChild(newDelete);
+
+        newInputGroup.appendChild(newSelect);
+        newFormGroup.appendChild(newInputGroup);
+        newFormGroup.id = "contactGroup-" + currentContactCount;
+        newInput.addEventListener("change", handleAddPhoneNumberClick, false);
+        newFormGroup.appendChild(newInput);
+        //newFormGroup.appendChild(newDelete);
+        target.parentNode.insertBefore(newFormGroup, target);
+        $("#contactsCount").val(currentContactCount);
+        
+        e.target.removeEventListener('change', handleAddPhoneNumberClick);
+
+    }
+    function handleDeletePhoneNumberClick(e) {
+        //alert("Delete" + e.target.dataset.contactid);
+        console.log("Delete Clicked");
+        var contactId = e.target.dataset.contactid;
+        var contactGroup = $("#contactGroup-" + contactId);
+        var deleteFlagName = "ContactNumbers[" + contactId + "].ToDelete";
+        var deleteFlag = $('[name="' + deleteFlagName + '"]');
+        if (deleteFlag.val() == "False") {
+            deleteFlag.val("True");
+            contactGroup.hide();
+        }
+        else {
+            contactGroup.remove();
+            var currentCount = $("#contactsCount").val() - 1;
+            $("#contactsCount").val(currentCount);
+
+        }
+
+    }
+</script>

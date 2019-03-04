@@ -1,4 +1,5 @@
 ﻿using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
 using System.Collections.Generic;
 
 namespace OrgChartDemo.Models.Repositories
@@ -13,5 +14,16 @@ namespace OrgChartDemo.Models.Repositories
         Member GetMemberWithPosition(int memberId);
         Member GetMemberWithDemographicsAndDutyStatus(int memberId);
         IEnumerable<MemberSelectListItem> GetAllMemberSelectListItems();
+        void UpdateMember(MemberAddEditViewModel vm);
+
+        /// <summary>
+        /// Removes the specified member identifier.
+        /// </summary>
+        /// <remarks>
+        /// This is an override of the IRepository's Remove method. This override removes all MemberContact entries 
+        /// when removing a Member.
+        /// </remarks>
+        /// <param name="memberId">The member identifier.</param>
+        void Remove(int memberId);
     }
 }

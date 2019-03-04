@@ -112,7 +112,8 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
-                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
             return View(vm);
         }
 
@@ -123,7 +124,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email")] MemberAddEditViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             if (!ModelState.IsValid)
             {
@@ -132,20 +133,7 @@ namespace OrgChartDemo.Controllers
             else
             {
                 // TODO: Member addition checks? Duplicate Name/Badge Numbers?
-                Member m = new Member
-                {
-                    FirstName = form.FirstName,
-                    LastName = form.LastName,
-                    MiddleName = form.MiddleName,
-                    Rank = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank),
-                    Race = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace),
-                    Gender = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender),
-                    Position = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId),
-                    DutyStatus = unitOfWork.MemberDutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId),
-                    IdNumber = form.IdNumber,
-                    Email = form.Email
-                };
-                unitOfWork.Members.Add(m);
+                unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }            
@@ -174,7 +162,8 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
-                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems());
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
             return View(vm);
         }
 
@@ -186,14 +175,9 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult Edit(int id, [Bind("MemberId,FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
-            Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
-            Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
-            MemberRank r = unitOfWork.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
-            MemberGender g = unitOfWork.MemberGenders.SingleOrDefault(x => x.GenderId == form.MemberGender);
-            MemberRace rc = unitOfWork.MemberRaces.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
-            MemberDutyStatus ds = unitOfWork.MemberDutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -202,16 +186,7 @@ namespace OrgChartDemo.Controllers
             {
                 try
                 {
-                    m.FirstName = form.FirstName;
-                    m.LastName = form.LastName;
-                    m.MiddleName = form.MiddleName;
-                    m.IdNumber = form.IdNumber;
-                    m.Email = form.Email;
-                    m.Rank = r;
-                    m.Gender = g;
-                    m.Race = rc;
-                    m.DutyStatus = ds;
-                    m.Position = targetPosition;
+                    unitOfWork.Members.UpdateMember(form);
                     unitOfWork.Complete();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -261,8 +236,8 @@ namespace OrgChartDemo.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            Member m = unitOfWork.Members.Get(id);
-            unitOfWork.Members.Remove(m);
+            
+            unitOfWork.Members.Remove(id);
             unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }

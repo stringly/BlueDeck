@@ -115,6 +115,10 @@ namespace OrgChartDemo.Models {
 
         public List<MemberContactNumber> PhoneNumbers { get; set; }
 
+        public Member()
+        {
+            PhoneNumbers = new List<MemberContactNumber>();
+        }
         /// <summary>
         /// Gets the formal title form of the Member's name and rank.
         /// </summary>

@@ -1,4 +1,4 @@
-﻿@model EditMemberModalViewComponentViewModel
+﻿@model MemberAddEditViewModel
 
 <div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="vertical-alignment-helper">
@@ -9,7 +9,7 @@
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
                     </button>
-                    <h4 class="modal-title" id="editMemberModalLabel">Edit Info for @Model.Member.GetTitleName()</h4>
+                    <h4 class="modal-title" id="editMemberModalLabel">Edit Member Info</h4>
 
                 </div>
                 <div style="padding: 10px 30px 5px 30px">
@@ -31,15 +31,16 @@
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="LastName" class="control-label"></label>
-                            <input asp-for="LastName" class="form-control" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
                             <label asp-for="MiddleName" class="control-label"></label>
                             <input asp-for="MiddleName" class="form-control" />
                             <span asp-validation-for="MiddleName" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
                         <div class="form-group">
                             <label asp-for="IdNumber" class="control-label"></label>
                             <input asp-for="IdNumber" class="form-control" />
@@ -73,6 +74,39 @@
                             <label asp-for="Email" class="control-label"></label>
                             <input asp-for="Email" class="form-control" />
                             <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ContactNumbers" class="control-label"></label>
+                            @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+                            {
+                                <div class="input-group" id="contactGroup-@i">
+                                    <div class="input-group-addon">
+                                        @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                             new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                             "Number Type",
+                                             new { @class = "phoneNumberTypeList" })
+                                    </div>
+                                    <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+                                    <span class="input-group-addon deleteNumber" data-contactid="@i">
+                                        <i class="glyphicon glyphicon-trash" data-contactid="@i"></i>
+                                    </span>
+                                </div>
+                            }
+                            <div class="input-group" id="contactGroup-@Model.ContactNumbers.Count">
+                                <div class="input-group-addon">
+                                    @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                         new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                         new { @class = "defaultPhoneTypeSelect phoneNumberTypeList" })
+                                </div>
+                                <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                                <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                            </div>
+                            <div id="newPhoneTarget">
+
+                            </div>
+                            <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
                         </div>
                     </form>
                 </div>

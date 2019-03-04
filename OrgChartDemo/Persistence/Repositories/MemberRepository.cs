@@ -2,6 +2,8 @@
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -70,6 +72,72 @@ namespace OrgChartDemo.Persistence.Repositories
                 .ToList().ConvertAll(x => new MemberSelectListItem { MemberId = x.MemberId, MemberName = x.GetTitleName() });
         }
 
+        public void UpdateMember(MemberAddEditViewModel form)
+        {
+            Member m;
+            if (form.MemberId != null)
+            {
+                    m = ApplicationDbContext.Members
+                .Include(x => x.PhoneNumbers)
+                .FirstOrDefault(x => x.MemberId == form.MemberId);
+            }
+            else
+            {
+                m = new Member();
+            }
+            
+            m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+            m.Rank = ApplicationDbContext.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
+            MemberGender g = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
+            MemberRace rc = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
+            MemberDutyStatus ds = ApplicationDbContext.DutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
+            m.Email = form.Email;
+            m.FirstName = form.FirstName;
+            m.IdNumber = form.IdNumber;
+            m.MiddleName = form.MiddleName;
+            m.LastName = form.LastName;
+            foreach(MemberContactNumber n in form.ContactNumbers)
+            {
+                if (n.MemberContactNumberId != 0)
+                {
+                    if (n.ToDelete == true)
+                    {
+                        MemberContactNumber toRemove = ApplicationDbContext.ContactNumbers.Where(x => x.MemberContactNumberId == n.MemberContactNumberId).FirstOrDefault();
+
+                        ApplicationDbContext.ContactNumbers.Remove(toRemove);
+                    }
+                    else
+                    {
+                        MemberContactNumber toUpdate = m.PhoneNumbers.FirstOrDefault(x => x.MemberContactNumberId == n.MemberContactNumberId);
+                        toUpdate.PhoneNumber = n.PhoneNumber;
+                        toUpdate.Type = ApplicationDbContext.PhoneNumberTypes.FirstOrDefault(x => x.PhoneNumberTypeId == n.Type.PhoneNumberTypeId);
+                    }
+                }
+                else if (n.PhoneNumber != null)
+                {
+                    MemberContactNumber toAdd = new MemberContactNumber()
+                    {
+                        Member = m,
+                        PhoneNumber = n.PhoneNumber,
+                        Type = ApplicationDbContext.PhoneNumberTypes.FirstOrDefault(x => x.PhoneNumberTypeId == n.Type.PhoneNumberTypeId)
+                    };
+                    m.PhoneNumbers.Add(toAdd);
+                }
+            }
+            if (form.MemberId == null)
+            {
+                ApplicationDbContext.Members.Add(m);
+            }
+        }
+
+        public void Remove(int memberId)
+        {
+            Member m = ApplicationDbContext.Members
+                .Include(x => x.PhoneNumbers)
+                .FirstOrDefault(x => x.MemberId == memberId);
+            ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
+            ApplicationDbContext.Members.Remove(m);
+        }
         /// <summary>
         /// Gets the application database context.
         /// </summary>

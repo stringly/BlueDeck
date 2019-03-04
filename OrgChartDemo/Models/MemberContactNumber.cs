@@ -1,5 +1,6 @@
 ﻿using OrgChartDemo.Models.Types;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrgChartDemo.Models
 {
@@ -13,6 +14,9 @@ namespace OrgChartDemo.Models
         public string PhoneNumber {get;set;}
 
         public Member Member {get;set;}
+
+        [NotMapped]
+        public bool ToDelete { get; set; }
 
     }
 }
