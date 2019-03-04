@@ -1,0 +1,22 @@
+﻿@model MemberContactNumberViewComponentViewModel
+
+<div class="form-group">
+    <label asp-for="ContactNumbers" class="control-label"></label>
+    @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+    {
+        <div class="input-group">
+            <div class="input-group-addon">
+                @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                        new SelectList(Model.NumberTypeList, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                        "Number Type",
+                        new { @class = "" })
+            </div>
+            <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+            <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+        </div>
+    }
+    <input type="hidden" asp-for="ContactNumbers.Count" />
+    <div style="margin:5px; color:cornflowerblue; cursor:pointer;">
+        <span class="glyphicon glyphicon-plus"></span><span href="">Add Contact Number</span>
+    </div>
+</div>

@@ -26,6 +26,8 @@ namespace OrgChartDemo.Persistence
             MemberGenders = new MemberGenderRepository(_context);
             MemberRaces = new MemberRaceRepository(_context);
             MemberDutyStatus = new MemberDutyStatusRepository(_context);
+            MemberContactNumbers = new MemberContactNumberRepository(_context);
+            PhoneNumberTypes = new PhoneNumberTypeRepository(_context);
         }
 
         /// <summary>
@@ -90,6 +92,10 @@ namespace OrgChartDemo.Persistence
         /// </value>
         /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository" />
         public IMemberDutyStatusRepository MemberDutyStatus { get; private set; }
+
+        public IMemberContactNumberRepository MemberContactNumbers { get; private set; }
+
+        public IPhoneNumberTypeRepository PhoneNumberTypes { get; private set; }
 
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates

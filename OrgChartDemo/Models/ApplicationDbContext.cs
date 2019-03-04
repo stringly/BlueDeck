@@ -80,5 +80,9 @@ namespace OrgChartDemo.Models {
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberDutyStatus"/>s
         /// </value>
         public virtual DbSet<MemberDutyStatus> DutyStatus { get; set; }
+
+        public virtual DbSet<MemberContactNumber> ContactNumbers { get; set; }
+
+        public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
     }
 }

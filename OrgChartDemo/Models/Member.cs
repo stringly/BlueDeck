@@ -113,6 +113,8 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Current Assignment")]
         public virtual Position Position { get; set; }
 
+        public List<MemberContactNumber> PhoneNumbers { get; set; }
+
         /// <summary>
         /// Gets the formal title form of the Member's name and rank.
         /// </summary>

@@ -164,7 +164,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            Member member = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
+            Member member = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(Convert.ToInt32(id));
             if (member == null)
             {
                 return NotFound();
@@ -186,7 +186,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email")] MemberAddEditViewModel form)
+        public IActionResult Edit(int id, [Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
             Position targetPosition = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
@@ -274,6 +274,14 @@ namespace OrgChartDemo.Controllers
         private bool MemberExists(int id)
         {
             return (unitOfWork.Members.SingleOrDefault(e => e.MemberId == id) != null);
+        }
+
+        public IActionResult GetMemberContactNumberViewComponent(int memberId)
+        {
+            Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(memberId);
+            List<PhoneNumberTypeSelectListItem> phoneTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+            MemberContactNumberViewComponentViewModel vm = new MemberContactNumberViewComponentViewModel(m, phoneTypes);
+            return ViewComponent("MemberContactNumber", vm);
         }
     }
 }

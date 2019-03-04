@@ -115,6 +115,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         [Display(Name = "Current Assignment")]
         public int? PositionId { get; set; }
+                
+        public List<MemberContactNumber> ContactNumbers { get; set; } 
 
         /// <summary>
         /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>s.
@@ -193,6 +195,7 @@ namespace OrgChartDemo.Models.ViewModels
             PositionId = _member?.Position?.PositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
+            ContactNumbers = _member.PhoneNumbers;
             RankList = _rankList;
             GenderList = _genderList;
             RaceList = _raceList;

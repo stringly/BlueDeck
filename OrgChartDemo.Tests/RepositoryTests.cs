@@ -3,6 +3,7 @@ using Xunit;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using Moq;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Tests
 {
@@ -124,5 +125,51 @@ namespace OrgChartDemo.Tests
             }
             Assert.Equal(actualMemberCount, expectedMemberCount);
         }
+
+        //[Fact]
+        //public void Member_Should_Get_MemberContactNumbers()
+        //{
+        //    // Arrange
+
+        //    // create mock member
+        //    var memberMock = new Member()
+        //    {
+        //        MemberId = 1,
+        //        FirstName = "Jason",
+        //        LastName = "Smith",                
+        //    };
+        //    // create mock MemberContact
+            
+        //    // first, need Number Types
+        //    var numberType1 = new PhoneNumberType(){
+        //            PhoneNumberTypeId = 0,
+        //            PhoneNumberTypeName = "Home"
+        //        };
+        //    var numberType2 = new PhoneNumberType(){
+        //            PhoneNumberTypeId = 1,
+        //            PhoneNumberTypeName = "Cell"
+        //        };
+        //    // now, mock Contacts
+
+        //    var contacts = new List<MemberContactNumber>()
+        //    {
+        //        new MemberContactNumber()
+        //        {
+        //            Member = memberMock,
+        //            MemberContactNumberId = 0,
+        //            PhoneNumber = "(301) 648-3444",
+        //            Type = numberType1
+                    
+        //        },
+        //        new MemberContactNumber()
+        //        { 
+        //            Member = memberMock,
+        //            MemberContactNumberId = 1,
+        //            PhoneNumber = "(123) 456-7890",
+        //            Type = numberType2
+        //        }
+                
+        //    };
+        //}
     }
 }

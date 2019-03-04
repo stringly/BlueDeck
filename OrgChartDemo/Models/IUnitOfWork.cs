@@ -76,6 +76,10 @@ namespace OrgChartDemo.Models
         /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository"/>
         IMemberDutyStatusRepository MemberDutyStatus { get; }
 
+        IMemberContactNumberRepository MemberContactNumbers { get; }
+
+        IPhoneNumberTypeRepository PhoneNumberTypes { get; }
+
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates
         /// </summary>
