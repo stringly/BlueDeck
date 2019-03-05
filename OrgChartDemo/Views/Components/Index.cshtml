@@ -4,15 +4,15 @@
 <div class="headerContainer">
     <h3>Component Index</h3>
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a>
     </p>
     <form asp-page="/Index" method="get">
         <div class="form-actions no-color">
             <p>
                 Find by name:
-                <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+                <input type="text" class="bigControl" name="SearchString" value="@Model.CurrentFilter" />
                 <input type="submit" value="Search" class="btn btn-default" /> |
-                <a asp-page="/Index">Back to full List</a>
+                <a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Back to Full List</a>
             </p>
         </div>
     </form>
@@ -22,10 +22,18 @@
     <table class="table indexTable">
         <thead>
             <tr>
-                <th>
+                <th>                    
                     <a asp-page="/Index" asp-route-sortOrder="@Model.ComponentNameSort"
                        asp-route-searchString="@Model.CurrentFilter">
                         @Html.DisplayNameFor(model => model.Components.First().ComponentName)
+                        @if (Model.CurrentSort == "name_desc")
+                        {
+                            <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                        }                        
                     </a>
                 </th>
                 <th>
@@ -35,6 +43,14 @@
                     <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
                        asp-route-searchString="@Model.CurrentFilter">
                         @Html.DisplayNameFor(model => model.Components.First().ParentComponentName)
+                        @if (Model.CurrentSort == "ParentComponentName")
+                        {
+                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                        }
                     </a>
                 </th>
                 <th>

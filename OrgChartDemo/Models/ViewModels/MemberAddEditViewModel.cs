@@ -234,5 +234,6 @@ namespace OrgChartDemo.Models.ViewModels
             DutyStatus = _dutyStatusList;
             PhoneNumberTypes = _phoneNumberTypes;
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
@@ -7,28 +8,98 @@ body {
 .pageContentContainer {
     margin-top: 50px;
     background-color: #f7f7f7;
+    padding:0px;
 }
 /* Bootstrap Overrides*/
 .headerContainer {
-    margin: 5px;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    color: white;
-    background-color: #f7f7f7;
-    background-image: linear-gradient(-60deg,#4d687b,#314551 60%);
-    padding: 5px 0px 10px 10px;
+    margin: 0px 0px 15px 0px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.30), 0 5px 10px rgba(0,0,0,0.22);
+    color: #41465a;
+    /*background-color: #B9C5D3;*/
+    /*background-image: linear-gradient(-60deg,#957F5D,#6C7886 70%);*/
+    background-image: linear-gradient(60deg,#F1F1F5,#BABDCD 70%);
+    padding: 5px 0px 5px 20px;
+    width: 100vw;
 }
+.orgChartContainer {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+.formContainer {
+    width: 90%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    background-color: #fff;    
+}
+    .formContainer .formHeader {
+        padding: 10px 0px 10px 20px;
+        color: #41465a;
+        background-image: linear-gradient(to bottom, rgba(186,189,205,1), rgba(186,189,205, 0.1));
+    }
+
+    .formContainer .formHeader a {
+        color: #3762ef;
+    }
+
+    .formContainer .formHeader a:hover {
+        color: #052692;
+    }
+    .formContainer .formHeader h4 {
+        margin-top: 5px;
+    }
+    .formContainer .formBody{
+        padding: 5px 25px 10px 25px;
+    }
+
+    .headerContainer h3 {
+        margin-top: 10px;
+    }
+    .headerContainer a {
+        color: #3762ef;
+    }
+        .headerContainer a:hover {
+            color: #052692;
+        }
 .navbar {
     border-radius: 0px;
     margin-bottom: 10px;
+    
 }
+.navbar-header {
+    background-image: linear-gradient(-120deg,#39577a,#213246 50%);
+}
+
 .navbar-inverse {
-    background-color: #213246 !important;    
-    background-image: none;
+    background-color: #213246 !important;
+    background-image: linear-gradient(90deg,#213246,#39577a 80%);
 }
-.navbar-inverse .navbar-brand {
-    color: #ffffff;
+.navbar-brand {
+    line-height: 12px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-left: 20px;
 }
+    .navbar-brand span {
+        color: #ffffff;
+        font-size: 20px;
+        position: relative;
+        display: block;
+        padding-bottom: 3px;
+    }
+
+    .navbar-brand small {
+        color: #bfbfbf;
+        display: block;
+        font-size: 10px;
+    }
 .navbar-inverse .navbar-nav > li > a {
+    font-size: 16px;
+    font-variant-caps: all-petite-caps;
+    /*font-weight: 600;*/
     color: #bfbfbf;
 }
 
@@ -39,15 +110,16 @@ body {
 .btn-default {
     color: white;
     border: 1px solid darkblue;
-    background-image: linear-gradient(to bottom, rgba(72, 152, 223, 0.5), rgba(72, 152, 223, 1));
+    background-image: linear-gradient(to bottom, rgba(72, 152, 223, 1), rgba(34, 69, 124, 1));
+    background-color: rgba(34, 69, 124, 1);
     text-shadow: none;
 }
     .btn-default:hover {
         color: white;
         border: 1px solid darkblue;
-        background-image: linear-gradient(to bottom, rgba(72, 152, 223, 1), rgba(34, 69, 124, 1));
+        background-image: linear-gradient(to bottom, rgba(72, 152, 223, 0.5), rgba(72, 152, 223, 1));
         text-shadow: none;
-        background-color: transparent;
+        background-color: rgba(72, 152, 223, 1);
         background-position: 0 0;
     }
     .btn-default:focus {
@@ -117,42 +189,63 @@ body {
     border: 1px solid #ccc;
     border-radius: 0px;
 }
-
-.input-group-addon {
-    padding: 4px 8px;
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 1;
-    color: #555;
-    text-align: center;
-    background-color: #eee;
-    border: 1px solid #ccc;
-    border-radius: 0px;
+.mygroup{
+    width: 100%;
 }
+.mygroup .form-control {
+    width:50%;
+}
+
+    .mygroup select {
+        background-color: #eee;
+    }
+    .mygroup .btn-addon {
+        font-size: 12px;
+        font-weight: 400;
+        color: #555;
+        vertical-align: top;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+        height: 30px;
+    }
 .form-inline > .form-group {
     vertical-align: middle;
     padding-bottom: 10px;
 }
 /*Custom Classes*/
 .bigControl {
-    padding: 6px 12px;
-    font-size: 14px;
-    height: 34px;
+    padding: 4px 8px;
+    font-size: 12px;
+    height: 30px;
     vertical-align: middle;
 }
 .indexTable {
     background-color: #fff;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    max-width: 90%;
+    max-width: 95%;
     margin-left: auto;
     margin-right: auto;
 }
     .indexTable thead {
-        background-color: #d7dae4;
+        background-color: #edeff7;
+        border-top: 1px solid #b9b4b4;
     }
         .indexTable thead a {
-            color: #07C;
+            color: #3762ef;
+            font-weight: bold;
+            
+            /*text-shadow: 1px 1px #afaeae;*/
         }
+        .indexTable a{
+            font-weight: normal;
+        }
+            .indexTable a:hover {
+                color: #052692;
+            }
+    .indexTable thead .glyphicon {
+        color: #7f828c;
+    }
 
     .indexTable tbody tr:hover {
         color: #fff;

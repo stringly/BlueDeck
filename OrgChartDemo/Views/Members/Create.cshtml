@@ -3,13 +3,16 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h2>Create</h2>
-
-<h4>Member</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class='formContainer'>
+    <div class="formHeader">
+        <img src="~/lib/bluedeck/css/images/Patch.png" style="height:74px; padding-right: 8px;" class="pull-left" />
+        <h4>Create a Member</h4>
+        <h6>New BlueDeck Member</h6>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+    <div class="formBody">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -71,14 +74,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="ContactNumbers" class="control-label"></label>
-                <div class="input-group" id="contactGroup-@Model.ContactNumbers.Count">
-                    <div class="input-group-addon">
-                        @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
-                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                new { @class = "defaultPhoneTypeSelect phoneNumberTypeList" })
-                    </div>
+                <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
+                    @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                            new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                            new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
                     <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
                     <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                    <span class="input-group-btn deleteNumber" style="visibility:hidden;">
+                        <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                    </span>
                 </div>
                 <div id="newPhoneTarget">
 
@@ -100,9 +104,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 <script>
     $(document).ready(function () {
@@ -115,40 +116,80 @@
     function handleAddPhoneNumberClick(e) {
         var currentContactCount = parseInt($("#contactsCount").val()) + 1;
         var target = document.getElementById('newPhoneTarget');
-        var newFormGroup = document.createElement('div');
-        newFormGroup.classList.add("input-group");
-        var newInputGroup = document.createElement('div');
-        newInputGroup.classList.add("input-group-addon");
 
+        //var newFormGroup = document.createElement('div');
+        //newFormGroup.classList.add("input-group");
+
+        // create the container group
+        var newInputGroup = document.createElement('div');
+        newInputGroup.classList.add("input-group");
+        newInputGroup.classList.add("mygroup");
+
+        // create the form controls
+
+        // clone the phonenumbertypes option group from another phonenumbertypeselectlist
         var options = document.getElementsByClassName("phoneNumberTypeList")[0].innerHTML;
+        // create a new select element
         var newSelect = document.createElement("select");
-        newSelect.classList = ["phoneNumberTypeList"]
+        newSelect.classList.add("form-control");
+        newSelect.classList.add("phoneNumberTypeList");
         newSelect.innerHTML = options;
         newSelect.name = "ContactNumbers[" + currentContactCount + "].Type.PhoneNumberTypeId";
+        // create the new text input
         var newInput = document.createElement("input");
         newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
         newInput.classList.add("form-control");
+
+        // create the span delete button wrapper span
+        // this will be added to the previous text input
         var newDelete = document.createElement("span");
-        newDelete.classList.add("input-group-addon");
+        newDelete.classList.add("input-group-btn");
         newDelete.classList.add("deleteNumber");
-        newDelete.dataset.contactid = currentContactCount -1;
+        newDelete.dataset.contactid = currentContactCount - 1;
+        // create the actual delete button
+        var newDeleteButton = document.createElement("button");
+        newDeleteButton.classList.add("btn");
+        newDeleteButton.classList.add("btn-addon");
+        newDeleteButton.dataset.contactid = currentContactCount - 1;
+        // register the button onclick event
+        newDeleteButton.addEventListener("click", handleDeletePhoneNumberClick, false);
+
+        // create the glyphicon to add to the button
         var newDeleteIcon = document.createElement("i");
         newDeleteIcon.classList.add("glyphicon");
         newDeleteIcon.classList.add("glyphicon-trash");
         newDeleteIcon.dataset.contactid = currentContactCount - 1;
-        newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
-        newDelete.appendChild(newDeleteIcon);
+        //newDeleteIcon.dataset.contactid = currentContactCount - 1;
+        //newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
+        newDeleteButton.appendChild(newDeleteIcon);
+        newDelete.appendChild(newDeleteButton);
+        e.target.parentNode.removeChild(e.target.parentNode.getElementsByClassName("deleteNumber")[0]);
         e.target.parentNode.appendChild(newDelete);
 
+        // the fake button is simply to preserve the spacing
+        var fakeDeleteSpan = document.createElement("span");
+        fakeDeleteSpan.classList.add("input-group-btn");
+        fakeDeleteSpan.classList.add("deleteNumber");
+        fakeDeleteSpan.style.visibility = "hidden";
+
+        var fakeDeleteButton = document.createElement("span");
+        fakeDeleteButton.classList.add("btn");
+        fakeDeleteButton.classList.add("btn-addon");
+
+        var fakeDeleteIcon = document.createElement("i");
+        fakeDeleteIcon.classList.add("glyphicon");
+        fakeDeleteIcon.classList.add("glyphicon-trash");
+        fakeDeleteButton.appendChild(fakeDeleteIcon);
+        fakeDeleteSpan.appendChild(fakeDeleteButton);
+
+
         newInputGroup.appendChild(newSelect);
-        newFormGroup.appendChild(newInputGroup);
-        newFormGroup.id = "contactGroup-" + currentContactCount;
+        newInputGroup.appendChild(newInput);
+        newInputGroup.appendChild(fakeDeleteSpan);
+        newInputGroup.id = "contactGroup-" + currentContactCount;
         newInput.addEventListener("change", handleAddPhoneNumberClick, false);
-        newFormGroup.appendChild(newInput);
-        //newFormGroup.appendChild(newDelete);
-        target.parentNode.insertBefore(newFormGroup, target);
+        target.parentNode.insertBefore(newInputGroup, target);
         $("#contactsCount").val(currentContactCount);
-        
         e.target.removeEventListener('change', handleAddPhoneNumberClick);
 
     }

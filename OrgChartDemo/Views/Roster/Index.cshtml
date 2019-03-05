@@ -4,17 +4,15 @@
     Layout = "_OrgChartLayout";
 }
 
-<h3>Manage Roster</h3>
-<h6>Select a Component to view Roster:</h6>
-@*<div class="rosterIndex-tb">
-    @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component" })
-    <a title="Get Component" class="get-next" id="getComponentButton">&nbsp;</a>
-</div>*@
-<div class="form-inline">
-    <div class="form-group">
-        @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component", @class = "bigControl" })
-        <input title="Get Component" type="submit" id="getComponentButton" value="View" class="btn btn-default" /> |
-        <a asp-page="/OrgChart/Index">Back to Org Chart</a>
+<div class="headerContainer">
+    <h3>Manage Roster</h3>    
+    <div class="form-inline">
+        <div class="form-group">
+            <label asp-for="@Model.SelectedComponentId" class="control-label"></label>
+            @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component", @class = "bigControl" })
+            <input title="Get Component" type="submit" id="getComponentButton" value="View" class="btn btn-default" /> |
+            <a asp-page="/OrgChart/Index">Back to Org Chart</a>
+        </div>
     </div>
 </div>
 <div id="rosterContainer" class="container-fluid">
@@ -323,38 +321,79 @@
         function handleAddPhoneNumberClick(e) {
             var currentContactCount = parseInt($("#contactsCount").val()) + 1;
             var target = document.getElementById('newPhoneTarget');
-            var newFormGroup = document.createElement('div');
-            newFormGroup.classList.add("input-group");
-            var newInputGroup = document.createElement('div');
-            newInputGroup.classList.add("input-group-addon");
 
+            //var newFormGroup = document.createElement('div');
+            //newFormGroup.classList.add("input-group");
+
+            // create the container group
+            var newInputGroup = document.createElement('div');
+            newInputGroup.classList.add("input-group");
+            newInputGroup.classList.add("mygroup");
+
+            // create the form controls
+
+            // clone the phonenumbertypes option group from another phonenumbertypeselectlist
             var options = document.getElementsByClassName("phoneNumberTypeList")[0].innerHTML;
+            // create a new select element
             var newSelect = document.createElement("select");
-            newSelect.classList = ["phoneNumberTypeList"]
+            newSelect.classList.add("form-control");
+            newSelect.classList.add("phoneNumberTypeList");
             newSelect.innerHTML = options;
             newSelect.name = "ContactNumbers[" + currentContactCount + "].Type.PhoneNumberTypeId";
+            // create the new text input
             var newInput = document.createElement("input");
             newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
             newInput.classList.add("form-control");
+
+            // create the span delete button wrapper span
+            // this will be added to the previous text input
             var newDelete = document.createElement("span");
-            newDelete.classList.add("input-group-addon");
+            newDelete.classList.add("input-group-btn");
             newDelete.classList.add("deleteNumber");
             newDelete.dataset.contactid = currentContactCount - 1;
+            // create the actual delete button
+            var newDeleteButton = document.createElement("button");
+            newDeleteButton.classList.add("btn");
+            newDeleteButton.classList.add("btn-addon");
+            newDeleteButton.dataset.contactid = currentContactCount - 1;
+            // register the button onclick event
+            newDeleteButton.addEventListener("click", handleDeletePhoneNumberClick, false);
+
+            // create the glyphicon to add to the button
             var newDeleteIcon = document.createElement("i");
             newDeleteIcon.classList.add("glyphicon");
             newDeleteIcon.classList.add("glyphicon-trash");
             newDeleteIcon.dataset.contactid = currentContactCount - 1;
-            newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
-            newDelete.appendChild(newDeleteIcon);
+            //newDeleteIcon.dataset.contactid = currentContactCount - 1;
+            //newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
+            newDeleteButton.appendChild(newDeleteIcon);
+            newDelete.appendChild(newDeleteButton);
+            e.target.parentNode.removeChild(e.target.parentNode.getElementsByClassName("deleteNumber")[0]);
             e.target.parentNode.appendChild(newDelete);
 
+            // the fake button is simply to preserve the spacing
+            var fakeDeleteSpan = document.createElement("span");
+            fakeDeleteSpan.classList.add("input-group-btn");
+            fakeDeleteSpan.classList.add("deleteNumber");
+            fakeDeleteSpan.style.visibility = "hidden";
+
+            var fakeDeleteButton = document.createElement("span");
+            fakeDeleteButton.classList.add("btn");
+            fakeDeleteButton.classList.add("btn-addon");
+
+            var fakeDeleteIcon = document.createElement("i");
+            fakeDeleteIcon.classList.add("glyphicon");
+            fakeDeleteIcon.classList.add("glyphicon-trash");
+            fakeDeleteButton.appendChild(fakeDeleteIcon);
+            fakeDeleteSpan.appendChild(fakeDeleteButton);
+
+
             newInputGroup.appendChild(newSelect);
-            newFormGroup.appendChild(newInputGroup);
-            newFormGroup.id = "contactGroup-" + currentContactCount;
+            newInputGroup.appendChild(newInput);
+            newInputGroup.appendChild(fakeDeleteSpan);
+            newInputGroup.id = "contactGroup-" + currentContactCount;
             newInput.addEventListener("change", handleAddPhoneNumberClick, false);
-            newFormGroup.appendChild(newInput);
-            //newFormGroup.appendChild(newDelete);
-            target.parentNode.insertBefore(newFormGroup, target);
+            target.parentNode.insertBefore(newInputGroup, target);
             $("#contactsCount").val(currentContactCount);
             e.target.removeEventListener('change', handleAddPhoneNumberClick);
 

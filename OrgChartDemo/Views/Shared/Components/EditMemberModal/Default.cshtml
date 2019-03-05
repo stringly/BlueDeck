@@ -79,29 +79,31 @@
                             <label asp-for="ContactNumbers" class="control-label"></label>
                             @for (var i = 0; i < Model.ContactNumbers.Count; i++)
                             {
-                                <div class="input-group" id="contactGroup-@i">
-                                    <div class="input-group-addon">
-                                        @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
-                                             new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                             "Number Type",
-                                             new { @class = "phoneNumberTypeList" })
-                                    </div>
+
+                                <div class="input-group mygroup" id="contactGroup-@i">
+                                    @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                            new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                            "Number Type",
+                                            new { @class = "phoneNumberTypeList form-control" })
+
                                     <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
-                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
-                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
-                                    <span class="input-group-addon deleteNumber" data-contactid="@i">
-                                        <i class="glyphicon glyphicon-trash" data-contactid="@i"></i>
+                                    <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                        <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
                                     </span>
                                 </div>
+                                <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+
                             }
-                            <div class="input-group" id="contactGroup-@Model.ContactNumbers.Count">
-                                <div class="input-group-addon">
-                                    @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
-                                         new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                         new { @class = "defaultPhoneTypeSelect phoneNumberTypeList" })
-                                </div>
+                            <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
+                                @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                        new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                        new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
                                 <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
                                 <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                                <span class="input-group-btn deleteNumber" style="visibility:hidden;">
+                                    <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                                </span>
                             </div>
                             <div id="newPhoneTarget">
 

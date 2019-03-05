@@ -1,19 +1,22 @@
 ﻿@model PositionIndexListViewModel
 
-<h3>Position Index</h3>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-page="/Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find by name:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-page="/Index">Back to full List</a>
-        </p>
-    </div>
-</form>
+<div class="headerContainer">
+    <h3>Position Index</h3>
+    <p>
+        <a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a>
+    </p>
+    <form asp-page="/Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find by name:
+                <input type="text" name="SearchString" class="bigControl" value="@Model.CurrentFilter" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Back to full List</a>
+            </p>
+        </div>
+    </form>
+</div>
+<h6 class="text-danger">@ViewBag.Message</h6>
 <table class="table indexTable">
     <thead>
         <tr>
@@ -21,12 +24,28 @@
                 <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
                    asp-route-searchString="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Positions.First().PositionName)
+                    @if (Model.CurrentSort == "name_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                    }
                 </a>
             </th>
             <th>
                 <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
                    asp-route-searchString="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Positions.First().ParentComponentName)
+                    @if (Model.CurrentSort == "parentName_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                    }
                 </a>
             </th>
             <th>

@@ -2,9 +2,12 @@
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
-<h3>Organization Chart</h3>
-<h6>Select a Component to view its Organization Chart:</h6>
-<div id="people"></div>
+<div class="headerContainer">
+    <h3>Organization Chart</h3>
+    <h6>Select a Component to view its Organization Chart</h6>
+</div>
+<h3 class="text-danger">@ViewBag.Message</h3>
+<div id="people" class="orgChartContainer"></div>
 <hidden id="currentComponentId"></hidden>
 <script type="text/javascript">
 

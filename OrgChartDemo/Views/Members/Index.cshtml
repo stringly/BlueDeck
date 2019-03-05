@@ -1,20 +1,23 @@
 ﻿@model MemberIndexListViewModel
 
-<h3>Members Index</h3>
+<div class="headerContainer">
+    <h3>Members Index</h3>
+    <p>
+        <a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Member</a>
+    </p>
+    <form asp-page="/Index" method="get">
+        <div class="form-actions no-color">
+            <p>
+                Find:
+                <input type="text" name="SearchString" class="bigControl" value="@Model.CurrentFilter" />
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Back to full List</a>
+            </p>
+        </div>
+    </form>
+</div>
+<h6 class="text-danger">@ViewBag.Message</h6>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-page="/Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-            Find:
-            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-page="/Index">Back to full List</a>
-        </p>
-    </div>
-</form>
 <table class="table indexTable">
     <thead>
         <tr>
@@ -22,12 +25,28 @@
                 <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
                    asp-route-searchString="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Members.First().LastName)
+                    @if (Model.CurrentSort == "lastName_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                    }
                 </a>
             </th>
             <th>
                 <a asp-page="/Index" asp-route-sortOrder="@Model.MemberFirstNameSort"
                    asp-route-searchString="@Model.CurrentFilter">
                     @Html.DisplayNameFor(model => model.Members.First().FirstName)
+                    @if (Model.CurrentSort == "firstName_desc")
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                    }
                 </a>
             </th>
             <th>
