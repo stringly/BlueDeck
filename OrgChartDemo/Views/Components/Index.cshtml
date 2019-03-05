@@ -1,6 +1,8 @@
 ﻿@model ComponentIndexListViewModel
 
-<h3>Component Index</h3>
+
+<div class="headerContainer">
+    <h3>Component Index</h3>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
@@ -14,7 +16,10 @@
             </p>
         </div>
     </form>
-    <table class="table">
+</div>
+    <h6 class="text-danger">@ViewBag.Message</h6>
+
+    <table class="table indexTable">
         <thead>
             <tr>
                 <th>

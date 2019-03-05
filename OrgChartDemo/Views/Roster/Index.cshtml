@@ -6,9 +6,16 @@
 
 <h3>Manage Roster</h3>
 <h6>Select a Component to view Roster:</h6>
-<div class="rosterIndex-tb">    
-        @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component" })                
-        <a title="Get Component" class="get-next" id="getComponentButton">&nbsp;</a>
+@*<div class="rosterIndex-tb">
+    @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component" })
+    <a title="Get Component" class="get-next" id="getComponentButton">&nbsp;</a>
+</div>*@
+<div class="form-inline">
+    <div class="form-group">
+        @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component", @class = "bigControl" })
+        <input title="Get Component" type="submit" id="getComponentButton" value="View" class="btn btn-default" /> |
+        <a asp-page="/OrgChart/Index">Back to Org Chart</a>
+    </div>
 </div>
 <div id="rosterContainer" class="container-fluid">
 
@@ -19,10 +26,10 @@
 
         // Drag and Drop
         var dragSrcEl = null;
-               
+
         function handleDragStart(e) {
             // Target (this) element is the source node.
-            dragSrcEl = this;            
+            dragSrcEl = this;
             e.dataTransfer.effectAllowed = 'move';
             e.dataTransfer.setData('text', this.outerHTML);
             this.classList.add('dragElem');
@@ -53,14 +60,14 @@
         }
         function handleDragEnter(e) {
             // this / e.target is the current hover target.
-           
+
         }
         function handleDragLeave(e) {
 
             this.classList.remove('over');  // this / e.target is previous target element.
         }
         function handleDrop(e) {
-        // this/e.target is current target element.
+            // this/e.target is current target element.
             if (e.stopPropagation) {
                 e.stopPropagation(); // Stops some browsers from redirecting.
             }
@@ -71,7 +78,7 @@
                 var swappable = false;
                 for (var i = 0; i < this.classList.length; i++) {
                     if (this.classList[i] == "insertable") {
-                        // i need to address the drop targeting... it appears possible that 
+                        // i need to address the drop targeting... it appears possible that
                         // the "drop" event can fire on an insertable even if the insertable has a member, so
                         // i need to make sure that the insertable doesn't have members... if it does, i need to swap, not drop
                         for (var i = 0; i < this.childNodes.length; i++) {
@@ -79,7 +86,7 @@
                                 if (this.childNodes[i].classList.contains("member")) {
                                     swappable = true;
                                 }
-                            }                            
+                            }
                         }
                         droppable = true;
                     }
@@ -92,17 +99,17 @@
                 //  check whether we are dropping or swapping
                 if (swappable) {
                     // target element IS a member - we need to swap
-                    // swapping invokes a Roster refresh, so we return after this                        
-                    var dragMemberId = dragSrcEl.dataset.memberid;                            
+                    // swapping invokes a Roster refresh, so we return after this
+                    var dragMemberId = dragSrcEl.dataset.memberid;
                     var dropMemberId = this.dataset.memberid;
                     if (dropMemberId == null) {
                         // if the drop event fired on the "insertable", the memberId will be in the dataset of it's first class="member" child
                         dropMemberId = this.getElementsByClassName("member")[0].dataset.memberid;
                     }
                     DragAndSwap(dragMemberId, dropMemberId);
-                    return;                   
+                    return;
                 }
-                
+
                 // We wont get here unless we are dropping instead of swapping
 
                 // Remove all current children of target insertable
@@ -121,17 +128,17 @@
                     oldParentNode.removeChild(oldParentNode.lastChild);
                 }
                 var newDiv = document.createElement("div");
-                    newDiv.dataset.positionid = originalPositionId;
-                    newDiv.classList.add("insertableInner");
-                    newDiv.textContent = "Drag & Drop or ";
+                newDiv.dataset.positionid = originalPositionId;
+                newDiv.classList.add("insertableInner");
+                newDiv.textContent = "Drag & Drop or ";
                 var newSpan = document.createElement("span");
-                    newSpan.classList.add("insertableInnerSelectMember");
-                    newSpan.dataset.positionid = originalPositionId;
-                    newSpan.addEventListener('click', HandleAssignMemberClick, false);
-                    newSpan.textContent = "click to select member.";
-                    newDiv.appendChild(newSpan);
+                newSpan.classList.add("insertableInnerSelectMember");
+                newSpan.dataset.positionid = originalPositionId;
+                newSpan.addEventListener('click', HandleAssignMemberClick, false);
+                newSpan.textContent = "click to select member.";
+                newDiv.appendChild(newSpan);
                 oldParentNode.appendChild(newDiv);
-                
+
                 // Set the source column's HTML to the HTML of the column we dropped on.
                 var dropHTML = e.dataTransfer.getData('text');
                 this.insertAdjacentHTML('beforeend', dropHTML);
@@ -221,14 +228,14 @@
         }
         function DragAndSwap(dragMId, dropMId) {
             $.get("Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
-                
+
                 if (data.success == true) {
                     $("#getComponentButton").trigger('click');
                 }
             })
         }
         function reassignMember(memberId, newPositionId) {
-            $.get("/Roster/ReassignMember", { memberId : memberId, positionId : newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
+            $.get("/Roster/ReassignMember", { memberId: memberId, positionId: newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
                 // check if a DemoRefresh has been returned
                 if (data.demoDictionary) {
                     console.log("Refreshing DemoTable");
@@ -267,7 +274,7 @@
             // retrieve the Component to which we want to add a position
             var componentId = e.target.dataset.componentid;
             // clear any extant modal from the modal container
-            var container =$("#modalTarget").empty();
+            var container = $("#modalTarget").empty();
             // retrieve the AddPositionModal from the server
             $.get('Roster/GetAddPositionToComponentViewComponent', { componentId: componentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
@@ -387,8 +394,8 @@
             })
         }
         /*
-         * Edit a Position 
-         * 
+         * Edit a Position
+         *
          */
 
         // Retrieve Edit Position Modal
@@ -425,7 +432,7 @@
                 $("#addPositionToComponentModal").modal("show");
             })
         }
-        function handleParentComponentChange (e) {
+        function handleParentComponentChange(e) {
             if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component
                 var container = $("#lineupSelectionTarget").empty();
@@ -438,7 +445,7 @@
             }
         }
 
-        
+
         function handleIsManagerChange(e) {
             console.log("ParentComponent value is: " + $("#ParentComponentId").val());
             console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
@@ -470,7 +477,7 @@
         }
 
         function handleLineupMoveUp() {
-            // Grab the <ul>, 
+            // Grab the <ul>,
             // Find the "newPositionInsert"
             // move it up on the <ul>
             // update the #LineupPosition value to the new value
@@ -537,8 +544,8 @@
                 console.log("Item is already at the bottom of the list at position: " + $("#newComponentInsert").index());
             }
         }
-        
-        
+
+
 
         function HandleAssignMemberClick(e) {
             // retrieve the PositionId of the Position to which we want to assign a member
@@ -572,7 +579,7 @@
 
         function handleReassignEmployeeModalSubmit() {
             var form = $("#reassignEmployeeModalForm");
-            if ($("#PositionId").children("option:selected").val() == ""){
+            if ($("#PositionId").children("option:selected").val() == "") {
                 $("#warning").text("Please select a Position.")
                 return;
             }
@@ -598,11 +605,11 @@
                     // the server will return a {Status = "Success"} object if validation passes.
                     // this is passed from a method with an IActionResult return type, which means
                     // it needs to be parsed before the properties are accessible
-                    
-                    if (response.success == true) {                                                
+
+                    if (response.success == true) {
                         $("#addPositionToComponentModal").modal("hide");
-                        $("#getComponentButton").trigger('click');                                                
-                    }                    
+                        $("#getComponentButton").trigger('click');
+                    }
                     else {
                         // hide the original modal
                         $("#addPositionToComponentModal").modal("hide");
@@ -663,7 +670,7 @@
                     // the server will return a {success = true} object if validation passes.
                     // this is passed from a method with an IActionResult return type, which means
                     // it needs to be parsed before the properties are accessible
-                    
+
                     if (response.success == true) {
                         // TODO: return new Member info
                         $("#editMemberModal").modal("hide");
@@ -719,7 +726,7 @@
                 url: form.attr('action'),
                 type: form.attr('method'),
                 data: form.serialize(),
-                success: function (response) {                    
+                success: function (response) {
                     if (response.success == true) {
                         // TODO: return new Member info
                         $("#changeEmployeeStatusModal").modal("hide");
@@ -797,7 +804,7 @@
                     e.target.childNodes[0].textContent = "Collapse"
                     $("#componentDetailSection" + componentId).show();
                     break;
-            }            
+            }
         }
 
         function handleEditComponentClick(e) {
@@ -819,7 +826,7 @@
                 $("#addEditComponentModal").modal("show");
             })
         }
-        function handleParentComponentChange (e) {
+        function handleParentComponentChange(e) {
             // retrieve the Lineup Interface view Component
             var container = $("#lineupSelectionTarget").empty();
             $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: this.value, componentBeingEditedId: $("#ComponentId").val() }, function (data) {
@@ -862,13 +869,13 @@
                         if (response.success == true) {
                             $("#ConfirmComponentDeleteModal").modal("hide");
                             $("#getComponentButton").trigger('click');
-                        }                        
+                        }
                     })
                 }, false)
                 $("#ConfirmComponentDeleteModal").modal("show");
             })
         }
-        
+
         $("#getComponentButton").click(function () {
             var selectedComponentId = $("#Component").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
