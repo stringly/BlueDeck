@@ -30,7 +30,12 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Back to full List</a></li>
+                @{
+                    if (Model.CurrentFilter != null)
+                    {
+                        <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
+                    }
+                }
                 <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

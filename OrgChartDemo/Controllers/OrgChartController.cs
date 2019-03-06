@@ -32,7 +32,7 @@ namespace OrgChartDemo.Controllers
             List<ChartableComponentWithMember> components = unitOfWork.Components.GetOrgChartComponentsWithMembers(parentComponentId);
             List<ComponentSelectListItem> items = unitOfWork.Components.GetComponentSelectListItems();
             
-            return Json( new { data = components, selectComponents = items, selectedComponent = parentComponentId });
+            return Json(components);
         }
 
         [HttpGet]
@@ -44,7 +44,11 @@ namespace OrgChartDemo.Controllers
         /// GET /OrgChart/
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index() => View();       
+        public IActionResult Index()
+        {
+            List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
+            return View(componentList);
+        }
         
     }
 }

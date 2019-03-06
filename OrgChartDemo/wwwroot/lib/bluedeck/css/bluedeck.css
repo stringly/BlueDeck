@@ -12,7 +12,7 @@ html, body {
 
 .pageContentContainer {
     margin-top: 50px;
-    background-color: #f7f7f7;
+    background-color: #fff;
     padding:0px;
 }
 /* Bootstrap Overrides*/
@@ -31,24 +31,43 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    margin-top: 70px;
+}
+.get-oc-tb input{
+    border-radius: 32px;
+    background-color: #fff;
 }
 .formContainer {
     width: 90%;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    background-color: #fff;    
+    margin: 40px auto 0;
+    /*box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);*/
+    background-color: #fff;
 }
     .formContainer .formHeader {
-        padding: 10px 0px 10px 20px;
-        color: #41465a;
-        background-image: linear-gradient(to bottom, rgba(186,189,205,1), rgba(186,189,205, 0.1));
+        border-bottom: 1px solid #e1e4e8;
+        display: flex;
+        flex-flow: row wrap;
+        margin: 0px 15px 15px 15px;
+        padding-bottom: 8px;
+        height: 85px;
     }
+.formHeader-heading {
+    flex: 1 1 auto;
+    font-size: 24px;
+    font-weight: lighter;
+    margin-bottom: 5px;
+    margin-top: 0px;
+}
 
-    .formContainer .formHeader a {
-        color: white;
-    }
+.formHeader-description {
+    color: #586069;
+    flex: 1 100%;
+    font-size: 14px;
+}
+
+.formContainer .formHeader a {
+    color: #0366d6;
+}
 
         .formContainer .formHeader a:hover {
             color: #55b6f2;
@@ -83,22 +102,23 @@ html, body {
     margin-bottom: 10px;
     
 }
-.navbar-header {
-    /*background-image: linear-gradient(-120deg,#39577a,#213246 50%);*/
+.mainNavBar .navbar-header {
+    background-image: linear-gradient(90deg,#000,#2a2c2e 50%);
 }
 
 .navbar-inverse {
     background-color: #2a2c2e !important;
-    /*background-image: linear-gradient(90deg,#213246,#39577a 80%);*/
+    background-image: linear-gradient(90deg,#000,#2a2c2e 10%);
 }
 .navbar-brand {
     line-height: 12px;
     padding-top: 15px;
     padding-bottom: 5px;
     padding-left: 20px;
+    
 }
     .navbar-brand span {
-        color: #ffffff;
+        color: #55b6f2;
         font-size: 20px;
         position: relative;
         display: block;
@@ -106,6 +126,7 @@ html, body {
     }
 
     .navbar-brand small {
+        
         color: #bfbfbf;
         display: block;
         font-size: 10px;
@@ -130,7 +151,7 @@ html, body {
 
 
 .btn {
-    border-radius: 0px;
+    border-radius: 3px;
 }
 .btn-default {
     color: white;
@@ -209,11 +230,59 @@ html, body {
     font-size: 12px;
     line-height: 1.42857143;
     color: #555;
-    background-color: #fff;
+    background-color: #fafbfc;
     background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 0px;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
 }
+select.form-control  {
+    background-color: #eff3f6;
+    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+    color: #24292e;
+    box-shadow: none;
+    cursor: pointer;
+}
+    select.form-control:hover {
+        background-color: #e6ebf1;
+        background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
+        background-position: -.5em;
+        border-color: rgba(27,31,35,.35);
+    }
+hr {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #dfe2e5;
+    height: 0;
+    margin: 15px 0;
+    overflow: hidden;
+}
+.form-checkbox {
+    margin: 15px 0;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+.form-checkbox input[type=checkbox] {
+    float: left;
+    margin: 5px 0 0 -20px;
+    vertical-align: middle;
+}
+.form-checkbox label {
+    margin-bottom:2px;
+}
+.form-checkbox .note {
+    color: #586069;
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    margin: 0;
+}
+.form-checkbox i {
+    float: left;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
 .mygroup{
     width: 100%;
 }
@@ -222,7 +291,7 @@ html, body {
 }
 
     .mygroup select {
-        background-color: #eee;
+        background-color: #fafbfc;
     }
     .mygroup .btn-addon {
         font-size: 12px;
@@ -244,9 +313,24 @@ html, body {
     font-size: 12px;
     height: 30px;
 }
-.pageBar{
+.pageBar .selectBox {
+    background-color: #e9e9e9;
+    border-radius: 32px;
+    border: 1px solid #ccc;
+    color: #999;
+}
+.pageBar .selectBox option {
+    background-color: #fff;       
+    color: #000;
+}
+.selectBox:focus{
+    outline: none;
+}
+.pageBar {
+    background-color: #fafbfc;
     margin-top: 50px;
     margin-bottom: 10px;
+    border-bottom: 1px solid #e1e4e8;
 }
 .pageBar .navbar-brand {
     color:black;
@@ -268,6 +352,11 @@ html, body {
     .pageBar a:hover {
         color:#55b6f2; 
     }
+@media screen and (max-width: 767px) {
+    .indexTable{
+        margin-top: 70px;
+    }
+}
     .indexTable {
         background-color: #fff;
         box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -276,12 +365,13 @@ html, body {
         margin-right: auto;
     }
         .indexTable thead {
-            background-color: #3a3d40;
+            background-color: #45484B;
             color: white;
             font-weight: normal;
         }
             .indexTable thead a {
                 color: #55b6f2;
+                cursor: pointer;
                 /*text-shadow: 1px 1px #afaeae;*/
             }
             .indexTable th {
@@ -689,7 +779,7 @@ html, body {
 
     #lineupSelection {
         border: 1px solid #ccc;
-        border-radius: 0px;
+        border-radius: 3px;
         padding: 4px 8px;
         font-size: 12px;
     }
@@ -698,10 +788,23 @@ html, body {
         pointer-events: none;
     }
 
-    #lineupSelection .active {        
-        color: cornflowerblue;
-    }
+        #lineupSelection .active {
+            color: #34d058;
+        }
 
     #lineupSelection .glyphicon {
         margin-top: 3px;
+    }
+    #lineupToolBar {    
+        border-radius: 3px;
+    }
+    #lineupToolBar .btn-small {
+        width: 50%;
+        font-size: 10px;
+        background-color: #eff3f6;
+        background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
+        color: #24292e;
+        box-shadow: none;
+        cursor: pointer;
+        border: 1px solid #d1d5da;
     }

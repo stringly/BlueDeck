@@ -1,6 +1,6 @@
 ﻿    @model PositionLineupViewComponentViewModel
 
-    <div class="form-group">
+    <div class=" col-sm-6 form-group">
     <label asp-for="Positions" class="control-label"></label>
     <ul id="lineupSelection" role="listbox" class="list-unstyled">
         @foreach (var item in Model.Positions)
@@ -17,7 +17,7 @@
         }
         @if (Model.PositionToEdit.PositionId == 0)
         {
-            <li id="newPositionInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-menu-right"></span> Insert Position Here <span class="glyphicon glyphicon-menu-left"></span></li>
+            <li id="newPositionInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-arrow-right"></span> Insert Position Here</li>
         }
         else if (!Model.Positions.Exists(x => x.PositionId == Model.PositionToEdit.PositionId)) {
             <li id="newPositionInsert" role="option" data-ismanager="@Model.PositionToEdit.IsManager" class="active disabled" data-lineupposition="@Model.PositionToEdit.LineupPosition" data-positionid="@Model.PositionToEdit.PositionId">@Model.PositionToEdit.Name @(Model.PositionToEdit.IsManager ? "(Manager)" : "" )</li>

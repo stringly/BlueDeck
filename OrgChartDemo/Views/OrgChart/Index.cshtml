@@ -1,62 +1,49 @@
-﻿@{
+﻿@model List<ComponentSelectListItem>
+@{
     ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
-<div class="headerContainer">
-    <h3>Organization Chart</h3>
-    <h6>Select a Component to view its Organization Chart</h6>
-</div>
+<nav class="pageBar navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <span class="navbar-brand">Organization Charts</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="navbar-header pull-left">
+            <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                <div class="form-group">
+                    @Html.DropDownList("componentSelectList",
+                                        new SelectList(Model, "Id", "ComponentName"),
+                                        "Select Component",
+                                        new { @class="bigControl selectBox"}
+                   )                   
+                </div>
+            </form>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Reset</a></li>                
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 <h3 class="text-danger">@ViewBag.Message</h3>
 <div id="people" class="orgChartContainer"></div>
 <hidden id="currentComponentId"></hidden>
 <script type="text/javascript">
 
     var orgChart;
-    getOrgChart.themes.BlueDeckTheme =
-        {
-            size: [500, 220],
-            toolbarHeight: 46,
-            textPointsNoImage: [
-                { x: 10, y: 40, width: 490 },
-                { x: 10, y: 80, width: 490 },
-                { x: 10, y: 105, width: 490 },
-                { x: 10, y: 130, width: 490 }
-            ],
-            expandCollapseBtnRadius: 20,
-            box: '<path class="get-box" d="M0 0 L500 0 L500 220 L0 220 Z"/>',
-            text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',            
-        };
-    orgChart = new getOrgChart(document.getElementById("people"), {
-        theme: "BlueDeckTheme",
-        enableEdit: false,
-        enablePrint: true,
-        enableDetailsView: false,
-        primaryFields: ["componentName", "positionName", "memberName", "email"],
-        color: "blue",
-        expandToLevel: 2,
-        updatedEvent: function () {
-            init();
-        },
-    });
-
     initSelectList();
-
-
-
-
     function initSelectList() {
         document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
-        var list = document.getElementById("componentSelectList");
-        $.getJSON("/OrgChart/GetComponentSelectListItems", function (response) {
-
-            list.options.length = 0;
-            for (var i = 0; i < response.length; i++) {
-                var option = document.createElement("option");
-                option.text = response[i].componentName;
-                option.setAttribute("value", response[i].id);
-                list.add(option, list[i]);
-            }
-        })
     }
 
     function handleComponentSelect(e) {
@@ -64,12 +51,28 @@
         var id = e.target.value;
         if (current != id) {
             $.getJSON("/OrgChart/GetComponents", { parentComponentId: id }, function (response) {
-                orgChart = new getOrgChart(document.getElementById("people"), {
+                getOrgChart.themes.BlueDeckTheme =
+                    {
+                        size: [500, 220],
+                        toolbarHeight: 46,
+                        textPointsNoImage: [
+                            { x: 10, y: 40, width: 490 },
+                            { x: 10, y: 80, width: 490 },
+                            { x: 10, y: 105, width: 490 },
+                            { x: 10, y: 130, width: 490 }
+                        ],
+                        expandCollapseBtnRadius: 20,
+                        box: '<path class="get-box" d="M0 0 L500 0 L500 220 L0 220 Z"/>',
+                        text: '<text width="[width]" class="get-text get-text-[index]" x="[x]" y="[y]">[text]</text>',
+                    };
+                var orgChart = new getOrgChart(document.getElementById("people"), {
                     theme: "BlueDeckTheme",
                     enableEdit: false,
                     enablePrint: true,
                     enableDetailsView: false,
+                    enableZoomOnNodeDoubleClick: true,
                     primaryFields: ["componentName", "positionName", "memberName", "email"],
+                    dataSource: response,
                     color: "blue",
                     expandToLevel: 3,
                     layout: getOrgChart.MIXED_HIERARCHY_RIGHT_LINKS,
@@ -77,18 +80,6 @@
                         init();
                     }
                 });
-                orgChart.loadFromJSON(response.data, false);
-                document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
-                var list = document.getElementById("componentSelectList");
-                list.options.length = 0;
-                for (var i = 0; i < response.selectComponents.length; i++) {
-                    var option = document.createElement("option");
-                    option.text = response.selectComponents[i].componentName;
-                    option.setAttribute("value", response.selectComponents[i].id);
-                    list.add(option, list[i]);
-                }
-                list.value = response.selectedComponent;
-                $("#currentComponentId").val(response.selectedComponent);
             });
         }
     }
@@ -139,21 +130,8 @@
                 }
             });
         }
-        //document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
 
     }
-    init();
-        //document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
-        //var list = document.getElementById("componentSelectList");
-        //$.getJSON("/OrgChart/GetComponentSelectListItems", function (response) {
 
-        //    list.options.length = 0;
-        //    for (var i = 0; i < response.length; i++) {
-        //        var option = document.createElement("option");
-        //        option.text = response[i].componentName;
-        //        option.setAttribute("value", response[i].id);
-        //        list.add(option, list[i]);
-        //    }
-        //})
 
 </script>

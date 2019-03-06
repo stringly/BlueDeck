@@ -1,92 +1,118 @@
 ﻿@model ComponentIndexListViewModel
 
+<nav class="pageBar navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <span class="navbar-brand">Component Index</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-<div class="headerContainer">
-    <h3>Component Index</h3>
-    <p>
-        <a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a>
-    </p>
-    <form asp-page="/Index" method="get">
-        <div class="form-actions no-color">
-            <p>
-                Find by name:
-                <input type="text" class="bigControl" name="SearchString" value="@Model.CurrentFilter" />
-                <input type="submit" value="Search" class="btn btn-default" /> |
-                <a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Back to Full List</a>
-            </p>
         </div>
-    </form>
-</div>
+        <div class="navbar-header pull-left">
+            <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Components" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-search-addon" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                @{
+                    if (Model.CurrentFilter != null)
+                    {
+                        <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
+                    }
+                }
+                <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
     <h6 class="text-danger">@ViewBag.Message</h6>
 
-    <table class="table indexTable">
-        <thead>
-            <tr>
-                <th>                    
-                    <a asp-page="/Index" asp-route-sortOrder="@Model.ComponentNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
-                        @Html.DisplayNameFor(model => model.Components.First().ComponentName)
-                        @if (Model.CurrentSort == "name_desc")
-                        {
-                            <span class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        }
-                        else
-                        {
-                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
-                        }                        
-                    </a>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Components.First().Acronym)
-                </th>
-                <th>
-                    <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
-                        @Html.DisplayNameFor(model => model.Components.First().ParentComponentName)
-                        @if (Model.CurrentSort == "ParentComponentName")
-                        {
-                            <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
-                        }
-                        else
-                        {
-                            <span class="glyphicon glyphicon-sort-by-alphabet"></span>
-                        }
-                    </a>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Components.First().PositionCount)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Components.First().MemberCount)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Components)
-            {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ComponentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Acronym)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParentComponentName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PositionCount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MemberCount)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <div class="table-responsive" style="margin-top: 70px">
+        <table class="table indexTable">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-page="/Index" asp-route-sortOrder="@Model.ComponentNameSort"
+                           asp-route-searchString="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Components.First().ComponentName)
+                            @if (Model.CurrentSort == "name_desc")
+                            {
+                                <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Components.First().Acronym)
+                    </th>
+                    <th>
+                        <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
+                           asp-route-searchString="@Model.CurrentFilter">
+                            @Html.DisplayNameFor(model => model.Components.First().ParentComponentName)
+                            @if (Model.CurrentSort == "ParentComponentName")
+                            {
+                                <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                            }
+                        </a>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Components.First().PositionCount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Components.First().MemberCount)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Components)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ComponentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Acronym)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentComponentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PositionCount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberCount)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
