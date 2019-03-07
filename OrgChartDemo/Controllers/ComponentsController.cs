@@ -85,7 +85,7 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.Title = "Component Details";
             return View(component);
         }
         
@@ -96,6 +96,7 @@ namespace OrgChartDemo.Controllers
         public IActionResult Create()
         {
             ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetComponentSelectListItems());
+            ViewBag.Title = "Create New Component";
             return View(vm);
         }
 
@@ -110,7 +111,9 @@ namespace OrgChartDemo.Controllers
         {        
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                form.Components = unitOfWork.Components.GetComponentSelectListItems();                
+                ViewBag.Title = "Create Component - Corrections Required";
+                return View(form);
             }
             else
             {
@@ -152,6 +155,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
+            ViewBag.Title = "Edit Component";
             return View(vm);
         }
 
@@ -174,13 +178,16 @@ namespace OrgChartDemo.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                ViewBag.Title = "Edit Component - Corrections Required";
+                return View(form);
             }
             else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
             {
                 ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetComponentSelectListItems());
-                return View(vm);
+                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                ViewBag.Title = "Edit Component - Corrections Required";
+                return View(form);
             }
             else { 
                 try
@@ -244,7 +251,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Message = $"WARNING: This Component includes {component.Positions.Count()} Positions with a total of {totalMembers} Members.\n"
                                         + "Deleting this Component will also delete all of it's assigned Positions and reassign all Members to 'Unassigned.'";
             }
-
+            ViewBag.Title = "Confirm Delete?";
             return View(component);
         }
 

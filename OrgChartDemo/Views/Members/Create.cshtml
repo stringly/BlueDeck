@@ -1,8 +1,5 @@
 ﻿@model MemberAddEditViewModel
 
-@{
-    ViewData["Title"] = "Create BlueDeck Member";
-}
 <div class='col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer'>
     <div class="formHeader">
         <h2 class="formHeader-heading">Create a Member</h2>
@@ -113,7 +110,8 @@
                     <hr />
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            <input type="submit" value="Create Member" class="btn btn-default" />
+                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <input type="submit" value="Create Member" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>

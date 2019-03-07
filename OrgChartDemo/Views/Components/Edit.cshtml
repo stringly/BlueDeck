@@ -1,7 +1,4 @@
 ﻿@model ComponentWithComponentListViewModel
-@{
-    ViewData["Title"] = "Edit Component";
-}
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     <div class="formHeader">
@@ -46,8 +43,10 @@
                     </div>
                     <hr />
                     <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <input type="submit" value="Save Changes" class="btn btn-default" />
+                        <div class="col-sm-12 form-group">
+                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <input type="submit" value="Save Changes" class="btn btn-primary" />
+                            <a asp-action="Delete" asp-route-id="@Model.ComponentId" class="btn btn-danger pull-right">Delete</a>
                         </div>
                     </div>
                 </div>

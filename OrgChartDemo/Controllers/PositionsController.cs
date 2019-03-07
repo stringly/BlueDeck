@@ -63,6 +63,7 @@ namespace OrgChartDemo.Controllers
                     vm.Positions = vm.Positions.OrderBy(x => x.PositionName);
                     break;
             }
+            ViewBag.Title = "BlueDeck Positions Index";
             return View(vm);
         }
 
@@ -78,13 +79,13 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = unitOfWork.Positions
-                .SingleOrDefault(m => m.PositionId == id);
+            var position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(id));
+                
             if (position == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Title = "Position Details";
             return View(position);
         }
 
@@ -96,7 +97,8 @@ namespace OrgChartDemo.Controllers
         {
             PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position()) { 
                 Components = unitOfWork.Components.GetComponentSelectListItems()
-                };            
+                };
+            ViewBag.Title = "Create New Position";
             return View(vm);
         }
 
@@ -148,6 +150,7 @@ namespace OrgChartDemo.Controllers
             }
             else {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                ViewBag.Title = "New Position: Corrections Required";
                 return View(form);
             }
         }
@@ -171,6 +174,7 @@ namespace OrgChartDemo.Controllers
             PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position){ 
                 Components = unitOfWork.Components.GetComponentSelectListItems()
                 };
+            ViewBag.Title = "Edit Position";
             return View(vm);
         }
 
@@ -234,6 +238,7 @@ namespace OrgChartDemo.Controllers
             } else
             {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                ViewBag.Title = "Edit Position - Corrections Required";
                 return View(form);
             }
             
@@ -252,13 +257,12 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var position = unitOfWork.Positions
-                .SingleOrDefault(m => m.PositionId == id);
+            var position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(id));
             if (position == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Title = "Confirm - Delete Position?";
             return View(position);
         }
 

@@ -113,6 +113,7 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Current Assignment")]
         public virtual Position Position { get; set; }
 
+        [Display(Name = "Contact Numbers")]
         public List<MemberContactNumber> PhoneNumbers { get; set; }
 
         public Member()
@@ -126,7 +127,26 @@ namespace OrgChartDemo.Models {
         /// e.g. "POFC Foo Bar #1234"
         /// </remarks>
         /// <returns>A <see cref="string"/> with the formal display name for the Member</returns>
-        public string GetTitleName() => $"{this.Rank.RankShort} {this.FirstName} {this.LastName} #{this.IdNumber}";
+        public string GetTitleName()
+        {
+            if(MemberId == 0)
+            {
+                return "New Member";
+            }
+            else if(Rank != null && FirstName != null && LastName != null && IdNumber != null)
+            {
+                return $"{this.Rank.RankShort} {this.FirstName} {this.LastName} #{this.IdNumber}";
+            }
+            else if (FirstName != null && LastName != null)
+            {
+                return $"{LastName}, {FirstName}";
+            }
+            else
+            {
+                return $"BlueDeck Member #{MemberId}";
+            }     
+            
+        }
 
         /// <summary>
         /// Gets the Member's name in "LastName, FirstName" format.

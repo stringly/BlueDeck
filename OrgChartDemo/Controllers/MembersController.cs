@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Types;
@@ -14,14 +12,15 @@ namespace OrgChartDemo.Controllers
     /// <summary>
     /// Controller for Member CRUD actions
     /// </summary>
-    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     public class MembersController : Controller
     {
         private IUnitOfWork unitOfWork;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.MembersController"/> class.
+        /// Initializes a new instance of the <see cref="MembersController"/> class.
         /// </summary>
-        /// <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         public MembersController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -30,10 +29,9 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET: Members
         /// </summary>
-        /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
+        /// <remarks>        
         /// </remarks>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <returns>An <see cref="IActionResult"/></returns>
         public IActionResult Index(string sortOrder, string searchString)
         {
             MemberIndexListViewModel vm = new MemberIndexListViewModel(unitOfWork.Members.GetMembersWithPositions().ToList());
@@ -77,6 +75,7 @@ namespace OrgChartDemo.Controllers
                     vm.Members = vm.Members.OrderBy(x => x.LastName);
                     break;
             }
+            ViewBag.Title = "BlueDeck Members Index";
             return View(vm);
         }
 
@@ -84,7 +83,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Members/Details/5.
         /// </summary>
         /// <param name="id">The identifier for a Member.</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <returns>An <see cref="IActionResult"/></returns>
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -92,43 +91,51 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var member = unitOfWork.Members.SingleOrDefault(m => m.MemberId == id);
+            var member = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(Convert.ToInt32(id));
             if (member == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Title = "Member Details";
             return View(member);
         }
 
         /// <summary>
         /// GET: Members/Create.
         /// </summary>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <returns>An <see cref="IActionResult"/></returns>
         public IActionResult Create()
         {
             MemberAddEditViewModel vm = new MemberAddEditViewModel(new Member(),
-                unitOfWork.Positions.GetAll().ToList(),
+                unitOfWork.Positions.GetAllPositionSelectListItems(),
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+            ViewBag.Title = "Create New Member";
             return View(vm);
         }
 
         /// <summary>
         /// POST: Members/Create.
         /// </summary>
-        /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> with certain fields bound on submit</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="form">A <see cref="MemberAddEditViewModel"/> with certain fields bound on submit</param>
+        /// <returns>An <see cref="IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                form.Positions = unitOfWork.Positions.GetAllPositionSelectListItems();
+                form.RaceList = unitOfWork.MemberRaces.GetMemberRaceSelectListItems();
+                form.RankList = unitOfWork.MemberRanks.GetMemberRankSelectListItems();
+                form.GenderList = unitOfWork.MemberGenders.GetMemberGenderSelectListItems();
+                form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+                ViewBag.Title = "Create Member - Corrections Required";
+                return View(form);
             }
             else
             {
@@ -138,13 +145,12 @@ namespace OrgChartDemo.Controllers
                 return RedirectToAction(nameof(Index));
             }            
         }
-
-
+        
         /// <summary>
         /// Members/Edit/5
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <returns>An <see cref="IActionResult"/></returns>
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -158,20 +164,21 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             MemberAddEditViewModel vm = new MemberAddEditViewModel(member, 
-                unitOfWork.Positions.GetAll().ToList(), 
+                unitOfWork.Positions.GetAllPositionSelectListItems(), 
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+            ViewBag.Title = "Edit Member";
             return View(vm);
         }
 
         /// <summary>
         /// POST: Members/Edit/5
         /// </summary>
-        /// <param name="id">The MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> being edited</param>
-        /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.MemberWithPositionListViewModel"/> object to which the POSTed form is Bound</param>
+        /// <param name="id">The MemberId for the <see cref="Member"/> being edited</param>
+        /// <param name="form">The <see cref="MemberAddEditViewModel"/> object to which the POSTed form is Bound</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -180,7 +187,15 @@ namespace OrgChartDemo.Controllers
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                // Model Validation failed, repopulate the ViewModel's List data and return the View
+                form.Positions = unitOfWork.Positions.GetAllPositionSelectListItems();
+                form.RaceList = unitOfWork.MemberRaces.GetMemberRaceSelectListItems();
+                form.RankList = unitOfWork.MemberRanks.GetMemberRankSelectListItems();
+                form.GenderList = unitOfWork.MemberGenders.GetMemberGenderSelectListItems();
+                form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+                ViewBag.Title = "Edit Member - Corrections Required";
+                return View(form);                
             }
             else
             {
@@ -203,13 +218,12 @@ namespace OrgChartDemo.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-
-        
+                
         /// <summary>
         /// GET: Member/Delete/5
         /// </summary>
-        /// <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
+        /// <param name="id">The MemberId of the <see cref="Member"/> being deleted</param>
+        /// <returns>An <see cref="IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -217,40 +231,47 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             // TODO: Handle deleting a Member and vacating a Position that is Manager of it's component 
-            Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == id);
+            Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(Convert.ToInt32(id));
             if (m == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Title = "Confirm - Delete Member?";
             return View(m);
         }
-
         
         /// <summary>
         /// POST: Members/Delete/5
         /// </summary>
-        /// <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:OrgChartDemo.Controllers.MembersController.Index"/> on successful deletion of a Member.</returns>
+        /// <param name="id">The MemberId of the <see cref="Member"/> being deleted</param>
+        /// <returns>An <see cref="IActionResult"/> that redirects to <see cref="MembersController.Index"/> on successful deletion of a Member.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
-        {
-            
+        {            
             unitOfWork.Members.Remove(id);
             unitOfWork.Complete();
             return RedirectToAction(nameof(Index));
         }
+
         /// <summary>
         /// Determines if a Member exists with the provided MemberId .
         /// </summary>
-        /// <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/></param>
-        /// <returns>True if a <see cref="T:OrgChartDemo.Models.Member"/> with the given id exists</returns>
+        /// <param name="id">The MemberId of the <see cref="Member"/></param>
+        /// <returns>True if a <see cref="Member"/> with the given id exists</returns>
         private bool MemberExists(int id)
         {
             return (unitOfWork.Members.SingleOrDefault(e => e.MemberId == id) != null);
         }
 
+        /// <summary>
+        /// Gets the member contact number view component.
+        /// </summary>
+        /// <remarks>
+        /// This View Component is used to add Phone Numbers in the Members/Edit and Member/Edit Modal Views
+        /// </remarks>
+        /// <param name="memberId">The member identifier.</param>
+        /// <returns></returns>
         public IActionResult GetMemberContactNumberViewComponent(int memberId)
         {
             Member m = unitOfWork.Members.GetMemberWithDemographicsAndDutyStatus(memberId);

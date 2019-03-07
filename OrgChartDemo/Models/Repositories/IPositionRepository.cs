@@ -15,7 +15,7 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns></returns>
         IEnumerable<Position> GetPositionsWithMembers();
 
-        IEnumerable<PositionSelectListItem> GetAllPositionSelectListItems();
+        List<PositionSelectListItem> GetAllPositionSelectListItems();
         IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems();
         Position GetPositionAndAllCurrentMembers(int positionId);
         /// <summary>

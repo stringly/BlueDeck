@@ -56,11 +56,13 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position)
                 .Include(x => x.PhoneNumbers)
-                .Include(x => x.DutyStatus)
-                .Include(x => x.Gender)
-                .Include(x => x.Race)
-                .Include(x => x.Rank)
+                    .ThenInclude(x => x.Type)                
+                .Include(x => x.DutyStatus)                    
+                .Include(x => x.Gender)                    
+                .Include(x => x.Race)                    
+                .Include(x => x.Rank)                    
                 .FirstOrDefault();
         }
 

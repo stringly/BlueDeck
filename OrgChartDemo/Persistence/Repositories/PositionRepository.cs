@@ -46,8 +46,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .ToList();
         }
 
-        public IEnumerable<PositionSelectListItem> GetAllPositionSelectListItems(){
-            return GetAll().ToList().ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name});
+        public List<PositionSelectListItem> GetAllPositionSelectListItems(){
+            return GetAll().ToList().ConvertAll(x => new PositionSelectListItem(x));
         }
 
         public IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems()

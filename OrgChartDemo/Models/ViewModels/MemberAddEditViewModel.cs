@@ -115,9 +115,26 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         [Display(Name = "Current Assignment")]
         public int? PositionId { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the display name.
+        /// </summary>
+        /// <value>
+        /// The Member's display name, used only for Display. This is not a model-bound editable field.
+        /// </value>
+        public string DisplayName { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the Member's Contact Numbers.
+        /// </summary>
+        /// <remarks>
+        /// This property stores a List of <see cref="MemberContactNumber"/> objects to store the Member's phone numbers.
+        /// </remarks>
+        /// <value>
+        /// The contact numbers.
+        /// </value>
         [Display(Name = "Contact Numbers")]
-        public List<MemberContactNumber> ContactNumbers { get; set; } 
+        public List<MemberContactNumber> ContactNumbers { get; set; }
 
         /// <summary>
         /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>s.
@@ -152,20 +169,29 @@ namespace OrgChartDemo.Models.ViewModels
         public List<MemberRaceSelectListItem> RaceList { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem"/>.
+        /// Gets or sets a list of <see cref="MemberDutyStatusSelectListItem"/>.
         /// </summary>
+        /// <remarks>
+        /// This property is used to populate drop-down lists of Member Duty Statuses.
+        /// </remarks>
         /// <value>
         /// The races.
         /// </value>
         public List<MemberDutyStatusSelectListItem> DutyStatus { get; set; }
 
+        /// <summary>
+        /// Gets or sets the list of <see cref="PhoneNumberTypeSelectListItem"/>.
+        /// </summary>
+        /// <remarks>
+        /// This property is used to populate drop-down lists of Phone Number Types.
+        /// </remarks>
+        /// <value>
+        /// The phone number types.
+        /// </value>
         public List<PhoneNumberTypeSelectListItem> PhoneNumberTypes { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel"/> class.
-        /// <remarks>
-        /// This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.MemberWithPositionListViewModel(Member, List{Position})"/> constructor overrode the default, and the form POST model-binding failed
-        /// </remarks>
+        /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
         /// </summary>
         public MemberAddEditViewModel()
         {
@@ -174,14 +200,15 @@ namespace OrgChartDemo.Models.ViewModels
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
         /// </summary>
-        /// <param name="_member">A <see cref="T:OrgChartDemo.Models.Member"/>.</param>
-        /// <param name="_positionList">A <see cref="T:List{OrgChartDemo.Models.Position}"/>.</param>
-        /// <param name="_rankList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}}"/>.</param>
-        /// <param name="_genderList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}}"/>.</param>
-        /// <param name="_raceList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}}"/>.</param>
-        /// <param name="_dutyStatusList">A <see cref="T:List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem}}"/>.</param>
+        /// <param name="_member">A <see cref="Member"/>.</param>
+        /// <param name="_positionList">A <see cref="PositionSelectListItem"/>.</param>
+        /// <param name="_rankList">A <see cref="MemberRankSelectListItem"/>.</param>
+        /// <param name="_genderList">A <see cref="MemberGenderSelectListItem"/>.</param>
+        /// <param name="_raceList">A <see cref="MemberRaceSelectListItem"/>.</param>
+        /// <param name="_dutyStatusList">A <see cref="MemberDutyStatusSelectListItem"/>.</param>
+        /// <param name="_phoneNumberTypes">A <see cref="PhoneNumberTypeSelectListItem"/>.</param>
         public MemberAddEditViewModel(Member _member, 
-            List<Position> _positionList, 
+            List<PositionSelectListItem> _positionList, 
             List<MemberRankSelectListItem> _rankList, 
             List<MemberGenderSelectListItem> _genderList, 
             List<MemberRaceSelectListItem> _raceList,
@@ -205,10 +232,24 @@ namespace OrgChartDemo.Models.ViewModels
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
             PhoneNumberTypes = _phoneNumberTypes;
-            Positions = _positionList.ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name });
+            DisplayName = _member.GetTitleName();
+            Positions = _positionList;
 
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
+        /// </summary>
+        /// <remarks>
+        /// This constructor serves the Modal Form to add a Member which is invoked from the RosterManager view.
+        /// The Member's Position cannot be changed from this Modal, so there is no List of PositionSelectListItem parameter.
+        /// </remarks>
+        /// <param name="_member">The member.</param>
+        /// <param name="_rankList">A <see cref="MemberRankSelectListItem"/>.</param>
+        /// <param name="_genderList">A <see cref="MemberGenderSelectListItem"/>.</param>
+        /// <param name="_raceList">A <see cref="MemberRaceSelectListItem"/>.</param>
+        /// <param name="_dutyStatusList">A <see cref="MemberDutyStatusSelectListItem"/>.</param>
+        /// <param name="_phoneNumberTypes">A <see cref="PhoneNumberTypeSelectListItem"/>.</param>
         public MemberAddEditViewModel(Member _member,
             List<MemberRankSelectListItem> _rankList,
             List<MemberGenderSelectListItem> _genderList,
@@ -233,6 +274,7 @@ namespace OrgChartDemo.Models.ViewModels
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
             PhoneNumberTypes = _phoneNumberTypes;
+            DisplayName = _member.GetTitleName();
         }
 
     }

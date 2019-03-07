@@ -22,5 +22,15 @@ namespace OrgChartDemo.Models.Types
         /// Gets or sets the Rank Id
         /// </summary>
         public int PositionId { get; set; }
+
+        public PositionSelectListItem()
+        {
+        }
+
+        public PositionSelectListItem(Position _p)
+        {
+            PositionName = _p.Name;
+            PositionId = _p.PositionId;
+        }
     }
 }
