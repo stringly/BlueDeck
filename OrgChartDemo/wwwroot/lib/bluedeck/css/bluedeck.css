@@ -38,8 +38,7 @@ html, body {
     background-color: #fff;
 }
 .formContainer {
-    width: 90%;
-    margin: 40px auto 0;
+    margin-top: 40px;
     /*box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);*/
     background-color: #fff;
 }
@@ -317,12 +316,13 @@ hr {
     background-color: #e9e9e9;
     border-radius: 32px;
     border: 1px solid #ccc;
-    color: #999;
+    color: #000;
 }
 .pageBar .selectBox option {
     background-color: #fff;       
     color: #000;
 }
+
 .selectBox:focus{
     outline: none;
 }
@@ -353,30 +353,37 @@ hr {
         color:#55b6f2; 
     }
 @media screen and (max-width: 767px) {
-    .indexTable{
+    .indexTable {
         margin-top: 70px;
     }
 }
-    .indexTable {
-        background-color: #fff;
-        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-        max-width: 95%;
-        margin-left: auto;
-        margin-right: auto;
+.indexTable {    
+    background-color: #fff;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+    .indexTable thead {
+        background-color: #45484B;
+        color: white;
+        font-weight: normal;
+        
     }
-        .indexTable thead {
-            background-color: #45484B;
-            color: white;
-            font-weight: normal;
+        .indexTable thead a {
+            color: #55b6f2;
+            cursor: pointer;
+            /*text-shadow: 1px 1px #afaeae;*/
+            
         }
-            .indexTable thead a {
-                color: #55b6f2;
-                cursor: pointer;
-                /*text-shadow: 1px 1px #afaeae;*/
-            }
-            .indexTable th {
-                font-weight: normal;
-            }
+    .indexTable th {
+        font-weight: normal;
+        vertical-align: middle;
+    }
+    .indexTable>tbody>tr>td {
+        vertical-align: middle;
+    }
         .indexTable a {
             font-weight: normal;
         }
@@ -392,8 +399,54 @@ hr {
     }
     .indexTable tbody tr:hover a {
         color: #fff;
-        text-decoration: underline;
+        border-color: #fff;
+        text-decoration:none;
+        
     }
+
+/**CSS FOR THE RING**/
+
+.glyphicon-ring {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #55b6f2;
+    color: #55b6f2;
+    display: inline-table;
+    text-align: center;
+    border-collapse: initial;
+    padding-right: 1px;
+    padding-bottom: 1px;
+}
+
+.glyphicon-ring:hover {
+    font-weight:bold;
+    border: 2px solid #fff;
+}
+        /**CSS FOR ICON WITH NO BACKGROUND COLOR**/
+
+        .glyphicon-ring .glyphicon-bordered {
+            font-size: 12px;
+            vertical-align: middle;
+            display: table-cell;
+        }
+    /**WITH AN ADDED BACKGROUND COLOR**/
+
+    .glyphicon-white {
+        background: white;
+        color: black;
+        border: 4px solid black;
+    }
+
+    .glyphicon-teal {
+        background: teal;
+        color: orange;
+    }
+
+    .glyphicon-red {
+        background: red;
+    }
+
 #rosterContainer {
     background-color: #f7f7f7;
     padding: 5px;
@@ -776,7 +829,7 @@ hr {
     .moreOptionsButtonGroup:hover .tooltiptext {
         visibility: visible;
     }
-
+    
     #lineupSelection {
         border: 1px solid #ccc;
         border-radius: 3px;
@@ -789,7 +842,7 @@ hr {
     }
 
         #lineupSelection .active {
-            color: #34d058;
+            color: #00c61f;
         }
 
     #lineupSelection .glyphicon {

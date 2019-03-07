@@ -88,9 +88,9 @@ namespace OrgChartDemo.Persistence.Repositories
             
             m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
             m.Rank = ApplicationDbContext.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
-            MemberGender g = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
-            MemberRace rc = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
-            MemberDutyStatus ds = ApplicationDbContext.DutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
+            m.Gender = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
+            m.Race = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
+            m.DutyStatus = ApplicationDbContext.DutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
             m.Email = form.Email;
             m.FirstName = form.FirstName;
             m.IdNumber = form.IdNumber;

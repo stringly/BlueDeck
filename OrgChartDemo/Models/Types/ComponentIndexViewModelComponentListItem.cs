@@ -26,7 +26,7 @@ namespace OrgChartDemo.Models.Types
             ComponentName = c.Name;
             ParentComponentId = c?.ParentComponent?.ComponentId ?? 0;
             ParentComponentName = c?.ParentComponent?.Name ?? "Police Department";
-            Acronym = c.Acronym;
+            Acronym = c?.Acronym ?? "-";
             PositionCount = c.Positions.Count();
 
             int totalMembers = 0;

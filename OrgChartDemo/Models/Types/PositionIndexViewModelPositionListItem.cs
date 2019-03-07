@@ -64,7 +64,7 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         /// A count of Member Entities that are assigned to this Position
         /// </value>
-        [Display(Name = "Current Members")]
+        [Display(Name = "Members")]
         public int MembersCount { get; set; }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         ///   <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
         /// </value>
-        [Display(Name = "Manager of Component")]
+        [Display(Name = "Manager")]
         public bool IsManager { get; set; }
 
         /// <summary>

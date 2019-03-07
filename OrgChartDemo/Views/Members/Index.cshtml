@@ -52,7 +52,7 @@
             <tr>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by Last Name">
                         @Html.DisplayNameFor(model => model.Members.First().LastName)
                         @if (Model.CurrentSort == "lastName_desc")
                         {
@@ -66,7 +66,7 @@
                 </th>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.MemberFirstNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by First Name">
                         @Html.DisplayNameFor(model => model.Members.First().FirstName)
                         @if (Model.CurrentSort == "firstName_desc")
                         {
@@ -80,13 +80,13 @@
                 </th>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.IdNumberSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by ID#">
                         @Html.DisplayNameFor(model => model.Members.First().IdNumber)
                     </a>
                 </th>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
                         @Html.DisplayNameFor(model => model.Members.First().PositionName)
                     </a>
                 </th>
@@ -113,14 +113,20 @@
                         @Html.DisplayFor(modelItem => item.PositionName)
                     </td>
                     <td>
-                        <a href="mailto:@item.Email" target="_top">
+                        <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
                             @Html.DisplayFor(modelItem => item.Email)
                         </a>
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.MemberId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.MemberId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.MemberId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.MemberId" title="Edit Member" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.MemberId" title="View Details" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.MemberId" title="Delete Member" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                        </a>
                     </td>
                 </tr>
             }

@@ -1,6 +1,6 @@
 ﻿@model ComponentLineupViewComponentViewModel
 
-<div class="form-group">
+<div class="col-sm-6 form-group">
     <label asp-for="Components" class="control-label"></label>
     <ul id="lineupSelection" role="listbox" class="list-unstyled">
         @foreach (var item in Model.Components)
@@ -17,7 +17,7 @@
         }
         @if (Model.ComponentToEdit.ComponentId == 0)
         {
-            <li id="newComponentInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-menu-right"></span> Insert Component Here <span class="glyphicon glyphicon-menu-left"></span></li>
+            <li id="newComponentInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-arrow-right"></span> Insert Component Here</li>
         }
         else if (!Model.Components.Exists(x => x.ComponentId == Model.ComponentToEdit.ComponentId))
         {

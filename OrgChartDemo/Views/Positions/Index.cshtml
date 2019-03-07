@@ -1,5 +1,7 @@
 ﻿@model PositionIndexListViewModel
-
+@{
+    ViewData["Title"] = "BlueDeck Position Index";
+}
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +51,7 @@
             <tr>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
                         @Html.DisplayNameFor(model => model.Positions.First().PositionName)
                         @if (Model.CurrentSort == "name_desc")
                         {
@@ -63,7 +65,7 @@
                 </th>
                 <th>
                     <a asp-page="/Index" asp-route-sortOrder="@Model.ParentComponentNameSort"
-                       asp-route-searchString="@Model.CurrentFilter">
+                       asp-route-searchString="@Model.CurrentFilter" title="Sort by Parent Component Name">
                         @Html.DisplayNameFor(model => model.Positions.First().ParentComponentName)
                         @if (Model.CurrentSort == "parentName_desc")
                         {
@@ -113,9 +115,15 @@
                         @Html.DisplayFor(modelItem => item.MembersCount)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.PositionId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.PositionId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.PositionId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.PositionId" title="Edit Position" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                        </a> 
+                        <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                        </a> 
+                        <a asp-action="Delete" asp-route-id="@item.PositionId" title="Delete Position" class="glyphicon-ring">
+                            <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                        </a>
                     </td>
                 </tr>
             }
