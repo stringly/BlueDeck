@@ -11,35 +11,43 @@
                     </button>
                     <h4 class="modal-title" id="addEditComponentModalLabel">@(Model.ComponentName != null ? "Edit " + Model.ComponentName : "Add New Component")</h4>
                 </div>
-                <div class="modal-body">
-                    <form asp-action="UpdateComponent" id="addEditComponentModalForm">
+                <div class="modal-body row">
+                    <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        @Html.HiddenFor(model => model.LineupPosition)                        
-                        <input type="hidden" asp-for="ComponentId" />
-                        <div class="form-group">
-                            <label asp-for="ComponentName" class="control-label"></label>
-                            <input asp-for="ComponentName" class="form-control" />
-                            <span asp-validation-for="ComponentName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ParentComponentId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.ParentComponentId,
-                                                            new SelectList(Model.Components, "Id", "ComponentName"),
-                                                            "Choose Parent Component",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>
-                        </div>
-                        <div id="lineupSelectionTarget"></div>
-                        <div class="form-group">
-                            <label asp-for="Acronym" class="control-label"></label>
-                            <input asp-for="Acronym" class="form-control" />
-                            <span asp-validation-for="Acronym" class="text-danger"></span>
+                        @Html.HiddenFor(model => model.LineupPosition)
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-8 form-group">
+                                    <label asp-for="ComponentName" class="control-label"></label>
+                                    <input asp-for="ComponentName" class="form-control" />
+                                    <span asp-validation-for="ComponentName" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label asp-for="Acronym" class="control-label"></label>
+                                    <input asp-for="Acronym" class="form-control" />
+                                    <span asp-validation-for="Acronym" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label asp-for="ParentComponentId" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.ParentComponentId,
+                                                                    new SelectList(Model.Components, "Id", "ComponentName"),
+                                                                    "Choose Parent Component",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                                </div>
+                                <div id="lineupSelectionTarget"></div>
+                            </div>                            
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#addEditComponentModal">Close</button>
-                    <button type="button" id="addEditComponentModalSubmit" class="btn btn-primary">Save changes</button>
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-target="#addEditComponentModal">Close</button>
+                        <button type="button" id="addEditComponentModalSubmit" class="btn btn-primary pull-left">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>

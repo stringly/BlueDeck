@@ -1,6 +1,9 @@
 ﻿
 html, body {
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
+    /*font-family: 'IBM Plex Sans', sans-serif;*/
+    font-family: Segoe UI,SegoeUI,Segoe WP,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    font-weight: 400;
     font-size: 12px;
     margin: 0;
     padding: 0;
@@ -8,6 +11,7 @@ html, body {
     height: 100%;
     overflow: auto;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body {
@@ -37,6 +41,10 @@ body {
     margin-right: auto;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     margin-top: 70px;
+}
+.get-blue.get-org-chart .get-oc-tb {
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+    background-color: #3e5374 !important;
 }
 .get-oc-tb input{
     border-radius: 32px;
@@ -415,6 +423,12 @@ hr {
         margin-top: 140px;
     }
 }
+@media screen and (min-width: 768px) {
+    #rosterContainer{
+        margin-top: 70px;
+    }
+
+}
 .indexTable {    
     background-color: #fff;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
@@ -424,11 +438,22 @@ hr {
     vertical-align: middle;
 }
     .indexTable thead {
-        background-color: #445f89;
+        background-image: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7) 100%);        
+        background-color: #3e5374 !important;
         color: white;
         font-weight: normal;
         text-shadow: 1px 1px black;
     }
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    /* IE10+ CSS styles go here */
+    .indexTable thead {
+        background-image: none;
+        background-color: #3e5374 !important;
+        color: white;
+        font-weight: normal;
+        text-shadow: 1px 1px black;
+    }
+}
         .indexTable thead a {
             color: #55b6f2;
             cursor: pointer;
@@ -443,6 +468,9 @@ hr {
     }
         .indexTable a {
             font-weight: normal;
+        }
+        .indexTable a:not(.glyphicon-ring):hover {
+            text-decoration: underline;
         }
 
         .indexTable thead .glyphicon {
@@ -512,7 +540,7 @@ hr {
 
 #rosterContainer {
     padding: 5px;
-    margin-top: 70px;
+
 }
 
 
@@ -533,7 +561,8 @@ hr {
         margin: 5px 0px 5px 10px;
     }
 .modal-header {
-    background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.7));
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+    background-color: #3e5374 !important;
     color: azure;
     padding: 10px;
 }
@@ -553,35 +582,87 @@ hr {
     padding: 0px;
     position: relative;
 }
-.componentDetails {
-    /*margin-left: 10px;*/
-}
 
-.componentContainer-nested-0 {
-    box-shadow: 15px 0 0 0px hsl(0, 0%, 60%) inset;
-    padding-left: 0px;
+.componentContainer-nested-0 .componentDetails {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset;
+    padding-left: 10px;
 }
-.componentContainer-nested-1 {
-    box-shadow: 15px 0 0 0px hsl(0, 0%, 60%) inset, 30px 5px 0 0px hsl(0, 0%, 70%) inset;
-    padding-left: 15px;
+.componentContainer-nested-1 .componentDetails, .componentContainer-nested-1 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset;
+    padding-left: 20px;
 }
-.componentContainer-nested-2 {
-    box-shadow: 15px 0 0 0px hsl(0, 0%, 60%) inset, 30px 0 0 0px hsl(0, 0%, 70%) inset, 45px 5px 0 0px hsl(0, 0%, 80%) inset;
+.componentContainer-nested-2 .componentDetails, .componentContainer-nested-2 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset;
     padding-left: 30px;
 }
-.componentContainer-nested-3 {
-    box-shadow: 15px 0 0 0px hsl(0, 0%, 60%) inset, 30px 0 0 0px hsl(0, 0%, 70%) inset, 45px 0 0 0px hsl(0, 0%, 80%) inset, 60px 5px 0 0px hsl(0, 0%, 90%) inset;
-    padding-left: 45px;
+.componentContainer-nested-3 .componentDetails, .componentContainer-nested-3 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset, 40px 0 0 0px hsl(0, 0%, 60%) inset;
+    padding-left: 40px;
 }
 
+.componentContainer-nested-4 .componentDetails, .componentContainer-nested-4 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset, 40px 0 0 0px hsl(0, 0%, 60%) inset, 50px 0 0 0px hsl(0, 0%, 70%) inset;
+    padding-left: 50px;
+}
+.componentContainer-nested-5 .componentDetails, .componentContainer-nested-5 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset, 40px 0 0 0px hsl(0, 0%, 60%) inset, 50px 0 0 0px hsl(0, 0%, 70%) inset, 60px 0 0 0px hsl(0, 0%, 80%) inset;
+    padding-left: 60px;
+}
+.componentContainer-nested-6 .componentDetails, .componentContainer-nested-6 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset, 40px 0 0 0px hsl(0, 0%, 60%) inset, 50px 0 0 0px hsl(0, 0%, 70%) inset, 60px 0 0 0px hsl(0, 0%, 80%) inset, 70px 0 0 0px hsl(0, 0%, 90%) inset;
+    padding-left: 70px;
+}
+.componentContainer-nested-7 .componentDetails, .componentContainer-nested-7 > .navbar {
+    box-shadow: 10px 0 0 0px hsl(0, 0%, 30%) inset, 20px 0 0 0px hsl(0, 0%, 40%) inset, 30px 0 0 0px hsl(0, 0%, 50%) inset, 40px 0 0 0px hsl(0, 0%, 60%) inset, 50px 0 0 0px hsl(0, 0%, 70%) inset, 60px 0 0 0px hsl(0, 0%, 80%) inset, 70px 0 0 0px hsl(0, 0%, 90%) inset, 80px 0 0 0px hsl(0, 0%, 95%) inset;
+    padding-left: 80px;
+}
 .componentHeaderDiv {
     height: 40px;
-    /*background-color: #f5f5f5;*/
-    background-color: #445f89;
+    background: rgb(18,22,41);
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
     width: 100%;
-    /*border: 1px solid #3b5998;*/
-    /*border-radius: 4px 4px 0 0;*/
-    border: 1px solid #3b5998;
+    border-radius: 0px 24px 24px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.componentContainer .navbar-inverse {
+    min-height: 40px;
+    background: rgb(18,22,41);
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+    width: 100%;
+    border-radius: 0px 24px 24px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0px;
+    background-color: #3e5374 !important;
+    border-right: none;
+    border-left: none;
+}
+.componentContainer .navbar-collapse {
+    position: relative;
+    z-index: 1;
+    margin-top: -2px;
+}
+.componentContainer .navbar-collapse ul {
+    padding: 0px 0px 0px 5px;
+    margin: 0;
+}
+.componentContainer .navbar-inverse .navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 5px 5px;
+    margin-top: 6px;
+    margin-right: 15px;
+    margin-bottom: 2px;
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    border-color: #141a2e;
+}
+.componentContainer .navbar-inverse .navbar-toggle:focus,
+.componentContainer .navbar-inverse .navbar-toggle:hover {
+    background-color: #2f4260;
 }
     .componentContainer .logoDiv {        
         margin-right: 3px;
@@ -600,38 +681,38 @@ hr {
 
 
 .headerSpan {
-    font-size: 16px;
+    font-size: 20px;
     color: #fff;
-    padding: 0px 20px 0px 10px;
+    padding: 0px 20px 0px 5px;
     margin-top: 0px;
-    line-height: 40px;
+    line-height: 36px;
     text-shadow: 1px 1px black;
     /*background-color: #3b5998;*/
     /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
 }
 .componentHeaderMenuItem {
     font-size: 12px;
-    color: #55b6f2;
+    color: white;
     line-height: 40px;
     margin: 0px 5px 0px 5px;
     cursor: pointer;
-    text-shadow: 1px 1px black;
 }
     .componentHeaderMenuItem .glyphicon {
     }
     .componentHeaderMenuItem:hover {
-        color: #fff;
+        color: #7accff;
         /*text-shadow: 1px 1px #55b6f2;*/
     }
     .headerSpan .glyphicon {
         color: whitesmoke;
         font-size: 20px;
     }
-    .componentContainer .nonUniquePositionWrapper {
-        margin: 10px 15px 10px 15px;
-        border: 1px solid black;
-        padding: 5px 0px 5px 0px;
-    }
+.componentContainer .nonUniquePositionWrapper {
+    margin: 10px 15px 10px 15px;
+    border: 1px solid #ccc;
+    padding: 5px 0px 5px 0px;
+    background-color: #F9FBFC;
+}
 
     .componentContainer .nonUniquePositionWrapper strong {
         margin: 2px 5px 2px 5px;
@@ -645,7 +726,6 @@ hr {
     font-size: 12px;
 }
 .componentContainer .member {
-    font-family: "Helvetica Neue",helvetica,Arial,sans-serif;
     float: right;
     margin-left: 5px;
     font-size: 12px;
@@ -653,13 +733,14 @@ hr {
     cursor: grab;
     width: 100%;
     color: black;
-    border: 1px solid #7d7b78;
-    border-left: 5px solid #7d7b78;
-    padding: 4px 4px 3px 0px;
+    border: 1px solid rgba(27,31,35,.6);
+    border-radius: .25em;
+    border-left: 5px solid rgba(27,31,35,.6);
+    padding: 3px 4px 3px 0px;
     height: 100%;
-    background-color: #d9d9d7;
     font-weight: 500;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d9d9d7), color-stop(100%,#b7b7b7));
+    background-color: #eff3f6;
+    background-image: linear-gradient(-180deg,#eff3f6,#dce3e8 90%);
 }
     .componentContainer .member:hover {
         /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
@@ -682,9 +763,14 @@ hr {
     }
 .componentContainer .insertable {
     vertical-align: middle;
-    border: 1px solid #7d7b78;
     height: 33px;
     padding: 3px;
+    background-color: #fff;
+    background-position: right 8px center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px rgba(27,31,35,.075);
     /*background-color: #fafbfc;
     box-shadow: 1px 1px 5px #ccc inset;*/
 }
@@ -745,13 +831,15 @@ hr {
 .componentDemoTable {
     margin: 0 auto;
     /*background-image: linear-gradient(to bottom, rgba(59,89,152,0.3), rgba(59,89,152, 0));*/
-    padding: 5px;    
+    padding: 5px;   
+    font-size: 10px;
+
 }
 
     .componentDemoTable .componentDemoTableHeaderRow td {
-        color: black;      
-        font-weight: bold;
+        color: black;              
         padding: 5px;
+        font-size: 12px;
         
     }
         .componentDemoTable .componentDemoTableSubHeaderRow th {
@@ -782,26 +870,29 @@ hr {
         padding-left: 5px;
     }
 
-    .drag-options {
-        float: left;
-        position: absolute;
-        padding: 5px;
-        right: 38px;
-        /*background-color: #3d5c9f;*/
-        /*background-color: #94a4c8;*/
-        background-image: linear-gradient(to bottom, rgba(61, 92, 159, 1), rgba(148, 164, 200, 1));
-        -webkit-transform: translateX(100%);
-        transform: translateX(100%);
-        margin-top: 5px;
-        opacity: 0;
-        z-index: 10;
-        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    }
+.drag-options {
+    float: right;
+    position: relative;
+    padding: 5px;
+    right: -144px;
+    top: 20px;
+    background-color: #757575;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+    display: none;
+    border-radius: 0px 0px 3px 3px;
+    border: 1px solid black;
+    border-top: none;
+}
 
     .drag-options.active {
         -webkit-transform: translateX(0);
         transform: translateX(0);
         opacity: 1;
+        display: block;
     }
 
     .drag-options-label {
@@ -855,6 +946,7 @@ hr {
     text-shadow: none;
     border: 1px solid black;
     background-color: #444444;
+    border-radius: 3px;
     /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#757575));*/
     /*opacity: 1;*/
 }
@@ -982,3 +1074,4 @@ hr {
         cursor: pointer;
         border: 1px solid #d1d5da;
     }
+

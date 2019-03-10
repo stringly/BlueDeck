@@ -28,7 +28,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ><a style="display:none;" id="ReloadRoster"><span class="glyphicon glyphicon-repeat"  style="margin-right:2px;" ></span>Reload</a></li>
+                <li><a style="display:none;" id="ReloadRoster"><span class="glyphicon glyphicon-repeat" style="margin-right:2px;"></span>Reload</a></li>
+                <li><a style="display:none;" id="CollapseRoster"><span class="glyphicon glyphicon-chevron-up" style="margin-right:2px;"></span>Collapse All</a></li>
+                <li><a style="display:none;" id="ExpandRoster"><span class="glyphicon glyphicon-chevron-down" style="margin-right:2px;"></span>Expand All</a></li>
                 <li><a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Reset</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -240,6 +242,7 @@
             var memberId = $(e.target).data('memberid');
             console.log('More options clicked for Member: ' + memberId);
             $("#options_" + memberId).toggleClass("active");
+
         }
         function handleMouseOut(elem) {
             this.classList.remove("active");
@@ -331,9 +334,10 @@
                 var submitButton = document.getElementById("editMemberModalSubmit");
                 submitButton.addEventListener('click', handleEditEmployeeSubmitButtonClick, false);
                 document.getElementById('defaultNewPhone').addEventListener("change", handleAddPhoneNumberClick, false);
-                document.querySelectorAll(".deleteNumber").forEach(function (elem) {
+                var deleteNumberButtons = document.querySelectorAll(".deleteNumber");
+                [].forEach.call(deleteNumberButtons, function (elem) {
                     elem.addEventListener("click", handleDeletePhoneNumberClick, false);
-                })
+                });
                 // show the modal
                 $("#editMemberModal").modal("show");
             })
@@ -680,10 +684,10 @@
                         $("#modalTarget").html(response);
                         var submitButton = document.getElementById("addPositionToComponentModalSubmit");
                         submitButton.addEventListener('click', handleAddPositionToComponentModalSubmit, false);
-                        var showDeleteButton = document.getElementById("deletePositionModalButton");
-                        showDeleteButton.addEventListener('click', handleShowDeletePositionConfirm, false);
-                        var deletePositionConfirmButton = document.getElementById("deletePositionConfirm");
-                        deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
+                        //var showDeleteButton = document.getElementById("deletePositionModalButton");
+                        //showDeleteButton.addEventListener('click', handleShowDeletePositionConfirm, false);
+                        //var deletePositionConfirmButton = document.getElementById("deletePositionConfirm");
+                        //deletePositionConfirmButton.addEventListener('click', handleDeletePosition, false);
                         var parentComponentSelect = document.getElementById('ParentComponentId');
                         parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
                         var isManagerCheckBox = document.getElementById('IsManager');
@@ -695,8 +699,8 @@
                         });
                         var isUniqueCheckBox = document.getElementById("IsManager");
                         isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
-                        var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
-                        uniqueWarningButton.addEventListener('click', handleUniqueWarningSubModalCancel, false);
+                        //var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
+                        //uniqueWarningButton.addEventListener('click', handleUniqueWarningSubModalCancel, false);
                         $("#addPositionToComponentModal").modal("show");
                     }
                 },
@@ -854,13 +858,13 @@
                     e.target.dataset.state = 'collapsed';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-up');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-down');
-                    e.target.childNodes[2].textContent = "Expand"
+                    e.target.childNodes[2].textContent = " Expand"
                     break;
                 case 'collapsed':
                     e.target.dataset.state = 'expanded';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-down');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-up');
-                    e.target.childNodes[2].textContent = "Collapse"
+                    e.target.childNodes[2].textContent = " Collapse"
                     $("#componentDetailSection" + componentId).show();
                     break;
             }
@@ -936,7 +940,28 @@
         }
         $("#ReloadRoster").click(function () {
             $("#SelectedComponent").trigger('change');
-        })
+        });
+        $("#CollapseRoster").click(function () {
+            var components = document.querySelectorAll('.expandCollapseButton');
+            [].forEach.call(components, function (elem) {
+                if (elem.dataset.state == "expanded") {
+                    $(elem).trigger("click");
+                }
+            });
+            $("#CollapseRoster").hide();
+            $("#ExpandRoster").show();
+        });
+
+        $("#ExpandRoster").click(function () {
+            var components = document.querySelectorAll('.expandCollapseButton');
+            [].forEach.call(components, function (elem) {
+                if (elem.dataset.state == "collapsed") {
+                    $(elem).trigger("click");
+                }                
+            });
+            $("#ExpandRoster").hide();
+            $("#CollapseRoster").show();
+        });
 
         $("#SelectedComponent").change(function () {
             var selectedComponentId = $("#SelectedComponent").children("option:selected").val();
@@ -1021,6 +1046,7 @@
                 });               
                 
                 $("#ReloadRoster").show();
+                $("#CollapseRoster").show();
             });
         });
     });
