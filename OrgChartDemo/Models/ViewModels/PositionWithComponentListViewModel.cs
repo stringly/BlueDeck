@@ -33,6 +33,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The parent's ComponentId.
         /// </value>
+        [Required]
         [Display(Name = "Parent Component")] 
         public int? ParentComponentId { get; set; }
 
@@ -42,7 +43,6 @@ namespace OrgChartDemo.Models.ViewModels
         /// <value>
         /// The job title.
         /// </value>
-        [Required]
         [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
 

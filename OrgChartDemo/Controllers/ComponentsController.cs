@@ -64,7 +64,8 @@ namespace OrgChartDemo.Controllers
                     vm.Components = vm.Components.OrderBy(x => x.ComponentName);
                     break;
             }
-
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             return View(vm);
         }
 
@@ -80,7 +81,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
 
-            var component = unitOfWork.Components.SingleOrDefault(m => m.ComponentId == id);
+            var component = unitOfWork.Components.GetComponentWithParentComponent(Convert.ToInt32(id));
             if (component == null)
             {
                 return NotFound();
@@ -113,6 +114,8 @@ namespace OrgChartDemo.Controllers
             {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();                
                 ViewBag.Title = "Create Component - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
                 return View(form);
             }
             else
@@ -125,15 +128,20 @@ namespace OrgChartDemo.Controllers
                     LineupPosition = form.LineupPosition
                 };
                 // check if a Component with the Name provided already exists and reject if so
-                if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName) != null)
+                if (unitOfWork.Components.ComponentNameNotAvailable(c) == true)
                 {
-                    ViewBag.Messaage = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                    ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, unitOfWork.Components.GetComponentSelectListItems());
+                    ViewBag.Title = "Create Component - Name taken";
+                    ViewBag.Status = "Warning!";                    
+                    ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                    return View(form);
                 }
                 // add Component to repo via method that controls setting lineup
                 unitOfWork.Components.UpdateComponentAndSetLineup(c);
                 unitOfWork.Complete();
             }
+            TempData["Status"] = "Success!";
+            TempData["Message"] = "Component successfully created.";
             return RedirectToAction(nameof(Index));
         }
 
@@ -180,6 +188,8 @@ namespace OrgChartDemo.Controllers
             {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "Edit Component - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
                 return View(form);
             }
             else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
@@ -187,6 +197,8 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "Edit Component - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
                 return View(form);
             }
             else { 
@@ -217,6 +229,8 @@ namespace OrgChartDemo.Controllers
                         throw;
                     }
                 }
+                TempData["Status"] = "Success!";
+                TempData["Message"] = "Component updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -239,7 +253,8 @@ namespace OrgChartDemo.Controllers
             }
             if(component.ChildComponents.Count() > 0)
             {
-                ViewBag.Message = $"WARNING: This Component currently has {component.ChildComponents.Count()} child Components. You cannot delete a Component that has active child Components.";
+                ViewBag.Message = $"This Component currently has {component.ChildComponents.Count()} child Components. You cannot delete a Component that has active child Components.";
+                ViewBag.Status = "Warning!";                
             }
             else if (component.Positions.Count() > 0)
             {
@@ -248,8 +263,9 @@ namespace OrgChartDemo.Controllers
                 {
                     totalMembers += p.Members.Count();
                 }
-                ViewBag.Message = $"WARNING: This Component includes {component.Positions.Count()} Positions with a total of {totalMembers} Members.\n"
+                ViewBag.Message = $"This Component includes {component.Positions.Count()} Positions with a total of {totalMembers} Members.\n"
                                         + "Deleting this Component will also delete all of it's assigned Positions and reassign all Members to 'Unassigned.'";
+                ViewBag.Status = "Warning!";
             }
             ViewBag.Title = "Confirm Delete?";
             return View(component);
@@ -266,6 +282,8 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork.Components.RemoveComponent(id);
             unitOfWork.Complete();            
+            TempData["Status"] = "Success!";
+            TempData["Message"] = "Component successfully deleted.";
             return RedirectToAction(nameof(Index));
         }
 

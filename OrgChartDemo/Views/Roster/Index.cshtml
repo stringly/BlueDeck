@@ -1,20 +1,40 @@
 ﻿@model RosterManagerViewModel
 @{
-    ViewData["Title"] = "Index";
     Layout = "_OrgChartLayout";
 }
+<nav class="pageBar navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <span class="navbar-brand">Roster Manager</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
-<div class="headerContainer">
-    <h3>Manage Roster</h3>    
-    <div class="form-inline">
-        <div class="form-group">
-            <label asp-for="@Model.SelectedComponentId" class="control-label"></label>
-            @Html.DropDownListFor(x => Model.SelectedComponentId, new SelectList(Model.Components, "Id", "ComponentName"), htmlAttributes: new { id = "Component", @class = "bigControl" })
-            <input title="Get Component" type="submit" id="getComponentButton" value="View" class="btn btn-default" /> |
-            <a asp-page="/OrgChart/Index">Back to Org Chart</a>
         </div>
-    </div>
-</div>
+        <div class="navbar-header pull-left">
+            <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                <div class="form-group">
+                    @Html.DropDownListFor(x => Model.SelectedComponentId, 
+                                            new SelectList(Model.Components, "Id", "ComponentName"),
+                                            "Select Component",
+                                            new { id = "SelectedComponent", @class = "bigControl selectBox form-control" })
+                </div>
+            </form>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ><a style="display:none;" id="ReloadRoster"><span class="glyphicon glyphicon-repeat"  style="margin-right:2px;" ></span>Reload</a></li>
+                <li><a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Reset</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
 <div id="rosterContainer" class="container-fluid">
 
 
@@ -35,7 +55,7 @@
             dragGhost.className = "dragGhost-member";
             dragGhost.style.width = "" + this.offsetWidth + "px";
             dragGhost.innerHTML = this.innerHTML;
-            dragGhost.style.opacity = 1;
+            //dragGhost.style.opacity = 1;
             document.body.appendChild(dragGhost);
             var posX = $(this).offset().left, posY = $(this).offset().top;
             e.dataTransfer.setDragImage(dragGhost, (e.pageX - posX), (e.pageY - posY));
@@ -228,7 +248,7 @@
             $.get("Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
 
                 if (data.success == true) {
-                    $("#getComponentButton").trigger('click');
+                    $("#SelectedComponent").trigger('change');
                 }
             })
         }
@@ -248,7 +268,7 @@
                 else if (data.status == "RefreshRosterManager") {
                     // if so, manually trigger the click event for the getComponentButton
                     console.log("Refreshing RosterManager");
-                    $("#getComponentButton").trigger('click');
+                    $("#SelectedComponent").trigger('change');
                 }
             });
         }
@@ -628,7 +648,7 @@
                 data: form.serialize(),
                 success: function () {
                     $("#reassignEmployeeModal").modal("hide");
-                    $("#getComponentButton").trigger('click');
+                    $("#SelectedComponent").trigger('change');
                 }
             });
         }
@@ -647,7 +667,7 @@
 
                     if (response.success == true) {
                         $("#addPositionToComponentModal").modal("hide");
-                        $("#getComponentButton").trigger('click');
+                        $("#SelectedComponent").trigger('change');
                     }
                     else {
                         // hide the original modal
@@ -713,7 +733,7 @@
                     if (response.success == true) {
                         // TODO: return new Member info
                         $("#editMemberModal").modal("hide");
-                        $("#getComponentButton").trigger('click');
+                        $("#SelectedComponent").trigger('change');
                     }
                     // if the return does not have {Status = "Success"}, we assume validation failed and the response
                     // payload is a new ViewComponent with Model Validation messages
@@ -746,7 +766,7 @@
                 success: function () {
                     $("#deletePositionSubModal").modal("hide");
                     $("#addPositionToComponentModal").modal("hide");
-                    $("#getComponentButton").trigger('click');
+                    $("#SelectedComponent").trigger('change');
                 }
             })
         }
@@ -769,7 +789,7 @@
                     if (response.success == true) {
                         // TODO: return new Member info
                         $("#changeEmployeeStatusModal").modal("hide");
-                        $("#getComponentButton").trigger('click');
+                        $("#SelectedComponent").trigger('change');
                     }
                     else {
                         // hide the original modal
@@ -801,7 +821,7 @@
                 success: function (response) {
                     if (response.success == true) {
                         $("#addEditComponentModal").modal("hide");
-                        $("#getComponentButton").trigger('click');
+                        $("#SelectedComponent").trigger('change');
                     }
                     else {
                         $("#addEditComponentModal").modal("hide");
@@ -834,13 +854,13 @@
                     e.target.dataset.state = 'collapsed';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-up');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-down');
-                    e.target.childNodes[0].textContent = "Expand"
+                    e.target.childNodes[2].textContent = "Expand"
                     break;
                 case 'collapsed':
                     e.target.dataset.state = 'expanded';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-down');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-up');
-                    e.target.childNodes[0].textContent = "Collapse"
+                    e.target.childNodes[2].textContent = "Collapse"
                     $("#componentDetailSection" + componentId).show();
                     break;
             }
@@ -877,7 +897,7 @@
         };
 
         function handleAddComponentClick(e) {
-            var parentComponentId = e.target.dataset.parentcomponentid;
+            var parentComponentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
             $.get('Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
@@ -907,16 +927,19 @@
                     $.get('/Roster/DeleteComponent', { componentId: e.target.dataset.componentid }, function (response) {
                         if (response.success == true) {
                             $("#ConfirmComponentDeleteModal").modal("hide");
-                            $("#getComponentButton").trigger('click');
+                            $("#SelectedComponent").trigger('change');
                         }
                     })
                 }, false)
                 $("#ConfirmComponentDeleteModal").modal("show");
             })
         }
+        $("#ReloadRoster").click(function () {
+            $("#SelectedComponent").trigger('change');
+        })
 
-        $("#getComponentButton").click(function () {
-            var selectedComponentId = $("#Component").children("option:selected").val();
+        $("#SelectedComponent").change(function () {
+            var selectedComponentId = $("#SelectedComponent").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
             var container = $("#rosterContainer");
             $.get("/Roster/GetRosterViewComponent", { componentId: selectedComponentId }, function (data) {
@@ -964,7 +987,7 @@
                 [].forEach.call(moreOptionsChangeStatus, function (elem) {
                     elem.addEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
                 })
-                var addNewPositionButtons = document.querySelectorAll('#addNewPositionButton');
+                var addNewPositionButtons = document.querySelectorAll('.addNewPositionButton');
                 [].forEach.call(addNewPositionButtons, function (elem) {
                     elem.addEventListener('click', handleAddNewPositionButtonClick, false);
                 })
@@ -992,7 +1015,12 @@
                 [].forEach.call(deleteComponentButtons, function (elem) {
                     elem.addEventListener('click', handleDeleteComponentClick, false);
                 })
-                document.getElementById('addNewComponentButton').addEventListener('click', handleAddComponentClick, false);
+                var addComponentButtons = document.querySelectorAll('.addNewComponentButton');
+                [].forEach.call(addComponentButtons, function(elem){
+                    elem.addEventListener('click', handleAddComponentClick, false);
+                });               
+                
+                $("#ReloadRoster").show();
             });
         });
     });

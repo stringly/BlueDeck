@@ -54,6 +54,7 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             Component result = ApplicationDbContext.Components
                 .Where(x => x.ComponentId == id)
+                .Include(x => x.ParentComponent)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Gender)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
@@ -65,6 +66,19 @@ namespace OrgChartDemo.Persistence.Repositories
                 result.ChildComponents = ApplicationDbContext.Components.Where(x => x.ParentComponent.ComponentId == result.ComponentId).ToList();
             }
             return result;
+        }
+
+        /// <summary>
+        /// Gets the Component with it's Parent Component.
+        /// </summary>
+        /// <param name="id">The ComponentId of the desired Component Entity.</param>
+
+        /// <returns></returns>
+        public Component GetComponentWithParentComponent(int id)
+        {
+            return ApplicationDbContext.Components
+                .Include(x => x.ParentComponent)
+                .FirstOrDefault(x => x.ComponentId == id);                
         }
 
         /// <summary>
@@ -417,5 +431,19 @@ namespace OrgChartDemo.Persistence.Repositories
                 }
             }                            
         }
+    
+        public int GetChildComponentCountForComponent(int componentId)
+        {
+            return ApplicationDbContext.Components
+                .Where(x => x.ParentComponent.ComponentId == componentId)
+                .Count();
+        }    
+        public bool ComponentNameNotAvailable(Component c)
+        {
+            return ApplicationDbContext.Components
+                .Where(x => x.Name == c.Name)
+                .Any(x => x.ComponentId != c.ComponentId);            
+        }
     }
+
 }

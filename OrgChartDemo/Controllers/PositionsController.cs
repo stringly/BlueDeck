@@ -64,6 +64,8 @@ namespace OrgChartDemo.Controllers
                     break;
             }
             ViewBag.Title = "BlueDeck Positions Index";
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             return View(vm);
         }
 
@@ -111,6 +113,15 @@ namespace OrgChartDemo.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Title = "Create Position: Corrections required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated";
+                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                return View(form);
+            }
+
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
             Position p = new Position {
@@ -123,10 +134,7 @@ namespace OrgChartDemo.Controllers
                 Callsign = form.Callsign.ToUpper()
                 };
 
-            if (!ModelState.IsValid) {
-                errors++;
-            }
-            else if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null) {                    
+            if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null) { 
                 ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                 errors++;
             }
@@ -137,7 +145,7 @@ namespace OrgChartDemo.Controllers
             // check if user is attempting to add "Manager" position to the ParentComponent
             else if (form.IsManager) {
                 // check if the Parent Component of the position already has a Position designated as "Manager"
-                if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true) != null) {                        
+                if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsManager == true) != null) {                    
                     ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.\n";
                     errors++;
                 }
@@ -146,11 +154,14 @@ namespace OrgChartDemo.Controllers
                 targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
                 unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                 unitOfWork.Complete();
+                TempData["Status"] = "Success!";
+                TempData["Message"] = "Position successfully created.";
                 return RedirectToAction(nameof(Index)); 
             }
             else {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "New Position: Corrections Required";
+                ViewBag.Status = "Warning!";
                 return View(form);
             }
         }
@@ -194,6 +205,7 @@ namespace OrgChartDemo.Controllers
             
             if (!ModelState.IsValid) {
                 errors++;
+                ViewBag.Message = "You must correct the fields indicated.";
             }
             else {            
 
@@ -202,17 +214,22 @@ namespace OrgChartDemo.Controllers
                 }
                 else if (unitOfWork.Positions.Find(x => x.Name == form.PositionName && x.PositionId != id).FirstOrDefault() != null)
                 {
-                    // user is attempting to change the name of the position to a name which already exists
+                    // user is attempting to change the name of the position to a name which already exists                    
                     ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                     errors++;
                 }
-                else if (unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign.ToUpper() && x.PositionId != form.PositionId) != null)
+                else if (form.Callsign != null)
                 {
-                    errors++;
-                    ViewBag.Message = $"The callsign {form.Callsign} is in use. Choose another.";
+                    if(unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign.ToUpper() && x.PositionId != form.PositionId) != null)
+                    {
+                        errors++;                    
+                        ViewBag.Message = $"The callsign {form.Callsign} is in use. Choose another.";
+                    }
+                    
                 }
                 else if (form.IsManager && unitOfWork.Positions.Find(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsManager && x.PositionId != form.PositionId).FirstOrDefault() != null) {
                     // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager
+                    
                     ViewBag.Message += $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.\n";
                     errors++;              
                 }
@@ -229,16 +246,19 @@ namespace OrgChartDemo.Controllers
                 p.Name = form.PositionName;
                 p.IsUnique = form.IsUnique;
                 p.JobTitle = form.JobTitle;
-                p.Callsign = form.Callsign.ToUpper();
+                p.Callsign = form?.Callsign?.ToUpper() ?? null;
                 p.IsManager = form.IsManager;
                 p.LineupPosition = form.LineupPosition;
                 unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                 unitOfWork.Complete();
+                TempData["Status"] = "Success!";
+                TempData["Message"] = "Position successfully updated";
                 return RedirectToAction(nameof(Index));
             } else
             {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "Edit Position - Corrections Required";
+                ViewBag.Status = "Warning!";
                 return View(form);
             }
             
@@ -278,6 +298,8 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork.Positions.RemovePositionAndReassignMembers(id);
             unitOfWork.Complete();
+            TempData["Status"] = "Success!";
+            TempData["Message"] = "Position successfully deleted";
             return RedirectToAction(nameof(Index));
         }
 

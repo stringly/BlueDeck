@@ -1,6 +1,14 @@
 ﻿@model MemberAddEditViewModel
 
 <div class='col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer'>
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
     <div class="formHeader">
         <h2 class="formHeader-heading">Create a Member</h2>
         <p class="formHeader-description">
@@ -11,9 +19,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">            
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <form asp-action="Create" class="row-border">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                                 
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-sm-3 form-group">
@@ -91,6 +99,26 @@
                         </div>
                         <div class="col-sm-8 form-group">
                             <label asp-for="ContactNumbers" class="control-label"></label>
+
+                            @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+                            {
+                                @if (Model.ContactNumbers[i].PhoneNumber != null)
+                                {
+                                    <div class="input-group mygroup" id="contactGroup-@i">
+                                        @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                                "Number Type",
+                                                new { @class = "phoneNumberTypeList form-control" })
+
+                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                        <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                            <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
+                                        </span>
+                                    </div>
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+                                }
+                            }
                             <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
                                 @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
                                         new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
@@ -117,7 +145,7 @@
                 </div>
             </form>
         </div>
-    </div>    
+    </div>
 </div>
 
 

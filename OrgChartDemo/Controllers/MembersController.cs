@@ -76,7 +76,9 @@ namespace OrgChartDemo.Controllers
                     break;
             }
             ViewBag.Title = "BlueDeck Members Index";
-            return View(vm);
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            return View(vm);            
         }
 
         /// <summary>
@@ -135,6 +137,8 @@ namespace OrgChartDemo.Controllers
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
                 ViewBag.Title = "Create Member - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
                 return View(form);
             }
             else
@@ -142,6 +146,8 @@ namespace OrgChartDemo.Controllers
                 // TODO: Member addition checks? Duplicate Name/Badge Numbers?
                 unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
+                TempData["Status"] = "Success!";
+                TempData["Message"] = "Member successfully created.";
                 return RedirectToAction(nameof(Index));
             }            
         }
@@ -195,6 +201,8 @@ namespace OrgChartDemo.Controllers
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
                 ViewBag.Title = "Edit Member - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
                 return View(form);                
             }
             else
@@ -215,7 +223,9 @@ namespace OrgChartDemo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+            TempData["Status"] = "Success!";
+            TempData["Message"] = "Member successfully updated.";
+            return RedirectToAction(nameof(Index));
             }
         }
                 
@@ -251,6 +261,8 @@ namespace OrgChartDemo.Controllers
         {            
             unitOfWork.Members.Remove(id);
             unitOfWork.Complete();
+            TempData["Status"] = "Success!";
+            TempData["Message"] = "Member successfully deleted.";
             return RedirectToAction(nameof(Index));
         }
 

@@ -2,7 +2,15 @@
 
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
-    <div class="formHeader">        
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="formHeader">
         <h2 class="formHeader-heading">Edit Member Information</h2>
         <p class="formHeader-description"> Showing details for @Model.DisplayName</p>
         <div>
@@ -95,22 +103,24 @@
                                     <label asp-for="ContactNumbers" class="control-label"></label>
                                     @for (var i = 0; i < Model.ContactNumbers.Count; i++)
                                     {
+                                        @if (Model.ContactNumbers[i].PhoneNumber != null)
+                                        {
+                                            <div class="input-group mygroup" id="contactGroup-@i">
+                                                @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                                        new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                                        "Number Type",
+                                                        new { @class = "phoneNumberTypeList form-control" })
 
-                                        <div class="input-group mygroup" id="contactGroup-@i">
-                                            @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
-                                                    new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                                    "Number Type",
-                                                    new { @class = "phoneNumberTypeList form-control" })
-
-                                            <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
-                                            <span class="input-group-btn deleteNumber" data-contactid="@i">
-                                                <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
-                                            </span>
-                                        </div>
-                                        <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
-                                        <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
-
+                                                <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                                <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                                    <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
+                                                </span>
+                                            </div>
+                                            <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                            <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+                                        }
                                     }
+
                                     <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
                                         @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
                                                 new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
@@ -121,6 +131,7 @@
                                             <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
                                         </span>
                                     </div>
+
                                     <div id="newPhoneTarget">
 
                                     </div>

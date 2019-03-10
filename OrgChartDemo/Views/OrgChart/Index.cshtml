@@ -22,7 +22,7 @@
                     @Html.DropDownList("componentSelectList",
                                         new SelectList(Model, "Id", "ComponentName"),
                                         "Select Component",
-                                        new { @class="bigControl selectBox"}
+                                        new { @class="bigControl selectBox form-control"}
                    )                   
                 </div>
             </form>
@@ -35,7 +35,7 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<h3 class="text-danger">@ViewBag.Message</h3>
+
 <div id="people" class="orgChartContainer"></div>
 <hidden id="currentComponentId"></hidden>
 <script type="text/javascript">

@@ -1,8 +1,6 @@
 ﻿@model RosterManagerViewComponentViewModel
 @{ var uniquePositionId = 0;}
-<div style="font-weight:bold" id="addNewComponentButton" data-parentcomponentid="@Model.ComponentList[0].ComponentId">
-    <span class="glyphicon glyphicon-plus"></span> Add New Component to @Model.ComponentList[0].Name
-</div>
+
 @foreach (RosterManagerViewModelComponent c in Model.ComponentList)
 {
     <div class="componentContainer-nested-@c.NestedLevel componentContainer container" data-componentid="@c.ComponentId">
@@ -10,27 +8,28 @@
             <div>
                 <span class="headerSpan">@c.Name</span>
                 <span class="componentHeaderMenuItem expandCollapseButton" data-componentid="@c.ComponentId" data-state="expanded">
-                    Collapse<span class="glyphicon glyphicon-chevron-up"></span>
+                    <span class="glyphicon glyphicon-chevron-up"></span> Collapse
                 </span>
                 <span class="componentHeaderMenuItem editComponentButton" data-componentid="@c.ComponentId">
-                    Edit<span class="glyphicon glyphicon-pencil"></span>
+                    <span class="glyphicon glyphicon-pencil"></span> Edit
+                </span>
+                <span class="componentHeaderMenuItem addNewComponentButton" data-componentid="@c.ComponentId">
+                    <span class="glyphicon glyphicon-plus"></span> Add Child Component
+                </span>
+                <span class="componentHeaderMenuItem addNewPositionButton" data-componentid="@c.ComponentId">
+                    <span class="glyphicon glyphicon-plus"></span> Add Position
                 </span>
                 @if (c.Children.Count() == 0)
                 {
-                    <span class="componentHeaderMenuItem deleteComponentButton" data-componentid="@c.ComponentId">
-                        Delete<span class="glyphicon glyphicon-trash"></span>
-                    </span>
+                <span class="componentHeaderMenuItem deleteComponentButton" data-componentid="@c.ComponentId">
+                    <span class="glyphicon glyphicon-trash"></span> Delete
+                </span>
                 }
             </div>
         </div>
 
-        <div class="row" id="@("componentDetailSection" + c.ComponentId)" data-componentid="@c.ComponentId">
-            <div class="col-md-6">
-                <div style="padding: 10px 0 5px 10px">
-                    <div style="font-weight:bold" id="addNewPositionButton" data-componentid="@c.ComponentId">
-                        <span class="glyphicon glyphicon-plus"></span> Add New Position to @c.Name
-                    </div>
-                </div>
+        <div class="componentDetails col-xs-12" id="@("componentDetailSection" + c.ComponentId)" data-componentid="@c.ComponentId">
+            <div class="col-md-8">
                 @foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
                 {
                     if (p.IsUnique)
@@ -48,10 +47,14 @@
                                     uniquePositionId++;
                                     <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
                                         <div id="member-id-@p.Members[0].MemberId" class="member" draggable="true" data-memberId="@p.Members[0].MemberId">
-                                            <img class="@p.Members[0].Rank.PayGrade" src="~/lib/bluedeck/css/@p.Members[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
-                                            @p.Members[0].GetTitleName()
+                                            
+                                            <span style="float:left;">
+                                                <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                <img class="@p.Members[0].Rank.PayGrade" src="~/lib/bluedeck/css/@p.Members[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                @p.Members[0].GetTitleName()
+                                            </span>
                                             <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
-                                                <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@p.Members[0].MemberId"></span>
+                                                <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@p.Members[0].MemberId"></span>
                                                 <span class="tooltiptext">Show more options</span>
                                             </div>
                                             <span style="margin: 0px 5px 0px 5px" class="pull-right">@p.Members[0].DutyStatus.DutyStatusName</span>
@@ -94,11 +97,14 @@
                                         <div class="members">
                                             @{uniquePositionId++;}
                                             <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
-                                                <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">
-                                                    <img class="@m.Rank.PayGrade" src="~/lib/bluedeck/css/@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
-                                                    @m.GetTitleName()
+                                                <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">                                                    
+                                                    <span style="float:left;">
+                                                        <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                        <img class="@m.Rank.PayGrade" src="~/lib/bluedeck/css/@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                        @m.GetTitleName()
+                                                    </span>
                                                     <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
-                                                        <span class="glyphicon glyphicon-option-vertical moreOptions" data-memberId="@m.MemberId"></span>
+                                                        <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@m.MemberId"></span>
                                                         <span class="tooltiptext">Show more options</span>
                                                     </div>
                                                     <span style="margin: 0px 5px 0px 5px" class="pull-right">@m.DutyStatus.DutyStatusName</span>
@@ -143,7 +149,7 @@
                 <div class="newPositionInsert" data-componentid="@c.ComponentId"></div>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group" id="demographicsgroup_@c.ComponentId">
                     @c.GetDemographicTableForComponentAndChildren()
                 </div>

@@ -1,15 +1,25 @@
 ﻿@model OrgChartDemo.Models.Component
 
+        
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger">
+            <strong>@ViewBag.Status</strong> @ViewBag.Message
+        </div>
+    }
     <div class="formHeader">
         <h2 class="formHeader-heading">Confirm Delete</h2>
         <p class="formHeader-description">
             Are you certain that you want to delete @Model.Name? This action cannot be undone.
         </p>
+
         <div>
             <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
+
     </div>
+
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
@@ -37,8 +47,11 @@
                             <input type="hidden" asp-for="ComponentId" />
                             <a asp-action="Index" class="btn btn-default">Cancel</a>
                             <a asp-action="Edit" asp-route-id="@Model.ComponentId" class="btn btn-primary">Edit</a>
-                            <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
-                        </form>                        
+                            @if (Model.ChildComponents.Count == 0)
+                            {
+                                <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
+                            }
+                        </form>
                     </div>
                 </div>
             </div>

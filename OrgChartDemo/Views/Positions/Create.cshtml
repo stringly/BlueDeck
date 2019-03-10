@@ -1,10 +1,14 @@
 ﻿@model PositionWithComponentListViewModel
 
-@{ 
-    ViewData["Title"] = "Create Position";
-}
-
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
     <div class="formHeader">
         <h2 class="formHeader-heading">Create a Position</h2>
         <p class="formHeader-description">
@@ -48,7 +52,7 @@
                                     Only a single Member can be assigned.
                                 </span>
                             </div>
-                        </div>                    
+                        </div>
                         <div class="col-sm-10 form-group" style="margin-bottom:0px">
                             <div class="form-checkbox">
                                 <label>

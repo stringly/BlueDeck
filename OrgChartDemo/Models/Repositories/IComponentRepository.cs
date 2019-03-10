@@ -45,7 +45,12 @@ namespace OrgChartDemo.Models.Repositories
         /// <param name="id">The Component identifier.</param>
         /// <returns>A <see cref="T:OrgChartDemo.Models.Component"/></returns>
         Component GetComponentWithChildren(int id);
-
+        /// <summary>
+        /// Gets the component with it's Parent Component loaded
+        /// </summary>
+        /// <param name="id">The ComponentId of the desired Component Entity.</param>
+        /// <returns></returns>
+        Component GetComponentWithParentComponent(int id);
         /// <summary>
         /// Gets the Component with it's Positions.
         /// </summary>
@@ -63,5 +68,28 @@ namespace OrgChartDemo.Models.Repositories
         List<ComponentPositionLineupItem> GetComponentLineupItemsForComponent(int componentId);
         void UpdateComponentAndSetLineup(Component c);
         void RemoveComponent(int componentId);
+
+        /// <summary>
+        /// Gets the number of child Components of a given ComponentId.
+        /// </summary>
+        /// <remarks>
+        /// This method can be used to determine if a Component has children. It is mainly used to prevent deletion of 
+        /// Components with active children assigned to it.
+        /// </remarks>
+        /// <param name="componentId">The component identifier.</param>
+        /// <returns></returns>
+        int GetChildComponentCountForComponent(int componentId);
+
+        /// <summary>
+        /// Determines if a Component Name is available.
+        /// </summary>
+        /// <remarks>
+        /// This method will determine if a Component Name is available.
+        /// It requires a <see cref="Component"/> parameter because the method needs to validate
+        /// that a Component name isn't colliding with itself.
+        /// </remarks>
+        /// <param name="c">The Component to to check.</param>
+        /// <returns></returns>
+        bool ComponentNameNotAvailable(Component c);
     }
 }
