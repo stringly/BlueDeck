@@ -639,7 +639,7 @@ hr {
     border-left: none;
 }
 .componentContainer .navbar-collapse {
-    position: relative;
+    /*position: relative;*/
     z-index: 1;
     margin-top: -2px;
 }
@@ -687,8 +687,7 @@ hr {
     margin-top: 0px;
     line-height: 36px;
     text-shadow: 1px 1px black;
-    /*background-color: #3b5998;*/
-    /*background-image: linear-gradient(to bottom, rgba(59,89,152,1), rgba(59,89,152, 0.5));*/
+    cursor: pointer;
 }
 .componentHeaderMenuItem {
     font-size: 12px;
@@ -739,16 +738,19 @@ hr {
     padding: 3px 4px 3px 0px;
     height: 100%;
     font-weight: 500;
-    background-color: #eff3f6;
-    background-image: linear-gradient(-180deg,#eff3f6,#dce3e8 90%);
+    background-color: #0080ff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#999999));
+    /*background-color: #0080ff;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#757575));*/
 }
     .componentContainer .member:hover {
         /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);*/
-        color: #F8F8F8;
+        color: #000;
         text-shadow: none;
         border-color: #000;
-        background-color: #0080ff;
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#757575));
+
+        background-color: #eff3f6;
+        background-image: linear-gradient(-180deg,#eff3f6,#dce3e8 90%);
     }
         .componentContainer .member:hover .moreOptionsButtonGroup {
             color: #F8F8F8;

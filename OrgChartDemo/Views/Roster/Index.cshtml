@@ -919,6 +919,11 @@
                 $("#addEditComponentModal").modal("show");
             })
         }
+        function handleComponentNameLinkClick(e) {
+            var componentId = e.target.dataset.componentid;
+            $("#SelectedComponent").val(componentId);
+            $("#SelectedComponent").trigger('change');
+        }
 
         function handleDeleteComponentClick(e) {
             var componentId = e.target.dataset.componentid;
@@ -1043,7 +1048,11 @@
                 var addComponentButtons = document.querySelectorAll('.addNewComponentButton');
                 [].forEach.call(addComponentButtons, function(elem){
                     elem.addEventListener('click', handleAddComponentClick, false);
-                });               
+                });   
+                var componentLinkButtons = document.querySelectorAll('.componentNameLink');
+                [].forEach.call(componentLinkButtons, function (elem) {
+                    elem.addEventListener('click', handleComponentNameLinkClick, false);
+                });
                 
                 $("#ReloadRoster").show();
                 $("#CollapseRoster").show();

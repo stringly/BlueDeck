@@ -25,6 +25,7 @@ namespace OrgChartDemo.Controllers
         {
             var vm = new RosterManagerViewModel();
             vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            ViewBag.Title = "Roster Manager";
             return View(vm);
         }
 

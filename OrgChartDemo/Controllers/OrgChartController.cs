@@ -47,6 +47,7 @@ namespace OrgChartDemo.Controllers
         public IActionResult Index()
         {
             List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
+            ViewBag.Title = "Organization Charts";
             return View(componentList);
         }
         

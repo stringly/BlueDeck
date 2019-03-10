@@ -12,7 +12,7 @@
                     <h4 class="modal-title" id="addEditComponentModalLabel">@(Model.ComponentName != null ? "Edit " + Model.ComponentName : "Add New Component")</h4>
                 </div>
                 <div class="modal-body row">
-                    <form asp-action="Create">
+                    <form asp-action="UpdateComponent" id="addEditComponentModalForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         @Html.HiddenFor(model => model.LineupPosition)
                         <div class="col-md-12">
