@@ -2,6 +2,8 @@
 using System.Linq;
 using OrgChartDemo.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using OrgChartDemo.Models.ViewModels;
 
 namespace OrgChartDemo.ViewComponents
 {
@@ -11,13 +13,32 @@ namespace OrgChartDemo.ViewComponents
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
     public class NavigationMenuViewComponent : ViewComponent
     {
+        private readonly string UserName;
+
+        public NavigationMenuViewComponent(IUnitOfWork unitOfWork)
+        {
+            UserName = unitOfWork.CurrentUser();
+        }
+
         /// <summary>
         /// Invokes the default <see cref="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent" />
         /// </summary>
-        /// <returns></returns>
+        /// <returns></returns>              
         public IViewComponentResult Invoke()
-        {
-            return View(new List<string> { "OrgChart", "Positions", "Members", "Components", "Roster" });
+        {  
+            MainNavMenuViewModel vm = new MainNavMenuViewModel();
+            vm.NavLinks = new List<string>()
+            {
+                "OrgChart", 
+                "Positions", 
+                "Members", 
+                "Components", 
+                "Roster",
+            };
+            vm.UserName = UserName;
+            return View(vm);
         }
     }
+
+
 }

@@ -35,6 +35,8 @@ namespace OrgChartDemo {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             services.AddMvc();
             
         }

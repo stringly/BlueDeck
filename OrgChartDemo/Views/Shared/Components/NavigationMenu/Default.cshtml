@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model MainNavMenuViewModel
 
     <nav class="mainNavBar navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
@@ -21,14 +21,13 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    @foreach (string category in Model)
+                    @foreach (string category in Model.NavLinks)
                     {
                         <li class="@(category == ViewBag.SelectedCategory ? "active" : "")"><a asp-action="Index" asp-controller="@category">@category</a></li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="#">@Model.UserName</a></li>
                 </ul>
             </div>
         </div>

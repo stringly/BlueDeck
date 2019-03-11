@@ -104,6 +104,9 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Email Address")]
         public string Email {get; set; }
 
+        [Display(Name = "Windows Logon Name")]
+        public string LDAPName {get; set;}
+
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
         /// </summary>
