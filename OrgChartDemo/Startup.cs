@@ -10,6 +10,7 @@ using OrgChartDemo.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Persistence;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace OrgChartDemo {
     /// <summary>

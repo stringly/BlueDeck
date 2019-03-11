@@ -46,7 +46,7 @@
 
         // Drag and Drop
         var dragSrcEl = null;
-
+        var stop = true;
         function handleDragStart(e) {
             // Target (this) element is the source node.
             dragSrcEl = this;
@@ -183,6 +183,7 @@
         }
         function handleDragEnd(e) {
             // this/e.target is the source node.
+            stop = true;
             this.classList.remove('over');
             var ghosts = document.getElementsByClassName("dragGhost-member");
             [].forEach.call(ghosts, function (elem) {
@@ -195,6 +196,7 @@
             elem.addEventListener('dragenter', handleDragEnter, false)
             elem.addEventListener('dragover', handleDragOver, false);
             elem.addEventListener('dragleave', handleDragLeave, false);
+            elem.addEventListener('drag', handleDragScroll, false);
             elem.addEventListener('drop', handleDrop, false);
             elem.addEventListener('dragend', handleDragEnd, false);
         }
@@ -202,22 +204,20 @@
         [].forEach.call(cols, addDnDHandlers);
 
         // attempt drag scroll
-        var stop = true;
-        $(".draggable").on("drag", function (e) {
+        
+        function handleDragScroll(e) {            
             stop = true;
-            if (e.originalEvent.clientY < 150) {
+            console.log("X: " + e.clientX + ",Y: " + e.clientY);
+            if (e.clientY < 150) {
                 stop = false;
                 scroll(-1)
             }
-            if (e.originalEvent.clientY > ($(window).height() - 150)) {
+            if (e.clientY > ($(window).height() - 150)) {
                 stop = false;
                 scroll(1)
             }
-        });
+        }
 
-        $(".draggable").on("dragend", function (e) {
-            stop = true;
-        });
         var scroll = function (step) {
             var scrollY = $(window).scrollTop();
             $(window).scrollTop(scrollY + step);
@@ -854,7 +854,7 @@
             var state = e.target.dataset.state;
             switch (state) {
                 case 'expanded':
-                    $("#componentDetailSection" + componentId).hide();
+                    $("#componentDetailSection" + componentId).collapse('hide');
                     e.target.dataset.state = 'collapsed';
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-up');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-down');
@@ -865,7 +865,7 @@
                     e.target.childNodes[1].classList.remove('glyphicon-chevron-down');
                     e.target.childNodes[1].classList.add('glyphicon-chevron-up');
                     e.target.childNodes[2].textContent = " Collapse"
-                    $("#componentDetailSection" + componentId).show();
+                    $("#componentDetailSection" + componentId).collapse('show');
                     break;
             }
         }
@@ -949,7 +949,7 @@
         $("#CollapseRoster").click(function () {
             var components = document.querySelectorAll('.expandCollapseButton');
             [].forEach.call(components, function (elem) {
-                if (elem.dataset.state == "expanded") {
+                if (elem.dataset.state == "expanded") {                    
                     $(elem).trigger("click");
                 }
             });
@@ -983,6 +983,7 @@
                     elem.addEventListener('dragenter', handleDragEnter, false)
                     elem.addEventListener('dragover', handleDragOver, false);
                     elem.addEventListener('dragleave', handleDragLeave, false);
+                    elem.addEventListener('drag', handleDragScroll, false);
                     elem.addEventListener('drop', handleDrop, false);
                     elem.addEventListener('dragend', handleDragEnd, false);
                 });

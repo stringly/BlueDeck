@@ -13,11 +13,11 @@ namespace OrgChartDemo.ViewComponents
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
     public class NavigationMenuViewComponent : ViewComponent
     {
-        private readonly string UserName;
+        private readonly Member CurrentUser;
 
         public NavigationMenuViewComponent(IUnitOfWork unitOfWork)
         {
-            UserName = unitOfWork.CurrentUser();
+            CurrentUser = unitOfWork.GetCurrentUser();
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace OrgChartDemo.ViewComponents
                 "Components", 
                 "Roster",
             };
-            vm.UserName = UserName;
+            vm.CurrentUser = CurrentUser;
             return View(vm);
         }
     }

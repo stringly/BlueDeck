@@ -14,7 +14,7 @@ namespace OrgChartDemo.Persistence
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        private readonly string _currentUserName;
+        private readonly Member CurrentUser;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
@@ -34,11 +34,15 @@ namespace OrgChartDemo.Persistence
             PhoneNumberTypes = new PhoneNumberTypeRepository(_context);
             string ctxName = httpContext.HttpContext.User.Identity.Name;
             string logonName = ctxName.Substring(ctxName.LastIndexOf(@"\") +1 );
-            _currentUserName = _context.Members
+            CurrentUser = _context.Members
                     .Where(x => x.LDAPName == logonName)
                     .Include(x => x.Rank)
-                    .FirstOrDefault()
-                    .GetTitleName() ?? "Guest";
+                    .FirstOrDefault() ?? new Member()
+                    {
+                        LastName = "Guest",
+                        FirstName = ""
+
+                    };
         }
 
         /// <summary>
@@ -125,9 +129,9 @@ namespace OrgChartDemo.Persistence
             _context.Dispose();
         }
 
-        public string CurrentUser()
+        public Member GetCurrentUser()
         {
-            return _currentUserName;
+            return CurrentUser;
         }
     }
 }

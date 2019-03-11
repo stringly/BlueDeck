@@ -8,6 +8,6 @@ namespace OrgChartDemo.Models.ViewModels
     public class MainNavMenuViewModel
     {
         public List<string> NavLinks {get;set;}
-        public string UserName {get;set;}
+        public Member CurrentUser {get;set;}
     }
 }
