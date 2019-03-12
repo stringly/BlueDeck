@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using OrgChartDemo.Models.Auth;
 
 namespace OrgChartDemo {
     /// <summary>
@@ -37,10 +39,18 @@ namespace OrgChartDemo {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             services.AddMvc();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "CanEditUser",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditUserRequirement()));
+            });
             services.AddScoped<IClaimsTransformation, ClaimsLoader>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsOwnerHandler>();
         }
 
         /// <summary>
@@ -52,8 +62,10 @@ namespace OrgChartDemo {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
             app.UseAuthentication();
             app.UseStaticFiles();
+            
 
             app.UseMvc(routes => {
                 routes.MapRoute(

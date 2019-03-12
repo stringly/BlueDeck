@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190312035547_UserRoles")]
+    partial class UserRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,28 +224,13 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<int?>("MemberId");
 
-                    b.Property<int?>("RoleTypeId");
+                    b.Property<int>("RoleName");
 
                     b.HasKey("RoleId");
 
                     b.HasIndex("MemberId");
 
-                    b.HasIndex("RoleTypeId");
-
                     b.ToTable("UserRoles");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.UserRoleType", b =>
-                {
-                    b.Property<int>("RoleTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("RoleTypeName");
-
-                    b.HasKey("RoleTypeId");
-
-                    b.ToTable("UserRoleType");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
@@ -299,10 +286,6 @@ namespace OrgChartDemo.Migrations
                     b.HasOne("OrgChartDemo.Models.Member")
                         .WithMany("CurrentRoles")
                         .HasForeignKey("MemberId");
-
-                    b.HasOne("OrgChartDemo.Models.UserRoleType", "RoleType")
-                        .WithMany()
-                        .HasForeignKey("RoleTypeId");
                 });
 #pragma warning restore 612, 618
         }

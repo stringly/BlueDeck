@@ -140,6 +140,15 @@ namespace OrgChartDemo.Persistence.Repositories
             ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
             ApplicationDbContext.Members.Remove(m);
         }
+
+        public Member GetMemberWithRoles(string LDAPName)
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.CurrentRoles).ThenInclude(x => x.RoleType)
+                .Include(x => x.Gender)
+                .Include(x => x.Rank)                
+                .FirstOrDefault(x => x.LDAPName == LDAPName);
+        }
         /// <summary>
         /// Gets the application database context.
         /// </summary>

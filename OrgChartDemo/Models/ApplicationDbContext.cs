@@ -84,5 +84,7 @@ namespace OrgChartDemo.Models {
         public virtual DbSet<MemberContactNumber> ContactNumbers { get; set; }
 
         public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
+
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     }
 }

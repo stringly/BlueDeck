@@ -23,12 +23,33 @@ namespace OrgChartDemo.Models
             // Is this the Windows Logon name?
             if (user == null) return principal;
 
-            // TODO: pull user roles 
-            // var dbUser = _unitOfWork.Members.GetUserWithRoles(user);
-
-            var ci = (ClaimsIdentity) principal.Identity;
-            var c = new Claim(ci.RoleClaimType, "Admin");
-            ci.AddClaim(c);
+            if(principal.Identity is ClaimsIdentity)
+            {
+                string logonName = user.Split('\\')[1];
+                // pull user roles 
+                Member dbUser = _unitOfWork.Members.GetMemberWithRoles(logonName);
+                if (dbUser != null)
+                {
+                    var ci = (ClaimsIdentity)principal.Identity;
+                    foreach (UserRole ur in dbUser.CurrentRoles)
+                    {
+                        var c = new Claim(ci.RoleClaimType, ur.RoleType.RoleTypeName);
+                        ci.AddClaim(c);
+                    }
+                    ci.AddClaim(new Claim(ClaimTypes.GivenName, dbUser.FirstName));
+                    ci.AddClaim(new Claim(ClaimTypes.Surname, dbUser.LastName));
+                    ci.AddClaim(new Claim("MemberId", dbUser.MemberId.ToString(), ClaimValueTypes.Integer32));
+                    ci.AddClaim(new Claim("DisplayName", dbUser.GetTitleName()));
+                }
+                else
+                {
+                    var ci = (ClaimsIdentity)principal.Identity;
+                    ci.AddClaim(new Claim("DisplayName", "Guest"));
+                    ci.AddClaim(new Claim("MemberId", "0", ClaimValueTypes.Integer32));
+                }
+                
+            }
+                        
             return principal;
         }
     }

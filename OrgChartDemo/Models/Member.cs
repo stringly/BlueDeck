@@ -119,6 +119,9 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Contact Numbers")]
         public List<MemberContactNumber> PhoneNumbers { get; set; }
 
+        [Display(Name = "Current Roles")]
+        public virtual List<UserRole> CurrentRoles { get; set; }
+
         public Member()
         {
             PhoneNumbers = new List<MemberContactNumber>();

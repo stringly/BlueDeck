@@ -20,7 +20,7 @@ namespace OrgChartDemo.Persistence
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
         /// </summary>
         /// <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
-        public UnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpContext)
+        public UnitOfWork(ApplicationDbContext context/*, IHttpContextAccessor httpContext*/)
         {
             _context = context;
             Positions = new PositionRepository(_context);

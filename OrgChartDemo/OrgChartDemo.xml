@@ -2283,7 +2283,7 @@
             </summary>
             <seealso cref="T:OrgChartDemo.Models.IUnitOfWork" />
         </member>
-        <member name="M:OrgChartDemo.Persistence.UnitOfWork.#ctor(OrgChartDemo.Models.ApplicationDbContext,Microsoft.AspNetCore.Http.IHttpContextAccessor)">
+        <member name="M:OrgChartDemo.Persistence.UnitOfWork.#ctor(OrgChartDemo.Models.ApplicationDbContext)">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
             </summary>

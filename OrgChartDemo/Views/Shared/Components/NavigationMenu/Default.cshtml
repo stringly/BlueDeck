@@ -1,6 +1,10 @@
 ﻿@using System.Security.Claims
 @model MainNavMenuViewModel
 
+@{
+    var DisplayName = ((ClaimsIdentity)User.Identity).FindFirst("DisplayName").Value;
+    var MemberId = ((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value;
+}
 <nav class="mainNavBar navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -28,7 +32,8 @@
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a asp-action="Details" asp-controller="Members" asp-route-id="1">@((ClaimsIdentity)User.Identity)</a></li>
+
+                <li><a asp-action="Details" asp-controller="Members" asp-route-id="@MemberId">@DisplayName</a></li>
             </ul>
         </div>
     </div>

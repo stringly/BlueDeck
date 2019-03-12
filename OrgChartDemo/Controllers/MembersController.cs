@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
@@ -157,6 +158,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [Authorize("CanEditUser")]
         public IActionResult Edit(int? id)
         {
             if (id == null)

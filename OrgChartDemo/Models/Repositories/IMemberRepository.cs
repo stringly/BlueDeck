@@ -25,5 +25,6 @@ namespace OrgChartDemo.Models.Repositories
         /// </remarks>
         /// <param name="memberId">The member identifier.</param>
         void Remove(int memberId);
+        Member GetMemberWithRoles(string LDAPName);
     }
 }
