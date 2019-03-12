@@ -85,6 +85,5 @@ namespace OrgChartDemo.Models
         /// </summary>
         /// <returns></returns>
         int Complete();
-        Member GetCurrentUser();
     }
 }

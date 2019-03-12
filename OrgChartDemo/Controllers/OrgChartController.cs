@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace OrgChartDemo.Controllers
         /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public JsonResult GetComponents(int parentComponentId)
         {

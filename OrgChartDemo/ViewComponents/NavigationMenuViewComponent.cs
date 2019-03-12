@@ -17,7 +17,7 @@ namespace OrgChartDemo.ViewComponents
 
         public NavigationMenuViewComponent(IUnitOfWork unitOfWork)
         {
-            CurrentUser = unitOfWork.GetCurrentUser();
+            
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace OrgChartDemo.ViewComponents
                 "Components", 
                 "Roster",
             };
-            vm.CurrentUser = CurrentUser;
+            
             return View(vm);
         }
     }

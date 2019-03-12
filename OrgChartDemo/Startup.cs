@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace OrgChartDemo {
     /// <summary>
@@ -39,7 +40,7 @@ namespace OrgChartDemo {
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             services.AddMvc();
-            
+            services.AddScoped<IClaimsTransformation, ClaimsLoader>();
         }
 
         /// <summary>
@@ -51,6 +52,7 @@ namespace OrgChartDemo {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
             app.UseStaticFiles();
 
             app.UseMvc(routes => {
