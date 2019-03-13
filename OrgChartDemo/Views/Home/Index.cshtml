@@ -1,0 +1,70 @@
+﻿@model HomePageViewModel
+
+<h3>Hello, @Model.UserFirstName</h3>
+
+<h4>Currently assigned to @Model.UserComponentName as @Model.UserPositionName</h4>
+<hr />
+@{
+HomePageComponentGroup home = Model.ComponentGroups.Where(x => x.ComponentId == Model.UserComponentId).First();
+
+<div class="HomePageComponentContainer">
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption>Members of @home.ComponentName</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var worker in home.Members)
+                    {
+                        <tr>
+                            <td><a href="#">@worker.MemberDisplayName</a></td>
+                            <td>@worker.PositionName</td>
+                            <td>@worker.ContactNumber</td>
+                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}
+@foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.UserComponentId).OrderBy(x => x.LineupPosition))
+{
+<div class="HomePageComponentContainer">    
+    <div class="col-md-8">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption>Members of @item.ComponentName</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var worker in item.Members)
+                    {
+                        <tr>
+                            <td><a href="#">@worker.MemberDisplayName</a></td>
+                            <td>@worker.PositionName</td>
+                            <td>@worker.ContactNumber</td>
+                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}
+

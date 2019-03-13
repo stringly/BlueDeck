@@ -3,8 +3,8 @@ using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.ViewModels;
-using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 
@@ -27,6 +27,16 @@ namespace OrgChartDemo.Persistence.Repositories
         }
 
         /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>        
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
+
+        /// <summary>
         /// Gets the members with positions.
         /// </summary>
         /// <returns></returns>
@@ -45,6 +55,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
                     .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
                 .Include(x => x.Rank)
@@ -52,6 +64,20 @@ namespace OrgChartDemo.Persistence.Repositories
                 .FirstOrDefault();
         }
 
+        public Member GetHomePageMember(int memberId)
+        {
+            return ApplicationDbContext.Members
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.Rank)
+                .Include(x => x.DutyStatus)
+                .FirstOrDefault();
+        }
         public Member GetMemberWithDemographicsAndDutyStatus(int memberId)
         {
             return ApplicationDbContext.Members
@@ -149,14 +175,42 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Rank)                
                 .FirstOrDefault(x => x.LDAPName == LDAPName);
         }
+
         /// <summary>
-        /// Gets the application database context.
+        /// Gets the home page view model for member.
         /// </summary>
-        /// <value>
-        /// The application database context.
-        /// </value>        
-        public ApplicationDbContext ApplicationDbContext {
-            get { return Context as ApplicationDbContext; }
+        /// <remarks>
+        /// This is an attempt to try and apply some better SOLID principals to the
+        /// way I build these viewModels...
+        /// </remarks>
+        /// <param name="memberId">The member identifier.</param>
+        /// <returns></returns>
+        public HomePageViewModel GetHomePageViewModelForMember(int memberId)
+        {
+            Member currentUser = ApplicationDbContext.Members
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .Include(x => x.Rank)
+                .FirstOrDefault();
+            HomePageViewModel result = new HomePageViewModel(currentUser);
+            SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);
+
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
+                .Load();
+            foreach(Component c in components.OrderBy(x => x.LineupPosition))
+            {
+                HomePageComponentGroup grp = new HomePageComponentGroup(c);
+                result.ComponentGroups.Add(grp);
+            }
+            return result;
         }
+
+
     }
 }

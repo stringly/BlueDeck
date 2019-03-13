@@ -58,7 +58,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Gender)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)                                
+                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)
+                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.PhoneNumbers)
                 .FirstOrDefault();
             if (result != null)
             {

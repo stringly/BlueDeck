@@ -27,7 +27,7 @@ namespace OrgChartDemo.Controllers
         /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
         [HttpGet]
         public JsonResult GetComponents(int parentComponentId)
         {

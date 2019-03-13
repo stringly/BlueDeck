@@ -2146,12 +2146,6 @@
             </summary>
             <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetMembersWithPositions">
-            <summary>
-            Gets the members with positions.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:OrgChartDemo.Persistence.Repositories.MemberRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -2159,6 +2153,23 @@
             <value>
             The application database context.
             </value>        
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetMembersWithPositions">
+            <summary>
+            Gets the members with positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetHomePageViewModelForMember(System.Int32)">
+            <summary>
+            Gets the home page view model for member.
+            </summary>
+            <remarks>
+            This is an attempt to try and apply some better SOLID principals to the
+            way I build these viewModels...
+            </remarks>
+            <param name="memberId">The member identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.PositionRepository">
             <summary>
