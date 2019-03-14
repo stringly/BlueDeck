@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.ViewModels;
 using System;
@@ -25,10 +26,16 @@ namespace OrgChartDemo.Controllers
                 var claimMemberId = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
                 if (claimMemberId != 0)
                 {
+                    ViewBag.Title = "BlueDeck Home";
                     HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);
                     return View(vm);
                 }
             }
+            return RedirectToAction(nameof(About));
+        }
+        [AllowAnonymous]
+        public IActionResult About()
+        {
             return View();
         }
 
@@ -45,10 +52,10 @@ namespace OrgChartDemo.Controllers
             {
                 List<Member> initial = unitOfWork.Members.GetMembersWithPositions().ToList();
                 initial = initial.Where(
-                    x => x.LastName.Contains(searchString)
-                    || x.FirstName.Contains(searchString)
-                    || x.IdNumber.Contains(searchString)
-                    || x.Position.Name.Contains(searchString))
+                    x => x.LastName.ToLower().Contains(searchString.ToLower())
+                    || x.FirstName.ToLower().Contains(searchString.ToLower())
+                    || x.IdNumber.ToLower().Contains(searchString.ToLower())
+                    || x.Position.Name.ToLower().Contains(searchString.ToLower()))
                     .ToList();
                 HomePageMemberSearchResultViewComponentViewModel vm = new HomePageMemberSearchResultViewComponentViewModel(initial);
                 return ViewComponent("HomePageMemberSearchResult", vm);

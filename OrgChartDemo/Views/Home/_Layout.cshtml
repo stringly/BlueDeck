@@ -14,12 +14,11 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-
     @await Component.InvokeAsync("NavigationMenu")
-    <div class="col-xs-12 col-md-10 col-md-offset-1 pageContentContainer">
-        <br />
-        <br />
+    <div style="height:100%">
         @RenderBody()
+
     </div>
+    @await Component.InvokeAsync("FooterMenu")
 </body>
 </html>
