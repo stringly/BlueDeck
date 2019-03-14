@@ -44,6 +44,10 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Include(c => c.Rank)
+                .Include(c => c.Gender)
+                .Include(c => c.Race)
+                .Include(c => c.PhoneNumbers)
+                .Include(c => c.DutyStatus)
                 .Include(c => c.Position)
                 .ThenInclude(c => c.ParentComponent)
                 .ToList();
@@ -189,8 +193,13 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             Member currentUser = ApplicationDbContext.Members
                 .Where(x => x.MemberId == memberId)
-                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
                 .Include(x => x.Rank)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)                
                 .FirstOrDefault();
             HomePageViewModel result = new HomePageViewModel(currentUser);
             SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);

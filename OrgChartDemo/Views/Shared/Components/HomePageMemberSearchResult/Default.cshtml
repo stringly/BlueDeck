@@ -1,0 +1,40 @@
+﻿@model HomePageMemberSearchResultViewComponentViewModel
+
+
+<div class="HomePageComponentContainer">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="indexAlertWrapper" id="responseAlert">
+                <div class="alert alert-primary alert-dismissible fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Message:</strong>
+                    <span id="alertMessageSpan">Found @Model.Members.Count  People.</span>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <caption>Search Results:</caption>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var worker in Model.Members)
+                    {
+                        <tr>
+                            <td><a href="#">@worker.MemberDisplayName</a></td>
+                            <td>@worker.PositionName</td>
+                            <td>@worker.ContactNumber</td>
+                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

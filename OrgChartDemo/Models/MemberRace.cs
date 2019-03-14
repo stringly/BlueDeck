@@ -21,7 +21,7 @@ namespace OrgChartDemo.Models.Types
         /// </summary>
         /// <value>
         /// The full name of the member race.
-        /// </value>
+        /// </value>        
         public string MemberRaceFullName { get; set; }
 
         /// <summary>
