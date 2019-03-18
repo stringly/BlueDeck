@@ -445,6 +445,12 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.Name == c.Name)
                 .Any(x => x.ComponentId != c.ComponentId);            
         }
+
+        public List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            return ApplicationDbContext.GetChildComponentsForComponentId.FromSql("EXECUTE Get_Child_Components_For_ComponentId @ComponentId", param1).ToList();
+        }
     }
 
 }

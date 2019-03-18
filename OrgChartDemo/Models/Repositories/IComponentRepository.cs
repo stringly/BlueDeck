@@ -91,5 +91,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <param name="c">The Component to to check.</param>
         /// <returns></returns>
         bool ComponentNameNotAvailable(Component c);
+        List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
     }
 }

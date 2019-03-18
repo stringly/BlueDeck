@@ -23,6 +23,14 @@ namespace OrgChartDemo.Models.Types
         /// </summary>
         public int MemberId { get; set; }
         
+        public MemberSelectListItem()
+        {
+        }
+        public MemberSelectListItem(Member m)
+        {
+            MemberName = m.GetTitleName();
+            MemberId = m.MemberId;
+        }
     }
 }
 

@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Newtonsoft.Json;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Models
 {
@@ -35,6 +38,19 @@ namespace OrgChartDemo.Models
                     {
                         var c = new Claim(ci.RoleClaimType, ur.RoleType.RoleTypeName);
                         ci.AddClaim(c);
+                        if (ur.RoleType.RoleTypeName == "ComponentAdmin")
+                        {
+                            // TODO: Repo method to get tree of componentIds for the user's parent component
+                            List<ComponentSelectListItem> canEditComponents = _unitOfWork.Components.GetChildComponentsForComponentId(dbUser.Position.ParentComponent.ComponentId);
+                            var d = new Claim("CanEditComponents", JsonConvert.SerializeObject(canEditComponents));
+                            ci.AddClaim(d);
+                            List<MemberSelectListItem> canEditMembers = _unitOfWork.Members.GetMembersUserCanEdit(canEditComponents);
+                            var e = new Claim("CanEditUsers", JsonConvert.SerializeObject(canEditMembers));
+                            ci.AddClaim(e);
+                            List<PositionSelectListItem> canEditPositions = _unitOfWork.Positions.GetPositionsUserCanEdit(canEditComponents);
+                            var f = new Claim("CanEditPositions", JsonConvert.SerializeObject(canEditPositions));
+                            ci.AddClaim(f);
+                        }
                     }
                     ci.AddClaim(new Claim(ClaimTypes.GivenName, dbUser.FirstName));
                     ci.AddClaim(new Claim(ClaimTypes.Surname, dbUser.LastName));

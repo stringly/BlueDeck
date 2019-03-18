@@ -6,6 +6,7 @@ using OrgChartDemo.Models.Types;
 using OrgChartDemo.Persistence;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OrgChartDemo.Controllers
 {
@@ -26,7 +27,7 @@ namespace OrgChartDemo.Controllers
             unitOfWork = unit;
         }
 
-        /// TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
+       
         /// <summary>
         /// GET: Positions
         /// </summary>
@@ -95,6 +96,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Positions/Create.
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditComponent")]
         public IActionResult Create()
         {
             PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position()) { 
@@ -171,6 +173,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditPositions")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -269,6 +272,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditPosition")]
         public IActionResult Delete(int? id)
         {
             // TODO: Warn or Prevent User from Deleting a Position with assigned Members? Or auto-reassign members to the General Pool?

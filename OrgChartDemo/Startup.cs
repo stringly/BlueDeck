@@ -42,10 +42,28 @@ namespace OrgChartDemo
                     "CanEditUser",
                     policyBuilder => policyBuilder.AddRequirements(
                         new CanEditUserRequirement()));
+                options.AddPolicy(
+                    "CanEditComponent",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditComponentRequirement()));
+                options.AddPolicy(
+                    "CanEditPosition",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditPositionRequirement()));
+                options.AddPolicy(
+                    "IsGlobalAdmin",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new IsGlobalAdminRequirement()));
             });
             services.AddScoped<IClaimsTransformation, ClaimsLoader>();
-            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForUserHandler>();
             services.AddSingleton<IAuthorizationHandler, IsOwnerHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsMemberSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForComponentHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsComponentSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsPositionComponentSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForPositionHandler>();
+
         }
 
         /// <summary>
@@ -65,7 +83,7 @@ namespace OrgChartDemo
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=About}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

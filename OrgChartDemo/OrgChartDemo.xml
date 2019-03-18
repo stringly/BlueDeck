@@ -187,7 +187,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.OrgChartController.Index">
+        <member name="M:OrgChartDemo.Controllers.OrgChartController.Index(System.Nullable{System.Int32})">
             <summary>
             GET /OrgChart/
             </summary>
@@ -206,7 +206,6 @@
             <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Index(System.String,System.String)">
-            TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
             <summary>
             GET: Positions
             </summary>

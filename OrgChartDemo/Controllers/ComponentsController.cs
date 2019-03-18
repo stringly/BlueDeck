@@ -6,6 +6,7 @@ using OrgChartDemo.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Types;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OrgChartDemo.Controllers
 {
@@ -64,6 +65,7 @@ namespace OrgChartDemo.Controllers
                     vm.Components = vm.Components.OrderBy(x => x.ComponentName);
                     break;
             }
+            ViewBag.Title = "BlueDeck Component Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             return View(vm);
@@ -150,6 +152,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditComponent")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -240,6 +243,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditComponent")]
         public IActionResult Delete(int? id)
         {
             if (id == null)

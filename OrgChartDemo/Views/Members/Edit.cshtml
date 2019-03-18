@@ -1,5 +1,7 @@
 ﻿@model MemberAddEditViewModel
-
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+}
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     @if (ViewBag.Status == "Warning!")
@@ -143,7 +145,10 @@
                                 <div class="col-sm-12 form-group">
                                     <a asp-action="Index" class="btn btn-default">Cancel</a>
                                     <input type="submit" value="Save Changes" class="btn btn-primary" />
-                                    <a asp-action="Delete" asp-route-id="@Model.MemberId" class="btn btn-danger pull-right">Delete</a>
+                                    @if (IsAdmin)
+                                    {
+                                        <a asp-action="Delete" asp-route-id="@Model.MemberId" class="btn btn-danger pull-right">Delete</a>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -177,7 +182,7 @@
         });
     })
 
-    function handleAddPhoneNumberClick(e) {    
+    function handleAddPhoneNumberClick(e) {
         var currentContactCount = parseInt($("#contactsCount").val()) + 1;
         var target = document.getElementById('newPhoneTarget');
 
@@ -217,7 +222,7 @@
         newDeleteButton.dataset.contactid = currentContactCount - 1;
         // register the button onclick event
         newDeleteButton.addEventListener("click", handleDeletePhoneNumberClick, false);
-        
+
         // create the glyphicon to add to the button
         var newDeleteIcon = document.createElement("i");
         newDeleteIcon.classList.add("glyphicon");
@@ -239,7 +244,7 @@
         var fakeDeleteButton = document.createElement("span");
         fakeDeleteButton.classList.add("btn");
         fakeDeleteButton.classList.add("btn-addon");
-        
+
         var fakeDeleteIcon = document.createElement("i");
         fakeDeleteIcon.classList.add("glyphicon");
         fakeDeleteIcon.classList.add("glyphicon-trash");
@@ -255,7 +260,7 @@
         target.parentNode.insertBefore(newInputGroup, target);
         $("#contactsCount").val(currentContactCount);
         e.target.removeEventListener('change', handleAddPhoneNumberClick);
-        
+
     }
     function handleDeletePhoneNumberClick(e) {
         //alert("Delete" + e.target.dataset.contactid);

@@ -53,6 +53,14 @@ namespace OrgChartDemo.Persistence.Repositories
                 .ToList();
         }
 
+        public MemberIndexListViewModel GetMemberIndexListViewModel()
+        {
+            MemberIndexListViewModel vm = new MemberIndexListViewModel();
+            vm.Members = ApplicationDbContext.MemberIndexViewModelMemberListItems.FromSql("EXECUTE Get_Member_Index_List").ToList();
+            return vm;              
+                                    
+        }
+
         public Member GetMemberWithPosition(int memberId)
         {
             return ApplicationDbContext.Members
@@ -174,6 +182,7 @@ namespace OrgChartDemo.Persistence.Repositories
         public Member GetMemberWithRoles(string LDAPName)
         {
             return ApplicationDbContext.Members
+                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
                 .Include(x => x.CurrentRoles).ThenInclude(x => x.RoleType)
                 .Include(x => x.Gender)
                 .Include(x => x.Rank)                
@@ -220,6 +229,28 @@ namespace OrgChartDemo.Persistence.Repositories
             return result;
         }
 
+        public int GetMemberParentComponentId(int memberid)
+        {
+            Member m = ApplicationDbContext.Members
+                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .FirstOrDefault(x => x.MemberId == memberid);
+                
+            return m.Position.ParentComponent.ComponentId;
+                
+                
+
+        }
+
+        public List<MemberSelectListItem> GetMembersUserCanEdit(List<ComponentSelectListItem> canEditComponents)
+        {
+            List<MemberSelectListItem> result = new List<MemberSelectListItem>();
+            foreach (ComponentSelectListItem c in canEditComponents)
+            {
+                List<Member> members = ApplicationDbContext.Members.Where(x => x.Position.ParentComponent.ComponentId == c.Id).ToList();
+                result.AddRange(members.ConvertAll(x => new MemberSelectListItem(x)));
+            }
+            return result;
+        }
 
     }
 }

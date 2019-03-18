@@ -36,6 +36,7 @@ namespace OrgChartDemo.Controllers
         [AllowAnonymous]
         public IActionResult About()
         {
+            ViewBag.Title = "About BlueDeck";
             return View();
         }
 

@@ -21,10 +21,16 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork = unit;
         }
-        public IActionResult Index()
+
+
+        public IActionResult Index(int? id)
         {
             var vm = new RosterManagerViewModel();
             vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            if(id != null)
+            {
+                vm.SelectedComponentId = Convert.ToInt32(id);
+            }
             ViewBag.Title = "Roster Manager";
             return View(vm);
         }

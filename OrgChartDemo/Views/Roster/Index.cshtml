@@ -937,6 +937,7 @@
                         if (response.success == true) {
                             $("#ConfirmComponentDeleteModal").modal("hide");
                             $("#SelectedComponent").trigger('change');
+                            // TODO: This fails if the "Selected" Component is the Component that was just deleted.
                         }
                     })
                 }, false)
@@ -1059,5 +1060,8 @@
                 $("#CollapseRoster").show();
             });
         });
+        if ($("#SelectedComponent").val() != 0 && $("#rosterContainer").children().length == 0) {
+            $("#SelectedComponent").trigger('change');
+        }
     });
 </script>

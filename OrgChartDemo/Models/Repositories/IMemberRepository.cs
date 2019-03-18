@@ -26,6 +26,9 @@ namespace OrgChartDemo.Models.Repositories
         /// <param name="memberId">The member identifier.</param>
         void Remove(int memberId);
         Member GetMemberWithRoles(string LDAPName);
+        MemberIndexListViewModel GetMemberIndexListViewModel();
         HomePageViewModel GetHomePageViewModelForMember(int memberId);
+        int GetMemberParentComponentId(int memberid);
+        List<MemberSelectListItem> GetMembersUserCanEdit(List<ComponentSelectListItem> canEditComponents);
     }
 }

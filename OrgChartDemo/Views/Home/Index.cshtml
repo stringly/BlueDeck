@@ -28,7 +28,11 @@
                         <hr />
                         <div class="table-responsive">
                             <table class="table table-hover">
-                                <caption>Members of @home.ComponentName</caption>
+                                <caption>
+                                    <strong>@home.ComponentName</strong> | 
+                                    <a asp-controller="Roster" asp-route-componentid="@home.ComponentId">Manage Roster</a> | 
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
+                                </caption>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -41,7 +45,7 @@
                                     @foreach (var worker in home.Members)
                                     {
                                         <tr>
-                                            <td><a href="#">@worker.MemberDisplayName</a></td>
+                                            <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
                                             <td>@worker.PositionName</td>
                                             <td>@worker.ContactNumber</td>
                                             <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
@@ -59,26 +63,30 @@
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table class="table table-hover">
-                                <caption>Members of @item.ComponentName</caption>
-                                <thead>
+                                <caption>
+                                    <strong>@item.ComponentName</strong> |
+                                    <a asp-controller="Roster" asp-route-componentid="@item.ComponentId">Manage Roster</a> |
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
+                                </caption>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var worker in item.Members)
+                                {
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
+                                        <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                        <td>@worker.PositionName</td>
+                                        <td>@worker.ContactNumber</td>
+                                        <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var worker in item.Members)
-                                    {
-                                        <tr>
-                                            <td><a href="#">@worker.MemberDisplayName</a></td>
-                                            <td>@worker.PositionName</td>
-                                            <td>@worker.ContactNumber</td>
-                                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                        </tr>
-                                    }
-                                </tbody>
+                                }
+                            </tbody>
                             </table>
                         </div>
                     </div>
@@ -100,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="row" id="memberSearchResultListTarget">
+                <div class="row" id="memberSearchResultListTarget" style="min-height:400px;">
 
                 </div>
             </div>

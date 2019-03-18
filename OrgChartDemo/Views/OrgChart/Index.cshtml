@@ -1,4 +1,4 @@
-﻿@model List<ComponentSelectListItem>
+﻿@model OrgChartIndexViewModel
 @{
     Layout = "_OrgChartLayout";
 }
@@ -18,10 +18,10 @@
         <div class="navbar-header pull-left">
             <form asp-page="/Index" method="get" class="navbar-form navbar-search">
                 <div class="form-group">
-                    @Html.DropDownList("componentSelectList",
-                                        new SelectList(Model, "Id", "ComponentName"),
+                    @Html.DropDownListFor(x => Model.SelectedComponentId,                                         
+                                        new SelectList(Model.ComponentList, "Id", "ComponentName"),
                                         "Select Component",
-                                        new { @class="bigControl selectBox form-control"}
+                                        new { id="componentSelectList", @class="bigControl selectBox form-control"}
                    )                   
                 </div>
             </form>
@@ -38,17 +38,14 @@
 <div id="people" class="orgChartContainer"></div>
 <hidden id="currentComponentId"></hidden>
 <script type="text/javascript">
-
-    var orgChart;
-    initSelectList();
-    function initSelectList() {
+    $(document).ready(function () {
+        var orgChart;
         document.getElementById("componentSelectList").addEventListener('change', handleComponentSelect, false);
-    }
 
-    function handleComponentSelect(e) {
-        var current = $("#currentComponentId").val();
-        var id = e.target.value;
-        if (current != id) {
+
+        function handleComponentSelect(e) {
+            var id = $("#componentSelectList").val();
+
             $.getJSON("/OrgChart/GetComponents", { parentComponentId: id }, function (response) {
                 getOrgChart.themes.BlueDeckTheme =
                     {
@@ -80,57 +77,62 @@
                     }
                 });
             });
-        }
-    }
 
-
-    function getNodeByClickedBtn(el) {
-        while (el.parentNode) {
-            el = el.parentNode;
-            if (el.getAttribute("data-node-id"))
-                return el;
-        }
-        return null;
-    }
-    function btnClicked(sender) {
-        var nodeElement = getNodeByClickedBtn(sender);
-        var action = sender.getAttribute("data-action");
-        var id = nodeElement.getAttribute("data-node-id");
-        var node = orgChart.nodes[id];
-        var memberId = node.data["memberId"];
-        var positionId = node.data["positionId"];
-        switch (action) {
-            case "member":
-                window.location.href = "/Members/Details?id=" + memberId;
-                break;
-            case "component":
-                window.location.href = "/Positions/Details?id=" + positionId;
-                break;
-        }
-    }
-
-    var init = function () {
-        var btns = document.getElementsByClassName("btn btn-org");
-        for (var i = 0; i < btns.length; i++) {
-
-            btns[i].addEventListener("click", function () {
-                var nodeElement = getNodeByClickedBtn(this);
-                var action = this.getAttribute("data-action");
-                var id = nodeElement.getAttribute("data-node-id");
-                var node = orgChart.nodes[id];
-
-                switch (action) {
-                    case "edit":
-                        alert(id);
-                        break;
-                    case "preview":
-                        orgChart.showDetailsView(id);
-                        break;
-                }
-            });
         }
 
-    }
+
+        function getNodeByClickedBtn(el) {
+            while (el.parentNode) {
+                el = el.parentNode;
+                if (el.getAttribute("data-node-id"))
+                    return el;
+            }
+            return null;
+        }
+        function btnClicked(sender) {
+            var nodeElement = getNodeByClickedBtn(sender);
+            var action = sender.getAttribute("data-action");
+            var id = nodeElement.getAttribute("data-node-id");
+            var node = orgChart.nodes[id];
+            var memberId = node.data["memberId"];
+            var positionId = node.data["positionId"];
+            switch (action) {
+                case "member":
+                    window.location.href = "/Members/Details?id=" + memberId;
+                    break;
+                case "component":
+                    window.location.href = "/Positions/Details?id=" + positionId;
+                    break;
+            }
+        }
+
+        var init = function () {
+            var btns = document.getElementsByClassName("btn btn-org");
+            for (var i = 0; i < btns.length; i++) {
+
+                btns[i].addEventListener("click", function () {
+                    var nodeElement = getNodeByClickedBtn(this);
+                    var action = this.getAttribute("data-action");
+                    var id = nodeElement.getAttribute("data-node-id");
+                    var node = orgChart.nodes[id];
+
+                    switch (action) {
+                        case "edit":
+                            alert(id);
+                            break;
+                        case "preview":
+                            orgChart.showDetailsView(id);
+                            break;
+                    }
+                });
+            }
+
+        }
+        if ($("#componentSelectList").val() != null && $("#people").children().length == 0) {
+            handleComponentSelect();
+        }
+    });
+   
 
 
 </script>

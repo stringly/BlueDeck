@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Models.ViewModels
@@ -12,6 +13,11 @@ namespace OrgChartDemo.Models.ViewModels
         public string PositionNameSort { get; set; }
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
+
+        public MemberIndexListViewModel()
+        {
+            Members = new List<MemberIndexViewModelMemberListItem>();
+        }
 
         public MemberIndexListViewModel(List<Member> members)
         {
