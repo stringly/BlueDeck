@@ -61,8 +61,10 @@ namespace OrgChartDemo
             services.AddSingleton<IAuthorizationHandler, IsMemberSupervisorHandler>();
             services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForComponentHandler>();
             services.AddSingleton<IAuthorizationHandler, IsComponentSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, CanCreateComponent>();
             services.AddSingleton<IAuthorizationHandler, IsPositionComponentSupervisorHandler>();
             services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForPositionHandler>();
+            services.AddSingleton<IAuthorizationHandler, CanCreatePositionHandler>();
 
         }
 

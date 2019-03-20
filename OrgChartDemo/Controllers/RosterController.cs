@@ -6,9 +6,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Html;
 using OrgChartDemo.Models.Types;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace OrgChartDemo.Controllers
 {
+    [Authorize("CanEditComponent")]
     public class RosterController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -26,7 +29,19 @@ namespace OrgChartDemo.Controllers
         public IActionResult Index(int? id)
         {
             var vm = new RosterManagerViewModel();
-            vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());                
+            }
+            else
+            {
+                return Forbid();
+            }
+            
             if(id != null)
             {
                 vm.SelectedComponentId = Convert.ToInt32(id);
@@ -178,9 +193,26 @@ namespace OrgChartDemo.Controllers
             if (positionId != null)
             {
                 Position position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(positionId));
-                List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
-                AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position, componentList);
-                return ViewComponent("AddPositionToComponent", new {vm = viewModel });
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
+                    AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position, componentList);
+                    return ViewComponent("AddPositionToComponent", new { vm = viewModel });
+                }
+                else if (User.IsInRole("ComponentAdmin"))
+                {
+                    List<ComponentSelectListItem> componentList = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                        User.Claims.FirstOrDefault(
+                            claim => claim.Type == "CanEditComponents")
+                            .Value
+                            .ToString());
+                    AddPositionToComponentViewComponentViewModel viewModel = new AddPositionToComponentViewComponentViewModel(position, componentList);
+                    return ViewComponent("AddPositionToComponent", new { vm = viewModel });
+                }
+                else
+                {
+                    return Forbid();
+                }
             }
             else
             {
@@ -409,7 +441,24 @@ namespace OrgChartDemo.Controllers
         public IActionResult GetAddEditComponentViewComponent(int componentId = 0, int parentComponentId = 0)
         {
             Component c = new Component();
-            List<ComponentSelectListItem> components = unitOfWork.Components.GetComponentSelectListItems();
+            List<ComponentSelectListItem> components = new List<ComponentSelectListItem>();
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                components = unitOfWork.Components.GetComponentSelectListItems();
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                        User.Claims.FirstOrDefault(
+                            claim => claim.Type == "CanEditComponents")
+                            .Value
+                            .ToString());
+            }
+            else
+            {
+                return Forbid();
+            }
+
             if (componentId != 0)
             {
                 c = unitOfWork.Components.Get(componentId);                                

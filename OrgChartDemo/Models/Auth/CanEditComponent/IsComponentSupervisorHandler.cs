@@ -18,9 +18,14 @@ namespace OrgChartDemo.Models.Auth
             {
                 if(context.User.HasClaim(claim => claim.Type == "CanEditComponents"))
                 {
-                    List<ComponentSelectListItem> components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(context.User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                    List<ComponentSelectListItem> components = 
+                        JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                            context.User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents")
+                            .Value
+                            .ToString());
+
                     var authContext = (AuthorizationFilterContext)context.Resource;
-                    var routeComponentId = Convert.ToInt32(authContext.HttpContext.GetRouteValue("id").ToString());
+                    var routeComponentId = Convert.ToInt32(authContext.HttpContext.GetRouteValue("id")?.ToString() ?? null);
                     if (components.Any(x => x.Id == routeComponentId))
                     {
                         context.Succeed(requirement);

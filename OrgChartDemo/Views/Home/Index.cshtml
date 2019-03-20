@@ -29,8 +29,11 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <caption>
-                                    <strong>@home.ComponentName</strong> | 
-                                    <a asp-controller="Roster" asp-route-componentid="@home.ComponentId">Manage Roster</a> | 
+                                    <strong>@home.ComponentName</strong> |
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a>@: |
+                                    }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
                                 </caption>
                                 <thead>
@@ -65,7 +68,10 @@
                             <table class="table table-hover">
                                 <caption>
                                     <strong>@item.ComponentName</strong> |
-                                    <a asp-controller="Roster" asp-route-componentid="@item.ComponentId">Manage Roster</a> |
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a> @: | 
+                                    }                                     
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
                                 </caption>
                             <thead>

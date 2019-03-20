@@ -23,6 +23,10 @@
             <remarks>
             This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel"/>
             </remarks>
+            <permission>
+            Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
+            logic that restricts the rendering of hyperlinks to Add/Edit/Delete Components from the rendered Index List.
+            </permission>
             <param name="sortOrder">The sort order.</param>
             <param name="searchString">The search string.</param>
             <returns>An <see cref="T:IActionResult"/></returns>

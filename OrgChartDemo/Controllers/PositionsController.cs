@@ -7,6 +7,7 @@ using OrgChartDemo.Persistence;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace OrgChartDemo.Controllers
 {
@@ -96,12 +97,22 @@ namespace OrgChartDemo.Controllers
         /// GET: Positions/Create.
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        [Authorize("CanEditComponent")]
+        [Authorize("CanEditPosition")]
         public IActionResult Create()
         {
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position()) { 
-                Components = unitOfWork.Components.GetComponentSelectListItems()
-                };
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position());
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                vm.Components = vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+            }
+            else
+            {
+                return Forbid();
+            }
             ViewBag.Title = "Create New Position";
             return View(vm);
         }
@@ -173,7 +184,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        [Authorize("CanEditPositions")]
+        [Authorize("CanEditPosition")]
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -185,9 +196,19 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position){ 
-                Components = unitOfWork.Components.GetComponentSelectListItems()
-                };
+            PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(position);
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                vm.Components = vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+            }
+            else
+            {
+                return Forbid();
+            }
             ViewBag.Title = "Edit Position";
             return View(vm);
         }

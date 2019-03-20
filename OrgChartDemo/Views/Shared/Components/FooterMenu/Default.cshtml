@@ -18,7 +18,10 @@
                 <li class="mr-3"><a asp-controller="Members" asp-action="Index">Members</a></li>
                 <li class="mr-3"><a asp-controller="Positions" asp-action="Index">Positions</a></li>
                 <li class="mr-3"><a asp-controller="Components" asp-action="Index">Components</a></li>
-                <li><a asp-controller="Roster" asp-action="Index">Roster Manager</a></li>
+                @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                {
+                    <li><a asp-controller="Roster" asp-action="Index">Roster Manager</a></li>
+                }
             </ul>
         </div>
         <div class="d-flex flex-justify-center pb-6">

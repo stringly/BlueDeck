@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Types;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace OrgChartDemo.Controllers
 {
@@ -33,9 +34,14 @@ namespace OrgChartDemo.Controllers
         /// <remarks>
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel"/>
         /// </remarks>
+        /// <permission>
+        /// Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
+        /// logic that restricts the rendering of hyperlinks to Add/Edit/Delete Components from the rendered Index List.
+        /// </permission>
         /// <param name="sortOrder">The sort order.</param>
         /// <param name="searchString">The search string.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        
         public IActionResult Index(string sortOrder, string searchString)
         {
             ComponentIndexListViewModel vm = new ComponentIndexListViewModel(unitOfWork.Components.GetComponentsWithChildren().ToList());
@@ -96,11 +102,32 @@ namespace OrgChartDemo.Controllers
         /// GET: Component/Create.
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [Authorize("CanEditComponent")]
         public IActionResult Create()
         {
-            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetComponentSelectListItems());
-            ViewBag.Title = "Create New Component";
-            return View(vm);
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                // if the User is a Global Admin, then they can add a Component as a Child to any of the existing components, 
+                // so we build the viewmodel with the full DB component list as Select list options
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetComponentSelectListItems());
+                ViewBag.Title = "Create New Component";
+                return View(vm);
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                // if the User is not GlobalAdmin, but is a Component Admin, then we restrict the VM to only allow the User to 
+                // add a Component to one of the components that they supervise. We retrieve this list from the User's Claims, where a
+                // List of ComponentSelectListItems should have been serialized via the ClaimsLoader
+                List<ComponentSelectListItem> components = 
+                    JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), components);
+                ViewBag.Title = "Create New Component";
+                return View(vm);
+            }
+            else
+            {
+                return Forbid();
+            }
         }
 
         /// <summary>
@@ -165,9 +192,24 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
-            ViewBag.Title = "Edit Component";
-            return View(vm);
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
+                ViewBag.Title = "Edit Component";
+                return View(vm);
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                List<ComponentSelectListItem> components =
+                    JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, components);
+                ViewBag.Title = "Edit Component";
+                return View(vm);
+            }
+            else
+            {
+                return Forbid();
+            }
         }
 
         /// <summary>
@@ -189,7 +231,19 @@ namespace OrgChartDemo.Controllers
 
             if (!ModelState.IsValid)
             {
-                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                }
+                else
+                {
+                    form.Components =
+                        JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                            User.Claims.FirstOrDefault(
+                                claim => claim.Type == "CanEditComponents")
+                                .Value
+                                .ToString());
+                }
                 ViewBag.Title = "Edit Component - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
@@ -198,7 +252,19 @@ namespace OrgChartDemo.Controllers
             else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
             {
                 ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
-                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                }
+                else
+                {
+                    form.Components =
+                        JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                            User.Claims.FirstOrDefault(
+                                claim => claim.Type == "CanEditComponents")
+                                .Value
+                                .ToString());
+                }
                 ViewBag.Title = "Edit Component - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";

@@ -1,7 +1,13 @@
 ﻿@model ComponentIndexListViewModel
 @{
     var IsAdmin = User.IsInRole("GlobalAdmin");
-    List<ComponentSelectListItem> CanEditComponents = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditComponents").Value.ToString());
+    var IsComponentSupervisor = User.IsInRole("ComponentAdmin");
+    List<ComponentSelectListItem> CanEditComponents = new List<ComponentSelectListItem>();
+    if (User.HasClaim(x => x.Type == "CanEditComponents"))
+    {
+        CanEditComponents = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditComponents").Value.ToString());
+    }
+
 }
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -39,7 +45,10 @@
                         <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
                     }
                 }
-                <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a></li>
+                @if (IsAdmin || IsComponentSupervisor)
+                {
+                    <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a></li>
+                }
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

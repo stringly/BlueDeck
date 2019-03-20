@@ -1,9 +1,17 @@
 ﻿@model OrgChartDemo.Models.Member
 @{
     var IsAdmin = User.IsInRole("GlobalAdmin");
-    var IsCurrentMember = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value) == Model.MemberId;
-    var CanEditMember = (JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString())).Any(x => x.MemberId == Model.MemberId);
+    var IsCurrentMember = false;
+    var CanEditMember = false;
+    if (User.HasClaim(x => x.Type == "MemberId"))
+    {
+        IsCurrentMember = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value) == Model.MemberId;
+    }
 
+    if (User.HasClaim(x => x.Type == "CanEditUsers"))
+    {
+        CanEditMember = (JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString())).Any(x => x.MemberId == Model.MemberId);
+    }
 }
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     <div class="formHeader">

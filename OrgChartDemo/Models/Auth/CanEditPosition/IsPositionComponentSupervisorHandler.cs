@@ -21,7 +21,7 @@ namespace OrgChartDemo.Models.Auth
                 {
                     List<PositionSelectListItem> positions = JsonConvert.DeserializeObject<List<PositionSelectListItem>>(context.User.Claims.FirstOrDefault(claim => claim.Type == "CanEditPositions").Value.ToString());
                     var authContext = (AuthorizationFilterContext)context.Resource;
-                    var routeComponentId = Convert.ToInt32(authContext.HttpContext.GetRouteValue("id").ToString());
+                    var routeComponentId = Convert.ToInt32(authContext.HttpContext.GetRouteValue("id")?.ToString() ?? null);
                     if (positions.Any(x => x.PositionId == routeComponentId))
                     {
                         context.Succeed(requirement);
