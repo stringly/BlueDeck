@@ -13,7 +13,9 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
         <li><a data-toggle="tab" href="#searchPeople">Search People</a></li>
+        <li><a data-toggle="tab" href="#documents">Documents</a></li>
         <li><a data-toggle="tab" href="#currentUserInfo">My Info</a></li>
+
     </ul>
 
     <div class="tab-content">
@@ -70,29 +72,29 @@
                                     <strong>@item.ComponentName</strong> |
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
-                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a> @: | 
-                                    }                                     
+                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a> @: |
+                                    }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
                                 </caption>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var worker in item.Members)
-                                {
+                                <thead>
                                     <tr>
-                                        <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
-                                        <td>@worker.PositionName</td>
-                                        <td>@worker.ContactNumber</td>
-                                        <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
                                     </tr>
-                                }
-                            </tbody>
+                                </thead>
+                                <tbody>
+                                    @foreach (var worker in item.Members)
+                                    {
+                                        <tr>
+                                            <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                            <td>@worker.PositionName</td>
+                                            <td>@worker.ContactNumber</td>
+                                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -116,6 +118,16 @@
 
                 <div class="row" id="memberSearchResultListTarget" style="min-height:400px;">
 
+                </div>
+            </div>
+        </div>
+        <div id="documents" class="tab-pane fade">
+            <div class="col-md-12">
+                <br />
+                <h4>Generate Dcouments</h4>
+                <hr />
+                <div class="row">
+                    <a asp-action="DownloadAlphaRoster" asp-controller="Home">Test Alpha Roster Generator</a>
                 </div>
             </div>
         </div>

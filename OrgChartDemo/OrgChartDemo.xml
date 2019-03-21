@@ -951,6 +951,71 @@
             The identifier.
             </value>
         </member>
+        <member name="T:OrgChartDemo.Models.Types.MappedField">
+            <summary>
+            Class used to map Table/Cell index and value
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.TableIndex">
+            <summary>
+            Gets or sets the index of the table.
+            </summary>
+            <remarks>
+            This is the index of the table in the Template document
+            </remarks>
+            <value>
+            The index of the table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.Table">
+            <summary>
+            Gets or sets the table.
+            </summary>
+            <remarks>
+            This property may replace the TableIndex completely, as the Table's index in the Document is 
+            dependant on the part of the document that it is in, which means tables in the header/footer
+            will be indexed according to the Header/Footer's tables collection, which is independent of the MainDocumentPart's
+            table indexes.
+            </remarks>
+            <value>
+            The table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.RowIndex">
+            <summary>
+            Gets or sets the index of the row.
+            </summary>
+            <value>
+            The index of the row.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.CellIndex">
+            <summary>
+            Gets or sets the index of the cell.
+            </summary>
+            <value>
+            The index of the cell.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.FieldName">
+            <summary>
+            Gets or sets the name of the field.
+            </summary>
+            <value>
+            The name of the field.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.Types.MappedField.Write(System.String)">
+            <summary>
+            Writes the data in the mapped field to the document.
+            </summary>
+            <param name="table">
+            The target <see cref="T:DocumentFormat.OpenXml.Wordprocessing.Table"/>. 
+            This parameter is required because the Table index depends on whether the MappedField is in a Header/Footer or in the document's mainpart, which means that the TableIndex is not
+            sufficient to target the proper table. 
+            </param>
+            <param name="newText">The new text.</param>
+        </member>
         <member name="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem">
             <summary>
             A Type that includes the DutyStatusId and DutyStatusName for the <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/> Entity.

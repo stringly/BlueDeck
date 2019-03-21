@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
+using OrgChartDemo.Models.DocGenerators;
 using OrgChartDemo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -66,6 +67,11 @@ namespace OrgChartDemo.Controllers
                 HomePageMemberSearchResultViewComponentViewModel vm = new HomePageMemberSearchResultViewComponentViewModel(new List<Member>());
                 return ViewComponent("HomePageMemberSearchResult", vm);
             }
+        }
+        public IActionResult DownloadAlphaRoster()
+        {
+            AlphaRosterGenerator gen = new AlphaRosterGenerator();
+            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Alpha Roster Test.docx");
         }
     }
 }
