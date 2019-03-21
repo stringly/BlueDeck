@@ -22,7 +22,7 @@ namespace OrgChartDemo.Models.DocGenerators
         public MemoryStream Generate()
         {
             var mem = new MemoryStream();
-            byte[] byteArray = File.ReadAllBytes("Alpha_Roster_Template.docx");
+            byte[] byteArray = File.ReadAllBytes("Templates/Alpha_Roster_Template.docx");
             mem.Write(byteArray, 0, byteArray.Length);
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(mem, true))
             {
@@ -43,36 +43,36 @@ namespace OrgChartDemo.Models.DocGenerators
             Table demoTable = mainPart.Document.Body.Elements<Table>().ElementAt(1);
             Fields = new List<MappedField>
             {
-                new MappedField { FieldName = "MainComponentName", RowIndex = 1, CellIndex = 1, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "RosterDate", RowIndex = 2, CellIndex = 1, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "Assignment", RowIndex = 4, CellIndex = 1, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "MemberName", RowIndex = 4, CellIndex = 2, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "MemberRank", RowIndex = 4, CellIndex = 3, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "MemberRaceGender", RowIndex = 4, CellIndex = 4, TableIndex = 0, Table = rosterTable },
-                new MappedField { FieldName = "MemberBadgeNumber", RowIndex = 4, CellIndex = 1, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "MainComponentName", RowIndex = 0, CellIndex = 0, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "RosterDate", RowIndex = 1, CellIndex = 0, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "Assignment", RowIndex = 3, CellIndex = 0, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "MemberName", RowIndex = 3, CellIndex = 1, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "MemberRank", RowIndex = 3, CellIndex = 2, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "MemberRaceGender", RowIndex = 3, CellIndex = 3, TableIndex = 0, Table = rosterTable },
+                new MappedField { FieldName = "MemberBadgeNumber", RowIndex = 3, CellIndex = 0, TableIndex = 0, Table = rosterTable },
             };
             Dictionary<string, int> Ranks = new Dictionary<string, int>
             {
-                { "Major", 3 },
-                { "Captain", 4 },
-                { "Lieutenant", 5 },
-                { "Sergeant", 6 },
-                { "Corporal", 7 },
-                { "POFC", 8 },
-                { "Police Officer", 9 },
-                { "Civilian", 11 }
+                { "Major", 2 },
+                { "Captain", 3 },
+                { "Lieutenant", 4 },
+                { "Sergeant", 5 },
+                { "Corporal", 6 },
+                { "POFC", 7 },
+                { "Police Officer", 8 },
+                { "Civilian", 10 }
             };
             foreach(KeyValuePair<string, int> rank in Ranks)
             {
-                for (int i = 2; i > 15; i++)
+                for (int i = 1; i > 14; i++)
                 {
                     string gender = "";
                     string race = "";
-                    if (i < 6 )
+                    if (i < 5 )
                     {
                         gender = "_Male";
                     }
-                    else if (i >= 6 && i < 10)
+                    else if (i >= 5 && i < 9)
                     {
                         gender = "_Female";
                     }
@@ -81,19 +81,19 @@ namespace OrgChartDemo.Models.DocGenerators
                         gender = "_Totals";
                     }
 
-                    if (i == 2 || i == 6 || i == 11)
+                    if (i == 1 || i == 5 || i == 10)
                     {
                         race = "_Black";
                     }
-                    if (i == 3 || i == 7 || i == 12)
+                    if (i == 2 || i == 6 || i == 11)
                     {
                         race = "_Hispanic";
                     }
-                    if (i == 4 || i == 8 || i == 13)
+                    if (i == 5 || i == 7 || i == 12)
                     {
                         race = "_Asian";
                     }
-                    if (i == 5 || i == 9 || i == 14)
+                    if (i == 6 || i == 8 || i == 13)
                     {
                         race = "_White";
                     }
