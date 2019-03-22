@@ -57,6 +57,8 @@ namespace OrgChartDemo.Models.Types
         /// </value>
         public string FieldName { get; set; }
 
+        public int Value { get; set; }
+
         /// <summary>
         /// Writes the data in the mapped field to the document.
         /// </summary>
@@ -66,7 +68,7 @@ namespace OrgChartDemo.Models.Types
         /// sufficient to target the proper table. 
         /// </param>
         /// <param name="newText">The new text.</param>
-        public void Write(string newText)
+        public void Write(string newText = null)
         {
             TableRow row = Table.Elements<TableRow>().ElementAt(RowIndex);
             TableCell cell = row.Elements<TableCell>().ElementAt(CellIndex);
@@ -74,8 +76,16 @@ namespace OrgChartDemo.Models.Types
             Run r = new Run();
             RunProperties runProperties1 = new RunProperties();
             r.Append(runProperties1);
-            Text t = new Text(newText);
-            r.Append(t);
+            if (newText != null)
+            {
+                Text t = new Text(newText);
+                r.Append(t);
+            }
+            else
+            {
+                Text t = new Text(Value.ToString());
+                r.Append(t);
+            }
             p.Append(r);
         }
     }

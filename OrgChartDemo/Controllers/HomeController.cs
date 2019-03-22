@@ -68,9 +68,13 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("HomePageMemberSearchResult", vm);
             }
         }
-        public IActionResult DownloadAlphaRoster()
+        public IActionResult DownloadAlphaRoster(int id)
         {
             AlphaRosterGenerator gen = new AlphaRosterGenerator();
+            gen.Members = unitOfWork.Components.GetMembersRosterForComponentId(id);
+            gen.ComponentName = unitOfWork.Components.Get(id).Name;
+
+
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Alpha Roster Test.docx");
         }
     }

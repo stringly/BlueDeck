@@ -13,8 +13,8 @@ namespace OrgChartDemo.Models.DocGenerators
     {
         public List<Member> Members { get; set; }
         public string ComponentName { get; set; }
-        public List<MappedField> Fields { get; set; }
-
+        private List<MappedField> Fields { get; set; }
+        private Dictionary<string, Dictionary<string, int>> totalCollection { get; set; }
         public AlphaRosterGenerator()
         {
         }
@@ -26,16 +26,156 @@ namespace OrgChartDemo.Models.DocGenerators
             mem.Write(byteArray, 0, byteArray.Length);
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(mem, true))
             {
+                // init Mapped Fields Collection
                 InitializeFieldMap(wordDoc);
+                PopulateDemographics();
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
-                MappedField x = Fields.First(f => f.FieldName == "MainComponentName");
-                x.Write("TEST COMPONENT");
+                // Write the Static fields
+                MappedField componentName = Fields.First(f => f.FieldName == "MainComponentName");
+                componentName.Write("ComponentName");
+                MappedField rosterDate = Fields.First(f => f.FieldName == "RosterDate");
+                rosterDate.Write(DateTime.Today.ToShortTimeString());
+                Table rosterTable = mainPart.Document.Body.Elements<Table>().ElementAt(0);
+                foreach (Member m in Members.OrderBy(x => x.LastName))
+                {
+                    TableRow tr = new TableRow();
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(m.Position.Name)))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(m.GetLastNameFirstName())))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(m.Rank.RankFullName)))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text($"{m.Race.Abbreviation}/{m.Gender.Abbreviation}")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text($"#{m.IdNumber}")))));
+                    rosterTable.Append(tr);
+                }
+
+                Table demoTable = mainPart.Document.Body.Elements<Table>().ElementAt(1);
+                foreach (KeyValuePair<string, Dictionary<string, int>> entry in totalCollection)
+                {
+                    TableRow tr = new TableRow();
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Key.ToString())))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BM"] != 0 ? $"{entry.Value["BM"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HM"] != 0 ? $"{entry.Value["HM"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AM"] != 0 ? $"{entry.Value["AM"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WM"] != 0 ? $"{entry.Value["WM"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BF"] != 0 ? $"{entry.Value["BF"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HF"] != 0 ? $"{entry.Value["HF"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AF"] != 0 ? $"{entry.Value["AF"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WF"] != 0 ? $"{entry.Value["WF"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BT"] != 0 ? $"{entry.Value["BT"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HT"] != 0 ? $"{entry.Value["HT"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AT"] != 0 ? $"{entry.Value["AT"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WT"] != 0 ? $"{entry.Value["WT"]}" : "")))));
+                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["TotalForRank"] == 0 ? $"{entry.Value["TotalForRank"]}" : "")))));
+                    demoTable.Append(tr);
+                }
+                
                 mainPart.Document.Save();
             }
             mem.Seek(0, SeekOrigin.Begin);
             return mem;
         }
         
+        private void PopulateDemographics()
+        {
+            // first, I need to know how many Ranks exist in the Members Collection, as this determines
+            // the number of rows.
+            List<string> ranks = Members.Select(x => x.Rank.RankFullName).Distinct().ToList();
+            totalCollection = new Dictionary<string, Dictionary<string, int>>();
+            totalCollection.Add("Sworn", new Dictionary<string, int>()
+                {
+                    { "BM", 0 },
+                    { "HM", 0 },
+                    { "AM", 0 },
+                    { "WM", 0 },
+                    { "BF", 0 },
+                    { "HF", 0 },
+                    { "AF", 0 },
+                    { "WF", 0 },
+                    { "BT", 0 },
+                    { "HT", 0 },
+                    { "AT", 0 },
+                    { "WT", 0 },
+                    { "TotalForRank", 0 }
+                });
+            totalCollection.Add("Civilian", new Dictionary<string, int>()
+                {
+                    { "BM", 0 },
+                    { "HM", 0 },
+                    { "AM", 0 },
+                    { "WM", 0 },
+                    { "BF", 0 },
+                    { "HF", 0 },
+                    { "AF", 0 },
+                    { "WF", 0 },
+                    { "BT", 0 },
+                    { "HT", 0 },
+                    { "AT", 0 },
+                    { "WT", 0 },
+                    { "TotalForRank", 0 }
+                });
+            totalCollection.Add("Station", new Dictionary<string, int>()
+                {
+                    { "BM", 0 },
+                    { "HM", 0 },
+                    { "AM", 0 },
+                    { "WM", 0 },
+                    { "BF", 0 },
+                    { "HF", 0 },
+                    { "AF", 0 },
+                    { "WF", 0 },
+                    { "BT", 0 },
+                    { "HT", 0 },
+                    { "AT", 0 },
+                    { "WT", 0 },
+                    { "TotalForRank", 0 }
+                });
+            foreach (string rank in ranks)
+            {                
+                Dictionary<string, int> demo = new Dictionary<string, int>()
+                {
+                    { "BM", 0 },
+                    { "HM", 0 },
+                    { "AM", 0 },
+                    { "WM", 0 },
+                    { "BF", 0 },
+                    { "HF", 0 },
+                    { "AF", 0 },
+                    { "WF", 0 },
+                    { "BT", 0 },
+                    { "HT", 0 },
+                    { "AT", 0 },
+                    { "WT", 0 },
+                    { "TotalForRank", 0 }
+                };
+                List<Member> rankMembers = Members.Where(x => x.Rank.RankFullName == rank).ToList();
+                foreach (Member m in rankMembers)
+                {
+                    if (m.Race.MemberRaceFullName != "Other" && m.Gender.GenderFullName != "Unknown") { 
+                        demo[$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
+                        demo[$"{m.Race.Abbreviation}T"]++;
+                        demo["TotalForRank"]++;
+                        if (m.Rank.IsSworn)
+                        {
+                            totalCollection["Sworn"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
+                            totalCollection["Sworn"][$"{m.Race.Abbreviation}T"]++;
+                            totalCollection["Sworn"]["TotalForRank"]++;
+                        }
+                        else
+                        {
+                            totalCollection["Civilian"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
+                            totalCollection["Civilian"][$"{m.Race.Abbreviation}T"]++;
+                            totalCollection["Sworn"]["TotalForRank"]++;
+                        }
+                        totalCollection["Station"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
+                        totalCollection["Station"][$"{m.Race.Abbreviation}T"]++;
+                        totalCollection["Station"]["TotalForRank"]++;
+                        
+                    }
+                }
+                totalCollection.Add(rank, demo);
+
+            }            
+        }
+
         private void InitializeFieldMap(WordprocessingDocument _doc)
         {
             MainDocumentPart mainPart = _doc.MainDocumentPart;
@@ -58,7 +198,7 @@ namespace OrgChartDemo.Models.DocGenerators
                 { "Lieutenant", 4 },
                 { "Sergeant", 5 },
                 { "Corporal", 6 },
-                { "POFC", 7 },
+                { "Police Officer First Class", 7 },
                 { "Police Officer", 8 },
                 { "Civilian", 10 }
             };

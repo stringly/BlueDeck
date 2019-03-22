@@ -127,7 +127,7 @@
                 <h4>Generate Documents</h4>
                 <hr />
                 <div class="row">
-                    <a asp-action="DownloadAlphaRoster" asp-controller="Home">Test Alpha Roster Generator</a>
+                    <a asp-action="DownloadAlphaRoster" asp-controller="Home" asp-route-id="@Model.CurrentUser.Position.ParentComponent.ComponentId">Test Alpha Roster Generator</a>
                 </div>
             </div>
         </div>

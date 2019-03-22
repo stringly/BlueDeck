@@ -451,6 +451,25 @@ namespace OrgChartDemo.Persistence.Repositories
             SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
             return ApplicationDbContext.GetChildComponentsForComponentId.FromSql("EXECUTE Get_Child_Components_For_ComponentId @ComponentId", param1).ToList();
         }
+
+        public List<Member> GetMembersRosterForComponentId(int componentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            List<ComponentSelectListItem> components = ApplicationDbContext.GetChildComponentsForComponentId.FromSql("EXECUTE Get_Child_Components_For_ComponentId @ComponentId", param1).ToList();
+            List<int> searchIds = new List<int>();
+            foreach (ComponentSelectListItem c in components)
+            {
+                searchIds.Add(c.Id);
+            }
+            return ApplicationDbContext.Members
+                .Include(x => x.Gender)
+                .Include(x => x.Rank)
+                .Include(x => x.Race)
+                .Include(x => x.Position)
+                .Where(x => searchIds.Contains(x.Position.ParentComponent.ComponentId))
+                .ToList();
+                
+        }
     }
 
 }

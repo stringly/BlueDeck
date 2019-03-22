@@ -92,5 +92,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns></returns>
         bool ComponentNameNotAvailable(Component c);
         List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
+        List<Member> GetMembersRosterForComponentId(int componentId);
     }
 }
