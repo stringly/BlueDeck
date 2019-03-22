@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.ViewModels;
@@ -32,9 +33,9 @@ namespace OrgChartDemo.Models.DocGenerators
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
                 // Write the Static fields
                 MappedField componentName = Fields.First(f => f.FieldName == "MainComponentName");
-                componentName.Write("ComponentName");
+                componentName.Write(ComponentName);
                 MappedField rosterDate = Fields.First(f => f.FieldName == "RosterDate");
-                rosterDate.Write(DateTime.Today.ToShortTimeString());
+                rosterDate.Write(DateTime.Today.ToShortDateString());
                 Table rosterTable = mainPart.Document.Body.Elements<Table>().ElementAt(0);
                 foreach (Member m in Members.OrderBy(x => x.LastName))
                 {
@@ -42,8 +43,24 @@ namespace OrgChartDemo.Models.DocGenerators
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(m.Position.Name)))));
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(m.GetLastNameFirstName())))));
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(m.Rank.RankFullName)))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text($"{m.Race.Abbreviation}/{m.Gender.Abbreviation}")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text($"#{m.IdNumber}")))));
+                    // we have to build the paragraph to set the justification inside the cell for these values
+                    Paragraph p1 = new Paragraph();
+                    ParagraphProperties pp1 = new ParagraphProperties();
+                    Justification pj1 = new Justification(){ Val = JustificationValues.Center };
+                    pp1.Append(pj1);
+                    p1.Append(pp1);
+                    p1.Append(new Run(new Text($"{m.Race.Abbreviation}/{m.Gender.Abbreviation}")));
+                    tr.Append(new TableCell(p1));
+                    // same here... I want this cell to be centered
+                    Paragraph p2 = new Paragraph();
+                    // I learned the hard way that I need to append the centering Justification to the paragraph
+                    // BEFORE the run, or it won't center.
+                    ParagraphProperties pp2 = new ParagraphProperties();
+                    Justification pj2 = new Justification(){ Val = JustificationValues.Center };
+                    pp2.Append(pj2);
+                    p2.Append(pp2);
+                    p2.Append(new Run(new Text($"#{m.IdNumber}")));
+                    tr.Append(new TableCell(p2));
                     rosterTable.Append(tr);
                 }
 
@@ -51,9 +68,36 @@ namespace OrgChartDemo.Models.DocGenerators
                 foreach (KeyValuePair<string, Dictionary<string, int>> entry in totalCollection)
                 {
                     TableRow tr = new TableRow();
+                    // append the "Rank Name" (First Column) cell
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Key.ToString())))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BM"] != 0 ? $"{entry.Value["BM"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HM"] != 0 ? $"{entry.Value["HM"]}" : "")))));
+
+                    // B/M column (this needs a 1.5pt left border)
+                    // set properties to apply to all text centering
+                    ParagraphProperties pp1 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+                    TableCellProperties tcp1 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+                    TableCellBorders tcb1 = new TableCellBorders();
+                    LeftBorder lb1 = new LeftBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+                    tcb1.Append(lb1);
+
+                    TableCell tc1 = new TableCell();
+                    tc1.Append(tcp1);
+                    tc1.Append(tcb1);
+
+                    Paragraph p1 = new Paragraph();
+                    p1.Append(pp1);                    
+                    p1.Append(new Run(new Text(entry.Value["BM"] != 0 ? $"{entry.Value["BM"]}" : "")));                    
+
+                    tc1.Append(p1);
+                    tr.Append(tc1);
+                    // H/M column
+                    ParagraphProperties pp2 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+                    TableCellProperties tcp2 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+                    TableCell tc2 = new TableCell(tcp2);
+                    Paragraph p2 = new Paragraph(pp2);
+                    p2.Append(new Run(new Text(entry.Value["HM"] != 0 ? $"{entry.Value["HM"]}" : "")));
+                    tc2.Append(p2);                    
+                    tr.Append(tc2);
+
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AM"] != 0 ? $"{entry.Value["AM"]}" : "")))));
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WM"] != 0 ? $"{entry.Value["WM"]}" : "")))));
                     tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BF"] != 0 ? $"{entry.Value["BF"]}" : "")))));
