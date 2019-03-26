@@ -15,7 +15,7 @@ namespace OrgChartDemo.Models.DocGenerators
         public List<Member> Members { get; set; }
         public string ComponentName { get; set; }
         private List<MappedField> Fields { get; set; }
-        private Dictionary<string, Dictionary<string, int>> totalCollection { get; set; }
+        private List<string> TitleColumns { get; set; }
         public AlphaRosterGenerator()
         {
         }
@@ -29,7 +29,6 @@ namespace OrgChartDemo.Models.DocGenerators
             {
                 // init Mapped Fields Collection
                 InitializeFieldMap(wordDoc);
-                PopulateDemographics();
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
                 // Write the Static fields
                 MappedField componentName = Fields.First(f => f.FieldName == "MainComponentName");
@@ -65,160 +64,24 @@ namespace OrgChartDemo.Models.DocGenerators
                 }
 
                 Table demoTable = mainPart.Document.Body.Elements<Table>().ElementAt(1);
-                foreach (KeyValuePair<string, Dictionary<string, int>> entry in totalCollection)
+                List<MemberRank> distinctRankList = Members.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
+                
+                foreach (MemberRank r in distinctRankList)
                 {
-                    TableRow tr = new TableRow();
-                    // append the "Rank Name" (First Column) cell
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Key.ToString())))));
-
-                    // B/M column (this needs a 1.5pt left border)
-                    // set properties to apply to all text centering
-                    ParagraphProperties pp1 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
-                    TableCellProperties tcp1 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
-                    TableCellBorders tcb1 = new TableCellBorders();
-                    LeftBorder lb1 = new LeftBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
-                    tcb1.Append(lb1);
-
-                    TableCell tc1 = new TableCell();
-                    tc1.Append(tcp1);
-                    tc1.Append(tcb1);
-
-                    Paragraph p1 = new Paragraph();
-                    p1.Append(pp1);                    
-                    p1.Append(new Run(new Text(entry.Value["BM"] != 0 ? $"{entry.Value["BM"]}" : "")));                    
-
-                    tc1.Append(p1);
-                    tr.Append(tc1);
-                    // H/M column
-                    ParagraphProperties pp2 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
-                    TableCellProperties tcp2 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
-                    TableCell tc2 = new TableCell(tcp2);
-                    Paragraph p2 = new Paragraph(pp2);
-                    p2.Append(new Run(new Text(entry.Value["HM"] != 0 ? $"{entry.Value["HM"]}" : "")));
-                    tc2.Append(p2);                    
-                    tr.Append(tc2);
-
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AM"] != 0 ? $"{entry.Value["AM"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WM"] != 0 ? $"{entry.Value["WM"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BF"] != 0 ? $"{entry.Value["BF"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HF"] != 0 ? $"{entry.Value["HF"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AF"] != 0 ? $"{entry.Value["AF"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WF"] != 0 ? $"{entry.Value["WF"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["BT"] != 0 ? $"{entry.Value["BT"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["HT"] != 0 ? $"{entry.Value["HT"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["AT"] != 0 ? $"{entry.Value["AT"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["WT"] != 0 ? $"{entry.Value["WT"]}" : "")))));
-                    tr.Append(new TableCell(new Paragraph(new Run(new Text(entry.Value["TotalForRank"] == 0 ? $"{entry.Value["TotalForRank"]}" : "")))));
-                    demoTable.Append(tr);
+                    List<Member> RankMembers = Members.Where(x => x.Rank == r).ToList();
+                    demoTable.Append(GenerateDemoTableRow(r.RankFullName, RankMembers));
                 }
+                List<Member> SwornMembers = Members.Where(x => x.Rank.IsSworn).ToList();
+                demoTable.Append(GenerateDemoTableRow("Sworn", SwornMembers));
+                List<Member> CivilianMembers = Members.Where(x => x.Rank.IsSworn == false).ToList();
+                demoTable.Append(GenerateDemoTableRow("Civilian", CivilianMembers));
+                demoTable.Append(GenerateDemoTableRow("Total", Members));
                 
                 mainPart.Document.Save();
             }
             mem.Seek(0, SeekOrigin.Begin);
             return mem;
-        }
-        
-        private void PopulateDemographics()
-        {
-            // first, I need to know how many Ranks exist in the Members Collection, as this determines
-            // the number of rows.
-            List<string> ranks = Members.Select(x => x.Rank.RankFullName).Distinct().ToList();
-            totalCollection = new Dictionary<string, Dictionary<string, int>>();
-            totalCollection.Add("Sworn", new Dictionary<string, int>()
-                {
-                    { "BM", 0 },
-                    { "HM", 0 },
-                    { "AM", 0 },
-                    { "WM", 0 },
-                    { "BF", 0 },
-                    { "HF", 0 },
-                    { "AF", 0 },
-                    { "WF", 0 },
-                    { "BT", 0 },
-                    { "HT", 0 },
-                    { "AT", 0 },
-                    { "WT", 0 },
-                    { "TotalForRank", 0 }
-                });
-            totalCollection.Add("Civilian", new Dictionary<string, int>()
-                {
-                    { "BM", 0 },
-                    { "HM", 0 },
-                    { "AM", 0 },
-                    { "WM", 0 },
-                    { "BF", 0 },
-                    { "HF", 0 },
-                    { "AF", 0 },
-                    { "WF", 0 },
-                    { "BT", 0 },
-                    { "HT", 0 },
-                    { "AT", 0 },
-                    { "WT", 0 },
-                    { "TotalForRank", 0 }
-                });
-            totalCollection.Add("Station", new Dictionary<string, int>()
-                {
-                    { "BM", 0 },
-                    { "HM", 0 },
-                    { "AM", 0 },
-                    { "WM", 0 },
-                    { "BF", 0 },
-                    { "HF", 0 },
-                    { "AF", 0 },
-                    { "WF", 0 },
-                    { "BT", 0 },
-                    { "HT", 0 },
-                    { "AT", 0 },
-                    { "WT", 0 },
-                    { "TotalForRank", 0 }
-                });
-            foreach (string rank in ranks)
-            {                
-                Dictionary<string, int> demo = new Dictionary<string, int>()
-                {
-                    { "BM", 0 },
-                    { "HM", 0 },
-                    { "AM", 0 },
-                    { "WM", 0 },
-                    { "BF", 0 },
-                    { "HF", 0 },
-                    { "AF", 0 },
-                    { "WF", 0 },
-                    { "BT", 0 },
-                    { "HT", 0 },
-                    { "AT", 0 },
-                    { "WT", 0 },
-                    { "TotalForRank", 0 }
-                };
-                List<Member> rankMembers = Members.Where(x => x.Rank.RankFullName == rank).ToList();
-                foreach (Member m in rankMembers)
-                {
-                    if (m.Race.MemberRaceFullName != "Other" && m.Gender.GenderFullName != "Unknown") { 
-                        demo[$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
-                        demo[$"{m.Race.Abbreviation}T"]++;
-                        demo["TotalForRank"]++;
-                        if (m.Rank.IsSworn)
-                        {
-                            totalCollection["Sworn"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
-                            totalCollection["Sworn"][$"{m.Race.Abbreviation}T"]++;
-                            totalCollection["Sworn"]["TotalForRank"]++;
-                        }
-                        else
-                        {
-                            totalCollection["Civilian"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
-                            totalCollection["Civilian"][$"{m.Race.Abbreviation}T"]++;
-                            totalCollection["Sworn"]["TotalForRank"]++;
-                        }
-                        totalCollection["Station"][$"{m.Race.Abbreviation}{m.Gender.Abbreviation}"]++;
-                        totalCollection["Station"][$"{m.Race.Abbreviation}T"]++;
-                        totalCollection["Station"]["TotalForRank"]++;
-                        
-                    }
-                }
-                totalCollection.Add(rank, demo);
-
-            }            
-        }
+        }     
 
         private void InitializeFieldMap(WordprocessingDocument _doc)
         {
@@ -234,63 +97,403 @@ namespace OrgChartDemo.Models.DocGenerators
                 new MappedField { FieldName = "MemberRank", RowIndex = 3, CellIndex = 2, TableIndex = 0, Table = rosterTable },
                 new MappedField { FieldName = "MemberRaceGender", RowIndex = 3, CellIndex = 3, TableIndex = 0, Table = rosterTable },
                 new MappedField { FieldName = "MemberBadgeNumber", RowIndex = 3, CellIndex = 0, TableIndex = 0, Table = rosterTable },
-            };
-            Dictionary<string, int> Ranks = new Dictionary<string, int>
-            {
-                { "Major", 2 },
-                { "Captain", 3 },
-                { "Lieutenant", 4 },
-                { "Sergeant", 5 },
-                { "Corporal", 6 },
-                { "Police Officer First Class", 7 },
-                { "Police Officer", 8 },
-                { "Civilian", 10 }
-            };
-            foreach(KeyValuePair<string, int> rank in Ranks)
-            {
-                for (int i = 1; i > 14; i++)
-                {
-                    string gender = "";
-                    string race = "";
-                    if (i < 5 )
-                    {
-                        gender = "_Male";
-                    }
-                    else if (i >= 5 && i < 9)
-                    {
-                        gender = "_Female";
-                    }
-                    else
-                    {
-                        gender = "_Totals";
-                    }
-
-                    if (i == 1 || i == 5 || i == 10)
-                    {
-                        race = "_Black";
-                    }
-                    if (i == 2 || i == 6 || i == 11)
-                    {
-                        race = "_Hispanic";
-                    }
-                    if (i == 5 || i == 7 || i == 12)
-                    {
-                        race = "_Asian";
-                    }
-                    if (i == 6 || i == 8 || i == 13)
-                    {
-                        race = "_White";
-                    }
-
-                    MappedField x = new MappedField { FieldName = $"{rank.Key}{gender}{race}", CellIndex = i, RowIndex = rank.Value, Table = demoTable, TableIndex = 1 };
-                    Fields.Add(x);
-                }
-            }
-            
-
-
+            };          
         }
 
+        private TableRow GenerateDemoTableRow(string ColumnName, List<Member> MemberList)
+        {
+             TableRow tr = new TableRow();
+            // append the "Rank Name" (First Column) cell
+            Paragraph p0 = new Paragraph();
+            ParagraphProperties pp0 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines0 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            pp0.Append(spacingBetweenLines0);
+            
+            p0.Append(pp0);
+            Run tr0 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp0 = new RunProperties(new Bold());
+                tr0.Append(rp0);
+            }            
+            tr0.Append(new Text(ColumnName));
+            p0.Append(tr0);
+            TableCell tc0 = new TableCell();
+            TableCellProperties tcp0 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs0 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp0.Append(tcs0);
+            }
+            tc0.Append(tcp0);
+            tc0.Append(p0);
+            tr.Append(tc0);
 
+            // B/M column (this needs a 1.5pt left border)
+            // set properties to apply to all text centering
+            int BMCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Black" && x.Gender.GenderFullName == "Male");
+            Run tr1 = new Run();                    
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp1 = new RunProperties(new Bold());
+                tr1.Append(rp1);
+            }
+            tr1.Append(new Text(BMCount != 0 ? $"{BMCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines1 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp1 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp1.Append(spacingBetweenLines1);
+            Paragraph p1 = new Paragraph(pp1);
+            p1.Append(tr1);
+
+            TableCellProperties tcp1 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs1 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp1.Append(tcs1);
+            }
+            TableCellBorders tcb1 = new TableCellBorders(new LeftBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U });
+            tcp1.Append(tcb1);
+            TableCell tc1 = new TableCell(tcp1);
+                    
+            tc1.Append(p1);
+            tr.Append(tc1);
+
+            // H/M column
+            int HMCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Hispanic" && x.Gender.GenderFullName == "Male");
+            Run tr2 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp2 = new RunProperties(new Bold());
+                tr2.Append(rp2);
+            }
+            tr2.Append(new Text(HMCount != 0 ? $"{HMCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines2 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp2 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp2.Append(spacingBetweenLines2);
+
+            Paragraph p2 = new Paragraph(pp2);
+            p2.Append(tr2);
+                    
+            TableCellProperties tcp2 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs2 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp2.Append(tcs2);
+            }
+            TableCell tc2 = new TableCell(tcp2);                                        
+                    
+            tc2.Append(p2);                    
+            tr.Append(tc2);
+
+            // A/M column
+            int AMCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Asian" && x.Gender.GenderFullName == "Male");
+            Run tr3 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp3 = new RunProperties(new Bold());
+                tr3.Append(rp3);
+            }
+            tr3.Append(new Text(AMCount != 0 ? $"{AMCount}" : "-"));
+            
+            SpacingBetweenLines spacingBetweenLines3 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp3 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp3.Append(spacingBetweenLines3);
+
+            Paragraph p3 = new Paragraph(pp3);                                        
+            p3.Append(tr3);
+
+                    
+            TableCellProperties tcp3 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });                                       
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs3 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp3.Append(tcs3);
+            }
+            
+            TableCell tc3 = new TableCell(tcp3);
+                    
+            tc3.Append(p3);                    
+            tr.Append(tc3);
+
+            // W/M Column
+            int WMCount = MemberList.Count(x => x.Race.MemberRaceFullName == "White" && x.Gender.GenderFullName == "Male");
+            Run tr4 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp4 = new RunProperties(new Bold());
+                tr4.Append(rp4);
+            }        
+            tr4.Append(new Text(WMCount != 0 ? $"{WMCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines4 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp4 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp4.Append(spacingBetweenLines4);
+
+            Paragraph p4 = new Paragraph(pp4);
+            p4.Append(tr4);
+                                        
+            TableCellProperties tcp4 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs4 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp4.Append(tcs4);
+            }
+            TableCellBorders tcb4 = new TableCellBorders(new RightBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U });
+            tcp4.Append(tcb4);
+
+            TableCell tc4 = new TableCell(tcp4);                    
+            tc4.Append(p4);
+            tr.Append(tc4);
+
+            // B/F Column
+            int BFCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Black" && x.Gender.GenderFullName == "Female");
+            Run tr5 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp5 = new RunProperties(new Bold());
+                tr5.Append(rp5);
+            }
+            tr5.Append(new Text(BFCount != 0 ? $"{BFCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines5 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp5 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp5.Append(spacingBetweenLines5);
+
+            Paragraph p5 = new Paragraph(pp5);
+            p5.Append(tr5);
+                    
+            TableCellProperties tcp5 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs5 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp5.Append(tcs5);
+            }
+            TableCell tc5 = new TableCell(tcp5);                                        
+                    
+            tc5.Append(p5);                    
+            tr.Append(tc5);
+                    
+            // H/F column
+            int HFCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Hispanic" && x.Gender.GenderFullName == "Female");
+            Run tr6 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp6 = new RunProperties(new Bold());
+                tr6.Append(rp6);
+            }
+            tr6.Append(new Text(HFCount != 0 ? $"{HFCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines6 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp6 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp6.Append(spacingBetweenLines6);
+
+            Paragraph p6 = new Paragraph(pp6);
+            p6.Append(tr6);
+                    
+            TableCellProperties tcp6 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs6 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp6.Append(tcs6);
+            }
+            TableCell tc6 = new TableCell(tcp6);                                        
+                    
+            tc6.Append(p6);                    
+            tr.Append(tc6);
+                    
+            // A/F column
+            int AFCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Asian" && x.Gender.GenderFullName == "Female");
+            Run tr7 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp7 = new RunProperties(new Bold());
+                tr7.Append(rp7);
+            }
+            tr7.Append(new Text(AFCount != 0 ? $"{AFCount}" : "-"));
+
+            SpacingBetweenLines spacingBetweenLines7 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp7 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp7.Append(spacingBetweenLines7);
+
+            Paragraph p7 = new Paragraph(pp7);
+            p7.Append(tr7);
+                    
+            TableCellProperties tcp7 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs7 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp7.Append(tcs7);
+            }
+            TableCell tc7 = new TableCell(tcp7);                                        
+                    
+            tc7.Append(p7);                    
+            tr.Append(tc7);
+
+            // W/F Column
+            int WFCount =  MemberList.Count(x => x.Race.MemberRaceFullName == "White" && x.Gender.GenderFullName == "Female");
+            Run tr8 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp8 = new RunProperties(new Bold());
+                tr8.Append(rp8);
+            } 
+            tr8.Append(new Text(WFCount != 0 ? $"{WFCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines8 = new SpacingBetweenLines(){ After = "0", Line = "280", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp8 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp8.Append(spacingBetweenLines8);
+
+            Paragraph p8 = new Paragraph(pp8);
+            p8.Append(tr8);
+                                        
+            TableCellProperties tcp8 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs8 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp8.Append(tcs8);
+            }
+            TableCellBorders tcb8 = new TableCellBorders(new RightBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U });
+            tcp8.Append(tcb8);
+
+            TableCell tc8 = new TableCell(tcp8);                    
+            tc8.Append(p8);
+            tr.Append(tc8);
+
+            // B/T Column
+            int BTCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Black");
+            Run tr9 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp9 = new RunProperties(new Bold());
+                tr9.Append(rp9);
+            } 
+            tr9.Append(new Text(BTCount != 0 ? $"{BTCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines9 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp9 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp9.Append(spacingBetweenLines9);
+
+            Paragraph p9 = new Paragraph(pp9);
+            p9.Append(tr9);
+                    
+            TableCellProperties tcp9 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs9 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp9.Append(tcs9);
+            }
+            TableCell tc9 = new TableCell(tcp9);                                        
+                    
+            tc9.Append(p9);                    
+            tr.Append(tc9);
+
+            // H/T Column
+            int HTCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Hispanic");
+            Run tr10 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp10 = new RunProperties(new Bold());
+                tr10.Append(rp10);
+            } 
+            tr10.Append(new Text(HTCount != 0 ? $"{HTCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines10 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp10 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp10.Append(spacingBetweenLines10);
+
+            Paragraph p10 = new Paragraph(pp10);
+            p10.Append(tr10);
+                    
+            TableCellProperties tcp10 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs10 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp10.Append(tcs10);
+            }
+            TableCell tc10 = new TableCell(tcp10);                                        
+                    
+            tc10.Append(p10);                    
+            tr.Append(tc10);
+
+            // A/T Column
+            int ATCount = MemberList.Count(x => x.Race.MemberRaceFullName == "Asian");
+            Run tr11 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp11 = new RunProperties(new Bold());
+                tr11.Append(rp11);
+            } 
+            tr11.Append(new Text(ATCount != 0 ? $"{ATCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines11 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp11 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp11.Append(spacingBetweenLines11);
+
+            Paragraph p11 = new Paragraph(pp11);
+            p11.Append(tr11);
+                    
+            TableCellProperties tcp11 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs11 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp11.Append(tcs11);
+            }
+            TableCell tc11 = new TableCell(tcp11);                                        
+                    
+            tc11.Append(p11);                    
+            tr.Append(tc11);
+
+            // W/T Column
+            int WTCount = MemberList.Count(x => x.Race.MemberRaceFullName == "White");
+            Run tr12 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp12 = new RunProperties(new Bold());
+                tr12.Append(rp12);
+            }         
+            tr12.Append(new Text(WTCount != 0 ? $"{WTCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines12 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp12 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp12.Append(spacingBetweenLines12);
+
+            Paragraph p12 = new Paragraph(pp12);
+            p12.Append(tr12);
+                                        
+            TableCellProperties tcp12 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs12 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp12.Append(tcs12);
+            }
+            TableCellBorders tcb12 = new TableCellBorders(new RightBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U });
+            tcp12.Append(tcb12);
+
+            TableCell tc12 = new TableCell(tcp12);                    
+            tc12.Append(p12);
+            tr.Append(tc12);
+
+            // TotalForRank column
+            int RankTotalCount = MemberList.Count;
+            Run tr13 = new Run();
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                RunProperties rp13 = new RunProperties(new Bold());
+                tr13.Append(rp13);
+            }  
+            tr13.Append(new Text(RankTotalCount != 0 ? $"{RankTotalCount}" : "-"));
+            SpacingBetweenLines spacingBetweenLines13 = new SpacingBetweenLines(){ After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            ParagraphProperties pp13 = new ParagraphProperties(new Justification(){ Val = JustificationValues.Center });
+            pp13.Append(spacingBetweenLines13);
+
+            Paragraph p13 = new Paragraph(pp13);
+            p13.Append(tr13);
+                                        
+            TableCellProperties tcp13 = new TableCellProperties(new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center });
+            if (ColumnName == "Sworn" || ColumnName == "Total")
+            {
+                Shading tcs13 = new Shading(){ Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+                tcp13.Append(tcs13);
+            }
+            TableCellBorders tcb13 = new TableCellBorders(new RightBorder(){ Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)13U, Space = (UInt32Value)0U });
+            tcp13.Append(tcb13);
+
+            TableCell tc13 = new TableCell(tcp13);                    
+            tc13.Append(p13);
+            tr.Append(tc13);
+            return tr;
+        }
     }
 }

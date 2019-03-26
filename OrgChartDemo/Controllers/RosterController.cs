@@ -85,6 +85,10 @@ namespace OrgChartDemo.Controllers
                 // pull Member from Repo
                 Member m = unitOfWork.Members.GetMemberWithPosition(memberId);
                 // pull the Member's current Position
+                if (m.Position == null)
+                {
+                    m.Position = unitOfWork.Positions.Find(x => x.Name == "Unassigned").First();
+                }
                 Position oldPosition = unitOfWork.Positions.GetPositionWithParentComponent(m.Position.PositionId);
                 // pull the new Position to which we are going to assign the member
                 Position newPosition = unitOfWork.Positions.GetPositionWithParentComponent(positionId);

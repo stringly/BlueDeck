@@ -125,8 +125,9 @@ namespace OrgChartDemo.Persistence.Repositories
             {
                 m = new Member();
             }
-            
-            m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+            if (form.PositionId != null){ 
+                m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+            }
             m.Rank = ApplicationDbContext.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
             m.Gender = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
             m.Race = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
