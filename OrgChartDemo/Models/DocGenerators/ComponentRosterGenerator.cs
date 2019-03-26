@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Models.DocGenerators
 {
@@ -29,14 +30,29 @@ namespace OrgChartDemo.Models.DocGenerators
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(mem, true))
             {
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
-                HeaderPart headerPart1 = mainPart.AddNewPart<HeaderPart>();
+                HeaderPart headerPart1 = mainPart.AddNewPart<HeaderPart>();                
+                //FooterPart footerPart1 = mainPart.AddNewPart<FooterPart>();
+                string headerPartId = mainPart.GetIdOfPart(headerPart1);
+                //string footerPartId = mainPart.GetIdOfPart(footerPart1);
                 GenerateHeaderPart1Content(headerPart1);
-                FooterPart footerPart1 = mainPart.AddNewPart<FooterPart>();
-                GenerateFooterPartContent(footerPart1);
-                Table initialTable = mainPart.Document.Body.Elements<Table>().ElementAt(0);
-                foreach(Component c in Components)
+                //GenerateFooterPartContent(footerPart1);
+                // Get SectionProperties and Replace HeaderReference and FooterRefernce with new Id
+                IEnumerable<SectionProperties> sections = mainPart.Document.Body.Elements<SectionProperties>();
+
+                foreach (var section in sections)
+                {
+                    // Delete existing references to headers and footers
+                    section.RemoveAllChildren<HeaderReference>();
+                    section.RemoveAllChildren<FooterReference>();
+
+                    // Create the new header and footer reference node
+                    section.PrependChild(new HeaderReference() { Id = headerPartId });
+                    //section.PrependChild(new FooterReference() { Id = footerPartId });
+                }
+                foreach (Component c in Components)
                 {
                     mainPart.Document.Body.Append(GenerateComponentTable(c));
+                    mainPart.Document.Body.Append(new Paragraph());
                 }
                 mainPart.Document.Save();
             }
@@ -140,21 +156,39 @@ namespace OrgChartDemo.Models.DocGenerators
             part.Footer = footer1;
         }
 
-        public Table GenerateComponentTable(Component c)
+        private Table GenerateComponentTable(Component c)
         {
-            Table table1 = new Table();
+            Table ComponentTable = new Table();
+            ComponentTable.Append(GenerateComponentTableProperties());
+            ComponentTable.Append(GenerateComponentTableGrid());
+            ComponentTable.Append(GenerateComponentTableHeaderRow(c.Name, c.ComponentId));
+            ComponentTable.Append(GenerateComponentTablePositionRow(c.Name, c.Positions?.ToList() ?? new List<Position>()));
+            
+            List<Component> childComponents = Components.Where(x => x.ParentComponent.ComponentId == c.ComponentId).OrderBy(x => x.LineupPosition).ToList();
+            if (childComponents.Count > 0)
+            {
+                ComponentTable.Append(GenerateComponentTableChildComponentRow(c.Name, childComponents));
+            }
+            ComponentTable.Append(GenerateComponentTableDemographicRow(c));
+            return ComponentTable;
+        }
 
+        // Methods that Generate the parts of the Component Table
+
+
+        private TableProperties GenerateComponentTableProperties()
+        {
             TableProperties tableProperties1 = new TableProperties();
-            TableStyle tableStyle1 = new TableStyle(){ Val = "TableGrid" };
-            TableWidth tableWidth1 = new TableWidth(){ Width = "14400", Type = TableWidthUnitValues.Dxa };
+            TableStyle tableStyle1 = new TableStyle() { Val = "TableGrid" };
+            TableWidth tableWidth1 = new TableWidth() { Width = "14400", Type = TableWidthUnitValues.Dxa };
 
             TableBorders tableBorders1 = new TableBorders();
-            TopBorder topBorder1 = new TopBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            LeftBorder leftBorder1 = new LeftBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            BottomBorder bottomBorder1 = new BottomBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            RightBorder rightBorder1 = new RightBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideHorizontalBorder insideHorizontalBorder1 = new InsideHorizontalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideVerticalBorder insideVerticalBorder1 = new InsideVerticalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            InsideHorizontalBorder insideHorizontalBorder1 = new InsideHorizontalBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            InsideVerticalBorder insideVerticalBorder1 = new InsideVerticalBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
 
             tableBorders1.Append(topBorder1);
             tableBorders1.Append(leftBorder1);
@@ -162,70 +196,83 @@ namespace OrgChartDemo.Models.DocGenerators
             tableBorders1.Append(rightBorder1);
             tableBorders1.Append(insideHorizontalBorder1);
             tableBorders1.Append(insideVerticalBorder1);
-            TableLook tableLook1 = new TableLook(){ Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+            TableLook tableLook1 = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
 
             tableProperties1.Append(tableStyle1);
             tableProperties1.Append(tableWidth1);
             tableProperties1.Append(tableBorders1);
             tableProperties1.Append(tableLook1);
-
+            return tableProperties1;
+        }
+        private TableGrid GenerateComponentTableGrid()
+        {
             TableGrid tableGrid1 = new TableGrid();
-            GridColumn gridColumn1 = new GridColumn(){ Width = "450" };
-            GridColumn gridColumn2 = new GridColumn(){ Width = "13950" };
+            GridColumn gridColumn1 = new GridColumn() { Width = "450" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "13950" };
 
             tableGrid1.Append(gridColumn1);
             tableGrid1.Append(gridColumn2);
-
+            return tableGrid1;
+        }
+        /// <summary>
+        /// Generates the Header Row for a Component Table.
+        /// </summary>
+        /// <param name="_componentName">Name of the component. This is required to populate the Table title and the link Bookmark</param>
+        /// <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
+        /// <returns></returns>
+        private TableRow GenerateComponentTableHeaderRow(string _componentName, int _componentId)
+        {
             TableRow tableRow1 = new TableRow();
 
             TableRowProperties tableRowProperties1 = new TableRowProperties();
-            CantSplit cantSplit1 = new CantSplit();
-            TableRowHeight tableRowHeight1 = new TableRowHeight(){ Val = (UInt32Value)603U };
+            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)603U };
 
-            tableRowProperties1.Append(cantSplit1);
             tableRowProperties1.Append(tableRowHeight1);
 
             TableCell tableCell1 = new TableCell();
 
             TableCellProperties tableCellProperties1 = new TableCellProperties();
-            TableCellWidth tableCellWidth1 = new TableCellWidth(){ Width = "14400", Type = TableWidthUnitValues.Dxa };
-            GridSpan gridSpan1 = new GridSpan(){ Val = 2 };
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "14400", Type = TableWidthUnitValues.Dxa };
+            GridSpan gridSpan1 = new GridSpan() { Val = 2 };
 
             TableCellBorders tableCellBorders1 = new TableCellBorders();
-            TopBorder topBorder2 = new TopBorder(){ Val = BorderValues.Single, Color = "767171", ThemeColor = ThemeColorValues.Background2, ThemeShade = "80", Size = (UInt32Value)18U, Space = (UInt32Value)0U };
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Single, Color = "767171", ThemeColor = ThemeColorValues.Background2, ThemeShade = "80", Size = (UInt32Value)18U, Space = (UInt32Value)0U };
 
-            tableCellBorders1.Append(topBorder2);
-            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center };
+            tableCellBorders1.Append(topBorder1);
+            Shading shading1 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "D9D9D9", ThemeFill = ThemeColorValues.Background1, ThemeFillShade = "D9" };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
 
             tableCellProperties1.Append(tableCellWidth1);
             tableCellProperties1.Append(gridSpan1);
             tableCellProperties1.Append(tableCellBorders1);
+            tableCellProperties1.Append(shading1);
             tableCellProperties1.Append(tableCellVerticalAlignment1);
 
             Paragraph paragraph1 = new Paragraph();
-            BookmarkStart bookmarkStart1 = new BookmarkStart(){ Name = $"{c.Name}", Id = $"{c.ComponentId}"};
-            BookmarkEnd bookmarkEnd1 = new BookmarkEnd(){Id = $"{c.ComponentId}"};
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+            KeepNext keepNext1 = new KeepNext();
+            paragraphProperties1.Append(keepNext1);
+
+            BookmarkStart bookmarkStart1 = new BookmarkStart() { Name = $"{_componentName}", Id = $"{_componentId}" };
+            BookmarkEnd bookmarkEnd1 = new BookmarkEnd() { Id = $"{_componentId}" };
 
             Run run1 = new Run();
+
             RunProperties runProperties1 = new RunProperties();
-            FontSize fontSize1 = new FontSize(){ Val = "32" };
+            Color color1 = new Color() { Val = "009999" };
+            FontSize fontSize1 = new FontSize() { Val = "32" };
+
+            runProperties1.Append(color1);
             runProperties1.Append(fontSize1);
             Text text1 = new Text();
-            text1.Text = $"{c.Name}";
+            text1.Text = $"{_componentName}";
+
             run1.Append(runProperties1);
             run1.Append(text1);
 
-
-            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
-            KeepNext keepNext1 = new KeepNext();
-            KeepLines keepLines1 = new KeepLines();
-
-            paragraphProperties1.Append(keepNext1);
-            paragraphProperties1.Append(keepLines1);
-
-            paragraph1.Append(paragraphProperties1);
             paragraph1.Append(bookmarkStart1);
             paragraph1.Append(bookmarkEnd1);
+            paragraph1.Append(paragraphProperties1);
             paragraph1.Append(run1);
 
             tableCell1.Append(tableCellProperties1);
@@ -233,35 +280,360 @@ namespace OrgChartDemo.Models.DocGenerators
 
             tableRow1.Append(tableRowProperties1);
             tableRow1.Append(tableCell1);
+            return tableRow1;
+        }
+        private TableRow GenerateComponentTablePositionRow(string _componentName, List<Position> _positions)
+        {
+            TableRow tableRow1 = new TableRow();
 
-            TableRow tableRow2 = new TableRow();
+            TableRowProperties tableRowProperties1 = new TableRowProperties();
+            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)1080U };
 
-            TableRowProperties tableRowProperties2 = new TableRowProperties();
-            CantSplit cantSplit2 = new CantSplit();
-            TableRowHeight tableRowHeight2 = new TableRowHeight(){ Val = (UInt32Value)1080U };
+            tableRowProperties1.Append(tableRowHeight1);
 
-            tableRowProperties2.Append(cantSplit2);
-            tableRowProperties2.Append(tableRowHeight2);
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellVerticalAlignment1);
+            Paragraph paragraph1 = new Paragraph();
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();            
+            KeepNext keepNext1 = new KeepNext();
+            paragraphProperties1.Append(keepNext1);
+            paragraph1.Append(paragraphProperties1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
 
             TableCell tableCell2 = new TableCell();
 
             TableCellProperties tableCellProperties2 = new TableCellProperties();
-            TableCellWidth tableCellWidth2 = new TableCellWidth(){ Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center };
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "13950", Type = TableWidthUnitValues.Dxa };
+            Shading shading1 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
 
             tableCellProperties2.Append(tableCellWidth2);
-            tableCellProperties2.Append(tableCellVerticalAlignment2);
+            tableCellProperties2.Append(shading1);
 
             Paragraph paragraph2 = new Paragraph();
 
             ParagraphProperties paragraphProperties2 = new ParagraphProperties();
             KeepNext keepNext2 = new KeepNext();
-            KeepLines keepLines2 = new KeepLines();
-
             paragraphProperties2.Append(keepNext2);
-            paragraphProperties2.Append(keepLines2);
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            Bold bold1 = new Bold();
+            Color color1 = new Color() { Val = "009999" };
+
+            paragraphMarkRunProperties1.Append(bold1);
+            paragraphMarkRunProperties1.Append(color1);
+
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
 
             paragraph2.Append(paragraphProperties2);
+            // Begin Generating the Positions Sub Table
+
+            // Start by Generating Sub Table with the header row
+            Table table1 = GeneratePositionSubTableWithHeaderRow(_componentName);
+            // Then add a row for each Position in the _positions Parameter
+            foreach(Position p in _positions)
+            {
+                foreach(Member m in p.Members)
+                {
+                    table1.Append(GeneratePositionSubTablePositionRow(m));
+                }
+                
+            }
+
+            Paragraph paragraph3 = new Paragraph();
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();            
+            KeepNext keepNext3 = new KeepNext();
+            paragraphProperties3.Append(keepNext3);
+            paragraph3.Append(paragraphProperties3);
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+            // Position sub table is appended here
+            tableCell2.Append(table1);
+            tableCell2.Append(paragraph3);
+
+            tableRow1.Append(tableRowProperties1);
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            return tableRow1;
+        }
+        private TableRow GenerateComponentTableChildComponentRow(string _componentName, List<Component> _components)
+        {
+            // Create new Table Row
+            TableRow tableRow1 = new TableRow();
+
+            // Create Row Properties
+            TableRowProperties tableRowProperties1 = new TableRowProperties();
+            CantSplit cantSplit1 = new CantSplit();
+            tableRowProperties1.Append(cantSplit1);
+            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)1233U };
+
+            tableRowProperties1.Append(tableRowHeight1);
+            // Append properties to table row
+            tableRow1.Append(tableRowProperties1);
+
+            // Create first column empty cell
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellVerticalAlignment1);
+            Paragraph paragraph1 = new Paragraph();
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            // append first column
+            tableRow1.Append(tableCell1);
+            // create second column, which will contain the sub-table
+            TableCell tableCell2 = new TableCell();
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "13950", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCell2.Append(tableCellProperties2);
+
+            // spacer paragraph
+            Paragraph paragraph2 = new Paragraph();
+            tableCell2.Append(paragraph2);
+
+            //// generate Sub Table here
+            Table table1 = GenerateChildComponentSubTableWithHeaderRow(_componentName);
+            foreach (Component c in _components)
+            {
+                table1.Append(GenerateChildComponentSubTableComponentRow(c));
+            }
+            tableCell2.Append(table1);
+
+            // final spacer paragraph
+
+            Paragraph paragraph3 = new Paragraph();
+            tableCell2.Append(paragraph3);
+
+            // append second column
+            tableRow1.Append(tableCell2);
+            return tableRow1;
+
+        }
+        private TableRow GenerateComponentTableDemographicRow(Component _component)
+        {
+            // Create new Table Row
+            TableRow tableRow1 = new TableRow();
+
+            // Create Row Properties
+            TableRowProperties tableRowProperties1 = new TableRowProperties();
+            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)1233U };
+            CantSplit cantSplit1 = new CantSplit();
+            tableRowProperties1.Append(cantSplit1);
+            tableRowProperties1.Append(tableRowHeight1);
+            // Append properties to table row
+            tableRow1.Append(tableRowProperties1);
+
+            // Create first column empty cell
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellVerticalAlignment1);
+            Paragraph paragraph1 = new Paragraph();
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            // append first column
+            tableRow1.Append(tableCell1);
+            // create second column, which will contain the sub-table
+            TableCell tableCell2 = new TableCell();
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "13950", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCell2.Append(tableCellProperties2);
+
+            // spacer paragraph
+            Paragraph paragraph2 = new Paragraph();
+            tableCell2.Append(paragraph2);
+
+            // generate Sub Table here
+            Table table1 = GenerateComponentDemoTable(_component.Name);
+
+            // APPEND DEMO ROWS HERE
+            List<Member> allMembers = RecurseForMembers(_component, new List<Member>());
+            List<MemberRank> distinctRankList = allMembers.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
+
+            foreach (MemberRank r in distinctRankList)
+            {
+                List<Member> RankMembers = allMembers.Where(x => x.Rank == r).ToList();
+                table1.Append(GenerateDemoTableRow(r.RankFullName, RankMembers));
+            }
+            table1.Append(GenerateDemoTableRow("Total", allMembers));
+            tableCell2.Append(table1);
+
+            // final spacer paragraph
+
+            Paragraph paragraph3 = new Paragraph();
+            tableCell2.Append(paragraph3);
+            Paragraph paragraph4 = new Paragraph();
+            tableCell2.Append(paragraph4);
+
+            // append second column
+            tableRow1.Append(tableCell2);
+            return tableRow1;
+        }
+
+        // Component Table Sub Table Methods
+
+        // Position Sub-Table
+        private Table GeneratePositionSubTableWithHeaderRow(string _componentName)
+        {
+            // Make new table
+            Table PositionSubTable = new Table();
+            // Make new table Properties
+            TableProperties tableProperties1 = new TableProperties();
+            TableStyle tableStyle1 = new TableStyle() { Val = "TableGrid" };
+            TableWidth tableWidth1 = new TableWidth() { Width = "0", Type = TableWidthUnitValues.Auto };
+            TableLook tableLook1 = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+
+            tableProperties1.Append(tableStyle1);
+            tableProperties1.Append(tableWidth1);
+            tableProperties1.Append(tableLook1);
+            // Append Table Properties to Table
+            PositionSubTable.Append(tableProperties1);
+
+            // Make new TableGrid
+            TableGrid tableGrid1 = new TableGrid();
+            GridColumn gridColumn1 = new GridColumn() { Width = "4401" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "4401" };
+            GridColumn gridColumn3 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn4 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn5 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn6 = new GridColumn() { Width = "1233" };
+
+            tableGrid1.Append(gridColumn1);
+            tableGrid1.Append(gridColumn2);
+            tableGrid1.Append(gridColumn3);
+            tableGrid1.Append(gridColumn4);
+            tableGrid1.Append(gridColumn5);
+            tableGrid1.Append(gridColumn6);
+            // Append TableGrid to Table
+            PositionSubTable.Append(tableGrid1);
+
+            // Create Header Row
+            TableRow tableRow1 = new TableRow() { RsidTableRowAddition = "00971797", RsidTableRowProperties = "005D464F" };
+
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "4401", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders1 = new TableCellBorders();
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders1.Append(topBorder1);
+            tableCellBorders1.Append(leftBorder1);
+            tableCellBorders1.Append(bottomBorder1);
+            tableCellBorders1.Append(rightBorder1);
+            Shading shading1 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellBorders1);
+            tableCellProperties1.Append(shading1);
+            tableCellProperties1.Append(tableCellVerticalAlignment1);
+
+            Paragraph paragraph1 = new Paragraph();
+
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            Color color1 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties1.Append(color1);
+
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+            Run run1 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties1 = new RunProperties();
+            Color color2 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold1 = new Bold();
+            runProperties1.Append(bold1);
+            runProperties1.Append(color2);
+            Text text1 = new Text();
+            text1.Text = $"{_componentName} Positions";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            paragraph1.Append(paragraphProperties1);
+            paragraph1.Append(run1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "4401", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders2 = new TableCellBorders();
+            TopBorder topBorder2 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder2 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder2 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders2.Append(topBorder2);
+            tableCellBorders2.Append(leftBorder2);
+            tableCellBorders2.Append(bottomBorder2);
+            tableCellBorders2.Append(rightBorder2);
+            Shading shading2 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCellProperties2.Append(tableCellBorders2);
+            tableCellProperties2.Append(shading2);
+            tableCellProperties2.Append(tableCellVerticalAlignment2);
+
+            Paragraph paragraph2 = new Paragraph();
+
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties2 = new ParagraphMarkRunProperties();
+            Color color3 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties2.Append(color3);
+
+            paragraphProperties2.Append(paragraphMarkRunProperties2);
+
+            Run run2 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties2 = new RunProperties();
+            Color color4 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold2 = new Bold();
+            runProperties2.Append(bold2);
+            runProperties2.Append(color4);
+            Text text2 = new Text();
+            text2.Text = "Name";
+
+            run2.Append(runProperties2);
+            run2.Append(text2);
+
+            paragraph2.Append(paragraphProperties2);
+            paragraph2.Append(run2);
 
             tableCell2.Append(tableCellProperties2);
             tableCell2.Append(paragraph2);
@@ -269,602 +641,1526 @@ namespace OrgChartDemo.Models.DocGenerators
             TableCell tableCell3 = new TableCell();
 
             TableCellProperties tableCellProperties3 = new TableCellProperties();
-            TableCellWidth tableCellWidth3 = new TableCellWidth(){ Width = "13950", Type = TableWidthUnitValues.Dxa };
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders3 = new TableCellBorders();
+            TopBorder topBorder3 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder3 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder3 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders3.Append(topBorder3);
+            tableCellBorders3.Append(leftBorder3);
+            tableCellBorders3.Append(bottomBorder3);
+            tableCellBorders3.Append(rightBorder3);
+            Shading shading3 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
 
             tableCellProperties3.Append(tableCellWidth3);
-
-            
-
-            Paragraph paragraph8 = new Paragraph();
-
-            ParagraphProperties paragraphProperties8 = new ParagraphProperties();
-            KeepLines keepLines8 = new KeepLines();
-
-            paragraphProperties8.Append(keepLines8);
-
-            paragraph8.Append(paragraphProperties8);
-
-            tableCell3.Append(tableCellProperties3);
-            // TODO: Append Positions table here
-            tableCell3.Append(GeneratePositionsSubTable(c.Positions.ToList()));
-            tableCell3.Append(paragraph8);
-
-            tableRow2.Append(tableRowProperties2);
-            tableRow2.Append(tableCell2);
-            tableRow2.Append(tableCell3);
-
-            TableRow tableRow4 = new TableRow();
-
-            TableRowProperties tableRowProperties3 = new TableRowProperties();
-            CantSplit cantSplit3 = new CantSplit();
-            TableRowHeight tableRowHeight3 = new TableRowHeight(){ Val = (UInt32Value)1233U };
-
-            tableRowProperties3.Append(cantSplit3);
-            tableRowProperties3.Append(tableRowHeight3);
-
-            TableCell tableCell9 = new TableCell();
-
-            TableCellProperties tableCellProperties9 = new TableCellProperties();
-            TableCellWidth tableCellWidth9 = new TableCellWidth(){ Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center };
-
-            tableCellProperties9.Append(tableCellWidth9);
-            tableCellProperties9.Append(tableCellVerticalAlignment3);
-
-            Paragraph paragraph9 = new Paragraph();
-
-            ParagraphProperties paragraphProperties9 = new ParagraphProperties();
-            KeepNext keepNext3 = new KeepNext();
-            KeepLines keepLines9 = new KeepLines();
-
-            paragraphProperties9.Append(keepNext3);
-            paragraphProperties9.Append(keepLines9);
-
-            paragraph9.Append(paragraphProperties9);
-
-            tableCell9.Append(tableCellProperties9);
-            tableCell9.Append(paragraph9);
-
-            TableCell tableCell10 = new TableCell();
-
-            TableCellProperties tableCellProperties10 = new TableCellProperties();
-            TableCellWidth tableCellWidth10 = new TableCellWidth(){ Width = "13950", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties10.Append(tableCellWidth10);
-
-            Table table3 = new Table();
-
-            TableProperties tableProperties3 = new TableProperties();
-            TableStyle tableStyle3 = new TableStyle(){ Val = "TableGrid" };
-            TableWidth tableWidth3 = new TableWidth(){ Width = "0", Type = TableWidthUnitValues.Auto };
-
-            TableBorders tableBorders3 = new TableBorders();
-            TopBorder topBorder4 = new TopBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            LeftBorder leftBorder3 = new LeftBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            BottomBorder bottomBorder3 = new BottomBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            RightBorder rightBorder3 = new RightBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideHorizontalBorder insideHorizontalBorder3 = new InsideHorizontalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideVerticalBorder insideVerticalBorder3 = new InsideVerticalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-
-            tableBorders3.Append(topBorder4);
-            tableBorders3.Append(leftBorder3);
-            tableBorders3.Append(bottomBorder3);
-            tableBorders3.Append(rightBorder3);
-            tableBorders3.Append(insideHorizontalBorder3);
-            tableBorders3.Append(insideVerticalBorder3);
-            TableLook tableLook3 = new TableLook(){ Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
-
-            tableProperties3.Append(tableStyle3);
-            tableProperties3.Append(tableWidth3);
-            tableProperties3.Append(tableBorders3);
-            tableProperties3.Append(tableLook3);
-
-            TableGrid tableGrid3 = new TableGrid();
-            GridColumn gridColumn8 = new GridColumn(){ Width = "2744" };
-            GridColumn gridColumn9 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn10 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn11 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn12 = new GridColumn(){ Width = "2745" };
-
-            tableGrid3.Append(gridColumn8);
-            tableGrid3.Append(gridColumn9);
-            tableGrid3.Append(gridColumn10);
-            tableGrid3.Append(gridColumn11);
-            tableGrid3.Append(gridColumn12);
-
-            TableRow tableRow5 = new TableRow();
-
-            TableCell tableCell11 = new TableCell();
-
-            TableCellProperties tableCellProperties11 = new TableCellProperties();
-            TableCellWidth tableCellWidth11 = new TableCellWidth(){ Width = "2744", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties11.Append(tableCellWidth11);
-
-            Paragraph paragraph10 = new Paragraph();
-
-            ParagraphProperties paragraphProperties10 = new ParagraphProperties();
-            KeepLines keepLines10 = new KeepLines();
-
-            paragraphProperties10.Append(keepLines10);
-
-            paragraph10.Append(paragraphProperties10);
-
-            tableCell11.Append(tableCellProperties11);
-            tableCell11.Append(paragraph10);
-
-            TableCell tableCell12 = new TableCell();
-
-            TableCellProperties tableCellProperties12 = new TableCellProperties();
-            TableCellWidth tableCellWidth12 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties12.Append(tableCellWidth12);
-
-            Paragraph paragraph11 = new Paragraph();
-
-            ParagraphProperties paragraphProperties11 = new ParagraphProperties();
-            KeepLines keepLines11 = new KeepLines();
-
-            paragraphProperties11.Append(keepLines11);
-
-            paragraph11.Append(paragraphProperties11);
-
-            tableCell12.Append(tableCellProperties12);
-            tableCell12.Append(paragraph11);
-
-            TableCell tableCell13 = new TableCell();
-
-            TableCellProperties tableCellProperties13 = new TableCellProperties();
-            TableCellWidth tableCellWidth13 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties13.Append(tableCellWidth13);
-
-            Paragraph paragraph12 = new Paragraph();
-
-            ParagraphProperties paragraphProperties12 = new ParagraphProperties();
-            KeepLines keepLines12 = new KeepLines();
-
-            paragraphProperties12.Append(keepLines12);
-
-            paragraph12.Append(paragraphProperties12);
-
-            tableCell13.Append(tableCellProperties13);
-            tableCell13.Append(paragraph12);
-
-            TableCell tableCell14 = new TableCell();
-
-            TableCellProperties tableCellProperties14 = new TableCellProperties();
-            TableCellWidth tableCellWidth14 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties14.Append(tableCellWidth14);
-
-            Paragraph paragraph13 = new Paragraph();
-
-            ParagraphProperties paragraphProperties13 = new ParagraphProperties();
-            KeepLines keepLines13 = new KeepLines();
-
-            paragraphProperties13.Append(keepLines13);
-
-            paragraph13.Append(paragraphProperties13);
-
-            tableCell14.Append(tableCellProperties14);
-            tableCell14.Append(paragraph13);
-
-            TableCell tableCell15 = new TableCell();
-
-            TableCellProperties tableCellProperties15 = new TableCellProperties();
-            TableCellWidth tableCellWidth15 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties15.Append(tableCellWidth15);
-
-            Paragraph paragraph14 = new Paragraph();
-
-            ParagraphProperties paragraphProperties14 = new ParagraphProperties();
-            KeepLines keepLines14 = new KeepLines();
-
-            paragraphProperties14.Append(keepLines14);
-
-            paragraph14.Append(paragraphProperties14);
-
-            tableCell15.Append(tableCellProperties15);
-            tableCell15.Append(paragraph14);
-
-            tableRow5.Append(tableCell11);
-            tableRow5.Append(tableCell12);
-            tableRow5.Append(tableCell13);
-            tableRow5.Append(tableCell14);
-            tableRow5.Append(tableCell15);
-
-            table3.Append(tableProperties3);
-            table3.Append(tableGrid3);
-            table3.Append(tableRow5);
-
-            Paragraph paragraph15 = new Paragraph();
-
-            ParagraphProperties paragraphProperties15 = new ParagraphProperties();
-            KeepLines keepLines15 = new KeepLines();
-
-            paragraphProperties15.Append(keepLines15);
-
-            paragraph15.Append(paragraphProperties15);
-
-            tableCell10.Append(tableCellProperties10);
-            tableCell10.Append(table3);
-            tableCell10.Append(paragraph15);
-
-            tableRow4.Append(tableRowProperties3);
-            tableRow4.Append(tableCell9);
-            tableRow4.Append(tableCell10);
-
-            TableRow tableRow6 = new TableRow();
-
-            TableRowProperties tableRowProperties4 = new TableRowProperties();
-            CantSplit cantSplit4 = new CantSplit();
-            TableRowHeight tableRowHeight4 = new TableRowHeight(){ Val = (UInt32Value)1233U };
-
-            tableRowProperties4.Append(cantSplit4);
-            tableRowProperties4.Append(tableRowHeight4);
-
-            TableCell tableCell16 = new TableCell();
-
-            TableCellProperties tableCellProperties16 = new TableCellProperties();
-            TableCellWidth tableCellWidth16 = new TableCellWidth(){ Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment(){ Val = TableVerticalAlignmentValues.Center };
-
-            tableCellProperties16.Append(tableCellWidth16);
-            tableCellProperties16.Append(tableCellVerticalAlignment4);
-
-            Paragraph paragraph16 = new Paragraph();
-
-            ParagraphProperties paragraphProperties16 = new ParagraphProperties();
-            KeepNext keepNext4 = new KeepNext();
-            KeepLines keepLines16 = new KeepLines();
-
-            paragraphProperties16.Append(keepNext4);
-            paragraphProperties16.Append(keepLines16);
-
-            paragraph16.Append(paragraphProperties16);
-
-            tableCell16.Append(tableCellProperties16);
-            tableCell16.Append(paragraph16);
-
-            TableCell tableCell17 = new TableCell();
-
-            TableCellProperties tableCellProperties17 = new TableCellProperties();
-            TableCellWidth tableCellWidth17 = new TableCellWidth(){ Width = "13950", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties17.Append(tableCellWidth17);
-
-            Table table4 = new Table();
-
-            TableProperties tableProperties4 = new TableProperties();
-            TableStyle tableStyle4 = new TableStyle(){ Val = "TableGrid" };
-            TableWidth tableWidth4 = new TableWidth(){ Width = "0", Type = TableWidthUnitValues.Auto };
-
-            TableBorders tableBorders4 = new TableBorders();
-            TopBorder topBorder5 = new TopBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            LeftBorder leftBorder4 = new LeftBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            BottomBorder bottomBorder4 = new BottomBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            RightBorder rightBorder4 = new RightBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideHorizontalBorder insideHorizontalBorder4 = new InsideHorizontalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideVerticalBorder insideVerticalBorder4 = new InsideVerticalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-
-            tableBorders4.Append(topBorder5);
-            tableBorders4.Append(leftBorder4);
-            tableBorders4.Append(bottomBorder4);
-            tableBorders4.Append(rightBorder4);
-            tableBorders4.Append(insideHorizontalBorder4);
-            tableBorders4.Append(insideVerticalBorder4);
-            TableLook tableLook4 = new TableLook(){ Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
-
-            tableProperties4.Append(tableStyle4);
-            tableProperties4.Append(tableWidth4);
-            tableProperties4.Append(tableBorders4);
-            tableProperties4.Append(tableLook4);
-
-            TableGrid tableGrid4 = new TableGrid();
-            GridColumn gridColumn13 = new GridColumn(){ Width = "2744" };
-            GridColumn gridColumn14 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn15 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn16 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn17 = new GridColumn(){ Width = "2745" };
-
-            tableGrid4.Append(gridColumn13);
-            tableGrid4.Append(gridColumn14);
-            tableGrid4.Append(gridColumn15);
-            tableGrid4.Append(gridColumn16);
-            tableGrid4.Append(gridColumn17);
-
-            TableRow tableRow7 = new TableRow();
-
-            TableCell tableCell18 = new TableCell();
-
-            TableCellProperties tableCellProperties18 = new TableCellProperties();
-            TableCellWidth tableCellWidth18 = new TableCellWidth(){ Width = "2744", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties18.Append(tableCellWidth18);
-
-            Paragraph paragraph17 = new Paragraph();
-
-            ParagraphProperties paragraphProperties17 = new ParagraphProperties();
-            KeepLines keepLines17 = new KeepLines();
-
-            paragraphProperties17.Append(keepLines17);
-
-            paragraph17.Append(paragraphProperties17);
-
-            tableCell18.Append(tableCellProperties18);
-            tableCell18.Append(paragraph17);
-
-            TableCell tableCell19 = new TableCell();
-
-            TableCellProperties tableCellProperties19 = new TableCellProperties();
-            TableCellWidth tableCellWidth19 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties19.Append(tableCellWidth19);
-
-            Paragraph paragraph18 = new Paragraph();
-
-            ParagraphProperties paragraphProperties18 = new ParagraphProperties();
-            KeepLines keepLines18 = new KeepLines();
-
-            paragraphProperties18.Append(keepLines18);
-
-            paragraph18.Append(paragraphProperties18);
-
-            tableCell19.Append(tableCellProperties19);
-            tableCell19.Append(paragraph18);
-
-            TableCell tableCell20 = new TableCell();
-
-            TableCellProperties tableCellProperties20 = new TableCellProperties();
-            TableCellWidth tableCellWidth20 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties20.Append(tableCellWidth20);
-
-            Paragraph paragraph19 = new Paragraph();
-
-            ParagraphProperties paragraphProperties19 = new ParagraphProperties();
-            KeepLines keepLines19 = new KeepLines();
-
-            paragraphProperties19.Append(keepLines19);
-
-            paragraph19.Append(paragraphProperties19);
-
-            tableCell20.Append(tableCellProperties20);
-            tableCell20.Append(paragraph19);
-
-            TableCell tableCell21 = new TableCell();
-
-            TableCellProperties tableCellProperties21 = new TableCellProperties();
-            TableCellWidth tableCellWidth21 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties21.Append(tableCellWidth21);
-
-            Paragraph paragraph20 = new Paragraph();
-
-            ParagraphProperties paragraphProperties20 = new ParagraphProperties();
-            KeepLines keepLines20 = new KeepLines();
-
-            paragraphProperties20.Append(keepLines20);
-
-            paragraph20.Append(paragraphProperties20);
-
-            tableCell21.Append(tableCellProperties21);
-            tableCell21.Append(paragraph20);
-
-            TableCell tableCell22 = new TableCell();
-
-            TableCellProperties tableCellProperties22 = new TableCellProperties();
-            TableCellWidth tableCellWidth22 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties22.Append(tableCellWidth22);
-
-            Paragraph paragraph21 = new Paragraph();
-
-            ParagraphProperties paragraphProperties21 = new ParagraphProperties();
-            KeepLines keepLines21 = new KeepLines();
-
-            paragraphProperties21.Append(keepLines21);
-
-            paragraph21.Append(paragraphProperties21);
-
-            tableCell22.Append(tableCellProperties22);
-            tableCell22.Append(paragraph21);
-
-            tableRow7.Append(tableCell18);
-            tableRow7.Append(tableCell19);
-            tableRow7.Append(tableCell20);
-            tableRow7.Append(tableCell21);
-            tableRow7.Append(tableCell22);
-
-            table4.Append(tableProperties4);
-            table4.Append(tableGrid4);
-            table4.Append(tableRow7);
-
-            Paragraph paragraph22 = new Paragraph();
-
-            ParagraphProperties paragraphProperties22 = new ParagraphProperties();
-            KeepLines keepLines22 = new KeepLines();
-
-            paragraphProperties22.Append(keepLines22);
-
-            paragraph22.Append(paragraphProperties22);
-
-            tableCell17.Append(tableCellProperties17);
-            tableCell17.Append(table4);
-            tableCell17.Append(paragraph22);
-
-            tableRow6.Append(tableRowProperties4);
-            tableRow6.Append(tableCell16);
-            tableRow6.Append(tableCell17);
-
-            table1.Append(tableProperties1);
-            table1.Append(tableGrid1);
-            table1.Append(tableRow1);
-            table1.Append(tableRow2);
-            table1.Append(tableRow4);
-            table1.Append(tableRow6);
-            return table1;
-        }
-
-        private Table GeneratePositionsSubTable(List<Position> positions)
-        {
-            Table table2 = new Table();
-
-            TableProperties tableProperties2 = new TableProperties();
-            TableStyle tableStyle2 = new TableStyle(){ Val = "TableGrid" };
-            TableWidth tableWidth2 = new TableWidth(){ Width = "0", Type = TableWidthUnitValues.Auto };
-
-            TableBorders tableBorders2 = new TableBorders();
-            TopBorder topBorder3 = new TopBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            LeftBorder leftBorder2 = new LeftBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            BottomBorder bottomBorder2 = new BottomBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            RightBorder rightBorder2 = new RightBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideHorizontalBorder insideHorizontalBorder2 = new InsideHorizontalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-            InsideVerticalBorder insideVerticalBorder2 = new InsideVerticalBorder(){ Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
-
-            tableBorders2.Append(topBorder3);
-            tableBorders2.Append(leftBorder2);
-            tableBorders2.Append(bottomBorder2);
-            tableBorders2.Append(rightBorder2);
-            tableBorders2.Append(insideHorizontalBorder2);
-            tableBorders2.Append(insideVerticalBorder2);
-            TableLook tableLook2 = new TableLook(){ Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
-
-            tableProperties2.Append(tableStyle2);
-            tableProperties2.Append(tableWidth2);
-            tableProperties2.Append(tableBorders2);
-            tableProperties2.Append(tableLook2);
-
-            TableGrid tableGrid2 = new TableGrid();
-            GridColumn gridColumn3 = new GridColumn(){ Width = "2744" };
-            GridColumn gridColumn4 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn5 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn6 = new GridColumn(){ Width = "2745" };
-            GridColumn gridColumn7 = new GridColumn(){ Width = "2745" };
-
-            tableGrid2.Append(gridColumn3);
-            tableGrid2.Append(gridColumn4);
-            tableGrid2.Append(gridColumn5);
-            tableGrid2.Append(gridColumn6);
-            tableGrid2.Append(gridColumn7);
-
-            // Header Row
-            TableRow tableRow3 = new TableRow();
-
-            TableCell tableCell4 = new TableCell();
-
-            TableCellProperties tableCellProperties4 = new TableCellProperties();
-            TableCellWidth tableCellWidth4 = new TableCellWidth(){ Width = "2744", Type = TableWidthUnitValues.Dxa };
-
-            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties3.Append(tableCellBorders3);
+            tableCellProperties3.Append(shading3);
+            tableCellProperties3.Append(tableCellVerticalAlignment3);
 
             Paragraph paragraph3 = new Paragraph();
 
             ParagraphProperties paragraphProperties3 = new ParagraphProperties();
-            KeepLines keepLines3 = new KeepLines();
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
 
-            paragraphProperties3.Append(keepLines3);
+            ParagraphMarkRunProperties paragraphMarkRunProperties3 = new ParagraphMarkRunProperties();
+            Color color5 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties3.Append(color5);
+
+            paragraphProperties3.Append(justification1);
+            paragraphProperties3.Append(paragraphMarkRunProperties3);
+
+            Run run3 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties3 = new RunProperties();
+            Color color6 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold3 = new Bold();
+            runProperties3.Append(bold3);
+            runProperties3.Append(color6);
+            Text text3 = new Text();
+            text3.Text = "ID";
+
+            run3.Append(runProperties3);
+            run3.Append(text3);
+
+            Run run4 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties4 = new RunProperties();
+            Color color7 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            runProperties4.Append(color7);
+            Text text4 = new Text();
+            text4.Text = "#";
+
+            run4.Append(runProperties4);
+            run4.Append(text4);
 
             paragraph3.Append(paragraphProperties3);
+            paragraph3.Append(run3);
+            paragraph3.Append(run4);
 
-            tableCell4.Append(tableCellProperties4);
-            tableCell4.Append(paragraph3);
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
 
-            TableCell tableCell5 = new TableCell();
+            TableCell tableCell4 = new TableCell();
 
-            TableCellProperties tableCellProperties5 = new TableCellProperties();
-            TableCellWidth tableCellWidth5 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
 
-            tableCellProperties5.Append(tableCellWidth5);
+            TableCellBorders tableCellBorders4 = new TableCellBorders();
+            TopBorder topBorder4 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder4 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder4 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder4 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders4.Append(topBorder4);
+            tableCellBorders4.Append(leftBorder4);
+            tableCellBorders4.Append(bottomBorder4);
+            tableCellBorders4.Append(rightBorder4);
+            Shading shading4 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties4.Append(tableCellBorders4);
+            tableCellProperties4.Append(shading4);
+            tableCellProperties4.Append(tableCellVerticalAlignment4);
 
             Paragraph paragraph4 = new Paragraph();
 
             ParagraphProperties paragraphProperties4 = new ParagraphProperties();
-            KeepLines keepLines4 = new KeepLines();
+            Justification justification2 = new Justification() { Val = JustificationValues.Center };
 
-            paragraphProperties4.Append(keepLines4);
+            ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
+            Color color8 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties4.Append(color8);
+
+            paragraphProperties4.Append(justification2);
+            paragraphProperties4.Append(paragraphMarkRunProperties4);
+
+            Run run5 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties5 = new RunProperties();
+            Color color9 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold5 = new Bold();
+            runProperties5.Append(bold5);
+            runProperties5.Append(color9);
+            Text text5 = new Text();
+            text5.Text = "Call Sign";
+
+            run5.Append(runProperties5);
+            run5.Append(text5);
 
             paragraph4.Append(paragraphProperties4);
+            paragraph4.Append(run5);
 
-            tableCell5.Append(tableCellProperties5);
-            tableCell5.Append(paragraph4);
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
 
-            TableCell tableCell6 = new TableCell();
+            TableCell tableCell5 = new TableCell();
 
-            TableCellProperties tableCellProperties6 = new TableCellProperties();
-            TableCellWidth tableCellWidth6 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
 
-            tableCellProperties6.Append(tableCellWidth6);
+            TableCellBorders tableCellBorders5 = new TableCellBorders();
+            TopBorder topBorder5 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder5 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder5 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder5 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders5.Append(topBorder5);
+            tableCellBorders5.Append(leftBorder5);
+            tableCellBorders5.Append(bottomBorder5);
+            tableCellBorders5.Append(rightBorder5);
+            Shading shading5 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment5 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties5.Append(tableCellWidth5);
+            tableCellProperties5.Append(tableCellBorders5);
+            tableCellProperties5.Append(shading5);
+            tableCellProperties5.Append(tableCellVerticalAlignment5);
 
             Paragraph paragraph5 = new Paragraph();
 
             ParagraphProperties paragraphProperties5 = new ParagraphProperties();
-            KeepLines keepLines5 = new KeepLines();
+            Justification justification3 = new Justification() { Val = JustificationValues.Center };
 
-            paragraphProperties5.Append(keepLines5);
+            ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
+            Color color10 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties5.Append(color10);
+
+            paragraphProperties5.Append(justification3);
+            paragraphProperties5.Append(paragraphMarkRunProperties5);
+
+            Run run6 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties6 = new RunProperties();
+            Color color11 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold6 = new Bold();
+            runProperties6.Append(bold6);
+            runProperties6.Append(color11);
+            Text text6 = new Text();
+            text6.Text = "Race";
+
+            run6.Append(runProperties6);
+            run6.Append(text6);
 
             paragraph5.Append(paragraphProperties5);
+            paragraph5.Append(run6);
 
-            tableCell6.Append(tableCellProperties6);
-            tableCell6.Append(paragraph5);
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
 
-            TableCell tableCell7 = new TableCell();
+            TableCell tableCell6 = new TableCell();
 
-            TableCellProperties tableCellProperties7 = new TableCellProperties();
-            TableCellWidth tableCellWidth7 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
+            TableCellProperties tableCellProperties6 = new TableCellProperties();
+            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
 
-            tableCellProperties7.Append(tableCellWidth7);
+            TableCellBorders tableCellBorders6 = new TableCellBorders();
+            TopBorder topBorder6 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder6 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder6 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder6 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders6.Append(topBorder6);
+            tableCellBorders6.Append(leftBorder6);
+            tableCellBorders6.Append(bottomBorder6);
+            tableCellBorders6.Append(rightBorder6);
+            Shading shading6 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment6 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties6.Append(tableCellWidth6);
+            tableCellProperties6.Append(tableCellBorders6);
+            tableCellProperties6.Append(shading6);
+            tableCellProperties6.Append(tableCellVerticalAlignment6);
 
             Paragraph paragraph6 = new Paragraph();
 
             ParagraphProperties paragraphProperties6 = new ParagraphProperties();
-            KeepLines keepLines6 = new KeepLines();
+            Justification justification4 = new Justification() { Val = JustificationValues.Center };
 
-            paragraphProperties6.Append(keepLines6);
+            ParagraphMarkRunProperties paragraphMarkRunProperties6 = new ParagraphMarkRunProperties();
+            Color color12 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties6.Append(color12);
+
+            paragraphProperties6.Append(justification4);
+            paragraphProperties6.Append(paragraphMarkRunProperties6);
+
+            Run run7 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties7 = new RunProperties();
+            Color color13 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            runProperties7.Append(color13);
+            Bold bold7 = new Bold();
+            runProperties7.Append(bold7);
+            Text text7 = new Text();
+            text7.Text = "Gender";
+
+            run7.Append(runProperties7);
+            run7.Append(text7);
 
             paragraph6.Append(paragraphProperties6);
+            paragraph6.Append(run7);
 
-            tableCell7.Append(tableCellProperties7);
-            tableCell7.Append(paragraph6);
+            tableCell6.Append(tableCellProperties6);
+            tableCell6.Append(paragraph6);
 
-            TableCell tableCell8 = new TableCell();
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+            tableRow1.Append(tableCell6);
 
-            TableCellProperties tableCellProperties8 = new TableCellProperties();
-            TableCellWidth tableCellWidth8 = new TableCellWidth(){ Width = "2745", Type = TableWidthUnitValues.Dxa };
+            // Append Header Row
+            PositionSubTable.Append(tableRow1);
+            return PositionSubTable;
 
-            tableCellProperties8.Append(tableCellWidth8);
+        }
+        private TableRow GeneratePositionSubTablePositionRow(Member _member)
+        {
+            TableRow tableRow1 = new TableRow() { RsidTableRowAddition = "00971797", RsidTableRowProperties = "005D464F" };
 
-            Paragraph paragraph7 = new Paragraph();
+            TableCell tableCell1 = new TableCell();
 
-            ParagraphProperties paragraphProperties7 = new ParagraphProperties();
-            KeepLines keepLines7 = new KeepLines();
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "4401", Type = TableWidthUnitValues.Dxa };
 
-            paragraphProperties7.Append(keepLines7);
+            TableCellBorders tableCellBorders1 = new TableCellBorders();
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.Nil };
 
-            paragraph7.Append(paragraphProperties7);
+            tableCellBorders1.Append(topBorder1);
+            tableCellBorders1.Append(leftBorder1);
+            tableCellBorders1.Append(bottomBorder1);
+            tableCellBorders1.Append(rightBorder1);
+            Shading shading1 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
 
-            tableCell8.Append(tableCellProperties8);
-            tableCell8.Append(paragraph7);
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellBorders1);
+            tableCellProperties1.Append(shading1);
 
-            tableRow3.Append(tableCell4);
-            tableRow3.Append(tableCell5);
-            tableRow3.Append(tableCell6);
-            tableRow3.Append(tableCell7);
-            tableRow3.Append(tableCell8);
-            table2.Append(tableProperties2);
-            table2.Append(tableGrid2);
-            table2.Append(tableRow3);
+            Paragraph paragraph1 = new Paragraph();
+
+            Run run1 = new Run();
+
+            RunProperties runProperties1 = new RunProperties();
+
+            Text text1 = new Text();
+            text1.Text = $"{_member.Position.Name}";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            paragraph1.Append(run1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "4401", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders2 = new TableCellBorders();
+            TopBorder topBorder2 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder2 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder2 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders2.Append(topBorder2);
+            tableCellBorders2.Append(leftBorder2);
+            tableCellBorders2.Append(bottomBorder2);
+            tableCellBorders2.Append(rightBorder2);
+            Shading shading2 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCellProperties2.Append(tableCellBorders2);
+            tableCellProperties2.Append(shading2);
+            Paragraph paragraph2 = new Paragraph();
+            Run run2 = new Run();
+
+            RunProperties runProperties2 = new RunProperties();
+
+            Text text2 = new Text();
+            text2.Text = $"{_member.GetTitleName()}";
+
+            run2.Append(runProperties2);
+            run2.Append(text2);
+
+            paragraph2.Append(run2);
+
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+
+            TableCell tableCell3 = new TableCell();
+
+            TableCellProperties tableCellProperties3 = new TableCellProperties();
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders3 = new TableCellBorders();
+            TopBorder topBorder3 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder3 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder3 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders3.Append(topBorder3);
+            tableCellBorders3.Append(leftBorder3);
+            tableCellBorders3.Append(bottomBorder3);
+            tableCellBorders3.Append(rightBorder3);
+            Shading shading3 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties3.Append(tableCellWidth3);
+            tableCellProperties3.Append(tableCellBorders3);
+            tableCellProperties3.Append(shading3);
+            tableCellProperties3.Append(tableCellVerticalAlignment1);
+
+            Paragraph paragraph3 = new Paragraph();
+            Run run3 = new Run();
+
+            RunProperties runProperties3 = new RunProperties();
+
+            Text text3 = new Text();
+            text3.Text = $"#{_member.IdNumber}";
+
+            run3.Append(runProperties3);
+            run3.Append(text3);
+
             
-            foreach(Position p in positions)
-            {
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
 
-            }
+            paragraphProperties1.Append(justification1);
 
-            return table2;
+            paragraph3.Append(paragraphProperties1);
+            paragraph3.Append(run3);
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
+
+            TableCell tableCell4 = new TableCell();
+
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders4 = new TableCellBorders();
+            TopBorder topBorder4 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder4 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder4 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder4 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders4.Append(topBorder4);
+            tableCellBorders4.Append(leftBorder4);
+            tableCellBorders4.Append(bottomBorder4);
+            tableCellBorders4.Append(rightBorder4);
+            Shading shading4 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties4.Append(tableCellBorders4);
+            tableCellProperties4.Append(shading4);
+            tableCellProperties4.Append(tableCellVerticalAlignment2);
+
+            Paragraph paragraph4 = new Paragraph();
+            Run run4 = new Run();
+
+            RunProperties runProperties4 = new RunProperties();
+
+            Text text4 = new Text();
+            string callSign = _member.Position.Callsign != null ? _member.Position.Callsign : "-";
+            text4.Text = $"{callSign}";
+
+            run4.Append(runProperties4);
+            run4.Append(text4);
+
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+            Justification justification2 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties2.Append(justification2);
+
+            paragraph4.Append(paragraphProperties2);
+            paragraph4.Append(run4);
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
+
+            TableCell tableCell5 = new TableCell();
+
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders5 = new TableCellBorders();
+            TopBorder topBorder5 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder5 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder5 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder5 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders5.Append(topBorder5);
+            tableCellBorders5.Append(leftBorder5);
+            tableCellBorders5.Append(bottomBorder5);
+            tableCellBorders5.Append(rightBorder5);
+            Shading shading5 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties5.Append(tableCellWidth5);
+            tableCellProperties5.Append(tableCellBorders5);
+            tableCellProperties5.Append(shading5);
+            tableCellProperties5.Append(tableCellVerticalAlignment3);
+
+            Paragraph paragraph5 = new Paragraph();
+            Run run5 = new Run();
+
+            RunProperties runProperties5 = new RunProperties();
+
+            Text text5 = new Text();            
+            text5.Text = $"{_member.Race.Abbreviation}";
+
+            run5.Append(runProperties5);
+            run5.Append(text5);
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+            Justification justification3 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties3.Append(justification3);
+
+            paragraph5.Append(paragraphProperties3);
+            paragraph5.Append(run5);
+
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
+
+            TableCell tableCell6 = new TableCell();
+
+            TableCellProperties tableCellProperties6 = new TableCellProperties();
+            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders6 = new TableCellBorders();
+            TopBorder topBorder6 = new TopBorder() { Val = BorderValues.Nil };
+            LeftBorder leftBorder6 = new LeftBorder() { Val = BorderValues.Nil };
+            BottomBorder bottomBorder6 = new BottomBorder() { Val = BorderValues.Nil };
+            RightBorder rightBorder6 = new RightBorder() { Val = BorderValues.Nil };
+
+            tableCellBorders6.Append(topBorder6);
+            tableCellBorders6.Append(leftBorder6);
+            tableCellBorders6.Append(bottomBorder6);
+            tableCellBorders6.Append(rightBorder6);
+            Shading shading6 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties6.Append(tableCellWidth6);
+            tableCellProperties6.Append(tableCellBorders6);
+            tableCellProperties6.Append(shading6);
+            tableCellProperties6.Append(tableCellVerticalAlignment4);
+
+            Paragraph paragraph6 = new Paragraph();
+            Run run6 = new Run();
+
+            RunProperties runProperties6 = new RunProperties();
+
+            Text text6 = new Text();
+            text6.Text = $"{_member.Gender.Abbreviation}";
+
+            run6.Append(runProperties6);
+            run6.Append(text6);
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+            Justification justification4 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties4.Append(justification4);
+
+            paragraph6.Append(paragraphProperties4);
+            paragraph6.Append(run6);
+            tableCell6.Append(tableCellProperties6);
+            tableCell6.Append(paragraph6);
+
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+            tableRow1.Append(tableCell6);
+            return tableRow1;
         }
 
+        // Child Component Sub-Table
+        private Table GenerateChildComponentSubTableWithHeaderRow(string _componentName)
+        {
+            // Create the New Table
+            Table ChildComponentSubTable = new Table();
+            // Create table properties
+            TableProperties tableProperties1 = new TableProperties();
+            TableStyle tableStyle1 = new TableStyle() { Val = "TableGrid" };
+            TableWidth tableWidth1 = new TableWidth() { Width = "0", Type = TableWidthUnitValues.Auto };
+
+            TableBorders tableBorders1 = new TableBorders();
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            InsideHorizontalBorder insideHorizontalBorder1 = new InsideHorizontalBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+            InsideVerticalBorder insideVerticalBorder1 = new InsideVerticalBorder() { Val = BorderValues.None, Color = "auto", Size = (UInt32Value)0U, Space = (UInt32Value)0U };
+
+            tableBorders1.Append(topBorder1);
+            tableBorders1.Append(leftBorder1);
+            tableBorders1.Append(bottomBorder1);
+            tableBorders1.Append(rightBorder1);
+            tableBorders1.Append(insideHorizontalBorder1);
+            tableBorders1.Append(insideVerticalBorder1);
+            TableLook tableLook1 = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+
+            tableProperties1.Append(tableStyle1);
+            tableProperties1.Append(tableWidth1);
+            tableProperties1.Append(tableBorders1);
+            tableProperties1.Append(tableLook1);
+            // Append Table Properties
+            ChildComponentSubTable.Append(tableProperties1);
+            // Create Table Grid
+            TableGrid tableGrid1 = new TableGrid();
+            GridColumn gridColumn1 = new GridColumn() { Width = "4392" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "4410" };
+            GridColumn gridColumn3 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn4 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn5 = new GridColumn() { Width = "1233" };
+            GridColumn gridColumn6 = new GridColumn() { Width = "1233" };
+
+            tableGrid1.Append(gridColumn1);
+            tableGrid1.Append(gridColumn2);
+            tableGrid1.Append(gridColumn3);
+            tableGrid1.Append(gridColumn4);
+            tableGrid1.Append(gridColumn5);
+            tableGrid1.Append(gridColumn6);
+            // Append Table Grid
+            ChildComponentSubTable.Append(tableGrid1);
+
+            // Create Header Row
+            TableRow tableRow1 = new TableRow();
+
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "4392", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders1 = new TableCellBorders();
+            BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders1.Append(bottomBorder2);
+            Shading shading1 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(tableCellBorders1);
+            tableCellProperties1.Append(shading1);
+
+            Paragraph paragraph1 = new Paragraph();
+
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            Color color1 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties1.Append(color1);
+
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+            Run run1 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties1 = new RunProperties();
+            Color color2 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            runProperties1.Append(color2);
+            Bold bold1 = new Bold();
+            runProperties1.Append(bold1);
+            Text text1 = new Text();
+            text1.Text = $"{_componentName} Subordinate Units";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            paragraph1.Append(paragraphProperties1);
+            paragraph1.Append(run1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "4410", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders2 = new TableCellBorders();
+            BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders2.Append(bottomBorder3);
+            Shading shading2 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCellProperties2.Append(tableCellBorders2);
+            tableCellProperties2.Append(shading2);
+
+            Paragraph paragraph2 = new Paragraph();
+
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties2 = new ParagraphMarkRunProperties();
+            Color color3 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties2.Append(color3);
+
+            paragraphProperties2.Append(paragraphMarkRunProperties2);
+
+            Run run2 = new Run();
+
+            RunProperties runProperties2 = new RunProperties();
+            Color color4 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold2 = new Bold();
+            runProperties2.Append(bold2);
+            runProperties2.Append(color4);
+            Text text2 = new Text();
+            text2.Text = "Supervisor";
+
+            run2.Append(runProperties2);
+            run2.Append(text2);
+
+            paragraph2.Append(paragraphProperties2);
+            paragraph2.Append(run2);
+
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+
+            TableCell tableCell3 = new TableCell();
+
+            TableCellProperties tableCellProperties3 = new TableCellProperties();
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders3 = new TableCellBorders();
+            BottomBorder bottomBorder4 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders3.Append(bottomBorder4);
+            Shading shading3 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties3.Append(tableCellWidth3);
+            tableCellProperties3.Append(tableCellBorders3);
+            tableCellProperties3.Append(shading3);
+            tableCellProperties3.Append(tableCellVerticalAlignment1);
+
+            Paragraph paragraph3 = new Paragraph();
+
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties3 = new ParagraphMarkRunProperties();
+            Color color5 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties3.Append(color5);
+
+            paragraphProperties3.Append(justification1);
+            paragraphProperties3.Append(paragraphMarkRunProperties3);
+
+            Run run3 = new Run();
+
+            RunProperties runProperties3 = new RunProperties();
+            Color color6 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold3 = new Bold();
+            runProperties3.Append(bold3);
+            runProperties3.Append(color6);
+            Text text3 = new Text();
+            text3.Text = "ID#";
+
+            run3.Append(runProperties3);
+            run3.Append(text3);
+
+            paragraph3.Append(paragraphProperties3);
+            paragraph3.Append(run3);
+
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
+
+            TableCell tableCell4 = new TableCell();
+
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders4 = new TableCellBorders();
+            BottomBorder bottomBorder5 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders4.Append(bottomBorder5);
+            Shading shading4 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties4.Append(tableCellBorders4);
+            tableCellProperties4.Append(shading4);
+            tableCellProperties4.Append(tableCellVerticalAlignment2);
+
+            Paragraph paragraph4 = new Paragraph() { RsidParagraphMarkRevision = "005D464F", RsidParagraphAddition = "00971797", RsidParagraphProperties = "00971797", RsidRunAdditionDefault = "00971797" };
+
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+            Justification justification2 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
+            Color color7 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties4.Append(color7);
+
+            paragraphProperties4.Append(justification2);
+            paragraphProperties4.Append(paragraphMarkRunProperties4);
+
+            Run run4 = new Run();
+
+            RunProperties runProperties4 = new RunProperties();
+            Color color8 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold4 = new Bold();
+            runProperties4.Append(bold4);
+            runProperties4.Append(color8);
+            Text text4 = new Text();
+            text4.Text = "Call Sign";
+
+            run4.Append(runProperties4);
+            run4.Append(text4);
+
+            paragraph4.Append(paragraphProperties4);
+            paragraph4.Append(run4);
+
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
+
+            TableCell tableCell5 = new TableCell();
+
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders5 = new TableCellBorders();
+            BottomBorder bottomBorder6 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders5.Append(bottomBorder6);
+            Shading shading5 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties5.Append(tableCellWidth5);
+            tableCellProperties5.Append(tableCellBorders5);
+            tableCellProperties5.Append(shading5);
+            tableCellProperties5.Append(tableCellVerticalAlignment3);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphMarkRevision = "005D464F", RsidParagraphAddition = "00971797", RsidParagraphProperties = "00971797", RsidRunAdditionDefault = "00971797" };
+
+            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+            Justification justification3 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
+            Color color9 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties5.Append(color9);
+
+            paragraphProperties5.Append(justification3);
+            paragraphProperties5.Append(paragraphMarkRunProperties5);
+
+            Run run5 = new Run() { RsidRunProperties = "005D464F" };
+            
+            
+            RunProperties runProperties5 = new RunProperties();
+            Color color10 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold5 = new Bold();
+            runProperties5.Append(bold5);
+            runProperties5.Append(color10);
+            Text text5 = new Text();
+            text5.Text = "Race";
+
+            run5.Append(runProperties5);
+            run5.Append(text5);
+
+            paragraph5.Append(paragraphProperties5);
+            paragraph5.Append(run5);
+
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
+
+            TableCell tableCell6 = new TableCell();
+
+            TableCellProperties tableCellProperties6 = new TableCellProperties();
+            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+            TableCellBorders tableCellBorders6 = new TableCellBorders();
+            BottomBorder bottomBorder7 = new BottomBorder() { Val = BorderValues.Single, Color = "AEAAAA", ThemeColor = ThemeColorValues.Background2, ThemeShade = "BF", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders6.Append(bottomBorder7);
+            Shading shading6 = new Shading() { Val = ShadingPatternValues.Clear, Color = "auto", Fill = "FFFFFF", ThemeFill = ThemeColorValues.Background1 };
+            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties6.Append(tableCellWidth6);
+            tableCellProperties6.Append(tableCellBorders6);
+            tableCellProperties6.Append(shading6);
+            tableCellProperties6.Append(tableCellVerticalAlignment4);
+
+            Paragraph paragraph6 = new Paragraph();
+
+            ParagraphProperties paragraphProperties6 = new ParagraphProperties();
+            Justification justification4 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties6 = new ParagraphMarkRunProperties();
+            Color color11 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+
+            paragraphMarkRunProperties6.Append(color11);
+
+            paragraphProperties6.Append(justification4);
+            paragraphProperties6.Append(paragraphMarkRunProperties6);
+
+            Run run6 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties6 = new RunProperties();
+            Color color12 = new Color() { Val = "000000", ThemeColor = ThemeColorValues.Text1 };
+            Bold bold6 = new Bold();
+            runProperties6.Append(bold6);
+            runProperties6.Append(color12);
+            Text text6 = new Text();
+            text6.Text = "Gender";
+
+            run6.Append(runProperties6);
+            run6.Append(text6);
+
+            paragraph6.Append(paragraphProperties6);
+            paragraph6.Append(run6);
+
+            tableCell6.Append(tableCellProperties6);
+            tableCell6.Append(paragraph6);
+
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+            tableRow1.Append(tableCell6);
+            ChildComponentSubTable.Append(tableRow1);
+            return ChildComponentSubTable;
+        }
+        private TableRow GenerateChildComponentSubTableComponentRow(Component _component)
+        {
+            Member Manager = _component.GetManager();
+            TableRow tableRow1 = new TableRow();
+
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "4392", Type = TableWidthUnitValues.Dxa };
+             
+
+            tableCellProperties1.Append(tableCellWidth1);
+
+            Paragraph paragraph1 = new Paragraph();
+
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
+            string bookMarkAnchor = _component.Name.Replace(" ", "_");
+            Hyperlink hyperlink1 = new Hyperlink() { Tooltip = $"Go To {_component.Name}", History = true, Anchor = bookMarkAnchor };
+
+            Run run1 = new Run() { RsidRunProperties = "005D464F" };
+
+            RunProperties runProperties1 = new RunProperties();
+            RunStyle runStyle1 = new RunStyle() { Val = "Hyperlink" };
+
+
+            runProperties1.Append(runStyle1);
+
+            Text text1 = new Text();
+            text1.Text = $"{_component.Name}";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            hyperlink1.Append(run1);
+
+            paragraph1.Append(paragraphProperties1);
+            paragraph1.Append(hyperlink1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "4410", Type = TableWidthUnitValues.Dxa };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            Paragraph paragraph2 = new Paragraph();
+
+            Run run2 = new Run();
+            Text text2 = new Text();
+            string managerDisplayName = _component?.GetManager()?.GetTitleName() ?? "VACANT";
+            text2.Text = $"{managerDisplayName}";
+            run2.Append(text2);
+            paragraph2.Append(run2);
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+
+            TableCell tableCell3 = new TableCell();
+
+            TableCellProperties tableCellProperties3 = new TableCellProperties();
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties3.Append(tableCellWidth3);
+            tableCellProperties3.Append(tableCellVerticalAlignment1);
+
+            Paragraph paragraph3 = new Paragraph();
+
+            Run run3 = new Run();
+            Text text3 = new Text();
+            string managerID = Manager?.IdNumber != null ? $"#{Manager.IdNumber}" : "-"; 
+            text3.Text = $"{managerID}";
+            run3.Append(text3);
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties2.Append(justification1);
+
+            paragraph3.Append(paragraphProperties2);
+            paragraph3.Append(run3);
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
+
+            TableCell tableCell4 = new TableCell();
+
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+
+            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties4.Append(tableCellVerticalAlignment2);
+
+            Paragraph paragraph4 = new Paragraph();
+            Run run4 = new Run();
+            Text text4 = new Text();
+            string managerCallsign = _component.Positions?
+                .Where(x => x.IsManager == true)
+                .FirstOrDefault().Callsign != null ? $"{_component.Positions?.Where(x => x.IsManager == true).FirstOrDefault().Callsign}" : "-";            
+            text4.Text = $"{managerCallsign}";
+            run4.Append(text4);
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+            Justification justification2 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties3.Append(justification2);
+
+            paragraph4.Append(paragraphProperties3);
+            paragraph4.Append(run4);
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
+
+            TableCell tableCell5 = new TableCell();
+
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+
+            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties5.Append(tableCellWidth5);
+            tableCellProperties5.Append(tableCellVerticalAlignment3);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphAddition = "00971797", RsidParagraphProperties = "00971797", RsidRunAdditionDefault = "00971797" };
+            Run run5 = new Run();
+            Text text5 = new Text();            
+            string managerRace = Manager?.Race.Abbreviation.ToString() ?? "-";
+            text5.Text = managerRace;
+            run5.Append(text5);
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+            Justification justification3 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties4.Append(justification3);
+
+            paragraph5.Append(paragraphProperties4);
+            paragraph5.Append(run5);
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
+
+            TableCell tableCell6 = new TableCell();
+
+            TableCellProperties tableCellProperties6 = new TableCellProperties();
+            TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1233", Type = TableWidthUnitValues.Dxa };
+
+
+            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties6.Append(tableCellWidth6);
+            tableCellProperties6.Append(tableCellVerticalAlignment4);
+
+            Paragraph paragraph6 = new Paragraph();
+            Run run6 = new Run();
+            Text text6 = new Text();
+            string managerGender = "-";
+            if (Manager != null){
+                managerGender = Manager.Gender.Abbreviation.ToString();
+            }
+            text6.Text = managerGender;
+            run6.Append(text6);
+            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+            Justification justification4 = new Justification() { Val = JustificationValues.Center };
+
+            paragraphProperties5.Append(justification4);
+
+            paragraph6.Append(paragraphProperties5);
+            paragraph6.Append(run6);
+            tableCell6.Append(tableCellProperties6);
+            tableCell6.Append(paragraph6);
+
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+            tableRow1.Append(tableCell6);
+            return tableRow1;
+
+        }
+        // Demographic Sub-Table
+        private Table GenerateComponentDemoTable(string _componentName)
+        {
+            // Create new Table
+            Table DemoTable = new Table();
+            // Create Table Properties
+            TableProperties tableProperties1 = new TableProperties();
+            TableWidth tableWidth1 = new TableWidth() { Width = "5000", Type = TableWidthUnitValues.Pct };
+
+            TableBorders tableBorders1 = new TableBorders();
+            TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            LeftBorder leftBorder1 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            BottomBorder bottomBorder1 = new BottomBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            RightBorder rightBorder1 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            InsideHorizontalBorder insideHorizontalBorder1 = new InsideHorizontalBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+            InsideVerticalBorder insideVerticalBorder1 = new InsideVerticalBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)4U, Space = (UInt32Value)0U };
+
+            tableBorders1.Append(topBorder1);
+            tableBorders1.Append(leftBorder1);
+            tableBorders1.Append(bottomBorder1);
+            tableBorders1.Append(rightBorder1);
+            tableBorders1.Append(insideHorizontalBorder1);
+            tableBorders1.Append(insideVerticalBorder1);
+            TableLook tableLook1 = new TableLook() { Val = "04A0", FirstRow = true, LastRow = false, FirstColumn = true, LastColumn = false, NoHorizontalBand = false, NoVerticalBand = true };
+
+            tableProperties1.Append(tableWidth1);
+            tableProperties1.Append(tableBorders1);
+            tableProperties1.Append(tableLook1);
+            // Append Table properties
+            DemoTable.Append(tableProperties1);
+
+            // Create Table Grid
+            TableGrid tableGrid1 = new TableGrid();
+            GridColumn gridColumn1 = new GridColumn() { Width = "2101" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn3 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn4 = new GridColumn() { Width = "344" };
+            GridColumn gridColumn5 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn6 = new GridColumn() { Width = "336" };
+            GridColumn gridColumn7 = new GridColumn() { Width = "344" };
+            GridColumn gridColumn8 = new GridColumn() { Width = "344" };
+            GridColumn gridColumn9 = new GridColumn() { Width = "403" };
+            GridColumn gridColumn10 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn11 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn12 = new GridColumn() { Width = "344" };
+            GridColumn gridColumn13 = new GridColumn() { Width = "396" };
+            GridColumn gridColumn14 = new GridColumn() { Width = "500" };
+            //GridColumn gridColumn15 = new GridColumn() { Width = "2809" };
+            //GridColumn gridColumn16 = new GridColumn() { Width = "889" };
+
+            tableGrid1.Append(gridColumn1);
+            tableGrid1.Append(gridColumn2);
+            tableGrid1.Append(gridColumn3);
+            tableGrid1.Append(gridColumn4);
+            tableGrid1.Append(gridColumn5);
+            tableGrid1.Append(gridColumn6);
+            tableGrid1.Append(gridColumn7);
+            tableGrid1.Append(gridColumn8);
+            tableGrid1.Append(gridColumn9);
+            tableGrid1.Append(gridColumn10);
+            tableGrid1.Append(gridColumn11);
+            tableGrid1.Append(gridColumn12);
+            tableGrid1.Append(gridColumn13);
+            tableGrid1.Append(gridColumn14);
+            //tableGrid1.Append(gridColumn15);
+            //tableGrid1.Append(gridColumn16);
+            DemoTable.Append(tableGrid1);
+
+            // Create Header Row
+            TableRow tableRow1 = new TableRow() { RsidTableRowMarkRevision = "00B716D7", RsidTableRowAddition = "00B716D7", RsidTableRowProperties = "00B716D7" };
+
+            TableCell tableCell1 = new TableCell();
+
+            TableCellProperties tableCellProperties1 = new TableCellProperties();
+            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "974", Type = TableWidthUnitValues.Pct };
+            VerticalMerge verticalMerge1 = new VerticalMerge() { Val = MergedCellValues.Restart };
+
+            TableCellBorders tableCellBorders1 = new TableCellBorders();
+            RightBorder rightBorder2 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders1.Append(rightBorder2);
+            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties1.Append(tableCellWidth1);
+            tableCellProperties1.Append(verticalMerge1);
+            tableCellProperties1.Append(tableCellBorders1);
+            tableCellProperties1.Append(tableCellVerticalAlignment1);
+
+            Paragraph paragraph1 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines1 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
+            RunFonts runFonts1 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize1 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript() { Val = "20" };
+
+            paragraphMarkRunProperties1.Append(runFonts1);
+            paragraphMarkRunProperties1.Append(fontSize1);
+            paragraphMarkRunProperties1.Append(fontSizeComplexScript1);
+
+            paragraphProperties1.Append(spacingBetweenLines1);
+            paragraphProperties1.Append(paragraphMarkRunProperties1);
+
+            Run run1 = new Run() { RsidRunProperties = "00B716D7" };
+
+            RunProperties runProperties1 = new RunProperties();
+            RunFonts runFonts2 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize2 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "20" };
+
+            runProperties1.Append(runFonts2);
+            runProperties1.Append(fontSize2);
+            runProperties1.Append(fontSizeComplexScript2);
+            Text text1 = new Text();
+            text1.Text = "RANK";
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            paragraph1.Append(paragraphProperties1);
+            paragraph1.Append(run1);
+
+            tableCell1.Append(tableCellProperties1);
+            tableCell1.Append(paragraph1);
+
+            TableCell tableCell2 = new TableCell();
+
+            TableCellProperties tableCellProperties2 = new TableCellProperties();
+            TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "711", Type = TableWidthUnitValues.Pct };
+            GridSpan gridSpan1 = new GridSpan() { Val = 4 };
+
+            TableCellBorders tableCellBorders2 = new TableCellBorders();
+            LeftBorder leftBorder2 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder3 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders2.Append(leftBorder2);
+            tableCellBorders2.Append(rightBorder3);
+            TableCellVerticalAlignment tableCellVerticalAlignment2 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties2.Append(tableCellWidth2);
+            tableCellProperties2.Append(gridSpan1);
+            tableCellProperties2.Append(tableCellBorders2);
+            tableCellProperties2.Append(tableCellVerticalAlignment2);
+
+            Paragraph paragraph2 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines2 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            Justification justification1 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties2 = new ParagraphMarkRunProperties();
+            RunFonts runFonts3 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize3 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript3 = new FontSizeComplexScript() { Val = "20" };
+
+            paragraphMarkRunProperties2.Append(runFonts3);
+            paragraphMarkRunProperties2.Append(fontSize3);
+            paragraphMarkRunProperties2.Append(fontSizeComplexScript3);
+
+            paragraphProperties2.Append(spacingBetweenLines2);
+            paragraphProperties2.Append(justification1);
+            paragraphProperties2.Append(paragraphMarkRunProperties2);
+
+            Run run2 = new Run() { RsidRunProperties = "00B716D7" };
+
+            RunProperties runProperties2 = new RunProperties();
+            RunFonts runFonts4 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize4 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript4 = new FontSizeComplexScript() { Val = "20" };
+
+            runProperties2.Append(runFonts4);
+            runProperties2.Append(fontSize4);
+            runProperties2.Append(fontSizeComplexScript4);
+            Text text2 = new Text();
+            text2.Text = "MALE";
+
+            run2.Append(runProperties2);
+            run2.Append(text2);
+
+            paragraph2.Append(paragraphProperties2);
+            paragraph2.Append(run2);
+
+            tableCell2.Append(tableCellProperties2);
+            tableCell2.Append(paragraph2);
+
+            TableCell tableCell3 = new TableCell();
+
+            TableCellProperties tableCellProperties3 = new TableCellProperties();
+            TableCellWidth tableCellWidth3 = new TableCellWidth() { Width = "663", Type = TableWidthUnitValues.Pct };
+            GridSpan gridSpan2 = new GridSpan() { Val = 4 };
+
+            TableCellBorders tableCellBorders3 = new TableCellBorders();
+            LeftBorder leftBorder3 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder4 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders3.Append(leftBorder3);
+            tableCellBorders3.Append(rightBorder4);
+            TableCellVerticalAlignment tableCellVerticalAlignment3 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties3.Append(tableCellWidth3);
+            tableCellProperties3.Append(gridSpan2);
+            tableCellProperties3.Append(tableCellBorders3);
+            tableCellProperties3.Append(tableCellVerticalAlignment3);
+
+            Paragraph paragraph3 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            ParagraphProperties paragraphProperties3 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines3 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            Justification justification2 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties3 = new ParagraphMarkRunProperties();
+            RunFonts runFonts5 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize5 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript5 = new FontSizeComplexScript() { Val = "20" };
+
+            paragraphMarkRunProperties3.Append(runFonts5);
+            paragraphMarkRunProperties3.Append(fontSize5);
+            paragraphMarkRunProperties3.Append(fontSizeComplexScript5);
+
+            paragraphProperties3.Append(spacingBetweenLines3);
+            paragraphProperties3.Append(justification2);
+            paragraphProperties3.Append(paragraphMarkRunProperties3);
+
+            Run run3 = new Run() { RsidRunProperties = "00B716D7" };
+
+            RunProperties runProperties3 = new RunProperties();
+            RunFonts runFonts6 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize6 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript6 = new FontSizeComplexScript() { Val = "20" };
+
+            runProperties3.Append(runFonts6);
+            runProperties3.Append(fontSize6);
+            runProperties3.Append(fontSizeComplexScript6);
+            Text text3 = new Text();
+            text3.Text = "FEMALE";
+
+            run3.Append(runProperties3);
+            run3.Append(text3);
+
+            paragraph3.Append(paragraphProperties3);
+            paragraph3.Append(run3);
+
+            tableCell3.Append(tableCellProperties3);
+            tableCell3.Append(paragraph3);
+
+            TableCell tableCell4 = new TableCell();
+
+            TableCellProperties tableCellProperties4 = new TableCellProperties();
+            TableCellWidth tableCellWidth4 = new TableCellWidth() { Width = "712", Type = TableWidthUnitValues.Pct };
+            GridSpan gridSpan3 = new GridSpan() { Val = 4 };
+
+            TableCellBorders tableCellBorders4 = new TableCellBorders();
+            LeftBorder leftBorder4 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder5 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders4.Append(leftBorder4);
+            tableCellBorders4.Append(rightBorder5);
+            TableCellVerticalAlignment tableCellVerticalAlignment4 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties4.Append(tableCellWidth4);
+            tableCellProperties4.Append(gridSpan3);
+            tableCellProperties4.Append(tableCellBorders4);
+            tableCellProperties4.Append(tableCellVerticalAlignment4);
+
+            Paragraph paragraph4 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            ParagraphProperties paragraphProperties4 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines4 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            Justification justification3 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties4 = new ParagraphMarkRunProperties();
+            RunFonts runFonts7 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize7 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript7 = new FontSizeComplexScript() { Val = "20" };
+
+            paragraphMarkRunProperties4.Append(runFonts7);
+            paragraphMarkRunProperties4.Append(fontSize7);
+            paragraphMarkRunProperties4.Append(fontSizeComplexScript7);
+
+            paragraphProperties4.Append(spacingBetweenLines4);
+            paragraphProperties4.Append(justification3);
+            paragraphProperties4.Append(paragraphMarkRunProperties4);
+
+            Run run4 = new Run() { RsidRunProperties = "00B716D7" };
+
+            RunProperties runProperties4 = new RunProperties();
+            RunFonts runFonts8 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize8 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript8 = new FontSizeComplexScript() { Val = "20" };
+
+            runProperties4.Append(runFonts8);
+            runProperties4.Append(fontSize8);
+            runProperties4.Append(fontSizeComplexScript8);
+            Text text4 = new Text();
+            text4.Text = "TOTALS";
+
+            run4.Append(runProperties4);
+            run4.Append(text4);
+
+            paragraph4.Append(paragraphProperties4);
+            paragraph4.Append(run4);
+
+            tableCell4.Append(tableCellProperties4);
+            tableCell4.Append(paragraph4);
+
+            TableCell tableCell5 = new TableCell();
+
+            TableCellProperties tableCellProperties5 = new TableCellProperties();
+            TableCellWidth tableCellWidth5 = new TableCellWidth() { Width = "225", Type = TableWidthUnitValues.Pct };
+            VerticalMerge verticalMerge2 = new VerticalMerge() { Val = MergedCellValues.Restart };
+
+            TableCellBorders tableCellBorders5 = new TableCellBorders();
+            LeftBorder leftBorder5 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            RightBorder rightBorder6 = new RightBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+
+            tableCellBorders5.Append(leftBorder5);
+            tableCellBorders5.Append(rightBorder6);
+            TableCellVerticalAlignment tableCellVerticalAlignment5 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+
+            tableCellProperties5.Append(tableCellWidth5);
+            tableCellProperties5.Append(verticalMerge2);
+            tableCellProperties5.Append(tableCellBorders5);
+            tableCellProperties5.Append(tableCellVerticalAlignment5);
+
+            Paragraph paragraph5 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            ParagraphProperties paragraphProperties5 = new ParagraphProperties();
+            SpacingBetweenLines spacingBetweenLines5 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+            Justification justification4 = new Justification() { Val = JustificationValues.Center };
+
+            ParagraphMarkRunProperties paragraphMarkRunProperties5 = new ParagraphMarkRunProperties();
+            RunFonts runFonts9 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize9 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript9 = new FontSizeComplexScript() { Val = "20" };
+
+            paragraphMarkRunProperties5.Append(runFonts9);
+            paragraphMarkRunProperties5.Append(fontSize9);
+            paragraphMarkRunProperties5.Append(fontSizeComplexScript9);
+
+            paragraphProperties5.Append(spacingBetweenLines5);
+            paragraphProperties5.Append(justification4);
+            paragraphProperties5.Append(paragraphMarkRunProperties5);
+
+            Run run5 = new Run() { RsidRunProperties = "00B716D7" };
+
+            RunProperties runProperties5 = new RunProperties();
+            RunFonts runFonts10 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            FontSize fontSize10 = new FontSize() { Val = "20" };
+            FontSizeComplexScript fontSizeComplexScript10 = new FontSizeComplexScript() { Val = "20" };
+
+            runProperties5.Append(runFonts10);
+            runProperties5.Append(fontSize10);
+            runProperties5.Append(fontSizeComplexScript10);
+            Text text5 = new Text();
+            text5.Text = "ALL";
+
+            run5.Append(runProperties5);
+            run5.Append(text5);
+
+            paragraph5.Append(paragraphProperties5);
+            paragraph5.Append(run5);
+
+            tableCell5.Append(tableCellProperties5);
+            tableCell5.Append(paragraph5);
+
+            //TableCell tableCell6 = new TableCell();
+
+            //TableCellProperties tableCellProperties6 = new TableCellProperties();
+            //TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1302", Type = TableWidthUnitValues.Pct };
+            //VerticalMerge verticalMerge3 = new VerticalMerge() { Val = MergedCellValues.Restart };
+
+            //TableCellBorders tableCellBorders6 = new TableCellBorders();
+            //LeftBorder leftBorder6 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
+            //BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Nil };
+            //RightBorder rightBorder7 = new RightBorder() { Val = BorderValues.Nil };
+
+            //tableCellBorders6.Append(leftBorder6);
+            //tableCellBorders6.Append(bottomBorder2);
+            //tableCellBorders6.Append(rightBorder7);
+
+            //tableCellProperties6.Append(tableCellWidth6);
+            //tableCellProperties6.Append(verticalMerge3);
+            //tableCellProperties6.Append(tableCellBorders6);
+
+            //Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            //ParagraphProperties paragraphProperties6 = new ParagraphProperties();
+            //SpacingBetweenLines spacingBetweenLines6 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            //ParagraphMarkRunProperties paragraphMarkRunProperties6 = new ParagraphMarkRunProperties();
+            //RunFonts runFonts11 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            //FontSize fontSize11 = new FontSize() { Val = "20" };
+            //FontSizeComplexScript fontSizeComplexScript11 = new FontSizeComplexScript() { Val = "20" };
+
+            //paragraphMarkRunProperties6.Append(runFonts11);
+            //paragraphMarkRunProperties6.Append(fontSize11);
+            //paragraphMarkRunProperties6.Append(fontSizeComplexScript11);
+
+            //paragraphProperties6.Append(spacingBetweenLines6);
+            //paragraphProperties6.Append(paragraphMarkRunProperties6);
+
+            //paragraph6.Append(paragraphProperties6);
+
+            //Paragraph paragraph7 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            //ParagraphProperties paragraphProperties7 = new ParagraphProperties();
+            //SpacingBetweenLines spacingBetweenLines7 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            //ParagraphMarkRunProperties paragraphMarkRunProperties7 = new ParagraphMarkRunProperties();
+            //RunFonts runFonts12 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            //FontSize fontSize12 = new FontSize() { Val = "20" };
+            //FontSizeComplexScript fontSizeComplexScript12 = new FontSizeComplexScript() { Val = "20" };
+
+            //paragraphMarkRunProperties7.Append(runFonts12);
+            //paragraphMarkRunProperties7.Append(fontSize12);
+            //paragraphMarkRunProperties7.Append(fontSizeComplexScript12);
+
+            //paragraphProperties7.Append(spacingBetweenLines7);
+            //paragraphProperties7.Append(paragraphMarkRunProperties7);
+
+            //paragraph7.Append(paragraphProperties7);
+
+            //tableCell6.Append(tableCellProperties6);
+            //tableCell6.Append(paragraph6);
+            //tableCell6.Append(paragraph7);
+
+            //TableCell tableCell7 = new TableCell();
+
+            //TableCellProperties tableCellProperties7 = new TableCellProperties();
+            //TableCellWidth tableCellWidth7 = new TableCellWidth() { Width = "413", Type = TableWidthUnitValues.Pct };
+            //VerticalMerge verticalMerge4 = new VerticalMerge() { Val = MergedCellValues.Restart };
+
+            //TableCellBorders tableCellBorders7 = new TableCellBorders();
+            //LeftBorder leftBorder7 = new LeftBorder() { Val = BorderValues.Nil };
+            //BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Nil };
+
+            //tableCellBorders7.Append(leftBorder7);
+            //tableCellBorders7.Append(bottomBorder3);
+
+            //tableCellProperties7.Append(tableCellWidth7);
+            //tableCellProperties7.Append(verticalMerge4);
+            //tableCellProperties7.Append(tableCellBorders7);
+
+            //Paragraph paragraph8 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
+
+            //ParagraphProperties paragraphProperties8 = new ParagraphProperties();
+            //SpacingBetweenLines spacingBetweenLines8 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
+
+            //ParagraphMarkRunProperties paragraphMarkRunProperties8 = new ParagraphMarkRunProperties();
+            //RunFonts runFonts13 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
+            //FontSize fontSize13 = new FontSize() { Val = "20" };
+            //FontSizeComplexScript fontSizeComplexScript13 = new FontSizeComplexScript() { Val = "20" };
+
+            //paragraphMarkRunProperties8.Append(runFonts13);
+            //paragraphMarkRunProperties8.Append(fontSize13);
+            //paragraphMarkRunProperties8.Append(fontSizeComplexScript13);
+
+            //paragraphProperties8.Append(spacingBetweenLines8);
+            //paragraphProperties8.Append(paragraphMarkRunProperties8);
+
+            //paragraph8.Append(paragraphProperties8);
+
+            //tableCell7.Append(tableCellProperties7);
+            //tableCell7.Append(paragraph8);
+
+            tableRow1.Append(tableCell1);
+            tableRow1.Append(tableCell2);
+            tableRow1.Append(tableCell3);
+            tableRow1.Append(tableCell4);
+            tableRow1.Append(tableCell5);
+            //tableRow1.Append(tableCell6);
+            //tableRow1.Append(tableCell7);
+            DemoTable.Append(tableRow1);
+            return DemoTable;
+
+        }
         private TableRow GenerateDemoTableRow(string ColumnName, List<Member> MemberList)
         {
              TableRow tr = new TableRow();
@@ -1259,6 +2555,31 @@ namespace OrgChartDemo.Models.DocGenerators
             tc13.Append(p13);
             tr.Append(tc13);
             return tr;
+        }
+
+        private List<Member> RecurseForMembers(Component _component, List<Member> _memberList)
+        {
+            
+            if (Components.Any(x => x.ParentComponent.ComponentId == _component.ComponentId))
+            {
+                List<Component> children = Components.Where(x => x.ParentComponent.ComponentId == _component.ComponentId).ToList();
+                foreach (Component c in children)
+                {
+                    RecurseForMembers(c, _memberList);
+                }
+            }
+            if (_component.Positions != null)
+            {
+                foreach (Position p in _component.Positions)
+                {
+                    foreach (Member m in p.Members)
+                    {
+                        _memberList.Add(m);
+                    }
+                }
+            }
+            
+            return _memberList;
         }
     }
 

@@ -158,16 +158,35 @@ namespace OrgChartDemo.Persistence.Repositories
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             
             List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+
             ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
                 .Load();
-
+            
             return components;
         }
-        
+        public List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            List<Component> componentsWithParents = new List<Component>();
+            foreach (Component c in components)
+            {
+                componentsWithParents.Add(ApplicationDbContext.Components.Include(x => x.ParentComponent).Where(x => x.ComponentId == c.ComponentId).FirstOrDefault());
+            }
+            ApplicationDbContext.Set<Position>().Where(x => componentsWithParents.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Load();
+
+            return componentsWithParents;
+        }
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
         /// </summary>

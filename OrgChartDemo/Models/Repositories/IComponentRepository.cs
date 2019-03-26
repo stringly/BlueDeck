@@ -32,6 +32,7 @@ namespace OrgChartDemo.Models.Repositories
 
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
         List<Component> GetComponentsAndChildrenSP(int parentComponentId);
+        List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId);
 
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list

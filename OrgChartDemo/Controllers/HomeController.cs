@@ -77,5 +77,12 @@ namespace OrgChartDemo.Controllers
 
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Alpha Roster Test.docx");
         }
+        public IActionResult DownloadComponentRoster(int id)
+        {
+            ComponentRosterGenerator gen = new ComponentRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
+            
+
+            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Component Roster Test.docx");
+        }
     }
 }

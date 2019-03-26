@@ -582,6 +582,14 @@
             An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
             </value>
         </member>
+        <member name="M:OrgChartDemo.Models.DocGenerators.ComponentRosterGenerator.GenerateComponentTableHeaderRow(System.String,System.Int32)">
+            <summary>
+            Generates the Header Row for a Component Table.
+            </summary>
+            <param name="_componentName">Name of the component. This is required to populate the Table title and the link Bookmark</param>
+            <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
+            <returns></returns>
+        </member>
         <member name="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods">
             <summary>
             Class containing custom extensions

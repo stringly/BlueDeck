@@ -99,5 +99,7 @@ namespace OrgChartDemo.Models {
         {
             Members = new List<Member>();
         }      
+
+
     }
 }

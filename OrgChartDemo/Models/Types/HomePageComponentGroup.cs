@@ -18,22 +18,26 @@ namespace OrgChartDemo.Models.Types
             ComponentId = c.ComponentId;
             LineupPosition = c.LineupPosition;
             Members = new List<HomePageViewModelMemberListItem>();
-            foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
+            if (c.Positions != null)
             {
-                if (p.Members.Count > 0)
+                foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
                 {
-                    foreach (Member m in p.Members)
+                    if (p.Members.Count > 0)
                     {
-                        HomePageViewModelMemberListItem mi = new HomePageViewModelMemberListItem(m);
+                        foreach (Member m in p.Members)
+                        {
+                            HomePageViewModelMemberListItem mi = new HomePageViewModelMemberListItem(m);
+                            Members.Add(mi);
+                        }
+                    }
+                    else
+                    {
+                        HomePageViewModelMemberListItem mi = new HomePageViewModelMemberListItem(p);
                         Members.Add(mi);
                     }
                 }
-                else
-                {
-                    HomePageViewModelMemberListItem mi = new HomePageViewModelMemberListItem(p);
-                    Members.Add(mi);
-                }
             }
+            
         }
     }
 }

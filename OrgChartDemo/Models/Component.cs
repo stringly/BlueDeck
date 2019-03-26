@@ -70,50 +70,14 @@ namespace OrgChartDemo.Models {
         public Component()
         {            
         }
-
-
-        public int GetComponentMemberGenderCountFemale()
+        public string GetManagerDisplayName()
         {
-            int totalCount = 0;
-            if (Positions != null)
-            {
-                foreach(Position p in Positions)
-                {   
-                    if (p.Members != null)
-                    {
-                        foreach (Member m in p.Members)
-                        {
-                            if (m.Gender.GenderFullName == "Female")
-                            {
-                                totalCount++;
-                            }
-                        }
-                    }
-                }
-            }
-            return totalCount;
+            return Positions?.Where(x => x.IsManager == true).FirstOrDefault()?.Members.First().GetTitleName() ?? "VACANT";
         }
 
-        public int GetComponentMemberGenderCountMale()
+        public Member GetManager()
         {
-            int totalCount = 0;
-            if (Positions != null)
-            {
-                foreach(Position p in Positions)
-                {   
-                    if (p.Members != null)
-                    {
-                        foreach (Member m in p.Members)
-                        {
-                            if (m.Gender.GenderFullName == "Male")
-                            {
-                                totalCount++;
-                            }
-                        }
-                    }
-                }
-            }
-            return totalCount;
+            return Positions?.Where(x => x.IsManager == true).FirstOrDefault().Members.FirstOrDefault() ?? null;
         }
     }
 }
