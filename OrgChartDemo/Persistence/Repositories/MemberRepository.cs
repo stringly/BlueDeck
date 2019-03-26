@@ -3,8 +3,8 @@ using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.ViewModels;
-using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 
@@ -27,6 +27,16 @@ namespace OrgChartDemo.Persistence.Repositories
         }
 
         /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>        
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
+
+        /// <summary>
         /// Gets the members with positions.
         /// </summary>
         /// <returns></returns>
@@ -34,9 +44,21 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Include(c => c.Rank)
+                .Include(c => c.Gender)
+                .Include(c => c.Race)
+                .Include(c => c.PhoneNumbers)
+                .Include(c => c.DutyStatus)
                 .Include(c => c.Position)
                 .ThenInclude(c => c.ParentComponent)
                 .ToList();
+        }
+
+        public MemberIndexListViewModel GetMemberIndexListViewModel()
+        {
+            MemberIndexListViewModel vm = new MemberIndexListViewModel();
+            vm.Members = ApplicationDbContext.MemberIndexViewModelMemberListItems.FromSql("EXECUTE Get_Member_Index_List").ToList();
+            return vm;              
+                                    
         }
 
         public Member GetMemberWithPosition(int memberId)
@@ -45,6 +67,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
                     .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
                 .Include(x => x.Rank)
@@ -52,6 +76,20 @@ namespace OrgChartDemo.Persistence.Repositories
                 .FirstOrDefault();
         }
 
+        public Member GetHomePageMember(int memberId)
+        {
+            return ApplicationDbContext.Members
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.Rank)
+                .Include(x => x.DutyStatus)
+                .FirstOrDefault();
+        }
         public Member GetMemberWithDemographicsAndDutyStatus(int memberId)
         {
             return ApplicationDbContext.Members
@@ -87,8 +125,9 @@ namespace OrgChartDemo.Persistence.Repositories
             {
                 m = new Member();
             }
-            
-            m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+            if (form.PositionId != null){ 
+                m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+            }
             m.Rank = ApplicationDbContext.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
             m.Gender = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
             m.Race = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
@@ -140,14 +179,79 @@ namespace OrgChartDemo.Persistence.Repositories
             ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
             ApplicationDbContext.Members.Remove(m);
         }
-        /// <summary>
-        /// Gets the application database context.
-        /// </summary>
-        /// <value>
-        /// The application database context.
-        /// </value>        
-        public ApplicationDbContext ApplicationDbContext {
-            get { return Context as ApplicationDbContext; }
+
+        public Member GetMemberWithRoles(string LDAPName)
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .Include(x => x.CurrentRoles).ThenInclude(x => x.RoleType)
+                .Include(x => x.Gender)
+                .Include(x => x.Rank)                
+                .FirstOrDefault(x => x.LDAPName == LDAPName);
         }
+
+        /// <summary>
+        /// Gets the home page view model for member.
+        /// </summary>
+        /// <remarks>
+        /// This is an attempt to try and apply some better SOLID principals to the
+        /// way I build these viewModels...
+        /// </remarks>
+        /// <param name="memberId">The member identifier.</param>
+        /// <returns></returns>
+        public HomePageViewModel GetHomePageViewModelForMember(int memberId)
+        {
+            Member currentUser = ApplicationDbContext.Members
+                .Where(x => x.MemberId == memberId)
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.Rank)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)                
+                .FirstOrDefault();
+            HomePageViewModel result = new HomePageViewModel(currentUser);
+            SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);
+
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
+                .Load();
+            foreach(Component c in components.OrderBy(x => x.LineupPosition))
+            {
+                HomePageComponentGroup grp = new HomePageComponentGroup(c);
+                result.ComponentGroups.Add(grp);
+            }
+            return result;
+        }
+
+        public int GetMemberParentComponentId(int memberid)
+        {
+            Member m = ApplicationDbContext.Members
+                .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .FirstOrDefault(x => x.MemberId == memberid);
+                
+            return m.Position.ParentComponent.ComponentId;
+                
+                
+
+        }
+
+        public List<MemberSelectListItem> GetMembersUserCanEdit(List<ComponentSelectListItem> canEditComponents)
+        {
+            List<MemberSelectListItem> result = new List<MemberSelectListItem>();
+            foreach (ComponentSelectListItem c in canEditComponents)
+            {
+                List<Member> members = ApplicationDbContext.Members.Where(x => x.Position.ParentComponent.ComponentId == c.Id).ToList();
+                result.AddRange(members.ConvertAll(x => new MemberSelectListItem(x)));
+            }
+            return result;
+        }
+
     }
 }

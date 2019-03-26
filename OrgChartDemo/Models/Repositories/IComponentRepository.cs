@@ -32,6 +32,7 @@ namespace OrgChartDemo.Models.Repositories
 
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
         List<Component> GetComponentsAndChildrenSP(int parentComponentId);
+        List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId);
 
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
@@ -91,5 +92,7 @@ namespace OrgChartDemo.Models.Repositories
         /// <param name="c">The Component to to check.</param>
         /// <returns></returns>
         bool ComponentNameNotAvailable(Component c);
+        List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
+        List<Member> GetMembersRosterForComponentId(int componentId);
     }
 }

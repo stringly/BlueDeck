@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
+using OrgChartDemo.Models.ViewModels;
+using System;
 
 namespace OrgChartDemo.Controllers
 {
@@ -26,6 +29,7 @@ namespace OrgChartDemo.Controllers
         /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         public JsonResult GetComponents(int parentComponentId)
         {
@@ -44,11 +48,16 @@ namespace OrgChartDemo.Controllers
         /// GET /OrgChart/
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index()
+        public IActionResult Index(int? componentid)
         {
-            List<ComponentSelectListItem> componentList = unitOfWork.Components.GetComponentSelectListItems();
+            OrgChartIndexViewModel vm = new OrgChartIndexViewModel();
+            vm.ComponentList = unitOfWork.Components.GetComponentSelectListItems();
             ViewBag.Title = "Organization Charts";
-            return View(componentList);
+            if (componentid != null)
+            {
+                vm.SelectedComponentId = Convert.ToInt32(componentid);
+            }
+            return View(vm);
         }
         
     }

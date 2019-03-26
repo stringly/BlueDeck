@@ -15,7 +15,7 @@ namespace OrgChartDemo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -55,6 +55,8 @@ namespace OrgChartDemo.Migrations
                     b.Property<int?>("GenderId");
 
                     b.Property<string>("IdNumber");
+
+                    b.Property<string>("LDAPName");
 
                     b.Property<string>("LastName");
 
@@ -188,6 +190,8 @@ namespace OrgChartDemo.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("IsSworn");
+
                     b.Property<string>("PayGrade");
 
                     b.Property<string>("RankFullName");
@@ -210,6 +214,38 @@ namespace OrgChartDemo.Migrations
                     b.HasKey("PhoneNumberTypeId");
 
                     b.ToTable("PhoneNumberTypes");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.UserRole", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MemberId");
+
+                    b.Property<int?>("RoleTypeId");
+
+                    b.HasKey("RoleId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("RoleTypeId");
+
+                    b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.UserRoleType", b =>
+                {
+                    b.Property<int>("RoleTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("RoleTypeName");
+
+                    b.HasKey("RoleTypeId");
+
+                    b.ToTable("UserRoleType");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
@@ -258,6 +294,17 @@ namespace OrgChartDemo.Migrations
                     b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
                         .WithMany("Positions")
                         .HasForeignKey("ParentComponentComponentId");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.UserRole", b =>
+                {
+                    b.HasOne("OrgChartDemo.Models.Member")
+                        .WithMany("CurrentRoles")
+                        .HasForeignKey("MemberId");
+
+                    b.HasOne("OrgChartDemo.Models.UserRoleType", "RoleType")
+                        .WithMany()
+                        .HasForeignKey("RoleTypeId");
                 });
 #pragma warning restore 612, 618
         }

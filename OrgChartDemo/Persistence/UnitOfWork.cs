@@ -1,6 +1,9 @@
-﻿using OrgChartDemo.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Persistence.Repositories;
+using System.Linq;
 
 namespace OrgChartDemo.Persistence
 {
@@ -11,12 +14,13 @@ namespace OrgChartDemo.Persistence
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+        //private readonly Member CurrentUser;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
         /// </summary>
         /// <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context/*, IHttpContextAccessor httpContext*/)
         {
             _context = context;
             Positions = new PositionRepository(_context);
@@ -28,6 +32,17 @@ namespace OrgChartDemo.Persistence
             MemberDutyStatus = new MemberDutyStatusRepository(_context);
             MemberContactNumbers = new MemberContactNumberRepository(_context);
             PhoneNumberTypes = new PhoneNumberTypeRepository(_context);
+            //string ctxName = httpContext.HttpContext.User.Identity.Name;
+            //string logonName = ctxName.Substring(ctxName.LastIndexOf(@"\") +1 );
+            //CurrentUser = _context.Members
+            //        .Where(x => x.LDAPName == "jcs30")
+            //        .Include(x => x.Rank)
+            //        .FirstOrDefault() ?? new Member()
+            //        {
+            //            LastName = "Guest",
+            //            FirstName = ""
+
+            //        };
         }
 
         /// <summary>
@@ -113,5 +128,7 @@ namespace OrgChartDemo.Persistence
         {
             _context.Dispose();
         }
+
+
     }
 }

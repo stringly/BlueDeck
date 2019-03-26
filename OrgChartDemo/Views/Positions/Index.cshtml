@@ -1,5 +1,14 @@
 ﻿@model PositionIndexListViewModel
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+    List<PositionSelectListItem> CanEditPositions = new List<PositionSelectListItem>();
+    var IsComponentSupervisor = User.IsInRole("ComponentAdmin");
+    if (User.IsInRole("ComponentAdmin"))
+    {
+        CanEditPositions = JsonConvert.DeserializeObject<List<PositionSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditPositions").Value.ToString());
+    }
 
+}
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,16 +24,16 @@
         </div>
         <div class="navbar-header pull-left">
             <form asp-page="/Index" method="get" class="navbar-form navbar-search">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Positions" />
-                            <div class="input-group-btn">
-                                <button class="btn btn-search-addon" type="submit">
-                                    <i class="glyphicon glyphicon-search"></i>
-                                </button>
-                            </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Positions" />
+                        <div class="input-group-btn">
+                            <button class="btn btn-search-addon" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
                         </div>
                     </div>
+                </div>
             </form>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -36,7 +45,10 @@
                         <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
                     }
                 }
-                <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a></li>
+                @if (IsAdmin || IsComponentSupervisor)
+                {
+                    <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a></li>
+                }
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -101,16 +113,16 @@
                             </a>
                         </th>
                         <th style="text-align:center;">
-                            @Html.DisplayNameFor(model => model.Positions.First().IsUnique)
+                            Unique
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Positions.First().JobTitle)
+                            Job Title
                         </th>
                         <th style="text-align:center;">
-                            @Html.DisplayNameFor(model => model.Positions.First().IsManager)
+                            Manager
                         </th>
                         <th style="text-align:center;">
-                            @Html.DisplayNameFor(model => model.Positions.First().MembersCount)
+                            Members
                         </th>
                         <th></th>
                     </tr>
@@ -120,33 +132,42 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PositionName)
+                                @item.PositionName
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ParentComponentName)
+                                @item.ParentComponentName
                             </td>
                             <td style="text-align:center;">
                                 @Html.DisplayFor(modelItem => item.IsUnique)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.JobTitle)
+                                @item.JobTitle
                             </td>
                             <td style="text-align:center;">
                                 @Html.DisplayFor(modelItem => item.IsManager)
                             </td>
                             <td style="text-align:center;">
-                                @Html.DisplayFor(modelItem => item.MembersCount)
+                                @item.MembersCount
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.PositionId" title="Edit Position" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                </a>
-                                <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.PositionId" title="Delete Position" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
-                                </a>
+                                @if (IsAdmin || CanEditPositions.Any(x => x.PositionId == item.PositionId))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.PositionId" title="Edit Position" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.PositionId" title="Delete Position" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                                    </a>
+                                }
+                                else
+                                {                                    
+                                    <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                                    </a>                                    
+                                }
                             </td>
                         </tr>
                     }

@@ -23,6 +23,10 @@
             <remarks>
             This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel"/>
             </remarks>
+            <permission>
+            Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
+            logic that restricts the rendering of hyperlinks to Add/Edit/Delete Components from the rendered Index List.
+            </permission>
             <param name="sortOrder">The sort order.</param>
             <param name="searchString">The search string.</param>
             <returns>An <see cref="T:IActionResult"/></returns>
@@ -187,7 +191,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.OrgChartController.Index">
+        <member name="M:OrgChartDemo.Controllers.OrgChartController.Index(System.Nullable{System.Int32})">
             <summary>
             GET /OrgChart/
             </summary>
@@ -206,7 +210,6 @@
             <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
         <member name="M:OrgChartDemo.Controllers.PositionsController.Index(System.String,System.String)">
-            TODO: Add "Members" Nav choice to List Item Options "Edit/Delete/Members" and wire to Members view
             <summary>
             GET: Positions
             </summary>
@@ -579,6 +582,14 @@
             An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
             </value>
         </member>
+        <member name="M:OrgChartDemo.Models.DocGenerators.ComponentRosterGenerator.GenerateComponentTableHeaderRow(System.String,System.Int32)">
+            <summary>
+            Generates the Header Row for a Component Table.
+            </summary>
+            <param name="_componentName">Name of the component. This is required to populate the Table title and the link Bookmark</param>
+            <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
+            <returns></returns>
+        </member>
         <member name="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods">
             <summary>
             Class containing custom extensions
@@ -868,7 +879,7 @@
             </summary>
             <value>
             The full name of the member race.
-            </value>
+            </value>        
         </member>
         <member name="P:OrgChartDemo.Models.Types.MemberRace.Abbreviation">
             <summary>
@@ -947,6 +958,71 @@
             <value>
             The identifier.
             </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MappedField">
+            <summary>
+            Class used to map Table/Cell index and value
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.TableIndex">
+            <summary>
+            Gets or sets the index of the table.
+            </summary>
+            <remarks>
+            This is the index of the table in the Template document
+            </remarks>
+            <value>
+            The index of the table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.Table">
+            <summary>
+            Gets or sets the table.
+            </summary>
+            <remarks>
+            This property may replace the TableIndex completely, as the Table's index in the Document is 
+            dependant on the part of the document that it is in, which means tables in the header/footer
+            will be indexed according to the Header/Footer's tables collection, which is independent of the MainDocumentPart's
+            table indexes.
+            </remarks>
+            <value>
+            The table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.RowIndex">
+            <summary>
+            Gets or sets the index of the row.
+            </summary>
+            <value>
+            The index of the row.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.CellIndex">
+            <summary>
+            Gets or sets the index of the cell.
+            </summary>
+            <value>
+            The index of the cell.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.FieldName">
+            <summary>
+            Gets or sets the name of the field.
+            </summary>
+            <value>
+            The name of the field.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.Types.MappedField.Write(System.String)">
+            <summary>
+            Writes the data in the mapped field to the document.
+            </summary>
+            <param name="table">
+            The target <see cref="T:DocumentFormat.OpenXml.Wordprocessing.Table"/>. 
+            This parameter is required because the Table index depends on whether the MappedField is in a Header/Footer or in the document's mainpart, which means that the TableIndex is not
+            sufficient to target the proper table. 
+            </param>
+            <param name="newText">The new text.</param>
         </member>
         <member name="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem">
             <summary>
@@ -2146,12 +2222,6 @@
             </summary>
             <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetMembersWithPositions">
-            <summary>
-            Gets the members with positions.
-            </summary>
-            <returns></returns>
-        </member>
         <member name="P:OrgChartDemo.Persistence.Repositories.MemberRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -2159,6 +2229,23 @@
             <value>
             The application database context.
             </value>        
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetMembersWithPositions">
+            <summary>
+            Gets the members with positions.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.MemberRepository.GetHomePageViewModelForMember(System.Int32)">
+            <summary>
+            Gets the home page view model for member.
+            </summary>
+            <remarks>
+            This is an attempt to try and apply some better SOLID principals to the
+            way I build these viewModels...
+            </remarks>
+            <param name="memberId">The member identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.PositionRepository">
             <summary>
@@ -2416,7 +2503,7 @@
             <summary>
             Invokes the default <see cref="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent" />
             </summary>
-            <returns></returns>
+            <returns></returns>              
         </member>
     </members>
 </doc>

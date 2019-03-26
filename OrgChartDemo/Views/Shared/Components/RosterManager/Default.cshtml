@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <div class="componentDetails" id="@("componentDetailSection" + c.ComponentId)" data-componentid="@c.ComponentId">
+        <div class="componentDetails collapse in" id="@("componentDetailSection" + c.ComponentId)" data-componentid="@c.ComponentId">
             <div class="row">
                 <div class="col-xs-12 col-md-8">
                     @foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))

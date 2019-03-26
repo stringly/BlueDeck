@@ -14,7 +14,7 @@
   <ProjectReference Include="..\OrgChartDemo\OrgChartDemo.csproj" />
  </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EFCore.TestSupport" Version="1.5.0" />
+    <PackageReference Include="EFCore.TestSupport" Version="1.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.1.2" />

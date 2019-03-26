@@ -1,5 +1,9 @@
 ﻿@model MemberIndexListViewModel
-
+@{    
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+    var MemberId = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value);
+    List<MemberSelectListItem> CanEditMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString());
+}
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -36,7 +40,10 @@
                         <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
                     }
                 }
-                <li><a asp-action="Create"><i class="ion-md-person-add"></i> Create a New Member</a></li>
+                @if (IsAdmin)
+                {
+                    <li><a asp-action="Create"><i class="ion-md-person-add"></i> Create a New Member</a></li>
+                }
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -74,7 +81,7 @@
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by Last Name">
-                                @Html.DisplayNameFor(model => model.Members.First().LastName)
+                                Last Name
                                 @if (Model.CurrentSort == "lastName_desc")
                                 {
                                     <span class="glyphicon glyphicon-sort-by-alphabet"></span>
@@ -88,7 +95,7 @@
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.MemberFirstNameSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by First Name">
-                                @Html.DisplayNameFor(model => model.Members.First().FirstName)
+                                First Name
                                 @if (Model.CurrentSort == "firstName_desc")
                                 {
                                     <span class="glyphicon glyphicon-sort-by-alphabet"></span>
@@ -102,13 +109,13 @@
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.IdNumberSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by ID#">
-                                @Html.DisplayNameFor(model => model.Members.First().IdNumber)
+                                ID Number
                             </a>
                         </th>
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
-                                @Html.DisplayNameFor(model => model.Members.First().PositionName)
+                                Position Name
                             </a>
                         </th>
                         <th>
@@ -122,32 +129,48 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
+                                @item.LastName
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.FirstName)
+                                @item.FirstName
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdNumber)
+                                @item.IdNumber
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PositionName)
+                                @item.PositionName
                             </td>
                             <td>
                                 <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
-                                    @Html.DisplayFor(modelItem => item.Email)
+                                    @item.Email
                                 </a>
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.MemberId" title="Edit Member" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                </a>
                                 <a asp-action="Details" asp-route-id="@item.MemberId" title="View Details" class="glyphicon-ring">
                                     <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
                                 </a>
-                                <a asp-action="Delete" asp-route-id="@item.MemberId" title="Delete Member" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
-                                </a>
+                                @if (IsAdmin)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.MemberId" title="Delete Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                                    </a>
+                                }
+                                else if (CanEditMembers.Any(x => x.MemberId == item.MemberId))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                }
+                                else if (item.MemberId == MemberId)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                }
+
                             </td>
                         </tr>
                     }

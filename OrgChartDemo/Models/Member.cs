@@ -104,6 +104,9 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Email Address")]
         public string Email {get; set; }
 
+        [Display(Name = "Windows Logon Name")]
+        public string LDAPName {get; set;}
+
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
         /// </summary>
@@ -115,6 +118,9 @@ namespace OrgChartDemo.Models {
 
         [Display(Name = "Contact Numbers")]
         public List<MemberContactNumber> PhoneNumbers { get; set; }
+
+        [Display(Name = "Current Roles")]
+        public virtual List<UserRole> CurrentRoles { get; set; }
 
         public Member()
         {

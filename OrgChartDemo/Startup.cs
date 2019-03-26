@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using OrgChartDemo.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Persistence;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using OrgChartDemo.Models.Auth;
 
-namespace OrgChartDemo {
+namespace OrgChartDemo
+{
     /// <summary>
     /// Startup Class
     /// </summary>
@@ -35,8 +34,38 @@ namespace OrgChartDemo {
         public void ConfigureServices(IServiceCollection services) {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             services.AddMvc();
-            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "CanEditUser",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditUserRequirement()));
+                options.AddPolicy(
+                    "CanEditComponent",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditComponentRequirement()));
+                options.AddPolicy(
+                    "CanEditPosition",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new CanEditPositionRequirement()));
+                options.AddPolicy(
+                    "IsGlobalAdmin",
+                    policyBuilder => policyBuilder.AddRequirements(
+                        new IsGlobalAdminRequirement()));
+            });
+            services.AddScoped<IClaimsTransformation, ClaimsLoader>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForUserHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsOwnerHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsMemberSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForComponentHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsComponentSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, CanCreateComponent>();
+            services.AddSingleton<IAuthorizationHandler, IsPositionComponentSupervisorHandler>();
+            services.AddSingleton<IAuthorizationHandler, IsGlobalAdminForPositionHandler>();
+            services.AddSingleton<IAuthorizationHandler, CanCreatePositionHandler>();
+
         }
 
         /// <summary>
@@ -48,12 +77,15 @@ namespace OrgChartDemo {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
+            app.UseAuthentication();
             app.UseStaticFiles();
+            
 
             app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=OrgChart}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

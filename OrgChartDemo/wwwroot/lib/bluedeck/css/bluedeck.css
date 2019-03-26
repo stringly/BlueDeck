@@ -16,13 +16,115 @@ html, body {
 
 body {
     background-color: #fff;
+    height: 100%; 
+}
+.aboutPageHeader {
+    margin-top: 50px;
+    background-color: #3e5374 !important;
+    color: #fff;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+    border-top: 2px solid #fff;
+}
+    .aboutPageHeader .icon {
+        float: left;
+        height: 8vw;
+        width: 8vw;
+        min-width: 40px;
+        min-height: 40px;
+        max-height: 70px;
+        max-width: 70px;
+        -webkit-filter: drop-shadow( 1px 1px 0px #000);
+        filter: drop-shadow( 1px 1px 0px #000);
+        /* Similar syntax to box-shadow */
+    }
+    .aboutPageHeader .appHeaderName {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        text-shadow: 1px 1px #000;
+    }
+    .aboutPageHeader a {
+        color: #55b6f2;
+    }
+    .aboutPageHeader p {
+        font-size: 16px;
+    }
+.aboutPageContent {
+    background-color: #eff0ef;
+    padding-top: 20px;
+    min-height: 600px;
+}
+.aboutPageContent .row {
+    margin-bottom: 20px;
+}
+.aboutPageContentContainer {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 10px;
+    min-height: 100px;
+    background-color: #fff;
+    
+
 }
 
+    .aboutPageContentContainer img {
+        height: 80px;
+        width: 80px;
+        border: 3px solid #000;
+        margin-right: 10px;
+        background-color: #fff;
+    }
+.aboutPageContentContainer h3 {
+    margin-top:0px;
+}
+.homePageHeader {
+    border-top: 2px solid white;
+    background-color: #3e5374 !important;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+    color: white;
+}
+.homePageHeader h4 {
+    font-weight: 100;
+}
+#searchPeople .glyphicon-refresh {
+    display:none;
+}
+#searchPeople .glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+    display: inline-block;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
 .pageContentContainer {
     margin-top: 50px;
     background-color: #fff;
     padding:0px;
     z-index: 1;
+    min-height:600px;
 }
 /* Bootstrap Overrides*/
 .headerContainer {
@@ -1077,3 +1179,84 @@ hr {
         border: 1px solid #d1d5da;
     }
 
+    /* Footer Styling Classes */
+
+.px-3 {
+    padding-right: 16px !important;
+}
+
+.pl-3, .px-3 {
+    padding-left: 16px !important;
+}
+
+.width-full {
+    width: 100% !important;
+}
+
+.container-lg, .container-xl {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-lg {
+    max-width: 1012px;
+}
+.d-flex {
+    display: flex !important;
+}
+
+.f6 {
+    font-size: 12px !important;
+}
+
+.pt-6 {
+    padding-top: 40px !important;
+}
+
+.pb-2 {
+    padding-bottom: 8px !important;
+}
+
+.mt-6 {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.flex-justify-between {
+    justify-content: space-between !important;
+}
+
+.text-gray {
+    color: #586069 !important;
+}
+
+.border-top {
+    border-top: 1px solid #e1e4e8 !important;
+}
+
+.border-gray-light {
+    border-color: #eaecef !important;
+}
+.list-style-none {
+    list-style: none !important;
+}
+
+.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+ol, ul {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+}
+.footer-octicon {
+    color: #c6cbd1;
+}
+.mr-3 {
+    margin-right: 16px !important;
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models.Types;
+using System.Collections.Generic;
 
 namespace OrgChartDemo.Models {
 
@@ -84,5 +85,11 @@ namespace OrgChartDemo.Models {
         public virtual DbSet<MemberContactNumber> ContactNumbers { get; set; }
 
         public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
+
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+
+        public DbQuery<MemberIndexViewModelMemberListItem> MemberIndexViewModelMemberListItems { get; set; }
+        public DbQuery<ComponentSelectListItem> GetChildComponentsForComponentId { get; set; }
+        
     }
 }

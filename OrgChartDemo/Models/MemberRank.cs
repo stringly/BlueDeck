@@ -49,6 +49,8 @@ namespace OrgChartDemo.Models.Types
         /// </value>
         public string PayGrade { get; set; }
 
+        public bool IsSworn { get; set; }
+
         public string GetRankImageSource()
         {
             switch (this.RankId)

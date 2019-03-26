@@ -58,7 +58,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Gender)
                 .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.Race)
-                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)                                
+                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.DutyStatus)
+                .Include(x => x.Positions).ThenInclude(x => x.Members).ThenInclude(x => x.PhoneNumbers)
                 .FirstOrDefault();
             if (result != null)
             {
@@ -157,16 +158,35 @@ namespace OrgChartDemo.Persistence.Repositories
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             
             List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+
             ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
                 .Load();
-
+            
             return components;
         }
-        
+        public List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            List<Component> componentsWithParents = new List<Component>();
+            foreach (Component c in components)
+            {
+                componentsWithParents.Add(ApplicationDbContext.Components.Include(x => x.ParentComponent).Where(x => x.ComponentId == c.ComponentId).FirstOrDefault());
+            }
+            ApplicationDbContext.Set<Position>().Where(x => componentsWithParents.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Load();
+
+            return componentsWithParents;
+        }
         /// <summary>
         /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
         /// </summary>
@@ -443,6 +463,31 @@ namespace OrgChartDemo.Persistence.Repositories
             return ApplicationDbContext.Components
                 .Where(x => x.Name == c.Name)
                 .Any(x => x.ComponentId != c.ComponentId);            
+        }
+
+        public List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            return ApplicationDbContext.GetChildComponentsForComponentId.FromSql("EXECUTE Get_Child_Components_For_ComponentId @ComponentId", param1).ToList();
+        }
+
+        public List<Member> GetMembersRosterForComponentId(int componentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            List<ComponentSelectListItem> components = ApplicationDbContext.GetChildComponentsForComponentId.FromSql("EXECUTE Get_Child_Components_For_ComponentId @ComponentId", param1).ToList();
+            List<int> searchIds = new List<int>();
+            foreach (ComponentSelectListItem c in components)
+            {
+                searchIds.Add(c.Id);
+            }
+            return ApplicationDbContext.Members
+                .Include(x => x.Gender)
+                .Include(x => x.Rank)
+                .Include(x => x.Race)
+                .Include(x => x.Position)
+                .Where(x => searchIds.Contains(x.Position.ParentComponent.ComponentId))
+                .ToList();
+                
         }
     }
 

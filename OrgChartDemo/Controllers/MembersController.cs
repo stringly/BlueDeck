@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
@@ -34,7 +35,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="IActionResult"/></returns>
         public IActionResult Index(string sortOrder, string searchString)
         {
-            MemberIndexListViewModel vm = new MemberIndexListViewModel(unitOfWork.Members.GetMembersWithPositions().ToList());
+            MemberIndexListViewModel vm = unitOfWork.Members.GetMemberIndexListViewModel();
             vm.CurrentSort = sortOrder;
             vm.MemberLastNameSort = String.IsNullOrEmpty(sortOrder) ? "lastName_desc" : "";
             vm.MemberFirstNameSort = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
@@ -44,8 +45,16 @@ namespace OrgChartDemo.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
+                char[] arr = searchString.ToCharArray();
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) 
+                                  || char.IsWhiteSpace(c) 
+                                  || c == '-')));
+                string lowerString = new string(arr);
                 vm.Members = vm.Members
-                    .Where(x => x.LastName.Contains(searchString) || x.FirstName.Contains(searchString) || x.PositionName.Contains(searchString));
+                    .Where(x => x.LastName.ToLower().Contains(lowerString) 
+                    || x.FirstName.ToLower().Contains(lowerString) 
+                    || x.PositionName.ToLower().Contains(lowerString)
+                    || x.IdNumber.Contains(lowerString));
             }
 
             switch (sortOrder)
@@ -99,6 +108,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Member Details";
+            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
             return View(member);
         }
 
@@ -157,6 +167,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [Authorize("CanEditUser")]
         public IActionResult Edit(int? id)
         {
             if (id == null)

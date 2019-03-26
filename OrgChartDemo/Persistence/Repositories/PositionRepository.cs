@@ -212,5 +212,16 @@ namespace OrgChartDemo.Persistence.Repositories
 
             }
         }
+
+        public List<PositionSelectListItem> GetPositionsUserCanEdit(List<ComponentSelectListItem> canEditComponents)
+        {
+            List<PositionSelectListItem> result = new List<PositionSelectListItem>();
+            foreach (ComponentSelectListItem c in canEditComponents)
+            {
+                List<Position> positions = ApplicationDbContext.Positions.Where(x => x.ParentComponent.ComponentId == c.Id).ToList();
+                result.AddRange(positions.ConvertAll(x => new PositionSelectListItem(x)));
+            }
+            return result;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width" />
     <link asp-href-include="lib/bootstrap/css/*.min.css" rel="stylesheet" />
@@ -16,5 +16,6 @@
     <div class="col-xs-12 pageContentContainer">
         @RenderBody()
     </div>
+    @await Component.InvokeAsync("FooterMenu")
 </body>
 </html>
