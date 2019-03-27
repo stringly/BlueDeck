@@ -30,25 +30,30 @@ namespace OrgChartDemo.Models.DocGenerators
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(mem, true))
             {
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
-                HeaderPart headerPart1 = mainPart.AddNewPart<HeaderPart>();                
-                //FooterPart footerPart1 = mainPart.AddNewPart<FooterPart>();
-                string headerPartId = mainPart.GetIdOfPart(headerPart1);
-                //string footerPartId = mainPart.GetIdOfPart(footerPart1);
-                GenerateHeaderPart1Content(headerPart1);
-                //GenerateFooterPartContent(footerPart1);
-                // Get SectionProperties and Replace HeaderReference and FooterRefernce with new Id
-                IEnumerable<SectionProperties> sections = mainPart.Document.Body.Elements<SectionProperties>();
-
-                foreach (var section in sections)
-                {
-                    // Delete existing references to headers and footers
-                    section.RemoveAllChildren<HeaderReference>();
-                    section.RemoveAllChildren<FooterReference>();
-
-                    // Create the new header and footer reference node
-                    section.PrependChild(new HeaderReference() { Id = headerPartId });
-                    //section.PrependChild(new FooterReference() { Id = footerPartId });
-                }
+                Table headerTable = mainPart.HeaderParts.ElementAt(2).RootElement.Elements<Table>().ElementAt(0);
+                RunProperties runProperties1 = new RunProperties();
+                Bold bold1 = new Bold();
+                runProperties1.Append(bold1);
+                FontSize fontSize1 = new FontSize(){ Val = "36" };
+                runProperties1.Append(fontSize1);
+                Run run1 = new Run();
+                run1.Append(runProperties1);
+                Text text1 = new Text("Personnel Roster");
+                run1.Append(text1);
+                
+                headerTable.Elements<TableRow>().ElementAt(0)
+                    .Elements<TableCell>().ElementAt(1)
+                        .Elements<Paragraph>().ElementAt(0)
+                            .Append(run1);
+                headerTable.Elements<TableRow>().ElementAt(1)
+                    .Elements<TableCell>().ElementAt(1)
+                        .Elements<Paragraph>().ElementAt(0)
+                            .Append(new Run(new Text($"{Components.First().Name}")));
+                headerTable.Elements<TableRow>().ElementAt(1)
+                    .Elements<TableCell>().ElementAt(2)
+                        .Elements<Paragraph>().ElementAt(0)
+                            .Append(new Run(new Text(DateTime.Now.ToString("MMMM dd, yyyy"))));
+                mainPart.Document.Body.Elements<Paragraph>().ElementAt(0).Remove();
                 foreach (Component c in Components)
                 {
                     mainPart.Document.Body.Append(GenerateComponentTable(c));
@@ -59,101 +64,6 @@ namespace OrgChartDemo.Models.DocGenerators
             mem.Seek(0, SeekOrigin.Begin);
             return mem;
 
-        }
-        // Generates content of headerPart1.
-        private void GenerateHeaderPart1Content(HeaderPart headerPart1)
-        {
-            Header header1 = new Header();
-
-            Paragraph paragraph1 = new Paragraph();
-
-            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId1 = new ParagraphStyleId(){ Val = "Header" };
-            Justification justification1 = new Justification(){ Val = JustificationValues.Center };
-
-            ParagraphMarkRunProperties paragraphMarkRunProperties1 = new ParagraphMarkRunProperties();
-            FontSize fontSize1 = new FontSize(){ Val = "28" };
-            FontSizeComplexScript fontSizeComplexScript1 = new FontSizeComplexScript(){ Val = "28" };
-
-            paragraphMarkRunProperties1.Append(fontSize1);
-            paragraphMarkRunProperties1.Append(fontSizeComplexScript1);
-
-            paragraphProperties1.Append(paragraphStyleId1);
-            paragraphProperties1.Append(justification1);
-            paragraphProperties1.Append(paragraphMarkRunProperties1);
-
-            Run run1 = new Run();
-
-            RunProperties runProperties1 = new RunProperties();
-            FontSize fontSize2 = new FontSize(){ Val = "28" };
-            FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript(){ Val = "28" };
-
-            runProperties1.Append(fontSize2);
-            runProperties1.Append(fontSizeComplexScript2);
-            Text text1 = new Text();
-            text1.Text = $"{Components.First().Name} Personnel Roster";
-
-            run1.Append(runProperties1);
-            run1.Append(text1);
-
-            paragraph1.Append(paragraphProperties1);
-            paragraph1.Append(run1);
-
-            Paragraph paragraph2 = new Paragraph();
-
-            ParagraphProperties paragraphProperties2 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId2 = new ParagraphStyleId(){ Val = "Header" };
-            Justification justification2 = new Justification(){ Val = JustificationValues.Center };
-
-            paragraphProperties2.Append(paragraphStyleId2);
-            paragraphProperties2.Append(justification2);
-
-            Run run2 = new Run();
-            Text text2 = new Text();
-            text2.Text = $"{DateTime.Now.ToString("MMMM dd, yyyy")}";
-
-            run2.Append(text2);
-
-            paragraph2.Append(paragraphProperties2);
-            paragraph2.Append(run2);
-
-            header1.Append(paragraph1);
-            header1.Append(paragraph2);
-
-            headerPart1.Header = header1;
-        }
-
-        // Generates content of part.
-        private void GenerateFooterPartContent(FooterPart part)
-        {
-            Footer footer1 = new Footer();
-
-            Paragraph paragraph1 = new Paragraph();
-
-            ParagraphProperties paragraphProperties1 = new ParagraphProperties();
-            ParagraphStyleId paragraphStyleId1 = new ParagraphStyleId(){ Val = "Footer" };
-
-            paragraphProperties1.Append(paragraphStyleId1);
-
-            Run run1 = new Run();
-            Text text1 = new Text();
-            text1.Text = $"{Components.First().Name} Personnel Roster";
-
-            run1.Append(text1);
-
-            Run run2 = new Run();
-            Text text2 = new Text(){ Space = SpaceProcessingModeValues.Preserve };
-            text2.Text = $" – {DateTime.Now.ToString("MMMM dd, yyyy")}";
-
-            run2.Append(text2);
-
-            paragraph1.Append(paragraphProperties1);
-            paragraph1.Append(run1);
-            paragraph1.Append(run2);
-
-            footer1.Append(paragraph1);
-
-            part.Footer = footer1;
         }
 
         private Table GenerateComponentTable(Component c)
@@ -207,10 +117,10 @@ namespace OrgChartDemo.Models.DocGenerators
         private TableGrid GenerateComponentTableGrid()
         {
             TableGrid tableGrid1 = new TableGrid();
-            GridColumn gridColumn1 = new GridColumn() { Width = "450" };
-            GridColumn gridColumn2 = new GridColumn() { Width = "13950" };
+            //GridColumn gridColumn1 = new GridColumn() { Width = "450" };
+            GridColumn gridColumn2 = new GridColumn() { Width = "14400" };
 
-            tableGrid1.Append(gridColumn1);
+            //tableGrid1.Append(gridColumn1);
             tableGrid1.Append(gridColumn2);
             return tableGrid1;
         }
@@ -225,7 +135,7 @@ namespace OrgChartDemo.Models.DocGenerators
             TableRow tableRow1 = new TableRow();
 
             TableRowProperties tableRowProperties1 = new TableRowProperties();
-            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)603U };
+            TableRowHeight tableRowHeight1 = new TableRowHeight() { Val = (UInt32Value)378U };
 
             tableRowProperties1.Append(tableRowHeight1);
 
@@ -233,7 +143,7 @@ namespace OrgChartDemo.Models.DocGenerators
 
             TableCellProperties tableCellProperties1 = new TableCellProperties();
             TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "14400", Type = TableWidthUnitValues.Dxa };
-            GridSpan gridSpan1 = new GridSpan() { Val = 2 };
+            //GridSpan gridSpan1 = new GridSpan() { Val = 2 };
 
             TableCellBorders tableCellBorders1 = new TableCellBorders();
             TopBorder topBorder1 = new TopBorder() { Val = BorderValues.Single, Color = "767171", ThemeColor = ThemeColorValues.Background2, ThemeShade = "80", Size = (UInt32Value)18U, Space = (UInt32Value)0U };
@@ -243,7 +153,7 @@ namespace OrgChartDemo.Models.DocGenerators
             TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
 
             tableCellProperties1.Append(tableCellWidth1);
-            tableCellProperties1.Append(gridSpan1);
+            //tableCellProperties1.Append(gridSpan1);
             tableCellProperties1.Append(tableCellBorders1);
             tableCellProperties1.Append(shading1);
             tableCellProperties1.Append(tableCellVerticalAlignment1);
@@ -259,8 +169,8 @@ namespace OrgChartDemo.Models.DocGenerators
             Run run1 = new Run();
 
             RunProperties runProperties1 = new RunProperties();
-            Color color1 = new Color() { Val = "009999" };
-            FontSize fontSize1 = new FontSize() { Val = "32" };
+            Color color1 = new Color() { Val = "000000" };
+            FontSize fontSize1 = new FontSize() { Val = "28" };
 
             runProperties1.Append(color1);
             runProperties1.Append(fontSize1);
@@ -291,23 +201,6 @@ namespace OrgChartDemo.Models.DocGenerators
 
             tableRowProperties1.Append(tableRowHeight1);
 
-            TableCell tableCell1 = new TableCell();
-
-            TableCellProperties tableCellProperties1 = new TableCellProperties();
-            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
-
-            tableCellProperties1.Append(tableCellWidth1);
-            tableCellProperties1.Append(tableCellVerticalAlignment1);
-            Paragraph paragraph1 = new Paragraph();
-            ParagraphProperties paragraphProperties1 = new ParagraphProperties();            
-            KeepNext keepNext1 = new KeepNext();
-            paragraphProperties1.Append(keepNext1);
-            paragraph1.Append(paragraphProperties1);
-
-            tableCell1.Append(tableCellProperties1);
-            tableCell1.Append(paragraph1);
-
             TableCell tableCell2 = new TableCell();
 
             TableCellProperties tableCellProperties2 = new TableCellProperties();
@@ -329,7 +222,7 @@ namespace OrgChartDemo.Models.DocGenerators
             paragraphMarkRunProperties1.Append(bold1);
             paragraphMarkRunProperties1.Append(color1);
 
-            paragraphProperties1.Append(paragraphMarkRunProperties1);
+            paragraphProperties2.Append(paragraphMarkRunProperties1);
 
             paragraph2.Append(paragraphProperties2);
             // Begin Generating the Positions Sub Table
@@ -358,7 +251,6 @@ namespace OrgChartDemo.Models.DocGenerators
             tableCell2.Append(paragraph3);
 
             tableRow1.Append(tableRowProperties1);
-            tableRow1.Append(tableCell1);
             tableRow1.Append(tableCell2);
             return tableRow1;
         }
@@ -377,23 +269,6 @@ namespace OrgChartDemo.Models.DocGenerators
             // Append properties to table row
             tableRow1.Append(tableRowProperties1);
 
-            // Create first column empty cell
-            TableCell tableCell1 = new TableCell();
-
-            TableCellProperties tableCellProperties1 = new TableCellProperties();
-            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
-
-            tableCellProperties1.Append(tableCellWidth1);
-            tableCellProperties1.Append(tableCellVerticalAlignment1);
-            Paragraph paragraph1 = new Paragraph();
-
-            tableCell1.Append(tableCellProperties1);
-            tableCell1.Append(paragraph1);
-
-            // append first column
-            tableRow1.Append(tableCell1);
-            // create second column, which will contain the sub-table
             TableCell tableCell2 = new TableCell();
             TableCellProperties tableCellProperties2 = new TableCellProperties();
             TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "13950", Type = TableWidthUnitValues.Dxa };
@@ -435,25 +310,8 @@ namespace OrgChartDemo.Models.DocGenerators
             tableRowProperties1.Append(cantSplit1);
             tableRowProperties1.Append(tableRowHeight1);
             // Append properties to table row
-            tableRow1.Append(tableRowProperties1);
-
-            // Create first column empty cell
-            TableCell tableCell1 = new TableCell();
-
-            TableCellProperties tableCellProperties1 = new TableCellProperties();
-            TableCellWidth tableCellWidth1 = new TableCellWidth() { Width = "450", Type = TableWidthUnitValues.Dxa };
-            TableCellVerticalAlignment tableCellVerticalAlignment1 = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
-
-            tableCellProperties1.Append(tableCellWidth1);
-            tableCellProperties1.Append(tableCellVerticalAlignment1);
-            Paragraph paragraph1 = new Paragraph();
-
-            tableCell1.Append(tableCellProperties1);
-            tableCell1.Append(paragraph1);
-
-            // append first column
-            tableRow1.Append(tableCell1);
-            // create second column, which will contain the sub-table
+            tableRow1.Append(tableRowProperties1);   
+                        
             TableCell tableCell2 = new TableCell();
             TableCellProperties tableCellProperties2 = new TableCellProperties();
             TableCellWidth tableCellWidth2 = new TableCellWidth() { Width = "13950", Type = TableWidthUnitValues.Dxa };
