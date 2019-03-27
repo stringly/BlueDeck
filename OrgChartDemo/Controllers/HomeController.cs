@@ -73,16 +73,22 @@ namespace OrgChartDemo.Controllers
             AlphaRosterGenerator gen = new AlphaRosterGenerator();
             gen.Members = unitOfWork.Components.GetMembersRosterForComponentId(id);
             gen.ComponentName = unitOfWork.Components.Get(id).Name;
+            string fileName = $"{unitOfWork.Components.Get(id).Name} Alpha Roster {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
 
-
-            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Alpha Roster Test.docx");
+            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
         public IActionResult DownloadComponentRoster(int id)
         {
             ComponentRosterGenerator gen = new ComponentRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
-            
 
-            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "Component Roster Test.docx");
+            string fileName = $"{unitOfWork.Components.Get(id).Name} Roster {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
+            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
+        }
+        public IActionResult DownloadOrganizationChart(int id)
+        {
+            OrgChartGenerator gen = new OrgChartGenerator(unitOfWork.Components.GetOrgChartComponentsWithMembers(id));
+            string fileName = $"{unitOfWork.Components.Get(id).Name} Organization Chart {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
+            return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
     }
 }
