@@ -209,7 +209,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
                 .Include(x => x.PhoneNumbers)
-                    .ThenInclude(x => x.Type)                
+                    .ThenInclude(x => x.Type)
                 .FirstOrDefault();
             HomePageViewModel result = new HomePageViewModel(currentUser);
             SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);
@@ -222,11 +222,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
                 .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
                 .Load();
-            foreach(Component c in components.OrderBy(x => x.LineupPosition))
-            {
-                HomePageComponentGroup grp = new HomePageComponentGroup(c);
-                result.ComponentGroups.Add(grp);
-            }
+            result.SetComponentGroups(components.OrderBy(x => x.LineupPosition).ToList());
             return result;
         }
 

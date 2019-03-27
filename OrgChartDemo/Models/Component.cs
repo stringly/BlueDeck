@@ -19,6 +19,8 @@ namespace OrgChartDemo.Models {
         [Key]
         public int ComponentId { get; set; }
 
+        public int? ParentComponentId { get; set; }
+
         /// <summary>
         /// Gets or sets the component's parent <see cref="T:OrgChartDemo.Models.Component"/>.
         /// </summary>
@@ -65,7 +67,7 @@ namespace OrgChartDemo.Models {
         /// </value>
         public ICollection<Position> Positions { get; set; }
         
-        public virtual ICollection<Component> ChildComponents { get; set; }
+        public ICollection<Component> ChildComponents { get; set; }
 
         public Component()
         {            
