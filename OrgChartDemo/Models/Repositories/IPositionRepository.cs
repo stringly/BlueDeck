@@ -26,6 +26,6 @@ namespace OrgChartDemo.Models.Repositories
         void RemovePositionAndReassignMembers(int id, string newPositionName = "Unassigned");
         Position GetPositionWithParentComponent(int positionId);
         void UpdatePositionAndSetLineup(Position p);
-        List<PositionSelectListItem> GetPositionsUserCanEdit(List<ComponentSelectListItem> canEditComponents);
+        List<PositionSelectListItem> GetPositionsUserCanEdit(int componentId);
     }
 }

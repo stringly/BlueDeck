@@ -91,8 +91,22 @@ body {
 .homePageHeader h4 {
     font-weight: 100;
 }
+.HomePageComponentContainer thead th {
+    color: #777;
+}
+.HomePageComponentContainer table caption {
+    
+    border-bottom: 1px solid #ddd;
+}
+    .HomePageComponentContainer table caption strong {
+        color: #777;
+        font-size: 14px;
+    }
+.HomePageComponentContainer table thead th {
+    border-bottom: 1px solid #ddd;
+}
 #searchPeople .glyphicon-refresh {
-    display:none;
+    display: none;
 }
 #searchPeople .glyphicon.spinning {
     animation: spin 1s infinite linear;

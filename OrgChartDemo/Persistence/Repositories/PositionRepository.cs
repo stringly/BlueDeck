@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
@@ -213,15 +214,10 @@ namespace OrgChartDemo.Persistence.Repositories
             }
         }
 
-        public List<PositionSelectListItem> GetPositionsUserCanEdit(List<ComponentSelectListItem> canEditComponents)
+        public List<PositionSelectListItem> GetPositionsUserCanEdit(int componentId)
         {
-            List<PositionSelectListItem> result = new List<PositionSelectListItem>();
-            foreach (ComponentSelectListItem c in canEditComponents)
-            {
-                List<Position> positions = ApplicationDbContext.Positions.Where(x => x.ParentComponent.ComponentId == c.Id).ToList();
-                result.AddRange(positions.ConvertAll(x => new PositionSelectListItem(x)));
-            }
-            return result;
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            return ApplicationDbContext.GetPositionsUserCanEdit.FromSql("EXECUTE Get_Positions_User_Can_Edit @ComponentId", param1).ToList();
         }
     }
 }

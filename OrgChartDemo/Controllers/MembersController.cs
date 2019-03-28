@@ -50,6 +50,7 @@ namespace OrgChartDemo.Controllers
                                   || char.IsWhiteSpace(c) 
                                   || c == '-')));
                 string lowerString = new string(arr);
+                lowerString = lowerString.ToLower();
                 vm.Members = vm.Members
                     .Where(x => x.LastName.ToLower().Contains(lowerString) 
                     || x.FirstName.ToLower().Contains(lowerString) 

@@ -29,6 +29,6 @@ namespace OrgChartDemo.Models.Repositories
         MemberIndexListViewModel GetMemberIndexListViewModel();
         HomePageViewModel GetHomePageViewModelForMember(int memberId);
         int GetMemberParentComponentId(int memberid);
-        List<MemberSelectListItem> GetMembersUserCanEdit(List<ComponentSelectListItem> canEditComponents);
+        List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);
     }
 }

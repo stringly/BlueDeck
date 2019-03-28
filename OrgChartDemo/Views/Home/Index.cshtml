@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="col-xs-12">
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
@@ -38,22 +38,22 @@
                                     }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
                                 </caption>
-                                <thead>
+                                @*<thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Phone</th>
                                         <th>Email</th>
                                     </tr>
-                                </thead>
+                                </thead>*@
                                 <tbody>
                                     @foreach (var worker in home.Members)
                                     {
                                         <tr>
-                                            <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
-                                            <td>@worker.PositionName</td>
-                                            <td>@worker.ContactNumber</td>
-                                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                            <td class="col-xs-4">@worker.PositionName</td>
+                                            <td class="col-xs-2">@worker.ContactNumber</td>
+                                            <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -76,22 +76,22 @@
                                     }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
                                 </caption>
-                                <thead>
+                                @*<thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
                                         <th>Phone</th>
                                         <th>Email</th>
                                     </tr>
-                                </thead>
+                                </thead>*@
                                 <tbody>
                                     @foreach (var worker in item.Members)
                                     {
                                         <tr>
-                                            <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
-                                            <td>@worker.PositionName</td>
-                                            <td>@worker.ContactNumber</td>
-                                            <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                            <td class="col-xs-4">@worker.PositionName</td>
+                                            <td class="col-xs-2">@worker.ContactNumber</td>
+                                            <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
                                         </tr>
                                     }
                                 </tbody>

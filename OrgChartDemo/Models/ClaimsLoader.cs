@@ -40,14 +40,15 @@ namespace OrgChartDemo.Models
                         ci.AddClaim(c);
                         if (ur.RoleType.RoleTypeName == "ComponentAdmin")
                         {
+                            int memberParentComponentId = dbUser.Position.ParentComponent.ComponentId;
                             // TODO: Repo method to get tree of componentIds for the user's parent component
-                            List<ComponentSelectListItem> canEditComponents = _unitOfWork.Components.GetChildComponentsForComponentId(dbUser.Position.ParentComponent.ComponentId);
+                            List<ComponentSelectListItem> canEditComponents = _unitOfWork.Components.GetChildComponentsForComponentId(memberParentComponentId);
                             var d = new Claim("CanEditComponents", JsonConvert.SerializeObject(canEditComponents));
                             ci.AddClaim(d);
-                            List<MemberSelectListItem> canEditMembers = _unitOfWork.Members.GetMembersUserCanEdit(canEditComponents);
+                            List<MemberSelectListItem> canEditMembers = _unitOfWork.Members.GetMembersUserCanEdit(memberParentComponentId);
                             var e = new Claim("CanEditUsers", JsonConvert.SerializeObject(canEditMembers));
                             ci.AddClaim(e);
-                            List<PositionSelectListItem> canEditPositions = _unitOfWork.Positions.GetPositionsUserCanEdit(canEditComponents);
+                            List<PositionSelectListItem> canEditPositions = _unitOfWork.Positions.GetPositionsUserCanEdit(memberParentComponentId);
                             var f = new Claim("CanEditPositions", JsonConvert.SerializeObject(canEditPositions));
                             ci.AddClaim(f);
                         }

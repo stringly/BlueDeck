@@ -240,15 +240,10 @@ namespace OrgChartDemo.Persistence.Repositories
 
         }
 
-        public List<MemberSelectListItem> GetMembersUserCanEdit(List<ComponentSelectListItem> canEditComponents)
+        public List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId)
         {
-            List<MemberSelectListItem> result = new List<MemberSelectListItem>();
-            foreach (ComponentSelectListItem c in canEditComponents)
-            {
-                List<Member> members = ApplicationDbContext.Members.Where(x => x.Position.ParentComponent.ComponentId == c.Id).ToList();
-                result.AddRange(members.ConvertAll(x => new MemberSelectListItem(x)));
-            }
-            return result;
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+            return ApplicationDbContext.GetMembersUserCanEdit.FromSql("dbo.Get_Members_User_Can_Edit @ComponentId", param1).ToList();
         }
 
     }

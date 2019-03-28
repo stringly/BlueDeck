@@ -90,6 +90,7 @@ namespace OrgChartDemo.Models {
 
         public DbQuery<MemberIndexViewModelMemberListItem> MemberIndexViewModelMemberListItems { get; set; }
         public DbQuery<ComponentSelectListItem> GetChildComponentsForComponentId { get; set; }
-        
+        public DbQuery<PositionSelectListItem> GetPositionsUserCanEdit { get; set; }
+        public DbQuery<MemberSelectListItem> GetMembersUserCanEdit { get; set; }
     }
 }
