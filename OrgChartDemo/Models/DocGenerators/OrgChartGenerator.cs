@@ -28,7 +28,7 @@ namespace OrgChartDemo.Models.DocGenerators
         public MemoryStream Generate()
         {
 
-            string hierarchicalStructure = ParseComponentToNestedXMLList(ChartableComponents.First()).ToString();
+            string hierarchicalStructure = ParseComponentToNestedXMLList(ChartableComponents.First(x => x.Parentid == 0)).ToString();
             var mem = new MemoryStream();
             byte[] byteArray = File.ReadAllBytes("Templates/Organization_Chart_Template.docx");
             mem.Write(byteArray, 0, byteArray.Length);
@@ -66,6 +66,7 @@ namespace OrgChartDemo.Models.DocGenerators
             return mem;
         }
 
+        // For this to work, it must be passed the Origin Component first
         public XElement ParseComponentToNestedXMLList(ChartableComponentWithMember _component, XElement _element = null)
         {
             XElement x = new XElement(

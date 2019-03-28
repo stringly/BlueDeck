@@ -17,5 +17,17 @@ namespace OrgChartDemo.Models.ViewModels
             ComponentGroups = new List<HomePageComponentGroup>();
 
         }
+
+        public void SetComponentOrder(List<HomePageComponentGroup> initial)
+        {
+            RecurseAndReorderComponents(initial);
+               
+        }
+
+        public void RecurseAndReorderComponents(List<HomePageComponentGroup> initial)
+        {
+        
+            
+        }
     }
 }

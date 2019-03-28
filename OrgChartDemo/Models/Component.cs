@@ -19,6 +19,8 @@ namespace OrgChartDemo.Models {
         [Key]
         public int ComponentId { get; set; }
 
+        public int? ParentComponentId {get;set;}
+
         /// <summary>
         /// Gets or sets the component's parent <see cref="T:OrgChartDemo.Models.Component"/>.
         /// </summary>

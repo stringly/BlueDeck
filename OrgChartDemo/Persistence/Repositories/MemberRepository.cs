@@ -222,11 +222,9 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
                 .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
                 .Load();
-            foreach(Component c in components.OrderBy(x => x.LineupPosition))
-            {
-                HomePageComponentGroup grp = new HomePageComponentGroup(c);
-                result.ComponentGroups.Add(grp);
-            }
+
+            List<HomePageComponentGroup> initial = components.ConvertAll(x => new HomePageComponentGroup(x));
+            result.SetComponentOrder(initial);
             return result;
         }
 

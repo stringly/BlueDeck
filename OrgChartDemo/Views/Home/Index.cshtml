@@ -62,7 +62,7 @@
                     </div>
                 </div>
             }
-            @foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.CurrentUser.Position.ParentComponent.ComponentId).OrderBy(x => x.LineupPosition))
+            @foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.CurrentUser.Position.ParentComponent.ComponentId))
             {
                 <div class="HomePageComponentContainer">
                     <div class="col-md-12">
