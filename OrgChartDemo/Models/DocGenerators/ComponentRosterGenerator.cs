@@ -328,9 +328,9 @@ namespace OrgChartDemo.Models.DocGenerators
 
             // APPEND DEMO ROWS HERE
             List<Member> allMembers = RecurseForMembers(_component, new List<Member>());
-            List<MemberRank> distinctRankList = allMembers.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
+            List<Rank> distinctRankList = allMembers.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
 
-            foreach (MemberRank r in distinctRankList)
+            foreach (Rank r in distinctRankList)
             {
                 List<Member> RankMembers = allMembers.Where(x => x.Rank == r).ToList();
                 table1.Append(GenerateDemoTableRow(r.RankFullName, RankMembers));

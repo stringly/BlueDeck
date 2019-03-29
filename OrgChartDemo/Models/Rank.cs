@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.Types
+namespace OrgChartDemo.Models
 {
     /// <summary>
     /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>
-    public class MemberRank {
+    public class Rank {
 
         /// <summary>
         /// Gets or sets the rank Id.
@@ -50,7 +51,7 @@ namespace OrgChartDemo.Models.Types
         public string PayGrade { get; set; }
 
         public bool IsSworn { get; set; }
-
+        
         public string GetRankImageSource()
         {
             switch (this.RankId)

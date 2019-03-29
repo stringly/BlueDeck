@@ -34,7 +34,7 @@ namespace OrgChartDemo.Models
                 if (dbUser != null)
                 {
                     var ci = (ClaimsIdentity)principal.Identity;
-                    foreach (UserRole ur in dbUser.CurrentRoles)
+                    foreach (Role ur in dbUser.CurrentRoles)
                     {
                         var c = new Claim(ci.RoleClaimType, ur.RoleType.RoleTypeName);
                         ci.AddClaim(c);
@@ -57,12 +57,15 @@ namespace OrgChartDemo.Models
                     ci.AddClaim(new Claim(ClaimTypes.Surname, dbUser.LastName));
                     ci.AddClaim(new Claim("MemberId", dbUser.MemberId.ToString(), ClaimValueTypes.Integer32));
                     ci.AddClaim(new Claim("DisplayName", dbUser.GetTitleName()));
+                    ci.AddClaim(new Claim("LDAPName", logonName));
                 }
                 else
                 {
                     var ci = (ClaimsIdentity)principal.Identity;
                     ci.AddClaim(new Claim("DisplayName", "Guest"));
                     ci.AddClaim(new Claim("MemberId", "0", ClaimValueTypes.Integer32));
+                    ci.AddClaim(new Claim(ci.RoleClaimType, "Guest"));
+                    ci.AddClaim(new Claim("LDAPName", logonName));
                 }
                 
             }

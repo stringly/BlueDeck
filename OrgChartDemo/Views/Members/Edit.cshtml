@@ -96,12 +96,17 @@
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-sm-4 form-group">
+                                <div class="col-sm-3 form-group">
                                     <label asp-for="Email" class="control-label"></label>
                                     <input asp-for="Email" class="form-control" />
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
-                                <div class="col-sm-8 form-group">
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="LDAPName" class="control-label"></label>
+                                    <input asp-for="LDAPName" class="form-control" />
+                                    <span asp-validation-for="LDAPName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6 form-group">
                                     <label asp-for="ContactNumbers" class="control-label"></label>
                                     @for (var i = 0; i < Model.ContactNumbers.Count; i++)
                                     {

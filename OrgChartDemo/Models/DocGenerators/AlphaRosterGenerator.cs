@@ -64,9 +64,9 @@ namespace OrgChartDemo.Models.DocGenerators
                 }
 
                 Table demoTable = mainPart.Document.Body.Elements<Table>().ElementAt(1);
-                List<MemberRank> distinctRankList = Members.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
+                List<Rank> distinctRankList = Members.Select(x => x.Rank).OrderByDescending(x => x.RankId).Distinct().ToList();
                 
-                foreach (MemberRank r in distinctRankList)
+                foreach (Rank r in distinctRankList)
                 {
                     List<Member> RankMembers = Members.Where(x => x.Rank == r).ToList();
                     demoTable.Append(GenerateDemoTableRow(r.RankFullName, RankMembers));

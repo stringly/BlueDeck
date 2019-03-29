@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.Types
+namespace OrgChartDemo.Models
 {
     /// <summary>
     /// A Class that represents racial demographic group.  Contains properties and methods used in displaying the race of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>
-    public class MemberRace
+    public class Race
     {
         /// <summary>
         /// Gets or sets the member race identifier.
@@ -31,6 +32,5 @@ namespace OrgChartDemo.Models.Types
         /// The race's abbreviation.
         /// </value>
         public char Abbreviation { get; set; }
-
     }
 }

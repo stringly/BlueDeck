@@ -12,7 +12,7 @@ namespace OrgChartDemo.Persistence.Repositories
     /// </summary>
     /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberRace}" />
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
-    public class MemberRaceRepository : Repository<MemberRace>, IMemberRaceRepository
+    public class MemberRaceRepository : Repository<Race>, IMemberRaceRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRaceRepository"/> class.
@@ -37,9 +37,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberRaceSelectListItem { MemberRaceId = x.MemberRaceId, RaceFullName = x.MemberRaceFullName, Abbreviation = x.Abbreviation });
         }
 
-        public MemberRace GetRaceById(int memberRaceId)
+        public Race GetRaceById(int memberRaceId)
         {
-            return ApplicationDbContext.MemberRace
+            return ApplicationDbContext.Races
                 .Where(x => x.MemberRaceId == memberRaceId)
                 .FirstOrDefault();
         }

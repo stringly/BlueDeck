@@ -56,7 +56,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
         /// </value>
-        public virtual DbSet<MemberRank> MemberRanks { get; set; }
+        public virtual DbSet<Rank> Ranks { get; set; }
 
         /// <summary>
         /// Gets or sets the MemberRaces.
@@ -64,7 +64,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRace"/>s
         /// </value>
-        public virtual DbSet<MemberRace> MemberRace { get; set; }
+        public virtual DbSet<Race> Races { get; set; }
 
         /// <summary>
         /// Gets or sets the MemberGenders.
@@ -72,7 +72,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberGender"/>s
         /// </value>
-        public virtual DbSet<MemberGender> MemberGender { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
 
         /// <summary>
         /// Gets or sets the MemberGenders.
@@ -80,17 +80,19 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberDutyStatus"/>s
         /// </value>
-        public virtual DbSet<MemberDutyStatus> DutyStatus { get; set; }
+        public virtual DbSet<DutyStatus> DutyStatuses { get; set; }
 
-        public virtual DbSet<MemberContactNumber> ContactNumbers { get; set; }
+        public virtual DbSet<ContactNumber> ContactNumbers { get; set; }
 
         public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
 
-        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
 
         public DbQuery<MemberIndexViewModelMemberListItem> MemberIndexViewModelMemberListItems { get; set; }
         public DbQuery<ComponentSelectListItem> GetChildComponentsForComponentId { get; set; }
         public DbQuery<PositionSelectListItem> GetPositionsUserCanEdit { get; set; }
         public DbQuery<MemberSelectListItem> GetMembersUserCanEdit { get; set; }
+
+
     }
 }

@@ -2,7 +2,12 @@
 @{    
     var IsAdmin = User.IsInRole("GlobalAdmin");
     var MemberId = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value);
-    List<MemberSelectListItem> CanEditMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString());
+    List<MemberSelectListItem> CanEditMembers = new List<MemberSelectListItem>();
+    if (User.HasClaim(x => x.Type == "CanEditUsers"))
+    {
+        CanEditMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString());
+    }
+
 }
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">

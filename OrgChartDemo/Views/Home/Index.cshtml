@@ -72,7 +72,7 @@
                                     <strong>@item.ComponentName</strong> |
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
-                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a> @: |
+                                        <a asp-controller="Roster" asp-route-id="@item.ComponentId">Manage Roster</a> @: |
                                     }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
                                 </caption>
@@ -200,10 +200,10 @@
                         }
                         else
                         {
-                            for (var i = 0; i < Model.CurrentUser.PhoneNumbers.Count; i++)
+                            foreach(var item in Model.CurrentUser.PhoneNumbers)
                             {
                                 <br />
-                                <span style="font-weight:bold">@Model.CurrentUser.PhoneNumbers[i].Type.PhoneNumberTypeName:<span style="font-weight:normal"> @Model.CurrentUser.PhoneNumbers[i].PhoneNumber</span></span>
+                                <span style="font-weight:bold">@item.Type.PhoneNumberTypeName:<span style="font-weight:normal"> @item.PhoneNumber</span></span>
 
                             }
                         }

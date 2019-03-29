@@ -8,7 +8,7 @@ namespace OrgChartDemo.Models.Repositories
     /// An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
     /// </summary>
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Types.MemberGender}" />
-    public interface IMemberGenderRepository : IRepository<MemberGender>
+    public interface IMemberGenderRepository : IRepository<Gender>
     {
         /// <summary>
         /// Gets a list of <see cref="T:OrgChartDemo.Types.MemberGenderSelectListItem"/>s.
@@ -19,6 +19,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}"/></returns>
         List<MemberGenderSelectListItem> GetMemberGenderSelectListItems();
 
-        MemberGender GetGenderById(int memberGenderId);
+        Gender GetGenderById(int memberGenderId);
     }
 }

@@ -18,6 +18,8 @@ namespace OrgChartDemo.Models {
         /// </value>
         [Key]
         public int PositionId { get; set;}
+                
+        public int ParentComponentId { get; set; }
 
         /// <summary>
         /// Gets or sets the ParentComponentId.

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OrgChartDemo.Models.Types;
 using System.ComponentModel.DataAnnotations;
-
+using System.Linq;
 
 namespace OrgChartDemo.Models.ViewModels
 {
@@ -124,17 +124,21 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         public string DisplayName { get; private set; }
 
+        [Display(Name = "Windows Logon Name")]
+        [Required]
+        public string LDAPName { get; set; }
+
         /// <summary>
         /// Gets or sets the Member's Contact Numbers.
         /// </summary>
         /// <remarks>
-        /// This property stores a List of <see cref="MemberContactNumber"/> objects to store the Member's phone numbers.
+        /// This property stores a List of <see cref="ContactNumber"/> objects to store the Member's phone numbers.
         /// </remarks>
         /// <value>
         /// The contact numbers.
         /// </value>
         [Display(Name = "Contact Numbers")]
-        public List<MemberContactNumber> ContactNumbers { get; set; }
+        public List<ContactNumber> ContactNumbers { get; set; }
 
         /// <summary>
         /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>s.
@@ -226,13 +230,14 @@ namespace OrgChartDemo.Models.ViewModels
             PositionId = _member?.Position?.PositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
-            ContactNumbers = _member?.PhoneNumbers ?? new List<MemberContactNumber>();
+            ContactNumbers = _member?.PhoneNumbers.ToList() ?? new List<ContactNumber>();
             RankList = _rankList;
             GenderList = _genderList;
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
+            LDAPName = _member.LDAPName;
             Positions = _positionList;
 
         }
@@ -268,13 +273,14 @@ namespace OrgChartDemo.Models.ViewModels
             PositionId = _member?.Position?.PositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
-            ContactNumbers = _member?.PhoneNumbers ?? new List<MemberContactNumber>();
+            ContactNumbers = _member?.PhoneNumbers.ToList() ?? new List<ContactNumber>();
             RankList = _rankList;
             GenderList = _genderList;
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
+            LDAPName = _member?.LDAPName;
         }
 
     }

@@ -7,7 +7,7 @@ using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Persistence.Repositories
 {
-    public class MemberDutyStatusRepository : Repository<MemberDutyStatus>, IMemberDutyStatusRepository
+    public class MemberDutyStatusRepository : Repository<DutyStatus>, IMemberDutyStatusRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Persistence.MemberDutyStatusRepository"/> class.
@@ -31,9 +31,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberDutyStatusSelectListItem { MemberDutyStatusId = x.DutyStatusId, MemberDutyStatusName = x.DutyStatusName });
         }
 
-        public MemberDutyStatus GetStatusById(int memberDutyStatus)
+        public DutyStatus GetStatusById(int memberDutyStatus)
         {
-            return ApplicationDbContext.DutyStatus
+            return ApplicationDbContext.DutyStatuses
                 .Where(x => x.DutyStatusId == memberDutyStatus)
                 .FirstOrDefault();
         }

@@ -70,10 +70,9 @@
                         }
                         else
                         {
-                            for (var i = 0; i < Model.PhoneNumbers.Count; i++)
-                            {
+                            foreach (var item in Model.PhoneNumbers) { 
                                 <br />
-                                <span style="font-weight:bold">@Model.PhoneNumbers[i].Type.PhoneNumberTypeName:<span style="font-weight:normal"> @Model.PhoneNumbers[i].PhoneNumber</span></span>
+                                <span style="font-weight:bold">@item.Type.PhoneNumberTypeName:<span style="font-weight:normal"> @item.PhoneNumber</span></span>
 
                             }
                         }

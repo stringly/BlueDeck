@@ -12,7 +12,7 @@ namespace OrgChartDemo.Persistence.Repositories
     /// </summary>
     /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberGender}" />
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
-    public class MemberGenderRepository: Repository<MemberGender>, IMemberGenderRepository
+    public class MemberGenderRepository: Repository<Gender>, IMemberGenderRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberGenderRepository"/> class.
@@ -36,9 +36,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberGenderSelectListItem { MemberGenderId = x.GenderId, MemberGenderFullName = x.GenderFullName , Abbreviation = x.Abbreviation });
         }
 
-        public MemberGender GetGenderById(int memberGenderId)
+        public Gender GetGenderById(int memberGenderId)
         {
-            return ApplicationDbContext.MemberGender
+            return ApplicationDbContext.Genders
                 .Where(x => x.GenderId == memberGenderId)
                 .FirstOrDefault();
         }

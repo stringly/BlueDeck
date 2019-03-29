@@ -10,9 +10,9 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Create a Member</h2>
+        <h2 class="formHeader-heading">Create a BlueDeck Account</h2>
         <p class="formHeader-description">
-            A member represents an employee of the organization.
+            Please provide the following information to register for BlueDeck.
         </p>
         <div>
             <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
@@ -20,8 +20,8 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <form asp-action="Create" class="row-border">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create" asp-controller="Members" class="row-border">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-sm-3 form-group">
@@ -74,12 +74,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            <label asp-for="PositionId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.PositionId,
-                                                            new SelectList(Model.Positions, "PositionId", "PositionName"),
-                                                            "Assign to Position",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="PositionId" class="text-danger"></span>
+                            <hidden asp-for="PositionId"></hidden>
                         </div>
                         <div class="col-sm-3 form-group">
                             <label asp-for="DutyStatusId" class="control-label"></label>
@@ -99,7 +94,7 @@
                         </div>
                         <div class="col-sm-3 form-group">
                             <label asp-for="LDAPName" class="control-label"></label>
-                            <input asp-for="LDAPName" class="form-control" />
+                            @Html.TextBoxFor(x => x.LDAPName, new { @class="form-control", @disabled = "disabled"})
                             <span asp-validation-for="LDAPName" class="text-danger"></span>
                         </div>
                         <div class="col-sm-6 form-group">

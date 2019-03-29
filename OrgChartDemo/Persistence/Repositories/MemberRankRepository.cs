@@ -13,7 +13,7 @@ namespace OrgChartDemo.Persistence.Repositories
     /// </summary>
     /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberRank}" />
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository" />
-    public class MemberRankRepository : Repository<MemberRank>, IMemberRankRepository
+    public class MemberRankRepository : Repository<Rank>, IMemberRankRepository
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository"/> class.
@@ -37,9 +37,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem { MemberRankId = x.RankId, RankName = x.RankFullName });
         }
 
-        public MemberRank GetRankById(int memberRankId)
+        public Rank GetRankById(int memberRankId)
         {
-            return ApplicationDbContext.MemberRanks
+            return ApplicationDbContext.Ranks
                 .Where(x => x.RankId == memberRankId)
                 .FirstOrDefault();
         }

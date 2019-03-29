@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrgChartDemo.Models
 {
-    public class MemberContactNumber
+    public class ContactNumber
     {
         [Key]
         public int MemberContactNumberId {get;set;}
@@ -13,7 +13,8 @@ namespace OrgChartDemo.Models
 
         public string PhoneNumber {get;set;}
 
-        public Member Member {get;set;}
+        public int MemberId { get; set; }
+        public virtual Member Member {get;set;}
 
         [NotMapped]
         public bool ToDelete { get; set; }

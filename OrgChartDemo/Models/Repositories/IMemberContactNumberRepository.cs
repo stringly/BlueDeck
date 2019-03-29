@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models.Repositories
 {
-    public interface IMemberContactNumberRepository : IRepository<MemberContactNumber>
+    public interface IMemberContactNumberRepository : IRepository<ContactNumber>
     {
     }
 }

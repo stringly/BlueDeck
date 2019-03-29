@@ -147,11 +147,11 @@ namespace OrgChartDemo.Controllers
                 Callsign = form.Callsign.ToUpper()
                 };
 
-            if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName) != null) { 
+            if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName && x.ParentComponentId == form.ParentComponentId) != null) { 
                 ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                 errors++;
             }
-            else if (unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign) != null ) {
+            else if (unitOfWork.Positions.SingleOrDefault(x => x.ParentComponentId == form.ParentComponentId && x.Callsign == form.Callsign) != null ) {
                 errors++;
                 ViewBag.Message = $"The callsign '{p.Callsign}' is in use. Choose another.";
             }
@@ -236,18 +236,18 @@ namespace OrgChartDemo.Controllers
                 if (id != form.PositionId) {
                     return NotFound();
                 }
-                else if (unitOfWork.Positions.Find(x => x.Name == form.PositionName && x.PositionId != id).FirstOrDefault() != null)
+                else if (unitOfWork.Positions.Find(x => x.Name == form.PositionName && x.ParentComponentId == form.ParentComponentId && x.PositionId != id).FirstOrDefault() != null)
                 {
                     // user is attempting to change the name of the position to a name which already exists                    
-                    ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
+                    ViewBag.Message = $"A Position with the name {form.PositionName} already exists in the selected parent Component. Use a different Name.\n";
                     errors++;
                 }
                 else if (form.Callsign != null)
                 {
-                    if(unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign.ToUpper() && x.PositionId != form.PositionId) != null)
+                    if(unitOfWork.Positions.SingleOrDefault(x => x.Callsign == form.Callsign.ToUpper() && x.ParentComponentId == form.ParentComponentId && x.PositionId != form.PositionId) != null)
                     {
                         errors++;                    
-                        ViewBag.Message = $"The callsign {form.Callsign} is in use. Choose another.";
+                        ViewBag.Message = $"The callsign {form.Callsign} is in use by another position in the selected parent Component. Choose another.";
                     }
                     
                 }

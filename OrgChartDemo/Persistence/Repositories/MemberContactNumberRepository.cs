@@ -4,7 +4,7 @@ using OrgChartDemo.Models.Types;
 
 namespace OrgChartDemo.Persistence.Repositories
 {
-    public class MemberContactNumberRepository : Repository<MemberContactNumber>, IMemberContactNumberRepository
+    public class MemberContactNumberRepository : Repository<ContactNumber>, IMemberContactNumberRepository
     {
         public MemberContactNumberRepository(ApplicationDbContext context) : base(context)
         {

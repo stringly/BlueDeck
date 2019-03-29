@@ -248,7 +248,7 @@
             this.classList.remove("active");
         }
         function DragAndSwap(dragMId, dropMId) {
-            $.get("Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
+            $.get("/Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
 
                 if (data.success == true) {
                     $("#SelectedComponent").trigger('change');
@@ -281,7 +281,7 @@
             // clear any extant modal from the modal container
             var container = $("#modalTarget").empty();
             // retrieve the ReassignEmployee from the server
-            $.get("Roster/GetReassignMemberViewComponent", { memberId: memberId }, function (data) {
+            $.get("/Roster/GetReassignMemberViewComponent", { memberId: memberId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
                 // register the Modal's event handlers
@@ -297,7 +297,7 @@
             // clear any extant modal from the modal container
             var container = $("#modalTarget").empty();
             // retrieve the AddPositionModal from the server
-            $.get('Roster/GetAddPositionToComponentViewComponent', { componentId: componentId }, function (data) {
+            $.get('/Roster/GetAddPositionToComponentViewComponent', { componentId: componentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
                 // register the Modal's event handlers
@@ -327,7 +327,7 @@
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
             // retrieve the EditEmployeeModal from the server
-            $.get('Roster/GetEditEmployeeModalViewComponent', { memberId: member }, function (data) {
+            $.get('/Roster/GetEditEmployeeModalViewComponent', { memberId: member }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
                 // register the Modal's event handlers
@@ -446,7 +446,7 @@
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
             // retrieve the ChangeDutyStatus modal from the server
-            $.get('Roster/GetChangeEmployeeStatusModalViewComponent', { memberId: member }, function (data) {
+            $.get('/Roster/GetChangeEmployeeStatusModalViewComponent', { memberId: member }, function (data) {
                 // inject the ViewComponent HTML into the container
                 container.html(data);
                 // register the Modal's control's event handlers
@@ -468,7 +468,7 @@
             // clear any modals from the container
             var container = $("#modalTarget").empty();
             // retrieve the EditPositionModal from the server
-            $.get('Roster/GetAddPositionToComponentViewComponent', { componentId: '0', positionId: position }, function (data) {
+            $.get('/Roster/GetAddPositionToComponentViewComponent', { componentId: '0', positionId: position }, function (data) {
                 // inject the viewcomponent HTML into the container
                 container.html(data);
                 // register the modal's submit button handler
@@ -618,7 +618,7 @@
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
             // retrieve the AssignMemberModal from the server
-            $.get('Roster/GetAssignMemberModalViewComponent', { positionId: position, selectedComponentId: selectedComponent }, function (data) {
+            $.get('/Roster/GetAssignMemberModalViewComponent', { positionId: position, selectedComponentId: selectedComponent }, function (data) {
                 // inject the viewcomponent HTML into the container
                 container.html(data);
                 // register the modal's submit button handler
@@ -873,7 +873,7 @@
         function handleEditComponentClick(e) {
             var componentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
-            $.get('Roster/GetAddEditComponentViewComponent', { componentId: componentId }, function (data) {
+            $.get('/Roster/GetAddEditComponentViewComponent', { componentId: componentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
                 // register the Modal's event handlers
@@ -903,7 +903,7 @@
         function handleAddComponentClick(e) {
             var parentComponentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
-            $.get('Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
+            $.get('/Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
                 // register the Modal's event handlers

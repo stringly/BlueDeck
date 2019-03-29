@@ -3,7 +3,14 @@
         <div class="position-relative d-flex flex-justify-between pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
             <ul class="list-style-none flex-sm-row d-flex flex-wrap">
                 <li class="mr-3">© 2019 <span title="BlueDeck">BlueDeck</span>.net</li>
-                <li class="mr-3"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                @if (User.IsInRole("Guest"))
+                {
+                    <li class="mr-3"><a asp-action="Register" asp-controller="Home">Register</a></li>
+                }
+                else
+                {
+                    <li class="mr-3"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                }
                 <li class="mr-3"><a href="mailto:Admin@BlueDeck.net">Contact BlueDeck</a></li>
                 <li class="mr-3"><a href="#">API</a></li>
                 <li class="mr-3"><a href="#">Help</a></li>

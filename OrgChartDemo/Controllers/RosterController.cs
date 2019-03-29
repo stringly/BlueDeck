@@ -105,19 +105,14 @@ namespace OrgChartDemo.Controllers
                 // here we check for that condition AND if the new position is Unique... if these conditions are met, we only want to return the 
                 // updated demotables to the client. If the
                 if (newPosition.ParentComponent.ComponentId != oldPosition.ParentComponent.ComponentId && newPosition.IsUnique == true)
-                {
-                    /*Dictionary<string, string> demoTableDictionary = new Dictionary<string, string>();     
-                    List<Component> componentList = unitOfWork.Components.GetComponentAndChildren(selectedComponentId, new List<Component>());
-                    RosterManagerViewComponentViewModel vm = new RosterManagerViewComponentViewModel(componentList);
-                    demoTableDictionary = vm.GetDemoTableDictionaryForAllComponents();
-                    return Json(new { Status = "Success", DemoDictionary = demoTableDictionary});*/
+                {                    
 
                     // when I implemented the "AssignMember" modal, if a member from outside the RosterManager's component scope is assigned to a "unique" position, the 
                     // RosterManager would'nt refresh... only the demotable, so the result would be that a new "member" draggable wouldn't be rendered.
                     // Considering that the above is doing 90% of all of the work of refreshing the RosterManager anyways, I figure fuck it, refresh the whole damn thing.
                     return Json(new { Status = "RefreshRosterManager" });
                 }
-                // if thhe above condition isn't true, then we need to check if we have added the member to a "non-unique" position and re-render 
+                // if the above condition isn't true, then we need to check if we have added the member to a "non-unique" position and re-render 
                 // the RosterManager ViewComponent so that an empty "insertable" can be appended to the component. 
                 else if (newPosition.IsUnique == false || oldPosition.IsUnique == false)
                 {
@@ -257,14 +252,14 @@ namespace OrgChartDemo.Controllers
                 foreach(Position p in allPositions)
                 {
                     // check for conflict in Position Name
-                    if (p.Name == form.PositionName && p.PositionId != form.PositionId)
+                    if (p.Name == form.PositionName && p.ParentComponentId == form.ParentComponentId && p.PositionId != form.PositionId)
                     {
                         errors++;
                         ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";                            
                     }
                     else if (form.Callsign != "NONE")
                     {
-                        if (p.Callsign == form.Callsign && p.PositionId != form.PositionId)
+                        if (p.Callsign == form.Callsign && p.ParentComponentId == form.ParentComponentId && p.PositionId != form.PositionId)
                         {
                             errors++;
                             ViewBag.Message = $"The callsign '{form.Callsign}' is in use by {p.Name}. Choose another.";
@@ -405,7 +400,7 @@ namespace OrgChartDemo.Controllers
                 // retrieve the member from the Repo
                 Member m = unitOfWork.Members.GetMemberWithPosition(Convert.ToInt32(form.MemberId));
                 // retrieve the DutyStatus
-                MemberDutyStatus status = unitOfWork.MemberDutyStatus.Get(Convert.ToInt32(form.DutyStatus));
+                DutyStatus status = unitOfWork.MemberDutyStatus.Get(Convert.ToInt32(form.DutyStatus));
                 // check if Member needs to be reassigned to the "Exception to Duty" Position in his ParentComponent
                 if (status.DutyStatusName != "Full Duty")
                 {

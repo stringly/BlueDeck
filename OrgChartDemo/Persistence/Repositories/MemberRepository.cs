@@ -128,35 +128,35 @@ namespace OrgChartDemo.Persistence.Repositories
             if (form.PositionId != null){ 
                 m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
             }
-            m.Rank = ApplicationDbContext.MemberRanks.SingleOrDefault(x => x.RankId == form.MemberRank);
-            m.Gender = ApplicationDbContext.MemberGender.SingleOrDefault(x => x.GenderId == form.MemberGender);
-            m.Race = ApplicationDbContext.MemberRace.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
-            m.DutyStatus = ApplicationDbContext.DutyStatus.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
+            m.Rank = ApplicationDbContext.Ranks.SingleOrDefault(x => x.RankId == form.MemberRank);
+            m.Gender = ApplicationDbContext.Genders.SingleOrDefault(x => x.GenderId == form.MemberGender);
+            m.Race = ApplicationDbContext.Races.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
+            m.DutyStatus = ApplicationDbContext.DutyStatuses.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
             m.Email = form.Email;
             m.FirstName = form.FirstName;
             m.IdNumber = form.IdNumber;
             m.MiddleName = form.MiddleName;
             m.LastName = form.LastName;
-            foreach(MemberContactNumber n in form.ContactNumbers)
+            foreach(ContactNumber n in form.ContactNumbers)
             {
                 if (n.MemberContactNumberId != 0)
                 {
                     if (n.ToDelete == true)
                     {
-                        MemberContactNumber toRemove = ApplicationDbContext.ContactNumbers.Where(x => x.MemberContactNumberId == n.MemberContactNumberId).FirstOrDefault();
+                        ContactNumber toRemove = ApplicationDbContext.ContactNumbers.Where(x => x.MemberContactNumberId == n.MemberContactNumberId).FirstOrDefault();
 
                         ApplicationDbContext.ContactNumbers.Remove(toRemove);
                     }
                     else
                     {
-                        MemberContactNumber toUpdate = m.PhoneNumbers.FirstOrDefault(x => x.MemberContactNumberId == n.MemberContactNumberId);
+                        ContactNumber toUpdate = m.PhoneNumbers.FirstOrDefault(x => x.MemberContactNumberId == n.MemberContactNumberId);
                         toUpdate.PhoneNumber = n.PhoneNumber;
                         toUpdate.Type = ApplicationDbContext.PhoneNumberTypes.FirstOrDefault(x => x.PhoneNumberTypeId == n.Type.PhoneNumberTypeId);
                     }
                 }
                 else if (n.PhoneNumber != null)
                 {
-                    MemberContactNumber toAdd = new MemberContactNumber()
+                    ContactNumber toAdd = new ContactNumber()
                     {
                         Member = m,
                         PhoneNumber = n.PhoneNumber,

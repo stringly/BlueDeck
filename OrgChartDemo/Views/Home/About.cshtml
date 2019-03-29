@@ -26,7 +26,7 @@
             </div>
         </div>
         @{
-            if (MemberId == null)
+            if (MemberId == "0")
             {
                 <p>
                     <a class="btn btn-default" style="color:white" asp-action="Register" asp-controller="Home">Get an Account</a>
@@ -43,7 +43,7 @@
 </div>
 <div class="aboutPageContent">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             <div class="aboutPageContentContainer">
                 <img src="~/lib/bluedeck/css/images/OrgChartIcon.png" class="pull-left" height="100" width="100" />
                 <h3>Organization Charts</h3>
@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             <div class="aboutPageContentContainer">
                 <img src="~/lib/bluedeck/css/images/Roster.png" class="pull-left" height="100" width="100" />
                 <h3>Personnel Rosters</h3>
@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             <div class="aboutPageContentContainer">
                 <img src="~/lib/bluedeck/css/images/search-512.png" class="pull-left" height="100" width="100" />
                 <h3>Find People</h3>

@@ -2,7 +2,7 @@
 
 namespace OrgChartDemo.Models
 {
-    public class UserRoleType
+    public class RoleType
     {
         [Key]
         public int RoleTypeId { get; set; }

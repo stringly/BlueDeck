@@ -10,14 +10,14 @@ using OrgChartDemo.Models;
 namespace OrgChartDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190327223433_ParentComponentId")]
-    partial class ParentComponentId
+    [Migration("20190329141229_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -42,56 +42,13 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("Components");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
-                {
-                    b.Property<int>("MemberId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("DutyStatusId");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<int?>("GenderId");
-
-                    b.Property<string>("IdNumber");
-
-                    b.Property<string>("LDAPName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("MiddleName");
-
-                    b.Property<int?>("PositionId");
-
-                    b.Property<int?>("RaceMemberRaceId");
-
-                    b.Property<int?>("RankId");
-
-                    b.HasKey("MemberId");
-
-                    b.HasIndex("DutyStatusId");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("PositionId");
-
-                    b.HasIndex("RaceMemberRaceId");
-
-                    b.HasIndex("RankId");
-
-                    b.ToTable("Members");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.MemberContactNumber", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.ContactNumber", b =>
                 {
                     b.Property<int>("MemberContactNumberId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int>("MemberId");
 
                     b.Property<string>("PhoneNumber");
 
@@ -104,6 +61,49 @@ namespace OrgChartDemo.Migrations
                     b.HasIndex("TypePhoneNumberTypeId");
 
                     b.ToTable("ContactNumbers");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
+                {
+                    b.Property<int>("MemberId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DutyStatusId");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("GenderId");
+
+                    b.Property<string>("IdNumber");
+
+                    b.Property<string>("LDAPName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("MiddleName");
+
+                    b.Property<int>("PositionId");
+
+                    b.Property<int>("RaceId");
+
+                    b.Property<int>("RankId");
+
+                    b.HasKey("MemberId");
+
+                    b.HasIndex("DutyStatusId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("PositionId");
+
+                    b.HasIndex("RaceId");
+
+                    b.HasIndex("RankId");
+
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
@@ -124,52 +124,16 @@ namespace OrgChartDemo.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("ParentComponentComponentId");
+                    b.Property<int>("ParentComponentId");
 
                     b.HasKey("PositionId");
 
-                    b.HasIndex("ParentComponentComponentId");
+                    b.HasIndex("ParentComponentId");
 
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberDutyStatus", b =>
-                {
-                    b.Property<int>("DutyStatusId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
-
-                    b.Property<string>("DutyStatusName");
-
-                    b.Property<bool>("HasPolicePower");
-
-                    b.HasKey("DutyStatusId");
-
-                    b.ToTable("DutyStatus");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberGender", b =>
-                {
-                    b.Property<int>("GenderId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
-
-                    b.Property<string>("GenderFullName");
-
-                    b.HasKey("GenderId");
-
-                    b.ToTable("MemberGender");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberRace", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.Race", b =>
                 {
                     b.Property<int>("MemberRaceId")
                         .ValueGeneratedOnAdd()
@@ -186,7 +150,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("MemberRace");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.MemberRank", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.Rank", b =>
                 {
                     b.Property<int>("RankId")
                         .ValueGeneratedOnAdd()
@@ -205,20 +169,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("MemberRanks");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.PhoneNumberType", b =>
-                {
-                    b.Property<int>("PhoneNumberTypeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("PhoneNumberTypeName");
-
-                    b.HasKey("PhoneNumberTypeId");
-
-                    b.ToTable("PhoneNumberTypes");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.UserRole", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -237,7 +188,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.UserRoleType", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.RoleType", b =>
                 {
                     b.Property<int>("RoleTypeId")
                         .ValueGeneratedOnAdd()
@@ -247,7 +198,56 @@ namespace OrgChartDemo.Migrations
 
                     b.HasKey("RoleTypeId");
 
-                    b.ToTable("UserRoleType");
+                    b.ToTable("RoleType");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.DutyStatus", b =>
+                {
+                    b.Property<int>("DutyStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("DutyStatusName");
+
+                    b.Property<bool>("HasPolicePower");
+
+                    b.HasKey("DutyStatusId");
+
+                    b.ToTable("DutyStatus");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.Gender", b =>
+                {
+                    b.Property<int>("GenderId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abbreviation")
+                        .IsRequired()
+                        .HasConversion(new ValueConverter<string, string>(v => default(string), v => default(string), new ConverterMappingHints(size: 1)));
+
+                    b.Property<string>("GenderFullName");
+
+                    b.HasKey("GenderId");
+
+                    b.ToTable("MemberGender");
+                });
+
+            modelBuilder.Entity("OrgChartDemo.Models.Types.PhoneNumberType", b =>
+                {
+                    b.Property<int>("PhoneNumberTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PhoneNumberTypeName");
+
+                    b.HasKey("PhoneNumberTypeId");
+
+                    b.ToTable("PhoneNumberTypes");
                 });
 
             modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
@@ -257,54 +257,61 @@ namespace OrgChartDemo.Migrations
                         .HasForeignKey("ParentComponentId");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
-                {
-                    b.HasOne("OrgChartDemo.Models.Types.MemberDutyStatus", "DutyStatus")
-                        .WithMany()
-                        .HasForeignKey("DutyStatusId");
-
-                    b.HasOne("OrgChartDemo.Models.Types.MemberGender", "Gender")
-                        .WithMany()
-                        .HasForeignKey("GenderId");
-
-                    b.HasOne("OrgChartDemo.Models.Position", "Position")
-                        .WithMany("Members")
-                        .HasForeignKey("PositionId");
-
-                    b.HasOne("OrgChartDemo.Models.Types.MemberRace", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceMemberRaceId");
-
-                    b.HasOne("OrgChartDemo.Models.Types.MemberRank", "Rank")
-                        .WithMany()
-                        .HasForeignKey("RankId");
-                });
-
-            modelBuilder.Entity("OrgChartDemo.Models.MemberContactNumber", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.ContactNumber", b =>
                 {
                     b.HasOne("OrgChartDemo.Models.Member", "Member")
                         .WithMany("PhoneNumbers")
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OrgChartDemo.Models.Types.PhoneNumberType", "Type")
                         .WithMany()
                         .HasForeignKey("TypePhoneNumberTypeId");
                 });
 
+            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
+                {
+                    b.HasOne("OrgChartDemo.Models.Types.DutyStatus", "DutyStatus")
+                        .WithMany()
+                        .HasForeignKey("DutyStatusId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrgChartDemo.Models.Types.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrgChartDemo.Models.Position", "Position")
+                        .WithMany("Members")
+                        .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrgChartDemo.Models.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OrgChartDemo.Models.Rank", "Rank")
+                        .WithMany()
+                        .HasForeignKey("RankId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
                 {
                     b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
                         .WithMany("Positions")
-                        .HasForeignKey("ParentComponentComponentId");
+                        .HasForeignKey("ParentComponentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.UserRole", b =>
+            modelBuilder.Entity("OrgChartDemo.Models.Role", b =>
                 {
                     b.HasOne("OrgChartDemo.Models.Member")
                         .WithMany("CurrentRoles")
                         .HasForeignKey("MemberId");
 
-                    b.HasOne("OrgChartDemo.Models.UserRoleType", "RoleType")
+                    b.HasOne("OrgChartDemo.Models.RoleType", "RoleType")
                         .WithMany()
                         .HasForeignKey("RoleTypeId");
                 });

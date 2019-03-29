@@ -45,4 +45,10 @@
     <Folder Include="docs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Home\Register.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

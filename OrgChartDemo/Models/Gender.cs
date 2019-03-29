@@ -9,7 +9,7 @@ namespace OrgChartDemo.Models.Types
     /// <summary>
     /// A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>
-    public class MemberGender
+    public class Gender
     {
         /// <summary>
         /// Gets or sets the gender's Id.
@@ -35,5 +35,6 @@ namespace OrgChartDemo.Models.Types
         /// The gender's single-character abbreviation.
         /// </value>
         public char Abbreviation { get; set; }
+
     }
 }

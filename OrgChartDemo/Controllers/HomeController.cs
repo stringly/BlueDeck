@@ -68,6 +68,26 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("HomePageMemberSearchResult", vm);
             }
         }
+
+        public IActionResult Register()
+        {
+            var identity = User.Identities.FirstOrDefault(x => x.IsAuthenticated);
+            string logonName = identity.Name.Split('\\')[1];
+            Member newMember = new Member()
+            {
+                Email = $"{logonName}@co.pg.md.us",
+                LDAPName = logonName
+            };
+            MemberAddEditViewModel vm = new MemberAddEditViewModel(newMember,
+                unitOfWork.Positions.GetAllPositionSelectListItems(),
+                unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
+                unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
+                unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
+                unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+            ViewBag.Title = "Register";
+            return View(vm);
+        }
         public IActionResult DownloadAlphaRoster(int id)
         {
             AlphaRosterGenerator gen = new AlphaRosterGenerator();

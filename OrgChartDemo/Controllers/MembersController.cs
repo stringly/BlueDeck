@@ -137,7 +137,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,ContactNumbers")] MemberAddEditViewModel form)
         {
             if (!ModelState.IsValid)
             {

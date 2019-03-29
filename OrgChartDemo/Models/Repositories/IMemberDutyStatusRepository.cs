@@ -7,7 +7,7 @@ namespace OrgChartDemo.Models.Repositories
     /// An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
     /// </summary>
     /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Types.MemberDutyStatus}" />
-    public interface IMemberDutyStatusRepository : IRepository<MemberDutyStatus>
+    public interface IMemberDutyStatusRepository : IRepository<DutyStatus>
     {
         /// <summary>
         /// Gets a list of <see cref="T:OrgChartDemo.Types.MemberDutyStatusSelectListItem"/>s.
@@ -18,6 +18,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem}"/></returns>
         List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems();
         
-        MemberDutyStatus GetStatusById(int memberDutyStatus);
+        DutyStatus GetStatusById(int memberDutyStatus);
     }
 }

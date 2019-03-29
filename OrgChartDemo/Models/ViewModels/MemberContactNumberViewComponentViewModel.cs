@@ -10,7 +10,7 @@ namespace OrgChartDemo.Models.ViewModels
     public class MemberContactNumberViewComponentViewModel
     {
         [Display(Name = "Contact Numbers")]
-        public List<MemberContactNumber> ContactNumbers { get; set; }
+        public List<ContactNumber> ContactNumbers { get; set; }
         public List<PhoneNumberTypeSelectListItem> NumberTypeList { get; set; }
         public int MemberId { get; set; }
 
@@ -19,7 +19,7 @@ namespace OrgChartDemo.Models.ViewModels
         }
         public MemberContactNumberViewComponentViewModel(Member m, List<PhoneNumberTypeSelectListItem> types)
         {
-            ContactNumbers = m.PhoneNumbers;
+            ContactNumbers = m.PhoneNumbers.ToList();
             NumberTypeList = types;
             MemberId = m.MemberId;
         }
