@@ -96,7 +96,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Member.</param>
         /// <returns>An <see cref="IActionResult"/></returns>
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -109,7 +109,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Member Details";
-            ViewBag.RefererUrl = Request.Headers["Referer"].ToString();
+            ViewBag.ReturnUrl = returnUrl;
             return View(member);
         }
 
@@ -117,7 +117,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Members/Create.
         /// </summary>
         /// <returns>An <see cref="IActionResult"/></returns>
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl)
         {
             MemberAddEditViewModel vm = new MemberAddEditViewModel(new Member(),
                 unitOfWork.Positions.GetAllPositionSelectListItems(),
@@ -125,8 +125,10 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
-                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
             ViewBag.Title = "Create New Member";
+            ViewBag.ReturnUrl = returnUrl;
             return View(vm);
         }
 
@@ -137,7 +139,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers,IsUser,IsComponentAdmin,IsGlobalAdmin")] MemberAddEditViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -159,7 +161,14 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Member successfully created.";
-                return RedirectToAction(nameof(Index));
+                if(returnUrl != "")
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }                
             }            
         }
         
@@ -169,7 +178,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="id"></param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [Authorize("CanEditUser")]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -187,8 +196,10 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
-                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
             ViewBag.Title = "Edit Member";
+            ViewBag.ReturnUrl = returnUrl;
             return View(vm);
         }
 
@@ -200,7 +211,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("MemberId,FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult Edit(int id, [Bind("MemberId,FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers,IsUser,IsComponentAdmin,IsGlobalAdmin")] MemberAddEditViewModel form, string returnUrl)
         {
 
             if (!ModelState.IsValid)
@@ -237,6 +248,10 @@ namespace OrgChartDemo.Controllers
                 }
             TempData["Status"] = "Success!";
             TempData["Message"] = "Member successfully updated.";
+            if(returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
             return RedirectToAction(nameof(Index));
             }
         }
@@ -246,7 +261,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The MemberId of the <see cref="Member"/> being deleted</param>
         /// <returns>An <see cref="IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -259,6 +274,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Confirm - Delete Member?";
+            ViewBag.ReturnUrl = returnUrl;
             return View(m);
         }
         
@@ -269,12 +285,16 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="IActionResult"/> that redirects to <see cref="MembersController.Index"/> on successful deletion of a Member.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string returnUrl)
         {            
             unitOfWork.Members.Remove(id);
             unitOfWork.Complete();
             TempData["Status"] = "Success!";
             TempData["Message"] = "Member successfully deleted.";
+            if(returnUrl != null)
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction(nameof(Index));
         }
 

@@ -1,14 +1,6 @@
-﻿@model MemberIndexListViewModel
-@{    
-    var IsAdmin = User.IsInRole("GlobalAdmin");
-    var MemberId = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value);
-    List<MemberSelectListItem> CanEditMembers = new List<MemberSelectListItem>();
-    if (User.HasClaim(x => x.Type == "CanEditUsers"))
-    {
-        CanEditMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString());
-    }
+﻿@model AdminMemberIndexListViewModel
 
-}
+
 <nav class="pageBar navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -45,10 +37,7 @@
                         <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
                     }
                 }
-                @if (IsAdmin)
-                {
-                    <li><a asp-action="Create"><i class="ion-md-person-add"></i> Create a New Member</a></li>
-                }
+                <li><a asp-action="Create" asp-controller="Members" asp-route-returnUrl="/Admin/Index"><i class="ion-md-person-add"></i> Create a New Member</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -123,8 +112,32 @@
                                 Position Name
                             </a>
                         </th>
+                        <th style="text-align:center">
+                            Status
+                        </th>
+                        <th style="text-align:center">
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.IsUserRoleFilter"
+                               asp-route-searchString="@Model.CurrentFilter" title="Show only Users in User Role">
+                                User
+                            </a>
+                        </th>
+                        <th style="text-align:center">
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.IsComponentAdminRoleFilter"
+                               asp-route-searchString="@Model.CurrentFilter" title="Show only Users in Component Admin Role">
+                                Component Admin
+                            </a>
+                        </th>
+                        <th style="text-align:center">
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.IsGlobalAdminRoleFilter"
+                               asp-route-searchString="@Model.CurrentFilter" title="Show only Users in Global Admin Role">
+                                Global Admin
+                            </a>
+                        </th>
+                        <th style="text-align:center">
+                            BlueDeck ID
+                        </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Members.First().Email)
+                            Email
                         </th>
                         <th></th>
                     </tr>
@@ -132,52 +145,51 @@
                 <tbody>
                     @foreach (var item in Model.Members)
                     {
-                        <tr>
-                            <td>
-                                @item.LastName
-                            </td>
-                            <td>
-                                @item.FirstName
-                            </td>
-                            <td>
-                                @item.IdNumber
-                            </td>
-                            <td>
-                                @item.PositionName
-                            </td>
-                            <td>
-                                <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
-                                    @item.Email
-                                </a>
-                            </td>
-                            <td>
-                                <a asp-action="Details" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index"  title="View Details" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
-                                </a>
-                                @if (IsAdmin)
-                                {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
-                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Delete Member" class="glyphicon-ring">
-                                        <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
-                                    </a>
-                                }
-                                else if (CanEditMembers.Any(x => x.MemberId == item.MemberId))
-                                {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
-                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                    </a>
-                                }
-                                else if (item.MemberId == MemberId)
-                                {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
-                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                    </a>
-                                }
-
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @item.LastName
+                        </td>
+                        <td>
+                            @item.FirstName
+                        </td>
+                        <td>
+                            @item.IdNumber
+                        </td>
+                        <td>
+                            @item.PositionName
+                        </td>
+                        <td style="text-align:center">
+                            @item.AccountState
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.IsUser)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.IsComponentAdmin)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.IsGlobalAdmin)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.MemberId)
+                        </td>
+                        <td>
+                            <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
+                                @item.Email
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-controller="Members" asp-route-id="@item.MemberId" asp-route-returnUrl="/Admin/Index" title="View Details" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Edit" asp-controller="Members" asp-route-id="@item.MemberId" asp-route-returnUrl="/Admin/Index" title="Edit Member" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Delete" asp-controller="Members" asp-route-id="@item.MemberId" asp-route-returnUrl="/Admin/Index" title="Delete Member" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

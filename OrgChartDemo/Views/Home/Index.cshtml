@@ -38,19 +38,11 @@
                                     }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
                                 </caption>
-                                @*<thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>*@
                                 <tbody>
                                     @foreach (var worker in home.Members)
                                     {
                                         <tr>
-                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
                                             <td class="col-xs-4">@worker.PositionName</td>
                                             <td class="col-xs-2">@worker.ContactNumber</td>
                                             <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
@@ -76,19 +68,11 @@
                                     }
                                     <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
                                 </caption>
-                                @*<thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                    </tr>
-                                </thead>*@
                                 <tbody>
                                     @foreach (var worker in item.Members)
                                     {
                                         <tr>
-                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId">@worker.MemberDisplayName</a></td>
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
                                             <td class="col-xs-4">@worker.PositionName</td>
                                             <td class="col-xs-2">@worker.ContactNumber</td>
                                             <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>

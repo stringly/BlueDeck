@@ -13,13 +13,6 @@ namespace OrgChartDemo.ViewComponents
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.ViewComponent" />
     public class NavigationMenuViewComponent : ViewComponent
     {
-        private readonly Member CurrentUser;
-
-        public NavigationMenuViewComponent(IUnitOfWork unitOfWork)
-        {
-            
-        }
-
         /// <summary>
         /// Invokes the default <see cref="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent" />
         /// </summary>
@@ -32,9 +25,16 @@ namespace OrgChartDemo.ViewComponents
                 "OrgChart", 
                 "Positions", 
                 "Members", 
-                "Components", 
-                "Roster",
+                "Components",
             };
+            if (User.IsInRole("ComponentAdmin"))
+            {
+                vm.NavLinks.Add("Roster");
+            }
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                vm.NavLinks.Add("Admin");
+            }
             
             return View(vm);
         }

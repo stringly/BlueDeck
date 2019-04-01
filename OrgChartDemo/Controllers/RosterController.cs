@@ -346,7 +346,8 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
-                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
             return ViewComponent("EditMemberModal", vm);
                 
         }
@@ -369,7 +370,8 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
-                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
                 return ViewComponent("EditMemberModal", vm);
             }
         }

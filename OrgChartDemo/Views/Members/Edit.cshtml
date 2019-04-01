@@ -23,7 +23,7 @@
         <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="">
                 <div class="">
-                    <form asp-action="Edit" class="row-border">
+                    <form asp-action="Edit" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
                         <input type="hidden" asp-for="@Model.MemberId">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="col-md-12">
@@ -96,17 +96,12 @@
                             </div>
                             <hr />
                             <div class="row">
-                                <div class="col-sm-3 form-group">
+                                <div class="col-sm-4 form-group">
                                     <label asp-for="Email" class="control-label"></label>
                                     <input asp-for="Email" class="form-control" />
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="LDAPName" class="control-label"></label>
-                                    <input asp-for="LDAPName" class="form-control" />
-                                    <span asp-validation-for="LDAPName" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-6 form-group">
+                                <div class="col-sm-8 form-group">
                                     <label asp-for="ContactNumbers" class="control-label"></label>
                                     @for (var i = 0; i < Model.ContactNumbers.Count; i++)
                                     {
@@ -146,13 +141,53 @@
                                 </div>
                             </div>
                             <hr />
+                            @if (IsAdmin)
+                            {
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="LDAPName" class="control-label"></label>
+                                    <input asp-for="LDAPName" class="form-control" />
+                                    <span asp-validation-for="LDAPName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="AppStatusId" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.AppStatusId,
+                                                            new SelectList(Model.AppStatuses, "Id", "Name"),
+                                                            "Choose Application Status",
+                                                            new { @class = "form-control" })
+                                    <span asp-validation-for="AppStatusId" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <div class="form-checkbox">
+                                        <label>
+                                            <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <div class="form-checkbox">
+                                        <label>
+                                            <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <div class="form-checkbox">
+                                        <label>
+                                            <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                                <hr />
+                            }
                             <div class="row">
                                 <div class="col-sm-12 form-group">
-                                    <a asp-action="Index" class="btn btn-default">Cancel</a>
+                                    <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                                     <input type="submit" value="Save Changes" class="btn btn-primary" />
                                     @if (IsAdmin)
                                     {
-                                        <a asp-action="Delete" asp-route-id="@Model.MemberId" class="btn btn-danger pull-right">Delete</a>
+                                        <a asp-action="Delete" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
                                     }
                                 </div>
                             </div>

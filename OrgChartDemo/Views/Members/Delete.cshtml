@@ -6,7 +6,7 @@
         <h2 class="formHeader-heading">Confirm Delete</h2>
         <p class="formHeader-description">Are you certain you want to delete @Model.GetTitleName()? This action cannot be undone.</p>
         <div>
-            <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+            <a href="@ViewBag.ReturnUrl"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
     </div>
     <div class="row">
@@ -82,9 +82,9 @@
                 <hr />
                 <div class="row">
                     <div class="col-sm-12 form-group pull-left">
-                        <form asp-action="Delete">
+                        <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
                             <input type="hidden" asp-for="MemberId" />
-                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                             <a asp-action="Edit" asp-route-id="@Model.MemberId" class="btn btn-primary">Edit</a>
                             <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
                         </form>

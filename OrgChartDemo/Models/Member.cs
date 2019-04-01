@@ -99,6 +99,9 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Duty Status")]
         public virtual DutyStatus DutyStatus { get; set; }
 
+        public int? AppStatusId { get;set; }
+
+        public AppStatus AppStatus { get;set; }
         /// <summary>
         /// Gets or sets the Member's email.
         /// </summary>

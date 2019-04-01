@@ -18,7 +18,7 @@
         <h2 class="formHeader-heading">@Model.GetTitleName()</h2>
         <p class="formHeader-description"> Showing Member details.</p>
         <div>
-            <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+            <a href="@ViewBag.ReturnUrl"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
     </div>
     <div class="row">
@@ -93,29 +93,41 @@
                     </div>
                 </div>
                 <hr />
+                @if (IsAdmin)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.LDAPName, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.AppStatus, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.AppStatus.StatusName, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <hr />
+                }
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <a href="@ViewBag.RefererUrl" class="btn btn-default">Cancel</a>
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                         @if (IsAdmin)
                         {
-                            <a asp-action="Edit" asp-route-id="@Model.MemberId" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@Model.MemberId" class="btn btn-danger pull-right">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
                         }
                         else if (CanEditMember)
                         {
-                            <a asp-action="Edit" asp-route-id="@Model.MemberId" class="btn btn-primary">Edit</a>
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
                         }
                         else if (IsCurrentMember)
                         {
-                            <a asp-action="Edit" asp-route-id="@Model.MemberId" class="btn btn-primary">Edit</a>
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
                         }
 
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 

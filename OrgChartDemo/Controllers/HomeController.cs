@@ -23,14 +23,22 @@ namespace OrgChartDemo.Controllers
         {
             var identity = (ClaimsIdentity)User.Identity;
             if (identity.HasClaim(claim => claim.Type == "MemberId"))
-            {
+            {                
                 var claimMemberId = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
-                if (claimMemberId != 0)
+                // if a user has registered for an account, but the admin has not activated it yet, the User will have a MemberId, but
+                // will not have the "User" Role Claim until their account is activated.
+                if (claimMemberId != 0 && User.IsInRole("User"))
+                    {
+                        ViewBag.Title = "BlueDeck Home";
+                        HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);
+                        return View(vm);
+                    }
+                else if (claimMemberId != 0)
                 {
-                    ViewBag.Title = "BlueDeck Home";
-                    HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);
-                    return View(vm);
+                    // Users with BlueDeck accounts Pending activation should be redirected to the "Pending" View
+                    return RedirectToAction(nameof(Pending));
                 }
+                
             }
             return RedirectToAction(nameof(About));
         }
@@ -40,7 +48,17 @@ namespace OrgChartDemo.Controllers
             ViewBag.Title = "About BlueDeck";
             return View();
         }
-
+        // TODO: Auth handler for User Role?
+        public IActionResult Pending()
+        {
+            if (User.IsInRole("User")) // in case a user navigates manually to Pending
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Title = "Registration Pending";
+            return View();
+        }
+        
         public IActionResult GetMemberSearchViewComponent(string searchString)
         {
             char[] arr = searchString.ToCharArray();
@@ -68,7 +86,7 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("HomePageMemberSearchResult", vm);
             }
         }
-
+        [HttpGet]
         public IActionResult Register()
         {
             var identity = User.Identities.FirstOrDefault(x => x.IsAuthenticated);
@@ -76,7 +94,8 @@ namespace OrgChartDemo.Controllers
             Member newMember = new Member()
             {
                 Email = $"{logonName}@co.pg.md.us",
-                LDAPName = logonName
+                LDAPName = logonName,
+                AppStatusId = 1 // 1 is new account
             };
             MemberAddEditViewModel vm = new MemberAddEditViewModel(newMember,
                 unitOfWork.Positions.GetAllPositionSelectListItems(),
@@ -84,9 +103,35 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
-                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems());
+                unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
             ViewBag.Title = "Register";
             return View(vm);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers")] MemberAddEditViewModel form)
+        {
+            if (!ModelState.IsValid)
+            {
+                form.Positions = unitOfWork.Positions.GetAllPositionSelectListItems();
+                form.RaceList = unitOfWork.MemberRaces.GetMemberRaceSelectListItems();
+                form.RankList = unitOfWork.MemberRanks.GetMemberRankSelectListItems();
+                form.GenderList = unitOfWork.MemberGenders.GetMemberGenderSelectListItems();
+                form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+                ViewBag.Title = "Create Member - Corrections Required";
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You must correct the fields indicated.";
+                return View(form);
+            }
+            else
+            {
+                // TODO: Member addition checks? Duplicate Name/Badge Numbers?
+                unitOfWork.Members.UpdateMember(form);
+                unitOfWork.Complete();
+                return RedirectToAction(nameof(Pending));
+            }            
         }
         public IActionResult DownloadAlphaRoster(int id)
         {

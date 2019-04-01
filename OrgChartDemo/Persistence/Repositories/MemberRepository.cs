@@ -3,6 +3,7 @@ using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -61,6 +62,19 @@ namespace OrgChartDemo.Persistence.Repositories
                                     
         }
 
+        public AdminMemberIndexListViewModel GetAdminMemberIndexListViewModel()
+        {
+            AdminMemberIndexListViewModel vm = new AdminMemberIndexListViewModel();
+            vm.Members = ApplicationDbContext.Members
+                            .Include(x => x.AppStatus)
+                            .Include(x => x.Position)
+                                .ThenInclude(x => x.ParentComponent)
+                            .Include(x => x.CurrentRoles)
+                            .ToList()
+                            .ConvertAll(x => new AdminMemberIndexViewModelMemberListItem(x));
+            return vm;
+        }
+
         public Member GetMemberWithPosition(int memberId)
         {
             return ApplicationDbContext.Members
@@ -97,7 +111,10 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Position)
                 .Include(x => x.PhoneNumbers)
                     .ThenInclude(x => x.Type)                
-                .Include(x => x.DutyStatus)                    
+                .Include(x => x.DutyStatus)
+                .Include(x => x.AppStatus)
+                .Include(x => x.CurrentRoles)
+                    .ThenInclude(x => x.RoleType)
                 .Include(x => x.Gender)                    
                 .Include(x => x.Race)                    
                 .Include(x => x.Rank)                    
@@ -119,24 +136,32 @@ namespace OrgChartDemo.Persistence.Repositories
             {
                     m = ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
+                .Include(x => x.CurrentRoles)
                 .FirstOrDefault(x => x.MemberId == form.MemberId);
             }
             else
             {
                 m = new Member();
+                m.CurrentRoles = new List<Role>();
             }
             if (form.PositionId != null){ 
-                m.Position = ApplicationDbContext.Positions.FirstOrDefault(x => x.PositionId == form.PositionId);
+                m.PositionId = Convert.ToInt32(form.PositionId);
             }
-            m.Rank = ApplicationDbContext.Ranks.SingleOrDefault(x => x.RankId == form.MemberRank);
-            m.Gender = ApplicationDbContext.Genders.SingleOrDefault(x => x.GenderId == form.MemberGender);
-            m.Race = ApplicationDbContext.Races.SingleOrDefault(x => x.MemberRaceId == form.MemberRace);
-            m.DutyStatus = ApplicationDbContext.DutyStatuses.SingleOrDefault(x => x.DutyStatusId == form.DutyStatusId);
+            else
+            {
+                m.PositionId = 7; // 7 is the current ID of the Unassigned Position
+            }
+            m.RankId = Convert.ToInt32(form.MemberRank);
+            m.GenderId = Convert.ToInt32(form.MemberGender);
+            m.RaceId = Convert.ToInt32(form.MemberRace);
+            m.DutyStatusId = Convert.ToInt32(form.DutyStatusId);
+            m.AppStatusId = Convert.ToInt32(form.AppStatusId);
             m.Email = form.Email;
             m.FirstName = form.FirstName;
             m.IdNumber = form.IdNumber;
             m.MiddleName = form.MiddleName;
             m.LastName = form.LastName;
+            m.LDAPName = form.LDAPName;
             foreach(ContactNumber n in form.ContactNumbers)
             {
                 if (n.MemberContactNumberId != 0)
@@ -169,14 +194,80 @@ namespace OrgChartDemo.Persistence.Repositories
             {
                 ApplicationDbContext.Members.Add(m);
             }
+            switch (form.IsUser)
+            {
+                case true:
+                    if(!m.CurrentRoles.Any(x => x.RoleType.RoleTypeName == "User"))
+                    {
+                            RoleType userRoleType = ApplicationDbContext.RoleTypes.First(x => x.RoleTypeName == "User");
+                            Role r = new Role()
+                            {
+                                RoleType = userRoleType
+                            };
+                            m.CurrentRoles.Add(r);
+                    }
+                    break;
+                case false:
+                    Role userRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "User");
+                    if (userRole != null)
+                    {
+                        ApplicationDbContext.Roles.Remove(userRole);  
+                    }
+                    break;
+            }
+            // 
+            switch (form.IsComponentAdmin)
+            {
+                case true:
+                    if(!m.CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin"))
+                    {
+                            RoleType userRoleType = ApplicationDbContext.RoleTypes.First(x => x.RoleTypeName == "ComponentAdmin");
+                            Role r = new Role()
+                            {
+                                RoleType = userRoleType
+                            };
+                            m.CurrentRoles.Add(r);
+                    }
+                    break;
+                case false:
+                    Role userRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+                    if (userRole != null)
+                    {
+                        ApplicationDbContext.Roles.Remove(userRole);  
+                    }
+                    break;
+            }
+            switch (form.IsGlobalAdmin)
+            {
+                case true:
+                    if(!m.CurrentRoles.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin"))
+                    {
+                            RoleType userRoleType = ApplicationDbContext.RoleTypes.First(x => x.RoleTypeName == "GlobalAdmin");
+                            Role r = new Role()
+                            {
+                                RoleType = userRoleType
+                            };
+                            m.CurrentRoles.Add(r);
+                    }
+                    break;
+                case false:
+                    Role userRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "GlobalAdmin");
+                    if (userRole != null)
+                    {
+                        ApplicationDbContext.Roles.Remove(userRole);    
+                    }
+                    break;
+            }
         }
 
         public void Remove(int memberId)
         {
             Member m = ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
+                .Include(x => x.CurrentRoles)
                 .FirstOrDefault(x => x.MemberId == memberId);
             ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
+            ApplicationDbContext.Roles.RemoveRange(m.CurrentRoles);
             ApplicationDbContext.Members.Remove(m);
         }
 

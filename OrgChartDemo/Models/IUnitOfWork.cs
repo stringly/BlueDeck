@@ -80,6 +80,8 @@ namespace OrgChartDemo.Models
 
         IPhoneNumberTypeRepository PhoneNumberTypes { get; }
 
+        IAppStatusRepository AppStatuses { get; }
+
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates
         /// </summary>

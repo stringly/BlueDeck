@@ -28,17 +28,7 @@
             <ul class="nav navbar-nav">
                 @foreach (string category in Model.NavLinks)
                 {
-                    if (category == "Roster")
-                    {
-                        if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
-                        {
-                            <li class="@(category == ViewBag.SelectedCategory ? "active" : "")"><a asp-action="Index" asp-controller="@category">@category</a></li>
-                        }
-                    }
-                    else
-                    {
-                        <li class="@(category == ViewBag.SelectedCategory ? "active" : "")"><a asp-action="Index" asp-controller="@category">@category</a></li>
-                    }
+                    <li class="@(category == ViewBag.SelectedCategory ? "active" : "")"><a asp-action="Index" asp-controller="@category">@category</a></li>                    
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">

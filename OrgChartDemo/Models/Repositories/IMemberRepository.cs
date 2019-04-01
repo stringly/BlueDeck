@@ -27,6 +27,7 @@ namespace OrgChartDemo.Models.Repositories
         void Remove(int memberId);
         Member GetMemberWithRoles(string LDAPName);
         MemberIndexListViewModel GetMemberIndexListViewModel();
+        AdminMemberIndexListViewModel GetAdminMemberIndexListViewModel();
         HomePageViewModel GetHomePageViewModelForMember(int memberId);
         int GetMemberParentComponentId(int memberid);
         List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);

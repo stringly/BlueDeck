@@ -82,11 +82,15 @@ namespace OrgChartDemo.Models {
         /// </value>
         public virtual DbSet<DutyStatus> DutyStatuses { get; set; }
 
+        public virtual DbSet<AppStatus> ApplicationStatuses {get;set;}
+
         public virtual DbSet<ContactNumber> ContactNumbers { get; set; }
 
         public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
 
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<RoleType> RoleTypes { get; set; }
+
 
         public DbQuery<MemberIndexViewModelMemberListItem> MemberIndexViewModelMemberListItems { get; set; }
         public DbQuery<ComponentSelectListItem> GetChildComponentsForComponentId { get; set; }

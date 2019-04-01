@@ -27,7 +27,7 @@
                     @foreach (var worker in Model.Members)
                     {
                         <tr>
-                            <td><a href="#">@worker.MemberDisplayName</a></td>
+                            <td><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
                             <td>@worker.PositionName</td>
                             <td>@worker.ContactNumber</td>
                             <td><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>

@@ -21,6 +21,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// <summary>
         /// Gets or sets the Rank of the Member.
         /// </summary>
+        [Required]
         [Display(Name = "Rank")]
         public int? MemberRank { get; set; }
 
@@ -97,6 +98,9 @@ namespace OrgChartDemo.Models.ViewModels
         [Display(Name = "Duty Status")]
         public int? DutyStatusId { get; set; }
 
+        
+        [Display(Name = "Account Status")]
+        public int? AppStatusId { get; set; }
         /// <summary>
         /// Gets or sets the Member's email.
         /// </summary>
@@ -127,6 +131,15 @@ namespace OrgChartDemo.Models.ViewModels
         [Display(Name = "Windows Logon Name")]
         [Required]
         public string LDAPName { get; set; }
+
+        [Display(Name = "User")]
+        public bool IsUser { get; set; }
+
+        [Display(Name = "Component Admin")]
+        public bool IsComponentAdmin { get; set; }
+
+        [Display(Name = "Global Admin")]
+        public bool IsGlobalAdmin { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's Contact Numbers.
@@ -183,6 +196,8 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         public List<MemberDutyStatusSelectListItem> DutyStatus { get; set; }
 
+        public List<ApplicationStatusSelectListItem> AppStatuses { get; set; }
+
         /// <summary>
         /// Gets or sets the list of <see cref="PhoneNumberTypeSelectListItem"/>.
         /// </summary>
@@ -211,13 +226,15 @@ namespace OrgChartDemo.Models.ViewModels
         /// <param name="_raceList">A <see cref="MemberRaceSelectListItem"/>.</param>
         /// <param name="_dutyStatusList">A <see cref="MemberDutyStatusSelectListItem"/>.</param>
         /// <param name="_phoneNumberTypes">A <see cref="PhoneNumberTypeSelectListItem"/>.</param>
+        /// <param name="_appStatusList">A List of  <see cref="ApplicationStatusSelectListItem"/>.</param>
         public MemberAddEditViewModel(Member _member, 
             List<PositionSelectListItem> _positionList, 
             List<MemberRankSelectListItem> _rankList, 
             List<MemberGenderSelectListItem> _genderList, 
             List<MemberRaceSelectListItem> _raceList,
             List<MemberDutyStatusSelectListItem> _dutyStatusList,
-            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes)
+            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes,
+            List<ApplicationStatusSelectListItem> _appStatusList)
         {
             MemberId = _member?.MemberId;
             MemberRank = _member?.Rank?.RankId;
@@ -235,10 +252,16 @@ namespace OrgChartDemo.Models.ViewModels
             GenderList = _genderList;
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
+            AppStatusId = _member?.AppStatusId ?? 1;
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
             LDAPName = _member.LDAPName;
             Positions = _positionList;
+            AppStatuses = _appStatusList;
+            IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
+            IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
+            IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;
+           
 
         }
 
@@ -250,17 +273,19 @@ namespace OrgChartDemo.Models.ViewModels
         /// The Member's Position cannot be changed from this Modal, so there is no List of PositionSelectListItem parameter.
         /// </remarks>
         /// <param name="_member">The member.</param>
-        /// <param name="_rankList">A <see cref="MemberRankSelectListItem"/>.</param>
-        /// <param name="_genderList">A <see cref="MemberGenderSelectListItem"/>.</param>
-        /// <param name="_raceList">A <see cref="MemberRaceSelectListItem"/>.</param>
-        /// <param name="_dutyStatusList">A <see cref="MemberDutyStatusSelectListItem"/>.</param>
-        /// <param name="_phoneNumberTypes">A <see cref="PhoneNumberTypeSelectListItem"/>.</param>
+        /// <param name="_rankList">A List of <see cref="MemberRankSelectListItem"/>.</param>
+        /// <param name="_genderList">A List of  <see cref="MemberGenderSelectListItem"/>.</param>
+        /// <param name="_raceList">A List of  <see cref="MemberRaceSelectListItem"/>.</param>
+        /// <param name="_dutyStatusList">A List of  <see cref="MemberDutyStatusSelectListItem"/>.</param>
+        /// <param name="_phoneNumberTypes">A List of  <see cref="PhoneNumberTypeSelectListItem"/>.</param>
+        /// <param name="_appStatusList">A List of  <see cref="ApplicationStatusSelectListItem"/>.</param>
         public MemberAddEditViewModel(Member _member,
             List<MemberRankSelectListItem> _rankList,
             List<MemberGenderSelectListItem> _genderList,
             List<MemberRaceSelectListItem> _raceList,
             List<MemberDutyStatusSelectListItem> _dutyStatusList,
-            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes)
+            List<PhoneNumberTypeSelectListItem> _phoneNumberTypes,
+            List<ApplicationStatusSelectListItem> _appStatusList)
         {
             MemberId = _member?.MemberId;
             MemberRank = _member?.Rank?.RankId;
@@ -278,9 +303,15 @@ namespace OrgChartDemo.Models.ViewModels
             GenderList = _genderList;
             RaceList = _raceList;
             DutyStatus = _dutyStatusList;
+            AppStatusId = _member?.AppStatusId ?? 1;
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
             LDAPName = _member?.LDAPName;
+            AppStatuses = _appStatusList;
+            IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
+            IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
+            IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;
+           
         }
 
     }

@@ -32,17 +32,8 @@ namespace OrgChartDemo.Persistence
             MemberDutyStatus = new MemberDutyStatusRepository(_context);
             MemberContactNumbers = new MemberContactNumberRepository(_context);
             PhoneNumberTypes = new PhoneNumberTypeRepository(_context);
-            //string ctxName = httpContext.HttpContext.User.Identity.Name;
-            //string logonName = ctxName.Substring(ctxName.LastIndexOf(@"\") +1 );
-            //CurrentUser = _context.Members
-            //        .Where(x => x.LDAPName == "jcs30")
-            //        .Include(x => x.Rank)
-            //        .FirstOrDefault() ?? new Member()
-            //        {
-            //            LastName = "Guest",
-            //            FirstName = ""
+            AppStatuses = new AppStatusRepository(_context);
 
-            //        };
         }
 
         /// <summary>
@@ -111,6 +102,8 @@ namespace OrgChartDemo.Persistence
         public IMemberContactNumberRepository MemberContactNumbers { get; private set; }
 
         public IPhoneNumberTypeRepository PhoneNumberTypes { get; private set; }
+
+        public IAppStatusRepository AppStatuses { get; private set; }
 
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates

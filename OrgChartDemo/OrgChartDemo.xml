@@ -107,34 +107,34 @@
             </remarks>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Details(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Members/Details/5.
             </summary>
             <param name="id">The identifier for a Member.</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Create">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Create(System.String)">
             <summary>
             GET: Members/Create.
             </summary>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Create(OrgChartDemo.Models.ViewModels.MemberAddEditViewModel)">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Create(OrgChartDemo.Models.ViewModels.MemberAddEditViewModel,System.String)">
             <summary>
             POST: Members/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> with certain fields bound on submit</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
             Members/Edit/5
             </summary>
             <param name="id"></param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.MemberAddEditViewModel)">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.MemberAddEditViewModel,System.String)">
             <summary>
             POST: Members/Edit/5
             </summary>
@@ -142,14 +142,14 @@
             <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> object to which the POSTed form is Bound</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Delete(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Member/Delete/5
             </summary>
             <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.DeleteConfirmed(System.Int32)">
+        <member name="M:OrgChartDemo.Controllers.MembersController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
             POST: Members/Delete/5
             </summary>
@@ -1910,7 +1910,7 @@
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.PositionSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem})">
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.PositionSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.ApplicationStatusSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
@@ -1921,8 +1921,9 @@
             <param name="_raceList">A <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.</param>
             <param name="_dutyStatusList">A <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
             <param name="_phoneNumberTypes">A <see cref="T:OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
+            <param name="_appStatusList">A List of  <see cref="T:OrgChartDemo.Models.Types.ApplicationStatusSelectListItem"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem})">
+        <member name="M:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.#ctor(OrgChartDemo.Models.Member,System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{OrgChartDemo.Models.Types.ApplicationStatusSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
@@ -1931,11 +1932,12 @@
             The Member's Position cannot be changed from this Modal, so there is no List of PositionSelectListItem parameter.
             </remarks>
             <param name="_member">The member.</param>
-            <param name="_rankList">A <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>.</param>
-            <param name="_genderList">A <see cref="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem"/>.</param>
-            <param name="_raceList">A <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.</param>
-            <param name="_dutyStatusList">A <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
-            <param name="_phoneNumberTypes">A <see cref="T:OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
+            <param name="_rankList">A List of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>.</param>
+            <param name="_genderList">A List of  <see cref="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem"/>.</param>
+            <param name="_raceList">A List of  <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.</param>
+            <param name="_dutyStatusList">A List of  <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
+            <param name="_phoneNumberTypes">A List of  <see cref="T:OrgChartDemo.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
+            <param name="_appStatusList">A List of  <see cref="T:OrgChartDemo.Models.Types.ApplicationStatusSelectListItem"/>.</param>
         </member>
         <member name="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel">
             <summary>
