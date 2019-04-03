@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
 using OrgChartDemo.Models.ViewModels;
 
 namespace OrgChartDemo.Controllers
 {
+    [Authorize("IsGlobalAdmin")]
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;

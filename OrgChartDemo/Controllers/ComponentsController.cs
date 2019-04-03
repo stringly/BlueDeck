@@ -82,7 +82,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Component.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -95,6 +95,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Component Details";
+            ViewBag.ReturnUrl = returnUrl;
             return View(component);
         }
         
@@ -103,7 +104,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl)
         {
             if (User.IsInRole("GlobalAdmin"))
             {
@@ -111,6 +112,7 @@ namespace OrgChartDemo.Controllers
                 // so we build the viewmodel with the full DB component list as Select list options
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), unitOfWork.Components.GetComponentSelectListItems());
                 ViewBag.Title = "Create New Component";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
             }
             else if (User.IsInRole("ComponentAdmin"))
@@ -122,6 +124,7 @@ namespace OrgChartDemo.Controllers
                     JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(new Component(), components);
                 ViewBag.Title = "Create New Component";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
             }
             else
@@ -137,7 +140,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form)
+        public IActionResult Create([Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form, string returnUrl)
         {        
             if (!ModelState.IsValid)
             {
@@ -145,6 +148,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Title = "Create Component - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
             else
@@ -163,6 +167,7 @@ namespace OrgChartDemo.Controllers
                     ViewBag.Status = "Warning!";                    
                     ViewBag.Message = $"A Component with the name {form.ComponentName} already exists. Use a different Name.";
                     form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                    ViewBag.ReturnUrl = returnUrl;
                     return View(form);
                 }
                 // add Component to repo via method that controls setting lineup
@@ -171,7 +176,14 @@ namespace OrgChartDemo.Controllers
             }
             TempData["Status"] = "Success!";
             TempData["Message"] = "Component successfully created.";
-            return RedirectToAction(nameof(Index));
+            if (!String.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         /// <summary>
@@ -180,7 +192,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -196,6 +208,7 @@ namespace OrgChartDemo.Controllers
             {
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
                 ViewBag.Title = "Edit Component";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
             }
             else if (User.IsInRole("ComponentAdmin"))
@@ -204,6 +217,7 @@ namespace OrgChartDemo.Controllers
                     JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, components);
                 ViewBag.Title = "Edit Component";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
             }
             else
@@ -220,7 +234,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ComponentId,ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form )
+        public IActionResult Edit(int id, [Bind("ComponentId,ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form, string returnUrl )
         {
             Component c = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
@@ -247,6 +261,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Title = "Edit Component - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
             else if (unitOfWork.Components.SingleOrDefault(x => x.Name == form.ComponentName && x.ComponentId != c.ComponentId) != null)
@@ -268,6 +283,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Title = "Edit Component - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
             else { 
@@ -300,7 +316,14 @@ namespace OrgChartDemo.Controllers
                 }
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Component updated successfully.";
-                return RedirectToAction(nameof(Index));
+                if (!String.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }                
             }
         }
 
@@ -310,7 +333,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -338,6 +361,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Status = "Warning!";
             }
             ViewBag.Title = "Confirm Delete?";
+            ViewBag.ReturnUrl = returnUrl;
             return View(component);
         }
 
@@ -348,12 +372,16 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Components.RemoveComponent(id);
             unitOfWork.Complete();            
             TempData["Status"] = "Success!";
             TempData["Message"] = "Component successfully deleted.";
+            if (!String.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction(nameof(Index));
         }
 

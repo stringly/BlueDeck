@@ -1,5 +1,7 @@
 ﻿@model PositionWithComponentListViewModel
-
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+}
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     @if (ViewBag.Status == "Warning!")
     {
@@ -20,7 +22,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <form asp-action="Create">
+            <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @Html.HiddenFor(model => model.LineupPosition)
                 <div class="col-md-12">
@@ -79,7 +81,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-sm-4 form-group">
-                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                     </div>
@@ -104,8 +106,8 @@
                 }
             }
         });
-        $("#ParentComponentId").on('change', function () {           
-            if (this.value != null && !document.getElementById('IsManager').checked ) {
+        $("#ParentComponentId").on('change', function () {
+            if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component
                 var container = $("#lineupSelectionTarget").empty();
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: this.value }, function (data) {
@@ -132,10 +134,10 @@
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
                     $("#LineupPosition").val($("#newPositionInsert").index());
                 });
-            }            
+            }
         })
         function handleLineupMoveUp() {
-            // Grab the <ul>, 
+            // Grab the <ul>,
             // Find the "newPositionInsert"
             // move it up on the <ul>
             // update the #LineupPosition value to the new value
@@ -150,9 +152,9 @@
                 $("#LineupPosition").val($("#newPositionInsert").index());
                 console.log("New item is now at position: " + $("#newPositionInsert").index());
             } else {
-                console.log("Cant move above manager");  
+                console.log("Cant move above manager");
             }
-            
+
         }
 
         function handleLineupMoveDown() {
@@ -168,7 +170,7 @@
                 console.log("New item is now at position: " + $("#newPositionInsert").index());
             } else {
                 console.log("Item is already at the bottom of the list at position: " + $("#newPositionInsert").index());
-            }            
+            }
         }
     });
 

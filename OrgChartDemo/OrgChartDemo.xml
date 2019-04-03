@@ -31,34 +31,34 @@
             <param name="searchString">The search string.</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Details(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Components/Details/5.
             </summary>
             <param name="id">The identifier for a Component.</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create(System.String)">
             <summary>
             GET: Component/Create.
             </summary>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create(OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Create(OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel,System.String)">
             <summary>
             POST: Components/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
             Components/Edit/5
             </summary>
             <param name="id"></param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel)">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel,System.String)">
             <summary>
             POST: Components/Edit/5
             </summary>
@@ -66,14 +66,14 @@
             <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Delete(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Components/Delete/5
             </summary>
             <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.DeleteConfirmed(System.Int32)">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
             POST: Components/Delete/5
             </summary>
@@ -218,34 +218,34 @@
             </remarks>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Details(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Positions/Details/5.
             </summary>
             <param name="id">The identifier for a Position.</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Create">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Create(System.String)">
             <summary>
             GET: Positions/Create.
             </summary>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Create(OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Create(OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel,System.String)">
             <summary>
             POST: Positions/Create.
             </summary>
             <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
             Positions/Edit/5
             </summary>
             <param name="id"></param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel)">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Edit(System.Int32,OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel,System.String)">
             <summary>
             POST: Positions/Edit/5
             </summary>
@@ -253,14 +253,14 @@
             <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Delete(System.Nullable{System.Int32})">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Positions/Delete/5
             </summary>
             <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(System.Int32)">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.DeleteConfirmed(System.Int32,System.String)">
             TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
             <summary>
             POST: Positions/Delete/5

@@ -47,7 +47,7 @@
                 }
                 @if (IsAdmin || IsComponentSupervisor)
                 {
-                    <li><a asp-action="Create"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a></li>
+                    <li><a asp-action="Create" asp-route-returnUrl="/Positions/Index"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Position</a></li>
                 }
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -152,19 +152,19 @@
                             <td>
                                 @if (IsAdmin || CanEditPositions.Any(x => x.PositionId == item.PositionId))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.PositionId" title="Edit Position" class="glyphicon-ring">
+                                    <a asp-action="Edit" asp-route-id="@item.PositionId" asp-route-returnUrl="/Positions/Index" title="Edit Position" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                     </a>
-                                    <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
+                                    <a asp-action="Details" asp-route-id="@item.PositionId" asp-route-returnUrl="/Positions/Index" title="View Details" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.PositionId" title="Delete Position" class="glyphicon-ring">
+                                    <a asp-action="Delete" asp-route-id="@item.PositionId" asp-route-returnUrl="/Positions/Index" title="Delete Position" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
                                     </a>
                                 }
                                 else
                                 {                                    
-                                    <a asp-action="Details" asp-route-id="@item.PositionId" title="View Details" class="glyphicon-ring">
+                                    <a asp-action="Details" asp-route-id="@item.PositionId" asp-route-returnUrl="/Positions/Index" title="View Details" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
                                     </a>                                    
                                 }

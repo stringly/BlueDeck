@@ -76,7 +76,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Position.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -90,6 +90,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Position Details";
+            ViewBag.ReturnUrl = returnUrl;
             return View(position);
         }
 
@@ -98,7 +99,7 @@ namespace OrgChartDemo.Controllers
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditPosition")]
-        public IActionResult Create()
+        public IActionResult Create(string returnUrl)
         {
             PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position());
             if (User.IsInRole("GlobalAdmin"))
@@ -114,6 +115,7 @@ namespace OrgChartDemo.Controllers
                 return Forbid();
             }
             ViewBag.Title = "Create New Position";
+            ViewBag.ReturnUrl = returnUrl;
             return View(vm);
         }
 
@@ -124,7 +126,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -132,6 +134,7 @@ namespace OrgChartDemo.Controllers
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated";
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
 
@@ -169,12 +172,20 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Position successfully created.";
-                return RedirectToAction(nameof(Index)); 
+                if(returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index)); 
+                }                
             }
             else {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "New Position: Corrections Required";
                 ViewBag.Status = "Warning!";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
         }
@@ -185,7 +196,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditPosition")]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
             {
@@ -209,6 +220,7 @@ namespace OrgChartDemo.Controllers
             {
                 return Forbid();
             }
+            ViewBag.ReturnUrl = returnUrl;
             ViewBag.Title = "Edit Position";
             return View(vm);
         }
@@ -221,7 +233,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form)
+        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form, string returnUrl)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
@@ -277,12 +289,20 @@ namespace OrgChartDemo.Controllers
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Position successfully updated";
-                return RedirectToAction(nameof(Index));
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }                
             } else
             {
                 form.Components = unitOfWork.Components.GetComponentSelectListItems();
                 ViewBag.Title = "Edit Position - Corrections Required";
                 ViewBag.Status = "Warning!";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
             
@@ -294,7 +314,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditPosition")]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id, string returnUrl)
         {
             // TODO: Warn or Prevent User from Deleting a Position with assigned Members? Or auto-reassign members to the General Pool?
             if (id == null)
@@ -308,6 +328,7 @@ namespace OrgChartDemo.Controllers
                 return NotFound();
             }
             ViewBag.Title = "Confirm - Delete Position?";
+            ViewBag.ReturnUrl = returnUrl;
             return View(position);
         }
 
@@ -319,12 +340,16 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:OrgChartDemo.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Positions.RemovePositionAndReassignMembers(id);
             unitOfWork.Complete();
             TempData["Status"] = "Success!";
             TempData["Message"] = "Position successfully deleted";
+            if (returnUrl != null)
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction(nameof(Index));
         }
 

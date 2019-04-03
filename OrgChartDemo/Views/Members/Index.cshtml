@@ -47,7 +47,7 @@
                 }
                 @if (IsAdmin)
                 {
-                    <li><a asp-action="Create"><i class="ion-md-person-add"></i> Create a New Member</a></li>
+                    <li><a asp-action="Create" asp-route-returnUrl="/Members/Index"><i class="ion-md-person-add"></i> Create a New Member</a></li>
                 }
             </ul>
         </div><!-- /.navbar-collapse -->
