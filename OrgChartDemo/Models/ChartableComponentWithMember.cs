@@ -86,6 +86,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The contact number.
         /// </value>
-        public string ContactNumber { get; set; }        
+        public string ContactNumber { get; set; }  
+        public string CallSign { get; set; }
     }
 }
