@@ -129,7 +129,6 @@ namespace OrgChartDemo.Models.ViewModels
         public string DisplayName { get; private set; }
 
         [Display(Name = "Windows Logon Name")]
-        [Required]
         public string LDAPName { get; set; }
 
         [Display(Name = "User")]

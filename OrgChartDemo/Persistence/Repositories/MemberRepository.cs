@@ -147,7 +147,7 @@ namespace OrgChartDemo.Persistence.Repositories
             if (form.PositionId != null){ 
                 m.PositionId = Convert.ToInt32(form.PositionId);
             }
-            else
+            else if (m.Position != null)
             {
                 m.PositionId = 7; // 7 is the current ID of the Unassigned Position
             }

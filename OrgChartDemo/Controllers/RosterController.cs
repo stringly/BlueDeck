@@ -354,7 +354,7 @@ namespace OrgChartDemo.Controllers
 
         
         [HttpPost]
-        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,AppStatusId,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             
             if (ModelState.IsValid)

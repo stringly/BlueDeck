@@ -17,6 +17,11 @@
                     <form asp-action="EditMemberModal" id="editMemberModalForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         @Html.HiddenFor(model => model.MemberId)
+                        @Html.HiddenFor(model => model.AppStatusId)
+                        @Html.HiddenFor(model => model.IsUser)
+                        @Html.HiddenFor(model => model.IsComponentAdmin)
+                        @Html.HiddenFor(model => model.IsGlobalAdmin)
+                        @Html.HiddenFor(model => model.LDAPName)
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-3 form-group">
