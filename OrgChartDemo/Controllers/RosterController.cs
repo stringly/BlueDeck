@@ -431,11 +431,30 @@ namespace OrgChartDemo.Controllers
 
         // AssignMemberModalViewComponent
         [HttpGet]
-        public IActionResult GetAssignMemberModalViewComponent(int positionId, int selectedComponentId)
+        public IActionResult GetAssignMemberModalViewComponent(int positionId, int selectedComponentId, string searchString)
         {
             Position p = unitOfWork.Positions.Get(positionId);
-            List<MemberSelectListItem> members = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+            List<MemberSelectListItem> members = new List<MemberSelectListItem>();
+            if (User.IsInRole("GlobalAdmin")){
+                members = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+            }
+            else if (User.IsInRole("ComponentAdmin"))
+            {
+                members = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
+            }            
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                char[] arr = searchString.ToCharArray();
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
+                                  || char.IsWhiteSpace(c)
+                                  || c == '-')));
+                string lowerString = new string(arr);
+                lowerString = lowerString.ToLower();
+                members = members.Where(x => x.MemberName.ToLower().Contains(lowerString)).ToList();
+            }
             AssignMemberModalViewComponentViewModel vm = new AssignMemberModalViewComponentViewModel(p, members, selectedComponentId);
+            vm.SearchString = searchString;
             return ViewComponent("AssignMemberModal", vm);
         }
 

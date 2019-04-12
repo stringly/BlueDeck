@@ -202,7 +202,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
-                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
                 .Load();
             foreach (Component c in components)
             {
@@ -224,17 +225,21 @@ namespace OrgChartDemo.Persistence.Repositories
                             // if no member is assigned to a Position designated as Manager, then we want to render "Vacant" details in the Parent Node
                             if (p.Members.Count == 0)
                             {
-                                n.PositionName = p.Name;                                
-                                n.MemberName = "Vacant";
+                                n.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";                                
+                                n.MemberName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>Vacant</a>";
                                 n.MemberId = -1;
+                                n.CallSign = $"Callsign: {p.Callsign}";
                                 n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                                n.ContactNumber = "";
                             }
                             else
                             {
-                                n.PositionName = p.Name;
+                                n.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
                                 n.PositionId = p.PositionId;
-                                n.MemberName = p.Members.First().GetTitleName();
-                                n.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
+                                n.MemberName = $"<a href='/Members/Details?id={p.Members.First().MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
+                                n.CallSign = $"Callsign: {p.Callsign}";
+                                n.Email = $"<a href='mailto:{p.Members.First().Email}'style='fill:white'>{p.Members.First().Email}</a>";
+                                n.ContactNumber = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "No Phone";
                                 n.MemberId = p.Members.First().MemberId;
                             }
                         }
@@ -249,18 +254,23 @@ namespace OrgChartDemo.Persistence.Repositories
                             };
                             if (p.Members.Count == 0)
                             {
-                                d.PositionName = p.Name;
+                                d.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
                                 d.PositionId = p.PositionId;
-                                d.MemberName = "Vacant";
+                                d.MemberName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'>Vacant</a>";
+                                d.CallSign = $"Callsign: {p.Callsign}";
                                 d.MemberId = -1;
                                 d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                                d.ContactNumber = $"Phone: None";
                             }
                             else
                             {
-                                d.PositionName = p.Name;
+                                d.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>";
                                 d.PositionId = p.PositionId;
-                                d.MemberName = p.Members.First().GetTitleName();
+                                d.MemberName = $"<a href='/Members/Details?id={p.Members.First().MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
+                                d.CallSign = $"Callsign: {p.Callsign}";
                                 d.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
+                                string phone = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
+                                d.ContactNumber = $"Phone: {phone}";
                                 d.MemberId = p.Members.First().MemberId;
                             }
                             results.Add(d);
@@ -273,11 +283,13 @@ namespace OrgChartDemo.Persistence.Repositories
                                 dynamicUniqueId--;
                                 ChartableComponentWithMember x = new ChartableComponentWithMember {
                                     Id = dynamicUniqueId,
-                                    PositionName = p.Name,
+                                    PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>",
                                     Parentid = n.Id,
-                                    ComponentName = p.Name, // TODO: Change this to "Node Name" in GetOrgChart?
-                                    MemberName = m.GetTitleName(),
+                                    ComponentName = $"<a href='/Components/Details?id={c.ComponentId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>", // TODO: Change this to "Node Name" in GetOrgChart?
+                                    MemberName = $"<a href='/Members/Details?id={m.MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
+                                    CallSign = $"Callsign: {p.Callsign}",
                                     Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
+                                    ContactNumber = $"Phone: {m.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None"}",
                                     MemberId = m.MemberId,
                                     PositionId = p.PositionId
                                     };                                    
@@ -291,6 +303,8 @@ namespace OrgChartDemo.Persistence.Repositories
                     n.PositionName = "";
                     n.MemberName = "";
                     n.Email = "";
+                    n.CallSign = "";
+                    n.ContactNumber = "";
                 }
                 results.Add(n);
             }
