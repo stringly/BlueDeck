@@ -310,7 +310,115 @@ namespace OrgChartDemo.Persistence.Repositories
             }
             return results;
         }        
-
+        /// <summary>
+        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+        /// </summary>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        public List<ChartableComponentWithMember> GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId)
+        {
+            int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
+            List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+            
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).OrderBy(x => x.LineupPosition).ToList();            
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Load();
+            foreach (Component c in components)
+            {
+                // All components will render this at minimum
+                ChartableComponentWithMember n = new ChartableComponentWithMember  {
+                    Id = c.ComponentId,
+                    Parentid = c?.ParentComponent?.ComponentId ?? 0,
+                    ComponentName = c.Name
+                    };  
+                // Check if component has child positions
+                if (c.Positions != null)
+                {
+                    // has child positions, so we need chartables for all
+                    foreach (Position p in c.Positions.OrderByDescending(x => x.LineupPosition))
+                    {
+                        // first, check if Position is Manager. If so, we want to render member details in the Parent Component Node
+                        if (p.IsManager)
+                        {
+                            // if no member is assigned to a Position designated as Manager, then we want to render "Vacant" details in the Parent Node
+                            if (p.Members.Count == 0)
+                            {
+                                n.PositionName = p.Name;                                
+                                n.MemberName = "Vacant";
+                                n.MemberId = -1;
+                                n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                            }
+                            else
+                            {
+                                n.PositionName = p.Name;
+                                n.PositionId = p.PositionId;
+                                n.MemberName = p.Members.First().GetTitleName();
+                                n.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
+                                n.MemberId = p.Members.First().MemberId;
+                            }
+                        }
+                        else if (p.IsUnique)
+                        {
+                            dynamicUniqueId--;
+                            ChartableComponentWithMember d = new ChartableComponentWithMember
+                            {
+                                Id = dynamicUniqueId,
+                                Parentid = n.Id,
+                                ComponentName = p.Name,                                
+                            };
+                            if (p.Members.Count == 0)
+                            {
+                                d.PositionName = p.Name;
+                                d.PositionId = p.PositionId;
+                                d.MemberName = "Vacant";
+                                d.MemberId = -1;
+                                d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                            }
+                            else
+                            {
+                                d.PositionName = p.Name;
+                                d.PositionId = p.PositionId;
+                                d.MemberName = p.Members.First().GetTitleName();
+                                d.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
+                                d.MemberId = p.Members.First().MemberId;
+                            }
+                            results.Add(d);
+                        }
+                        else if (p.Members != null ) 
+                            // if position is not manager/unique and has members, we need a new Chartable for each member
+                        {
+                            foreach (Member m in p.Members)
+                            {
+                                dynamicUniqueId--;
+                                ChartableComponentWithMember x = new ChartableComponentWithMember {
+                                    Id = dynamicUniqueId,
+                                    PositionName = p.Name,
+                                    Parentid = n.Id,
+                                    ComponentName = p.Name, // TODO: Change this to "Node Name" in GetOrgChart?
+                                    MemberName = m.GetTitleName(),
+                                    Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
+                                    MemberId = m.MemberId,
+                                    PositionId = p.PositionId
+                                    };                                    
+                                results.Add(x);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    n.PositionName = "";
+                    n.MemberName = "";
+                    n.Email = "";
+                }
+                results.Add(n);
+            }
+            return results;
+        }  
         public List<PositionLineupItem> GetPositionLineupItemsForComponent(int componentId)
         {
             return ApplicationDbContext.Positions

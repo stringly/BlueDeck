@@ -2079,6 +2079,12 @@
             </summary>
             <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
+        <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembersNoMarkup(System.Int32)">
+            <summary>
+            Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+            </summary>
+            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        </member>
         <member name="M:OrgChartDemo.Persistence.Repositories.ComponentRepository.UpdateComponentAndSetLineup(OrgChartDemo.Models.Component)">
             <summary>
             Adds a new Component or Updates an existing Component and adjusts the LineupPosition of all sibling Components within the ParentComponent

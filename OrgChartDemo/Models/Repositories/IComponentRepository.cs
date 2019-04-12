@@ -29,7 +29,7 @@ namespace OrgChartDemo.Models.Repositories
         /// </remarks>
         /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
         List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId);
-
+        List<ChartableComponentWithMember> GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId);
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
         List<Component> GetComponentsAndChildrenSP(int parentComponentId);
         List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId);

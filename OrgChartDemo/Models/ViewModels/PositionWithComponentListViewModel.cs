@@ -93,7 +93,11 @@ namespace OrgChartDemo.Models.ViewModels
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
             LineupPosition = p.LineupPosition;
-            Callsign = p.Callsign;
+            if (p.Callsign != "NONE")
+            {
+                Callsign = p.Callsign;
+            }
+            
             Components = new List<ComponentSelectListItem>();
         }
 
