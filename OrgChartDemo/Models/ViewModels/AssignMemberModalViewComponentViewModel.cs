@@ -20,7 +20,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// The member identifier.
         /// </value>
         [Required]
-        [Display(Name = "Please select a Member:")]
+        [Display(Name = "Available Members:")]
         public int MemberId { get; set; }
         /// <summary>
         /// Gets or sets the position identifier.
@@ -33,6 +33,9 @@ namespace OrgChartDemo.Models.ViewModels
         /// The position identifier.
         /// </value>
         public int PositionId { get; set; }
+        
+        [Display(Name = "Search Member List:")]
+        public string SearchString { get; set; }
 
         /// <summary>
         /// Gets or sets the selected component identifier.

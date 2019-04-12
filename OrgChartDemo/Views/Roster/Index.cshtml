@@ -624,16 +624,58 @@
                 // register the modal's submit button handler
                 var submitButton = document.getElementById('assignMemberModalSubmit');
                 submitButton.addEventListener('click', handleAssignMemberModalSubmit, false);
+                document.getElementById('filterMemberListButton').addEventListener('click', handlefilterMemberListButtonClick, false);
+                document.getElementById('clearFilterMemberListButton').addEventListener('click', handleClearFilterMemberListButtonClick, false);
+                document.getElementById('MemberId').addEventListener('change', handleSelectMemberChange, false);
                 // show the modal
                 $("#assignMemberModal").modal("show");
             })
         }
 
+        function handlefilterMemberListButtonClick(e) {
+            var search = $.trim($("#SearchString").val());
+            var regex = new RegExp(search, "gi");
+            var resultCount = 0;
+            if (search != "") {
+                $("#MemberId > option").each(function () {
+                    if (this.text.match(regex) !== null) {
+                        $(this).show();
+                        resultCount++;
+                        if (resultCount == 1) {
+                            $("#MemberId").val($(this).val());
+                        }
+                    }
+                    else {
+                        $(this).hide();
+                    }
+                })
+                $("#resultMessage").text("Found " + resultCount + " Members that match '" + search + "'");
+                $("#warning").text("");
+                $("#clearFilterMemberListButton").show();
+            }
+        }
+        function handleClearFilterMemberListButtonClick(e) {
+            $("#SearchString").val("");
+            $("#MemberId > option").each(function () {
+                $(this).show();
+            });
+            $("#resultMessage").text("Showing all available Members");
+            $("#warning").text("");
+            $("#clearFilterMemberListButton").hide();
+            $("#MemberId").val("");
+        }
+
+        function handleSelectMemberChange(e) {
+            $("#warning").text("");
+        }
+
+
         function handleAssignMemberModalSubmit() {
             var member = $("#assignMemberModal").find("[name=MemberId]").val();
             var position = $("#assignMemberModal").find("[name=PositionId]").val();
-            if ($("MemberId").children("option:selected").val() == "") {
+            if ($("#MemberId").val() == "") {
                 $("#warning").text("Please select a Member to assign.");
+                $("#resultMessage").text("");
                 return;
             }
             $("#assignMemberModal").modal("hide");

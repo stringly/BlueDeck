@@ -152,6 +152,9 @@ body {
     display:table;
     
 }
+.btn {
+    padding: 4px 8px;
+}
 
 /* GetOrgChart Overrides*/
 .orgChartContainer {

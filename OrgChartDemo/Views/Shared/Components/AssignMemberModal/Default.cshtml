@@ -14,19 +14,42 @@
 
                 <form asp-action="ReassignMember" id="assignMemberModalForm">
                     <div class="modal-body">
-                        <h6 class="text-danger" id="warning">@ViewBag.Message</h6>
-                        @Html.HiddenFor(model => model.PositionId)                        
-                        @Html.LabelFor(model => model.MemberId)
-                        @Html.DropDownListFor(model => model.MemberId,
-                                                    new SelectList(Model.Members, "MemberId", "MemberName"),
-                                                    "Select a Member",
-                                                    new { @class = "form-control" })
+                        @Html.HiddenFor(model => model.PositionId)
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="SearchString" class="control-label"></label>
+                                <div class="input-group">
+                                    <input asp-for="SearchString" class="form-control" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="filterMemberListButton">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    
+                                        <button class="btn btn-danger" type="button" id="clearFilterMemberListButton" style="display:none">
+                                            <i class="glyphicon glyphicon-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.MemberId)
+                                @Html.DropDownListFor(model => model.MemberId,
+                                     new SelectList(Model.Members, "MemberId", "MemberName"),
+                                     "Select a Member",
+                                     new { @class = "form-control" })
+                                <small id="resultMessage"></small>
+                                <small id="warning" style="color:red"></small>
+                            </div>
+                        </div>
                         @Html.HiddenFor(model => model.SelectedComponentId)
                     </div>
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#assignMemberModal">Close</button>
-                    <button type="button" id="assignMemberModalSubmit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#assignMemberModal">Cancel</button>
+                    <button type="button" id="assignMemberModalSubmit" class="btn btn-primary">Assign</button>
                 </div>
             </div>
         </div>
