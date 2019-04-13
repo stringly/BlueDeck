@@ -8,7 +8,7 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     overflow: auto;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -16,8 +16,10 @@ html, body {
 
 body {
     background-color: #fff;
-    height: 100%; 
+    /*height: 100%;*/ 
 }
+
+
 .aboutPageHeader {
     margin-top: 50px;
     background-color: #3e5374 !important;
@@ -571,7 +573,7 @@ hr {
 }
 .indexTable {    
     background-color: #fff;
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    /*box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);*/
     max-width: 95%;
     margin-left: auto;
     margin-right: auto;
@@ -680,7 +682,7 @@ hr {
 
 #rosterContainer {
     padding: 5px;
-
+    height: 100%;
 }
 
 
@@ -1046,13 +1048,17 @@ hr {
         opacity: 0.6;
     }
 
-    .drag-options-label a {
+    .drag-options-label span {
         display: inline-block;
         font-size: 0.9rem;
         font-weight: 400;
         color: white;
         margin: 0px;
+        cursor: pointer;
     }
+        .drag-options-label span:hover {
+            text-decoration:underline;
+        }
 
     .vertical-alignment-helper {
         display: table;

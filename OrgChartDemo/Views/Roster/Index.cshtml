@@ -1010,7 +1010,12 @@
             $("#ExpandRoster").hide();
             $("#CollapseRoster").show();
         });
-
+        //$(window).on('shown.bs.modal', function (e) {
+        //    $("body").addClass("noScroll");
+        //});
+        //$(window).on('hidden.bs.modal', function (e) {
+        //    $("body").removeClass("noScroll");
+        //});
         $("#SelectedComponent").change(function () {
             var selectedComponentId = $("#SelectedComponent").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
