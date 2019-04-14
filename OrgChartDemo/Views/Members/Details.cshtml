@@ -104,6 +104,14 @@
                             @Html.LabelFor(model => model.AppStatus, new { @class = "control-label" })
                             @Html.TextBoxFor(model => model.AppStatus.StatusName, new { @class = "form-control", disabled = "disabled" })
                         </div>
+                        <div class="col-sm-5 form-group">
+                            <label class="control-label">Account Roles:</label><br/>
+                            @foreach(Role role in Model.CurrentRoles)
+                            {
+                                <span>@role.RoleType.RoleTypeName,</span>
+                            }
+                        
+                        </div>
                     </div>
                     <hr />
                 }

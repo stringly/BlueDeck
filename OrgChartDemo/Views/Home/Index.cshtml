@@ -42,7 +42,21 @@
                                     @foreach (var worker in home.Members)
                                     {
                                     <tr>
-                                        <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        @if (worker.MemberId == 0)
+                                        {
+                                            if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
+                                            {
+                                                <td class="col-xs-4"><a asp-action="Index" asp-controller="Roster" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="col-xs-4">Vacant</td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        }
                                         <td class="col-xs-4"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
                                         <td class="col-xs-2">@worker.ContactNumber</td>
                                         <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>

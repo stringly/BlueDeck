@@ -99,6 +99,7 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Duty Status")]
         public virtual DutyStatus DutyStatus { get; set; }
 
+        [Display(Name = "Account Status")]
         public int? AppStatusId { get;set; }
 
         public AppStatus AppStatus { get;set; }
