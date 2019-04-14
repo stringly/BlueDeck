@@ -46,7 +46,7 @@
                                         {
                                             if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                             {
-                                                <td class="col-xs-4"><a asp-action="Index" asp-controller="Roster" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
+                                                <td class="col-xs-4"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                             }
                                             else
                                             {
@@ -90,7 +90,7 @@
                                         {
                                             if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                             {
-                                                <td class="col-xs-4"><a asp-action="Index" asp-controller="Roster" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
+                                                <td class="col-xs-4"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                             }
                                             else
                                             {

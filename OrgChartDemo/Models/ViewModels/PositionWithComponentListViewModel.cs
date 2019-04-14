@@ -97,7 +97,6 @@ namespace OrgChartDemo.Models.ViewModels
             {
                 Callsign = p.Callsign;
             }
-            
             Components = new List<ComponentSelectListItem>();
         }
 

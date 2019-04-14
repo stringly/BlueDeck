@@ -79,8 +79,14 @@
                     </div>
                     <hr />
                     <div class="row">
+                        <div id="currentMemberTarget">
+                            
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
                         <div class="col-sm-12 form-group">
-                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                             <input type="submit" value="Save Changes" class="btn btn-primary" />
                             <a asp-action="Delete" asp-route-id="@Model.PositionId" class="btn btn-danger pull-right">Delete</a>
                         </div>
@@ -111,6 +117,39 @@
             document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
         });
 
+        $.get("/Positions/GetMemberLineupViewComponent", { positionId : @Model.PositionId }, function(data){
+            $("#currentMemberTarget").html(data);
+            var removeButtons = document.getElementsByClassName('unassignButton');
+            [].forEach.call(removeButtons, function(elem){
+                elem.addEventListener('click', handleUnassignMemberClick, false);
+            });
+            document.getElementById('addSelectedMemberButton').addEventListener('click', handleAssignMemberClick, false)
+        });
+
+        function handleUnassignMemberClick(e){
+            var position = @Model.PositionId;
+            var member = e.target.dataset.memberid;
+            $.get("/Positions/AssignMember", { addOrRemove: 'remove', PositionId: position, MemberId: member }, function(data) {
+                $("#currentMemberTarget").html(data);
+                var removeButtons = document.getElementsByClassName('unassignButton');
+                [].forEach.call(removeButtons, function(elem){
+                    elem.addEventListener('click', handleUnassignMemberClick, false);
+                });
+                document.getElementById('addSelectedMemberButton').addEventListener('click', handleAssignMemberClick, false)
+            });
+        }
+        function handleAssignMemberClick(e){
+            var position = @Model.PositionId;
+            var member = $("#SelectedMember").val();
+            $.get("/Positions/AssignMember", { addOrRemove: 'add', PositionId: position, MemberId: member }, function(data) {
+                $("#currentMemberTarget").html(data);
+                var removeButtons = document.getElementsByClassName('unassignButton');
+                [].forEach.call(removeButtons, function(elem){
+                    elem.addEventListener('click', handleUnassignMemberClick, false);
+                });
+                document.getElementById('addSelectedMemberButton').addEventListener('click', handleAssignMemberClick, false)
+            });
+        }
         $("#ParentComponentId").on('change', function () {
             if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component

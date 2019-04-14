@@ -214,7 +214,7 @@ namespace OrgChartDemo.Controllers
             }
             else if (User.IsInRole("ComponentAdmin"))
             {
-                vm.Components = vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
             }
             else
             {
@@ -377,5 +377,38 @@ namespace OrgChartDemo.Controllers
                 return ViewComponent("PositionLineup", vm);
             }
         }
+
+        public IActionResult GetMemberLineupViewComponent(int positionId)
+        {
+            Position p = unitOfWork.Positions.GetPositionAndAllCurrentMembers(positionId);
+            List<MemberSelectListItem> memberList = new List<MemberSelectListItem>();
+            if (User.IsInRole("GlobalAdmin"))
+            {
+                memberList = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+            }
+            else
+            {
+                memberList = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
+            }
+            MemberLineupViewComponentViewModel vm = new MemberLineupViewComponentViewModel(p, memberList);
+            return ViewComponent("PositionMemberLineup", vm);            
+        }
+
+        public IActionResult AssignMember(string addOrRemove, int PositionId, int MemberId)
+        {
+            Member m = unitOfWork.Members.Get(MemberId);
+            switch (addOrRemove)
+            {
+                case "add":
+                    m.PositionId = PositionId;
+                    break;
+                case "remove":
+                    m.PositionId = unitOfWork.Positions.Find(x => x.Name == "Unassigned").FirstOrDefault().PositionId;
+                    break;
+            }
+            unitOfWork.Complete();
+            return RedirectToAction("GetMemberLineupViewComponent", new { positionId = PositionId});
+        }
+
     }
 }

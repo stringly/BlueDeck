@@ -336,6 +336,9 @@ namespace OrgChartDemo.Persistence.Repositories
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             return ApplicationDbContext.GetMembersUserCanEdit.FromSql("dbo.Get_Members_User_Can_Edit @ComponentId", param1).ToList();
         }
+              
+
+
 
     }
 }

@@ -1,0 +1,38 @@
+﻿@model MemberLineupViewComponentViewModel
+
+
+<div class="form-group col-md-5">
+    <label class="control-label">Assign Member:</label>
+    <div class="input-group">
+        @Html.DropDownListFor(model => model.SelectedMember,
+                                        new SelectList(Model.AvailableMembers, "MemberId", "MemberName"),
+                                        "Select Member to Assign",
+                                        new { @class = "form-control" })
+        <span asp-validation-for="SelectedMember" class="text-danger"></span>
+        <div class="input-group-btn">
+            <button class="btn btn-default" type="button" id="addSelectedMemberButton">
+                <i class="glyphicon glyphicon-plus"></i> Assign
+            </button>
+        </div>
+    </div>
+</div>
+<div class="form-group col-md-7">
+    <label class="control-label">Current Members:</label>
+    <ul class="list-unstyled" id="memberLineup">
+        @if (Model.CurrentMembers.Count() == 0)
+        {
+            <li><span>No Current Members</span></li>
+        }
+        else
+        {
+            @foreach (MemberLineupItem m in Model.CurrentMembers)
+            {
+                <li>
+                    <button type="button" class="btn btn-small btn-danger unassignButton" data-positionid="@Model.PositionId" data-memberid="@m.MemberId">Unassign</button>
+                    <span>@m.MemberName | @m.MemberRace/@m.MemberGender</span>
+                </li>
+            }
+        }
+    </ul>
+</div>
+

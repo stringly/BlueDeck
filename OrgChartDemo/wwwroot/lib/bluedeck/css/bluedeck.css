@@ -1198,6 +1198,7 @@ hr {
         font-size: 12px;
     }
 
+
     #lineupSelection .disabled {
         pointer-events: none;
     }
@@ -1222,7 +1223,19 @@ hr {
         cursor: pointer;
         border: 1px solid #d1d5da;
     }
+#memberLineup {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
 
+#memberLineup .btn-small {
+    font-size: 10px;
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px solid #d1d5da;
+}
     /* Footer Styling Classes */
 
 .px-3 {

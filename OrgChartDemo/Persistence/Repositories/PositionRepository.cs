@@ -61,7 +61,12 @@ namespace OrgChartDemo.Persistence.Repositories
        
         public Position GetPositionAndAllCurrentMembers(int positionId)
         {
-            return ApplicationDbContext.Positions.Where(x => x.PositionId == positionId).Include(x => x.Members).SingleOrDefault();
+            return ApplicationDbContext.Positions
+                .Where(x => x.PositionId == positionId)
+                .Include(x => x.Members).ThenInclude(x => x.Rank)
+                .Include(x => x.Members).ThenInclude(x => x.Race)
+                .Include(x => x.Members).ThenInclude(x => x.Gender)
+                .SingleOrDefault();
         }
         
         /// <summary>
