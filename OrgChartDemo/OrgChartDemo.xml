@@ -281,15 +281,6 @@
             </summary>
             <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.RosterController.GetComponents(System.Int32)">
-            <summary>
-            Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
-            </summary>
-            <remarks>
-            This method is used to 
-            </remarks>
-            <returns></returns>
-        </member>
         <member name="M:OrgChartDemo.Controllers.RosterController.ReassignMember(System.Int32,System.Int32,System.Int32)">
             <summary>
             Reassigns the member to a new position.

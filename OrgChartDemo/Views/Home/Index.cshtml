@@ -2,8 +2,8 @@
 
 <div class="homePageHeader container container-fluid" >
     <div class="col-md-10">
-        <h3>Hello, @Model.CurrentUser.FirstName.</h3>
-        <h4>Currently assigned to @Model.CurrentUser.Position.ParentComponent.Name as @Model.CurrentUser.Position.Name</h4>
+        <h4>Hello, @Model.CurrentUser.FirstName.</h4>
+        <h5>Currently assigned to @Model.CurrentUser.Position.ParentComponent.Name as @Model.CurrentUser.Position.Name</h5>
         <br />
     </div>
 </div>
@@ -11,10 +11,10 @@
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-        <li><a data-toggle="tab" href="#searchPeople">Search People</a></li>
-        <li><a data-toggle="tab" href="#documents">Documents</a></li>
-        <li><a data-toggle="tab" href="#currentUserInfo">My Info</a></li>
+        <li class="active"><a data-toggle="tab" href="#home"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+        <li><a data-toggle="tab" href="#searchPeople"><i class="glyphicon glyphicon-search"></i> Search People</a></li>
+        <li><a data-toggle="tab" href="#documents"><i class="glyphicon glyphicon-file"></i> Documents</a></li>
+        <li><a data-toggle="tab" href="#currentUserInfo"><i class="glyphicon glyphicon-user"></i> My Info</a></li>
 
     </ul>
 
@@ -31,7 +31,19 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <caption>
-                                    <strong>@home.ComponentName</strong> |
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                        </a>@: | 
+                                    }
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
                                         <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a>@: |
@@ -75,7 +87,19 @@
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <caption>
-                                    <strong>@item.ComponentName</strong> |
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                        </a>@: |
+                                    }
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
                                         <a asp-controller="Roster" asp-route-id="@item.ComponentId">Manage Roster</a> @: |
@@ -225,7 +249,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <a asp-action="Edit" asp-controller="Members" asp-route-id="@Model.CurrentUser.MemberId" class="btn btn-primary">Edit My Info</a>
+                        <a asp-action="Edit" asp-controller="Members" asp-route-id="@Model.CurrentUser.MemberId" asp-route-returnUrl="/Home/Index" class="btn btn-primary">Edit My Info</a>
                     </div>
                 </div>
             </div>

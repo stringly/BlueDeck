@@ -168,10 +168,11 @@
                             @Html.DisplayFor(modelItem => item.IsComponentAdmin)
                         </td>
                         <td style="text-align:center">
-                            @Html.DisplayFor(modelItem => item.IsGlobalAdmin)
+                            @Html.DisplayFor(modelItem => item.IsGlobalAdmin)                           
                         </td>
                         <td style="text-align:center">
-                            @Html.DisplayFor(modelItem => item.MemberId)
+                            @item.MemberId
+                            
                         </td>
                         <td>
                             <a href="mailto:@item.Email" target="_top" title="Click to send and Email">

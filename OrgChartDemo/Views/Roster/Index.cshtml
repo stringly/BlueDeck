@@ -276,6 +276,8 @@
             });
         }
         function handleMoreOptionsReassignEmployeeClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
             // retrieve the Member that we want to transfer
             var memberId = $(e.target).data('memberid');
             // clear any extant modal from the modal container
@@ -287,11 +289,16 @@
                 // register the Modal's event handlers
                 var submitButton = document.getElementById("reassignEmployeeModalSubmit");
                 submitButton.addEventListener('click', handleReassignEmployeeModalSubmit, false);
+                $('#reassignEmployeeModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
+                });
                 $("#reassignEmployeeModal").modal("show");
             })
         }
 
         function handleAddNewPositionButtonClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleAddNewPositionButtonClick, false);
             // retrieve the Component to which we want to add a position
             var componentId = e.target.dataset.componentid;
             // clear any extant modal from the modal container
@@ -312,6 +319,9 @@
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
                 });
+                $('#addPositionToComponentModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleAddNewPositionButtonClick, false);
+                });
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -322,6 +332,8 @@
         }
 
         function handleMoreOptionsEditMemberClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleMoreOptionsEditMemberClick, false);
             // retrieve the MemberId of the member we want to edit
             var member = e.target.dataset.memberid;
             // clear any existing modals from the container
@@ -337,6 +349,9 @@
                 var deleteNumberButtons = document.querySelectorAll(".deleteNumber");
                 [].forEach.call(deleteNumberButtons, function (elem) {
                     elem.addEventListener("click", handleDeletePhoneNumberClick, false);
+                });
+                $('#editMemberModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleMoreOptionsEditMemberClick, false);
                 });
                 // show the modal
                 $("#editMemberModal").modal("show");
@@ -423,8 +438,6 @@
 
         }
         function handleDeletePhoneNumberClick(e) {
-            //alert("Delete" + e.target.dataset.contactid);
-            console.log("Delete Clicked");
             var contactId = e.target.dataset.contactid;
             var contactGroup = $("#contactGroup-" + contactId);
             var deleteFlagName = "ContactNumbers[" + contactId + "].ToDelete";
@@ -441,6 +454,8 @@
             }
         }
         function handleMoreOptionsChangeDutyStatusClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
             // retrive the MemberId of the member we want to edit
             var member = e.target.dataset.memberid;
             // clear any existing modals from the container
@@ -452,6 +467,9 @@
                 // register the Modal's control's event handlers
                 var submitButton = document.getElementById('changeEmployeeStatusModalSubmit');
                 submitButton.addEventListener('click', handleChangeDutyStatusSubmitButtonClick, false);
+                $('#changeEmployeeStatusModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
+                });
                 // show the modal
                 $("#changeEmployeeStatusModal").modal("show");
             })
@@ -463,6 +481,8 @@
 
         // Retrieve Edit Position Modal
         function handleEditPositionButtonClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleEditPositionButtonClick, false);
             // retrieve the PositionId of the position we want to edit
             var position = e.target.dataset.positionid;
             // clear any modals from the container
@@ -491,6 +511,9 @@
                 isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
                 var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
                 uniqueWarningCancelButton.addEventListener('click', handleUniqueWarningSubModalCancel, false);
+                $('#addPositionToComponentModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleEditPositionButtonClick, false);
+                });
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -611,7 +634,9 @@
 
 
         function HandleAssignMemberClick(e) {
+            var elem = e.currentTarget;
             // retrieve the PositionId of the Position to which we want to assign a member
+            elem.removeEventListener('click', HandleAssignMemberClick, false);
             var position = e.target.dataset.positionid;
             // retrieve the current Selected Component
             var selectedComponent = $("#Component").children("option:selected").val();
@@ -627,7 +652,10 @@
                 document.getElementById('filterMemberListButton').addEventListener('click', handlefilterMemberListButtonClick, false);
                 document.getElementById('clearFilterMemberListButton').addEventListener('click', handleClearFilterMemberListButtonClick, false);
                 document.getElementById('MemberId').addEventListener('change', handleSelectMemberChange, false);
-                // show the modal
+                 // show the modal
+                $('#assignMemberModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', HandleAssignMemberClick, false);
+                });
                 $("#assignMemberModal").modal("show");
             })
         }
@@ -913,6 +941,8 @@
         }
 
         function handleEditComponentClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleEditComponentClick, false);
             var componentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
             $.get('/Roster/GetAddEditComponentViewComponent', { componentId: componentId }, function (data) {
@@ -926,6 +956,9 @@
                     document.getElementById('lineupMoveUp').addEventListener('click', handleComponentLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleComponentLineupMoveDown, false);
                     document.getElementById('ParentComponentId').addEventListener('change', handleParentComponentChange, false);
+                });
+                $('#addEditComponentModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleEditComponentClick, false);
                 });
                 // show the modal
                 $("#addEditComponentModal").modal("show");
@@ -943,6 +976,8 @@
         };
 
         function handleAddComponentClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleAddComponentClick, false);
             var parentComponentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
             $.get('/Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
@@ -957,6 +992,9 @@
                     document.getElementById('lineupMoveDown').addEventListener('click', handleComponentLineupMoveDown, false);
                     document.getElementById('ParentComponentId').addEventListener('change', handleParentComponentChange, false);
                 });
+                $('#addEditComponentModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleAddComponentClick, false);
+                });
                 // show the modal
                 $("#addEditComponentModal").modal("show");
             })
@@ -968,6 +1006,8 @@
         }
 
         function handleDeleteComponentClick(e) {
+            var elem = e.currentTarget;
+            elem.removeEventListener('click', handleDeleteComponentClick, false);
             var componentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
             $.get('/Roster/GetConfirmComponentDeleteModal', { componentId: componentId }, function (data) {
@@ -983,6 +1023,9 @@
                         }
                     })
                 }, false)
+                $('#ConfirmComponentDeleteModal').on('hide.bs.modal', function () {
+                    elem.addEventListener('click', handleDeleteComponentClick, false);
+                });
                 $("#ConfirmComponentDeleteModal").modal("show");
             })
         }

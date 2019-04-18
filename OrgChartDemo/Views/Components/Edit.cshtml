@@ -52,7 +52,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-sm-12 form-group">
-                            <a asp-action="Index" class="btn btn-default">Cancel</a>
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                             <input type="submit" value="Save Changes" class="btn btn-primary" />
                             <a asp-action="Delete" asp-route-id="@Model.ComponentId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
                         </div>

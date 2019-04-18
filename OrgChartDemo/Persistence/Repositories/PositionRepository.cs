@@ -62,6 +62,7 @@ namespace OrgChartDemo.Persistence.Repositories
         public Position GetPositionAndAllCurrentMembers(int positionId)
         {
             return ApplicationDbContext.Positions
+                .Include(x => x.ParentComponent)
                 .Where(x => x.PositionId == positionId)
                 .Include(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Members).ThenInclude(x => x.Race)
@@ -143,6 +144,14 @@ namespace OrgChartDemo.Persistence.Repositories
                         child.LineupPosition++;
                     }
                 }
+                if(p.Members != null)
+                {                    
+                    foreach(Member m in p.Members)
+                    {
+                        Member repoMember = ApplicationDbContext.Members.Find(m.MemberId);
+                        repoMember.Position = p;
+                    }
+                }
                 ApplicationDbContext.Positions.Add(p);
             }
             else // existing Position
@@ -201,12 +210,26 @@ namespace OrgChartDemo.Persistence.Repositories
                     .FirstOrDefault(x => x.PositionId == p.PositionId);
                 if(p.IsUnique == true && positionToUpdate.Members.Count() > 1)
                 {
-                    Position unassigned = ApplicationDbContext.Positions.FirstOrDefault(x => x.Name == "Unassigned");
+                    int unassignedId = ApplicationDbContext.Positions.FirstOrDefault(x => x.Name == "Unassigned").PositionId;
                     foreach (Member m in positionToUpdate.Members)
                     {
-                        m.Position = unassigned;
+                        m.PositionId = unassignedId;
                     }
                 }
+                if(p.Members != null)
+                {
+                    int unassignedId = ApplicationDbContext.Positions.FirstOrDefault(x => x.Name == "Unassigned").PositionId;
+                    foreach (Member m in positionToUpdate.Members)
+                    {
+                        m.PositionId = unassignedId;
+                    }
+                    foreach (Member m in p.Members)
+                    {
+                        ApplicationDbContext.Members.Find(m.MemberId);
+                        m.PositionId = p.PositionId;
+                    }
+                }
+
                 // Finally, update the Position with the new values
                 positionToUpdate.IsManager = p.IsManager;
                 positionToUpdate.IsUnique = p.IsUnique;

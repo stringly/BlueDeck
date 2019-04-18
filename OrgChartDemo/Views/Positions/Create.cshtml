@@ -80,8 +80,49 @@
                     </div>
                     <hr />
                     <div class="row">
+                        <div class="form-group col-md-5">
+                            <label class="control-label">Assign Member</label>
+                            <div class="input-group">
+                                @Html.DropDownList("AvailableMembers", new SelectList(Model.AvailableMembers, "MemberId", "MemberName"),
+                                                                "Select Member to Assign",
+                                                                new { @class = "form-control" })
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="button" id="addSelectedMemberButton">
+                                        <i class="glyphicon glyphicon-plus"></i> Assign
+                                    </button>
+                                </div>
+                            </div>
+                            <span id="AvailableMembersMessage" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-7">
+                            <label asp-for="CurrentMembers" class="control-label">Current Members</label><small id="currentMembersSubText">@(Model.IsUnique == true ? " (This is a unique position, so only a single member can be assigned.)" : " (Multiple members can be assigned.)")</small>
+                            <ul class="list-unstyled" id="memberLineup">
+                                @if (Model.CurrentMembers.Count() == 0)
+                                {
+                                    <li id="noMembersItem"><span>No Current Members</span></li>
+                                }
+                                else
+                                {
+                                    @for (int i = 0; i < Model.CurrentMembers.Count; i++)
+                                    {
+                                        <li class="memberLineupItem" id="memberLineupItem-@i" data-memberid="@Model.CurrentMembers[i].MemberId">
+                                            <button type="button" class="btn btn-small btn-danger unassignButton" data-membernumber="@i" data-positionid="@Model.PositionId" data-memberid="@Model.CurrentMembers[i].MemberId">
+                                                <i class="glyphicon glyphicon-remove"></i>
+                                            </button>
+                                            <span>@Model.CurrentMembers[i].MemberName</span>
+                                            <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberId" />
+                                            <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberName" />
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
                         <div class="col-sm-4 form-group">
                             <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                     </div>
@@ -106,6 +147,94 @@
                 }
             }
         });
+        var removeButtons = document.getElementsByClassName('unassignButton');
+        [].forEach.call(removeButtons, function (elem) {
+            elem.addEventListener('click', handleUnassignMemberClick, false);
+        });
+        document.getElementById('addSelectedMemberButton').addEventListener('click', handleAssignMemberClick, false)
+
+        function handleUnassignMemberClick(e) {
+            var memberNumber = e.currentTarget.dataset.membernumber;
+            var memberToRemove = document.getElementById("memberLineupItem-" + memberNumber);
+            var memberList = memberToRemove.parentElement;
+            memberList.removeChild(memberToRemove);
+            if (memberList.children.length == 0) {
+                var noMembersItem = document.createElement("li");
+                noMembersItem.id = "noMembersItem";
+                noMembersItem.appendChild(document.createTextNode("No Members Assigned"));
+                memberList.appendChild(noMembersItem);
+            }
+        }
+        function handleAssignMemberClick(e){
+            var position = @Model.PositionId;
+            var memberId = $("#AvailableMembers").val();
+            var memberName = $("#AvailableMembers option:selected").text();
+            var memberList = document.getElementById("memberLineup");
+            var noMembersItem = document.getElementById("noMembersItem");
+            if (noMembersItem != null) {
+                memberList.removeChild(noMembersItem);
+            }            
+            var currentMemberCount = $("#memberLineup li").length;      
+            var currentMembers = document.getElementsByClassName("memberLineupItem");
+            for (var i = 0; i < currentMembers.length; i++){
+                if (currentMembers[i].dataset.memberid == memberId) {
+                    $("#AvailableMembersMessage").text("Selected Member is already assigned to this position.")
+                    return;
+                }
+            }
+            if (currentMemberCount > 0 && document.getElementById("IsUnique").checked) {
+                while (memberList.firstChild) {
+                    memberList.removeChild(memberList.firstChild);
+                }
+                currentMemberCount = currentMemberCount - 1;
+            }
+            // list item
+            var newMemberListItem = document.createElement("li");
+            newMemberListItem.classList.add("memberLineupItem");
+            newMemberListItem.id = "memberLineupItem-" + currentMemberCount;
+            newMemberListItem.dataset.memberid = memberId;
+            // remove button
+            var newRemoveButton = document.createElement("button");
+            newRemoveButton.type = "button";
+            newRemoveButton.classList.add("btn", "btn-small", "btn-danger", "unassignButton" );
+            newRemoveButton.dataset.membernumber = currentMemberCount;
+            newRemoveButton.dataset.positionid = position;
+            newRemoveButton.dataset.memberid = memberId;
+            newRemoveButton.addEventListener('click', handleUnassignMemberClick, false);
+            // glyphicon
+            var glyphicon = document.createElement("i");
+            glyphicon.classList.add("glyphicon", "glyphicon-remove");
+            newRemoveButton.appendChild(glyphicon);
+            newMemberListItem.appendChild(newRemoveButton);
+            // name span
+            var nameSpan = document.createElement("span");            
+            nameSpan.appendChild(document.createTextNode(" " + memberName));
+            newMemberListItem.appendChild(nameSpan);
+            // hidden inputs
+            var memberIdInput = document.createElement("input");
+            memberIdInput.type = "hidden";
+            memberIdInput.dataset.val = "true";
+            memberIdInput.id = "CurrentMembers_" + currentMemberCount + "__MemberId";
+            memberIdInput.name = "CurrentMembers[" + currentMemberCount + "].MemberId";
+            memberIdInput.value = memberId;
+            newMemberListItem.appendChild(memberIdInput);
+            
+            var memberNameInput = document.createElement("input");
+            memberNameInput.type = "hidden";
+            memberNameInput.dataset.val = "true";
+            memberNameInput.id = "CurrentMembers_" + currentMemberCount + "__MemberName";
+            memberNameInput.name = "CurrentMembers[" + currentMemberCount + "].MemberName";
+            memberNameInput.value = memberName;
+            newMemberListItem.appendChild(memberNameInput);
+
+            memberList.appendChild(newMemberListItem);
+
+        }
+
+        $("#AvailableMembers").on('change', function () {
+            $("#AvailableMembersMessage").text("");
+        });
+
         $("#ParentComponentId").on('change', function () {
             if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component
@@ -135,7 +264,24 @@
                     $("#LineupPosition").val($("#newPositionInsert").index());
                 });
             }
-        })
+        });
+        $("#IsUnique").on('change', function () {
+            if (this.checked) {
+                $("#currentMembersSubText").text(" (This is a unique position, so only a single member can be assigned.)");
+                var memberList = document.getElementById("memberLineup");
+                while (memberList.childNodes.length > 1) {
+                    memberList.removeChild(memberList.lastChild);
+                }
+                var noMembersItem = document.createElement("li");
+                noMembersItem.id = "noMembersItem";
+                noMembersItem.appendChild(document.createTextNode("No Members Assigned"));
+                memberList.appendChild(noMembersItem);
+            }
+            else {
+                $("#currentMembersSubText").text(" (Multiple members can be assigned.)");
+
+            }
+        });
         function handleLineupMoveUp() {
             // Grab the <ul>,
             // Find the "newPositionInsert"

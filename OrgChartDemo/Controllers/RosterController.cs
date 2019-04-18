@@ -49,22 +49,7 @@ namespace OrgChartDemo.Controllers
             ViewBag.Title = "Roster Manager";
             return View(vm);
         }
-
-        // TODO: Is this Roster/GetComponents deprecated?
-        /// <summary>
-        /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
-        /// </summary>
-        /// <remarks>
-        /// This method is used to 
-        /// </remarks>
-        /// <returns></returns>
-        [HttpGet]
-        public JsonResult GetComponents(int componentId)
-        {
-            // TODO: update the repo method to retrieve data reequired for this view            
-            List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
-            return Json(result);
-        }
+        
 
         // Drag-and-Drop Functions
         /// <summary>
@@ -146,8 +131,8 @@ namespace OrgChartDemo.Controllers
         /// <param name="componentId">The ComponentId of the top-level component</param>
         /// <returns></returns>
         public IActionResult GetRosterViewComponent(int componentId){
-            //List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
-            List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
+            List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
+            //List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
             return ViewComponent("RosterManager", result.OrderBy(x => x.ComponentId).ToList());    
         }
 
@@ -293,7 +278,7 @@ namespace OrgChartDemo.Controllers
                             IsManager = form.IsManager,
                             IsUnique = form.IsUnique,
                             LineupPosition = form.LineupPosition,
-                            Callsign = form.Callsign
+                            Callsign = form.Callsign,
                         };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();

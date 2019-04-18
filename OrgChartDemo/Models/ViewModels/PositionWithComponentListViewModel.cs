@@ -78,6 +78,9 @@ namespace OrgChartDemo.Models.ViewModels
         /// </value>
         public List<ComponentSelectListItem> Components { get; set; }
 
+        public List<MemberLineupItem> CurrentMembers { get; set; }
+
+        public List<MemberSelectListItem> AvailableMembers { get; set; }
 
         /// TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
         /// <summary>
@@ -93,6 +96,7 @@ namespace OrgChartDemo.Models.ViewModels
             IsManager = p.IsManager;
             IsUnique = p.IsUnique;
             LineupPosition = p.LineupPosition;
+            CurrentMembers = p.Members.ConvertAll(x => new MemberLineupItem(x));
             if (p.Callsign != "NONE")
             {
                 Callsign = p.Callsign;

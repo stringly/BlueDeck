@@ -105,10 +105,12 @@ namespace OrgChartDemo.Controllers
             if (User.IsInRole("GlobalAdmin"))
             {
                 vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+                vm.AvailableMembers = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
             }
             else if (User.IsInRole("ComponentAdmin"))
             {
-                vm.Components = vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                vm.AvailableMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
             }
             else
             {
@@ -126,14 +128,23 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form, string returnUrl)
+        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique,CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Create Position: Corrections required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated";
-                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                    form.AvailableMembers = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+                }
+                else if(User.IsInRole("ComponentAdmin"))
+                {
+                    form.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                    form.AvailableMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
+                }
                 ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
@@ -149,7 +160,15 @@ namespace OrgChartDemo.Controllers
                 LineupPosition = form.LineupPosition,
                 Callsign = form.Callsign.ToUpper()
                 };
-
+            if (form.CurrentMembers != null)
+            {
+                p.Members = new List<Member>();
+                foreach (MemberLineupItem mli in form.CurrentMembers)
+                {
+                    Member m = unitOfWork.Members.Get(mli.MemberId);
+                    p.Members.Add(m);
+                }
+            }
             if (unitOfWork.Positions.SingleOrDefault(x => x.Name == form.PositionName && x.ParentComponentId == form.ParentComponentId) != null) { 
                 ViewBag.Message = $"A Position with the name {form.PositionName} already exists. Use a different Name.\n";
                 errors++;
@@ -202,7 +221,7 @@ namespace OrgChartDemo.Controllers
             {
                 return NotFound();
             }
-            Position position = unitOfWork.Positions.GetPositionWithParentComponent(Convert.ToInt32(id));
+            Position position = unitOfWork.Positions.GetPositionAndAllCurrentMembers(Convert.ToInt32(id));
             if (position == null)
             {
                 return NotFound();
@@ -211,10 +230,12 @@ namespace OrgChartDemo.Controllers
             if (User.IsInRole("GlobalAdmin"))
             {
                 vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+                vm.AvailableMembers = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
             }
             else if (User.IsInRole("ComponentAdmin"))
             {
                 vm.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                vm.AvailableMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
             }
             else
             {
@@ -233,7 +254,7 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique")] PositionWithComponentListViewModel form, string returnUrl)
+        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique,CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
@@ -285,6 +306,20 @@ namespace OrgChartDemo.Controllers
                 p.Callsign = form?.Callsign?.ToUpper() ?? null;
                 p.IsManager = form.IsManager;
                 p.LineupPosition = form.LineupPosition;
+                if (form.CurrentMembers != null)
+                {
+                    List<Member> formMembers = new List<Member>();
+                    foreach (MemberLineupItem mli in form.CurrentMembers)
+                    {
+                        Member m = unitOfWork.Members.Get(mli.MemberId);
+                        formMembers.Add(m);
+                    }
+                    p.Members = formMembers;
+                }
+                else
+                {
+                    p.Members = new List<Member>();
+                }
                 unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
@@ -378,28 +413,20 @@ namespace OrgChartDemo.Controllers
             }
         }
 
-        public IActionResult GetMemberLineupViewComponent(int positionId)
-        {
-            Position p = unitOfWork.Positions.GetPositionAndAllCurrentMembers(positionId);
-            List<MemberSelectListItem> memberList = new List<MemberSelectListItem>();
-            if (User.IsInRole("GlobalAdmin"))
-            {
-                memberList = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
-            }
-            else
-            {
-                memberList = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
-            }
-            MemberLineupViewComponentViewModel vm = new MemberLineupViewComponentViewModel(p, memberList);
-            return ViewComponent("PositionMemberLineup", vm);            
-        }
-
         public IActionResult AssignMember(string addOrRemove, int PositionId, int MemberId)
         {
             Member m = unitOfWork.Members.Get(MemberId);
             switch (addOrRemove)
             {
                 case "add":
+                    Position p = unitOfWork.Positions.GetPositionAndAllCurrentMembers(PositionId);
+                    if(p.IsUnique == true)
+                    {
+                        foreach(Member cm in p.Members)
+                        {
+                            cm.PositionId = unitOfWork.Positions.Find(x => x.Name == "Unassigned").FirstOrDefault().PositionId;
+                        }
+                    }
                     m.PositionId = PositionId;
                     break;
                 case "remove":
