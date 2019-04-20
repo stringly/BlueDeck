@@ -10,11 +10,12 @@ namespace OrgChartDemo.Models.ViewModels
     {
         public List<HomePageComponentGroup> ComponentGroups { get; set; }
         public Member CurrentUser {get;set;}
+        public List<ComponentSelectListItem> Components { get; set; }
 
-        public HomePageViewModel(Member member)
+        public HomePageViewModel(Member _member)
         {
-            CurrentUser = member;
-            ComponentGroups = new List<HomePageComponentGroup>();
+            CurrentUser = _member;
+            ComponentGroups = new List<HomePageComponentGroup>();           
 
         }
 

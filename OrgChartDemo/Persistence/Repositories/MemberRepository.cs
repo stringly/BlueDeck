@@ -301,7 +301,7 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Include(x => x.Race)
                 .Include(x => x.PhoneNumbers)
                     .ThenInclude(x => x.Type)                
-                .FirstOrDefault();
+                .FirstOrDefault();            
             HomePageViewModel result = new HomePageViewModel(currentUser);
             SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);
 

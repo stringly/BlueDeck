@@ -19,7 +19,7 @@
     </ul>
 
     <div class="tab-content">
-        <div id="home" class="tab-pane fade in active">
+        <div id="home" href="#home" class="tab-pane fade in active">
             @{
                 HomePageComponentGroup home = Model.ComponentGroups.Where(x => x.ComponentId == Model.CurrentUser.Position.ParentComponent.ComponentId).First();
 
@@ -137,7 +137,7 @@
                 </div>
             }
         </div>
-        <div id="searchPeople" class="tab-pane fade">
+        <div id="searchPeople" href="#searchPeople" class="tab-pane fade">
             <div class="col-md-12">
                 <br />
                 <h4>Search for a Person</h4>
@@ -163,13 +163,43 @@
                 <h4>Generate Documents</h4>
                 <hr />
                 <div class="row">
-                    <a asp-action="DownloadAlphaRoster" asp-controller="Home" asp-route-id="@Model.CurrentUser.Position.ParentComponent.ComponentId">Test Alpha Roster Generator</a>
+                    <div class="form-inline">
+                        <div class="col-sm-10 form-group">
+                            <label class="control-label">Select a Component:</label>
+                            @Html.DropDownList("SelectedComponent",
+                                    new SelectList(Model.Components, "Id", "ComponentName"),
+                                    "Choose Component",
+                                    new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <button type="button" class="btn btn-default bigSquareButton pull-left" id="GenerateAlphaRoster">
+                            <img style="height:25px; width:25px;" src="/lib/bluedeck/css/images/Alphabetize.png">
+                        </button>
+                        <strong>Generate an Alpha Roster</strong><br />
+                        <small>An Alpha Roster will list all Members of the selected component in alphabetical order by the Member's last name.</small>
+                    </div>
+                </div>                
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <button type="button" class="btn btn-default bigSquareButton pull-left" id="GenerateComponentRoster">
+                            <img style="height:35px; width:35px;"  src="/lib/bluedeck/css/images/Roster.png">
+                        </button>
+                        <strong>Generate a Component Roster</strong><br />
+                        <small>Component Roster will list all Positions and Members of the selected component and all of it's subordinate Components, grouped by Component.</small>
+                    </div>
                 </div>
                 <div class="row">
-                    <a asp-action="DownloadComponentRoster" asp-controller="Home" asp-route-id="@Model.CurrentUser.Position.ParentComponent.ComponentId">Test Component Roster Generator</a>
-                </div>
-                <div class="row">
-                    <a asp-action="DownloadOrganizationChart" asp-controller="Home" asp-route-id="@Model.CurrentUser.Position.ParentComponent.ComponentId">Test Org Chart Generator</a>
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <button type="button" class="btn btn-default bigSquareButton pull-left" id="GenerateOrgChart">
+                            <img style="height:50px; width:50px;" src="/lib/bluedeck/css/images/OrgChartIcon.png">
+                        </button>
+                        <strong>Generate an Organizational Chart</strong><br />
+                        <small>Component Roster will generate an organizational chart for the selected Component and all of it's subordinate components.</small>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -260,8 +290,21 @@
 
     $(document).ready(function () {
         $("#MemberSearchButton").click(searchMembers);
+        function onHashChange() {
+            var hash = window.location.hash;
 
-    })
+            if (hash) {
+                // using ES6 template string syntax
+                $(`[data-toggle="tab"][href="${hash}"]`).trigger('click');
+            }
+        }
+
+        window.addEventListener('hashchange', onHashChange, false);
+        onHashChange();
+        document.getElementById("GenerateAlphaRoster"),addEventListener('click', handleAlphaRosterClick, false);
+        document.getElementById("GenerateComponentRoster"), addEventListener('click', handleAlphaRosterClick, false);
+        document.getElementById("GenerateOrgChart"), addEventListener('click', handleAlphaRosterClick, false);
+    });
     function searchMembers() {
         var searchStr =  $("#SearchString").val();
         if (searchStr.length > 0) {

@@ -31,6 +31,7 @@ namespace OrgChartDemo.Controllers
                     {
                         ViewBag.Title = "BlueDeck Home";
                         HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);
+                        vm.Components = unitOfWork.Components.GetComponentSelectListItems();
                         return View(vm);
                     }
                 else if (claimMemberId != 0)
