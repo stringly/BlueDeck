@@ -206,10 +206,12 @@
 <script>
     $(document).ready(function () {
         document.getElementById('defaultNewPhone').addEventListener("change", handleAddPhoneNumberClick, false);
-        document.querySelectorAll(".deleteNumber").forEach(function (elem) {
+        var deleteNumberButtons = document.querySelectorAll(".deleteNumber");
+        [].forEach.call(deleteNumberButtons, function (elem) {
             elem.addEventListener("click", handleDeletePhoneNumberClick, false);
         });
-        $('input[type=text],input[type=radio],input[type=checkbox],textarea,select,input[type=email],input[type=number]').each(function () {
+        var controls = $('input[type=text],input[type=radio],input[type=checkbox],textarea,select,input[type=email],input[type=number]');
+        controls.each(function () {
             var req = $(this).attr('data-val-required');
             var exclude = $(this).attr('data-exclude');
             if (undefined != req && undefined == exclude) {

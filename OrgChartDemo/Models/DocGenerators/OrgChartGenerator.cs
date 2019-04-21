@@ -185,7 +185,7 @@ namespace OrgChartDemo.Models.DocGenerators
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = $"{ChartableComponents.First().ComponentName} Organization Chart";
+            text1.Text = $"{ChartableComponents?.First(x => x.Parentid == 0)?.ComponentName ?? ""} Organization Chart";
 
             run1.Append(runProperties1);
             run1.Append(text1);

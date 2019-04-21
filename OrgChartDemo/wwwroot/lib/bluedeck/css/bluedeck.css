@@ -408,6 +408,12 @@ body {
         background-position: -.5em;
         border-color: rgba(27,31,35,.35);
     }
+    .bigSquareButton:focus {
+        background-color: #e6ebf1;
+        background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
+        background-position: -.5em;
+        border-color: rgba(27,31,35,.35);
+    }
 
 .close {
     color: #fff;
@@ -911,7 +917,7 @@ hr {
     padding: 3px 4px 3px 0px;
     height: 100%;
     font-weight: 500;
-    background-color: #0080ff;
+    background-color: #ccc;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#999999));
     /*background-color: #0080ff;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(100%,#757575));*/

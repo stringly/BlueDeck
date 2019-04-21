@@ -335,6 +335,11 @@ namespace OrgChartDemo.Persistence.Repositories
                     Parentid = c?.ParentComponent?.ComponentId ?? 0,
                     ComponentName = c.Name
                     };  
+                // this is goofy, but here I need to ensure that the "top-level" Chartable component's parent Id is set to 0.
+                if (n.Id == parentComponentId)
+                {
+                    n.Parentid = 0;
+                }
                 // Check if component has child positions
                 if (c.Positions != null)
                 {
