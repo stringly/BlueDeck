@@ -16,7 +16,14 @@ namespace OrgChartDemo.Controllers
         {
             unitOfWork = unit;
         }
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.Title = "BlueDeck Admin - Main Page";
+            return View();
+        }
+
+        public IActionResult MemberIndex(string sortOrder, string searchString)
         {
             AdminMemberIndexListViewModel vm = unitOfWork.Members.GetAdminMemberIndexListViewModel();
             vm.CurrentSort = sortOrder;

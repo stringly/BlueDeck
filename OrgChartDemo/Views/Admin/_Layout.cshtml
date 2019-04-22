@@ -9,15 +9,64 @@
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+    <link href="~/lib/bluedeck/css/adminsidebar.css" rel="stylesheet" />
     <link href="https://unpkg.com/ionicons@4.2.2/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    @await Component.InvokeAsync("NavigationMenu")
-    <div class="col-xs-12 pageContentContainer">
-        @RenderBody()
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <aside id="sidebar">
+                <ul id="sidemenu" class="sidebar-nav">
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Main Page" ? "active" : "" )">
+                        <a href="/Admin/Index">
+                            <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                            <span class="sidebar-title">Main</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Members Index" ? "active" : "" )">
+                        <a href="/Admin/MemberIndex">
+                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
+                            <span class="sidebar-title">Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                            <span class="sidebar-title">Positions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                            <span class="sidebar-title">Components</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-2">
+                            <span class="sidebar-icon"><i class="fa fa-database"></i></span>
+                            <span class="sidebar-title">Enumerations</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Account Status</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Duty Status</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Genders</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Races</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Ranks</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>User Roles</a></li>
+                            <li><a href="#"><i class="fa fa-caret-right"></i>Phone Types</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        @await Component.InvokeAsync("NavigationMenu")
+        <div id="page-content-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync("FooterMenu")
     </div>
-    @await Component.InvokeAsync("FooterMenu")
 </body>
 </html>
