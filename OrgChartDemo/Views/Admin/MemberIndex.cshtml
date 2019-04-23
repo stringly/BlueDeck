@@ -1,7 +1,7 @@
 ﻿@model AdminMemberIndexListViewModel
 
 
-<form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">    
+<form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
     <div class="form-group">
         <div class="input-group">
             <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Members" />
@@ -20,6 +20,7 @@
     }
     <a asp-action="Create" asp-controller="Members" asp-route-returnUrl="/Admin/MemberIndex"><i class="ion-md-person-add"></i> Create a New Member</a>
 </form>
+
 <div>
     @if (ViewBag.Status == "Success!")
     {
@@ -38,16 +39,24 @@
             <div class="alert alert-primary alert-dismissible fade in">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Message:</strong>
-                <span>Found @Model.Members.Count() Members that match '@Model.CurrentFilter'</span>
+                <span>Found @Model.PagingInfo.TotalItems Members that match '@Model.CurrentFilter'</span>
             </div>
         </div>
     }
     @if (Model.Members.Count() > 0)
     {
-
         <div class="table-responsive">
             <table class="table table-condensed">
                 <thead>
+                    <tr class="tablePageControlHeaderRow">
+                        <th colspan="11">
+                            <div page-model="@Model.PagingInfo" page-action="MemberIndex" page-classes-enabled="true"
+                                 page-class="" page-class-normal=""
+                                 page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
+                                 class="btn-group">
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
@@ -172,14 +181,16 @@
                 </tbody>
             </table>
         </div>
+
     }
     else
     {
         <div style="max-width: 95%; margin: auto">
-            <a asp-action="Index" class="">Go Back to Full List</a>
+            <a asp-action="MemberIndex" class="">Go Back to Full List</a>
         </div>
     }
 </div>
+
 <script>
     // close any alert after 3 seconds
     window.setTimeout(function () {

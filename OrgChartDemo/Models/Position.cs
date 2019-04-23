@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,6 +29,7 @@ namespace OrgChartDemo.Models {
         /// The ComponentId (PK) of the Parent Component (FK)
         /// </value>
         [Display(Name = "Parent Component")]
+        [ForeignKey("ParentComponentId")]
         public virtual Component ParentComponent { get; set; }
 
         /// <summary>
@@ -81,6 +83,15 @@ namespace OrgChartDemo.Models {
         /// </value>
         [Display(Name = "Queue Position")]
         public int? LineupPosition {get;set;}
+
+        public int? CreatorId { get; set; }
+        [ForeignKey("CreatorId")]
+        public virtual Member Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastModified { get; set; }
+        public int? LastModifiedById { get; set; }
+        [ForeignKey("LastModifiedById")]
+        public virtual Member LastModifiedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the Members.

@@ -10,6 +10,7 @@ namespace OrgChartDemo.Models.ViewModels
     public class ComponentIndexListViewModel
     {        
         public IEnumerable<ComponentIndexViewModelComponentListItem> Components { get; set; }
+        public PagingInfo PagingInfo { get; set; }
         public string ComponentNameSort { get; set; }
         public string ParentComponentNameSort { get; set; }
         public string CurrentFilter { get; set; }

@@ -18,6 +18,7 @@ namespace OrgChartDemo.Controllers
     public class PositionsController : Controller
     {
         private IUnitOfWork unitOfWork;
+        public int PageSize = 25;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
@@ -36,7 +37,7 @@ namespace OrgChartDemo.Controllers
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             PositionIndexListViewModel vm = new PositionIndexListViewModel(unitOfWork.Positions.GetPositionsWithMembers().ToList());
             vm.CurrentSort = sortOrder;
@@ -65,9 +66,16 @@ namespace OrgChartDemo.Controllers
                     vm.Positions = vm.Positions.OrderBy(x => x.PositionName);
                     break;
             }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Positions.GetAll().Count() : vm.Positions.Count()
+            };
             ViewBag.Title = "BlueDeck Positions Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.Positions = vm.Positions.Skip((page - 1) * PageSize).Take(PageSize);
             return View(vm);
         }
 

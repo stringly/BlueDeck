@@ -28,6 +28,7 @@ namespace OrgChartDemo.Models {
         /// The Component's parent <see cref="T:OrgChartDemo.Models.Component"/>
         /// </value>
         [Display(Name = "Parent Component")]
+        [ForeignKey("ParentComponentId")]
         public virtual Component ParentComponent { get; set; }
 
         /// <summary>
@@ -58,6 +59,15 @@ namespace OrgChartDemo.Models {
         /// The lineup position.
         /// </value>
         public int? LineupPosition { get; set; }
+        public int? CreatorId { get; set; }
+        [ForeignKey("CreatorId")]
+        public virtual Member Creator { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime LastModified { get; set; }
+        
+        public int? LastModifiedById { get; set; }
+        [ForeignKey("LastModifiedById")]
+        public virtual Member LastModifiedBy { get; set; }
 
         /// <summary>
         /// Gets or sets the list of the <see cref="T:OrgChartDemo.Models.Position"/>s assinged to this Component.

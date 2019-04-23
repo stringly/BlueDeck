@@ -97,6 +97,36 @@ namespace OrgChartDemo.Models {
         public DbQuery<PositionSelectListItem> GetPositionsUserCanEdit { get; set; }
         public DbQuery<MemberSelectListItem> GetMembersUserCanEdit { get; set; }
 
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Member>()
+                .HasOne(p => p.Position)
+                .WithMany(m => m.Members)
+                .HasForeignKey(p => p.PositionId);
+            modelBuilder.Entity<Member>()
+                .HasOne(c => c.Creator)
+                .WithMany(m => m.CreatedMembers)
+                .HasForeignKey(m => m.CreatorId);
+            modelBuilder.Entity<Member>()
+                .HasOne(c => c.LastModifiedBy)
+                .WithMany(m => m.LastModifiedMembers)
+                .HasForeignKey(m => m.LastModifiedById);
+            modelBuilder.Entity<Position>()
+                .HasOne(c => c.Creator)
+                .WithMany(m => m.CreatedPositions)
+                .HasForeignKey(p => p.CreatorId);
+            modelBuilder.Entity<Position>()
+                .HasOne(c => c.LastModifiedBy)
+                .WithMany(m => m.LastModifiedPositions)
+                .HasForeignKey(p => p.LastModifiedById);
+            modelBuilder.Entity<Component>()
+                .HasOne(c => c.Creator)
+                .WithMany(m => m.CreatedComponents)
+                .HasForeignKey(p => p.CreatorId);
+            modelBuilder.Entity<Component>()
+                .HasOne(c => c.LastModifiedBy)
+                .WithMany(m => m.LastModifiedComponents)
+                .HasForeignKey(p => p.LastModifiedById);
+        }
     }
 }

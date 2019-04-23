@@ -16,7 +16,7 @@
             </summary>
             <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.ComponentsController.Index(System.String,System.String)">
+        <member name="M:OrgChartDemo.Controllers.ComponentsController.Index(System.String,System.String,System.Int32)">
             <summary>
             GET: Components
             </summary>
@@ -99,7 +99,7 @@
             </summary>
             <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.MembersController.Index(System.String,System.String)">
+        <member name="M:OrgChartDemo.Controllers.MembersController.Index(System.String,System.String,System.Int32)">
             <summary>
             GET: Members
             </summary>
@@ -154,7 +154,7 @@
             POST: Members/Delete/5
             </summary>
             <param name="id">The MemberId of the <see cref="T:OrgChartDemo.Models.Member"/> being deleted</param>
-            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> that redirects to <see cref="M:OrgChartDemo.Controllers.MembersController.Index(System.String,System.String)"/> on successful deletion of a Member.</returns>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> that redirects to <see cref="M:OrgChartDemo.Controllers.MembersController.Index(System.String,System.String,System.Int32)"/> on successful deletion of a Member.</returns>
         </member>
         <member name="M:OrgChartDemo.Controllers.MembersController.MemberExists(System.Int32)">
             <summary>
@@ -209,7 +209,7 @@
             </summary>
             <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
         </member>
-        <member name="M:OrgChartDemo.Controllers.PositionsController.Index(System.String,System.String)">
+        <member name="M:OrgChartDemo.Controllers.PositionsController.Index(System.String,System.String,System.Int32)">
             <summary>
             GET: Positions
             </summary>
@@ -1270,7 +1270,7 @@
             </summary>
             <value>
             The full name of the member race.
-            </value>        
+            </value>
         </member>
         <member name="P:OrgChartDemo.Models.Race.Abbreviation">
             <summary>

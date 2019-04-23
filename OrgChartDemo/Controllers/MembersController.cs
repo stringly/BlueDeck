@@ -17,6 +17,7 @@ namespace OrgChartDemo.Controllers
     public class MembersController : Controller
     {
         private IUnitOfWork unitOfWork;
+        public int PageSize = 25;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MembersController"/> class.
@@ -33,7 +34,7 @@ namespace OrgChartDemo.Controllers
         /// <remarks>        
         /// </remarks>
         /// <returns>An <see cref="IActionResult"/></returns>
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             MemberIndexListViewModel vm = unitOfWork.Members.GetMemberIndexListViewModel();
             vm.CurrentSort = sortOrder;
@@ -85,9 +86,16 @@ namespace OrgChartDemo.Controllers
                     vm.Members = vm.Members.OrderBy(x => x.LastName);
                     break;
             }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Members.GetAll().Count() : vm.Members.Count()
+            };
             ViewBag.Title = "BlueDeck Members Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.Members = vm.Members.Skip((page - 1) * PageSize).Take(PageSize);
             return View(vm);            
         }
 
@@ -139,7 +147,24 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers,IsUser,IsComponentAdmin,IsGlobalAdmin")] MemberAddEditViewModel form, string returnUrl)
+        public IActionResult Create([Bind(
+            "FirstName," +
+            "LastName," +
+            "MiddleName," +
+            "MemberRank," +
+            "DutyStatusId," +
+            "MemberRace," +
+            "MemberGender," +
+            "PositionId," +
+            "IdNumber," +
+            "Email," +
+            "LDAPName," +
+            "AppStatusId," +
+            "ContactNumbers," +
+            "IsUser," +
+            "IsComponentAdmin," +
+            "IsGlobalAdmin")
+            ] MemberAddEditViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -149,6 +174,7 @@ namespace OrgChartDemo.Controllers
                 form.GenderList = unitOfWork.MemberGenders.GetMemberGenderSelectListItems();
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+                form.AppStatuses = unitOfWork.AppStatuses.GetApplicationStatusSelectListItems();
                 ViewBag.Title = "Create Member - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
@@ -157,6 +183,10 @@ namespace OrgChartDemo.Controllers
             else
             {
                 // TODO: Member addition checks? Duplicate Name/Badge Numbers?
+                form.CreatedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                form.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                form.CreatedDate = DateTime.Now;
+                form.LastModified = DateTime.Now;
                 unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
@@ -211,7 +241,28 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("MemberId,FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberGender,MemberRace,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers,IsUser,IsComponentAdmin,IsGlobalAdmin")] MemberAddEditViewModel form, string returnUrl)
+        public IActionResult Edit(int id, [Bind(
+            "MemberId," +
+            "FirstName," +
+            "LastName," +
+            "MiddleName," +
+            "MemberRank," +
+            "DutyStatusId," +
+            "MemberGender," +
+            "MemberRace," +
+            "PositionId," +
+            "IdNumber," +
+            "Email," +
+            "LDAPName," +
+            "AppStatusId," +
+            "ContactNumbers," +
+            "IsUser," +
+            "IsComponentAdmin," +
+            "IsGlobalAdmin," +
+            "Creator," +
+            "CreatedDate," +
+            "LastModifiedBy," +
+            "LastModified")] MemberAddEditViewModel form, string returnUrl)
         {
 
             if (!ModelState.IsValid)
@@ -232,6 +283,8 @@ namespace OrgChartDemo.Controllers
             {
                 try
                 {
+                    form.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                    form.LastModified = DateTime.Now;
                     unitOfWork.Members.UpdateMember(form);
                     unitOfWork.Complete();
                 }

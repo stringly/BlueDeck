@@ -11,6 +11,7 @@ namespace OrgChartDemo.Controllers
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;
+        public int PageSize = 25;
 
         public AdminController(IUnitOfWork unit)
         {
@@ -23,7 +24,7 @@ namespace OrgChartDemo.Controllers
             return View();
         }
 
-        public IActionResult MemberIndex(string sortOrder, string searchString)
+        public IActionResult MemberIndex(string sortOrder, string searchString, int page = 1)
         {
             AdminMemberIndexListViewModel vm = unitOfWork.Members.GetAdminMemberIndexListViewModel();
             vm.CurrentSort = sortOrder;
@@ -87,9 +88,17 @@ namespace OrgChartDemo.Controllers
                     vm.Members = vm.Members.OrderBy(x => x.AccountStateId).ThenBy(x => x.LastName);
                     break;
             }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Members.GetAll().Count() : vm.Members.Count()
+            };
             ViewBag.Title = "BlueDeck Admin - Members Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
-            ViewBag.Message = TempData["Message"]?.ToString() ?? "";            
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.Members = vm.Members.Skip((page - 1) * PageSize).Take(PageSize);
+
             return View(vm);            
         }        
     }

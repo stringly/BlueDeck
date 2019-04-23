@@ -83,6 +83,15 @@
         <div class="table-responsive">
             <table class="table indexTable">
                 <thead>
+                    <tr class="tablePageControlHeaderRow">
+                        <th colspan="6">
+                            <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+                                 page-class="" page-class-normal=""
+                                 page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
+                                 class="btn-group">
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                         <th>
                             <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"

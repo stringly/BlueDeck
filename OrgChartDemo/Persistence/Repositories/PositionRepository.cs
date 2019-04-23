@@ -238,6 +238,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 positionToUpdate.Name = p.Name;
                 positionToUpdate.Callsign = p.Callsign;
                 positionToUpdate.ParentComponent = p.ParentComponent;
+                positionToUpdate.LastModified = p.LastModified;
+                positionToUpdate.LastModifiedById = p.LastModifiedById;               
 
             }
         }

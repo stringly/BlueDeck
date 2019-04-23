@@ -7,6 +7,7 @@ namespace OrgChartDemo.Models.ViewModels
     public class MemberIndexListViewModel
     {
         public IEnumerable<MemberIndexViewModelMemberListItem> Members { get; set; }
+        public PagingInfo PagingInfo { get; set; }
         public string MemberFirstNameSort { get; set; }
         public string MemberLastNameSort { get; set; }
         public string IdNumberSort { get; set; }

@@ -19,7 +19,12 @@ body {
     /*height: 100%;*/ 
 }
 
+li {
+    cursor:pointer;
+}
+.pagination {
 
+}
 .aboutPageHeader {
     margin-top: 50px;
     background-color: #3e5374 !important;
@@ -616,13 +621,32 @@ hr {
     margin-right: auto;
     vertical-align: middle;
 }
-    .indexTable thead {
-        background-image: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7) 100%);        
-        background-color: #3e5374 !important;
-        color: white;
-        font-weight: normal;
-        text-shadow: 1px 1px black;
+    .tablePageControlHeaderRow {
+        background-color: #fff;
     }
+
+    .tablePageControlHeaderRow .pagination {
+        margin: 0px;
+        height: 40px;        
+    }
+        .tablePageControlHeaderRow .pagination a {
+            text-shadow: none;
+            color: #337ab7;
+            font-weight: normal;
+        }
+        .tablePageControlHeaderRow .pagination .active a {
+            text-shadow: none;
+            color: #fff;
+            font-weight: normal;
+        }
+
+.indexTable thead {
+    background-image: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7) 100%);
+    background-color: #3e5374 !important;
+    color: white;
+    font-weight: normal;
+    text-shadow: 1px 1px black;
+}
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
     /* IE10+ CSS styles go here */
     .indexTable thead {

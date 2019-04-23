@@ -2,6 +2,7 @@
 using OrgChartDemo.Models.Types;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System;
 
 namespace OrgChartDemo.Models.ViewModels
 {
@@ -97,7 +98,6 @@ namespace OrgChartDemo.Models.ViewModels
         [Required]
         [Display(Name = "Duty Status")]
         public int? DutyStatusId { get; set; }
-
         
         [Display(Name = "Account Status")]
         public int? AppStatusId { get; set; }
@@ -139,6 +139,17 @@ namespace OrgChartDemo.Models.ViewModels
 
         [Display(Name = "Global Admin")]
         public bool IsGlobalAdmin { get; set; }
+
+        [Display(Name = "Created By")]
+        public string Creator { get; set; }
+        [Display(Name = "Created")]
+        public DateTime? CreatedDate { get; set; }
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+        [Display(Name = "Last Modified")]
+        public DateTime? LastModified { get; set; }
+        public int? LastModifiedById { get; set; }
+        public int? CreatedById { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's Contact Numbers.
@@ -257,6 +268,12 @@ namespace OrgChartDemo.Models.ViewModels
             LDAPName = _member.LDAPName;
             Positions = _positionList;
             AppStatuses = _appStatusList;
+            Creator = _member.Creator?.GetTitleName() ?? "";
+            CreatedById = _member?.CreatorId;
+            CreatedDate = _member?.CreatedDate;
+            LastModifiedBy = _member?.LastModifiedBy?.GetTitleName() ?? "";
+            LastModifiedById = _member?.LastModifiedById;
+            LastModified = _member?.LastModified;
             IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
             IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
             IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;
@@ -307,6 +324,12 @@ namespace OrgChartDemo.Models.ViewModels
             DisplayName = _member.GetTitleName();
             LDAPName = _member?.LDAPName;
             AppStatuses = _appStatusList;
+            Creator = _member.Creator?.GetTitleName() ?? "";
+            CreatedById = _member?.CreatorId;
+            CreatedDate = _member?.CreatedDate;
+            LastModifiedBy = _member.LastModifiedBy?.GetTitleName() ?? "";
+            LastModifiedById = _member?.LastModifiedById;
+            LastModified = _member?.LastModified;
             IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
             IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
             IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;

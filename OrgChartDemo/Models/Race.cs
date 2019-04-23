@@ -22,7 +22,8 @@ namespace OrgChartDemo.Models
         /// </summary>
         /// <value>
         /// The full name of the member race.
-        /// </value>        
+        /// </value>
+        [Display(Name = "Race")]
         public string MemberRaceFullName { get; set; }
 
         /// <summary>
@@ -31,6 +32,7 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The race's abbreviation.
         /// </value>
+        [Display(Name = "R")]
         public char Abbreviation { get; set; }
     }
 }

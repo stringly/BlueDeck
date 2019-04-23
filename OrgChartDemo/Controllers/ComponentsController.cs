@@ -18,6 +18,7 @@ namespace OrgChartDemo.Controllers
     public class ComponentsController : Controller
     {
         private IUnitOfWork unitOfWork;
+        public int PageSize = 25;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.ComponentsController"/> class.
@@ -42,7 +43,7 @@ namespace OrgChartDemo.Controllers
         /// <param name="searchString">The search string.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         
-        public IActionResult Index(string sortOrder, string searchString)
+        public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             ComponentIndexListViewModel vm = new ComponentIndexListViewModel(unitOfWork.Components.GetComponentsWithChildren().ToList());
             vm.CurrentSort = sortOrder;
@@ -71,9 +72,16 @@ namespace OrgChartDemo.Controllers
                     vm.Components = vm.Components.OrderBy(x => x.ComponentName);
                     break;
             }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.Components.Count()
+            };
             ViewBag.Title = "BlueDeck Component Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.Components = vm.Components.Skip((page - 1) * PageSize).Take(PageSize);
             return View(vm);
         }
 

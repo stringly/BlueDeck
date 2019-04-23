@@ -82,6 +82,8 @@ namespace OrgChartDemo.Controllers
                 {
                     // Reassign the member
                     m.Position = newPosition;
+                    m.LastModified = DateTime.Now;
+                    m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
                     unitOfWork.Complete();
                 }
                 // next, we check if we have a condition that requires a refresh of the RosterManager View Component
@@ -117,7 +119,11 @@ namespace OrgChartDemo.Controllers
             Position dragPosition = dragMember.Position;
             Position dropPosition = dropMember.Position;
             dragMember.Position = dropPosition;
+            dragMember.LastModified = DateTime.Now;
+            dragMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
             dropMember.Position = dragPosition;
+            dropMember.LastModified = DateTime.Now;
+            dropMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
             unitOfWork.Complete();
         
             return Json(new { success = true });
@@ -157,10 +163,11 @@ namespace OrgChartDemo.Controllers
         [HttpPost]
         public void ReassignMemberViaModal([Bind("PositionId","MemberId","SelectedComponentId")] ReassignEmployeeModalViewComponentViewModel form)
         {            
-                Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == form.MemberId);
-                Position p = unitOfWork.Positions.SingleOrDefault(x => x.PositionId == form.PositionId);
-                m.Position = p;
-                unitOfWork.Complete();                        
+            Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == form.MemberId);
+            m.PositionId = form.PositionId;
+            m.LastModified = DateTime.Now;
+            m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+            unitOfWork.Complete();                        
         }
 
         /* 
@@ -279,7 +286,11 @@ namespace OrgChartDemo.Controllers
                             IsUnique = form.IsUnique,
                             LineupPosition = form.LineupPosition,
                             Callsign = form.Callsign,
-                        };
+                            CreatedDate = DateTime.Now,
+                            CreatorId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                            LastModified = DateTime.Now,
+                            LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value)
+                    };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();
                     }
@@ -293,7 +304,9 @@ namespace OrgChartDemo.Controllers
                             IsManager = form.IsManager,
                             IsUnique = form.IsUnique,
                             LineupPosition = form.LineupPosition,
-                            Callsign = form.Callsign
+                            Callsign = form.Callsign,                            
+                            LastModified = DateTime.Now,
+                            LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value)
                         };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();
@@ -344,6 +357,8 @@ namespace OrgChartDemo.Controllers
             
             if (ModelState.IsValid)
             {
+                form.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                form.LastModified = DateTime.Now;
                 unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
                 return Json(new { success = true });
@@ -398,8 +413,10 @@ namespace OrgChartDemo.Controllers
                     }
                 }
                 // set the Member status to the new Status
-                m.DutyStatus = status;
+                m.DutyStatusId = Convert.ToInt32(form.DutyStatus);
                 // save changes to the repo
+                m.LastModified = DateTime.Now;
+                m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
                 unitOfWork.Complete();
                 // return success object so Client can refresh the RosterManager
                 return Json(new { success = true });

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using OrgChartDemo.Models.Types;
@@ -28,6 +29,7 @@ namespace OrgChartDemo.Models {
         /// The <see cref="Rank"/> of the Member
         /// </value>
         [Display(Name = "Rank")]
+        [ForeignKey("RankId")]
         public virtual Rank Rank { get; set; }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace OrgChartDemo.Models {
         /// </value>
         /// <seealso cref="T:OrgChartDemo.Models.Types.MemberGender"/>
         [Display(Name = "Gender")]
+        [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
 
         public int RaceId { get; set; }
@@ -97,11 +100,12 @@ namespace OrgChartDemo.Models {
         /// </value>
         /// <seealso cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/>
         [Display(Name = "Duty Status")]
+        [ForeignKey("DutyStatusId")]
         public virtual DutyStatus DutyStatus { get; set; }
 
         [Display(Name = "Account Status")]
         public int? AppStatusId { get;set; }
-
+        [ForeignKey("AppStatusId")]
         public AppStatus AppStatus { get;set; }
         /// <summary>
         /// Gets or sets the Member's email.
@@ -115,6 +119,19 @@ namespace OrgChartDemo.Models {
         [Display(Name = "Windows Logon Name")]
         public string LDAPName {get; set;}
 
+        public int? CreatorId { get; set; }
+        [ForeignKey("CreatorId")]
+        [Display(Name = "Created By")]
+        public virtual Member Creator { get; set; }
+        [Display(Name = "Created")]
+        public DateTime CreatedDate { get; set; }
+        [Display(Name = "Last Modified")]
+        public DateTime LastModified { get; set; }
+        public int? LastModifiedById { get; set; }
+        [ForeignKey("LastModifiedById")]
+        [Display(Name = "Last Modified By")]
+        public virtual Member LastModifiedBy { get; set; }
+
         public int PositionId { get; set; }
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
@@ -123,13 +140,21 @@ namespace OrgChartDemo.Models {
         /// The position.
         /// </value>
         [Display(Name = "Current Assignment")]
-        public virtual Position Position { get; set; }
-
+        [ForeignKey("PositionId")]
+        public Position Position { get; set; }
+        
         [Display(Name = "Contact Numbers")]
         public ICollection<ContactNumber> PhoneNumbers { get; set; }
 
         [Display(Name = "Current Roles")]
         public virtual ICollection<Role> CurrentRoles { get; set; }
+
+        public virtual ICollection<Member> CreatedMembers { get; set; }
+        public virtual ICollection<Position> CreatedPositions { get; set; }
+        public virtual ICollection<Component> CreatedComponents { get; set; }
+        public virtual ICollection<Member> LastModifiedMembers { get; set; }
+        public virtual ICollection<Position> LastModifiedPositions { get; set; }
+        public virtual ICollection<Component> LastModifiedComponents { get; set; }
 
         public Member()
         {

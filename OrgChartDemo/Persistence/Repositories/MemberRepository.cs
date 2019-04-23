@@ -109,6 +109,8 @@ namespace OrgChartDemo.Persistence.Repositories
             return ApplicationDbContext.Members
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
+                .Include(x => x.Creator)
+                .Include(x => x.LastModifiedBy)
                 .Include(x => x.PhoneNumbers)
                     .ThenInclude(x => x.Type)                
                 .Include(x => x.DutyStatus)
@@ -132,22 +134,31 @@ namespace OrgChartDemo.Persistence.Repositories
         public void UpdateMember(MemberAddEditViewModel form)
         {
             Member m;
-            if (form.MemberId != null)
+            if (form.MemberId != null) // if MemberId is not null, we are editing an existing Member
             {
                     m = ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
                 .Include(x => x.CurrentRoles)
                 .FirstOrDefault(x => x.MemberId == form.MemberId);
+
+                m.LastModifiedById = form.LastModifiedById;
+                m.LastModified = Convert.ToDateTime(form.LastModified);
             }
             else
             {
                 m = new Member();
                 m.CurrentRoles = new List<Role>();
+
+                m.LastModified = Convert.ToDateTime(form.LastModified);
+                m.LastModifiedById = form.LastModifiedById;
+                m.CreatorId = form.CreatedById;
+                m.CreatedDate = Convert.ToDateTime(form.CreatedDate);
+
             }
             if (form.PositionId != null){ 
                 m.PositionId = Convert.ToInt32(form.PositionId);
             }
-            else if (m.Position != null)
+            else if (m.PositionId == 0)
             {
                 m.PositionId = 7; // 7 is the current ID of the Unassigned Position
             }
@@ -162,6 +173,8 @@ namespace OrgChartDemo.Persistence.Repositories
             m.MiddleName = form.MiddleName;
             m.LastName = form.LastName;
             m.LDAPName = form.LDAPName;
+
+            
             foreach(ContactNumber n in form.ContactNumbers)
             {
                 if (n.MemberContactNumberId != 0)

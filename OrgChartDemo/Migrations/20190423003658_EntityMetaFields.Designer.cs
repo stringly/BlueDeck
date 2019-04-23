@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrgChartDemo.Models;
 
 namespace OrgChartDemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190423003658_EntityMetaFields")]
+    partial class EntityMetaFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,7 +130,9 @@ namespace OrgChartDemo.Migrations
 
                     b.HasIndex("AppStatusId");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("CreatorId")
+                        .IsUnique()
+                        .HasFilter("[CreatorId] IS NOT NULL");
 
                     b.HasIndex("DutyStatusId");
 
@@ -304,11 +308,11 @@ namespace OrgChartDemo.Migrations
             modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
                 {
                     b.HasOne("OrgChartDemo.Models.Member", "Creator")
-                        .WithMany("CreatedComponents")
+                        .WithMany()
                         .HasForeignKey("CreatorId");
 
                     b.HasOne("OrgChartDemo.Models.Member", "LastModifiedBy")
-                        .WithMany("LastModifiedComponents")
+                        .WithMany()
                         .HasForeignKey("LastModifiedById");
 
                     b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
@@ -335,8 +339,8 @@ namespace OrgChartDemo.Migrations
                         .HasForeignKey("AppStatusId");
 
                     b.HasOne("OrgChartDemo.Models.Member", "Creator")
-                        .WithMany("CreatedMembers")
-                        .HasForeignKey("CreatorId");
+                        .WithOne()
+                        .HasForeignKey("OrgChartDemo.Models.Member", "CreatorId");
 
                     b.HasOne("OrgChartDemo.Models.Types.DutyStatus", "DutyStatus")
                         .WithMany()
@@ -349,7 +353,7 @@ namespace OrgChartDemo.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OrgChartDemo.Models.Member", "LastModifiedBy")
-                        .WithMany("LastModifiedMembers")
+                        .WithMany()
                         .HasForeignKey("LastModifiedById");
 
                     b.HasOne("OrgChartDemo.Models.Position", "Position")
@@ -371,11 +375,11 @@ namespace OrgChartDemo.Migrations
             modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
                 {
                     b.HasOne("OrgChartDemo.Models.Member", "Creator")
-                        .WithMany("CreatedPositions")
+                        .WithMany()
                         .HasForeignKey("CreatorId");
 
                     b.HasOne("OrgChartDemo.Models.Member", "LastModifiedBy")
-                        .WithMany("LastModifiedPositions")
+                        .WithMany()
                         .HasForeignKey("LastModifiedById");
 
                     b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
