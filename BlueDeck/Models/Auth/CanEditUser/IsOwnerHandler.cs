@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Auth
+namespace BlueDeck.Models.Auth
 {
     public class IsOwnerHandler : AuthorizationHandler<CanEditUserRequirement>
     {

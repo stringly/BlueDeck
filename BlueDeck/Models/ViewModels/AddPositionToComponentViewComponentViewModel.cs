@@ -1,8 +1,8 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     public class AddPositionToComponentViewComponentViewModel
     {        
@@ -25,7 +25,7 @@ namespace OrgChartDemo.Models.ViewModels
         public string PositionName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Id of the Position's parent <see cref="T:OrgChartDemo.Models.Component"/>
+        /// Gets or sets the Id of the Position's parent <see cref="T:BlueDeck.Models.Component"/>
         /// </summary>
         /// <value>
         /// The parent's ComponentId.
@@ -44,7 +44,7 @@ namespace OrgChartDemo.Models.ViewModels
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="T:OrgChartDemo.Models.Component"/>.
+        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="T:BlueDeck.Models.Component"/>.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is manager; otherwise, <c>false</c>.
@@ -53,7 +53,7 @@ namespace OrgChartDemo.Models.ViewModels
         public bool IsManager { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:OrgChartDemo.Models.Member"/>s.
+        /// Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:BlueDeck.Models.Member"/>s.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is unique; otherwise, <c>false</c>.

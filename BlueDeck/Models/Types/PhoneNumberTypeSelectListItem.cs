@@ -1,5 +1,5 @@
 ﻿
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     public class PhoneNumberTypeSelectListItem
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System.Collections.Generic;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
 
     /// <summary>
     /// Entity Framework DbContext Class
@@ -11,14 +11,14 @@ namespace OrgChartDemo.Models {
     public class ApplicationDbContext : DbContext {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.ApplicationDbContext"/> class.
         /// </summary>
-        /// <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        /// <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {   
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.ApplicationDbContext"/> class.
         /// </summary>
         /// <remarks>
         /// Parameterless Constructor
@@ -30,7 +30,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Components.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Component"/>s.
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Component"/>s.
         /// </value>
         public virtual DbSet<Component> Components { get; set; }
 
@@ -38,7 +38,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Members.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Member"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Member"/>s
         /// </value>
         public virtual DbSet<Member> Members { get; set; }
 
@@ -46,7 +46,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the Positions.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Position"/>s
         /// </value>
         public virtual DbSet<Position> Positions { get; set; }
 
@@ -54,7 +54,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the MemberRanks.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRank"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRank"/>s
         /// </value>
         public virtual DbSet<Rank> Ranks { get; set; }
 
@@ -62,7 +62,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the MemberRaces.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberRace"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRace"/>s
         /// </value>
         public virtual DbSet<Race> Races { get; set; }
 
@@ -70,7 +70,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the MemberGenders.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberGender"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberGender"/>s
         /// </value>
         public virtual DbSet<Gender> Genders { get; set; }
 
@@ -78,7 +78,7 @@ namespace OrgChartDemo.Models {
         /// Gets or sets the MemberGenders.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:OrgChartDemo.Models.MemberDutyStatus"/>s
+        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberDutyStatus"/>s
         /// </value>
         public virtual DbSet<DutyStatus> DutyStatuses { get; set; }
 

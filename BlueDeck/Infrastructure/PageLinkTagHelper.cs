@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using System.Collections.Generic;
 using System.Linq;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.ViewModels;
 
-namespace OrgChartDemo.Infrastructure
+namespace BlueDeck.Infrastructure
 {
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper

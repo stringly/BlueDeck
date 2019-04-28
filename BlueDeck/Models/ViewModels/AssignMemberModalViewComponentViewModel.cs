@@ -1,11 +1,11 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     public class AssignMemberModalViewComponentViewModel
     {
@@ -55,7 +55,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// </summary>
         /// <remarks>
         /// This list is used to populate a Select List from which a user can select a Member to assign.
-        /// See <see cref="T:OrgChartDemo.Models.Types.MemberSelectListItem"/>
+        /// See <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/>
         /// </remarks>
         /// <value>
         /// The members.

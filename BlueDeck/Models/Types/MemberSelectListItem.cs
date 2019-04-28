@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     /// <summary>
-    /// A Type that includes the MemberDisplayName and MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> Entity.
+    /// A Type that includes the MemberDisplayName and MemberId for the <see cref="T:BlueDeck.Models.Member"/> Entity.
     /// <remarks>
     /// This type is used to populate a Position select list.
     /// </remarks>

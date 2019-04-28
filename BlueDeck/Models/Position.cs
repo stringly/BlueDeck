@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
     /// <summary>
     /// Position Entity
     /// </summary>
@@ -107,9 +107,9 @@ namespace OrgChartDemo.Models {
         public virtual List<Member> Members { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Position"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Position"/> class.
         /// <remarks>
-        /// Parameter-less constructor used to ensure that the <see cref="T:OrgChartDemo.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
+        /// Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
         /// </remarks>
         /// </summary>
         public Position()

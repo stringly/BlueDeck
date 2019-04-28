@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.DocGenerators;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.DocGenerators;
+using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     public class HomeController : Controller
     {

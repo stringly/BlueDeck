@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
     /// <summary>
     /// Component Entity
     /// </summary>
@@ -22,10 +22,10 @@ namespace OrgChartDemo.Models {
         public int? ParentComponentId {get;set;}
 
         /// <summary>
-        /// Gets or sets the component's parent <see cref="T:OrgChartDemo.Models.Component"/>.
+        /// Gets or sets the component's parent <see cref="T:BlueDeck.Models.Component"/>.
         /// </summary>
         /// <value>
-        /// The Component's parent <see cref="T:OrgChartDemo.Models.Component"/>
+        /// The Component's parent <see cref="T:BlueDeck.Models.Component"/>
         /// </value>
         [Display(Name = "Parent Component")]
         [ForeignKey("ParentComponentId")]
@@ -74,10 +74,10 @@ namespace OrgChartDemo.Models {
         public virtual Member LastModifiedBy { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of the <see cref="T:OrgChartDemo.Models.Position"/>s assinged to this Component.
+        /// Gets or sets the list of the <see cref="T:BlueDeck.Models.Position"/>s assinged to this Component.
         /// </summary>
         /// <value>
-        /// An <see cref="T:ICollection{T}"/> of <see cref="T:OrgChartDemo.Models.Position"/>s.
+        /// An <see cref="T:ICollection{T}"/> of <see cref="T:BlueDeck.Models.Position"/>s.
         /// </value>
         public virtual ICollection<Position> Positions { get; set; }
         

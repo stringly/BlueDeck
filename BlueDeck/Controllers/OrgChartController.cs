@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models;
+using BlueDeck.Models.Types;
 using System.Collections.Generic;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.ViewModels;
 using System;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     /// <summary>
     /// Serves Views and data that renders in <a href="http://www.getorgchart.com/Documentation#separationMixedHierarchyNodes" >GetOrgChart</a> Plugin
@@ -17,9 +17,9 @@ namespace OrgChartDemo.Controllers
         private IUnitOfWork unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.HomeController"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.HomeController"/> class.
         /// </summary>
-        /// <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+        /// <param name="unit">An <see cref="T:BlueDeck.Models.IUnitOfWork"/></param>
         public OrgChartController(IUnitOfWork unit)
         {
             unitOfWork = unit;

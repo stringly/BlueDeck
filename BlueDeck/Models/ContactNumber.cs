@@ -1,8 +1,8 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OrgChartDemo.Models
+namespace BlueDeck.Models
 {
     public class ContactNumber
     {

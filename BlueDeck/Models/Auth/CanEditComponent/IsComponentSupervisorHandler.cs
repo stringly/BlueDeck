@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Auth
+namespace BlueDeck.Models.Auth
 {
     public class IsComponentSupervisorHandler : AuthorizationHandler<CanEditComponentRequirement>
     {

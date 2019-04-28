@@ -1,26 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     /// <summary>
     /// A repository for the Component Entity
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Component}" />
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+    /// <seealso cref="T:BlueDeck.Persistence.Repositories.Repository{BlueDeck.Models.Component}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository" />
     public class ComponentRepository : Repository<Component>, IComponentRepository
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.ComponentRepository"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.ComponentRepository"/> class.
         /// </summary>
-        /// <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        /// <param name="context">The <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
         public ComponentRepository(ApplicationDbContext context)
             : base(context)
         {
@@ -33,7 +33,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// Gets the list components with all member children.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}" />
+        /// A <see cref="T:System.Collections.IEnumerable{BlueDeck.Models.Component}" />
         /// </returns>
         public IEnumerable<Component> GetComponentsWithChildren()
         {
@@ -49,7 +49,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </summary>
         /// <param name="id">The Component identifier.</param>
         /// <returns>
-        /// A <see cref="T:OrgChartDemo.Models.Component" />
+        /// A <see cref="T:BlueDeck.Models.Component" />
         /// </returns>
         public Component GetComponentWithChildren(int id)
         {
@@ -100,9 +100,9 @@ namespace OrgChartDemo.Persistence.Repositories
                
 
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
+        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
         /// </summary>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
         public IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers()
         {
             List<ChartableComponent> results = new List<ChartableComponent>();
@@ -120,10 +120,10 @@ namespace OrgChartDemo.Persistence.Repositories
         }       
 
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem" />s to populate a Component select list
+        /// Gets the list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem" />s to populate a Component select list
         /// </summary>
         /// <returns>
-        /// A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}" />
+        /// A <see cref="T:List{BlueDeck.Models.Types.ComponentSelectListItem}" />
         /// </returns>
         public List<ComponentSelectListItem> GetComponentSelectListItems()
         {
@@ -191,9 +191,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return componentsWithParents;
         }
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/>s.
         /// </summary>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
         public List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId)
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
@@ -314,9 +314,9 @@ namespace OrgChartDemo.Persistence.Repositories
             return results;
         }        
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/>s.
         /// </summary>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
         public List<ChartableComponentWithMember> GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId)
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
@@ -453,7 +453,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// This is because the method needs to know the "unedited" value of the Component's LineupPosition to determine whether the Component has been moved up or down
         /// in it's ParentComponent's Lineup.
         /// /// </remarks>
-        /// <param name="c">The <seealso cref="T:OrgChartDemo.Models.Component"/> being added or edited.</param>
+        /// <param name="c">The <seealso cref="T:BlueDeck.Models.Component"/> being added or edited.</param>
         public void UpdateComponentAndSetLineup(Component c)
         {
             // assume that the Component's ParentComponent is set? It has to be, right? Hmmm...

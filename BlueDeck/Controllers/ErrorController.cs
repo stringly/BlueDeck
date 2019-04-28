@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     [AllowAnonymous]
     public class ErrorController : Controller

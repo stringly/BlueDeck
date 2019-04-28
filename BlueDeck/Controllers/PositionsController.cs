@@ -1,15 +1,15 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.ViewModels;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Persistence;
+using BlueDeck.Models;
+using BlueDeck.Models.ViewModels;
+using BlueDeck.Models.Types;
+using BlueDeck.Persistence;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     /// <summary>
     /// Controller for Position CRUD actions
@@ -21,9 +21,9 @@ namespace OrgChartDemo.Controllers
         public int PageSize = 25;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.PositionsController"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsController"/> class.
         /// </summary>
-        /// <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
         public PositionsController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -34,7 +34,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Positions
         /// </summary>
         /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithMemberCountItem"/>
+        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         public IActionResult Index(string sortOrder, string searchString, int page = 1)
@@ -132,7 +132,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Create.
         /// </summary>
-        /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
+        /// <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -269,8 +269,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Edit/5
         /// </summary>
-        /// <param name="id">The PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> being edited</param>
-        /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
+        /// <param name="id">The PositionId for the <see cref="T:BlueDeck.Models.Position"/> being edited</param>
+        /// <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -383,7 +383,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
+        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditPosition")]
         public IActionResult Delete(int? id, string returnUrl)
@@ -408,8 +408,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:OrgChartDemo.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
+        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
+        /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:BlueDeck.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
@@ -428,8 +428,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Determines if a Position exists with the provided PositionId .
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:OrgChartDemo.Models.Position"/></param>
-        /// <returns>True if a <see cref="T:OrgChartDemo.Models.Position"/> with the given id exists</returns>
+        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/></param>
+        /// <returns>True if a <see cref="T:BlueDeck.Models.Position"/> with the given id exists</returns>
         private bool PositionExists(int id)
         {
             return (unitOfWork.Positions.Find(e => e.PositionId == id) != null);

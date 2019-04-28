@@ -1,33 +1,33 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.Linq;
 
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     /// <summary>
     /// A repository for the MemberRank entity.
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Types.MemberRank}" />
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository" />
+    /// <seealso cref="T:BlueDeck.Persistence.Repositories.Repository{BlueDeck.Models.Types.MemberRank}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository" />
     public class MemberRankRepository : Repository<Rank>, IMemberRankRepository
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRankRepository"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.MemberRankRepository"/> class.
         /// </summary>
-        /// <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        /// <param name="context">A <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
         public MemberRankRepository(ApplicationDbContext context) : base(context)
         {
         }
 
         /// <summary>
-        /// Gets a list of <see cref="T:OrgChartDemo.Types.MemberRankSelectListItem" />s.
+        /// Gets a list of <see cref="T:BlueDeck.Types.MemberRankSelectListItem" />s.
         /// </summary>
         /// <returns>
-        /// A <see cref="T:List{OrgChartDemo.Models.Types.MemberRankSelectListItem}" />
+        /// A <see cref="T:List{BlueDeck.Models.Types.MemberRankSelectListItem}" />
         /// </returns>
         /// <remarks>
         /// This method is used to populate Rank select lists.

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace OrgChartDemo.Models.Auth
+namespace BlueDeck.Models.Auth
 {
     public class CanEditPositionRequirement : IAuthorizationRequirement
     {

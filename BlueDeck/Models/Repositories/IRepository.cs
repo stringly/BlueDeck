@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace OrgChartDemo.Models.Repositories
+namespace BlueDeck.Models.Repositories
 {
     /// <summary>
     /// An interface that encapsulates data store interactions common to all Domain Entity Interactions. 
@@ -11,10 +11,10 @@ namespace OrgChartDemo.Models.Repositories
     /// This interface should not be implemented directly, but rather a Entity-specific interface that implements this interface should be created,
     /// and specific implementations of Repositories should be derived from Entity-specific interface 
     /// </remarks>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository"/>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository"/>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository"/>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository"/>
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository"/>
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository"/>
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository"/>
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public interface IRepository<TEntity> where TEntity : class
     {

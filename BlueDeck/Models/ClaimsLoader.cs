@@ -4,9 +4,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Models
+namespace BlueDeck.Models
 {
     public class ClaimsLoader : IClaimsTransformation
     {

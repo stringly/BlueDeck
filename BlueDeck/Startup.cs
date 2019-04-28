@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using OrgChartDemo.Models;
+using BlueDeck.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Persistence;
+using BlueDeck.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
-using OrgChartDemo.Models.Auth;
+using BlueDeck.Models.Auth;
 
-namespace OrgChartDemo
+namespace BlueDeck
 {
     /// <summary>
     /// Startup Class

@@ -1,14 +1,14 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/jcs30/source/repos/OrgChartDemo/OrgChartDemo/docfx_project",
+  "source_base_path": "C:/Users/jcs30/source/repos/BlueDeck/BlueDeck/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.ComponentsController.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.ComponentsController.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.ComponentsController.html",
+          "relative_path": "api/BlueDeck.Controllers.ComponentsController.html",
           "hash": "3yBqzqmhC18yv24BqRVwBg=="
         }
       },
@@ -17,10 +17,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.MembersController.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.MembersController.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.MembersController.html",
+          "relative_path": "api/BlueDeck.Controllers.MembersController.html",
           "hash": "Z6qI1SUzDcF487WXi+E6sg=="
         }
       },
@@ -29,10 +29,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.OrgChartController.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.OrgChartController.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.OrgChartController.html",
+          "relative_path": "api/BlueDeck.Controllers.OrgChartController.html",
           "hash": "2J4OHU9jP6r3hxfkm7arEg=="
         }
       },
@@ -41,10 +41,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.PositionsController.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.PositionsController.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.PositionsController.html",
+          "relative_path": "api/BlueDeck.Controllers.PositionsController.html",
           "hash": "s11ixm2cZFaOT4+oM0KzNA=="
         }
       },
@@ -53,10 +53,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.RosterController.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.RosterController.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.RosterController.html",
+          "relative_path": "api/BlueDeck.Controllers.RosterController.html",
           "hash": "V1M1uKibV62X/+OherE51g=="
         }
       },
@@ -65,10 +65,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Controllers.yml",
+      "source_relative_path": "api/BlueDeck.Controllers.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Controllers.html",
+          "relative_path": "api/BlueDeck.Controllers.html",
           "hash": "QYAVT+g1qu3A62Rmfxdjew=="
         }
       },
@@ -77,10 +77,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.AddLineupPositionToComponent.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.AddLineupPositionToComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.AddLineupPositionToComponent.html",
+          "relative_path": "api/BlueDeck.Migrations.AddLineupPositionToComponent.html",
           "hash": "4E4+cp7nrv5Cf5ub7fo3Yw=="
         }
       },
@@ -89,10 +89,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.Initial.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.Initial.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.Initial.html",
+          "relative_path": "api/BlueDeck.Migrations.Initial.html",
           "hash": "uuc/hfQDg+cc8JjM/YdAYQ=="
         }
       },
@@ -101,10 +101,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.PositionCallSign.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.PositionCallSign.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.PositionCallSign.html",
+          "relative_path": "api/BlueDeck.Migrations.PositionCallSign.html",
           "hash": "6Oe4xMV9te7cXHRzTP9fKg=="
         }
       },
@@ -113,10 +113,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.addDutyStatus.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.addDutyStatus.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.addDutyStatus.html",
+          "relative_path": "api/BlueDeck.Migrations.addDutyStatus.html",
           "hash": "Pp0AlW31fnqzvh9W0o73ug=="
         }
       },
@@ -125,10 +125,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.addLineupToPosition.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.addLineupToPosition.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.addLineupToPosition.html",
+          "relative_path": "api/BlueDeck.Migrations.addLineupToPosition.html",
           "hash": "uiJ8XdHf3PK0A6K5VO1whw=="
         }
       },
@@ -137,10 +137,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Migrations.yml",
+      "source_relative_path": "api/BlueDeck.Migrations.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Migrations.html",
+          "relative_path": "api/BlueDeck.Migrations.html",
           "hash": "X9NSb+ItK4qRACJw4bvnlw=="
         }
       },
@@ -149,10 +149,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ApplicationDbContext.yml",
+      "source_relative_path": "api/BlueDeck.Models.ApplicationDbContext.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ApplicationDbContext.html",
+          "relative_path": "api/BlueDeck.Models.ApplicationDbContext.html",
           "hash": "043GuhcwhW+SGM5OTApssA=="
         }
       },
@@ -161,10 +161,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ChartableComponent.yml",
+      "source_relative_path": "api/BlueDeck.Models.ChartableComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ChartableComponent.html",
+          "relative_path": "api/BlueDeck.Models.ChartableComponent.html",
           "hash": "AEZLuDSEK8Wquksk3cF4Qg=="
         }
       },
@@ -173,10 +173,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ChartableComponentWithMember.yml",
+      "source_relative_path": "api/BlueDeck.Models.ChartableComponentWithMember.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ChartableComponentWithMember.html",
+          "relative_path": "api/BlueDeck.Models.ChartableComponentWithMember.html",
           "hash": "dE1yEoQ208Jlze4tHuvdsg=="
         }
       },
@@ -185,10 +185,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Component.yml",
+      "source_relative_path": "api/BlueDeck.Models.Component.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Component.html",
+          "relative_path": "api/BlueDeck.Models.Component.html",
           "hash": "ZwlJ7KekOI4as/+MXlSdYQ=="
         }
       },
@@ -197,10 +197,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.yml",
+      "source_relative_path": "api/BlueDeck.Models.ExtensionMethods.ExtensionMethods.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ExtensionMethods.ExtensionMethods.html",
+          "relative_path": "api/BlueDeck.Models.ExtensionMethods.ExtensionMethods.html",
           "hash": "F0FkplYGvu2x8hTLCTjNcA=="
         }
       },
@@ -209,10 +209,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ExtensionMethods.yml",
+      "source_relative_path": "api/BlueDeck.Models.ExtensionMethods.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ExtensionMethods.html",
+          "relative_path": "api/BlueDeck.Models.ExtensionMethods.html",
           "hash": "qwTCUuAeQu9dmHt+Emf4Ig=="
         }
       },
@@ -221,10 +221,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.IUnitOfWork.yml",
+      "source_relative_path": "api/BlueDeck.Models.IUnitOfWork.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.IUnitOfWork.html",
+          "relative_path": "api/BlueDeck.Models.IUnitOfWork.html",
           "hash": "sJkZNovh3qpV0ZG2YCIc9Q=="
         }
       },
@@ -233,10 +233,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Member.yml",
+      "source_relative_path": "api/BlueDeck.Models.Member.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Member.html",
+          "relative_path": "api/BlueDeck.Models.Member.html",
           "hash": "t6JnHuJjd7T26xvFNoU6WQ=="
         }
       },
@@ -245,10 +245,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Position.yml",
+      "source_relative_path": "api/BlueDeck.Models.Position.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Position.html",
+          "relative_path": "api/BlueDeck.Models.Position.html",
           "hash": "0lOTaut6eaAkzUI4Rb40Zg=="
         }
       },
@@ -257,10 +257,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IComponentRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IComponentRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IComponentRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IComponentRepository.html",
           "hash": "dQ1UA9gkkO+V89oLW0SPlg=="
         }
       },
@@ -269,10 +269,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.html",
           "hash": "rRpzGYNABlL83GqNqq+64Q=="
         }
       },
@@ -281,10 +281,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberGenderRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberGenderRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberGenderRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberGenderRepository.html",
           "hash": "ei6q9OkWiZkzbW1SPXVacw=="
         }
       },
@@ -293,10 +293,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRaceRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberRaceRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRaceRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberRaceRepository.html",
           "hash": "aNktzUTxabYYvqnabiCOKA=="
         }
       },
@@ -305,10 +305,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRankRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberRankRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRankRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberRankRepository.html",
           "hash": "3yrWy+aRMIgaSgB8cHKIUg=="
         }
       },
@@ -317,10 +317,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IMemberRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberRepository.html",
           "hash": "0LmJVtcWoESv2hZg6E4ebg=="
         }
       },
@@ -329,10 +329,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IPositionRepository.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IPositionRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IPositionRepository.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IPositionRepository.html",
           "hash": "e9tzLSDgqU7IcxaYNhGM9g=="
         }
       },
@@ -341,10 +341,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.IRepository-1.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IRepository-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.IRepository-1.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.IRepository-1.html",
           "hash": "KhAlGgxX4asjD7JoEY/w3Q=="
         }
       },
@@ -353,10 +353,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Repositories.yml",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Repositories.html",
+          "relative_path": "api/BlueDeck.Models.Repositories.html",
           "hash": "xXHWiWN+NJDjmBK30dIRTg=="
         }
       },
@@ -365,10 +365,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.BundledGenderRankDemoCollectionObject.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.BundledGenderRankDemoCollectionObject.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.BundledGenderRankDemoCollectionObject.html",
+          "relative_path": "api/BlueDeck.Models.Types.BundledGenderRankDemoCollectionObject.html",
           "hash": "6UY4aN4BryoyYH8NQA7GRg=="
         }
       },
@@ -377,10 +377,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.ChartablePosition.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.ChartablePosition.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.ChartablePosition.html",
+          "relative_path": "api/BlueDeck.Models.Types.ChartablePosition.html",
           "hash": "leMkA7Q7TqPwJWJxixdhrg=="
         }
       },
@@ -389,10 +389,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentIndexViewModelComponentListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.ComponentIndexViewModelComponentListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.ComponentIndexViewModelComponentListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.ComponentIndexViewModelComponentListItem.html",
           "hash": "EmfN1gO3nbSr7qJ1yijTng=="
         }
       },
@@ -401,10 +401,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentPositionLineupItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.ComponentPositionLineupItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.ComponentPositionLineupItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.ComponentPositionLineupItem.html",
           "hash": "n7WXGysmYpL/FCvhfPAFXg=="
         }
       },
@@ -413,10 +413,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.ComponentSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.ComponentSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.ComponentSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.ComponentSelectListItem.html",
           "hash": "MtSM6oySsFuLWwUFojyb6w=="
         }
       },
@@ -425,10 +425,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.DemoTableDataObject.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.DemoTableDataObject.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.DemoTableDataObject.html",
+          "relative_path": "api/BlueDeck.Models.Types.DemoTableDataObject.html",
           "hash": "hWOh8YJEtK34K7v4lGWOEA=="
         }
       },
@@ -437,10 +437,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.GenderRankDemoCollectionObject.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.GenderRankDemoCollectionObject.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.GenderRankDemoCollectionObject.html",
+          "relative_path": "api/BlueDeck.Models.Types.GenderRankDemoCollectionObject.html",
           "hash": "dtQSXHepR7gD5KeZDJxfBg=="
         }
       },
@@ -449,10 +449,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatus.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberDutyStatus.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatus.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberDutyStatus.html",
           "hash": "GNfSBsMYO++yIYvHxsISDA=="
         }
       },
@@ -461,10 +461,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberDutyStatusSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberDutyStatusSelectListItem.html",
           "hash": "ZCFe/Ogqbt6bL2Y2xO0CUA=="
         }
       },
@@ -473,10 +473,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberGender.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberGender.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberGender.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberGender.html",
           "hash": "NZru4Eltil45T8S7RU+Biw=="
         }
       },
@@ -485,10 +485,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberGenderSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberGenderSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberGenderSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberGenderSelectListItem.html",
           "hash": "kaKJbHEjSonIq413l0+vkQ=="
         }
       },
@@ -497,10 +497,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberIndexViewModelMemberListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberIndexViewModelMemberListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberIndexViewModelMemberListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberIndexViewModelMemberListItem.html",
           "hash": "+ZPxL6rI7VgoiaYGm19q1Q=="
         }
       },
@@ -509,10 +509,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRace.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberRace.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberRace.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberRace.html",
           "hash": "aw7Mk6+IZNMUsMI4Oh3NAA=="
         }
       },
@@ -521,10 +521,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRaceSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberRaceSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberRaceSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberRaceSelectListItem.html",
           "hash": "guxc9myn0dfDkDixaBtWqQ=="
         }
       },
@@ -533,10 +533,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRank.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberRank.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberRank.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberRank.html",
           "hash": "ugHBtoAOnZkHRpN3tzmQRQ=="
         }
       },
@@ -545,10 +545,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberRankSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberRankSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberRankSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberRankSelectListItem.html",
           "hash": "ZfA6ZTfhcVfxfgBp2CJR2g=="
         }
       },
@@ -557,10 +557,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.MemberSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.MemberSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.MemberSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.MemberSelectListItem.html",
           "hash": "6YspTctWaBEjUiEzUOU5Ig=="
         }
       },
@@ -569,10 +569,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.PositionIndexViewModelPositionListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.PositionIndexViewModelPositionListItem.html",
           "hash": "/KIXldPBoT0um3Te+cuztw=="
         }
       },
@@ -581,10 +581,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionLineupItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.PositionLineupItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.PositionLineupItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.PositionLineupItem.html",
           "hash": "uKGIA8UA90ny9ZEyUN5/NQ=="
         }
       },
@@ -593,10 +593,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.PositionSelectListItem.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.PositionSelectListItem.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.PositionSelectListItem.html",
+          "relative_path": "api/BlueDeck.Models.Types.PositionSelectListItem.html",
           "hash": "uAs4XKaSIp09bIk5gkKWzQ=="
         }
       },
@@ -605,10 +605,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.RosterManagerViewModelComponent.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.RosterManagerViewModelComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.RosterManagerViewModelComponent.html",
+          "relative_path": "api/BlueDeck.Models.Types.RosterManagerViewModelComponent.html",
           "hash": "3W/gLyfYNTRdfC7dJvFVLQ=="
         }
       },
@@ -617,10 +617,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.Types.yml",
+      "source_relative_path": "api/BlueDeck.Models.Types.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.Types.html",
+          "relative_path": "api/BlueDeck.Models.Types.html",
           "hash": "Gqx0WyHmGFj4tky0LtQULQ=="
         }
       },
@@ -629,10 +629,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html",
           "hash": "a5XSW3aCZh32Zy8VHxklNg=="
         }
       },
@@ -641,10 +641,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.AssignMemberModalViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.html",
           "hash": "i/qH64ptNRg4VOiSfS0YGw=="
         }
       },
@@ -653,10 +653,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.html",
           "hash": "W1jTmfcUbmSRyf72qVfuUQ=="
         }
       },
@@ -665,10 +665,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ComponentIndexListViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.ComponentIndexListViewModel.html",
           "hash": "R2vbfTA4wGDGcWOLTK/9mQ=="
         }
       },
@@ -677,10 +677,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentLineupViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ComponentLineupViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentLineupViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.ComponentLineupViewComponentViewModel.html",
           "hash": "9OLLusY9GmwGYbarXnLtTA=="
         }
       },
@@ -689,10 +689,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel.html",
           "hash": "XhMaGhFuIkWH2wT59wOlag=="
         }
       },
@@ -701,10 +701,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.EditMemberModalViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.EditMemberModalViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.EditMemberModalViewComponentViewModel.html",
           "hash": "FG6m9/Z3aHga2hHwdPdgoA=="
         }
       },
@@ -713,10 +713,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.MemberAddEditViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html",
           "hash": "8450GCgH8Ls0uBlA9EOJPA=="
         }
       },
@@ -725,10 +725,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.MemberIndexListViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.MemberIndexListViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.MemberIndexListViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.MemberIndexListViewModel.html",
           "hash": "kbHm27zvUye3HfYq5dDPjw=="
         }
       },
@@ -737,10 +737,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionIndexListViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.PositionIndexListViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionIndexListViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.PositionIndexListViewModel.html",
           "hash": "K3xFCIcZ+1TI0Gs9Z0x2iA=="
         }
       },
@@ -749,10 +749,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionLineupViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.PositionLineupViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionLineupViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.PositionLineupViewComponentViewModel.html",
           "hash": "a6M7szvX9JmMFgG4oa0ruQ=="
         }
       },
@@ -761,10 +761,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.PositionWithComponentListViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.html",
           "hash": "8YDn5TebCMpchjVCJP105A=="
         }
       },
@@ -773,10 +773,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html",
           "hash": "c/anNQpwv4BC1RbbESQSsg=="
         }
       },
@@ -785,10 +785,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewComponentViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewComponentViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewComponentViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewComponentViewModel.html",
           "hash": "xAi26pu8rTVhOKPfk+MvsA=="
         }
       },
@@ -797,10 +797,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewModel.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.RosterManagerViewModel.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewModel.html",
           "hash": "JKI07keotR4QUPQWtf32jg=="
         }
       },
@@ -809,10 +809,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.ViewModels.yml",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.ViewModels.html",
+          "relative_path": "api/BlueDeck.Models.ViewModels.html",
           "hash": "H3S2b6GGx2aMJH8Fr3iAEg=="
         }
       },
@@ -821,10 +821,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Models.yml",
+      "source_relative_path": "api/BlueDeck.Models.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Models.html",
+          "relative_path": "api/BlueDeck.Models.html",
           "hash": "m4oXGr0OcbLFQJAF8E2wPw=="
         }
       },
@@ -833,10 +833,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.ComponentRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.ComponentRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.ComponentRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.ComponentRepository.html",
           "hash": "HZQiWvrJ1peNGUvF/ULnOw=="
         }
       },
@@ -845,10 +845,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberDutyStatusRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberDutyStatusRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html",
           "hash": "7i2yxWK9g6ZFXMg9+jNgig=="
         }
       },
@@ -857,10 +857,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberGenderRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberGenderRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberGenderRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html",
           "hash": "n5IhAaDN4y8G2yUH5aZqOA=="
         }
       },
@@ -869,10 +869,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRaceRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberRaceRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRaceRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRaceRepository.html",
           "hash": "wxn14Ot+BtJ+u+xlDf8z0g=="
         }
       },
@@ -881,10 +881,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRankRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberRankRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRankRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRankRepository.html",
           "hash": "Wco4PIO0GYNoIj/xufzm0g=="
         }
       },
@@ -893,10 +893,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.MemberRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRepository.html",
           "hash": "Rw8SJ+pWbnodwl2xef1LXw=="
         }
       },
@@ -905,10 +905,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.PositionRepository.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.PositionRepository.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.PositionRepository.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.PositionRepository.html",
           "hash": "F+CeG5wC9YkVCbNAil0MFg=="
         }
       },
@@ -917,10 +917,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.Repository-1.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.Repository-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.Repository-1.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.Repository-1.html",
           "hash": "sQM4/uQxd3/bIGnRz7x95w=="
         }
       },
@@ -929,10 +929,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.Repositories.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.Repositories.html",
+          "relative_path": "api/BlueDeck.Persistence.Repositories.html",
           "hash": "aBDpArT/tDB4UHpidlxhYA=="
         }
       },
@@ -941,10 +941,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.UnitOfWork.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.UnitOfWork.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.UnitOfWork.html",
+          "relative_path": "api/BlueDeck.Persistence.UnitOfWork.html",
           "hash": "qrzLnJN6jg28qArMhwtluw=="
         }
       },
@@ -953,10 +953,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Persistence.yml",
+      "source_relative_path": "api/BlueDeck.Persistence.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Persistence.html",
+          "relative_path": "api/BlueDeck.Persistence.html",
           "hash": "B6zZ2GjaW+4Z7aOlg3bc+w=="
         }
       },
@@ -965,10 +965,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Program.yml",
+      "source_relative_path": "api/BlueDeck.Program.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Program.html",
+          "relative_path": "api/BlueDeck.Program.html",
           "hash": "r3zg7ZcU+ltHyBWdaImdXg=="
         }
       },
@@ -977,10 +977,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.Startup.yml",
+      "source_relative_path": "api/BlueDeck.Startup.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.Startup.html",
+          "relative_path": "api/BlueDeck.Startup.html",
           "hash": "qbd804V5g7sNKrSKm+gmPQ=="
         }
       },
@@ -989,10 +989,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.AddPositionToComponentViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.AddPositionToComponentViewComponent.html",
           "hash": "F21t7e2+4TcCbEkEE/atlg=="
         }
       },
@@ -1001,10 +1001,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.AssignMemberModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.AssignMemberModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.AssignMemberModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.AssignMemberModalViewComponent.html",
           "hash": "tSpIyyT0iLkD473mADH1sA=="
         }
       },
@@ -1013,10 +1013,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.ChangeEmployeeStatusModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.ChangeEmployeeStatusModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.ChangeEmployeeStatusModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.ChangeEmployeeStatusModalViewComponent.html",
           "hash": "f3v1tJXpLfoHkv/nodQu2g=="
         }
       },
@@ -1025,10 +1025,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.ComponentAddEditModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.ComponentAddEditModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.ComponentAddEditModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.ComponentAddEditModalViewComponent.html",
           "hash": "90oWcn7y8U6Kdj27qpXsjg=="
         }
       },
@@ -1037,10 +1037,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.ComponentLineupViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.ComponentLineupViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.ComponentLineupViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.ComponentLineupViewComponent.html",
           "hash": "AZzINvH5xaxa/ArczdcB3Q=="
         }
       },
@@ -1049,10 +1049,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.ConfirmComponentDeleteModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.ConfirmComponentDeleteModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.ConfirmComponentDeleteModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.ConfirmComponentDeleteModalViewComponent.html",
           "hash": "Wj7rZAJENJa+mP5mIJIKag=="
         }
       },
@@ -1061,10 +1061,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.EditMemberModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.EditMemberModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.EditMemberModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.EditMemberModalViewComponent.html",
           "hash": "QqddM5eX76IH9E4B/Nl8qw=="
         }
       },
@@ -1073,10 +1073,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.NavigationMenuViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.NavigationMenuViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.NavigationMenuViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.NavigationMenuViewComponent.html",
           "hash": "BcpTi0cKYiEs5NNPsE741A=="
         }
       },
@@ -1085,10 +1085,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.PositionLineupViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.PositionLineupViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.PositionLineupViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.PositionLineupViewComponent.html",
           "hash": "kfWJqsFo/1piVBj4dAF5cg=="
         }
       },
@@ -1097,10 +1097,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.ReassignEmployeeModalViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.ReassignEmployeeModalViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.ReassignEmployeeModalViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.ReassignEmployeeModalViewComponent.html",
           "hash": "hVSVL0zeK75GoCN2onzp2g=="
         }
       },
@@ -1109,10 +1109,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.RosterManagerViewComponent.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.RosterManagerViewComponent.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.RosterManagerViewComponent.html",
+          "relative_path": "api/BlueDeck.ViewComponents.RosterManagerViewComponent.html",
           "hash": "GXZ0eVBITAGak02yj9Et+A=="
         }
       },
@@ -1121,10 +1121,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.ViewComponents.yml",
+      "source_relative_path": "api/BlueDeck.ViewComponents.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.ViewComponents.html",
+          "relative_path": "api/BlueDeck.ViewComponents.html",
           "hash": "8vEBwqbDQ7xH/ikHFVorrQ=="
         }
       },
@@ -1133,10 +1133,10 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/OrgChartDemo.yml",
+      "source_relative_path": "api/BlueDeck.yml",
       "output": {
         ".html": {
-          "relative_path": "api/OrgChartDemo.html",
+          "relative_path": "api/BlueDeck.html",
           "hash": "qRcigkqPv6FfTNMxWHSBhw=="
         }
       },

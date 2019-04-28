@@ -1,21 +1,21 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System.Collections.Generic;
 
-namespace OrgChartDemo.Models.Repositories
+namespace BlueDeck.Models.Repositories
 {
     /// <summary>
-    /// An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+    /// An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Types.MemberDutyStatus}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Types.MemberDutyStatus}" />
     public interface IMemberDutyStatusRepository : IRepository<DutyStatus>
     {
         /// <summary>
-        /// Gets a list of <see cref="T:OrgChartDemo.Types.MemberDutyStatusSelectListItem"/>s.
+        /// Gets a list of <see cref="T:BlueDeck.Types.MemberDutyStatusSelectListItem"/>s.
         /// </summary>
         /// <remarks>
         /// This method is used to populate Duty Status select lists.
         /// </remarks>
-        /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem}"/></returns>
+        /// <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem}"/></returns>
         List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems();
         
         DutyStatus GetStatusById(int memberDutyStatus);

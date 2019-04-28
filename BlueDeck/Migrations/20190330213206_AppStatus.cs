@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OrgChartDemo.Migrations
+namespace BlueDeck.Migrations
 {
     public partial class AppStatus : Migration
     {

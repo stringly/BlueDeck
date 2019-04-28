@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     public class MemberIndexListViewModel
     {

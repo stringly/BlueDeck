@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     public class MemberDutyStatusRepository : Repository<DutyStatus>, IMemberDutyStatusRepository
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Persistence.MemberDutyStatusRepository"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Persistence.MemberDutyStatusRepository"/> class.
         /// </summary>
-        /// <param name="context">A <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/></param>
+        /// <param name="context">A <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
         public MemberDutyStatusRepository(ApplicationDbContext context) : base(context)
         {
         }
 
         /// <summary>
-        /// Gets a list of <see cref="T:OrgChartDemo.Types.MemberGenderSelectListItem" />s.
+        /// Gets a list of <see cref="T:BlueDeck.Types.MemberGenderSelectListItem" />s.
         /// </summary>
         /// <remarks>
         /// This method is used to populate Gender select lists.
         /// </remarks>
         /// <returns>
-        /// A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}" />
+        /// A <see cref="T:List{BlueDeck.Models.Types.MemberGenderSelectListItem}" />
         /// </returns>
         public List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems()
         {

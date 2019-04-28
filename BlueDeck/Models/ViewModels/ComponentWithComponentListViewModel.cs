@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     /// <summary>
     /// ViewModel used to display a Component and populate a selectlist of Component Names/Ids to facilitate adding a Component or changing the Component to which a Component is assigned. 
@@ -63,14 +63,14 @@ namespace OrgChartDemo.Models.ViewModels
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
         /// <value>
-        /// The <see cref="T:List{T}"/> of <see cref="T:OrgChartDemo.Types.ComponentSelectListItem"/>s.
+        /// The <see cref="T:List{T}"/> of <see cref="T:BlueDeck.Types.ComponentSelectListItem"/>s.
         /// </value>
         public List<ComponentSelectListItem> Components { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.ComponentWithComponentListViewModel"/> class.
         /// <remarks>
-        /// This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel(Component, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
+        /// This parameter-less constructor had to be added in because the <see cref="T:BlueDeck.ViewModels.ComponentWithComponentListViewModel(Component, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
         /// </remarks>
         /// </summary>
         public ComponentWithComponentListViewModel()
@@ -79,10 +79,10 @@ namespace OrgChartDemo.Models.ViewModels
 
         /// TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.ComponentWithComponentListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.ComponentWithComponentListViewModel"/> class.
         /// </summary>
-        /// <param name="c">The <see cref="T:OrgChartDemo.Models.Component"/> being displayed by the view</param>
-        /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:OrgChartDemo.Models.Component"/>s in the repository </param>
+        /// <param name="c">The <see cref="T:BlueDeck.Models.Component"/> being displayed by the view</param>
+        /// <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:BlueDeck.Models.Component"/>s in the repository </param>
         public ComponentWithComponentListViewModel(Component c, List<ComponentSelectListItem> l)
         {
             ComponentId = c?.ComponentId;

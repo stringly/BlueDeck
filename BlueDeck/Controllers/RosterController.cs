@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Html;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     [Authorize("CanEditComponent")]
     public class RosterController : Controller
@@ -17,9 +17,9 @@ namespace OrgChartDemo.Controllers
         private IUnitOfWork unitOfWork;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.RosterController"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RosterController"/> class.
         /// </summary>
-        /// <param name="unit">An <see cref="T:OrgChartDemo.Models.IUnitOfWork"/></param>
+        /// <param name="unit">An <see cref="T:BlueDeck.Models.IUnitOfWork"/></param>
         public RosterController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -159,7 +159,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Reassigns the member via POST from the ReassignMemberModal ViewComponent.
         /// </summary>
-        /// <param name="form">A POSTed <see cref="T:OrgChartDemo.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel"></see></param>
+        /// <param name="form">A POSTed <see cref="T:BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel"></see></param>
         [HttpPost]
         public void ReassignMemberViaModal([Bind("PositionId","MemberId","SelectedComponentId")] ReassignEmployeeModalViewComponentViewModel form)
         {            
@@ -178,7 +178,7 @@ namespace OrgChartDemo.Controllers
         /// Gets the AddPositionToComponentViewComponent.
         /// </summary>
         /// <param name="componentId">The ComponentId of the Component to which a Position is being added</param>
-        /// <returns>A <see cref="T:OrgChartDemo.ViewComponents.AddPositionToComponentViewComponent"/></returns>
+        /// <returns>A <see cref="T:BlueDeck.ViewComponents.AddPositionToComponentViewComponent"/></returns>
         public IActionResult GetAddPositionToComponentViewComponent(int componentId, int? positionId = null)
         { 
             if (positionId != null)
@@ -217,7 +217,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Adds a new Position to a Component via POST from the AddPositionToComponentViewComponent.
         /// </summary>
-        /// <param name="form">The POSTed <see cref="T:OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
+        /// <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)

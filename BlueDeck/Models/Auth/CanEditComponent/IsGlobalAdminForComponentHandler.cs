@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Auth
+namespace BlueDeck.Models.Auth
 {
     public class IsGlobalAdminForComponentHandler : AuthorizationHandler<CanEditComponentRequirement>
     {

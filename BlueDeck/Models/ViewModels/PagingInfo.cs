@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     public class PagingInfo
     {

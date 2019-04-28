@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Persistence.Repositories;
+using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Persistence.Repositories;
 using System.Linq;
 
-namespace OrgChartDemo.Persistence
+namespace BlueDeck.Persistence
 {
     /// <summary>
-    /// An instance of <see cref="T:OrgChartDemo.Models.IUnitOfWork"/>
+    /// An instance of <see cref="T:BlueDeck.Models.IUnitOfWork"/>
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Models.IUnitOfWork" />
+    /// <seealso cref="T:BlueDeck.Models.IUnitOfWork" />
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
         //private readonly Member CurrentUser;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.UnitOfWork"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.UnitOfWork"/> class.
         /// </summary>
-        /// <param name="context">An <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        /// <param name="context">An <see cref="T:BlueDeck.Models.ApplicationDbContext"/>.</param>
         public UnitOfWork(ApplicationDbContext context/*, IHttpContextAccessor httpContext*/)
         {
             _context = context;
@@ -37,66 +37,66 @@ namespace OrgChartDemo.Persistence
         }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Position Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
         public IPositionRepository Positions { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IComponentRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Component Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IComponentRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository" />
         public IComponentRepository Components { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Member Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
         public IMemberRepository Members { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRankRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRankRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRanks Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IPositionRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
         public IMemberRankRepository MemberRanks { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberGender Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberGenderRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository" />
         public IMemberGenderRepository MemberGenders { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRace Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRaceRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository" />
         public IMemberRaceRepository MemberRaces { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository" />
+        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRace Entity.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberDutyStatusRepository" />
+        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
         public IMemberDutyStatusRepository MemberDutyStatus { get; private set; }
 
         public IMemberContactNumberRepository MemberContactNumbers { get; private set; }

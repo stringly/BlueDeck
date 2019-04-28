@@ -1,14 +1,14 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace OrgChartDemo.Models.DocGenerators
+namespace BlueDeck.Models.DocGenerators
 {
     public class AlphaRosterGenerator
     {

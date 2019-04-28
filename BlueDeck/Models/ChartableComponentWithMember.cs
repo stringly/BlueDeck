@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
 
     /// <summary>
-    /// An extension of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
+    /// An extension of <see cref="T:BlueDeck.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
     /// </summary>
     /// <remarks>
-    /// This is not a direct representation of a <see cref="T:OrgChartDemo.Models.Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
+    /// This is not a direct representation of a <see cref="T:BlueDeck.Models.Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
     /// GetOrgChart</a> cannot render a component with multiple positions or multiple members.
-    /// This class is used to map GetOrgChart Components, NOT domain <see cref="T:OrgChartDemo.Models.Component"/>s.
-    /// When rendering <see cref="T:OrgChartDemo.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
+    /// This class is used to map GetOrgChart Components, NOT domain <see cref="T:BlueDeck.Models.Component"/>s.
+    /// When rendering <see cref="T:BlueDeck.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
     /// </remarks>
-    /// <seealso cref="T:OrgChartDemo.Models.ChartableComponent" />
+    /// <seealso cref="T:BlueDeck.Models.ChartableComponent" />
     public class ChartableComponentWithMember {
         /// <summary>
         /// Gets or sets the id.
@@ -25,7 +25,7 @@ namespace OrgChartDemo.Models {
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+        /// Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
         /// </summary>
         /// <value>
         /// The parentid of the component.

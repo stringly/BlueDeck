@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     public class RosterManagerViewModelComponent : Component
     {

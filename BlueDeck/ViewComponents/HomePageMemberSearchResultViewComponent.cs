@@ -1,7 +1,7 @@
-﻿using OrgChartDemo.Models.ViewModels;
+﻿using BlueDeck.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OrgChartDemo.ViewComponents
+namespace BlueDeck.ViewComponents
 {
     public class HomePageMemberSearchResultViewComponent : ViewComponent
     {

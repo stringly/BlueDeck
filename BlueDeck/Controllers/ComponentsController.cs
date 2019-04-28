@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models;
+using BlueDeck.Models.Types;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     /// <summary>
     /// Controller for Component CRUD actions
@@ -21,9 +21,9 @@ namespace OrgChartDemo.Controllers
         public int PageSize = 25;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Controllers.ComponentsController"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsController"/> class.
         /// </summary>
-        /// <param name="unit"><see cref="T:OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
         public ComponentsController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -33,7 +33,7 @@ namespace OrgChartDemo.Controllers
         /// GET: Components
         /// </summary>
         /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ViewModels.ComponentIndexListViewModel"/>
+        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.ComponentIndexListViewModel"/>
         /// </remarks>
         /// <permission>
         /// Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
@@ -144,7 +144,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Components/Create.
         /// </summary>
-        /// <param name="form">A <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
+        /// <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -241,8 +241,8 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Components/Edit/5
         /// </summary>
-        /// <param name="id">The ComponentId for the <see cref="T:OrgChartDemo.Models.Component"/> being edited</param>
-        /// <param name="form">The <see cref="T:OrgChartDemo.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
+        /// <param name="id">The ComponentId for the <see cref="T:BlueDeck.Models.Component"/> being edited</param>
+        /// <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -357,7 +357,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// GET: Components/Delete/5
         /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
         public IActionResult Delete(int? id, string returnUrl)
@@ -395,7 +395,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// POST: Components/Delete/5
         /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/> being deleted</param>
+        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -415,7 +415,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Determines if a Component exists with the provided ComponentId .
         /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:OrgChartDemo.Models.Component"/></param>
+        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         private bool ComponentExists(int id)
         {

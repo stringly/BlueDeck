@@ -10,7 +10,7 @@ using Dgm = DocumentFormat.OpenXml.Drawing.Diagrams;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace OrgChartDemo.Models.DocGenerators
+namespace BlueDeck.Models.DocGenerators
 {
     public class OrgChartGenerator
     {

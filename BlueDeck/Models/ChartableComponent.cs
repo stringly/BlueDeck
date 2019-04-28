@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models
+namespace BlueDeck.Models
 {
 
     /// <summary>
@@ -20,7 +20,7 @@ namespace OrgChartDemo.Models
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the parentid. Combined with <see cref="T:OrgChartDemo.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+        /// Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
         /// </summary>
         /// <value>
         /// The parentid of the component.

@@ -1,27 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     /// <summary>
     /// A repository for the Member entity
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Persistence.Repositories.Repository{OrgChartDemo.Models.Member}" />
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IMemberRepository" />
+    /// <seealso cref="T:BlueDeck.Persistence.Repositories.Repository{BlueDeck.Models.Member}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
     public class MemberRepository : Repository<Member>, IMemberRepository
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.MemberRepository"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.MemberRepository"/> class.
         /// </summary>
-        /// <param name="context">The <see cref="T:OrgChartDemo.Models.ApplicationDbContext"/>.</param>
+        /// <param name="context">The <see cref="T:BlueDeck.Models.ApplicationDbContext"/>.</param>
         public MemberRepository(ApplicationDbContext context)
          : base(context)
         {

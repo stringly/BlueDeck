@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     /// <summary>
     /// ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
@@ -29,7 +29,7 @@ namespace OrgChartDemo.Models.ViewModels
         public string PositionName { get; set; }
 
         /// <summary>
-        /// Gets or sets the Id of the Position's parent <see cref="T:OrgChartDemo.Models.Component"/>
+        /// Gets or sets the Id of the Position's parent <see cref="T:BlueDeck.Models.Component"/>
         /// </summary>
         /// <value>
         /// The parent's ComponentId.
@@ -48,7 +48,7 @@ namespace OrgChartDemo.Models.ViewModels
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="T:OrgChartDemo.Models.Component"/>.
+        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="T:BlueDeck.Models.Component"/>.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is manager; otherwise, <c>false</c>.
@@ -57,7 +57,7 @@ namespace OrgChartDemo.Models.ViewModels
         public bool IsManager { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:OrgChartDemo.Models.Member"/>s.
+        /// Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:BlueDeck.Models.Member"/>s.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is unique; otherwise, <c>false</c>.
@@ -84,7 +84,7 @@ namespace OrgChartDemo.Models.ViewModels
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
         /// <value>
-        /// The <see cref="T:List{T}"/> of <see cref="T:OrgChartDemo.Types.ComponentSelectListItem"/>s.
+        /// The <see cref="T:List{T}"/> of <see cref="T:BlueDeck.Types.ComponentSelectListItem"/>s.
         /// </value>
         public List<ComponentSelectListItem> Components { get; set; }
 
@@ -94,9 +94,9 @@ namespace OrgChartDemo.Models.ViewModels
 
         /// TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel"/> class.
         /// </summary>
-        /// <param name="p">The <see cref="T:OrgChartDemo.Models.Position"/> being displayed by the view</param>
+        /// <param name="p">The <see cref="T:BlueDeck.Models.Position"/> being displayed by the view</param>
         public PositionWithComponentListViewModel(Position p) {
 
             PositionId = p?.PositionId;
@@ -121,9 +121,9 @@ namespace OrgChartDemo.Models.ViewModels
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel"/> class.
         /// <remarks>
-        /// This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel(Position, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
+        /// This parameter-less constructor had to be added in because the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel(Position, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
         /// </remarks>
         /// </summary>
         public PositionWithComponentListViewModel() {

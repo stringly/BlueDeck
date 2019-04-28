@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     /// <summary>
-    /// A Type that includes the DutyStatusId and DutyStatusName for the <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/> Entity.
+    /// A Type that includes the DutyStatusId and DutyStatusName for the <see cref="T:BlueDeck.Models.Types.MemberDutyStatus"/> Entity.
     /// /// <remarks>
     /// This type is used to populate a MemberDutyStatus select list.
     /// </remarks>

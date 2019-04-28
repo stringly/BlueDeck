@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
+using BlueDeck.Models;
 
 
-namespace OrgChartDemo.ViewComponents
+namespace BlueDeck.ViewComponents
 {
     public class ConfirmComponentDeleteModalViewComponent : ViewComponent
     {

@@ -1,34 +1,34 @@
-﻿using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+﻿using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Repositories
+namespace BlueDeck.Models.Repositories
 {
     /// <summary>
-    /// An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+    /// An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Component}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Component}" />
     public interface IComponentRepository : IRepository<Component>
     {
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/>s.
+        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
         /// </summary>
         /// <remarks>
         /// This method is used to seed the GetOrgChart JQuery chart with a list of Components without Member details .
         /// </remarks>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponent"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
         IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers();
 
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/>s.
+        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/>s.
         /// </summary>
         /// <remarks>
         /// This method is used to seed the GetOrgChart JQuery chart with a list of Components with Member details.
         /// </remarks>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:OrgChartDemo.Models.ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
         List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId);
         List<ChartableComponentWithMember> GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId);
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
@@ -36,16 +36,16 @@ namespace OrgChartDemo.Models.Repositories
         List<Component> GetComponentsAndChildrenWithParentSP(int parentComponentId);
 
         /// <summary>
-        /// Gets the list of <see cref="T:OrgChartDemo.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
+        /// Gets the list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/>s to populate a Component select list
         /// </summary>
-        /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.ComponentSelectListItem}"/></returns>
+        /// <returns>A <see cref="T:List{BlueDeck.Models.Types.ComponentSelectListItem}"/></returns>
         List<ComponentSelectListItem> GetComponentSelectListItems();
 
         /// <summary>
         /// Gets the component with all of it's member children.
         /// </summary>
         /// <param name="id">The Component identifier.</param>
-        /// <returns>A <see cref="T:OrgChartDemo.Models.Component"/></returns>
+        /// <returns>A <see cref="T:BlueDeck.Models.Component"/></returns>
         Component GetComponentWithChildren(int id);
         /// <summary>
         /// Gets the component with it's Parent Component loaded
@@ -62,7 +62,7 @@ namespace OrgChartDemo.Models.Repositories
         /// <summary>
         /// Gets the list components with all member children.
         /// </summary>
-        /// <returns>A <see cref="T:System.Collections.IEnumerable{OrgChartDemo.Models.Component}"/></returns>
+        /// <returns>A <see cref="T:System.Collections.IEnumerable{BlueDeck.Models.Component}"/></returns>
         IEnumerable<Component> GetComponentsWithChildren();
 
         List<PositionLineupItem> GetPositionLineupItemsForComponent(int componentId);

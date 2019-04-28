@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace OrgChartDemo.Models.Auth
+namespace BlueDeck.Models.Auth
 {
     public class IsGlobalAdmin : AuthorizationHandler<IsGlobalAdminRequirement>
     {

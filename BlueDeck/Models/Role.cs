@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace OrgChartDemo.Models
+namespace BlueDeck.Models
 {
     public class Role
     {

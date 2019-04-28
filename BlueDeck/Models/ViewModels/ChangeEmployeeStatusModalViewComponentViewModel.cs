@@ -1,8 +1,8 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     public class ChangeEmployeeStatusModalViewComponentViewModel
     {        

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.ViewModels;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     [Authorize("IsGlobalAdmin")]
     public class AdminController : Controller

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using OrgChartDemo.Models;
+using BlueDeck.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.ViewModels;
 
-namespace OrgChartDemo.ViewComponents
+namespace BlueDeck.ViewComponents
 {
     /// <summary>
     /// A ViewComponent that renders the Navigation Sidebar
@@ -14,7 +14,7 @@ namespace OrgChartDemo.ViewComponents
     public class NavigationMenuViewComponent : ViewComponent
     {
         /// <summary>
-        /// Invokes the default <see cref="T:OrgChartDemo.ViewComponents.NavigationMenuViewComponent" />
+        /// Invokes the default <see cref="T:BlueDeck.ViewComponents.NavigationMenuViewComponent" />
         /// </summary>
         /// <returns></returns>              
         public IViewComponentResult Invoke()

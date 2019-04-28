@@ -1,8 +1,8 @@
 ﻿
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     /// <summary>
-    /// A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRace"/> Entity.
+    /// A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:BlueDeck.Models.Types.MemberRace"/> Entity.
     /// /// <remarks>
     /// This type is used to populate a MemberRace select list.
     /// </remarks>

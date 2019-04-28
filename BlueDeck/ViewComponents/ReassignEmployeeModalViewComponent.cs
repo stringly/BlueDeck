@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 
-namespace OrgChartDemo.ViewComponents
+namespace BlueDeck.ViewComponents
 {
     public class ReassignEmployeeModalViewComponent : ViewComponent
     {

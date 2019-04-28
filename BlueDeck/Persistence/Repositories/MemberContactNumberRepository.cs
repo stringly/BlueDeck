@@ -1,8 +1,8 @@
-﻿using OrgChartDemo.Models;
-using OrgChartDemo.Models.Repositories;
-using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     public class MemberContactNumberRepository : Repository<ContactNumber>, IMemberContactNumberRepository
     {

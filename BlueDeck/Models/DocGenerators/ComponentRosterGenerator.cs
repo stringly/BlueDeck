@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Models.DocGenerators
+namespace BlueDeck.Models.DocGenerators
 {
     public class ComponentRosterGenerator
     {

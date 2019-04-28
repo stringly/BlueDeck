@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models.ViewModels;
 
-namespace OrgChartDemo.ViewComponents
+namespace BlueDeck.ViewComponents
 {
     public class MemberContactNumberViewComponent : ViewComponent
     {

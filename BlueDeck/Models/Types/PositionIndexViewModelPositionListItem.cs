@@ -2,7 +2,7 @@
 using System.Linq;
 
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     public class PositionIndexViewModelPositionListItem
     {
@@ -78,12 +78,12 @@ namespace OrgChartDemo.Models.Types
         public bool IsManager { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.PositionIndexViewModelPositionListItem"/> class.
         /// </summary>
         /// <remarks>
-        /// This constructor requires a <see cref="T:OrgChartDemo.Models.Position"/> to be passed as a parameter.
+        /// This constructor requires a <see cref="T:BlueDeck.Models.Position"/> to be passed as a parameter.
         /// </remarks>
-        /// <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> object.</param>
+        /// <param name="p">A <see cref="T:BlueDeck.Models.Position"/> object.</param>
         public PositionIndexViewModelPositionListItem(Position p)
         {
             PositionId = p.PositionId;
@@ -97,7 +97,7 @@ namespace OrgChartDemo.Models.Types
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/>.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.PositionIndexViewModelPositionListItem"/>.
         /// <remarks>
         /// This is a parameterless constructor used to create new objects
         /// </remarks>

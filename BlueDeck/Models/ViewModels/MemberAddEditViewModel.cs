@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System;
 
-namespace OrgChartDemo.Models.ViewModels
+namespace BlueDeck.Models.ViewModels
 {
     /// <summary>
     /// ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
@@ -164,7 +164,7 @@ namespace OrgChartDemo.Models.ViewModels
         public List<ContactNumber> ContactNumbers { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRankSelectListItem"/>s.
+        /// Gets or sets a list of <see cref="T:BlueDeck.Models.Types.MemberRankSelectListItem"/>s.
         /// </summary>
         /// <value>
         /// The rank list.
@@ -172,7 +172,7 @@ namespace OrgChartDemo.Models.ViewModels
         public List<MemberRankSelectListItem> RankList { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.PositionSelectListItem"/>.
+        /// Gets or sets a list of <see cref="T:BlueDeck.Models.Types.PositionSelectListItem"/>.
         /// </summary>
         /// <value>
         /// The positions.
@@ -180,7 +180,7 @@ namespace OrgChartDemo.Models.ViewModels
         public List<PositionSelectListItem> Positions { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem"/>.
+        /// Gets or sets a list of <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/>.
         /// </summary>
         /// <value>
         /// The genders.
@@ -188,7 +188,7 @@ namespace OrgChartDemo.Models.ViewModels
         public List<MemberGenderSelectListItem> GenderList { get; set; }
 
         /// <summary>
-        /// Gets or sets a list of <see cref="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem"/>.
+        /// Gets or sets a list of <see cref="T:BlueDeck.Models.Types.MemberRaceSelectListItem"/>.
         /// </summary>
         /// <value>
         /// The races.

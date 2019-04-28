@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
     /// <summary>
-    /// A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
+    /// A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:BlueDeck.Models.Member"/>
     /// </summary>
     public class Gender
     {

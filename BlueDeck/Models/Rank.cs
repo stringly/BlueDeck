@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models
+namespace BlueDeck.Models
 {
     /// <summary>
-    /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:OrgChartDemo.Models.Member"/>
+    /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:BlueDeck.Models.Member"/>
     /// </summary>
     public class Rank {
 

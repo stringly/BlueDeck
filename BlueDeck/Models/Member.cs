@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using OrgChartDemo.Models.Types;
+using BlueDeck.Models.Types;
 
-namespace OrgChartDemo.Models {
+namespace BlueDeck.Models {
     /// <summary>
     /// Member Entity
     /// </summary>
@@ -75,7 +75,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Member's gender.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberGender"/>
+        /// <seealso cref="T:BlueDeck.Models.Types.MemberGender"/>
         [Display(Name = "Gender")]
         [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
@@ -87,7 +87,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Member's race.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberRace"/>
+        /// <seealso cref="T:BlueDeck.Models.Types.MemberRace"/>
         [Display(Name = "Race")]
         public virtual Race Race { get; set; }
 
@@ -98,7 +98,7 @@ namespace OrgChartDemo.Models {
         /// <value>
         /// The Member's race.
         /// </value>
-        /// <seealso cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/>
+        /// <seealso cref="T:BlueDeck.Models.Types.MemberDutyStatus"/>
         [Display(Name = "Duty Status")]
         [ForeignKey("DutyStatusId")]
         public virtual DutyStatus DutyStatus { get; set; }

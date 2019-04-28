@@ -4,11 +4,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
-using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+using BlueDeck.Models;
+using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     /// <summary>
     /// Controller for Member CRUD actions
@@ -22,7 +22,7 @@ namespace OrgChartDemo.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="MembersController"/> class.
         /// </summary>
-        /// <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="OrgChartDemo.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="BlueDeck.Persistence.UnitOfWork"/>.</param>
         public MembersController(IUnitOfWork unit)
         {
             unitOfWork = unit;

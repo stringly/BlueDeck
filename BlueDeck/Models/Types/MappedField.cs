@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using DocumentFormat.OpenXml.Wordprocessing;
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     /// <summary>
     /// Class used to map Table/Cell index and value

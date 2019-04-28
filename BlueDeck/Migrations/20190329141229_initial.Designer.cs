@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OrgChartDemo.Models;
+using BlueDeck.Models;
 
-namespace OrgChartDemo.Migrations
+namespace BlueDeck.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190329141229_initial")]
@@ -21,7 +21,7 @@ namespace OrgChartDemo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
+            modelBuilder.Entity("BlueDeck.Models.Component", b =>
                 {
                     b.Property<int>("ComponentId")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("Components");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.ContactNumber", b =>
+            modelBuilder.Entity("BlueDeck.Models.ContactNumber", b =>
                 {
                     b.Property<int>("MemberContactNumberId")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("ContactNumbers");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
+            modelBuilder.Entity("BlueDeck.Models.Member", b =>
                 {
                     b.Property<int>("MemberId")
                         .ValueGeneratedOnAdd()
@@ -106,7 +106,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("Members");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
+            modelBuilder.Entity("BlueDeck.Models.Position", b =>
                 {
                     b.Property<int>("PositionId")
                         .ValueGeneratedOnAdd()
@@ -133,7 +133,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("Positions");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Race", b =>
+            modelBuilder.Entity("BlueDeck.Models.Race", b =>
                 {
                     b.Property<int>("MemberRaceId")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("MemberRace");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Rank", b =>
+            modelBuilder.Entity("BlueDeck.Models.Rank", b =>
                 {
                     b.Property<int>("RankId")
                         .ValueGeneratedOnAdd()
@@ -169,7 +169,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("MemberRanks");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Role", b =>
+            modelBuilder.Entity("BlueDeck.Models.Role", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -188,7 +188,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.RoleType", b =>
+            modelBuilder.Entity("BlueDeck.Models.RoleType", b =>
                 {
                     b.Property<int>("RoleTypeId")
                         .ValueGeneratedOnAdd()
@@ -201,7 +201,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("RoleType");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.DutyStatus", b =>
+            modelBuilder.Entity("BlueDeck.Models.Types.DutyStatus", b =>
                 {
                     b.Property<int>("DutyStatusId")
                         .ValueGeneratedOnAdd()
@@ -220,7 +220,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("DutyStatus");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.Gender", b =>
+            modelBuilder.Entity("BlueDeck.Models.Types.Gender", b =>
                 {
                     b.Property<int>("GenderId")
                         .ValueGeneratedOnAdd()
@@ -237,7 +237,7 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("MemberGender");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Types.PhoneNumberType", b =>
+            modelBuilder.Entity("BlueDeck.Models.Types.PhoneNumberType", b =>
                 {
                     b.Property<int>("PhoneNumberTypeId")
                         .ValueGeneratedOnAdd()
@@ -250,68 +250,68 @@ namespace OrgChartDemo.Migrations
                     b.ToTable("PhoneNumberTypes");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Component", b =>
+            modelBuilder.Entity("BlueDeck.Models.Component", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
+                    b.HasOne("BlueDeck.Models.Component", "ParentComponent")
                         .WithMany("ChildComponents")
                         .HasForeignKey("ParentComponentId");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.ContactNumber", b =>
+            modelBuilder.Entity("BlueDeck.Models.ContactNumber", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Member", "Member")
+                    b.HasOne("BlueDeck.Models.Member", "Member")
                         .WithMany("PhoneNumbers")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgChartDemo.Models.Types.PhoneNumberType", "Type")
+                    b.HasOne("BlueDeck.Models.Types.PhoneNumberType", "Type")
                         .WithMany()
                         .HasForeignKey("TypePhoneNumberTypeId");
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Member", b =>
+            modelBuilder.Entity("BlueDeck.Models.Member", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Types.DutyStatus", "DutyStatus")
+                    b.HasOne("BlueDeck.Models.Types.DutyStatus", "DutyStatus")
                         .WithMany()
                         .HasForeignKey("DutyStatusId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgChartDemo.Models.Types.Gender", "Gender")
+                    b.HasOne("BlueDeck.Models.Types.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgChartDemo.Models.Position", "Position")
+                    b.HasOne("BlueDeck.Models.Position", "Position")
                         .WithMany("Members")
                         .HasForeignKey("PositionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgChartDemo.Models.Race", "Race")
+                    b.HasOne("BlueDeck.Models.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("OrgChartDemo.Models.Rank", "Rank")
+                    b.HasOne("BlueDeck.Models.Rank", "Rank")
                         .WithMany()
                         .HasForeignKey("RankId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Position", b =>
+            modelBuilder.Entity("BlueDeck.Models.Position", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Component", "ParentComponent")
+                    b.HasOne("BlueDeck.Models.Component", "ParentComponent")
                         .WithMany("Positions")
                         .HasForeignKey("ParentComponentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("OrgChartDemo.Models.Role", b =>
+            modelBuilder.Entity("BlueDeck.Models.Role", b =>
                 {
-                    b.HasOne("OrgChartDemo.Models.Member")
+                    b.HasOne("BlueDeck.Models.Member")
                         .WithMany("CurrentRoles")
                         .HasForeignKey("MemberId");
 
-                    b.HasOne("OrgChartDemo.Models.RoleType", "RoleType")
+                    b.HasOne("BlueDeck.Models.RoleType", "RoleType")
                         .WithMany()
                         .HasForeignKey("RoleTypeId");
                 });

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace OrgChartDemo.Models.Types
+namespace BlueDeck.Models.Types
 {
     public class ComponentIndexViewModelComponentListItem
     {

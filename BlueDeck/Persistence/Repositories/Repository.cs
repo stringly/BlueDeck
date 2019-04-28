@@ -1,18 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models.Repositories;
+using BlueDeck.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Persistence.Repositories
+namespace BlueDeck.Persistence.Repositories
 {
     /// <summary>
     /// Represents CRUD actions common to DbContext entities
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{TEntity}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IRepository{TEntity}" />
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace OrgChartDemo.Persistence.Repositories
         protected readonly DbContext Context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:OrgChartDemo.Persistence.Repositories.Repository{TEntity}"/> class.
+        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.Repository{TEntity}"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
         public Repository(DbContext context)

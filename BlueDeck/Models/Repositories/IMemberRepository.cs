@@ -1,13 +1,13 @@
-﻿using OrgChartDemo.Models.Types;
-using OrgChartDemo.Models.ViewModels;
+﻿using BlueDeck.Models.Types;
+using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
 
-namespace OrgChartDemo.Models.Repositories
+namespace BlueDeck.Models.Repositories
 {
     /// <summary>
-    /// An implementation of <see cref="T:OrgChartDemo.Models.Repositories.IRepository{T}"/>
+    /// An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
     /// </summary>
-    /// <seealso cref="T:OrgChartDemo.Models.Repositories.IRepository{OrgChartDemo.Models.Member}" />
+    /// <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Member}" />
     public interface IMemberRepository : IRepository<Member>
     {
         IEnumerable<Member> GetMembersWithPositions();

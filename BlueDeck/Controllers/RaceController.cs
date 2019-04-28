@@ -3,9 +3,9 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OrgChartDemo.Models;
+using BlueDeck.Models;
 
-namespace OrgChartDemo.Controllers
+namespace BlueDeck.Controllers
 {
     [Authorize("IsGlobalAdmin")]
     public class RaceController : Controller

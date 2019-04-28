@@ -1,7 +1,7 @@
-﻿using OrgChartDemo.Models.Types;
+﻿using BlueDeck.Models.Types;
 using System.Collections.Generic;
 
-namespace OrgChartDemo.Models.Repositories
+namespace BlueDeck.Models.Repositories
 {
     public interface IAppStatusRepository : IRepository<AppStatus>
     {
