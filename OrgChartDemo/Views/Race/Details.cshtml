@@ -1,0 +1,39 @@
+﻿@model OrgChartDemo.Models.Race
+
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Race: <strong>@Model.MemberRaceFullName</strong></h2>
+        <p class="formHeader-description">
+            Showing Race Details
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        @Html.LabelFor(model => model.MemberRaceId, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.MemberRaceId, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5 form-group">
+                        @Html.LabelFor(model => model.MemberRaceFullName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.MemberRaceFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-2 form-group">
+                        @Html.LabelFor(model => model.Abbreviation, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Abbreviation, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.MemberRaceId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.MemberRaceId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

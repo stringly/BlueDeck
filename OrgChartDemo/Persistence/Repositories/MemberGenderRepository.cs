@@ -33,7 +33,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </returns>
         public List<MemberGenderSelectListItem> GetMemberGenderSelectListItems()
         {
-            return GetAll().ToList().ConvertAll(x => new MemberGenderSelectListItem { MemberGenderId = x.GenderId, MemberGenderFullName = x.GenderFullName , Abbreviation = x.Abbreviation });
+            return GetAll().ToList().ConvertAll(x => new MemberGenderSelectListItem { MemberGenderId = System.Convert.ToInt32(x.GenderId), MemberGenderFullName = x.GenderFullName , Abbreviation = x.Abbreviation });
         }
 
         public Gender GetGenderById(int memberGenderId)
@@ -42,6 +42,12 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.GenderId == memberGenderId)
                 .FirstOrDefault();
         }
+
+        public List<Gender> GetGendersWithMembers()
+        {
+            return ApplicationDbContext.Genders.Include(x => x.Members).ToList();
+        }
+
         /// <summary>
         /// Gets the application database context.
         /// </summary>

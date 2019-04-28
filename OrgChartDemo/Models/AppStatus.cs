@@ -1,12 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrgChartDemo.Models
 {
     public class AppStatus
     {
         [Key]
-        public int AppStatusId {get;set;}
+        [Display(Name = "Status Id")]
+        public int? AppStatusId {get;set;}
+        [Display(Name = "Status Name")]
+        [Required]
         public string StatusName {get;set;}
+
+        public virtual IEnumerable<Member> Members { get; set; }
         
     }
 }

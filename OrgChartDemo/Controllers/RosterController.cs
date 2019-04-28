@@ -276,7 +276,7 @@ namespace OrgChartDemo.Controllers
                 if (errors == 0)
                 {
                     // add the position via unitOfWork
-                    if (form.PositionId == null)
+                    if (form.PositionId == null) // null PositionId means this is a new Position
                     {
                         Position p = new Position(){
                             ParentComponent = form.ParentComponent,
@@ -294,7 +294,7 @@ namespace OrgChartDemo.Controllers
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();
                     }
-                    else
+                    else // editing an existing position
                     {
                         Position p = new Position() {
                             PositionId = Convert.ToInt32(form.PositionId),

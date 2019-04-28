@@ -34,7 +34,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </returns>
         public List<MemberRaceSelectListItem> GetMemberRaceSelectListItems()
         {
-            return GetAll().ToList().ConvertAll(x => new MemberRaceSelectListItem { MemberRaceId = x.MemberRaceId, RaceFullName = x.MemberRaceFullName, Abbreviation = x.Abbreviation });
+            return GetAll().ToList().ConvertAll(x => new MemberRaceSelectListItem { MemberRaceId = System.Convert.ToInt32(x.MemberRaceId), RaceFullName = x.MemberRaceFullName, Abbreviation = x.Abbreviation });
         }
 
         public Race GetRaceById(int memberRaceId)
@@ -43,6 +43,12 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.MemberRaceId == memberRaceId)
                 .FirstOrDefault();
         }
+
+        public List<Race> GetRacesWithMembers()
+        {
+            return ApplicationDbContext.Races.Include(x => x.Members).ToList();
+        }
+
         /// <summary>
         /// Gets the application database context.
         /// </summary>

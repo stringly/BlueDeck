@@ -2,6 +2,7 @@
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -79,6 +80,8 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return ApplicationDbContext.Components
                 .Include(x => x.ParentComponent)
+                .Include(x => x.Creator)
+                .Include(x => x.LastModifiedBy)
                 .FirstOrDefault(x => x.ComponentId == id);                
         }
 
@@ -526,6 +529,8 @@ namespace OrgChartDemo.Persistence.Repositories
                 componentBeingEdited.LineupPosition = c.LineupPosition;
                 componentBeingEdited.Name = c.Name;
                 componentBeingEdited.ParentComponent = c.ParentComponent;
+                componentBeingEdited.LastModifiedById = c.LastModifiedById;
+                componentBeingEdited.LastModified = c.LastModified;
             }
         }
 
@@ -615,6 +620,19 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => searchIds.Contains(x.Position.ParentComponent.ComponentId))
                 .ToList();
                 
+        }
+
+        public AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel()
+        {
+            AdminComponentIndexListViewModel vm = new AdminComponentIndexListViewModel(
+                ApplicationDbContext.Components
+                .Include(x => x.ChildComponents)
+                .Include(x => x.ParentComponent)
+                .Include(x => x.Positions)
+                    .ThenInclude(x => x.Members).ThenInclude(x => x.Rank)                
+                .Include(x => x.Positions)
+                .ToList());
+            return vm;
         }
     }
 

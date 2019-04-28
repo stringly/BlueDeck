@@ -48,6 +48,16 @@ namespace OrgChartDemo.Models.ViewModels
         public string Acronym { get; set; }
 
         public int? LineupPosition { get; set; }
+        [Display(Name = "Created By")]
+        public string Creator { get; set; }
+        [Display(Name = "Date Created")]
+        public System.DateTime? CreatedDate { get; set; }
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+        [Display(Name = "Date Last Modified")]
+        public System.DateTime? LastModified { get; set; }
+        public int? LastModifiedById { get; set; }
+        public int? CreatedById { get; set; }
 
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
@@ -80,7 +90,14 @@ namespace OrgChartDemo.Models.ViewModels
             ParentComponentId = c?.ParentComponent?.ComponentId;
             Acronym = c.Acronym;
             LineupPosition = c.LineupPosition;
-            Components = l; 
+            Components = l;
+            Creator = c?.Creator?.GetTitleName() ?? "";
+            CreatedDate = c?.CreatedDate;
+            CreatedById = c?.CreatorId ?? 0;
+            LastModifiedBy = c?.LastModifiedBy?.GetTitleName() ?? "";
+            LastModified = c?.LastModified;
+            LastModifiedById = c?.LastModifiedById ?? 0;
+
         }
     }
 }

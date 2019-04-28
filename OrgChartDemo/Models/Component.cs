@@ -60,12 +60,16 @@ namespace OrgChartDemo.Models {
         /// </value>
         public int? LineupPosition { get; set; }
         public int? CreatorId { get; set; }
+        [Display(Name = "Created By")]
         [ForeignKey("CreatorId")]
         public virtual Member Creator { get; set; }
+        [Display(Name = "Date Created")]
         public DateTime CreatedDate { get; set; }
+        [Display(Name = "Date Last Modified")]
         public DateTime LastModified { get; set; }
         
         public int? LastModifiedById { get; set; }
+        [Display(Name = "Last Modified By")]
         [ForeignKey("LastModifiedById")]
         public virtual Member LastModifiedBy { get; set; }
 

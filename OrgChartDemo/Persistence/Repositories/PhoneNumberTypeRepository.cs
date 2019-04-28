@@ -1,4 +1,5 @@
-﻿using OrgChartDemo.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
@@ -16,7 +17,10 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             return GetAll().ToList().ConvertAll(x => new PhoneNumberTypeSelectListItem(x));
         }
-
+        public List<PhoneNumberType> GetPhoneNumberTypesWithPhoneNumbers()
+        {
+            return ApplicationDbContext.PhoneNumberTypes.Include(x => x.ContactNumbers).ToList();
+        }
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }
         }

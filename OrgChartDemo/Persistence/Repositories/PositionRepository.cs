@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
 
 namespace OrgChartDemo.Persistence.Repositories
 {
@@ -64,6 +65,8 @@ namespace OrgChartDemo.Persistence.Repositories
             return ApplicationDbContext.Positions
                 .Include(x => x.ParentComponent)
                 .Where(x => x.PositionId == positionId)
+                .Include(x => x.Creator)
+                .Include(x => x.LastModifiedBy)
                 .Include(x => x.Members).ThenInclude(x => x.Rank)
                 .Include(x => x.Members).ThenInclude(x => x.Race)
                 .Include(x => x.Members).ThenInclude(x => x.Gender)
@@ -248,6 +251,17 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
             return ApplicationDbContext.GetPositionsUserCanEdit.FromSql("EXECUTE Get_Positions_User_Can_Edit @ComponentId", param1).ToList();
+        }
+
+        public AdminPositionIndexListViewModel GetAdminPositionIndexListViewModel()
+        {
+            AdminPositionIndexListViewModel vm = new AdminPositionIndexListViewModel();
+            vm.Positions = ApplicationDbContext.Positions
+                .Include(x => x.ParentComponent)
+                .Include(x => x.Members)
+                .ToList()
+                .ConvertAll(x => new AdminPositionIndexViewModelListItem(x));
+            return vm;       
         }
     }
 }

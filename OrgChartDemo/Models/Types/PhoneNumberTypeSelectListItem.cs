@@ -11,7 +11,7 @@ namespace OrgChartDemo.Models.Types
         }
         public PhoneNumberTypeSelectListItem(PhoneNumberType t)
         {
-            PhoneNumberTypeId = t.PhoneNumberTypeId;
+            PhoneNumberTypeId = System.Convert.ToInt32(t.PhoneNumberTypeId);
             PhoneNumberTypeName = t.PhoneNumberTypeName;
         }
     }

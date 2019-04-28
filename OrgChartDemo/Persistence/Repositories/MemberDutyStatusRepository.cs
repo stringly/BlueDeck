@@ -28,7 +28,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </returns>
         public List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems()
         {
-            return GetAll().ToList().ConvertAll(x => new MemberDutyStatusSelectListItem { MemberDutyStatusId = x.DutyStatusId, MemberDutyStatusName = x.DutyStatusName });
+            return GetAll().ToList().ConvertAll(x => new MemberDutyStatusSelectListItem { MemberDutyStatusId = System.Convert.ToInt32(x.DutyStatusId), MemberDutyStatusName = x.DutyStatusName });
         }
 
         public DutyStatus GetStatusById(int memberDutyStatus)
@@ -45,6 +45,11 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </value>
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }
+        }
+
+        public List<DutyStatus> GetDutyStatusesWithMemberCount()
+        {
+            return ApplicationDbContext.DutyStatuses.Include(x => x.Members).ToList();
         }
     }
 }

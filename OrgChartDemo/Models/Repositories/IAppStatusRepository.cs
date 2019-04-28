@@ -6,7 +6,7 @@ namespace OrgChartDemo.Models.Repositories
     public interface IAppStatusRepository : IRepository<AppStatus>
     {
         List<ApplicationStatusSelectListItem> GetApplicationStatusSelectListItems();
-        
+        List<AppStatus> GetAppStatusesWithMemberCount();
     }
 }
 

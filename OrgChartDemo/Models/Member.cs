@@ -123,9 +123,9 @@ namespace OrgChartDemo.Models {
         [ForeignKey("CreatorId")]
         [Display(Name = "Created By")]
         public virtual Member Creator { get; set; }
-        [Display(Name = "Created")]
+        [Display(Name = "Date Created")]
         public DateTime CreatedDate { get; set; }
-        [Display(Name = "Last Modified")]
+        [Display(Name = "Date Last Modified")]
         public DateTime LastModified { get; set; }
         public int? LastModifiedById { get; set; }
         [ForeignKey("LastModifiedById")]

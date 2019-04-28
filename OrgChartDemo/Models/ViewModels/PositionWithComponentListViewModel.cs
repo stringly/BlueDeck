@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using OrgChartDemo.Models.Types;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace OrgChartDemo.Models.ViewModels
 {
@@ -69,7 +70,16 @@ namespace OrgChartDemo.Models.ViewModels
         [Display(Name = "Call Sign")]
         [StringLength(20)]
         public string Callsign { get; set; }
-
+        [Display(Name = "Created By")]
+        public string Creator { get; set; }
+        [Display(Name = "Date Created")]
+        public DateTime? CreatedDate { get; set; }
+        [Display(Name = "Last Modified By")]
+        public string LastModifiedBy { get; set; }
+        [Display(Name = "Date Last Modified")]
+        public DateTime? LastModified { get; set; }
+        public int? LastModifiedById { get; set; }
+        public int? CreatedById { get; set; }
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>
@@ -102,6 +112,12 @@ namespace OrgChartDemo.Models.ViewModels
                 Callsign = p.Callsign;
             }
             Components = new List<ComponentSelectListItem>();
+            Creator = p?.Creator?.GetTitleName() ?? "";
+            CreatedDate = p?.CreatedDate;
+            CreatedById = p?.CreatorId ?? 0;
+            LastModifiedBy = p?.LastModifiedBy?.GetTitleName() ?? "";
+            LastModified = p?.LastModified;
+            LastModifiedById = p?.LastModifiedById ?? 0;
         }
 
         /// <summary>

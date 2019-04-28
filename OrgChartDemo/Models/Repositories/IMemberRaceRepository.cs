@@ -19,5 +19,6 @@ namespace OrgChartDemo.Models.Repositories
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberRaceSelectListItem}"/></returns>
         List<MemberRaceSelectListItem> GetMemberRaceSelectListItems();
         Race GetRaceById(int memberRaceId);
+        List<Race> GetRacesWithMembers();
     }
 }

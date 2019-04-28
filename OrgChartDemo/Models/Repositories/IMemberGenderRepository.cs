@@ -18,7 +18,7 @@ namespace OrgChartDemo.Models.Repositories
         /// </remarks>
         /// <returns>A <see cref="T:List{OrgChartDemo.Models.Types.MemberGenderSelectListItem}"/></returns>
         List<MemberGenderSelectListItem> GetMemberGenderSelectListItems();
-
+        List<Gender> GetGendersWithMembers();
         Gender GetGenderById(int memberGenderId);
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OrgChartDemo.Models.Types
 {
-    public class AdminMemberIndexViewModelMemberListItem
+    public class AdminMemberIndexViewModelListItem
     {
         public int MemberId { get; set; }        
         [Display(Name = "First Name")]        
@@ -21,7 +21,7 @@ namespace OrgChartDemo.Models.Types
         public string PositionName { get; set; }
         [Display(Name = "Account Status")]
         public string AccountState {get;set;}
-        public int AccountStateId {get;set;}
+        public int? AccountStateId {get;set;}
         [Display(Name = "User")]
         public bool IsUser {get;set;}
         [Display(Name = "Component Admin")]
@@ -32,11 +32,11 @@ namespace OrgChartDemo.Models.Types
         public string ParentComponentName { get; set; }
         public int ParentComponentId { get; set; }
 
-        public AdminMemberIndexViewModelMemberListItem()
+        public AdminMemberIndexViewModelListItem()
         {
 
         }
-        public AdminMemberIndexViewModelMemberListItem(Member m)
+        public AdminMemberIndexViewModelListItem(Member m)
         {
             MemberId = m.MemberId;
             FirstName = m.FirstName;
@@ -48,7 +48,7 @@ namespace OrgChartDemo.Models.Types
             ParentComponentName = m.Position?.ParentComponent?.Name ?? "None";
             ParentComponentId = m.Position?.ParentComponent?.ComponentId ?? 0;
             AccountState = m.AppStatus.StatusName;
-            AccountStateId = m.AppStatus.AppStatusId;
+            AccountStateId = m?.AppStatus?.AppStatusId;
             IsUser = m?.CurrentRoles?.Any(x => x.RoleType.RoleTypeId == 3) ?? false;
             IsComponentAdmin = m?.CurrentRoles?.Any(x => x.RoleType.RoleTypeId == 2) ?? false;
             IsGlobalAdmin = m?.CurrentRoles?.Any(x => x.RoleType.RoleTypeId == 1) ?? false;

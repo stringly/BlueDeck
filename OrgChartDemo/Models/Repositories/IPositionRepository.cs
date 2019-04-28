@@ -1,4 +1,5 @@
 ﻿using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
 using System.Collections.Generic;
 
 namespace OrgChartDemo.Models.Repositories
@@ -27,5 +28,6 @@ namespace OrgChartDemo.Models.Repositories
         Position GetPositionWithParentComponent(int positionId);
         void UpdatePositionAndSetLineup(Position p);
         List<PositionSelectListItem> GetPositionsUserCanEdit(int componentId);
+        AdminPositionIndexListViewModel GetAdminPositionIndexListViewModel();
     }
 }

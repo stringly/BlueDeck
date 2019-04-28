@@ -15,7 +15,7 @@ namespace OrgChartDemo.Models
         /// The member race identifier.
         /// </value>
         [Key]
-        public int MemberRaceId { get; set; }
+        public int? MemberRaceId { get; set; }
 
         /// <summary>
         /// Gets or sets the full name of the member race.
@@ -24,6 +24,7 @@ namespace OrgChartDemo.Models
         /// The full name of the member race.
         /// </value>
         [Display(Name = "Race")]
+        [Required]
         public string MemberRaceFullName { get; set; }
 
         /// <summary>
@@ -32,7 +33,10 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The race's abbreviation.
         /// </value>
-        [Display(Name = "R")]
+        [Display(Name = "Abbreviation")]
+        [Required]
         public char Abbreviation { get; set; }
+
+        public virtual IEnumerable<Member> Members { get; set; }
     }
 }

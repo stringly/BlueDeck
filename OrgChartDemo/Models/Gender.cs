@@ -4,8 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrgChartDemo.Models.Types
-{
+namespace OrgChartDemo.Models {
     /// <summary>
     /// A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
     /// </summary>
@@ -18,7 +17,7 @@ namespace OrgChartDemo.Models.Types
         /// The gender Id.
         /// </value>
         [Key]
-        public int GenderId { get; set; }
+        public int? GenderId { get; set; }
 
         /// <summary>
         /// Gets or sets the full name of the gender.
@@ -26,6 +25,8 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         /// The full name of the gender.
         /// </value>
+        [Display(Name = "Full Name")]
+        [Required]
         public string GenderFullName { get; set; }
 
         /// <summary>
@@ -34,7 +35,11 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         /// The gender's single-character abbreviation.
         /// </value>
+        [Display(Name = "Abbreviation")]
+        [Required]
         public char Abbreviation { get; set; }
+
+        public virtual IEnumerable<Member> Members { get; set; }
 
     }
 }

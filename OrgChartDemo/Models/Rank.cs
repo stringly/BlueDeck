@@ -15,7 +15,7 @@ namespace OrgChartDemo.Models
         /// The rank Id.
         /// </value>
         [Key]
-        public int RankId { get; set; }
+        public int? RankId { get; set; }
 
         /// <summary>
         /// Gets or sets the full name of the rank.
@@ -26,6 +26,7 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The full name of the rank.
         /// </value>
+        [Display(Name = "Rank Name")]
         public string RankFullName { get; set; }
 
         /// <summary>
@@ -37,6 +38,7 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The rank abbreviation.
         /// </value>
+        [Display(Name = "Abbreviation")]
         public string RankShort { get; set; }
 
         /// <summary>
@@ -48,9 +50,13 @@ namespace OrgChartDemo.Models
         /// <value>
         /// The pay grade for the rank.
         /// </value>
+        [Display(Name = "Pay Grade")]
+        [Required]
         public string PayGrade { get; set; }
-
+        [Display(Name = "Is Sworn")]
         public bool IsSworn { get; set; }
+
+        public virtual IEnumerable<Member> Members { get; set; }
         
         public string GetRankImageSource()
         {
@@ -59,21 +65,21 @@ namespace OrgChartDemo.Models
                 case 1:
                     return "";                    
                 case 2:
-                    return "images/rankicons/L02.png";
+                    return "/lib/bluedeck/css/images/rankicons/L02.png";
                 case 3:
-                    return "images/rankicons/L03.png";
+                    return "/lib/bluedeck/css/images/rankicons/L03.png";
                 case 4:
-                    return "images/rankicons/L04.png";
+                    return "/lib/bluedeck/css/images/rankicons/L04.png";
                 case 5:
-                    return "images/rankicons/L05.png";
+                    return "/lib/bluedeck/css/images/rankicons/L05.png";
                 case 6:
-                    return "images/rankicons/L06.png";
+                    return "/lib/bluedeck/css/images/rankicons/L06.png";
                 case 7:
-                    return "images/rankicons/L07.png";
+                    return "/lib/bluedeck/css/images/rankicons/L07.png";
                 case 8:
                 case 9:
                 case 10:
-                    return "images/rankicons/L08.png";
+                    return "/lib/bluedeck/css/images/rankicons/L08.png";
                 default:
                     return "";                 
             }

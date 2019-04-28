@@ -202,6 +202,7 @@
                             <div class="row">
                                 <div class="col-sm-12 form-group">
                                     <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                                    <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Undo Changes</a>
                                     <input type="submit" value="Save Changes" class="btn btn-primary" />
                                     @if (IsAdmin)
                                     {

@@ -40,13 +40,17 @@
         width: 225px;
     }
 }
-
+@media (max-width: 992px){
+    #page-content-wrapper {
+        margin-left: 45px;
+    }
+}
 #sidebar-wrapper {
     border-right: 1px solid #e7e7e7;
 }
 
 #sidebar-wrapper {
-    z-index: 1000;
+    /*z-index: 1000;*/
     position: fixed;
     left: 225px;
     width: 0;

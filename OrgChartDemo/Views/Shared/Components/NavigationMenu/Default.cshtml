@@ -24,7 +24,7 @@
                 </div>
             </a>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
+        <div class="collapse navbar-collapse" id="myNavbar" style="text-align:right">
             <ul class="nav navbar-nav">
                 @foreach (string category in Model.NavLinks)
                 {
@@ -32,7 +32,6 @@
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 <li><a asp-action="Index" asp-controller="Home">@DisplayName</a></li>
             </ul>
         </div>

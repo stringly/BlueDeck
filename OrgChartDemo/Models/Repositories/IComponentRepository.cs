@@ -1,4 +1,5 @@
 ﻿using OrgChartDemo.Models.Types;
+using OrgChartDemo.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,5 +95,6 @@ namespace OrgChartDemo.Models.Repositories
         bool ComponentNameNotAvailable(Component c);
         List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
         List<Member> GetMembersRosterForComponentId(int componentId);
+        AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel();
     }
 }

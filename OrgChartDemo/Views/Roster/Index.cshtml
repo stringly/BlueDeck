@@ -15,19 +15,19 @@
             </button>
 
         </div>
-        <div class="navbar-header pull-left">
-            <form asp-page="/Index" method="get" class="navbar-form navbar-search">
-                <div class="form-group">
-                    @Html.DropDownListFor(x => Model.SelectedComponentId, 
-                                            new SelectList(Model.Components, "Id", "ComponentName"),
-                                            "Select Component",
-                                            new { id = "SelectedComponent", @class = "bigControl selectBox form-control" })
-                </div>
-            </form>
-        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li>
+                    <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => Model.SelectedComponentId,
+                                                    new SelectList(Model.Components, "Id", "ComponentName"),
+                                                    "Select Component",
+                                                    new { id = "SelectedComponent", @class = "bigControl selectBox form-control" })
+                        </div>
+                    </form>
+                </li>
                 <li><a style="display:none;" id="ReloadRoster"><span class="glyphicon glyphicon-repeat" style="margin-right:2px;"></span>Reload</a></li>
                 <li><a style="display:none;" id="CollapseRoster"><span class="glyphicon glyphicon-chevron-up" style="margin-right:2px;"></span>Collapse All</a></li>
                 <li><a style="display:none;" id="ExpandRoster"><span class="glyphicon glyphicon-chevron-down" style="margin-right:2px;"></span>Expand All</a></li>

@@ -22,18 +22,18 @@ body {
 li {
     cursor:pointer;
 }
-.pagination {
 
-}
-.aboutPageHeader {
-    margin-top: 50px;
-    background-color: #3e5374 !important;
-    color: #fff;
-    margin-bottom: 5px;
-    padding-bottom: 10px;
-    background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
-    border-top: 2px solid #fff;
-}
+    .pagination>.active>a {
+        z-index: 0;
+    }
+    .aboutPageHeader {
+        background-color: #3e5374 !important;
+        color: #fff;
+        margin-bottom: 5px;
+        padding-bottom: 10px;
+        background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
+        border-top: 2px solid #fff;
+    }
 .aboutPageHeader .icon {
     float: left;
     height: 8vw;
@@ -88,7 +88,6 @@ li {
     border-top: 2px solid white;
     background-color: #3e5374 !important;
     width: 100%;
-    margin-top: 50px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ccc;
     background: linear-gradient(90deg, rgba(18,22,41,1) 3%, rgba(68,95,137,1) 26%, rgba(68,95,137,0.7231267507002801) 100%);
@@ -159,6 +158,79 @@ li {
 }
 
 /* Bootstrap Overrides*/
+
+/* Nav Collapse */
+/* The default BS3 Nav-collapse breakpoint is to narrow to accomodate the number of links in my Navbar 
+   At 974 px the Navbar elements begin to stack. This is to ensure the collapse happens prior to the stacking.
+*/
+@media (max-width: 974px) {
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-left, .navbar-right {
+        float: none !important;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .navbar-nav {
+        float: none !important;
+        margin-top: 7.5px;
+    }
+
+        .navbar-nav > li {
+            float: none;
+        }
+
+            .navbar-nav > li > a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+    .collapse.in {
+        display: block !important;
+    }
+    .navbar-right {
+        margin-right: 0px;
+        margin-top: 0px;
+    }
+    #rosterContainer {
+        margin-top: 120px;
+    }
+
+    #subHeaderSearchContainer {
+        text-align: left;
+    }
+    #subHeaderSearchContainer .navbar-search {
+        padding-left: 0px;
+        margin-top: 0px;
+    }
+
+    .orgChartContainer {
+        margin-top: 120px;
+    }
+}
+
+/* End Nav Collapse*/
+
+
 .headerContainer {
     margin: 0px 0px 15px 0px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.30), 0 5px 10px rgba(0,0,0,0.22);
@@ -175,12 +247,17 @@ li {
 }
 
 /* GetOrgChart Overrides*/
+@media (min-width: 975px){
+    .orgChartContainer {
+        margin-top: 70px;
+    }
+}
 .orgChartContainer {
     width: 95%;
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    margin-top: 70px;
+    
 }
 
 .get-org-chart .get-text-1 {
@@ -323,6 +400,8 @@ li {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 10px;
+    border-top: none;
+    border-bottom: none;
 }
 
 
@@ -611,8 +690,8 @@ hr {
     #rosterContainer{
         margin-top: 70px;
     }
-
 }
+
 .indexTable {    
     background-color: #fff;
     /*box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);*/
@@ -739,6 +818,69 @@ hr {
 
     .glyphicon-red {
         background: red;
+    }
+
+.glyphicon-ring-green {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #28a745;
+    color: #28a745;
+    display: inline-table;
+    text-align: center;
+    border-collapse: initial;
+    padding-right: 1px;
+    padding-bottom: 1px;
+}
+
+    .glyphicon-ring-green:hover {
+        font-weight: bold;
+        border: 2px solid #186b2b;
+        text-decoration: none;
+    }
+
+    .glyphicon-ring-green:focus {
+        color: #186b2b;
+        font-weight: bold;
+        border: 2px solid #186b2b;
+        text-decoration: none;
+    }
+    .glyphicon-ring-green .glyphicon-bordered {
+        font-size: 12px;
+        vertical-align: middle;
+        display: table-cell;
+    }
+.glyphicon-ring-red {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #cb2431;
+    color: #cb2431;
+    display: inline-table;
+    text-align: center;
+    border-collapse: initial;
+    padding-right: 1px;
+    padding-bottom: 1px;
+}
+
+    .glyphicon-ring-red:hover {
+        font-weight: bold;
+        color: #77141c;
+        border: 2px solid #77141c;
+        text-decoration: none;
+    }
+
+    .glyphicon-ring-red:focus {
+        color: #77141c;
+        font-weight: bold;
+        border: 2px solid #186b2b;
+        text-decoration: none;
+    }
+
+    .glyphicon-ring-red .glyphicon-bordered {
+        font-size: 12px;
+        vertical-align: middle;
+        display: table-cell;
     }
 
 #rosterContainer {
@@ -1252,6 +1394,19 @@ hr {
         visibility: visible;
     }
     
+    /* Roster Manager Responsive Classes */
+    @media (max-width: 445px) {
+        .member .raceGenderSpan {
+            display: none;
+        }
+        .member .dutyStatusSpan {
+            display:none;
+        }
+        .callSignSpan {
+            display:none;
+        }
+    }
+
     #lineupSelection {
         border: 1px solid #ccc;
         border-radius: 3px;
@@ -1289,6 +1444,11 @@ hr {
 #addSelectedMemberButton {
     height: 30px;
 }
+#filterMemberListButton {
+    height: 30px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
 #memberLineup {
     border: 1px solid #ccc;
     border-radius: 3px;
@@ -1305,7 +1465,31 @@ hr {
         padding: 2px 4px 2px 4px;
     }
     /* Footer Styling Classes */
-
+.footerListWrapper {
+    text-align: center;
+}
+.footerList li {
+    display: inline;
+}
+.footerList .topLogoLi{
+    display:none;
+}
+@media (max-width: 916px) {
+    /*.footerListWrapper {
+        text-align: left;
+    }*/
+    .footerList li {
+        display: list-item;
+        margin-right: 0px !important;
+    }
+    .footerList .centerLogoLi {
+        display: none;
+    }
+    .footerList .topLogoLi {
+        display: list-item;
+    }
+}
+/* Github Footer Styling Classes */
 .px-3 {
     padding-right: 16px !important;
 }
@@ -1383,5 +1567,9 @@ ol, ul {
     color: #c6cbd1;
 }
 .mr-3 {
+    margin-right: 16px !important;
+}
+.m-3 {
+    margin-left: 16px !important;
     margin-right: 16px !important;
 }

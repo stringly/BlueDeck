@@ -1,5 +1,7 @@
 ﻿@model OrgChartDemo.Models.Component
-
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+}
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     <div class="formHeader">
@@ -29,12 +31,34 @@
                     <div class="col-md-5 form-group">
                         @Html.LabelFor(model => model.ParentComponent.Name, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.ParentComponent.Name, new { @class = "form-control", disabled = "disabled" })
-                    </div>                        
+                    </div>
                 </div>
                 <hr />
+                @if (IsAdmin)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="Creator" class="control-label"></label><br />
+                            @Model.Creator.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="CreatedDate" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                            @Model.LastModifiedBy.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModified" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.LastModified)
+                        </div>
+                    </div>
+                    <hr />
+                }
                 <div class="row">
-                    <div class="col-sm-12 form-group pull-left">
-                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>                        
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                         <a asp-action="Edit" asp-route-id="@Model.ComponentId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
                         <a asp-action="Delete" asp-route-id="@Model.ComponentId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
                     </div>

@@ -8,7 +8,7 @@ namespace OrgChartDemo.Models.ViewModels
 {
     public class AdminMemberIndexListViewModel
     {
-        public IEnumerable<AdminMemberIndexViewModelMemberListItem> Members { get; set; }
+        public IEnumerable<AdminMemberIndexViewModelListItem> Members { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string MemberFirstNameSort { get; set; }
         public string MemberLastNameSort { get; set; }
@@ -22,12 +22,12 @@ namespace OrgChartDemo.Models.ViewModels
                 
         public AdminMemberIndexListViewModel()
         {
-            Members = new List<AdminMemberIndexViewModelMemberListItem>();
+            Members = new List<AdminMemberIndexViewModelListItem>();
         }
 
         public AdminMemberIndexListViewModel(List<Member> members)
         {
-            Members = members.ConvertAll(x => new AdminMemberIndexViewModelMemberListItem(x));
+            Members = members.ConvertAll(x => new AdminMemberIndexViewModelListItem(x));
         }
     }
 }

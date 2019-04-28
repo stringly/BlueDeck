@@ -1,5 +1,7 @@
 ﻿@model PositionWithComponentListViewModel
-
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+}
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     @if (ViewBag.Status == "Warning!")
     {
@@ -73,7 +75,7 @@
                                                             new SelectList(Model.Components, "Id", "ComponentName"),
                                                             "Choose Parent Component",
                                                             new { @class = "form-control" })
-                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>                            
+                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>
                         </div>
                         <div id="lineupSelectionTarget"></div>
                     </div>
@@ -113,15 +115,37 @@
                                             <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberName" />
                                         </li>
                                     }
-                                }                                
+                                }
                             </ul>
                         </div>
                     </div>
                     <hr />
+                    @if (IsAdmin)
+                    {
+                        <div class="row">
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="Creator" class="control-label"></label><br />
+                                @Model.Creator
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="CreatedDate" class="control-label"></label><br />
+                                @Html.DisplayFor(model => model.CreatedDate)
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                                @Model.LastModifiedBy
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="LastModified" class="control-label"></label><br />
+                                @Html.DisplayFor(model => model.LastModified)
+                            </div>
+                        </div>
+                        <hr />
+                    }
                     <div class="row">
                         <div class="col-sm-12 form-group">
                             <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Edit" asp-route-id="@Model.PositionId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                            <a asp-action="Edit" asp-route-id="@Model.PositionId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Undo Changes</a>
                             <input type="submit" value="Save Changes" class="btn btn-primary" />
                             <a asp-action="Delete" asp-route-id="@Model.PositionId" class="btn btn-danger pull-right">Delete</a>
                         </div>
@@ -179,8 +203,8 @@
             var noMembersItem = document.getElementById("noMembersItem");
             if (noMembersItem != null) {
                 memberList.removeChild(noMembersItem);
-            }            
-            var currentMemberCount = $("#memberLineup li").length;      
+            }
+            var currentMemberCount = $("#memberLineup li").length;
             var currentMembers = document.getElementsByClassName("memberLineupItem");
             for (var i = 0; i < currentMembers.length; i++){
                 if (currentMembers[i].dataset.memberid == memberId) {
@@ -213,7 +237,7 @@
             newRemoveButton.appendChild(glyphicon);
             newMemberListItem.appendChild(newRemoveButton);
             // name span
-            var nameSpan = document.createElement("span");            
+            var nameSpan = document.createElement("span");
             nameSpan.appendChild(document.createTextNode(" " + memberName));
             newMemberListItem.appendChild(nameSpan);
             // hidden inputs
@@ -224,7 +248,7 @@
             memberIdInput.name = "CurrentMembers[" + currentMemberCount + "].MemberId";
             memberIdInput.value = memberId;
             newMemberListItem.appendChild(memberIdInput);
-            
+
             var memberNameInput = document.createElement("input");
             memberNameInput.type = "hidden";
             memberNameInput.dataset.val = "true";
@@ -285,7 +309,7 @@
             }
             else {
                 $("#currentMembersSubText").text(" (Multiple members can be assigned.)");
-                
+
             }
         });
 

@@ -54,7 +54,7 @@
                                     <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
                                     <span class="tooltiptext">Edit @p.Name</span>
                                 </div>
-                                <strong class="pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
+                                <strong class="callSignSpan pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                                 <div class="members">
                                     @if (p.Members.Count() > 0)
                                     {
@@ -64,15 +64,15 @@
 
                                                 <span style="float:left;">
                                                     <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
-                                                    <img class="@p.Members[0].Rank.PayGrade" src="~/lib/bluedeck/css/@p.Members[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                    <img class="@p.Members[0].Rank.PayGrade" src="@p.Members[0].Rank.GetRankImageSource()"  style="height:16px; width:16px; margin-right:5px" />
                                                     @p.Members[0].GetTitleName()
                                                 </span>
                                                 <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
                                                     <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@p.Members[0].MemberId"></span>
                                                     <span class="tooltiptext">Show more options</span>
                                                 </div>
-                                                <span style="margin: 0px 5px 0px 5px" class="pull-right">@p.Members[0].DutyStatus.DutyStatusName</span>
-                                                <span style="margin: 0px 20px 0px 5px" class="pull-right">@p.Members[0].Race.Abbreviation/@p.Members[0].Gender.Abbreviation</span>
+                                                <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@p.Members[0].DutyStatus.DutyStatusName</span>
+                                                <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@p.Members[0].Race.Abbreviation/@p.Members[0].Gender.Abbreviation</span>
                                                 <div class="drag-options" id="options_@p.Members[0].MemberId">
                                                     <label class="drag-options-label">
                                                         <span class="drag-options-edit" data-memberId="@p.Members[0].MemberId">Edit Employee Info</span><br />
@@ -102,7 +102,7 @@
                                     <span class="glyphicon glyphicon-pencil" data-positionid="@p.PositionId"></span>
                                     <span class="tooltiptext">Edit @p.Name</span>
                                 </div>
-                                <strong class="pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
+                                <strong class="callSignSpan pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                                 @if (p.Members.Count() > 0)
                                 {
                                     foreach (Member m in p.Members)
@@ -114,15 +114,15 @@
                                                     <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">
                                                         <span style="float:left;">
                                                             <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
-                                                            <img class="@m.Rank.PayGrade" src="~/lib/bluedeck/css/@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                            <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()"  style="height:16px; width:16px; margin-right:5px" />
                                                             @m.GetTitleName()
                                                         </span>
                                                         <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
                                                             <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@m.MemberId"></span>
                                                             <span class="tooltiptext">Show more options</span>
                                                         </div>
-                                                        <span style="margin: 0px 5px 0px 5px" class="pull-right">@m.DutyStatus.DutyStatusName</span>
-                                                        <span style="margin: 0px 20px 0px 5px" class="pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
+                                                        <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
+                                                        <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
                                                         <div class="drag-options" id="options_@m.MemberId">
                                                             <label class="drag-options-label">
                                                                 <span class="drag-options-edit" data-memberId="@m.MemberId">Edit Employee Info</span><br />

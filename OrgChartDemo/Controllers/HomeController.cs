@@ -37,6 +37,16 @@ namespace OrgChartDemo.Controllers
                 else if (claimMemberId != 0)
                 {
                     // Users with BlueDeck accounts Pending activation should be redirected to the "Pending" View
+                    // If the User already has an account (existed at development), then their account status should be set to '1' (New)
+                    // If they are accessing the app for the first time, the status will be set to "Pending" so it shows in the admin panel for activation.
+                    Member currentMember = unitOfWork.Members.Get(claimMemberId);
+                    if(currentMember.AppStatusId == 1)
+                    {
+                        currentMember.AppStatusId = 2;
+                        currentMember.LastModified = DateTime.Now;
+                        currentMember.LastModifiedById = claimMemberId;                        
+                        unitOfWork.Complete();
+                    }
                     return RedirectToAction(nameof(Pending));
                 }
                 
@@ -96,7 +106,7 @@ namespace OrgChartDemo.Controllers
             {
                 Email = $"{logonName}@co.pg.md.us",
                 LDAPName = logonName,
-                AppStatusId = 1 // 1 is new account
+                AppStatusId = 2 // 1 is Pending - Request Activation
             };
             MemberAddEditViewModel vm = new MemberAddEditViewModel(newMember,
                 unitOfWork.Positions.GetAllPositionSelectListItems(),
@@ -128,6 +138,9 @@ namespace OrgChartDemo.Controllers
             }
             else
             {
+                var identity = (ClaimsIdentity)User.Identity;
+                form.LastModified = DateTime.Now;
+                form.LastModifiedById = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
                 // TODO: Member addition checks? Duplicate Name/Badge Numbers?
                 unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();

@@ -19,5 +19,6 @@ namespace OrgChartDemo.Models.Repositories
         List<MemberDutyStatusSelectListItem> GetMemberDutyStatusSelectListItems();
         
         DutyStatus GetStatusById(int memberDutyStatus);
+        List<DutyStatus> GetDutyStatusesWithMemberCount();
     }
 }

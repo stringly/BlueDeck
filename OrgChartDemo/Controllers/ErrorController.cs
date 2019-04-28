@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OrgChartDemo.Controllers
@@ -9,6 +10,8 @@ namespace OrgChartDemo.Controllers
     {
         public IActionResult Error(int? statusCode = null)
         {
+            var feature = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
+            ViewData["ErrorUrl"] = feature?.OriginalPath;
             if (statusCode.HasValue)
             {
                 switch (statusCode.Value)

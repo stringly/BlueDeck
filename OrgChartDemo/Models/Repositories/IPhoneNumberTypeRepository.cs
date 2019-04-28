@@ -6,5 +6,6 @@ namespace OrgChartDemo.Models.Repositories
     public interface IPhoneNumberTypeRepository : IRepository<PhoneNumberType>
     {
         List<PhoneNumberTypeSelectListItem> GetPhoneNumberTypeSelectListItems();
+        List<PhoneNumberType> GetPhoneNumberTypesWithPhoneNumbers();
     }
 }

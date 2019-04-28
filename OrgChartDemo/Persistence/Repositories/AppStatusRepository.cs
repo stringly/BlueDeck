@@ -1,4 +1,5 @@
-﻿using OrgChartDemo.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using OrgChartDemo.Models;
 using OrgChartDemo.Models.Repositories;
 using OrgChartDemo.Models.Types;
 using System.Collections.Generic;
@@ -11,9 +12,23 @@ namespace OrgChartDemo.Persistence.Repositories
         public AppStatusRepository(ApplicationDbContext context) : base(context)
         {
         }
+        /// <summary>
+        /// Gets the application database context.
+        /// </summary>
+        /// <value>
+        /// The application database context.
+        /// </value>
+        public ApplicationDbContext ApplicationDbContext {
+            get { return Context as ApplicationDbContext; }
+        }
         public List<ApplicationStatusSelectListItem> GetApplicationStatusSelectListItems()
         {
             return GetAll().ToList().ConvertAll(x => new ApplicationStatusSelectListItem(x));
+        }
+
+        public List<AppStatus> GetAppStatusesWithMemberCount()
+        {
+            return ApplicationDbContext.ApplicationStatuses.Include(x => x.Members).ToList();
         }
     }
 }

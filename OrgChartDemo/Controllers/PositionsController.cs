@@ -136,7 +136,15 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique,CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
+        public IActionResult Create(
+            [Bind("PositionName," +
+            "LineupPosition," +
+            "ParentComponentId," +
+            "JobTitle," +
+            "Callsign," +
+            "IsManager," +
+            "IsUnique," +
+            "CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -166,7 +174,11 @@ namespace OrgChartDemo.Controllers
                 JobTitle = form.JobTitle,
                 IsManager = form.IsManager,
                 LineupPosition = form.LineupPosition,
-                Callsign = form.Callsign.ToUpper()
+                Callsign = form.Callsign.ToUpper(),
+                CreatedDate = DateTime.Now,
+                LastModified = DateTime.Now,
+                CreatorId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value)
                 };
             if (form.CurrentMembers != null)
             {
@@ -262,7 +274,22 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("PositionId,PositionName,LineupPosition,ParentComponentId,JobTitle,Callsign,IsManager,IsUnique,CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
+        public IActionResult Edit(int id, 
+            [Bind("PositionId," +
+            "PositionName," +
+            "LineupPosition," +
+            "ParentComponentId," +
+            "JobTitle," +
+            "Callsign," +
+            "IsManager," +
+            "IsUnique," +
+            "CurrentMembers" +
+            "Creator," +
+            "CreatedDate," +
+            "CreatedById," + 
+            "LastModifiedBy," +
+            "LastModified," +
+            "LastModifiedById")] PositionWithComponentListViewModel form, string returnUrl)
         {
             int errors = 0;
             Component targetParentComponent = unitOfWork.Components.Find(c => c.ComponentId == form.ParentComponentId).FirstOrDefault();
@@ -314,6 +341,8 @@ namespace OrgChartDemo.Controllers
                 p.Callsign = form?.Callsign?.ToUpper() ?? null;
                 p.IsManager = form.IsManager;
                 p.LineupPosition = form.LineupPosition;
+                p.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                p.LastModified = DateTime.Now;
                 if (form.CurrentMembers != null)
                 {
                     List<Member> formMembers = new List<Member>();

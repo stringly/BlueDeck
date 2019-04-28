@@ -54,6 +54,7 @@
                     <div class="row">
                         <div class="col-sm-4 form-group">
                             <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
                             <input type="submit" value="Create" class="btn btn-primary" />
                         </div>
                     </div>

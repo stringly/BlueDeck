@@ -34,7 +34,7 @@ namespace OrgChartDemo.Persistence.Repositories
         /// </remarks>
         public List<MemberRankSelectListItem> GetMemberRankSelectListItems()
         {   
-            return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem { MemberRankId = x.RankId, RankName = x.RankFullName });
+            return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem { MemberRankId = System.Convert.ToInt32(x.RankId), RankName = x.RankFullName });
         }
 
         public Rank GetRankById(int memberRankId)
@@ -43,6 +43,12 @@ namespace OrgChartDemo.Persistence.Repositories
                 .Where(x => x.RankId == memberRankId)
                 .FirstOrDefault();
         }
+
+        public List<Rank> GetRanksWithMembers()
+        {
+            return ApplicationDbContext.Ranks.Include(x => x.Members).ToList();
+        }
+
         /// <summary>
         /// Gets the application database context.
         /// </summary>

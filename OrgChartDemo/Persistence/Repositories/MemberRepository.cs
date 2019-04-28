@@ -71,7 +71,7 @@ namespace OrgChartDemo.Persistence.Repositories
                                 .ThenInclude(x => x.ParentComponent)
                             .Include(x => x.CurrentRoles)
                             .ToList()
-                            .ConvertAll(x => new AdminMemberIndexViewModelMemberListItem(x));
+                            .ConvertAll(x => new AdminMemberIndexViewModelListItem(x));
             return vm;
         }
 
@@ -348,6 +348,20 @@ namespace OrgChartDemo.Persistence.Repositories
         {
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             return ApplicationDbContext.GetMembersUserCanEdit.FromSql("dbo.Get_Members_User_Can_Edit @ComponentId", param1).ToList();
+        }
+
+        public List<Member> GetGlobalAdmins()
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.CurrentRoles)
+                    .ThenInclude(x => x.RoleType)
+                .Where(x => x.CurrentRoles.Any(r => r.RoleType.RoleTypeName == "GlobalAdmin"))
+                .ToList();
+        }
+
+        public List<Member> GetPendingAccounts()
+        {
+            return ApplicationDbContext.Members.Where(x => x.AppStatusId == 2).ToList();
         }
               
 

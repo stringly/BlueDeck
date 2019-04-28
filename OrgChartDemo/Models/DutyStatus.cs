@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OrgChartDemo.Models.Types
+namespace OrgChartDemo.Models
 {
     /// <summary>
     /// A Class that represents a member's duty status.  Contains properties and methods used in displaying the duty status of a <see cref="T:OrgChartDemo.Models.Member"/>
@@ -15,7 +15,8 @@ namespace OrgChartDemo.Models.Types
         /// The duty status identifier.
         /// </value>
         [Key]
-        public int DutyStatusId { get; set; }
+        [Display(Name = "Status Id")]
+        public int? DutyStatusId { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the duty status.
@@ -23,6 +24,8 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         /// The name of the duty status.
         /// </value>
+        [Display(Name = "Status Name")]
+        [Required]
         public string DutyStatusName { get; set; }
 
         /// <summary>
@@ -31,6 +34,7 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         ///   <c>true</c> if this instance has police power; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Has Police Power")]
         public bool HasPolicePower { get; set; }
 
         /// <summary>
@@ -39,6 +43,10 @@ namespace OrgChartDemo.Models.Types
         /// <value>
         /// The abbreviation.
         /// </value>
+        [Display(Name = "Abbreviation")]
+        [Required]
         public char Abbreviation { get; set; }
+
+        public virtual IEnumerable<Member> Members { get; set; }
     }
 }

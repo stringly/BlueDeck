@@ -15,20 +15,20 @@
             </button>
 
         </div>
-        <div class="navbar-header pull-left">
-            <form asp-page="/Index" method="get" class="navbar-form navbar-search">
-                <div class="form-group">
-                    @Html.DropDownListFor(x => Model.SelectedComponentId,                                         
-                                        new SelectList(Model.ComponentList, "Id", "ComponentName"),
-                                        "Select Component",
-                                        new { id="componentSelectList", @class="bigControl selectBox form-control"}
-                   )                   
-                </div>
-            </form>
-        </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li>
+                    <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => Model.SelectedComponentId,
+                                                new SelectList(Model.ComponentList, "Id", "ComponentName"),
+                                                "Select Component",
+                                                new { id="componentSelectList", @class="bigControl selectBox form-control"}
+                           )
+                        </div>
+                    </form>
+                </li>
                 <li><a asp-page="/Index"><span class="glyphicon glyphicon-refresh" style="margin-right:2px"></span>Reset</a></li>                
             </ul>
         </div><!-- /.navbar-collapse -->

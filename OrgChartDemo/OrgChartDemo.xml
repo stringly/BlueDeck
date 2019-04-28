@@ -581,12 +581,12 @@
             <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
             <returns></returns>
         </member>
-        <member name="T:OrgChartDemo.Models.Types.DutyStatus">
+        <member name="T:OrgChartDemo.Models.DutyStatus">
             <summary>
             A Class that represents a member's duty status.  Contains properties and methods used in displaying the duty status of a <see cref="T:OrgChartDemo.Models.Member"/>
             </summary>
         </member>
-        <member name="P:OrgChartDemo.Models.Types.DutyStatus.DutyStatusId">
+        <member name="P:OrgChartDemo.Models.DutyStatus.DutyStatusId">
             <summary>
             Gets or sets the duty status identifier.
             </summary>
@@ -594,7 +594,7 @@
             The duty status identifier.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.Types.DutyStatus.DutyStatusName">
+        <member name="P:OrgChartDemo.Models.DutyStatus.DutyStatusName">
             <summary>
             Gets or sets the name of the duty status.
             </summary>
@@ -602,7 +602,7 @@
             The name of the duty status.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.Types.DutyStatus.HasPolicePower">
+        <member name="P:OrgChartDemo.Models.DutyStatus.HasPolicePower">
             <summary>
             Gets or sets a value indicating whether this instance has police power.
             </summary>
@@ -610,361 +610,13 @@
               <c>true</c> if this instance has police power; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:OrgChartDemo.Models.Types.DutyStatus.Abbreviation">
+        <member name="P:OrgChartDemo.Models.DutyStatus.Abbreviation">
             <summary>
             Gets or sets the abbreviation.
             </summary>
             <value>
             The abbreviation.
             </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.Gender">
-            <summary>
-            A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.Gender.GenderId">
-            <summary>
-            Gets or sets the gender's Id.
-            </summary>
-            <value>
-            The gender Id.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.Gender.GenderFullName">
-            <summary>
-            Gets or sets the full name of the gender.
-            </summary>
-            <value>
-            The full name of the gender.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.Gender.Abbreviation">
-            <summary>
-            Gets or sets the gender's single-character abbreviation.
-            </summary>
-            <value>
-            The gender's single-character abbreviation.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.ComponentSelectListItem">
-            <summary>
-            A type that represents the Name and Id of any entity. This is used to create select lists in views.
-            <remarks>
-            This was initially created for a <see cref="T:OrgChartDemo.Models.Component"/>, but can be used for any Name/Id combination.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.ComponentSelectListItem.ComponentName">
-            <summary>
-            Gets or sets the display name of the component.
-            </summary>
-            <value>
-            The name of the component.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.ComponentSelectListItem.Id">
-            <summary>
-            Gets or sets the Id of the component.
-            </summary>
-            <value>
-            The identifier.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MappedField">
-            <summary>
-            Class used to map Table/Cell index and value
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MappedField.TableIndex">
-            <summary>
-            Gets or sets the index of the table.
-            </summary>
-            <remarks>
-            This is the index of the table in the Template document
-            </remarks>
-            <value>
-            The index of the table.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MappedField.Table">
-            <summary>
-            Gets or sets the table.
-            </summary>
-            <remarks>
-            This property may replace the TableIndex completely, as the Table's index in the Document is 
-            dependant on the part of the document that it is in, which means tables in the header/footer
-            will be indexed according to the Header/Footer's tables collection, which is independent of the MainDocumentPart's
-            table indexes.
-            </remarks>
-            <value>
-            The table.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MappedField.RowIndex">
-            <summary>
-            Gets or sets the index of the row.
-            </summary>
-            <value>
-            The index of the row.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MappedField.CellIndex">
-            <summary>
-            Gets or sets the index of the cell.
-            </summary>
-            <value>
-            The index of the cell.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MappedField.FieldName">
-            <summary>
-            Gets or sets the name of the field.
-            </summary>
-            <value>
-            The name of the field.
-            </value>
-        </member>
-        <member name="M:OrgChartDemo.Models.Types.MappedField.Write(System.String)">
-            <summary>
-            Writes the data in the mapped field to the document.
-            </summary>
-            <param name="table">
-            The target <see cref="T:DocumentFormat.OpenXml.Wordprocessing.Table"/>. 
-            This parameter is required because the Table index depends on whether the MappedField is in a Header/Footer or in the document's mainpart, which means that the TableIndex is not
-            sufficient to target the proper table. 
-            </param>
-            <param name="newText">The new text.</param>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem">
-            <summary>
-            A Type that includes the DutyStatusId and DutyStatusName for the <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/> Entity.
-            /// <remarks>
-            This type is used to populate a MemberDutyStatus select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.MemberDutyStatusId">
-            <summary>
-            Gets or sets the member duty status identifier.
-            </summary>
-            <value>
-            The member duty status identifier.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.MemberDutyStatusName">
-            <summary>
-            Gets or sets the name of the member duty status.
-            </summary>
-            <value>
-            The name of the member duty status.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem">
-            <summary>
-            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberGender"/> Entity.
-            /// <remarks>
-            This type is used to populate a MemberGender select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderId">
-            <summary>
-            Gets or sets the member gender identifier.
-            </summary>
-            <value>
-            The member gender identifier.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderFullName">
-            <summary>
-            Gets or sets the full name of the member gender.
-            </summary>
-            <value>
-            The full name of the member gender.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.Abbreviation">
-            <summary>
-            Gets or sets the abbreviation.
-            </summary>
-            <value>
-            The abbreviation.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem">
-            <summary>
-            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRace"/> Entity.
-            /// <remarks>
-            This type is used to populate a MemberRace select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.MemberRaceId">
-            <summary>
-            Gets or sets the member race identifier.
-            </summary>
-            <value>
-            The member race identifier.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.RaceFullName">
-            <summary>
-            Gets or sets the name of the race.
-            </summary>
-            <value>
-            The name of the race.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.Abbreviation">
-            <summary>
-            Gets or sets the abbreviation.
-            </summary>
-            <value>
-            The abbreviation.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MemberRankSelectListItem">
-            <summary>
-            A Type that includes the MemberRankId and RankFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRank"/> Entity.
-            <remarks>
-            This type is used to populate a MemberRank select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.MemberRankId">
-            <summary>
-            Gets or sets the member rank identifier.
-            </summary>
-            <value>
-            The member rank identifier.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.RankName">
-            <summary>
-            Gets or sets the name of the rank.
-            </summary>
-            <value>
-            The name of the rank.
-            </value>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.MemberSelectListItem">
-            <summary>
-            A Type that includes the MemberDisplayName and MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> Entity.
-            <remarks>
-            This type is used to populate a Position select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberName">
-            <summary>
-            Gets or sets the Member Name
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberId">
-            <summary>
-            Gets or sets the Member Id
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.PositionId">
-            <summary>
-            Gets or sets the position identifier.
-            </summary>
-            <value>
-            The PositionId PK.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.ParentComponentId">
-            <summary>
-            Gets or sets the id of the parent component.
-            </summary>
-            <value>
-            The Id of the Component to which this Position Instance is assigned
-            </value>        
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.ParentComponentName">
-            <summary>
-            Gets or sets the name of the parent component.
-            </summary>
-            <value>
-            The name of the parent component.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.PositionName">
-            <summary>
-            Gets or sets the Position name.
-            </summary>
-            <value>
-            The name of the Position.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.IsUnique">
-            <summary>
-            Gets or sets a value indicating whether the Position is unique.
-            </summary>
-            <value>
-              <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.JobTitle">
-            <summary>
-            Gets or sets the Job Title.
-            </summary>
-            <value>
-            The Job Title of a Member assigned to this Position
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.MembersCount">
-            <summary>
-            Gets or sets the count of Position Members
-            </summary>
-            <value>
-            A count of Member Entities that are assigned to this Position
-            </value>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.IsManager">
-            <summary>
-            Gets or sets a value indicating whether this Position is the manager.
-            A Component must have exactly one position designated as manager.
-            </summary>
-            <value>
-              <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="M:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.#ctor(OrgChartDemo.Models.Position)">
-            <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/> class.
-            </summary>
-            <remarks>
-            This constructor requires a <see cref="T:OrgChartDemo.Models.Position"/> to be passed as a parameter.
-            </remarks>
-            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> object.</param>
-        </member>
-        <member name="M:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/>.
-            <remarks>
-            This is a parameterless constructor used to create new objects
-            </remarks>
-            </summary>
-        </member>
-        <member name="T:OrgChartDemo.Models.Types.PositionSelectListItem">
-            <summary>
-            A Type that includes the PositionName and PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> Entity.
-            <remarks>
-            This type is used to populate a Position select list.
-            </remarks>
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionName">
-            <summary>
-            Gets or sets the Rank Name
-            </summary>
-        </member>
-        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionId">
-            <summary>
-            Gets or sets the Rank Id
-            </summary>
         </member>
         <member name="T:OrgChartDemo.Models.ExtensionMethods.ExtensionMethods">
             <summary>
@@ -979,6 +631,35 @@
             <param name="e">The <see cref="T:System.Collections.Generic.IEnumerable`1"/> to which you are adding.</param>
             <param name="value">The object of T type to add to the <see cref="T:System.Collections.Generic.IEnumerable`1"/>parameter.</param>
             <returns></returns>
+        </member>
+        <member name="T:OrgChartDemo.Models.Gender">
+            <summary>
+            A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:OrgChartDemo.Models.Member"/>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Gender.GenderId">
+            <summary>
+            Gets or sets the gender's Id.
+            </summary>
+            <value>
+            The gender Id.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Gender.GenderFullName">
+            <summary>
+            Gets or sets the full name of the gender.
+            </summary>
+            <value>
+            The full name of the gender.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Gender.Abbreviation">
+            <summary>
+            Gets or sets the gender's single-character abbreviation.
+            </summary>
+            <value>
+            The gender's single-character abbreviation.
+            </value>
         </member>
         <member name="T:OrgChartDemo.Models.IUnitOfWork">
             <summary>
@@ -1572,6 +1253,325 @@
             </summary>
             <param name="entities">An <see cref="T:IEnumerable{T}"/> of entities to remove.</param>
         </member>
+        <member name="T:OrgChartDemo.Models.Types.ComponentSelectListItem">
+            <summary>
+            A type that represents the Name and Id of any entity. This is used to create select lists in views.
+            <remarks>
+            This was initially created for a <see cref="T:OrgChartDemo.Models.Component"/>, but can be used for any Name/Id combination.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.ComponentSelectListItem.ComponentName">
+            <summary>
+            Gets or sets the display name of the component.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.ComponentSelectListItem.Id">
+            <summary>
+            Gets or sets the Id of the component.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MappedField">
+            <summary>
+            Class used to map Table/Cell index and value
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.TableIndex">
+            <summary>
+            Gets or sets the index of the table.
+            </summary>
+            <remarks>
+            This is the index of the table in the Template document
+            </remarks>
+            <value>
+            The index of the table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.Table">
+            <summary>
+            Gets or sets the table.
+            </summary>
+            <remarks>
+            This property may replace the TableIndex completely, as the Table's index in the Document is 
+            dependant on the part of the document that it is in, which means tables in the header/footer
+            will be indexed according to the Header/Footer's tables collection, which is independent of the MainDocumentPart's
+            table indexes.
+            </remarks>
+            <value>
+            The table.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.RowIndex">
+            <summary>
+            Gets or sets the index of the row.
+            </summary>
+            <value>
+            The index of the row.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.CellIndex">
+            <summary>
+            Gets or sets the index of the cell.
+            </summary>
+            <value>
+            The index of the cell.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MappedField.FieldName">
+            <summary>
+            Gets or sets the name of the field.
+            </summary>
+            <value>
+            The name of the field.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.Types.MappedField.Write(System.String)">
+            <summary>
+            Writes the data in the mapped field to the document.
+            </summary>
+            <param name="table">
+            The target <see cref="T:DocumentFormat.OpenXml.Wordprocessing.Table"/>. 
+            This parameter is required because the Table index depends on whether the MappedField is in a Header/Footer or in the document's mainpart, which means that the TableIndex is not
+            sufficient to target the proper table. 
+            </param>
+            <param name="newText">The new text.</param>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem">
+            <summary>
+            A Type that includes the DutyStatusId and DutyStatusName for the <see cref="T:OrgChartDemo.Models.Types.MemberDutyStatus"/> Entity.
+            /// <remarks>
+            This type is used to populate a MemberDutyStatus select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.MemberDutyStatusId">
+            <summary>
+            Gets or sets the member duty status identifier.
+            </summary>
+            <value>
+            The member duty status identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberDutyStatusSelectListItem.MemberDutyStatusName">
+            <summary>
+            Gets or sets the name of the member duty status.
+            </summary>
+            <value>
+            The name of the member duty status.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberGenderSelectListItem">
+            <summary>
+            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberGender"/> Entity.
+            /// <remarks>
+            This type is used to populate a MemberGender select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderId">
+            <summary>
+            Gets or sets the member gender identifier.
+            </summary>
+            <value>
+            The member gender identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.MemberGenderFullName">
+            <summary>
+            Gets or sets the full name of the member gender.
+            </summary>
+            <value>
+            The full name of the member gender.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberGenderSelectListItem.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberRaceSelectListItem">
+            <summary>
+            A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRace"/> Entity.
+            /// <remarks>
+            This type is used to populate a MemberRace select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.MemberRaceId">
+            <summary>
+            Gets or sets the member race identifier.
+            </summary>
+            <value>
+            The member race identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.RaceFullName">
+            <summary>
+            Gets or sets the name of the race.
+            </summary>
+            <value>
+            The name of the race.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRaceSelectListItem.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberRankSelectListItem">
+            <summary>
+            A Type that includes the MemberRankId and RankFullName for the <see cref="T:OrgChartDemo.Models.Types.MemberRank"/> Entity.
+            <remarks>
+            This type is used to populate a MemberRank select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.MemberRankId">
+            <summary>
+            Gets or sets the member rank identifier.
+            </summary>
+            <value>
+            The member rank identifier.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberRankSelectListItem.RankName">
+            <summary>
+            Gets or sets the name of the rank.
+            </summary>
+            <value>
+            The name of the rank.
+            </value>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.MemberSelectListItem">
+            <summary>
+            A Type that includes the MemberDisplayName and MemberId for the <see cref="T:OrgChartDemo.Models.Member"/> Entity.
+            <remarks>
+            This type is used to populate a Position select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberName">
+            <summary>
+            Gets or sets the Member Name
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.MemberSelectListItem.MemberId">
+            <summary>
+            Gets or sets the Member Id
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.PositionId">
+            <summary>
+            Gets or sets the position identifier.
+            </summary>
+            <value>
+            The PositionId PK.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.ParentComponentId">
+            <summary>
+            Gets or sets the id of the parent component.
+            </summary>
+            <value>
+            The Id of the Component to which this Position Instance is assigned
+            </value>        
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.ParentComponentName">
+            <summary>
+            Gets or sets the name of the parent component.
+            </summary>
+            <value>
+            The name of the parent component.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.PositionName">
+            <summary>
+            Gets or sets the Position name.
+            </summary>
+            <value>
+            The name of the Position.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.IsUnique">
+            <summary>
+            Gets or sets a value indicating whether the Position is unique.
+            </summary>
+            <value>
+              <c>true</c> if this instance is unique and can be assigned only one Member; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.JobTitle">
+            <summary>
+            Gets or sets the Job Title.
+            </summary>
+            <value>
+            The Job Title of a Member assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.MembersCount">
+            <summary>
+            Gets or sets the count of Position Members
+            </summary>
+            <value>
+            A count of Member Entities that are assigned to this Position
+            </value>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.IsManager">
+            <summary>
+            Gets or sets a value indicating whether this Position is the manager.
+            A Component must have exactly one position designated as manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.#ctor(OrgChartDemo.Models.Position)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/> class.
+            </summary>
+            <remarks>
+            This constructor requires a <see cref="T:OrgChartDemo.Models.Position"/> to be passed as a parameter.
+            </remarks>
+            <param name="p">A <see cref="T:OrgChartDemo.Models.Position"/> object.</param>
+        </member>
+        <member name="M:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OrgChartDemo.Models.Types.PositionIndexViewModelPositionListItem"/>.
+            <remarks>
+            This is a parameterless constructor used to create new objects
+            </remarks>
+            </summary>
+        </member>
+        <member name="T:OrgChartDemo.Models.Types.PositionSelectListItem">
+            <summary>
+            A Type that includes the PositionName and PositionId for the <see cref="T:OrgChartDemo.Models.Position"/> Entity.
+            <remarks>
+            This type is used to populate a Position select list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionName">
+            <summary>
+            Gets or sets the Rank Name
+            </summary>
+        </member>
+        <member name="P:OrgChartDemo.Models.Types.PositionSelectListItem.PositionId">
+            <summary>
+            Gets or sets the Rank Id
+            </summary>
+        </member>
         <member name="P:OrgChartDemo.Models.ViewModels.AddPositionToComponentViewComponentViewModel.PositionId">
             <summary>
             Gets or sets the Id of the Position.
@@ -2005,6 +2005,14 @@
             This parameter-less constructor had to be added in because the <see cref="T:OrgChartDemo.ViewModels.PositionWithComponentListViewModel(Position, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
             </remarks>
             </summary>
+        </member>
+        <member name="P:OrgChartDemo.Persistence.Repositories.AppStatusRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
         </member>
         <member name="T:OrgChartDemo.Persistence.Repositories.ComponentRepository">
             <summary>

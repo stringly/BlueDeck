@@ -31,5 +31,7 @@ namespace OrgChartDemo.Models.Repositories
         HomePageViewModel GetHomePageViewModelForMember(int memberId);
         int GetMemberParentComponentId(int memberid);
         List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);
+        List<Member> GetGlobalAdmins();
+        List<Member> GetPendingAccounts();
     }
 }

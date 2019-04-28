@@ -166,7 +166,11 @@ namespace OrgChartDemo.Controllers
                     Name = form.ComponentName,
                     Acronym = form.Acronym,
                     ParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId),
-                    LineupPosition = form.LineupPosition
+                    LineupPosition = form.LineupPosition,
+                    CreatedDate = DateTime.Now,
+                    LastModified = DateTime.Now,
+                    CreatorId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                    LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value)
                 };
                 // check if a Component with the Name provided already exists and reject if so
                 if (unitOfWork.Components.ComponentNameNotAvailable(c) == true)
@@ -242,9 +246,20 @@ namespace OrgChartDemo.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ComponentId,ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form, string returnUrl )
+        public IActionResult Edit(int id, 
+            [Bind("ComponentId," +
+            "ParentComponentId," +
+            "ComponentName," +
+            "LineupPosition," +
+            "Acronym," +
+            "Creator," +
+            "CreatedDate," +
+            "LastModifiedBy," +
+            "LastModified," +
+            "LastModifiedById," + 
+            "CreatedById")] ComponentWithComponentListViewModel form, string returnUrl)
         {
-            Component c = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
+            Component c = unitOfWork.Components.GetComponentWithParentComponent(Convert.ToInt32(id));
             Component targetParentComponent = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == form.ParentComponentId);
             if (id != form.ComponentId)
             {
@@ -306,7 +321,11 @@ namespace OrgChartDemo.Controllers
                         Acronym = form.Acronym,
                         Name = form.ComponentName,
                         LineupPosition = form.LineupPosition,
-                        ParentComponent = targetParentComponent
+                        ParentComponent = targetParentComponent,
+                        CreatorId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                        LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                        CreatedDate = DateTime.Now,
+                        LastModified = DateTime.Now
                     };
                     unitOfWork.Components.UpdateComponentAndSetLineup(componentToEdit);
                     unitOfWork.Complete();
