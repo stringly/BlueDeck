@@ -1,0 +1,208 @@
+﻿@model MemberIndexListViewModel
+@{    
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+    var MemberId = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value);
+    List<MemberSelectListItem> CanEditMembers = new List<MemberSelectListItem>();
+    if (User.HasClaim(x => x.Type == "CanEditUsers"))
+    {
+        CanEditMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString());
+    }
+
+}
+<nav class="pageBar navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <span class="navbar-brand">Member Index</span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <form asp-page="/Index" method="get" class="navbar-form navbar-search">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Members" />
+                                <div class="input-group-btn">
+                                    <button class="btn btn-search-addon" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                @{
+                    if (Model.CurrentFilter != null)
+                    {
+                        <li><a asp-page="/Index"><i class="ion-md-arrow-round-back"></i> Back to full List</a></li>
+                    }
+                }
+                @if (IsAdmin)
+                {
+                    <li><a asp-action="Create" asp-route-returnUrl="/Members/Index"><i class="ion-md-person-add"></i> Create a New Member</a></li>
+                }
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div style="margin-top:70px;">
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    else if (Model.CurrentFilter != null)
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-primary alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Message:</strong>
+                <span>Found @Model.PagingInfo.TotalItems Members that match '@Model.CurrentFilter'</span>
+            </div>
+        </div>
+    }
+    @if (Model.Members.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table indexTable">
+                <thead>
+                    <tr class="tablePageControlHeaderRow">
+                        <th colspan="6">
+                            <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"
+                                 page-class="" page-class-normal=""
+                                 page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
+                                 class="btn-group">
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.MemberLastNameSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Last Name">
+                                Last Name
+                                @if (Model.CurrentSort == "lastName_desc")
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                                }
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.MemberFirstNameSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by First Name">
+                                First Name
+                                @if (Model.CurrentSort == "firstName_desc")
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                                }
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.IdNumberSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by ID#">
+                                ID Number
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.PositionNameSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
+                                Position Name
+                            </a>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Members.First().Email)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Members)
+                    {
+                        <tr>
+                            <td>
+                                @item.LastName
+                            </td>
+                            <td>
+                                @item.FirstName
+                            </td>
+                            <td>
+                                @item.IdNumber
+                            </td>
+                            <td>
+                                @item.PositionName
+                            </td>
+                            <td>
+                                <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
+                                    @item.Email
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index"  title="View Details" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                                </a>
+                                @if (IsAdmin)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Delete Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                                    </a>
+                                }
+                                else if (CanEditMembers.Any(x => x.MemberId == item.MemberId))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                }
+                                else if (item.MemberId == MemberId)
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                        <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                    </a>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div style="max-width: 95%; margin: auto">
+            <a asp-action="Index" class="">Go Back to Full List</a>
+        </div>
+    }
+</div>
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

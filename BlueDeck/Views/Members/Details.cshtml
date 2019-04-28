@@ -1,0 +1,159 @@
+﻿@model BlueDeck.Models.Member
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+    var IsCurrentMember = false;
+    var CanEditMember = false;
+    if (User.HasClaim(x => x.Type == "MemberId"))
+    {
+        IsCurrentMember = Convert.ToInt32(((ClaimsIdentity)User.Identity).FindFirst("MemberId").Value) == Model.MemberId;
+    }
+
+    if (User.HasClaim(x => x.Type == "CanEditUsers"))
+    {
+        CanEditMember = (JsonConvert.DeserializeObject<List<MemberSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditUsers").Value.ToString())).Any(x => x.MemberId == Model.MemberId);
+    }
+}
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">@Model.GetTitleName()</h2>
+        <p class="formHeader-description"> Showing Member details.</p>
+        <div>
+            <a href="@ViewBag.ReturnUrl"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.FirstName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.MiddleName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.LastName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        @Html.LabelFor(model => model.IdNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.IdNumber, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.Rank, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Rank.RankFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.Gender, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Gender.GenderFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.Race.MemberRaceFullName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Race.MemberRaceFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.Position, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Position.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.DutyStatus, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.DutyStatus.DutyStatusName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        @Html.LabelFor(model => model.PhoneNumbers, new { @class = "control-label" })
+                        @if (Model.PhoneNumbers.Count == 0)
+                        {
+                            <br />
+                            <span>No current contact numbers.</span>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.PhoneNumbers)
+                            {
+                                <br />
+                                <span style="font-weight:bold">@item.Type.PhoneNumberTypeName:<span style="font-weight:normal"> @item.PhoneNumber</span></span>
+
+                            }
+                        }
+
+                    </div>
+                </div>
+                <hr />
+                @if (IsAdmin)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            @Html.LabelFor(model => model.LDAPName, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            @Html.LabelFor(model => model.AppStatusId, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.AppStatus.StatusName, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                        <div class="col-sm-5 form-group">
+                            <label class="control-label">Account Roles:</label><br />
+                            @foreach (Role role in Model.CurrentRoles)
+                            {
+                                <span>@role.RoleType.RoleTypeName,</span>
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="Creator" class="control-label"></label><br />
+                            @Model.Creator.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="CreatedDate" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                            @Model.LastModifiedBy.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModified" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.LastModified)
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        @if (IsAdmin)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                        }
+                        else if (CanEditMember)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        }
+                        else if (IsCurrentMember)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<BlueDeck.Models.Gender>
+
+<div style="padding-top:10px; padding-bottom:10px">
+    <a asp-action="Create" asp-controller="Gender" asp-route-returnUrl="/Admin/GenderIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Gender</a>
+</div>
+<div>
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    @if (Model.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Full Name
+                        </th>
+                        <th style="text-align:center">
+                            GenderId
+                        </th>
+                        <th style="text-align:center">
+                            Abbreviation
+                        </th>
+                        <th style="text-align:center">
+                            Members with Gender
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @item.GenderFullName
+                        </td>
+                        <td style="text-align:center">
+                            @item.GenderId
+                        </td>
+                        <td style="text-align:center">
+                            @item.Abbreviation
+                        </td>
+                        <td style="text-align:center">
+                            @item.Members.Count()
+                        </td>
+                        <td style="text-align:center">
+                            <a asp-action="Details" asp-controller="Gender" asp-route-id="@item.GenderId" asp-route-returnUrl="/Admin/GenderIndex" title="View Details" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Edit" asp-controller="Gender" asp-route-id="@item.GenderId" asp-route-returnUrl="/Admin/GenderIndex" title="Edit Gender" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Delete" asp-controller="Gender" asp-route-id="@item.GenderId" asp-route-returnUrl="/Admin/GenderIndex" title="Delete Gender" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+</div>
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

@@ -1,0 +1,60 @@
+﻿@model AssignMemberModalViewComponentViewModel
+
+<div class="modal fade" id="assignMemberModal" tabindex="-1" role="dialog" aria-labelledby="assignMemberModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#assignMemberModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="assignMemberModalLabel">Assign a Member to @Model.Position.Name</h4>
+                </div>
+
+                
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="SearchString" class="control-label"></label>
+                                <div class="input-group">
+                                    <input asp-for="SearchString" class="form-control" />
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button" id="filterMemberListButton">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+
+                                        <button class="btn btn-danger" type="button" id="clearFilterMemberListButton" style="display:none">
+                                            <i class="glyphicon glyphicon-refresh"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <form asp-action="ReassignMember" id="assignMemberModalForm">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(model => model.MemberId)
+                                    @Html.DropDownListFor(model => model.MemberId,
+                                         new SelectList(Model.Members, "MemberId", "MemberName"),
+                                         "Select a Member",
+                                         new { @class = "form-control" })
+                                    <small id="resultMessage"></small>
+                                    <small id="warning" style="color:red"></small>
+                                </div>
+                            </form>
+                        </div>
+                        @Html.HiddenFor(model => model.PositionId)
+                        @Html.HiddenFor(model => model.SelectedComponentId)
+                    </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-target="#assignMemberModal">Cancel</button>
+                    <button type="button" id="assignMemberModalSubmit" class="btn btn-primary">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+﻿@model BlueDeck.Models.Position
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+    var CanEditPosition = false;
+
+    if (User.HasClaim(x => x.Type == "CanEditPositions"))
+    {
+        CanEditPosition = (JsonConvert.DeserializeObject<List<PositionSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditPositions").Value.ToString())).Any(x => x.PositionId == Model.PositionId);
+    }
+}
+    
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="formHeader">
+        <h2 class="formHeader-heading">@Model.Name</h2>
+        <p class="formHeader-description">
+            Showing Position details.
+        </p>
+        <div>
+            <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-5 form-group">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.Callsign, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Callsign, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.JobTitle, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsUnique" disabled /> @Html.DisplayNameFor(model => model.IsUnique)
+                            </label>
+                            <span class="note">
+                                Only a single Member can be assigned.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsManager" disabled /> @Html.DisplayNameFor(model => model.IsManager)
+                            </label>
+                            <span class="note">
+                                This Position will be the Manager for it's Component.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        @Html.LabelFor(model => model.ParentComponent, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.ParentComponent.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                @if (IsAdmin)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="Creator" class="control-label"></label><br />
+                            @Model.Creator.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="CreatedDate" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                            @Model.LastModifiedBy.GetTitleName()
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModified" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.LastModified)
+                        </div>
+                    </div>
+                    <hr />
+                }
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        @if (IsAdmin)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.PositionId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@Model.PositionId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                        }
+                        else if (CanEditPosition)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.PositionId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

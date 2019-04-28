@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BlueDeck.Models.AppStatus>
+
+<div style="padding-top:10px; padding-bottom:10px">
+    <a asp-action="Create" asp-controller="AppStatus" asp-route-returnUrl="/AppStatus/Index"><i class="ion-md-person-add"></i> Create a New Status</a>
+</div>
+<div>
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    @if (Model.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Status
+                        </th>
+                        <th style="text-align:center">
+                            AppStatusId
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.StatusName
+                            </td>
+                            <td style="text-align:center">
+                                @item.AppStatusId
+                            </td>
+                            <td style="text-align:center">
+                                <a asp-action="Details" asp-controller="AppStatus" asp-route-id="@item.AppStatusId" asp-route-returnUrl="/AppStatus/Index" title="View Details" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="AppStatus" asp-route-id="@item.AppStatusId" asp-route-returnUrl="/AppStatus/Index" title="Edit Status" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                </a>
+                                <a asp-action="Delete" asp-controller="AppStatus" asp-route-id="@item.AppStatusId" asp-route-returnUrl="/AppStatus/Index" title="Delete Status" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+</div>
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

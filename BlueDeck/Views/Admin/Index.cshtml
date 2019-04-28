@@ -1,0 +1,118 @@
+﻿@model AdminIndexViewModel
+
+<h3>Admin Index Page</h3>
+<hr />
+
+@if (ViewBag.Status == "Warning!")
+{
+    <div class="alert alert-danger alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>
+        <span>@ViewBag.Message</span>
+    </div>
+}
+else if (ViewBag.Status == "Success!")
+{
+    <div class="indexAlertWrapper">
+        <div class="alert alert-success alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    </div>
+}
+<h4>Global Administrators</h4>
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                BlueDeckId
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        @foreach (Member m in Model.GlobalAdmins)
+        {
+            <tr>
+                <td>
+                    @m.GetTitleName()
+                </td>
+                <td>
+                    @m.MemberId
+                </td>
+                <td>
+                    @m.Email
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<h4>Pending Registration Requests</h4>
+<div class="table-responsive">
+    @if (Model.PendingAccounts.Count() > 0)
+    {
+        <table class="table table-condensed">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    BlueDeckId
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Request Date
+                </th>
+                <th></th>
+            </tr>
+            @foreach (Member m in Model.PendingAccounts)
+            {
+                <tr>
+                    <td>
+                        @m.GetTitleName()
+                    </td>
+                    <td>
+                        @m.MemberId
+                    </td>
+                    <td>
+                        @m.Email
+                    </td>
+                    <td>
+                        @m.LastModified
+                    </td>
+                    <td>
+                        <a asp-action="RegisterUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Activate" class="glyphicon-ring-green">
+                            <span class="glyphicon glyphicon-ok glyphicon-bordered"></span>
+                        </a>
+                        <a asp-action="DenyUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Edit Member" class="glyphicon-ring-red">
+                            <span class="glyphicon glyphicon-remove glyphicon-bordered"></span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div style="text-align:center">
+            <strong>No Pending Requests</strong>
+        </div>
+    }
+</div>
+<hr />
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

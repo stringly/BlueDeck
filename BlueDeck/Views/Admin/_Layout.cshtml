@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link asp-href-include="lib/bootstrap/css/*.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+    <link href="~/lib/bluedeck/css/adminsidebar.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <aside id="sidebar">
+                <ul id="sidemenu" class="sidebar-nav">
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Main Page" ? "active" : "")">
+                        <a href="/Admin/Index">
+                            <span class="sidebar-icon"><i class="fa fa-dashboard"></i></span>
+                            <span class="sidebar-title">Main</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Members Index" ? "active" : "")">
+                        <a href="/Admin/MemberIndex">
+                            <span class="sidebar-icon"><i class="fa fa-users"></i></span>
+                            <span class="sidebar-title">Users</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Positions Index" ? "active" : "")">
+                        <a href="/Admin/PositionIndex">
+                            <span class="sidebar-icon"><i class="fa fa-share-alt"></i></span>
+                            <span class="sidebar-title">Positions</span>
+                        </a>
+                    </li>
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Components Index" ? "active" : "")">
+                        <a href="/Admin/ComponentIndex">
+                            <span class="sidebar-icon"><i class="fa fa-sitemap"></i></span>
+                            <span class="sidebar-title">Components</span>
+                        </a>
+                    </li>
+                    <li>
+                        @if (ViewBag.Enumeration == true)
+                        {
+                            <a class="accordion-toggle toggle-switch" data-toggle="collapse" href="#submenu-2">
+                                <span class="sidebar-icon"><i class="fa fa-database"></i></span>
+                                <span class="sidebar-title">Enumerations</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul id="submenu-2" class="panel-collapse panel-switch collapse in" role="menu">
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Application Status Index" ? "active" : "")">
+                                    <a href="/Admin/AppStatusIndex"><i class="fa fa-caret-right"></i>Account Status</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Duty Status Index" ? "active" : "")">
+                                    <a href="/Admin/DutyStatusIndex"><i class="fa fa-caret-right"></i>Duty Status</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Gender Index" ? "active" : "")">
+                                    <a href="/Admin/GenderIndex"><i class="fa fa-caret-right"></i>Genders</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Race Index" ? "active" : "")">
+                                    <a href="/Admin/RaceIndex"><i class="fa fa-caret-right"></i>Races</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Rank Index" ? "active" : "")">
+                                    <a href="/Admin/RankIndex"><i class="fa fa-caret-right"></i>Ranks</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Phone Types Index" ? "active" : "")">
+                                    <a href="/Admin/PhoneTypeIndex"><i class="fa fa-caret-right"></i>Phone Types</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <a class="accordion-toggle collapsed toggle-switch" data-toggle="collapse" href="#submenu-2">
+                                <span class="sidebar-icon"><i class="fa fa-database"></i></span>
+                                <span class="sidebar-title">Enumerations</span>
+                                <b class="caret"></b>
+                            </a>                        
+                            <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Application Status Index" ? "active" : "")">
+                                    <a href="/Admin/AppStatusIndex"><i class="fa fa-caret-right"></i>Account Status</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Duty Status Index" ? "active" : "")">
+                                    <a href="/Admin/DutyStatusIndex"><i class="fa fa-caret-right"></i>Duty Status</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Gender Index" ? "active" : "")">
+                                    <a href="/Admin/GenderIndex"><i class="fa fa-caret-right"></i>Genders</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Race Index" ? "active" : "")">
+                                    <a href="/Admin/RaceIndex"><i class="fa fa-caret-right"></i>Races</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Rank Index" ? "active" : "")">
+                                    <a href="/Admin/RankIndex"><i class="fa fa-caret-right"></i>Ranks</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Phone Types Index" ? "active" : "")">
+                                    <a href="/Admin/PhoneTypeIndex"><i class="fa fa-caret-right"></i>Phone Types</a>
+                                </li>
+                            </ul>
+                        }
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        @await Component.InvokeAsync("NavigationMenu")
+        <div id="page-content-wrapper">
+            <div style="min-height:600px">
+                @RenderBody()
+            </div>            
+            @await Component.InvokeAsync("FooterMenu")
+        </div>
+        
+    </div>
+</body>
+</html>

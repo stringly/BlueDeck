@@ -1,0 +1,314 @@
+﻿@model MemberAddEditViewModel
+@{
+    var IsAdmin = User.IsInRole("GlobalAdmin");
+}
+<div class='col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer'>
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Create a Member</h2>
+        <p class="formHeader-description">
+            A member represents an employee of the organization.
+        </p>
+        <div>
+            <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <form asp-action="Create" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="MiddleName" class="control-label"></label>
+                            <input asp-for="MiddleName" class="form-control" />
+                            <span asp-validation-for="MiddleName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <label asp-for="IdNumber" class="control-label"></label>
+                            <input asp-for="IdNumber" class="form-control" />
+                            <span asp-validation-for="IdNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="MemberRank" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberRank,
+                                                new SelectList(Model.RankList, "MemberRankId", "RankName"),
+                                                "Choose Rank",
+                                                new { @class = "form-control" })
+                            <span asp-validation-for="MemberRank" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="MemberGender" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberGender,
+                                                            new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
+                                                            "Choose Gender",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="MemberGender" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="MemberRace" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.MemberRace,
+                                                            new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
+                                                            "Choose Race",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="MemberRace" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="PositionId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.PositionId,
+                                                            new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                            "Assign to Position",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="PositionId" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="DutyStatusId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.DutyStatusId,
+                                                            new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
+                                                            "Choose Duty Status",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="DutyStatusId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-8 form-group">
+                            <label asp-for="ContactNumbers" class="control-label"></label>
+
+                            @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+                            {
+                                @if (Model.ContactNumbers[i].PhoneNumber != null)
+                                {
+                                    <div class="input-group mygroup" id="contactGroup-@i">
+                                        @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                                "Number Type",
+                                                new { @class = "phoneNumberTypeList form-control" })
+
+                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                        <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                            <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
+                                        </span>
+                                    </div>
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+                                }
+                            }
+                            <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
+                                @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                        new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                        new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
+                                <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                                <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                                <span class="input-group-btn deleteNumber" style="visibility:hidden;">
+                                    <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                                </span>
+                            </div>
+                            <div id="newPhoneTarget">
+
+                            </div>
+                            <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
+                        </div>
+                    </div>
+                    <hr />
+                    @if (IsAdmin)
+                    {
+                        <div class="row">
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="LDAPName" class="control-label"></label>
+                                <input asp-for="LDAPName" class="form-control" />
+                                <span asp-validation-for="LDAPName" class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-3 form-group">
+                                <label asp-for="AppStatusId" class="control-label"></label>
+                                @Html.DropDownListFor(model => model.AppStatusId,
+                                                        new SelectList(Model.AppStatuses, "Id", "Name"),
+                                                        "Choose Application Status",
+                                                        new { @class = "form-control" })
+                                <span asp-validation-for="AppStatusId" class="text-danger"></span>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <div class="form-checkbox">
+                                    <label>
+                                        <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <div class="form-checkbox">
+                                    <label>
+                                        <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 form-group">
+                                <div class="form-checkbox">
+                                    <label>
+                                        <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                            <input type="submit" value="Create Member" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('defaultNewPhone').addEventListener("change", handleAddPhoneNumberClick, false);
+        document.querySelectorAll(".deleteNumber").forEach(function (elem) {
+            elem.addEventListener("click", handleDeletePhoneNumberClick, false);
+        });
+        //this will add * next to required label
+        $('input[type=text],input[type=radio],input[type=checkbox],textarea,select,input[type=email],input[type=number]').each(function () {
+            var req = $(this).attr('data-val-required');
+            var exclude = $(this).attr('data-exclude');
+            if (undefined != req && undefined == exclude) {
+                var label = $('label[for="' + $(this).attr('id') + '"]');
+                var text = label.text();
+                if (text.length > 0) {
+                    label.append('<span style="color:red"> *</span>');
+                }
+            }
+        });
+    })
+
+    function handleAddPhoneNumberClick(e) {
+        var currentContactCount = parseInt($("#contactsCount").val()) + 1;
+        var target = document.getElementById('newPhoneTarget');
+
+        //var newFormGroup = document.createElement('div');
+        //newFormGroup.classList.add("input-group");
+
+        // create the container group
+        var newInputGroup = document.createElement('div');
+        newInputGroup.classList.add("input-group");
+        newInputGroup.classList.add("mygroup");
+
+        // create the form controls
+
+        // clone the phonenumbertypes option group from another phonenumbertypeselectlist
+        var options = document.getElementsByClassName("phoneNumberTypeList")[0].innerHTML;
+        // create a new select element
+        var newSelect = document.createElement("select");
+        newSelect.classList.add("form-control");
+        newSelect.classList.add("phoneNumberTypeList");
+        newSelect.innerHTML = options;
+        newSelect.name = "ContactNumbers[" + currentContactCount + "].Type.PhoneNumberTypeId";
+        // create the new text input
+        var newInput = document.createElement("input");
+        newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
+        newInput.classList.add("form-control");
+
+        // create the span delete button wrapper span
+        // this will be added to the previous text input
+        var newDelete = document.createElement("span");
+        newDelete.classList.add("input-group-btn");
+        newDelete.classList.add("deleteNumber");
+        newDelete.dataset.contactid = currentContactCount - 1;
+        // create the actual delete button
+        var newDeleteButton = document.createElement("button");
+        newDeleteButton.classList.add("btn");
+        newDeleteButton.classList.add("btn-addon");
+        newDeleteButton.dataset.contactid = currentContactCount - 1;
+        // register the button onclick event
+        newDeleteButton.addEventListener("click", handleDeletePhoneNumberClick, false);
+
+        // create the glyphicon to add to the button
+        var newDeleteIcon = document.createElement("i");
+        newDeleteIcon.classList.add("glyphicon");
+        newDeleteIcon.classList.add("glyphicon-trash");
+        newDeleteIcon.dataset.contactid = currentContactCount - 1;
+        //newDeleteIcon.dataset.contactid = currentContactCount - 1;
+        //newDelete.addEventListener("click", handleDeletePhoneNumberClick, false);
+        newDeleteButton.appendChild(newDeleteIcon);
+        newDelete.appendChild(newDeleteButton);
+        e.target.parentNode.removeChild(e.target.parentNode.getElementsByClassName("deleteNumber")[0]);
+        e.target.parentNode.appendChild(newDelete);
+
+        // the fake button is simply to preserve the spacing
+        var fakeDeleteSpan = document.createElement("span");
+        fakeDeleteSpan.classList.add("input-group-btn");
+        fakeDeleteSpan.classList.add("deleteNumber");
+        fakeDeleteSpan.style.visibility = "hidden";
+
+        var fakeDeleteButton = document.createElement("span");
+        fakeDeleteButton.classList.add("btn");
+        fakeDeleteButton.classList.add("btn-addon");
+
+        var fakeDeleteIcon = document.createElement("i");
+        fakeDeleteIcon.classList.add("glyphicon");
+        fakeDeleteIcon.classList.add("glyphicon-trash");
+        fakeDeleteButton.appendChild(fakeDeleteIcon);
+        fakeDeleteSpan.appendChild(fakeDeleteButton);
+
+
+        newInputGroup.appendChild(newSelect);
+        newInputGroup.appendChild(newInput);
+        newInputGroup.appendChild(fakeDeleteSpan);
+        newInputGroup.id = "contactGroup-" + currentContactCount;
+        newInput.addEventListener("change", handleAddPhoneNumberClick, false);
+        target.parentNode.insertBefore(newInputGroup, target);
+        $("#contactsCount").val(currentContactCount);
+        e.target.removeEventListener('change', handleAddPhoneNumberClick);
+
+    }
+    function handleDeletePhoneNumberClick(e) {
+        //alert("Delete" + e.target.dataset.contactid);
+        console.log("Delete Clicked");
+        var contactId = e.target.dataset.contactid;
+        var contactGroup = $("#contactGroup-" + contactId);
+        var deleteFlagName = "ContactNumbers[" + contactId + "].ToDelete";
+        var deleteFlag = $('[name="' + deleteFlagName + '"]');
+        if (deleteFlag.val() == "False") {
+            deleteFlag.val("True");
+            contactGroup.hide();
+        }
+        else {
+            contactGroup.remove();
+            var currentCount = $("#contactsCount").val() - 1;
+            $("#contactsCount").val(currentCount);
+
+        }
+
+    }
+</script>

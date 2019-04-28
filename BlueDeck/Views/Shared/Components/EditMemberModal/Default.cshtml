@@ -1,0 +1,136 @@
+﻿@model MemberAddEditViewModel
+
+<div class="modal fade" id="editMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" data-target="#editMemberModal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+
+                    </button>
+                    <h4 class="modal-title" id="editMemberModalLabel">Edit Member Info</h4>
+
+                </div>
+                <div class="modal-body row">
+                    <h6 class="text-danger" id="warning">@ViewBag.Message</h6>
+                    <form asp-action="EditMemberModal" id="editMemberModalForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        @Html.HiddenFor(model => model.MemberId)
+                        @Html.HiddenFor(model => model.AppStatusId)
+                        @Html.HiddenFor(model => model.IsUser)
+                        @Html.HiddenFor(model => model.IsComponentAdmin)
+                        @Html.HiddenFor(model => model.IsGlobalAdmin)
+                        @Html.HiddenFor(model => model.LDAPName)
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="FirstName" class="control-label"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="MiddleName" class="control-label"></label>
+                                    <input asp-for="MiddleName" class="form-control" />
+                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="LastName" class="control-label"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-2 form-group">
+                                    <label asp-for="IdNumber" class="control-label"></label>
+                                    <input asp-for="IdNumber" class="form-control" />
+                                    <span asp-validation-for="IdNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label asp-for="MemberRank" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.MemberRank,
+                                                                    new SelectList(Model.RankList, "MemberRankId", "RankName"),
+                                                                    "Choose Rank",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="MemberRank" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="MemberGender" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.MemberGender,
+                                                                    new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
+                                                                    "Choose Gender",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="MemberGender" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="MemberRace" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.MemberRace,
+                                                                    new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
+                                                                    "Choose Race",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="MemberRace" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
+                                    <label asp-for="DutyStatusId" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.DutyStatusId,
+                                                                    new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
+                                                                    "Choose Duty Status",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="DutyStatusId" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-4 form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-sm-12 form-group">
+                                <label asp-for="ContactNumbers" class="control-label"></label>
+                                @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+                                {
+
+                                    <div class="input-group mygroup" id="contactGroup-@i">
+                                        @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                                "Number Type",
+                                                new { @class = "phoneNumberTypeList form-control" })
+
+                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                        <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                            <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
+                                        </span>
+                                    </div>
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                    <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
+
+                                }
+                                <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
+                                    @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                            new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                            new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
+                                    <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                                    <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                                    <span class="input-group-btn deleteNumber" style="visibility:hidden;">
+                                        <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                                    </span>
+                                </div>
+                                <div id="newPhoneTarget">
+
+                                </div>
+                                <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-target="#editMemberModal">Close</button>
+                    <button type="button" id="editMemberModalSubmit" class="btn btn-primary pull-left">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

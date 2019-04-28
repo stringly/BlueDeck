@@ -1,0 +1,365 @@
+﻿@model HomePageViewModel
+
+<div class="homePageHeader container container-fluid" >
+    <div class="col-md-10">
+        <h4>Hello, @Model.CurrentUser.FirstName.</h4>
+        <h5>Currently assigned to @Model.CurrentUser.Position.ParentComponent.Name as @Model.CurrentUser.Position.Name</h5>
+        <br />
+    </div>
+</div>
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+        <li><a data-toggle="tab" href="#searchPeople"><i class="glyphicon glyphicon-search"></i> Search People</a></li>
+        <li><a data-toggle="tab" href="#documents"><i class="glyphicon glyphicon-file"></i> Documents</a></li>
+        <li><a data-toggle="tab" href="#currentUserInfo"><i class="glyphicon glyphicon-user"></i> My Info</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+        <div id="home" href="#home" class="tab-pane fade in active">
+            @{
+                HomePageComponentGroup home = Model.ComponentGroups.Where(x => x.ComponentId == Model.CurrentUser.Position.ParentComponent.ComponentId).First();
+
+                <div class="HomePageComponentContainer">
+                    <div class="col-md-12">
+                        <br />
+                        <h4>My Coworkers</h4>
+                        <hr />
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <caption>
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                        </a>@: | 
+                                    }
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a>@: |
+                                    }
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
+                                </caption>
+                                <tbody>
+                                    @foreach (var worker in home.Members)
+                                    {
+                                    <tr>
+                                        @if (worker.MemberId == 0)
+                                        {
+                                            if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
+                                            {
+                                                <td class="col-xs-4"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="col-xs-4">Vacant</td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        }
+                                        <td class="col-xs-4"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                        <td class="col-xs-2">@worker.ContactNumber</td>
+                                        <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            @foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.CurrentUser.Position.ParentComponent.ComponentId))
+            {
+                <div class="HomePageComponentContainer">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <caption>
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                        </a>@: |
+                                    }
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@item.ComponentId">Manage Roster</a> @: |
+                                    }
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
+                                </caption>
+                                <tbody>
+                                @foreach (var worker in item.Members)
+                                {
+                                    <tr>
+                                        @if (worker.MemberId == 0)
+                                        {
+                                            if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
+                                            {
+                                                <td class="col-xs-4"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td class="col-xs-4">Vacant</td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <td class="col-xs-4"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        }
+                                        <td class="col-xs-4"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                        <td class="col-xs-2">@worker.ContactNumber</td>
+                                        <td class="col-xs-2"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="searchPeople" href="#searchPeople" class="tab-pane fade">
+            <div class="col-md-12">
+                <br />
+                <h4>Search for a Person</h4>
+                <hr />
+                <div class="row">
+                    <div class="form-inline">
+                        <div class="col-sm-10 form-group">
+                            <label class="control-label">Search for:</label>
+                            <input type="text" id="SearchString" class="form-control" placeholder='"John", "#1234", etc...' />
+                            <button id="MemberSearchButton" class="btn btn-default">Find <span class="glyphicon glyphicon-refresh"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="memberSearchResultListTarget" style="min-height:400px;">
+
+                </div>
+            </div>
+        </div>
+        <div id="documents" class="tab-pane fade">
+            <div class="col-md-12">
+                <br />
+                <h4>Generate Documents</h4>
+                <hr />
+                <div class="row">
+                    <div class="form-inline">
+                        <div class="col-sm-10 form-group">
+                            <label class="control-label">Select a Component:</label>
+                            @Html.DropDownList("SelectedComponent",
+                                 new SelectList(Model.Components, "Id", "ComponentName"),
+                                 "Choose Component",
+                                 new { @class = "form-control" })
+                            <small class="text-danger" id="selectedComponentMessage"></small>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <a style="line-height:43px" class="btn btn-default bigSquareButton pull-left" id="GenerateAlphaRoster" download>
+                            <img style="height:25px; width:25px;" src="/lib/bluedeck/css/images/Alphabetize.png">
+                        </a>
+                        <strong>Generate an Alpha Roster</strong><br />
+                        <small>An Alpha Roster will list all Members of the selected component in alphabetical order by the Member's last name.</small>
+                    </div>
+                </div>                
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <a style="line-height:45px" type="button" class="btn btn-default bigSquareButton pull-left" id="GenerateComponentRoster" download>
+                            <img style="height:35px; width:35px;"  src="/lib/bluedeck/css/images/Roster.png">
+                        </a>
+                        <strong>Generate a Component Roster</strong><br />
+                        <small>Component Roster will list all Positions and Members of the selected component and all of it's subordinate Components, grouped by Component.</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <a class="btn btn-default bigSquareButton pull-left" id="GenerateOrgChart" download>
+                            <img style="height:50px; width:50px;" src="/lib/bluedeck/css/images/OrgChartIcon.png">
+                        </a>
+                        <strong>Generate an Organizational Chart</strong><br />
+                        <small>Component Roster will generate an organizational chart for the selected Component and all of it's subordinate components.</small>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div id="currentUserInfo" class="tab-pane fade">
+            <div class="col-md-12">
+                <br />
+                <h4>My Info</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.FirstName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.FirstName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.MiddleName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.MiddleName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.LastName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.LastName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.IdNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.IdNumber, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.Rank, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.Rank.RankFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.Gender, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.Gender.GenderFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.Race, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.Race.MemberRaceFullName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.Position, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.Position.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.DutyStatus, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.DutyStatus.DutyStatusName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.Email, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.Email, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.PhoneNumbers, new { @class = "control-label" })
+                        @if (Model.CurrentUser.PhoneNumbers.Count == 0)
+                        {
+                            <br />
+                            <span>No current contact numbers.</span>
+                        }
+                        else
+                        {
+                            foreach(var item in Model.CurrentUser.PhoneNumbers)
+                            {
+                                <br />
+                                <span style="font-weight:bold">@item.Type.PhoneNumberTypeName:<span style="font-weight:normal"> @item.PhoneNumber</span></span>
+
+                            }
+                        }
+
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a asp-action="Edit" asp-controller="Members" asp-route-id="@Model.CurrentUser.MemberId" asp-route-returnUrl="/Home/Index" class="btn btn-primary">Edit My Info</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $("#MemberSearchButton").click(searchMembers);
+        function onHashChange() {
+            var hash = window.location.hash;
+
+            if (hash) {
+                // using ES6 template string syntax
+                $('[data-toggle="tab"][href="${hash}"]').trigger('click');
+            }
+        }
+
+        window.addEventListener('hashchange', onHashChange, false);
+        onHashChange();
+        document.getElementById("GenerateAlphaRoster").addEventListener('click', handleAlphaRosterClick, false);
+        document.getElementById("GenerateComponentRoster").addEventListener('click', handleComponentRosterClick, false);
+        document.getElementById("GenerateOrgChart").addEventListener('click', handleOrgChartClick, false);
+        $("#SelectedComponent").change(function () {
+            $("#selectedComponentMessage").text("");
+            if ($(this).val() == "") {
+                document.getElementById("GenerateAlphaRoster").removeAttribute('href');
+                document.getElementById("GenerateAlphaRoster").removeAttribute('href');
+                document.getElementById("GenerateAlphaRoster").removeAttribute('href');
+            }
+            else {
+                componentId = $(this).val();
+                document.getElementById("GenerateAlphaRoster").href = "Home/DownloadAlphaRoster?id=" + componentId;
+                document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster?id=" + componentId;;
+                document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart?id=" + componentId;;
+            }
+            
+        });
+    });
+
+    function searchMembers() {
+        var searchStr =  $("#SearchString").val();
+        if (searchStr.length > 0) {
+            var container = $("#memberSearchResultListTarget").empty();
+            var spinner = document.getElementsByClassName("glyphicon-refresh")[0]
+            spinner.classList.add("spinning");
+            $.get("/Home/GetMemberSearchViewComponent", { searchString: searchStr }, function (response) {
+                container.html(response);
+                spinner.classList.remove('spinning');
+                window.setTimeout(function () {
+                    $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                        $(this).remove();
+                    });
+                }, 3000);
+
+            });
+        }
+    }
+
+    function handleAlphaRosterClick(e) {
+        var componentId = $("#SelectedComponent").val();
+        if (componentId == "") {
+            $("#selectedComponentMessage").text("Select a Component")
+        }
+    }
+    function handleComponentRosterClick(e) {
+        var componentId = $("#SelectedComponent").val();
+        if (componentId == "") {
+            $("#selectedComponentMessage").text("Select a Component")
+        }
+    }
+    function handleOrgChartClick(e) {
+        var componentId = $("#SelectedComponent").val();
+        if (componentId == "") {
+            $("#selectedComponentMessage").text("Select a Component")
+        }
+    }
+</script>
+

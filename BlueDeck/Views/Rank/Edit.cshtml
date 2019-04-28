@@ -1,0 +1,53 @@
+﻿@model BlueDeck.Models.Rank
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Edit Rank: <strong>@Model.RankFullName</strong></h2>
+        <p class="formHeader-description">
+            Editing Rank Details
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <form asp-action="Edit" asp-route-returnUrl="@ViewBag.ReturnUrl" asp-route-id="@Model.RankId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="RankId" />
+                    <div class="row">
+                        <div class="col-md-5 form-group">
+                            <label asp-for="RankFullName" class="control-label"></label>
+                            <input asp-for="RankFullName" class="form-control" />
+                            <span asp-validation-for="RankFullName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label asp-for="RankShort" class="control-label"></label>
+                            <input asp-for="RankShort" class="form-control" />
+                            <span asp-validation-for="RankShort" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label asp-for="PayGrade" class="control-label"></label>
+                            <input asp-for="PayGrade" class="form-control" />
+                            <span asp-validation-for="PayGrade" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsSworn" /> @Html.DisplayNameFor(model => model.IsSworn)
+                                </label>
+                                <span class="note">
+                                    Rank is sworn officer.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Delete" asp-route-id="@Model.RankId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

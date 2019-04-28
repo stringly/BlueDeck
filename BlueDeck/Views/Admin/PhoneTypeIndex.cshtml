@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BlueDeck.Models.PhoneNumberType>
+
+<div style="padding-top:10px; padding-bottom:10px">
+    <a asp-action="Create" asp-controller="PhoneType" asp-route-returnUrl="/Admin/PhoneTypeIndex"><i class="glyphicon glyphicon-plus" ></i>Create a New Phone Type</a>
+</div>
+<div>
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    @if (Model.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            Phone Type Name
+                        </th>
+                        <th style="text-align:center">
+                            PhoneNumberTypeId
+                        </th>
+                        <th style="text-align:center">
+                            Count of Type
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @item.PhoneNumberTypeName
+                        </td>
+                        <td style="text-align:center">
+                            @item.PhoneNumberTypeId
+                        </td>
+                        <td style="text-align:center">
+                            @item.ContactNumbers.Count()
+                        </td>
+                        <td style="text-align:center">
+                            <a asp-action="Details" asp-controller="PhoneType" asp-route-id="@item.PhoneNumberTypeId" asp-route-returnUrl="/Admin/PhoneTypeIndex" title="View Details" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Edit" asp-controller="PhoneType" asp-route-id="@item.PhoneNumberTypeId" asp-route-returnUrl="/Admin/PhoneTypeIndex" title="Edit Gender" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="Delete" asp-controller="PhoneType" asp-route-id="@item.PhoneNumberTypeId" asp-route-returnUrl="/Admin/PhoneTypeIndex" title="Delete Gender" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+</div>
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

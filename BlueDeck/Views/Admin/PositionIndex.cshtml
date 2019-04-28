@@ -1,0 +1,171 @@
+﻿@model AdminPositionIndexListViewModel
+
+
+<form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Positions" />
+            <div class="input-group-btn">
+                <button class="btn btn-search-addon" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    @{
+        if (Model.CurrentFilter != null)
+        {
+            <a asp-page="/MemberIndex"><i class="ion-md-arrow-round-back"></i> Back to full List</a><span> | </span>
+        }
+    }
+    <a asp-action="Create" asp-controller="Positions" asp-route-returnUrl="/Admin/PositionIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Position</a>
+</form>
+
+<div>
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    else if (Model.CurrentFilter != null)
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-primary alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Message:</strong>
+                <span>Found @Model.PagingInfo.TotalItems Members that match '@Model.CurrentFilter'</span>
+            </div>
+        </div>
+    }
+    @if (Model.Positions.Count() > 0)
+    {
+
+        <div class="table-responsive">
+            <table class="table indexTable">
+                <thead>
+                    <tr class="tablePageControlHeaderRow">
+                        <th colspan="6">
+                            <div page-model="@Model.PagingInfo" page-action="PositionIndex" page-classes-enabled="true"
+                                 page-class="" page-class-normal=""
+                                 page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
+                                 class="btn-group">
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <a asp-page="/PositionIndex" asp-route-sortOrder="@Model.PositionNameSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
+                                Position Name
+                                @if (Model.CurrentSort == "name_desc")
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                                }
+                            </a>
+                        </th>
+                        <th>
+                            <a asp-page="/PositionIndex" asp-route-sortOrder="@Model.ParentComponentNameSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Parent Component Name">
+                                Parent Component
+                                @if (Model.CurrentSort == "parentName_desc")
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                                }
+                            </a>
+                        </th>
+                        <th>
+                            Job Title
+                        </th>
+                        <th>
+                            Callsign
+                        </th>
+                        <th style="text-align:center;">
+                            Unique
+                        </th>
+                        <th style="text-align:center;">
+                            Manager
+                        </th>
+                        <th style="text-align:center;">
+                            Lineup
+                        </th>
+                        <th style="text-align:center;">
+                            Members
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Positions)
+                    {
+                    <tr>
+                        <td>
+                            @item.PositionName
+                        </td>
+                        <td>
+                            @item.ParentComponentName
+                        </td>
+                        <td>
+                            @item.JobTitle
+                        </td>
+                        <td>
+                            @item.Callsign
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.IsUnique)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.IsManager)
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.LineupPosition)
+                        </td>
+                        <td style="text-align:center;">
+                            @item.MembersCount
+                        </td>
+                        <td>
+                            <a asp-controller="Positions" asp-action="Edit" asp-route-id="@item.PositionId" asp-route-returnUrl="/Admin/PositionIndex" title="Edit Position" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                            </a>
+                            <a asp-controller="Positions" asp-action="Details" asp-route-id="@item.PositionId" asp-route-returnUrl="/Admin/PositionIndex" title="View Details" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                            </a>
+                            <a asp-controller="Positions" asp-action="Delete" asp-route-id="@item.PositionId" asp-route-returnUrl="/Admin/PositionIndex" title="Delete Position" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div style="max-width: 95%; margin: auto">
+            <a asp-action="PositionIndex" class="">Go Back to Full List</a>
+        </div>
+    }
+</div>
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>
