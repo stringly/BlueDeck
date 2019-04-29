@@ -1,6 +1,8 @@
-﻿using BlueDeck.Models.Types;
+﻿using BlueDeck.Models.APIModels;
+using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlueDeck.Models.Repositories
 {
@@ -33,5 +35,6 @@ namespace BlueDeck.Models.Repositories
         List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);
         List<Member> GetGlobalAdmins();
         List<Member> GetPendingAccounts();
+        Task<MemberApiResult> GetApiMember(int id);
     }
 }

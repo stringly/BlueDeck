@@ -27,7 +27,7 @@ namespace BlueDeck.Controllers
         {
             unitOfWork = unit;
         }
-        
+
         /// <summary>
         /// GET: Members
         /// </summary>
@@ -47,14 +47,14 @@ namespace BlueDeck.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 char[] arr = searchString.ToCharArray();
-                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) 
-                                  || char.IsWhiteSpace(c) 
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
+                                  || char.IsWhiteSpace(c)
                                   || c == '-')));
                 string lowerString = new string(arr);
                 lowerString = lowerString.ToLower();
                 vm.Members = vm.Members
-                    .Where(x => x.LastName.ToLower().Contains(lowerString) 
-                    || x.FirstName.ToLower().Contains(lowerString) 
+                    .Where(x => x.LastName.ToLower().Contains(lowerString)
+                    || x.FirstName.ToLower().Contains(lowerString)
                     || x.PositionName.ToLower().Contains(lowerString)
                     || x.IdNumber.Contains(lowerString));
             }
@@ -96,7 +96,7 @@ namespace BlueDeck.Controllers
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             vm.Members = vm.Members.Skip((page - 1) * PageSize).Take(PageSize);
-            return View(vm);            
+            return View(vm);
         }
 
         /// <summary>
@@ -191,17 +191,17 @@ namespace BlueDeck.Controllers
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Member successfully created.";
-                if(returnUrl != "")
+                if (returnUrl != "")
                 {
                     return Redirect(returnUrl);
                 }
                 else
                 {
                     return RedirectToAction(nameof(Index));
-                }                
-            }            
+                }
+            }
         }
-        
+
         /// <summary>
         /// Members/Edit/5
         /// </summary>
@@ -220,8 +220,8 @@ namespace BlueDeck.Controllers
             {
                 return NotFound();
             }
-            MemberAddEditViewModel vm = new MemberAddEditViewModel(member, 
-                unitOfWork.Positions.GetAllPositionSelectListItems(), 
+            MemberAddEditViewModel vm = new MemberAddEditViewModel(member,
+                unitOfWork.Positions.GetAllPositionSelectListItems(),
                 unitOfWork.MemberRanks.GetMemberRankSelectListItems(),
                 unitOfWork.MemberGenders.GetMemberGenderSelectListItems(),
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
@@ -277,7 +277,7 @@ namespace BlueDeck.Controllers
                 ViewBag.Title = "Edit Member - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
-                return View(form);                
+                return View(form);
             }
             else
             {
@@ -299,16 +299,16 @@ namespace BlueDeck.Controllers
                         throw;
                     }
                 }
-            TempData["Status"] = "Success!";
-            TempData["Message"] = "Member successfully updated.";
-            if(returnUrl != null)
+                TempData["Status"] = "Success!";
+                TempData["Message"] = "Member successfully updated.";
+                if (returnUrl != null)
                 {
                     return Redirect(returnUrl);
                 }
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
         }
-                
+
         /// <summary>
         /// GET: Member/Delete/5
         /// </summary>
@@ -330,7 +330,7 @@ namespace BlueDeck.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(m);
         }
-        
+
         /// <summary>
         /// POST: Members/Delete/5
         /// </summary>
@@ -339,12 +339,12 @@ namespace BlueDeck.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
-        {            
+        {
             unitOfWork.Members.Remove(id);
             unitOfWork.Complete();
             TempData["Status"] = "Success!";
             TempData["Message"] = "Member successfully deleted.";
-            if(returnUrl != null)
+            if (returnUrl != null)
             {
                 return Redirect(returnUrl);
             }
