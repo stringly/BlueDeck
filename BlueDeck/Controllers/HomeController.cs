@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace BlueDeck.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IUnitOfWork unitOfWork;

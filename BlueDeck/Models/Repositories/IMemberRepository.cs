@@ -14,6 +14,7 @@ namespace BlueDeck.Models.Repositories
     {
         IEnumerable<Member> GetMembersWithPositions();
         Member GetMemberWithPosition(int memberId);
+        IEnumerable<Member> GetMembersWithRank();
         Member GetMemberWithDemographicsAndDutyStatus(int memberId);
         IEnumerable<MemberSelectListItem> GetAllMemberSelectListItems();
         void UpdateMember(MemberAddEditViewModel vm);

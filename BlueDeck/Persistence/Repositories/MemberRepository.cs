@@ -54,6 +54,12 @@ namespace BlueDeck.Persistence.Repositories
                 .ThenInclude(c => c.ParentComponent)
                 .ToList();
         }
+        public IEnumerable<Member> GetMembersWithRank()
+        {
+            return ApplicationDbContext.Members
+                .Include(x => x.Rank)
+                .ToList();
+        }
 
         public MemberIndexListViewModel GetMemberIndexListViewModel()
         {
@@ -90,6 +96,8 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.DutyStatus)                
                 .FirstOrDefault();
         }
+
+        
 
         public Member GetHomePageMember(int memberId)
         {
@@ -280,8 +288,8 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.PhoneNumbers)
                 .Include(x => x.CurrentRoles)
                 .FirstOrDefault(x => x.MemberId == memberId);
-            ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
-            ApplicationDbContext.Roles.RemoveRange(m.CurrentRoles);
+            //ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
+            //ApplicationDbContext.Roles.RemoveRange(m.CurrentRoles);
             ApplicationDbContext.Members.Remove(m);
         }
 

@@ -8,6 +8,8 @@ using BlueDeck.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using BlueDeck.Models.Auth;
+using Microsoft.AspNetCore.Server.IISIntegration;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace BlueDeck
 {
@@ -32,9 +34,11 @@ namespace BlueDeck
         /// </summary>
         /// <param name="services">An <see cref="IServiceCollection"/></param>
         public void ConfigureServices(IServiceCollection services) {
+            
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
+            
             services.AddMvc();
             services.AddAuthorization(options =>
             {
