@@ -1,6 +1,8 @@
-﻿using BlueDeck.Models.Types;
+﻿using BlueDeck.Models.APIModels;
+using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BlueDeck.Models.Repositories
 {
@@ -29,5 +31,6 @@ namespace BlueDeck.Models.Repositories
         void UpdatePositionAndSetLineup(Position p);
         List<PositionSelectListItem> GetPositionsUserCanEdit(int componentId);
         AdminPositionIndexListViewModel GetAdminPositionIndexListViewModel();
+        Task<PositionApiResult> GetApiPosition(int id);
     }
 }

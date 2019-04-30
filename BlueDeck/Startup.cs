@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 using BlueDeck.Models.Auth;
 using Microsoft.AspNetCore.Server.IISIntegration;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Reflection;
+using System;
+using System.IO;
 
 namespace BlueDeck
 {
@@ -40,6 +43,23 @@ namespace BlueDeck
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
             
             services.AddMvc();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info {
+                    Title = "BlueDeck API",
+                    Version = "v1",
+                    Description = "A RESTful service to access BlueDeck Organization Information",
+                    Contact = new Swashbuckle.AspNetCore.Swagger.Contact
+                    {
+                        Name = "Jason Smith",
+                        Email = "Admin@BlueDeck.net"
+                    }
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+            });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(
@@ -85,7 +105,12 @@ namespace BlueDeck
             app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
             app.UseAuthentication();
             app.UseStaticFiles();
-            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlueDeck API V1");
+                c.InjectStylesheet("/swagger/ui/custom.css");
+            });
 
             app.UseMvc(routes => {
                 routes.MapRoute(

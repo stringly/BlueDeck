@@ -13,6 +13,7 @@ namespace BlueDeck.Models.APIModels
         public bool IsUnique { get; set; }
         public string Callsign { get; set; }
         public ComponentApiResult Component { get; set; }
+        public IEnumerable<MemberApiResult> Members { get; set; }
 
         public PositionApiResult()
         {
@@ -26,6 +27,7 @@ namespace BlueDeck.Models.APIModels
             IsUnique = _position.IsUnique;
             Callsign = _position.Callsign;
             Component = new ComponentApiResult(_position.ParentComponent);
+            Members = _position.Members.ToList().ConvertAll(x => new MemberApiResult(x));
         }
     }
 }

@@ -6,6 +6,8 @@ using BlueDeck.Models;
 using BlueDeck.Models.Repositories;
 using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
+using BlueDeck.Models.APIModels;
+using System.Threading.Tasks;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -262,6 +264,21 @@ namespace BlueDeck.Persistence.Repositories
                 .ToList()
                 .ConvertAll(x => new AdminPositionIndexViewModelListItem(x));
             return vm;       
+        }
+
+        public async Task<PositionApiResult> GetApiPosition(int id)
+        {
+            Position position = await ApplicationDbContext.Positions
+                .Include(x => x.Members).ThenInclude(x => x.Race)
+                .Include(x => x.Members).ThenInclude(x => x.Gender)
+                .Include(x => x.Members).ThenInclude(x => x.DutyStatus)
+                .Include(x => x.Members).ThenInclude(x => x.Rank)
+                .Include(x => x.Members).ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
+                .FirstOrDefaultAsync(x => x.PositionId == id);
+
+            return new PositionApiResult(position);
+                    
+
         }
     }
 }

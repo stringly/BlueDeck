@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\jcs30\source\repos\BlueDeck\BlueDeck\BlueDeck.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\jcsmith1\source\repos\BlueDeck\BlueDeck\BlueDeck.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,10 +19,15 @@
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\lib\getorgchart\js\getorgchart.min.js" />
+    <Content Remove="wwwroot\swagger\ui\index.html" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\lib\getorgchart\js\getorgchart.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\swagger\ui\index.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +43,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     
   </ItemGroup>
 

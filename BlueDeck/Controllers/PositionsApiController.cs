@@ -16,94 +16,93 @@ namespace BlueDeck.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    public class MembersApiController : ControllerBase
+    public class PositionsApiController : ControllerBase
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public MembersApiController(IUnitOfWork unit)
+        public PositionsApiController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
         /// <summary>
-        /// Gets a List of Member Names/BlueDeck Ids of all Members
+        /// Gets a List of Position Names/Ids of all Positions
         /// </summary>
         /// <remarks>
         /// Sample request:
         /// 
-        ///     GET /MembersApi/GetAll
+        ///     GET /PositionsApi/GetAll
         ///     {
         ///         {
-        ///             name : "Bob Jones",
-        ///             blueDeckId : "1"
+        ///             positionId : "1",
+        ///             name : "Squad 1 OIC"
         ///         },
         ///         {
-        ///             name : "Steve Johnson",
-        ///             blueDeckId : "2"
+        ///             positionId : "2",
+        ///             name : "Shift 1 Commander"            
         ///         }
         ///     }
         ///         
-        /// Use this method to retrieve the BlueDeck Id of a member by the Member's name.
+        /// Use this method to retrieve the Position Id of a position by the Position's name.
         /// </remarks>
-        /// <returns>A list of Member Names/BlueDeck Ids of all current Members</returns>
-        /// <response code="200">Returns a JSON object containing all current Members</response>
+        /// <returns>A list of Position Names/Ids of all current Positions</returns>
+        /// <response code="200">Returns a JSON object containing all current Positions</response>
         [HttpGet("GetAll")]
         [AllowAnonymous]
         [ProducesResponseType(200)]
-        public IEnumerable<MemberListAPIListItem> GetMembers()
-        {            
-            return unitOfWork.Members
-                .GetAllMemberSelectListItems()
+        public IEnumerable<PositionListAPIListItem> GetPositions()
+        {
+            return unitOfWork.Positions
+                .GetAllPositionSelectListItems()
                 .ToList()
-                .ConvertAll(x => new MemberListAPIListItem(x));
+                .ConvertAll(x => new PositionListAPIListItem(x));
         }
 
         /// <summary>
-        /// Searches for a member whose First Name, Last Name, or PGPD ID# matches the provided search string.
+        /// Searches for a Position whose name or callsign matches the provided search string.
         /// </summary>
         /// <remarks>
         /// Sample Request
         /// 
-        ///     GET /MembersApi/SearchMembers/smith
+        ///     GET /PositionsApi/SearchPositions/District I
         ///     {
         ///         {
-        ///             name : "Bob Smith",
-        ///             blueDeckId : "1"
+        ///             positionId : "1",
+        ///             name : "District I Commander"
         ///         },
         ///         {
-        ///             name : "John Smith",
-        ///             blueDeckId : "4"
+        ///             positionId : "2",
+        ///             name : "District I, Shift I Commander"            
         ///         }
         ///     }
         /// </remarks>
         /// <param name="searchString">The search string.</param>
-        /// <returns>A list of Members that match the search string</returns>
-        /// <response code="200">Returns a list of Members that match the search string</response>
-        /// <response code="400">No members match the search string</response>
+        /// <returns>A list of Positions that match the search string</returns>
+        /// <response code="200">Returns a list of Positions that match the search string</response>
+        /// <response code="400">No Positions match the search string</response>
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [HttpGet("SearchMembers/{searchString}" )]
-        public async Task<IActionResult> SearchMembers([FromRoute] string searchString)
+        [HttpGet("SearchPositions/{searchString}")]
+        public async Task<IActionResult> SearchPositions([FromRoute] string searchString)
         {
-            IEnumerable<MemberListAPIListItem> result = new List<MemberListAPIListItem>();
+            IEnumerable<PositionListAPIListItem> result = new List<PositionListAPIListItem>();
             if (!string.IsNullOrEmpty(searchString))
             {
-                IEnumerable<Member> members = unitOfWork.Members.GetMembersWithRank();
+                List<Position> positions = unitOfWork.Positions.GetAll().ToList();
                 char[] arr = searchString.ToCharArray();
                 arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
                                   || char.IsWhiteSpace(c)
                                   || c == '-')));
                 string lowerString = new string(arr);
                 lowerString = lowerString.ToLower();
-                members = members
-                    .Where(x => x.LastName.ToLower().Contains(lowerString)
-                    || x.FirstName.ToLower().Contains(lowerString)                     
-                    || x.IdNumber.Contains(lowerString));
-                if(members.Count() > 0)
-                {
-                    result = members.ToList().ConvertAll(x => new MemberListAPIListItem(x));
-                }
                 
+                positions = positions
+                    .Where(x => x.Name.ToLower().Contains(lowerString)
+                    || (x.Callsign != null && x.Callsign.Contains(lowerString.ToUpper()))).ToList();
+                if (positions.Count > 0)
+                {
+                    result = positions.ToList().ConvertAll(x => new PositionListAPIListItem(x));
+                }                
             }
             else
             {
@@ -118,14 +117,13 @@ namespace BlueDeck.Controllers
                 return NotFound(new { status = "Not Found", message = $"No members match {searchString}" });
             }
         }
-
         /// <summary>
-        /// Gets detailed information for a specific member by BlueDeck Id.
+        /// Gets detailed information for a specific Position by BlueDeck Id.
         /// </summary>
         /// <remarks>
         /// Sample request:
         /// 
-        ///     GET /MembersApi/GetMember/1
+        ///     GET /PositionApi/GetPosition/1
         ///     {
         ///         "memberId": 1,
         ///         "firstName": "John",
@@ -219,37 +217,36 @@ namespace BlueDeck.Controllers
         ///     } 
         ///     
         /// </remarks>
-        /// <param name="id">The BlueDeck Id of the member.</param>
-        /// <returns>A collection of detailed information for the Member with the provided BlueDeckId</returns>
-        /// <response code="200">Detailed information for the Member with the provided BlueDeckId</response>
-        /// <response code="400">No member with the provided BlueDeck Id was found</response>
-        [HttpGet("GetMember/{id}")]
+        /// <param name="id">The Position Id of the Position.</param>
+        /// <returns>A collection of detailed information for the Position with the provided PositionId</returns>
+        /// <response code="200">Detailed information for the Positionwith the provided PositionId</response>
+        /// <response code="400">No Position with the provided Position Id was found</response>
+        [HttpGet("GetPosition/{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetMember([FromRoute] int id)
+        public async Task<IActionResult> GetPosition([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            
-
-            if (!MemberExists(id))
+            if (!PositionExists(id))
             {
-                return NotFound(new { status = "Not Found", message = $"No Member with id={id} exists." });
+                return NotFound(new { status = "Not Found", message = $"No Position with id={id} exists." });
             }
             else
             {
-                MemberApiResult result = await unitOfWork.Members.GetApiMember(id);            
+                PositionApiResult result = await unitOfWork.Positions.GetApiPosition(id);
                 return Ok(result);
-            }            
-        }
-             
+            }
 
-        private bool MemberExists(int id)
-        {
-            return unitOfWork.Members.Get(id) != null ? true : false;
         }
+
+        private bool PositionExists(int id)
+        {
+            return unitOfWork.Positions.Get(id) != null ? true : false;
+        }
+
     }
 }

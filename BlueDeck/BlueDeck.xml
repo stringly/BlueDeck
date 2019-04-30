@@ -87,6 +87,160 @@
             <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/></param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetMembers">
+            <summary>
+            Gets a List of Member Names/BlueDeck Ids of all Members
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /MembersApi/GetAll
+                {
+                    {
+                        name : "Bob Jones",
+                        blueDeckId : "1"
+                    },
+                    {
+                        name : "Steve Johnson",
+                        blueDeckId : "2"
+                    }
+                }
+                    
+            Use this method to retrieve the BlueDeck Id of a member by the Member's name.
+            </remarks>
+            <returns>A list of Member Names/BlueDeck Ids of all current Members</returns>
+            <response code="200">Returns a JSON object containing all current Members</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.SearchMembers(System.String)">
+            <summary>
+            Searches for a member whose First Name, Last Name, or PGPD ID# matches the provided search string.
+            </summary>
+            <remarks>
+            Sample Request
+            
+                GET /MembersApi/SearchMembers/smith
+                {
+                    {
+                        name : "Bob Smith",
+                        blueDeckId : "1"
+                    },
+                    {
+                        name : "John Smith",
+                        blueDeckId : "4"
+                    }
+                }
+            </remarks>
+            <param name="searchString">The search string.</param>
+            <returns>A list of Members that match the search string</returns>
+            <response code="200">Returns a list of Members that match the search string</response>
+            <response code="400">No members match the search string</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetMember(System.Int32)">
+            <summary>
+            Gets detailed information for a specific member by BlueDeck Id.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /MembersApi/GetMember/1
+                {
+                    "memberId": 1,
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "example@email.com",
+                    "contactNumbers": [
+                        {
+                            "type": "Cell (Personal)",
+                            "phoneNumber": "(123) 456-7890"
+                        }
+                    ],
+                    "rank": {
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "name": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "name": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 13,
+                        "name": "Assistant District Commander, District I",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": null,
+                        "component": {
+                            "componentId": 50,
+                            "name": "District I",
+                            "acronym": "NULL",
+                            "parentComponent": null
+                        }
+                    },
+                    "supervisor": {
+                        "memberId": 1234,
+                        "firstName": "Judy",
+                        "lastName": "Johnson",
+                        "pgpdId": "4321",
+                        "email": "example2@email.net",
+                        "contactNumbers": [
+                            {
+                                "type": "Cell (Work)",
+                                "phoneNumber": "(123) 456-7890"
+                            }
+                        ],
+                        "rank": {
+                            "rankName": "Captain",
+                            "rankShort": "Capt.",
+                            "payGrade": "L06",
+                            "isSworn": true
+                        },
+                        "gender": {
+                            "name": "Female",
+                            "abbreviation": "F"
+                        },
+                        "race": {
+                            "name": "White",
+                            "abbreviation": "W"
+                        },
+                        "dutyStatus": {
+                            "name": "Full Duty",
+                            "abbreviation": "F",
+                            "hasPolicePower": true
+                        },
+                        "position": {
+                            "positionId": 12,
+                            "name": "Commander, District I",
+                            "isManager": true,
+                            "isUnique": true,
+                            "callsign": "CAR-11",
+                            "component": {
+                                "componentId": null,
+                                "name": "",
+                                "acronym": "",
+                                "parentComponent": null
+                            }
+                        },
+                        "supervisor": null
+                    }
+                } 
+                
+            </remarks>
+            <param name="id">The BlueDeck Id of the member.</param>
+            <returns>A collection of detailed information for the Member with the provided BlueDeckId</returns>
+            <response code="200">Detailed information for the Member with the provided BlueDeckId</response>
+            <response code="400">No member with the provided BlueDeck Id was found</response>
+        </member>
         <member name="T:BlueDeck.Controllers.MembersController">
             <summary>
             Controller for Member CRUD actions
@@ -196,6 +350,160 @@
             GET /OrgChart/
             </summary>
             <returns>An <see cref="T:IActionResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsApiController.GetPositions">
+            <summary>
+            Gets a List of Position Names/Ids of all Positions
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /PositionsApi/GetAll
+                {
+                    {
+                        positionId : "1",
+                        name : "Squad 1 OIC"
+                    },
+                    {
+                        positionId : "2",
+                        name : "Shift 1 Commander"            
+                    }
+                }
+                    
+            Use this method to retrieve the Position Id of a position by the Position's name.
+            </remarks>
+            <returns>A list of Position Names/Ids of all current Positions</returns>
+            <response code="200">Returns a JSON object containing all current Positions</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsApiController.SearchPositions(System.String)">
+            <summary>
+            Searches for a Position whose name or callsign matches the provided search string.
+            </summary>
+            <remarks>
+            Sample Request
+            
+                GET /PositionsApi/SearchPositions/District I
+                {
+                    {
+                        positionId : "1",
+                        name : "District I Commander"
+                    },
+                    {
+                        positionId : "2",
+                        name : "District I, Shift I Commander"            
+                    }
+                }
+            </remarks>
+            <param name="searchString">The search string.</param>
+            <returns>A list of Positions that match the search string</returns>
+            <response code="200">Returns a list of Positions that match the search string</response>
+            <response code="400">No Positions match the search string</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsApiController.GetPosition(System.Int32)">
+            <summary>
+            Gets detailed information for a specific Position by BlueDeck Id.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /PositionApi/GetPosition/1
+                {
+                    "memberId": 1,
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "example@email.com",
+                    "contactNumbers": [
+                        {
+                            "type": "Cell (Personal)",
+                            "phoneNumber": "(123) 456-7890"
+                        }
+                    ],
+                    "rank": {
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "name": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "name": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 13,
+                        "name": "Assistant District Commander, District I",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": null,
+                        "component": {
+                            "componentId": 50,
+                            "name": "District I",
+                            "acronym": "NULL",
+                            "parentComponent": null
+                        }
+                    },
+                    "supervisor": {
+                        "memberId": 1234,
+                        "firstName": "Judy",
+                        "lastName": "Johnson",
+                        "pgpdId": "4321",
+                        "email": "example2@email.net",
+                        "contactNumbers": [
+                            {
+                                "type": "Cell (Work)",
+                                "phoneNumber": "(123) 456-7890"
+                            }
+                        ],
+                        "rank": {
+                            "rankName": "Captain",
+                            "rankShort": "Capt.",
+                            "payGrade": "L06",
+                            "isSworn": true
+                        },
+                        "gender": {
+                            "name": "Female",
+                            "abbreviation": "F"
+                        },
+                        "race": {
+                            "name": "White",
+                            "abbreviation": "W"
+                        },
+                        "dutyStatus": {
+                            "name": "Full Duty",
+                            "abbreviation": "F",
+                            "hasPolicePower": true
+                        },
+                        "position": {
+                            "positionId": 12,
+                            "name": "Commander, District I",
+                            "isManager": true,
+                            "isUnique": true,
+                            "callsign": "CAR-11",
+                            "component": {
+                                "componentId": null,
+                                "name": "",
+                                "acronym": "",
+                                "parentComponent": null
+                            }
+                        },
+                        "supervisor": null
+                    }
+                } 
+                
+            </remarks>
+            <param name="id">The Position Id of the Position.</param>
+            <returns>A collection of detailed information for the Position with the provided PositionId</returns>
+            <response code="200">Detailed information for the Positionwith the provided PositionId</response>
+            <response code="400">No Position with the provided Position Id was found</response>
         </member>
         <member name="T:BlueDeck.Controllers.PositionsController">
             <summary>
