@@ -8,6 +8,7 @@ using BlueDeck.Models;
 namespace BlueDeck.Controllers
 {
     [Authorize("IsGlobalAdmin")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class DutyStatusController : Controller
     {
         private IUnitOfWork unitOfWork;

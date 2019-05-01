@@ -50,12 +50,28 @@ namespace BlueDeck.Controllers
         [HttpGet("GetAll")]
         [AllowAnonymous]
         [ProducesResponseType(200)]
-        public IEnumerable<PositionListAPIListItem> GetPositions()
+        public async Task<IActionResult> GetPositions()
         {
-            return unitOfWork.Positions
+            try
+            {
+                var response = unitOfWork.Positions
                 .GetAllPositionSelectListItems()
                 .ToList()
                 .ConvertAll(x => new PositionListAPIListItem(x));
+                if (response.Count() > 0) {
+                    return Ok(response);
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = "No Positions found."});
+                }
+                
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }
+            
         }
 
         /// <summary>
@@ -85,37 +101,45 @@ namespace BlueDeck.Controllers
         [HttpGet("SearchPositions/{searchString}")]
         public async Task<IActionResult> SearchPositions([FromRoute] string searchString)
         {
-            IEnumerable<PositionListAPIListItem> result = new List<PositionListAPIListItem>();
-            if (!string.IsNullOrEmpty(searchString))
+            try
             {
-                List<Position> positions = unitOfWork.Positions.GetAll().ToList();
-                char[] arr = searchString.ToCharArray();
-                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
-                                  || char.IsWhiteSpace(c)
-                                  || c == '-')));
-                string lowerString = new string(arr);
-                lowerString = lowerString.ToLower();
-                
-                positions = positions
-                    .Where(x => x.Name.ToLower().Contains(lowerString)
-                    || (x.Callsign != null && x.Callsign.Contains(lowerString.ToUpper()))).ToList();
-                if (positions.Count > 0)
+                 IEnumerable<PositionListAPIListItem> result = new List<PositionListAPIListItem>();
+                if (!string.IsNullOrEmpty(searchString))
                 {
-                    result = positions.ToList().ConvertAll(x => new PositionListAPIListItem(x));
-                }                
+                    List<Position> positions = unitOfWork.Positions.GetAll().ToList();
+                    char[] arr = searchString.ToCharArray();
+                    arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
+                                      || char.IsWhiteSpace(c)
+                                      || c == '-')));
+                    string lowerString = new string(arr);
+                    lowerString = lowerString.ToLower();
+                
+                    positions = positions
+                        .Where(x => x.Name.ToLower().Contains(lowerString)
+                        || (x.Callsign != null && x.Callsign.Contains(lowerString.ToUpper()))).ToList();
+                    if (positions.Count > 0)
+                    {
+                        result = positions.ToList().ConvertAll(x => new PositionListAPIListItem(x));
+                    }                
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = "Search string parameter is required." });
+                }
+                if (result.Count() > 0)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = $"No positions match {searchString}" });
+                }
             }
-            else
+            catch (Exception e)
             {
-                return NotFound(new { status = "Not Found", message = "Search string parameter is required." });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }
-            if (result.Count() > 0)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return NotFound(new { status = "Not Found", message = $"No members match {searchString}" });
-            }
+
         }
         /// <summary>
         /// Gets detailed information for a specific Position by BlueDeck Id.
@@ -123,98 +147,48 @@ namespace BlueDeck.Controllers
         /// <remarks>
         /// Sample request:
         /// 
-        ///     GET /PositionApi/GetPosition/1
+        ///     GET /PositionsApi/GetPosition/10
         ///     {
-        ///         "memberId": 1,
-        ///         "firstName": "John",
-        ///         "lastName": "Smith",
-        ///         "pgpdId": "1234",
-        ///         "email": "example@email.com",
-        ///         "contactNumbers": [
+        ///         "positionId": 10,
+        ///         "name": "OIC, Squad 1",
+        ///         "isManager": true,
+        ///         "isUnique": true,
+        ///         "callsign": "BAKER-10",
+        ///         "component": {
+        ///         "componentId": 84,
+        ///         "name": "Squad 1",
+        ///         "acronym": "NULL"
+        ///          },
+        ///         "members": [
         ///             {
-        ///                 "type": "Cell (Personal)",
-        ///                 "phoneNumber": "(123) 456-7890"
-        ///             }
-        ///         ],
-        ///         "rank": {
-        ///             "rankName": "Lieutenant",
-        ///             "rankShort": "Lt.",
-        ///             "payGrade": "L05",
-        ///             "isSworn": true
-        ///         },
-        ///         "gender": {
-        ///             "name": "Male",
-        ///             "abbreviation": "M"
-        ///         },
-        ///         "race": {
-        ///             "name": "White",
-        ///             "abbreviation": "W"
-        ///         },
-        ///         "dutyStatus": {
-        ///             "name": "Full Duty",
-        ///             "abbreviation": "F",
-        ///             "hasPolicePower": true
-        ///         },
-        ///         "position": {
-        ///             "positionId": 13,
-        ///             "name": "Assistant District Commander, District I",
-        ///             "isManager": true,
-        ///             "isUnique": true,
-        ///             "callsign": null,
-        ///             "component": {
-        ///                 "componentId": 50,
-        ///                 "name": "District I",
-        ///                 "acronym": "NULL",
-        ///                 "parentComponent": null
-        ///             }
-        ///         },
-        ///         "supervisor": {
-        ///             "memberId": 1234,
-        ///             "firstName": "Judy",
-        ///             "lastName": "Johnson",
-        ///             "pgpdId": "4321",
-        ///             "email": "example2@email.net",
-        ///             "contactNumbers": [
-        ///                 {
-        ///                     "type": "Cell (Work)",
-        ///                     "phoneNumber": "(123) 456-7890"
+        ///                 "memberId": 1234,
+        ///                 "firstName": "John",
+        ///                 "lastName": "Smith",
+        ///                 "pgpdId": "4321",
+        ///                 "email": "example@mail.com",
+        ///                 "contactNumbers": [],
+        ///                 "rank": {
+        ///                     "rankName": "Sergeant",
+        ///                     "rankShort": "Sgt.",
+        ///                     "payGrade": "L04",
+        ///                     "isSworn": true
+        ///                 },
+        ///                 "gender": {
+        ///                     "name": "Male",
+        ///                     "abbreviation": "M"
+        ///                 },
+        ///                 "race": {
+        ///                     "name": "Black",
+        ///                     "abbreviation": "B"
+        ///                 },
+        ///                 "dutyStatus": {
+        ///                     "name": "Full Duty",
+        ///                     "abbreviation": "F",
+        ///                     "hasPolicePower": true
         ///                 }
-        ///             ],
-        ///             "rank": {
-        ///                 "rankName": "Captain",
-        ///                 "rankShort": "Capt.",
-        ///                 "payGrade": "L06",
-        ///                 "isSworn": true
-        ///             },
-        ///             "gender": {
-        ///                 "name": "Female",
-        ///                 "abbreviation": "F"
-        ///             },
-        ///             "race": {
-        ///                 "name": "White",
-        ///                 "abbreviation": "W"
-        ///             },
-        ///             "dutyStatus": {
-        ///                 "name": "Full Duty",
-        ///                 "abbreviation": "F",
-        ///                 "hasPolicePower": true
-        ///             },
-        ///             "position": {
-        ///                 "positionId": 12,
-        ///                 "name": "Commander, District I",
-        ///                 "isManager": true,
-        ///                 "isUnique": true,
-        ///                 "callsign": "CAR-11",
-        ///                 "component": {
-        ///                     "componentId": null,
-        ///                     "name": "",
-        ///                     "acronym": "",
-        ///                     "parentComponent": null
-        ///                 }
-        ///             },
-        ///             "supervisor": null
-        ///         }
-        ///     } 
+        ///             }
+        ///         ]
+        ///     }
         ///     
         /// </remarks>
         /// <param name="id">The Position Id of the Position.</param>
@@ -230,17 +204,22 @@ namespace BlueDeck.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            if (!PositionExists(id))
+            try
             {
-                return NotFound(new { status = "Not Found", message = $"No Position with id={id} exists." });
+                if (!PositionExists(id))
+                {
+                    return NotFound(new { status = "Not Found", message = $"No Position with id={id} exists." });
+                }
+                else
+                {
+                    PositionApiResult result = await unitOfWork.Positions.GetApiPosition(id);
+                    return Ok(result);
+                }
             }
-            else
+            catch (Exception e)
             {
-                PositionApiResult result = await unitOfWork.Positions.GetApiPosition(id);
-                return Ok(result);
-            }
-
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }           
         }
 
         private bool PositionExists(int id)

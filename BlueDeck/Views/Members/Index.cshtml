@@ -164,7 +164,7 @@
                                 </a>
                                 @if (IsAdmin)
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                    <a asp-controller="Members" asp-action="Edit"  asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                     </a>
                                     <a asp-action="Delete" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Delete Member" class="glyphicon-ring">

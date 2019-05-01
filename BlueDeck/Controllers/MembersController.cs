@@ -14,6 +14,7 @@ namespace BlueDeck.Controllers
     /// Controller for Member CRUD actions
     /// </summary>
     /// <seealso cref="Controller" />
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class MembersController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -34,6 +35,8 @@ namespace BlueDeck.Controllers
         /// <remarks>        
         /// </remarks>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [HttpGet]
+        [Route("Members/Index")]
         public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             MemberIndexListViewModel vm = unitOfWork.Members.GetMemberIndexListViewModel();
@@ -104,6 +107,8 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Member.</param>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [HttpGet]
+        [Route("Members/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -125,6 +130,8 @@ namespace BlueDeck.Controllers
         /// GET: Members/Create.
         /// </summary>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [HttpGet]
+        [Route("Members/Create")]
         public IActionResult Create(string returnUrl)
         {
             MemberAddEditViewModel vm = new MemberAddEditViewModel(new Member(),
@@ -207,7 +214,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="IActionResult"/></returns>
+        [HttpGet]
         [Authorize("CanEditUser")]
+        [Route("Members/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -241,6 +250,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Members/Edit/{id:int}")]
         public IActionResult Edit(int id, [Bind(
             "MemberId," +
             "FirstName," +
@@ -314,6 +324,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The MemberId of the <see cref="Member"/> being deleted</param>
         /// <returns>An <see cref="IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
+        [HttpGet]
+        [Authorize("IsGlobalAdmin")]
+        [Route("Members/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)

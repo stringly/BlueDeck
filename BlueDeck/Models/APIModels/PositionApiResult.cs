@@ -12,8 +12,8 @@ namespace BlueDeck.Models.APIModels
         public bool IsManager { get; set; }
         public bool IsUnique { get; set; }
         public string Callsign { get; set; }
-        public ComponentApiResult Component { get; set; }
-        public IEnumerable<MemberApiResult> Members { get; set; }
+        public SubComponentApiResult Component { get; set; }
+        public IEnumerable<SubMemberApiResult> Members { get; set; }
 
         public PositionApiResult()
         {
@@ -26,8 +26,8 @@ namespace BlueDeck.Models.APIModels
             IsManager = _position.IsManager;
             IsUnique = _position.IsUnique;
             Callsign = _position.Callsign;
-            Component = new ComponentApiResult(_position.ParentComponent);
-            Members = _position.Members.ToList().ConvertAll(x => new MemberApiResult(x));
+            Component = new SubComponentApiResult(_position.ParentComponent);
+            Members = _position.Members.ToList().ConvertAll(x => new SubMemberApiResult(x));
         }
     }
 }

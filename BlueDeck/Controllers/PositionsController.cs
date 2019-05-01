@@ -15,6 +15,7 @@ namespace BlueDeck.Controllers
     /// Controller for Position CRUD actions
     /// </summary>
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class PositionsController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -37,6 +38,9 @@ namespace BlueDeck.Controllers
         /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.PositionWithMemberCountItem"/>
         /// </remarks>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
+        [Route("Positions/Index")]
+        [AllowAnonymous]
         public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             PositionIndexListViewModel vm = new PositionIndexListViewModel(unitOfWork.Positions.GetPositionsWithMembers().ToList());
@@ -84,6 +88,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Position.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
+        [Route("Positions/Index/{id:int}")]
+        [AllowAnonymous]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -106,7 +113,9 @@ namespace BlueDeck.Controllers
         /// GET: Positions/Create.
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
         [Authorize("CanEditPosition")]
+        [Route("Positions/Create")]
         public IActionResult Create(string returnUrl)
         {
             PositionWithComponentListViewModel vm = new PositionWithComponentListViewModel(new Position());
@@ -136,6 +145,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Positions/Create")]
         public IActionResult Create(
             [Bind("PositionName," +
             "LineupPosition," +
@@ -234,7 +244,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
         [Authorize("CanEditPosition")]
+        [Route("Positions/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -274,6 +286,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Positions/Edit/{id:int}")]
         public IActionResult Edit(int id, 
             [Bind("PositionId," +
             "PositionName," +
@@ -385,7 +398,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
         [Authorize("CanEditPosition")]
+        [Route("Positions/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
             // TODO: Warn or Prevent User from Deleting a Position with assigned Members? Or auto-reassign members to the General Pool?

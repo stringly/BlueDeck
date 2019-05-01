@@ -269,6 +269,7 @@ namespace BlueDeck.Persistence.Repositories
         public async Task<PositionApiResult> GetApiPosition(int id)
         {
             Position position = await ApplicationDbContext.Positions
+                .Include(x => x.ParentComponent)
                 .Include(x => x.Members).ThenInclude(x => x.Race)
                 .Include(x => x.Members).ThenInclude(x => x.Gender)
                 .Include(x => x.Members).ThenInclude(x => x.DutyStatus)

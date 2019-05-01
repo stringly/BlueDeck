@@ -12,6 +12,7 @@ namespace BlueDeck.Controllers
     /// Serves Views and data that renders in <a href="http://www.getorgchart.com/Documentation#separationMixedHierarchyNodes" >GetOrgChart</a> Plugin
     /// </summary>
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class OrgChartController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -48,6 +49,8 @@ namespace BlueDeck.Controllers
         /// GET /OrgChart/
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
+        [Route("OrgChart/Index/{id:int?}")]
         public IActionResult Index(int? componentid)
         {
             OrgChartIndexViewModel vm = new OrgChartIndexViewModel();

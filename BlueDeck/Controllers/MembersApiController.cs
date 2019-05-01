@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using BlueDeck.Models;
 using Microsoft.AspNetCore.Authorization;
 using BlueDeck.Models.APIModels;
-using BlueDeck.Models.Types;
 
 namespace BlueDeck.Controllers
 {
@@ -50,12 +48,20 @@ namespace BlueDeck.Controllers
         [HttpGet("GetAll")]
         [AllowAnonymous]
         [ProducesResponseType(200)]
-        public IEnumerable<MemberListAPIListItem> GetMembers()
-        {            
-            return unitOfWork.Members
+        public async Task<IActionResult> GetMembers()
+        {
+            try
+            {
+                return Ok(unitOfWork.Members
                 .GetAllMemberSelectListItems()
                 .ToList()
-                .ConvertAll(x => new MemberListAPIListItem(x));
+                .ConvertAll(x => new MemberListAPIListItem(x)));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }
+            
         }
 
         /// <summary>
@@ -85,37 +91,43 @@ namespace BlueDeck.Controllers
         [HttpGet("SearchMembers/{searchString}" )]
         public async Task<IActionResult> SearchMembers([FromRoute] string searchString)
         {
-            IEnumerable<MemberListAPIListItem> result = new List<MemberListAPIListItem>();
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                IEnumerable<Member> members = unitOfWork.Members.GetMembersWithRank();
-                char[] arr = searchString.ToCharArray();
-                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
-                                  || char.IsWhiteSpace(c)
-                                  || c == '-')));
-                string lowerString = new string(arr);
-                lowerString = lowerString.ToLower();
-                members = members
-                    .Where(x => x.LastName.ToLower().Contains(lowerString)
-                    || x.FirstName.ToLower().Contains(lowerString)                     
-                    || x.IdNumber.Contains(lowerString));
-                if(members.Count() > 0)
+            try {
+                IEnumerable<MemberListAPIListItem> result = new List<MemberListAPIListItem>();
+                if (!string.IsNullOrEmpty(searchString))
                 {
-                    result = members.ToList().ConvertAll(x => new MemberListAPIListItem(x));
-                }
+                    IEnumerable<Member> members = unitOfWork.Members.GetMembersWithRank();
+                    char[] arr = searchString.ToCharArray();
+                    arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
+                                      || char.IsWhiteSpace(c)
+                                      || c == '-')));
+                    string lowerString = new string(arr);
+                    lowerString = lowerString.ToLower();
+                    members = members
+                        .Where(x => x.LastName.ToLower().Contains(lowerString)
+                        || x.FirstName.ToLower().Contains(lowerString)                     
+                        || x.IdNumber.Contains(lowerString));
+                    if(members.Count() > 0)
+                    {
+                        result = members.ToList().ConvertAll(x => new MemberListAPIListItem(x));
+                    }
                 
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = "Search string parameter is required." });
+                }
+                if (result.Count() > 0)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = $"No members match {searchString}" });
+                }
             }
-            else
+            catch (Exception e)
             {
-                return NotFound(new { status = "Not Found", message = "Search string parameter is required." });
-            }
-            if (result.Count() > 0)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return NotFound(new { status = "Not Found", message = $"No members match {searchString}" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }
         }
 
@@ -163,12 +175,6 @@ namespace BlueDeck.Controllers
         ///             "isManager": true,
         ///             "isUnique": true,
         ///             "callsign": null,
-        ///             "component": {
-        ///                 "componentId": 50,
-        ///                 "name": "District I",
-        ///                 "acronym": "NULL",
-        ///                 "parentComponent": null
-        ///             }
         ///         },
         ///         "supervisor": {
         ///             "memberId": 1234,
@@ -233,17 +239,23 @@ namespace BlueDeck.Controllers
                 return BadRequest(ModelState);
             }
 
-            
+            try
+            {
 
-            if (!MemberExists(id))
-            {
-                return NotFound(new { status = "Not Found", message = $"No Member with id={id} exists." });
+                if (!MemberExists(id))
+                {
+                    return NotFound(new { status = "Not Found", message = $"No Member with id={id} exists." });
+                }
+                else
+                {
+                    MemberApiResult result = await unitOfWork.Members.GetApiMember(id);            
+                    return Ok(result);
+                }
             }
-            else
+            catch (Exception e)
             {
-                MemberApiResult result = await unitOfWork.Members.GetApiMember(id);            
-                return Ok(result);
-            }            
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }
         }
              
 

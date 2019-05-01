@@ -401,7 +401,7 @@ namespace BlueDeck.Persistence.Repositories
                     var supervisor = await FindNearestManager(Convert.ToInt32(member.Position.ParentComponent.ParentComponentId));
                     if (supervisor != null)
                     {
-                        result.Supervisor = new MemberApiResult(supervisor);
+                        result.Supervisor = new SubMemberApiResult(supervisor);
                     }                    
                 }
                 else
@@ -409,7 +409,7 @@ namespace BlueDeck.Persistence.Repositories
                     var supervisor = await FindNearestManager(member.Position.ParentComponentId);
                     if (supervisor != null)
                     {
-                        result.Supervisor = new MemberApiResult(supervisor);
+                        result.Supervisor = new SubMemberApiResult(supervisor);
                     }  
                 }                
                 return result;

@@ -17,8 +17,8 @@ namespace BlueDeck.Models.APIModels
         public GenderApiResult Gender { get; set; }
         public RaceApiResult Race { get; set; }
         public DutyStatusApiResult DutyStatus { get; set; }
-        public PositionApiResult Position { get; set; }
-        public MemberApiResult Supervisor { get; set; }
+        public SubPositionApiResult Position { get; set; }
+        public SubMemberApiResult Supervisor { get; set; }
 
         public MemberApiResult()
         {
@@ -36,7 +36,7 @@ namespace BlueDeck.Models.APIModels
             Gender = new GenderApiResult(_member.Gender);
             Race = new RaceApiResult(_member.Race);
             DutyStatus = new DutyStatusApiResult(_member.DutyStatus);
-            Position = new PositionApiResult(_member.Position);            
+            Position = new SubPositionApiResult(_member.Position);            
         }
     }
 }

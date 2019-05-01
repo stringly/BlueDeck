@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BlueDeck.Controllers
 {
     [AllowAnonymous]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorController : Controller
     {
         public IActionResult Error(int? statusCode = null)

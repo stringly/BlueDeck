@@ -15,6 +15,7 @@ namespace BlueDeck.Controllers
     /// Controller for Component CRUD actions
     /// </summary>
     /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ComponentsController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -42,7 +43,9 @@ namespace BlueDeck.Controllers
         /// <param name="sortOrder">The sort order.</param>
         /// <param name="searchString">The search string.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
-        
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Components/Index")]
         public IActionResult Index(string sortOrder, string searchString, int page = 1)
         {
             ComponentIndexListViewModel vm = new ComponentIndexListViewModel(unitOfWork.Components.GetComponentsWithChildren().ToList());
@@ -90,6 +93,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The identifier for a Component.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("Components/Details")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -112,6 +118,8 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
+        [HttpGet]
+        [Route("Components/Create")]
         public IActionResult Create(string returnUrl)
         {
             if (User.IsInRole("GlobalAdmin"))
@@ -148,6 +156,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Components/Create")]
         public IActionResult Create([Bind("ParentComponentId,ComponentName,LineupPosition,Acronym")] ComponentWithComponentListViewModel form, string returnUrl)
         {        
             if (!ModelState.IsValid)
@@ -203,7 +212,9 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
+        [HttpGet]
         [Authorize("CanEditComponent")]
+        [Route("Components/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -246,6 +257,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Components/Edit/{id:int}")]
         public IActionResult Edit(int id, 
             [Bind("ComponentId," +
             "ParentComponentId," +
@@ -360,6 +372,8 @@ namespace BlueDeck.Controllers
         /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [Authorize("CanEditComponent")]
+        [HttpGet]
+        [Route("Components/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)

@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 namespace BlueDeck.Controllers
 {
     [Authorize("CanEditComponent")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class RosterController : Controller
     {
         private IUnitOfWork unitOfWork;

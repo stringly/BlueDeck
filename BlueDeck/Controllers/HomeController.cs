@@ -11,6 +11,7 @@ using System.Security.Claims;
 namespace BlueDeck.Controllers
 {
     [Authorize]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
     {
         private IUnitOfWork unitOfWork;
@@ -19,7 +20,6 @@ namespace BlueDeck.Controllers
         {
             unitOfWork = unit;
         }
-
         public IActionResult Index()
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -54,13 +54,17 @@ namespace BlueDeck.Controllers
             }
             return RedirectToAction(nameof(About));
         }
+        [HttpGet]
         [AllowAnonymous]
+        [Route("Home/About")]
         public IActionResult About()
         {
             ViewBag.Title = "About BlueDeck";
             return View();
         }
         // TODO: Auth handler for User Role?
+        [HttpGet]
+        [Route("Home/Pending")]
         public IActionResult Pending()
         {
             if (User.IsInRole("User")) // in case a user navigates manually to Pending
@@ -99,6 +103,7 @@ namespace BlueDeck.Controllers
             }
         }
         [HttpGet]
+        [Route("Home/Register")]
         public IActionResult Register()
         {
             var identity = User.Identities.FirstOrDefault(x => x.IsAuthenticated);
@@ -148,6 +153,8 @@ namespace BlueDeck.Controllers
                 return RedirectToAction(nameof(Pending));
             }            
         }
+        [HttpGet]
+        [Route("Home/DownloadAlphaRoster/{id:int}")]
         public IActionResult DownloadAlphaRoster(int id)
         {
             AlphaRosterGenerator gen = new AlphaRosterGenerator();
@@ -157,6 +164,8 @@ namespace BlueDeck.Controllers
 
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
+        [HttpGet]
+        [Route("Home/DownloadComponentRoster/{id:int}")]
         public IActionResult DownloadComponentRoster(int id)
         {
             ComponentRosterGenerator gen = new ComponentRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
@@ -164,6 +173,8 @@ namespace BlueDeck.Controllers
             string fileName = $"{unitOfWork.Components.Get(id).Name} Roster {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
+        [HttpGet]
+        [Route("Home/DownloadOrganizationChart/{id:int}")]
         public IActionResult DownloadOrganizationChart(int id)
         {
             OrgChartGenerator gen = new OrgChartGenerator(unitOfWork.Components.GetOrgChartComponentsWithMembersNoMarkup(id));

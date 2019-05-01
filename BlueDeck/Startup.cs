@@ -116,6 +116,9 @@ namespace BlueDeck
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
+                //routes.MapRoute(
+                //    name: "Edit Member Route",
+                //    template: "{controller=Members}/{action=Index}/{id}/{returnUrl}");
             });
         }
     }

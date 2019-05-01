@@ -180,12 +180,6 @@
                         "isManager": true,
                         "isUnique": true,
                         "callsign": null,
-                        "component": {
-                            "componentId": 50,
-                            "name": "District I",
-                            "acronym": "NULL",
-                            "parentComponent": null
-                        }
                     },
                     "supervisor": {
                         "memberId": 1234,
@@ -406,98 +400,48 @@
             <remarks>
             Sample request:
             
-                GET /PositionApi/GetPosition/1
+                GET /PositionsApi/GetPosition/10
                 {
-                    "memberId": 1,
-                    "firstName": "John",
-                    "lastName": "Smith",
-                    "pgpdId": "1234",
-                    "email": "example@email.com",
-                    "contactNumbers": [
+                    "positionId": 10,
+                    "name": "OIC, Squad 1",
+                    "isManager": true,
+                    "isUnique": true,
+                    "callsign": "BAKER-10",
+                    "component": {
+                    "componentId": 84,
+                    "name": "Squad 1",
+                    "acronym": "NULL"
+                     },
+                    "members": [
                         {
-                            "type": "Cell (Personal)",
-                            "phoneNumber": "(123) 456-7890"
-                        }
-                    ],
-                    "rank": {
-                        "rankName": "Lieutenant",
-                        "rankShort": "Lt.",
-                        "payGrade": "L05",
-                        "isSworn": true
-                    },
-                    "gender": {
-                        "name": "Male",
-                        "abbreviation": "M"
-                    },
-                    "race": {
-                        "name": "White",
-                        "abbreviation": "W"
-                    },
-                    "dutyStatus": {
-                        "name": "Full Duty",
-                        "abbreviation": "F",
-                        "hasPolicePower": true
-                    },
-                    "position": {
-                        "positionId": 13,
-                        "name": "Assistant District Commander, District I",
-                        "isManager": true,
-                        "isUnique": true,
-                        "callsign": null,
-                        "component": {
-                            "componentId": 50,
-                            "name": "District I",
-                            "acronym": "NULL",
-                            "parentComponent": null
-                        }
-                    },
-                    "supervisor": {
-                        "memberId": 1234,
-                        "firstName": "Judy",
-                        "lastName": "Johnson",
-                        "pgpdId": "4321",
-                        "email": "example2@email.net",
-                        "contactNumbers": [
-                            {
-                                "type": "Cell (Work)",
-                                "phoneNumber": "(123) 456-7890"
+                            "memberId": 1234,
+                            "firstName": "John",
+                            "lastName": "Smith",
+                            "pgpdId": "4321",
+                            "email": "example@mail.com",
+                            "contactNumbers": [],
+                            "rank": {
+                                "rankName": "Sergeant",
+                                "rankShort": "Sgt.",
+                                "payGrade": "L04",
+                                "isSworn": true
+                            },
+                            "gender": {
+                                "name": "Male",
+                                "abbreviation": "M"
+                            },
+                            "race": {
+                                "name": "Black",
+                                "abbreviation": "B"
+                            },
+                            "dutyStatus": {
+                                "name": "Full Duty",
+                                "abbreviation": "F",
+                                "hasPolicePower": true
                             }
-                        ],
-                        "rank": {
-                            "rankName": "Captain",
-                            "rankShort": "Capt.",
-                            "payGrade": "L06",
-                            "isSworn": true
-                        },
-                        "gender": {
-                            "name": "Female",
-                            "abbreviation": "F"
-                        },
-                        "race": {
-                            "name": "White",
-                            "abbreviation": "W"
-                        },
-                        "dutyStatus": {
-                            "name": "Full Duty",
-                            "abbreviation": "F",
-                            "hasPolicePower": true
-                        },
-                        "position": {
-                            "positionId": 12,
-                            "name": "Commander, District I",
-                            "isManager": true,
-                            "isUnique": true,
-                            "callsign": "CAR-11",
-                            "component": {
-                                "componentId": null,
-                                "name": "",
-                                "acronym": "",
-                                "parentComponent": null
-                            }
-                        },
-                        "supervisor": null
-                    }
-                } 
+                        }
+                    ]
+                }
                 
             </remarks>
             <param name="id">The Position Id of the Position.</param>

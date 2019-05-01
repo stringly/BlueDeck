@@ -9,6 +9,7 @@ using BlueDeck.Models.ViewModels;
 namespace BlueDeck.Controllers
 {
     [Authorize("IsGlobalAdmin")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;
