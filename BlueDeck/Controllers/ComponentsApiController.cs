@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlueDeck.Models;
+using BlueDeck.Models.APIModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,11 +32,11 @@ namespace BlueDeck.Controllers
         ///     {
         ///         {
         ///             name : "District I",
-        ///             blueDeckId : "1"
+        ///             componentId : "1"
         ///         },
         ///         {
         ///             name : "Automotive Services",
-        ///             blueDeckId : "2"
+        ///             componentId : "2"
         ///         }
         ///     }
         ///         
@@ -59,6 +60,119 @@ namespace BlueDeck.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }
+        }
+
+        /// <summary>
+        /// Searches for a Component whose Name or Acronym matches the provided search string.
+        /// </summary>
+        /// <remarks>
+        /// Sample Request
+        /// 
+        ///     GET /ComponentApi/SearchComponents/Example
+        ///     {
+        ///         {
+        ///             name : "Example District",
+        ///             componentId : "1"
+        ///         },
+        ///         {
+        ///             name : "Example Office of Administration",
+        ///             componentId : "4"
+        ///         }
+        ///     }
+        /// </remarks>
+        /// <param name="searchString">The search string.</param>
+        /// <returns>A list of Components that match the search string</returns>
+        /// <response code="200">Returns a list of Components that match the search string</response>
+        /// <response code="400">No Components match the search string</response>
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [HttpGet("SearchComponents/{searchString}")]
+        public async Task<IActionResult> SearchComponents([FromRoute] string searchString)
+        {
+            try
+            {
+                IEnumerable<ComponentListApiListItem> result = new List<ComponentListApiListItem>();
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    IEnumerable<Component> components = unitOfWork.Components.GetAll();
+                    char[] arr = searchString.ToCharArray();
+                    arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c)
+                                      || char.IsWhiteSpace(c)
+                                      || c == '-')));
+                    string lowerString = new string(arr);
+                    lowerString = lowerString.ToLower();
+                    components = components
+                        .Where(x => x.Name.ToLower().Contains(lowerString)
+                        || x.Acronym.ToLower().Contains(lowerString));
+                    if(components.Count() > 0)
+                    {
+                        result = components.ToList().ConvertAll(x => new ComponentListApiListItem(x));
+                    }
+                
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = "Search string parameter is required." });
+                }
+                if (result.Count() > 0)
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound(new { status = "Not Found", message = $"No Components match {searchString}" });
+                }
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }
+        }
+        /// <summary>
+        /// Gets detailed information for a specific Component by Id.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     GET /ComponentApi/GetComponent/1
+        ///     
+        /// </remarks>
+        /// <param name="id">The Component Id of the Component.</param>
+        /// <returns>A collection of detailed information for the Component with the provided Component Id</returns>
+        /// <response code="200">Detailed information for the Component with the provided Component Id</response>
+        /// <response code="400">No Component with the provided Component Id was found</response>
+        [HttpGet("GetComponent/{id}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> GetComponent([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                if (!ComponentExists(id))
+                {
+                    return NotFound(new { status = "Not Found", message = $"No Component with id {id} could be found" });
+                }
+                else
+                {
+                    ComponentApiResult result = await unitOfWork.Components.GetApiComponent(id);
+                    return Ok(result);
+                }
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
+            }
+        }
+
+        private bool ComponentExists(int id)
+        {
+            return unitOfWork.Components.Get(id) != null ? true : false;
         }
     }
 }

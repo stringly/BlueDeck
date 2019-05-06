@@ -244,7 +244,7 @@ namespace BlueDeck.Controllers
 
                 if (!MemberExists(id))
                 {
-                    return NotFound(new { status = "Not Found", message = $"No Member with id={id} exists." });
+                    return NotFound(new { status = "Not Found", message = $"No Member with id {id} cold be found." });
                 }
                 else
                 {

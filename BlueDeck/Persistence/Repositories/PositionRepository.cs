@@ -277,7 +277,15 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Members).ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
                 .FirstOrDefaultAsync(x => x.PositionId == id);
 
-            return new PositionApiResult(position);
+            if (position != null)
+            {
+                return new PositionApiResult(position);
+            }
+            else
+            {
+                return null;
+            }
+            
                     
 
         }

@@ -1,4 +1,5 @@
-﻿using BlueDeck.Models.Types;
+﻿using BlueDeck.Models.APIModels;
+using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -96,5 +97,6 @@ namespace BlueDeck.Models.Repositories
         List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
         List<Member> GetMembersRosterForComponentId(int componentId);
         AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel();
+        Task<ComponentApiResult> GetApiComponent(int id);
     }
 }

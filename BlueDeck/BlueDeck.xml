@@ -4,6 +4,69 @@
         <name>BlueDeck</name>
     </assembly>
     <members>
+        <member name="M:BlueDeck.Controllers.ComponentsApiController.GetComponents">
+            <summary>
+            Gets a List of Component Names/Ids of all Components
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /ComponentApi/GetAll
+                {
+                    {
+                        name : "District I",
+                        componentId : "1"
+                    },
+                    {
+                        name : "Automotive Services",
+                        componentId : "2"
+                    }
+                }
+                    
+            Use this method to retrieve the Component Id of a Component by the Component's name.
+            </remarks>
+            <returns>A list of Component Names/Ids of all current Component</returns>
+            <response code="200">Returns a JSON object containing all current Component</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.ComponentsApiController.SearchComponents(System.String)">
+            <summary>
+            Searches for a Component whose Name or Acronym matches the provided search string.
+            </summary>
+            <remarks>
+            Sample Request
+            
+                GET /ComponentApi/SearchComponents/Example
+                {
+                    {
+                        name : "Example District",
+                        componentId : "1"
+                    },
+                    {
+                        name : "Example Office of Administration",
+                        componentId : "4"
+                    }
+                }
+            </remarks>
+            <param name="searchString">The search string.</param>
+            <returns>A list of Components that match the search string</returns>
+            <response code="200">Returns a list of Components that match the search string</response>
+            <response code="400">No Components match the search string</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.ComponentsApiController.GetComponent(System.Int32)">
+            <summary>
+            Gets detailed information for a specific Component by Id.
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /ComponentApi/GetComponent/1
+                
+            </remarks>
+            <param name="id">The Component Id of the Component.</param>
+            <returns>A collection of detailed information for the Component with the provided Component Id</returns>
+            <response code="200">Detailed information for the Component with the provided Component Id</response>
+            <response code="400">No Component with the provided Component Id was found</response>
+        </member>
         <member name="T:BlueDeck.Controllers.ComponentsController">
             <summary>
             Controller for Component CRUD actions

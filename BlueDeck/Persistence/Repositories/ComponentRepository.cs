@@ -6,7 +6,8 @@ using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-
+using BlueDeck.Models.APIModels;
+using System.Threading.Tasks;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -633,6 +634,46 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Positions)
                 .ToList());
             return vm;
+        }
+
+        public async Task<ComponentApiResult> GetApiComponent(int id)
+        {
+            
+            //Component component = await ApplicationDbContext.Components
+                //.Include(x => x.ParentComponent)
+                //.Include(x => x.Positions)
+                //    .ThenInclude(x => x.Members)
+                //        .ThenInclude(x => x.Race)
+                //    .ThenInclude(x => x.Members)
+                //        .ThenInclude(x => x.Gender)
+                //    .ThenInclude(x => x.Members)
+                //        .ThenInclude(x => x.DutyStatus)
+                //    .ThenInclude(x => x.Members)
+                //        .ThenInclude(x => x.Rank)
+                //    .ThenInclude(x => x.Members)
+                //        .ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
+                //    .FirstOrDefaultAsync(x => x.ComponentId == id);
+            Component component = await ApplicationDbContext.Components.FirstOrDefaultAsync(x => x.ComponentId == id);
+            if (component != null)
+            {
+                ApplicationDbContext.Set<Position>().Where(x => x.ParentComponentId == component.ComponentId)
+                    .Include(x => x.Members)
+                        .ThenInclude(x => x.Race)
+                    .ThenInclude(x => x.Members)
+                        .ThenInclude(x => x.Gender)
+                    .ThenInclude(x => x.Members)
+                        .ThenInclude(x => x.DutyStatus)
+                    .ThenInclude(x => x.Members)
+                        .ThenInclude(x => x.Rank)
+                    .ThenInclude(x => x.Members)
+                        .ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
+                    .Load();
+                return new ComponentApiResult(component);
+            }
+            else
+            {
+                return null;
+            }            
         }
     }
 

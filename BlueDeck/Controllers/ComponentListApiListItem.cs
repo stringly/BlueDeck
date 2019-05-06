@@ -1,4 +1,5 @@
 ﻿using BlueDeck.Models.Types;
+using BlueDeck.Models;
 
 namespace BlueDeck.Controllers
 {
@@ -21,6 +22,12 @@ namespace BlueDeck.Controllers
         {
             Name = _c.ComponentName;
             ComponentId = _c.Id;
+        }
+
+        public ComponentListApiListItem(Component _c)
+        {
+            Name = _c.Name;
+            ComponentId = _c.ComponentId;
         }
     }
 }

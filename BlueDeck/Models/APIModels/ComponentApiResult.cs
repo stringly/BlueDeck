@@ -10,7 +10,8 @@ namespace BlueDeck.Models.APIModels
         public int? ComponentId { get; set; }
         public string Name { get; set; }
         public string Acronym { get; set; }
-        public ComponentApiResult ParentComponent { get; set; }
+        public SubComponentApiResult ParentComponent { get; set; }
+        public List<PositionApiResult> Positions { get; set; }
 
         public ComponentApiResult()
         {
@@ -23,12 +24,11 @@ namespace BlueDeck.Models.APIModels
             Acronym = _component?.Acronym ?? "";
             if (_component?.ParentComponent != null)
             {
-                ParentComponent = new ComponentApiResult()
-                {
-                    ComponentId = _component.ParentComponentId,
-                    Name = _component.ParentComponent.Name,
-                    Acronym = _component.Acronym                    
-                };
+                ParentComponent = new SubComponentApiResult(_component.ParentComponent);                
+            }
+            if (_component?.Positions != null)
+            {
+                Positions = _component.Positions.ToList().ConvertAll(x => new PositionApiResult(x));
             }
             
         }
