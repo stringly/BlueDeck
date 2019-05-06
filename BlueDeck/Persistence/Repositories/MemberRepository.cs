@@ -27,7 +27,6 @@ namespace BlueDeck.Persistence.Repositories
          : base(context)
         {
         }
-
         /// <summary>
         /// Gets the application database context.
         /// </summary>
@@ -37,7 +36,6 @@ namespace BlueDeck.Persistence.Repositories
         public ApplicationDbContext ApplicationDbContext {
             get { return Context as ApplicationDbContext; }
         }
-
         /// <summary>
         /// Gets the members with positions.
         /// </summary>
@@ -60,7 +58,6 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Rank)
                 .ToList();
         }
-
         public MemberIndexListViewModel GetMemberIndexListViewModel()
         {
             MemberIndexListViewModel vm = new MemberIndexListViewModel();
@@ -68,7 +65,6 @@ namespace BlueDeck.Persistence.Repositories
             return vm;              
                                     
         }
-
         public AdminMemberIndexListViewModel GetAdminMemberIndexListViewModel()
         {
             AdminMemberIndexListViewModel vm = new AdminMemberIndexListViewModel();
@@ -81,7 +77,6 @@ namespace BlueDeck.Persistence.Repositories
                             .ConvertAll(x => new AdminMemberIndexViewModelListItem(x));
             return vm;
         }
-
         public Member GetMemberWithPosition(int memberId)
         {
             return ApplicationDbContext.Members
@@ -96,9 +91,6 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.DutyStatus)                
                 .FirstOrDefault();
         }
-
-        
-
         public Member GetHomePageMember(int memberId)
         {
             return ApplicationDbContext.Members
@@ -131,7 +123,6 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Rank)                    
                 .FirstOrDefault();
         }
-
         public IEnumerable<MemberSelectListItem> GetAllMemberSelectListItems()
         {
             return ApplicationDbContext.Members
@@ -139,7 +130,6 @@ namespace BlueDeck.Persistence.Repositories
                 .OrderByDescending(x => x.IdNumber)
                 .ToList().ConvertAll(x => new MemberSelectListItem { MemberId = x.MemberId, MemberName = x.GetTitleName() });
         }
-
         public void UpdateMember(MemberAddEditViewModel form)
         {
             Member m;
@@ -281,7 +271,6 @@ namespace BlueDeck.Persistence.Repositories
                     break;
             }
         }
-
         public void Remove(int memberId)
         {
             Member m = ApplicationDbContext.Members
@@ -292,7 +281,6 @@ namespace BlueDeck.Persistence.Repositories
             //ApplicationDbContext.Roles.RemoveRange(m.CurrentRoles);
             ApplicationDbContext.Members.Remove(m);
         }
-
         public Member GetMemberWithRoles(string LDAPName)
         {
             return ApplicationDbContext.Members
@@ -302,7 +290,6 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Rank)                
                 .FirstOrDefault(x => x.LDAPName == LDAPName);
         }
-
         /// <summary>
         /// Gets the home page view model for member.
         /// </summary>
@@ -340,7 +327,6 @@ namespace BlueDeck.Persistence.Repositories
             result.SetComponentOrder(initial);
             return result;
         }
-
         public int GetMemberParentComponentId(int memberid)
         {
             Member m = ApplicationDbContext.Members
@@ -352,13 +338,11 @@ namespace BlueDeck.Persistence.Repositories
                 
 
         }
-
         public List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId)
         {
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             return ApplicationDbContext.GetMembersUserCanEdit.FromSql("dbo.Get_Members_User_Can_Edit @ComponentId", param1).ToList();
         }
-
         public List<Member> GetGlobalAdmins()
         {
             return ApplicationDbContext.Members
@@ -367,12 +351,10 @@ namespace BlueDeck.Persistence.Repositories
                 .Where(x => x.CurrentRoles.Any(r => r.RoleType.RoleTypeName == "GlobalAdmin"))
                 .ToList();
         }
-
         public List<Member> GetPendingAccounts()
         {
             return ApplicationDbContext.Members.Where(x => x.AppStatusId == 2).ToList();
         }
-
         public async Task<MemberApiResult> GetApiMember(int id)
         {
             var member = await ApplicationDbContext.Members
@@ -416,7 +398,6 @@ namespace BlueDeck.Persistence.Repositories
             }
             
         }
-
         private async Task<Member> FindNearestManager(int _componentId)
         {
             // attempt to locate a manager in the current component's positions
@@ -451,5 +432,9 @@ namespace BlueDeck.Persistence.Repositories
                 return m;
             }                                    
         }        
+        public IEnumerable<RoleType> GetMemberRoles()
+        {
+            return ApplicationDbContext.RoleTypes.ToList();
+        }
     }
 }

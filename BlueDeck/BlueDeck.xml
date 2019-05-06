@@ -150,6 +150,22 @@
             <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/></param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetAll">
+            <summary>
+            Gets a List of all BlueDeck enumberable types
+            </summary>
+            <remarks>
+            Sample request:
+            
+                GET /EnumsApi/GetAll
+                {
+                }
+                    
+            Use this method to retrieve a collection of all BlueDeck Enumerable types
+            </remarks>
+            <returns>A collection of all BlueDeck Enumerable types</returns>
+            <response code="200">Returns a JSON object containing all BlueDeck Enumerable types</response>
+        </member>
         <member name="M:BlueDeck.Controllers.MembersApiController.GetMembers">
             <summary>
             Gets a List of Member Names/BlueDeck Ids of all Members

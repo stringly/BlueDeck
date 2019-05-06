@@ -37,5 +37,6 @@ namespace BlueDeck.Models.Repositories
         List<Member> GetGlobalAdmins();
         List<Member> GetPendingAccounts();
         Task<MemberApiResult> GetApiMember(int id);
+        IEnumerable<RoleType> GetMemberRoles();
     }
 }
