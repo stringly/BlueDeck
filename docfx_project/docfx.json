@@ -33,7 +33,7 @@
       {
         "files": [
           "faq/**.md",
-          "faq/toc.yml"
+          "faq/**/toc.yml"
         ]
       }
     ],

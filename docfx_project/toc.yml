@@ -1,6 +1,6 @@
 - name: Articles
   href: articles/
-  name: FAQ
+- name: FAQ
   href: faq/
 - name: Api Documentation
   href: api/
