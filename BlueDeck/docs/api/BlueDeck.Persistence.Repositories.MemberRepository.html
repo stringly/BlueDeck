@@ -1,0 +1,853 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MemberRepository
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MemberRepository
+   ">
+    <meta name="generator" content="docfx 2.42.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BlueDeck.Persistence.Repositories.MemberRepository">
+  
+  
+  <h1 id="BlueDeck_Persistence_Repositories_MemberRepository" data-uid="BlueDeck.Persistence.Repositories.MemberRepository" class="text-break">Class MemberRepository
+  </h1>
+  <div class="markdown level0 summary"><p>A repository for the Member entity</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html">Repository</a>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</div>
+    <div class="level2"><span class="xref">MemberRepository</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="BlueDeck.Models.Repositories.IMemberRepository.html">IMemberRepository</a></div>
+    <div><a class="xref" href="BlueDeck.Models.Repositories.IRepository-1.html">IRepository</a>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Context">Repository&lt;Member&gt;.Context</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Get_System_Int32_">Repository&lt;Member&gt;.Get(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_GetAll">Repository&lt;Member&gt;.GetAll()</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Find_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___">Repository&lt;Member&gt;.Find(Expression&lt;Func&lt;Member, Boolean&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_SingleOrDefault_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___">Repository&lt;Member&gt;.SingleOrDefault(Expression&lt;Func&lt;Member, Boolean&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Add__0_">Repository&lt;Member&gt;.Add(Member)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_AddRange_System_Collections_Generic_IEnumerable__0__">Repository&lt;Member&gt;.AddRange(IEnumerable&lt;Member&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Remove__0_">Repository&lt;Member&gt;.Remove(Member)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_RemoveRange_System_Collections_Generic_IEnumerable__0__">Repository&lt;Member&gt;.RemoveRange(IEnumerable&lt;Member&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="BlueDeck.Persistence.Repositories.html">BlueDeck.Persistence.Repositories</a></h6>
+  <h6><strong>Assembly</strong>: BlueDeck.dll</h6>
+  <h5 id="BlueDeck_Persistence_Repositories_MemberRepository_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MemberRepository : Repository&lt;Member&gt;, IMemberRepository, IRepository&lt;Member&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository__ctor_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.#ctor*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository__ctor_BlueDeck_Models_ApplicationDbContext_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">MemberRepository(ApplicationDbContext)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="BlueDeck.Persistence.Repositories.MemberRepository.html">MemberRepository</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemberRepository(ApplicationDbContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The <a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_ApplicationDbContext_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.ApplicationDbContext*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_ApplicationDbContext" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.ApplicationDbContext">ApplicationDbContext</h4>
+  <div class="markdown level1 summary"><p>Gets the application database context.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationDbContext ApplicationDbContext { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a></td>
+        <td><p>The application database context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetAdminMemberIndexListViewModel_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetAdminMemberIndexListViewModel*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetAdminMemberIndexListViewModel" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetAdminMemberIndexListViewModel">GetAdminMemberIndexListViewModel()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AdminMemberIndexListViewModel GetAdminMemberIndexListViewModel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ViewModels.AdminMemberIndexListViewModel.html">AdminMemberIndexListViewModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetAllMemberSelectListItems_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetAllMemberSelectListItems*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetAllMemberSelectListItems" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetAllMemberSelectListItems">GetAllMemberSelectListItems()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;MemberSelectListItem&gt; GetAllMemberSelectListItems()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.Types.MemberSelectListItem.html">MemberSelectListItem</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetApiMember_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetApiMember_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember(System.Int32)">GetApiMember(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;MemberApiResult&gt; GetApiMember(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="BlueDeck.Models.APIModels.MemberApiResult.html">MemberApiResult</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetGlobalAdmins_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetGlobalAdmins*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetGlobalAdmins" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetGlobalAdmins">GetGlobalAdmins()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Member&gt; GetGlobalAdmins()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetHomePageMember_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetHomePageMember*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetHomePageMember_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetHomePageMember(System.Int32)">GetHomePageMember(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Member GetHomePageMember(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Member.html">Member</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetHomePageViewModelForMember_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetHomePageViewModelForMember*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetHomePageViewModelForMember_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetHomePageViewModelForMember(System.Int32)">GetHomePageViewModelForMember(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the home page view model for member.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public HomePageViewModel GetHomePageViewModelForMember(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td><p>The member identifier.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ViewModels.HomePageViewModel.html">HomePageViewModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BlueDeck_Persistence_Repositories_MemberRepository_GetHomePageViewModelForMember_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This is an attempt to try and apply some better SOLID principals to the
+way I build these viewModels...</p>
+</div>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberIndexListViewModel_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberIndexListViewModel*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberIndexListViewModel" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberIndexListViewModel">GetMemberIndexListViewModel()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemberIndexListViewModel GetMemberIndexListViewModel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ViewModels.MemberIndexListViewModel.html">MemberIndexListViewModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberParentComponentId_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberParentComponentId*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberParentComponentId_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberParentComponentId(System.Int32)">GetMemberParentComponentId(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetMemberParentComponentId(int memberid)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberid</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberRoles_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberRoles*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberRoles" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberRoles">GetMemberRoles()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;RoleType&gt; GetMemberRoles()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.RoleType.html">RoleType</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersUserCanEdit_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersUserCanEdit*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersUserCanEdit_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersUserCanEdit(System.Int32)">GetMembersUserCanEdit(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;MemberSelectListItem&gt; GetMembersUserCanEdit(int parentComponentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Types.MemberSelectListItem.html">MemberSelectListItem</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersWithPositions_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersWithPositions*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersWithPositions" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersWithPositions">GetMembersWithPositions()</h4>
+  <div class="markdown level1 summary"><p>Gets the members with positions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Member&gt; GetMembersWithPositions()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersWithRank_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersWithRank*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMembersWithRank" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMembersWithRank">GetMembersWithRank()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Member&gt; GetMembersWithRank()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithDemographicsAndDutyStatus_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithDemographicsAndDutyStatus*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithDemographicsAndDutyStatus_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithDemographicsAndDutyStatus(System.Int32)">GetMemberWithDemographicsAndDutyStatus(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Member GetMemberWithDemographicsAndDutyStatus(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Member.html">Member</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithPosition_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithPosition*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithPosition_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithPosition(System.Int32)">GetMemberWithPosition(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Member GetMemberWithPosition(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Member.html">Member</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithRoles_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithRoles*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetMemberWithRoles_System_String_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithRoles(System.String)">GetMemberWithRoles(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Member GetMemberWithRoles(string LDAPName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">LDAPName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Member.html">Member</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_GetPendingAccounts_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetPendingAccounts*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_GetPendingAccounts" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.GetPendingAccounts">GetPendingAccounts()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Member&gt; GetPendingAccounts()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_Remove_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.Remove*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_Remove_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.Remove(System.Int32)">Remove(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Remove(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_MemberRepository_UpdateMember_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.UpdateMember*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_MemberRepository_UpdateMember_BlueDeck_Models_ViewModels_MemberAddEditViewModel_" data-uid="BlueDeck.Persistence.Repositories.MemberRepository.UpdateMember(BlueDeck.Models.ViewModels.MemberAddEditViewModel)">UpdateMember(MemberAddEditViewModel)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateMember(MemberAddEditViewModel form)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ViewModels.MemberAddEditViewModel.html">MemberAddEditViewModel</a></td>
+        <td><span class="parametername">form</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="BlueDeck.Models.Repositories.IMemberRepository.html">IMemberRepository</a>
+  </div>
+  <div>
+      <a class="xref" href="BlueDeck.Models.Repositories.IRepository-1.html">IRepository&lt;TEntity&gt;</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html">Repository</a>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</div>
+      <div><a class="xref" href="BlueDeck.Models.Repositories.IMemberRepository.html">IMemberRepository</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

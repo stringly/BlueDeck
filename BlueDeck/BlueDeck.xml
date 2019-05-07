@@ -159,6 +159,39 @@
             
                 GET /EnumsApi/GetAll
                 {
+                    "genders": [
+                        {
+                            "genderId": 1,
+                            "genderFullName": "Unknown",
+                            "abbreviation": "U",
+                            "members": null
+                        },
+                        {
+                            "genderId": 2,
+                            "genderFullName": "Male",
+                            "abbreviation": "M",
+                            "members": null
+                        }
+                    ],
+                    "ranks": [
+                        {
+                            "rankId": 1,
+                            "rankFullName": "Police Officer",
+                            "rankShort": "P/O",
+                            "payGrade": "L01",
+                            "isSworn": true,
+                            "members": null
+                        },
+                        {
+                            "rankId": 2,
+                            "rankFullName": "Police Officer First Class",
+                            "rankShort": "POFC",
+                            "payGrade": "L02",
+                            "isSworn": true,
+                            "members": null
+                        }
+                    ],
+                    ...              
                 }
                     
             Use this method to retrieve a collection of all BlueDeck Enumerable types

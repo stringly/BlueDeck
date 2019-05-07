@@ -1,0 +1,1068 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ComponentRepository
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ComponentRepository
+   ">
+    <meta name="generator" content="docfx 2.42.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository">
+  
+  
+  <h1 id="BlueDeck_Persistence_Repositories_ComponentRepository" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository" class="text-break">Class ComponentRepository
+  </h1>
+  <div class="markdown level0 summary"><p>A repository for the Component Entity</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html">Repository</a>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</div>
+    <div class="level2"><span class="xref">ComponentRepository</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="BlueDeck.Models.Repositories.IComponentRepository.html">IComponentRepository</a></div>
+    <div><a class="xref" href="BlueDeck.Models.Repositories.IRepository-1.html">IRepository</a>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Context">Repository&lt;Component&gt;.Context</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Get_System_Int32_">Repository&lt;Component&gt;.Get(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_GetAll">Repository&lt;Component&gt;.GetAll()</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Find_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___">Repository&lt;Component&gt;.Find(Expression&lt;Func&lt;Component, Boolean&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_SingleOrDefault_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___">Repository&lt;Component&gt;.SingleOrDefault(Expression&lt;Func&lt;Component, Boolean&gt;&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Add__0_">Repository&lt;Component&gt;.Add(Component)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_AddRange_System_Collections_Generic_IEnumerable__0__">Repository&lt;Component&gt;.AddRange(IEnumerable&lt;Component&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_Remove__0_">Repository&lt;Component&gt;.Remove(Component)</a>
+    </div>
+    <div>
+      <a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html#BlueDeck_Persistence_Repositories_Repository_1_RemoveRange_System_Collections_Generic_IEnumerable__0__">Repository&lt;Component&gt;.RemoveRange(IEnumerable&lt;Component&gt;)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="BlueDeck.Persistence.Repositories.html">BlueDeck.Persistence.Repositories</a></h6>
+  <h6><strong>Assembly</strong>: BlueDeck.dll</h6>
+  <h5 id="BlueDeck_Persistence_Repositories_ComponentRepository_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ComponentRepository : Repository&lt;Component&gt;, IComponentRepository, IRepository&lt;Component&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository__ctor_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.#ctor*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository__ctor_BlueDeck_Models_ApplicationDbContext_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">ComponentRepository(ApplicationDbContext)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="BlueDeck.Persistence.Repositories.ComponentRepository.html">ComponentRepository</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ComponentRepository(ApplicationDbContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The <a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_ApplicationDbContext_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.ApplicationDbContext*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_ApplicationDbContext" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.ApplicationDbContext">ApplicationDbContext</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ApplicationDbContext ApplicationDbContext { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ApplicationDbContext.html">ApplicationDbContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_ComponentNameNotAvailable_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.ComponentNameNotAvailable*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_ComponentNameNotAvailable_BlueDeck_Models_Component_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.ComponentNameNotAvailable(BlueDeck.Models.Component)">ComponentNameNotAvailable(Component)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ComponentNameNotAvailable(Component c)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Component.html">Component</a></td>
+        <td><span class="parametername">c</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetAdminComponentIndexListViewModel_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetAdminComponentIndexListViewModel*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetAdminComponentIndexListViewModel" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetAdminComponentIndexListViewModel">GetAdminComponentIndexListViewModel()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.html">AdminComponentIndexListViewModel</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetApiComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetApiComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetApiComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetApiComponent(System.Int32)">GetApiComponent(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;ComponentApiResult&gt; GetApiComponent(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="BlueDeck.Models.APIModels.ComponentApiResult.html">ComponentApiResult</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetChildComponentCountForComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetChildComponentCountForComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetChildComponentCountForComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetChildComponentCountForComponent(System.Int32)">GetChildComponentCountForComponent(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetChildComponentCountForComponent(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetChildComponentsForComponentId_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetChildComponentsForComponentId*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetChildComponentsForComponentId_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetChildComponentsForComponentId(System.Int32)">GetChildComponentsForComponentId(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ComponentSelectListItem&gt; GetChildComponentsForComponentId(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Types.ComponentSelectListItem.html">ComponentSelectListItem</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentAndChildren_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentAndChildren*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentAndChildren_System_Int32_System_Collections_Generic_List_BlueDeck_Models_Component__" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentAndChildren(System.Int32,System.Collections.Generic.List{BlueDeck.Models.Component})">GetComponentAndChildren(Int32, List&lt;Component&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Component&gt; GetComponentAndChildren(int parentComponentId, List&lt;Component&gt; ccl)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</td>
+        <td><span class="parametername">ccl</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentLineupItemsForComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentLineupItemsForComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentLineupItemsForComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentLineupItemsForComponent(System.Int32)">GetComponentLineupItemsForComponent(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ComponentPositionLineupItem&gt; GetComponentLineupItemsForComponent(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Types.ComponentPositionLineupItem.html">ComponentPositionLineupItem</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsAndChildrenSP_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsAndChildrenSP*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsAndChildrenSP_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsAndChildrenSP(System.Int32)">GetComponentsAndChildrenSP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Component&gt; GetComponentsAndChildrenSP(int parentComponentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsAndChildrenWithParentSP_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsAndChildrenWithParentSP*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsAndChildrenWithParentSP_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsAndChildrenWithParentSP(System.Int32)">GetComponentsAndChildrenWithParentSP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Component&gt; GetComponentsAndChildrenWithParentSP(int parentComponentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentSelectListItems_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentSelectListItems*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentSelectListItems" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentSelectListItems">GetComponentSelectListItems()</h4>
+  <div class="markdown level1 summary"><p>Gets the list of <a class="xref" href="BlueDeck.Models.Types.ComponentSelectListItem.html">ComponentSelectListItem</a>s to populate a Component select list</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ComponentSelectListItem&gt; GetComponentSelectListItems()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Types.ComponentSelectListItem.html">ComponentSelectListItem</a>&gt;</td>
+        <td><p>A <span class="xref">List{BlueDeck.Models.Types.ComponentSelectListItem}</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsWithChildren_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsWithChildren*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentsWithChildren" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentsWithChildren">GetComponentsWithChildren()</h4>
+  <div class="markdown level1 summary"><p>Gets the list components with all member children.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;Component&gt; GetComponentsWithChildren()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.IEnumerable{BlueDeck.Models.Component}</span></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithChildren_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithChildren*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithChildren_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithChildren(System.Int32)">GetComponentWithChildren(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the component with all of it's member children.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Component GetComponentWithChildren(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The Component identifier.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Component.html">Component</a></td>
+        <td><p>A <a class="xref" href="BlueDeck.Models.Component.html">Component</a></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithParentComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithParentComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithParentComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithParentComponent(System.Int32)">GetComponentWithParentComponent(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the Component with it's Parent Component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Component GetComponentWithParentComponent(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The ComponentId of the desired Component Entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Component.html">Component</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithPositions_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithPositions*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentWithPositions_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithPositions(System.Int32)">GetComponentWithPositions(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the Component with it's Positions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Component GetComponentWithPositions(int id)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">id</span></td>
+        <td><p>The ComponentId of the requested Component.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Component.html">Component</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetMembersRosterForComponentId_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetMembersRosterForComponentId*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetMembersRosterForComponentId_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetMembersRosterForComponentId(System.Int32)">GetMembersRosterForComponentId(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;Member&gt; GetMembersRosterForComponentId(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Member.html">Member</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithMembers_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithMembers_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">GetOrgChartComponentsWithMembers(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the list of <a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ChartableComponentWithMember&gt; GetOrgChartComponentsWithMembers(int parentComponentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a>&gt;</td>
+        <td><p>A <span class="xref">IEnumerable{T}</span> list of <a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a> objects</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithMembersNoMarkup_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembersNoMarkup*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithMembersNoMarkup_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembersNoMarkup(System.Int32)">GetOrgChartComponentsWithMembersNoMarkup(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the list of <a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;ChartableComponentWithMember&gt; GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">parentComponentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a>&gt;</td>
+        <td><p>A <span class="xref">IEnumerable{T}</span> list of <a class="xref" href="BlueDeck.Models.ChartableComponentWithMember.html">ChartableComponentWithMember</a> objects</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithoutMembers_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetOrgChartComponentsWithoutMembers" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers">GetOrgChartComponentsWithoutMembers()</h4>
+  <div class="markdown level1 summary"><p>Gets the list of <a class="xref" href="BlueDeck.Models.ChartableComponent.html">ChartableComponent</a>s.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ChartableComponent&gt; GetOrgChartComponentsWithoutMembers()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="BlueDeck.Models.ChartableComponent.html">ChartableComponent</a>&gt;</td>
+        <td><p>A <span class="xref">IEnumerable{T}</span> list of <a class="xref" href="BlueDeck.Models.ChartableComponent.html">ChartableComponent</a> objects</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_GetPositionLineupItemsForComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetPositionLineupItemsForComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_GetPositionLineupItemsForComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.GetPositionLineupItemsForComponent(System.Int32)">GetPositionLineupItemsForComponent(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;PositionLineupItem&gt; GetPositionLineupItemsForComponent(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="BlueDeck.Models.Types.PositionLineupItem.html">PositionLineupItem</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_RemoveComponent_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.RemoveComponent*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_RemoveComponent_System_Int32_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.RemoveComponent(System.Int32)">RemoveComponent(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveComponent(int componentId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">componentId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="BlueDeck_Persistence_Repositories_ComponentRepository_UpdateComponentAndSetLineup_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.UpdateComponentAndSetLineup*"></a>
+  <h4 id="BlueDeck_Persistence_Repositories_ComponentRepository_UpdateComponentAndSetLineup_BlueDeck_Models_Component_" data-uid="BlueDeck.Persistence.Repositories.ComponentRepository.UpdateComponentAndSetLineup(BlueDeck.Models.Component)">UpdateComponentAndSetLineup(Component)</h4>
+  <div class="markdown level1 summary"><p>Adds a new Component or Updates an existing Component and adjusts the LineupPosition of all sibling Components within the ParentComponent</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateComponentAndSetLineup(Component c)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="BlueDeck.Models.Component.html">Component</a></td>
+        <td><span class="parametername">c</span></td>
+        <td><p>The <a class="xref" href="BlueDeck.Models.Component.html">Component</a> being added or edited.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="BlueDeck_Persistence_Repositories_ComponentRepository_UpdateComponentAndSetLineup_BlueDeck_Models_Component__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If this method is used to edit an existing component, then the Component parameter must be a new Component instance set to the form values of the existing component.
+This is because the method needs to know the &quot;unedited&quot; value of the Component's LineupPosition to determine whether the Component has been moved up or down
+in it's ParentComponent's Lineup.
+///</p>
+</div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="BlueDeck.Models.Repositories.IComponentRepository.html">IComponentRepository</a>
+  </div>
+  <div>
+      <a class="xref" href="BlueDeck.Models.Repositories.IRepository-1.html">IRepository&lt;TEntity&gt;</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><a class="xref" href="BlueDeck.Persistence.Repositories.Repository-1.html">Repository</a>&lt;<a class="xref" href="BlueDeck.Models.Component.html">Component</a>&gt;</div>
+      <div><a class="xref" href="BlueDeck.Models.Repositories.IComponentRepository.html">IComponentRepository</a></div>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
