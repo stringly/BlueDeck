@@ -2241,10 +2241,58 @@
       "output": {
         ".html": {
           "relative_path": "articles/toc.html",
-          "hash": "t7iiFrmuYmrKWisdq+lN6Q=="
+          "hash": "a1xwkn3OpvkTNACH6/V1Hg=="
         }
       },
       "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/wtf.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/wtf.html",
+          "hash": "Ri7Y0UiciCbyEDggndeaDQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "faq/i_dont.understand.md",
+      "output": {
+        ".html": {
+          "relative_path": "faq/i_dont.understand.html",
+          "hash": "SOdfbA+2KGRo5uaO/52jtg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "faq/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "faq/toc.html",
+          "hash": "dJwN/ew0wok8zBK5t2TGLw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "faq/what_the_hell.md",
+      "output": {
+        ".html": {
+          "relative_path": "faq/what_the_hell.html",
+          "hash": "FJb4fAsgp17H2ZTCQ5mnoQ=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2265,7 +2313,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "k+/dkjFuwAVS32HduMpmBw=="
+          "hash": "lgh2NPLWRYvD3IcgkJFIbg=="
         }
       },
       "is_incremental": false,
@@ -2291,8 +2339,8 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 3,
-          "skipped_file_count": 3
+          "total_file_count": 6,
+          "skipped_file_count": 6
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
