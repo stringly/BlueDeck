@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="docs\**" />
     <Compile Remove="Helpers\**" />
+    <Content Remove="docs\**" />
     <Content Remove="Helpers\**" />
+    <EmbeddedResource Remove="docs\**" />
     <EmbeddedResource Remove="Helpers\**" />
+    <None Remove="docs\**" />
     <None Remove="Helpers\**" />
   </ItemGroup>
 
@@ -45,10 +49,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="docs\" />
   </ItemGroup>
 
   <ItemGroup>
