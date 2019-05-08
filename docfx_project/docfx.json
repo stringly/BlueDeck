@@ -32,8 +32,14 @@
       },
       {
         "files": [
-          "faq/**.md",
-          "faq/**/toc.yml"
+          "faq/**.md",          
+          "faq/toc.yml"
+        ]
+      },
+      {
+        "files": [
+          "help/**.md",
+          "help/toc.yml"
         ]
       }
     ],

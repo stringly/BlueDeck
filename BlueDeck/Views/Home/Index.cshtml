@@ -316,9 +316,9 @@
             }
             else {
                 componentId = $(this).val();
-                document.getElementById("GenerateAlphaRoster").href = "Home/DownloadAlphaRoster?id=" + componentId;
-                document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster?id=" + componentId;;
-                document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart?id=" + componentId;;
+                document.getElementById("GenerateAlphaRoster").href = "Home/DownloadAlphaRoster/" + componentId;
+                document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster/" + componentId;;
+                document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart/" + componentId;;
             }
             
         });

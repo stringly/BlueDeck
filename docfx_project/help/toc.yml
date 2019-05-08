@@ -1,0 +1,27 @@
+- name: BlueDeck Help
+  href: bluedeck_help_main.md
+- name: Logging On
+  href: logging_on.md
+  items:
+    - name: Creating an Account
+      href: create_an_account.md
+    - name: Account Activation
+      href: account_activation.md
+- name: BlueDeck Pages
+  href: bluedeck_pages.md
+  items:
+    - name: Home Page
+      href: home_page.md
+    - name: Component Index
+      href: component_index.md
+    - name: Position Index
+      href: position_index.md
+    - name: Member Index
+      href: member_index.md
+    - name: Administrative Views
+      href: admin_views.md
+      items: 
+        - name: Roster Manager
+          href: roster_manager.md
+        - name: Admin View
+          href: admin_view.md

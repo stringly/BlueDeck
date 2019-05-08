@@ -143,61 +143,69 @@
                             <hr />
                             @if (IsAdmin)
                             {
-                            <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="LDAPName" class="control-label"></label>
-                                    <input asp-for="LDAPName" class="form-control" />
-                                    <span asp-validation-for="LDAPName" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="AppStatusId" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.AppStatusId,
-                                                            new SelectList(Model.AppStatuses, "Id", "Name"),
-                                                            "Choose Application Status",
-                                                            new { @class = "form-control" })
-                                    <span asp-validation-for="AppStatusId" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-2 form-group">
-                                    <div class="form-checkbox">
-                                        <label>
-                                            <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
-                                        </label>
+                                <div class="row">
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="LDAPName" class="control-label"></label>
+                                        <input asp-for="LDAPName" class="form-control" />
+                                        <span asp-validation-for="LDAPName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="AppStatusId" class="control-label"></label>
+                                        @Html.DropDownListFor(model => model.AppStatusId,
+                                                                new SelectList(Model.AppStatuses, "Id", "Name"),
+                                                                "Choose Application Status",
+                                                                new { @class = "form-control" })
+                                        <span asp-validation-for="AppStatusId" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <div class="form-checkbox">
+                                            <label>
+                                                <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <div class="form-checkbox">
+                                            <label>
+                                                <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2 form-group">
+                                        <div class="form-checkbox">
+                                            <label>
+                                                <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-2 form-group">
-                                    <div class="form-checkbox">
-                                        <label>
-                                            <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
-                                        </label>
+                                <div class="row">
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="Creator" class="control-label"></label><br />
+                                        @Html.DisplayFor(model => model.Creator)
+                                    </div>
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="CreatedDate" class="control-label"></label><br />
+                                        @Html.DisplayFor(model => model.CreatedDate)
+                                    </div>
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                                        @Html.DisplayFor(model => model.LastModifiedBy)
+                                    </div>
+                                    <div class="col-sm-3 form-group">
+                                        <label asp-for="LastModified" class="control-label"></label><br />
+                                        @Html.DisplayFor(model => model.LastModified)
                                     </div>
                                 </div>
-                                <div class="col-sm-2 form-group">
-                                    <div class="form-checkbox">
-                                        <label>
-                                            <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="Creator" class="control-label"></label><br />
-                                    @Html.DisplayFor(model => model.Creator)
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="CreatedDate" class="control-label"></label><br />
-                                    @Html.DisplayFor(model => model.CreatedDate)
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="LastModifiedBy" class="control-label"></label><br />
-                                    @Html.DisplayFor(model => model.LastModifiedBy)
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="LastModified" class="control-label"></label><br />
-                                    @Html.DisplayFor(model => model.LastModified)
-                                </div>
-                            </div>
-                            <hr />
+                                <hr />
+                            }
+                            else
+                            {
+                                <input type="hidden" asp-for="@Model.AppStatusId">
+                                <input type="hidden" asp-for="@Model.LDAPName">
+                                <input type="hidden" asp-for="@Model.IsUser">
+                                <input type="hidden" asp-for="@Model.IsComponentAdmin">
+                                <input type="hidden" asp-for="@Model.IsGlobalAdmin">
                             }
                             <div class="row">
                                 <div class="col-sm-12 form-group">

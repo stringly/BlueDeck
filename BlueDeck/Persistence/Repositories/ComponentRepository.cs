@@ -192,9 +192,9 @@ namespace BlueDeck.Persistence.Repositories
             return componentsWithParents;
         }
         /// <summary>
-        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/>s.
+        /// Gets the list of <see cref="BlueDeck.Models.ChartableComponentWithMember"/>s.
         /// </summary>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
         public List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId)
         {
             int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
@@ -229,8 +229,8 @@ namespace BlueDeck.Persistence.Repositories
                             // if no member is assigned to a Position designated as Manager, then we want to render "Vacant" details in the Parent Node
                             if (p.Members.Count == 0)
                             {
-                                n.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";                                
-                                n.MemberName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>Vacant</a>";
+                                n.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";                                
+                                n.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>Vacant</a>";
                                 n.MemberId = -1;
                                 n.CallSign = $"Callsign: {p.Callsign}";
                                 n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
@@ -238,9 +238,9 @@ namespace BlueDeck.Persistence.Repositories
                             }
                             else
                             {
-                                n.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
+                                n.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
                                 n.PositionId = p.PositionId;
-                                n.MemberName = $"<a href='/Members/Details?id={p.Members.First().MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
+                                n.MemberName = $"<a href='/Members/Details/{p.Members.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
                                 n.CallSign = $"Callsign: {p.Callsign}";
                                 n.Email = $"<a href='mailto:{p.Members.First().Email}'style='fill:white'>{p.Members.First().Email}</a>";
                                 n.ContactNumber = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "No Phone";
@@ -258,9 +258,9 @@ namespace BlueDeck.Persistence.Repositories
                             };
                             if (p.Members.Count == 0)
                             {
-                                d.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
+                                d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
                                 d.PositionId = p.PositionId;
-                                d.MemberName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'>Vacant</a>";
+                                d.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'>Vacant</a>";
                                 d.CallSign = $"Callsign: {p.Callsign}";
                                 d.MemberId = -1;
                                 d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
@@ -268,9 +268,9 @@ namespace BlueDeck.Persistence.Repositories
                             }
                             else
                             {
-                                d.PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>";
+                                d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>";
                                 d.PositionId = p.PositionId;
-                                d.MemberName = $"<a href='/Members/Details?id={p.Members.First().MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
+                                d.MemberName = $"<a href='/Members/Details/{p.Members.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Members.First().GetTitleName()}</a>";
                                 d.CallSign = $"Callsign: {p.Callsign}";
                                 d.Email = $"<a href='mailto:{p.Members.First().Email}'>{p.Members.First().Email}</a>";
                                 string phone = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
@@ -287,10 +287,10 @@ namespace BlueDeck.Persistence.Repositories
                                 dynamicUniqueId--;
                                 ChartableComponentWithMember x = new ChartableComponentWithMember {
                                     Id = dynamicUniqueId,
-                                    PositionName = $"<a href='/Positions/Details?id={p.PositionId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>",
+                                    PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>",
                                     Parentid = n.Id,
-                                    ComponentName = $"<a href='/Components/Details?id={c.ComponentId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>", // TODO: Change this to "Node Name" in GetOrgChart?
-                                    MemberName = $"<a href='/Members/Details?id={m.MemberId}&returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
+                                    ComponentName = $"<a href='/Components/Details/{c.ComponentId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>", // TODO: Change this to "Node Name" in GetOrgChart?
+                                    MemberName = $"<a href='/Members/Details/{m.MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
                                     CallSign = $"Callsign: {p.Callsign}",
                                     Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
                                     ContactNumber = $"Phone: {m.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None"}",

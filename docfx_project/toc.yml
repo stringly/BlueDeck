@@ -1,5 +1,7 @@
 - name: Articles
   href: articles/
+- name: Help
+  href: help/
 - name: FAQ
   href: faq/
 - name: Api Documentation

@@ -89,7 +89,7 @@ namespace BlueDeck.Controllers
         /// <param name="id">The identifier for a Position.</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpGet]
-        [Route("Positions/Index/{id:int}")]
+        [Route("Positions/Details/{id:int}")]
         [AllowAnonymous]
         public IActionResult Details(int? id, string returnUrl)
         {

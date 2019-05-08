@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.HomeController.html",
-          "hash": "c0YhW/M4Ih912VO7PiuJcA=="
+          "hash": "BBX3XpXAlK4Zj7PFqHr8Hw=="
         }
       },
       "is_incremental": true,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.PositionsController.html",
-          "hash": "lIKlR5Okm7xgYfG4pV5hOA=="
+          "hash": "d7Id3Sm0g9TOuTiUczAMDw=="
         }
       },
       "is_incremental": true,
@@ -1665,7 +1665,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html",
-          "hash": "NKO1CzZFi8A2hd6jLYOtvw=="
+          "hash": "HJ2tpa9cvR5KUCQoJN8Q8A=="
         }
       },
       "is_incremental": true,
@@ -1833,7 +1833,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.ComponentRepository.html",
-          "hash": "ccscvGOSQv1xtaxifWKZBw=="
+          "hash": "J108X4HTPj0nPrPm+Z16lg=="
         }
       },
       "is_incremental": true,
@@ -2297,11 +2297,189 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "help/account_activation.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/account_activation.html",
+          "hash": "eS/vNPgzCScxp/7f9LHRgQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/admin_view.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/admin_view.html",
+          "hash": "IrYt0u+iKF/+afvpqwP/qA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/admin_views.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/admin_views.html",
+          "hash": "JWcgPMUv9CjrwFXEZlFI8w=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/bluedeck_help_main.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/bluedeck_help_main.html",
+          "hash": "38UBelAfn9IyEgSVaJK3Ag=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/bluedeck_pages.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/bluedeck_pages.html",
+          "hash": "g6DyvRZkaYQkXOJ36NnQUg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/component_index.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/component_index.html",
+          "hash": "XdskNgAQ+mAiNDlktnjalw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/create_an_account.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/create_an_account.html",
+          "hash": "g8yJ/uxkBbPamh2ErChsoQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/home_page.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/home_page.html",
+          "hash": "d8aZ7HF6Wm1+ZpgyvMGPhg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/logging_on.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/logging_on.html",
+          "hash": "ivArDOEE5+yG+4h1+1/V7A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/member_index.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/member_index.html",
+          "hash": "Y1m8csyIN0L9bj020P6uZA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/position_index.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/position_index.html",
+          "hash": "XFkft8JaMv4g9cLQ7A9qww=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "help/roster_manager.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/roster_manager.html",
+          "hash": "Y9r99Evya3974x2hG6e9SQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "help/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "help/toc.html",
+          "hash": "S4PC1tuYBMypjAbWqy8OGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/AboutPage.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/AboutPage.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/pending.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/pending.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "gHG1USbcDKk5igd7eVkOHg=="
+          "hash": "hU7a44oCzBUaKu0O8xLw0g=="
         }
       },
       "is_incremental": true,
@@ -2313,7 +2491,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "yAe3tfdEg9Z9/72+xUxMyQ=="
+          "hash": "ElpkeIQBH8tu/UAorm3Ypg=="
         }
       },
       "is_incremental": false,
@@ -2336,17 +2514,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 6,
-          "skipped_file_count": 6
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 183,
           "skipped_file_count": 183
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 18,
+          "skipped_file_count": 18
         }
       }
     },

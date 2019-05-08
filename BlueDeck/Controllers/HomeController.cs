@@ -146,7 +146,9 @@ namespace BlueDeck.Controllers
             {
                 var identity = (ClaimsIdentity)User.Identity;
                 form.LastModified = DateTime.Now;
-                form.LastModifiedById = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
+                form.CreatedDate = DateTime.Now;
+                form.CreatedById = 1; // hack... just set this to me for new registrations
+                form.LastModifiedById = 1;
                 // TODO: Member addition checks? Duplicate Name/Badge Numbers?
                 unitOfWork.Members.UpdateMember(form);
                 unitOfWork.Complete();
