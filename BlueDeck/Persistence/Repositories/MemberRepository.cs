@@ -325,6 +325,7 @@ namespace BlueDeck.Persistence.Repositories
 
             List<HomePageComponentGroup> initial = components.ConvertAll(x => new HomePageComponentGroup(x));
             result.SetComponentOrder(initial);
+            result.GetExceptionToDutyMembers();
             return result;
         }
         public int GetMemberParentComponentId(int memberid)

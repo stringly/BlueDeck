@@ -24,12 +24,12 @@ namespace BlueDeck.Models.Types
             MemberId = member.MemberId;
             MemberDisplayName = member.GetTitleName();
             MemberRankImageUri = member.Rank.GetRankImageSource();
-            EmailAddress = member.Email;
+            EmailAddress = member?.Email ?? "-";
             ContactNumber = member?.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
             PositionName = member.Position.Name;
             PositionId = member.Position.PositionId;
             LineupPosition = member.Position.LineupPosition;
-            DutyStatus = member.DutyStatus.DutyStatusName;
+            DutyStatus = member?.DutyStatus?.DutyStatusName ?? "-";
             Gender = member.Gender.Abbreviation;
             Race = member.Race.Abbreviation;
 
@@ -40,11 +40,11 @@ namespace BlueDeck.Models.Types
             MemberId = 0;
             MemberDisplayName = "Vacant";
             MemberRankImageUri = "";
-            EmailAddress = "";
-            ContactNumber = "";
+            EmailAddress = "-";
+            ContactNumber = "-";
             PositionName = p.Name;
             PositionId = p.PositionId;
-            DutyStatus = "N/A";
+            DutyStatus = "-";
             LineupPosition = p.LineupPosition;
 
         }

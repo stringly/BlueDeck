@@ -13,7 +13,8 @@ namespace BlueDeck.Models.Types
         public int? ParentComponentId { get; set; }
         public int NestedLevel {get;set;}
         public List<HomePageViewModelMemberListItem> Members { get; set; }
-
+        public string StrengthDisplay { get; set; }
+        
         public HomePageComponentGroup(Component c)
         {
             ComponentName = c.Name;
@@ -21,12 +22,15 @@ namespace BlueDeck.Models.Types
             LineupPosition = c.LineupPosition;
             ParentComponentId = c.ParentComponentId;
             Members = new List<HomePageViewModelMemberListItem>();
+            int managerCount = 0;
+            int workerCount = 0;
             if (c.Positions != null)
             {
                 foreach (Position p in c.Positions.OrderBy(x => x.LineupPosition))
                 {
                     if (p.Members.Count > 0)
                     {
+
                         foreach (Member m in p.Members)
                         {
                             HomePageViewModelMemberListItem mi = new HomePageViewModelMemberListItem(m);
@@ -40,7 +44,7 @@ namespace BlueDeck.Models.Types
                     }
                 }
             }
-            
-        }
+            StrengthDisplay = $"{c.GetManagerCount()} and {c.GetWorkerCount()}";
+        }        
     }
 }

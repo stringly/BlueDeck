@@ -118,6 +118,18 @@ li {
 .HomePageComponentContainer table thead th {
     border-bottom: 1px solid #ddd;
 }
+.HomePageComponentContainer table td.col-25 {
+    width: 25%;
+}
+.HomePageComponentContainer table td.col-20 {
+    width: 20%;
+}
+.HomePageComponentContainer table td.col-15 {
+    width: 15%;
+}
+.HomePageComponentContainer table td.col-10 {
+    width: 10%;
+}
 .HomePageDocumentButtonGroup {
     min-height: 50px;
 }
@@ -1573,3 +1585,23 @@ ol, ul {
     margin-left: 16px !important;
     margin-right: 16px !important;
 }
+
+.nav-pills {
+    color: #777;
+}
+.nav-pills>li>a {
+    border-radius: 0px;
+}
+    .nav-pills>li.active {
+        color: #f3f2f1;
+    }
+        .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
+            font-weight: bold;
+            color: #777;
+            background-color: #edebe9;
+        }
+    .nav-pills > li > a:hover {
+        background-color: #f3f2f1;
+        border-radius: 0px;
+        color: #337ab7;
+    }

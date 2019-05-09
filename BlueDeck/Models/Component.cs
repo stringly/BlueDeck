@@ -90,10 +90,49 @@ namespace BlueDeck.Models {
         {
             return Positions?.Where(x => x.IsManager == true).FirstOrDefault()?.Members.First().GetTitleName() ?? "VACANT";
         }
-
         public Member GetManager()
         {
             return Positions?.Where(x => x.IsManager == true).FirstOrDefault().Members.FirstOrDefault() ?? null;
+        }        
+        public int GetWorkerCount()
+        {
+            int total = 0;
+            if (ChildComponents != null && ChildComponents.Count > 0)
+            {
+                foreach (Component c in ChildComponents)
+                {
+                    total = total + c.GetWorkerCount();
+                }
+            }
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach (Position p in Positions.Where(x => x.IsManager == false))
+                {
+                    total = total + p.Members.Count();
+                }
+            }
+            
+            return total;
         }
+        public int GetManagerCount()
+        {
+            int total = 0;
+            if (ChildComponents != null && ChildComponents.Count > 0)
+            {
+                foreach (Component c in ChildComponents)
+                {
+                    total = total + c.GetManagerCount();
+                }
+            }
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach (Position p in Positions.Where(x => x.IsManager == true))
+                {
+                    total = total + p.Members.Count();
+                }
+            }            
+            return total;
+        }
+
     }
 }

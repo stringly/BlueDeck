@@ -11,14 +11,28 @@ namespace BlueDeck.Models.ViewModels
         public List<HomePageComponentGroup> ComponentGroups { get; set; }
         public Member CurrentUser {get;set;}
         public List<ComponentSelectListItem> Components { get; set; }
+        public List<HomePageViewModelMemberListItem> ExceptionToDuty { get; set; }
 
         public HomePageViewModel(Member _member)
         {
             CurrentUser = _member;
-            ComponentGroups = new List<HomePageComponentGroup>();           
-
+            ComponentGroups = new List<HomePageComponentGroup>();
+            ExceptionToDuty = new List<HomePageViewModelMemberListItem>();
         }
 
+        public void GetExceptionToDutyMembers()
+        {
+            foreach(HomePageComponentGroup g in ComponentGroups)
+            {
+                foreach (HomePageViewModelMemberListItem m in g.Members)
+                {
+                    if (m.MemberDisplayName != "Vacant" && m.DutyStatus != "Full Duty")
+                    {
+                        ExceptionToDuty.Add(m);
+                    }
+                }
+            }
+        }
         public void SetComponentOrder(List<HomePageComponentGroup> initial)
         {
             RecurseAndReorderComponents(initial);
