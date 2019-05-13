@@ -199,6 +199,12 @@
             <returns>A collection of all BlueDeck Enumerable types</returns>
             <response code="200">Returns a JSON object containing all BlueDeck Enumerable types</response>
         </member>
+        <member name="M:BlueDeck.Controllers.HomeController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.HomeController"/> class.
+            </summary>
+            <param name="unit">The unit.</param>
+        </member>
         <member name="M:BlueDeck.Controllers.MembersApiController.GetMembers">
             <summary>
             Gets a List of Member Names/BlueDeck Ids of all Members
@@ -1641,6 +1647,17 @@
             The identifier.
             </value>
         </member>
+        <member name="M:BlueDeck.Models.Types.ComponentSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.ComponentSelectListItem.#ctor(BlueDeck.Models.Component)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> class.
+            </summary>
+            <param name="_c">The Component.</param>
+        </member>
         <member name="T:BlueDeck.Models.Types.MappedField">
             <summary>
             Class used to map Table/Cell index and value
@@ -1762,6 +1779,17 @@
             The abbreviation.
             </value>
         </member>
+        <member name="M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor(BlueDeck.Models.Gender)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/> class.
+            </summary>
+            <param name="_g">The g.</param>
+        </member>
         <member name="T:BlueDeck.Models.Types.MemberRaceSelectListItem">
             <summary>
             A Type that includes the MemberRaceId and RaceFullName for the <see cref="T:BlueDeck.Models.Types.MemberRace"/> Entity.
@@ -1793,6 +1821,11 @@
             <value>
             The abbreviation.
             </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.MemberRaceSelectListItem"/> class.
+            </summary>
         </member>
         <member name="T:BlueDeck.Models.Types.MemberRankSelectListItem">
             <summary>

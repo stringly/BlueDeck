@@ -34,7 +34,7 @@ namespace BlueDeck.Persistence.Repositories
         /// </remarks>
         public List<MemberRankSelectListItem> GetMemberRankSelectListItems()
         {   
-            return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem { MemberRankId = System.Convert.ToInt32(x.RankId), RankName = x.RankFullName });
+            return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem(x));
         }
 
         public Rank GetRankById(int memberRankId)

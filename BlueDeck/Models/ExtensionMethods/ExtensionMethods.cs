@@ -31,5 +31,7 @@ namespace BlueDeck.Models.ExtensionMethods
 
             return (claim != null) ? claim.Value : string.Empty;
         }
+
+
     }
 }

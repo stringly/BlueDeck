@@ -675,6 +675,20 @@ namespace BlueDeck.Persistence.Repositories
                 return null;
             }            
         }
+
+        public Component GetComponentForDemographics(int componentId)
+        {
+            SqlParameter param1 = new SqlParameter("@ComponentId", componentId);
+            
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();                     
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Load();
+            return components.FirstOrDefault();
+        }
     }
 
 }

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\jcsmith1\source\repos\BlueDeck\BlueDeck\BlueDeck.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\jcs30\source\repos\BlueDeck\BlueDeck\BlueDeck.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,6 +47,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="OpenXmlPowerTools" Version="4.5.3.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     
   </ItemGroup>

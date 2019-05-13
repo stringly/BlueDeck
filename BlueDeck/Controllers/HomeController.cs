@@ -16,6 +16,10 @@ namespace BlueDeck.Controllers
     {
         private IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="unit">The unit.</param>
         public HomeController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -31,8 +35,7 @@ namespace BlueDeck.Controllers
                 if (claimMemberId != 0 && User.IsInRole("User"))
                     {
                         ViewBag.Title = "BlueDeck Home";
-                        HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);
-                        vm.Components = unitOfWork.Components.GetComponentSelectListItems();
+                        HomePageViewModel vm = unitOfWork.Members.GetHomePageViewModelForMember(claimMemberId);                        
                         return View(vm);
                     }
                 else if (claimMemberId != 0)
@@ -102,6 +105,26 @@ namespace BlueDeck.Controllers
                 return ViewComponent("HomePageMemberSearchResult", vm);
             }
         }
+
+        public IActionResult GetDemograpicSearchResultViewComponent(int SelectedDemographicComponent, List<int> SelectedRanks, int SelectedGender, List<int> SelectedRaces)
+        {
+            Component c = unitOfWork.Components.GetComponentForDemographics(SelectedDemographicComponent);
+            if (c != null)
+            {
+                ComponentDemographicTableViewComponentViewModel vm =
+                    new ComponentDemographicTableViewComponentViewModel(
+                        c,
+                        unitOfWork.MemberGenders.GetMemberGenderSelectListItems().ToList().Where(x => (SelectedGender == 0 || x.MemberGenderId == SelectedGender)).ToList(),
+                        unitOfWork.MemberRaces.GetMemberRaceSelectListItems().ToList().Where(x => (SelectedRaces.Count() == 0 || SelectedRaces.Contains(x.MemberRaceId))).ToList(),
+                        unitOfWork.MemberRanks.GetMemberRankSelectListItems().ToList().Where(x => (SelectedRanks.Count() == 0 || SelectedRanks.Contains(x.MemberRankId))).ToList());
+                return ViewComponent("ComponentDemographicTable", vm);
+            }
+            else
+            {
+                return null;
+            }
+
+        }
         [HttpGet]
         [Route("Home/Register")]
         public IActionResult Register()
@@ -170,8 +193,8 @@ namespace BlueDeck.Controllers
         [Route("Home/DownloadComponentRoster/{id:int}")]
         public IActionResult DownloadComponentRoster(int id)
         {
-            ComponentRosterGenerator gen = new ComponentRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
-
+            TraditionalRosterGenerator gen = new TraditionalRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
+            //ComponentRosterGenerator gen = new ComponentRosterGenerator(unitOfWork.Components.GetComponentsAndChildrenWithParentSP(id));
             string fileName = $"{unitOfWork.Components.Get(id).Name} Roster {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }

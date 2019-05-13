@@ -1908,113 +1908,11 @@ namespace BlueDeck.Models.DocGenerators
             tableCell5.Append(tableCellProperties5);
             tableCell5.Append(paragraph5);
 
-            //TableCell tableCell6 = new TableCell();
-
-            //TableCellProperties tableCellProperties6 = new TableCellProperties();
-            //TableCellWidth tableCellWidth6 = new TableCellWidth() { Width = "1302", Type = TableWidthUnitValues.Pct };
-            //VerticalMerge verticalMerge3 = new VerticalMerge() { Val = MergedCellValues.Restart };
-
-            //TableCellBorders tableCellBorders6 = new TableCellBorders();
-            //LeftBorder leftBorder6 = new LeftBorder() { Val = BorderValues.Single, Color = "auto", Size = (UInt32Value)12U, Space = (UInt32Value)0U };
-            //BottomBorder bottomBorder2 = new BottomBorder() { Val = BorderValues.Nil };
-            //RightBorder rightBorder7 = new RightBorder() { Val = BorderValues.Nil };
-
-            //tableCellBorders6.Append(leftBorder6);
-            //tableCellBorders6.Append(bottomBorder2);
-            //tableCellBorders6.Append(rightBorder7);
-
-            //tableCellProperties6.Append(tableCellWidth6);
-            //tableCellProperties6.Append(verticalMerge3);
-            //tableCellProperties6.Append(tableCellBorders6);
-
-            //Paragraph paragraph6 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
-
-            //ParagraphProperties paragraphProperties6 = new ParagraphProperties();
-            //SpacingBetweenLines spacingBetweenLines6 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
-
-            //ParagraphMarkRunProperties paragraphMarkRunProperties6 = new ParagraphMarkRunProperties();
-            //RunFonts runFonts11 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
-            //FontSize fontSize11 = new FontSize() { Val = "20" };
-            //FontSizeComplexScript fontSizeComplexScript11 = new FontSizeComplexScript() { Val = "20" };
-
-            //paragraphMarkRunProperties6.Append(runFonts11);
-            //paragraphMarkRunProperties6.Append(fontSize11);
-            //paragraphMarkRunProperties6.Append(fontSizeComplexScript11);
-
-            //paragraphProperties6.Append(spacingBetweenLines6);
-            //paragraphProperties6.Append(paragraphMarkRunProperties6);
-
-            //paragraph6.Append(paragraphProperties6);
-
-            //Paragraph paragraph7 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
-
-            //ParagraphProperties paragraphProperties7 = new ParagraphProperties();
-            //SpacingBetweenLines spacingBetweenLines7 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
-
-            //ParagraphMarkRunProperties paragraphMarkRunProperties7 = new ParagraphMarkRunProperties();
-            //RunFonts runFonts12 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
-            //FontSize fontSize12 = new FontSize() { Val = "20" };
-            //FontSizeComplexScript fontSizeComplexScript12 = new FontSizeComplexScript() { Val = "20" };
-
-            //paragraphMarkRunProperties7.Append(runFonts12);
-            //paragraphMarkRunProperties7.Append(fontSize12);
-            //paragraphMarkRunProperties7.Append(fontSizeComplexScript12);
-
-            //paragraphProperties7.Append(spacingBetweenLines7);
-            //paragraphProperties7.Append(paragraphMarkRunProperties7);
-
-            //paragraph7.Append(paragraphProperties7);
-
-            //tableCell6.Append(tableCellProperties6);
-            //tableCell6.Append(paragraph6);
-            //tableCell6.Append(paragraph7);
-
-            //TableCell tableCell7 = new TableCell();
-
-            //TableCellProperties tableCellProperties7 = new TableCellProperties();
-            //TableCellWidth tableCellWidth7 = new TableCellWidth() { Width = "413", Type = TableWidthUnitValues.Pct };
-            //VerticalMerge verticalMerge4 = new VerticalMerge() { Val = MergedCellValues.Restart };
-
-            //TableCellBorders tableCellBorders7 = new TableCellBorders();
-            //LeftBorder leftBorder7 = new LeftBorder() { Val = BorderValues.Nil };
-            //BottomBorder bottomBorder3 = new BottomBorder() { Val = BorderValues.Nil };
-
-            //tableCellBorders7.Append(leftBorder7);
-            //tableCellBorders7.Append(bottomBorder3);
-
-            //tableCellProperties7.Append(tableCellWidth7);
-            //tableCellProperties7.Append(verticalMerge4);
-            //tableCellProperties7.Append(tableCellBorders7);
-
-            //Paragraph paragraph8 = new Paragraph() { RsidParagraphMarkRevision = "00B716D7", RsidParagraphAddition = "00B716D7", RsidParagraphProperties = "00B716D7", RsidRunAdditionDefault = "00B716D7" };
-
-            //ParagraphProperties paragraphProperties8 = new ParagraphProperties();
-            //SpacingBetweenLines spacingBetweenLines8 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
-
-            //ParagraphMarkRunProperties paragraphMarkRunProperties8 = new ParagraphMarkRunProperties();
-            //RunFonts runFonts13 = new RunFonts() { EastAsia = "Times New Roman", ComplexScriptTheme = ThemeFontValues.MinorHighAnsi };
-            //FontSize fontSize13 = new FontSize() { Val = "20" };
-            //FontSizeComplexScript fontSizeComplexScript13 = new FontSizeComplexScript() { Val = "20" };
-
-            //paragraphMarkRunProperties8.Append(runFonts13);
-            //paragraphMarkRunProperties8.Append(fontSize13);
-            //paragraphMarkRunProperties8.Append(fontSizeComplexScript13);
-
-            //paragraphProperties8.Append(spacingBetweenLines8);
-            //paragraphProperties8.Append(paragraphMarkRunProperties8);
-
-            //paragraph8.Append(paragraphProperties8);
-
-            //tableCell7.Append(tableCellProperties7);
-            //tableCell7.Append(paragraph8);
-
             tableRow1.Append(tableCell1);
             tableRow1.Append(tableCell2);
             tableRow1.Append(tableCell3);
             tableRow1.Append(tableCell4);
             tableRow1.Append(tableCell5);
-            //tableRow1.Append(tableCell6);
-            //tableRow1.Append(tableCell7);
             DemoTable.Append(tableRow1);
             return DemoTable;
 

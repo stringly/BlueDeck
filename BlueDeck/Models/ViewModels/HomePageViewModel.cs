@@ -11,13 +11,24 @@ namespace BlueDeck.Models.ViewModels
         public List<HomePageComponentGroup> ComponentGroups { get; set; }
         public Member CurrentUser {get;set;}
         public List<ComponentSelectListItem> Components { get; set; }
+        public List<MemberGenderSelectListItem> Genders { get; set; }
+        public List<MemberRaceSelectListItem> Races { get; set; }
+        public List<MemberRankSelectListItem> Ranks { get; set; }
         public List<HomePageViewModelMemberListItem> ExceptionToDuty { get; set; }
 
-        public HomePageViewModel(Member _member)
+        public HomePageViewModel(Member _member,
+            List<ComponentSelectListItem> _components,
+            List<MemberGenderSelectListItem> _genders,
+            List<MemberRaceSelectListItem> _races,
+            List<MemberRankSelectListItem> _ranks)
         {
             CurrentUser = _member;
             ComponentGroups = new List<HomePageComponentGroup>();
             ExceptionToDuty = new List<HomePageViewModelMemberListItem>();
+            Components = _components;
+            Genders = _genders;
+            Races = _races;
+            Ranks = _ranks;
         }
 
         public void GetExceptionToDutyMembers()

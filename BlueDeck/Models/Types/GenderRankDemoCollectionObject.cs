@@ -95,6 +95,5 @@ namespace BlueDeck.Models.Types
             }
             return result;
         }
-    }
-    
+    }    
 }

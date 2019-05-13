@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace BlueDeck.Models.Types
 {
     /// <summary>
@@ -32,5 +34,21 @@ namespace BlueDeck.Models.Types
         /// The abbreviation.
         /// </value>
         public char Abbreviation { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MemberRaceSelectListItem"/> class.
+        /// </summary>
+        public MemberRaceSelectListItem()
+        {
+        }
+        
+        public MemberRaceSelectListItem(Race _r)
+        {
+            MemberRaceId = Convert.ToInt32(_r.MemberRaceId);
+            RaceFullName = _r.MemberRaceFullName;
+            Abbreviation = _r.Abbreviation;
+
+        }
+
     }
 }

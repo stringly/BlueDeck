@@ -98,5 +98,6 @@ namespace BlueDeck.Models.Repositories
         List<Member> GetMembersRosterForComponentId(int componentId);
         AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel();
         Task<ComponentApiResult> GetApiComponent(int id);
+        Component GetComponentForDemographics(int componentId);
     }
 }

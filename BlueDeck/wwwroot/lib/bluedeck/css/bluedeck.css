@@ -141,6 +141,9 @@ li {
     -webkit-animation: spin2 1s infinite linear;
     display: inline-block;
 }
+.radio {
+    margin-top: 0px;
+ }
 
 @keyframes spin {
     from {

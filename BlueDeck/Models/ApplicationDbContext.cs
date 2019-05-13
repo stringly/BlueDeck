@@ -127,6 +127,10 @@ namespace BlueDeck.Models {
                 .HasOne(c => c.LastModifiedBy)
                 .WithMany(m => m.LastModifiedComponents)
                 .HasForeignKey(p => p.LastModifiedById);
+            modelBuilder.Entity<Component>()
+                .HasOne(c => c.ParentComponent)
+                .WithMany(c => c.ChildComponents)
+                .HasForeignKey(c => c.ParentComponentId);
         }
     }
 }

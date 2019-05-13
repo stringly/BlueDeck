@@ -12,132 +12,133 @@
         <li class="active"><a data-toggle="pill" href="#home"><i class="glyphicon glyphicon-home"></i> Home</a></li>
         <li><a data-toggle="pill" href="#exceptionToDuty"><i class="glyphicon glyphicon-asterisk"></i>Exception to Duty</a></li>
         <li><a data-toggle="pill" href="#searchPeople"><i class="glyphicon glyphicon-search"></i> Search People</a></li>
+        <li><a data-toggle="pill" href="#demographics"><i class="glyphicon glyphicon-file"></i> Demographics</a></li>
         <li><a data-toggle="pill" href="#documents"><i class="glyphicon glyphicon-file"></i> Documents</a></li>
         <li><a data-toggle="pill" href="#currentUserInfo"><i class="glyphicon glyphicon-user"></i> My Info</a></li>
     </ul>
     <div class="tab-content">
-        <div id="home" href="#home" class="tab-pane fade in active">            
-                @{
-                    HomePageComponentGroup home = Model.ComponentGroups.Where(x => x.ComponentId == Model.CurrentUser.Position.ParentComponent.ComponentId).First();
+        <div id="home" href="#home" class="tab-pane fade in active">
+            @{
+                HomePageComponentGroup home = Model.ComponentGroups.Where(x => x.ComponentId == Model.CurrentUser.Position.ParentComponent.ComponentId).First();
 
-                    <div class="HomePageComponentContainer">
-                        <div class="col-md-12">
-                            <br />
-                            <h4 style="color:#777">My Coworkers</h4>
-                            <hr />
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <caption>
-                                        @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
-                                        {
-                                            <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
-                                                <strong>@home.ComponentName</strong>
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>@: | @home.StrengthDisplay |
-                                        }
-                                        else
-                                        {
-                                            <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
-                                                <strong>@home.ComponentName</strong>
-                                            </a>@: | @home.StrengthDisplay |
-                                        }
-                                        @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
-                                        {
-                                            <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a>@: |
-                                        }
-                                        <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
-                                    </caption>
-                                    <tbody>
-                                        @foreach (var worker in home.Members)
-                                        {
-                                            <tr>
-                                                @if (worker.MemberId == 0)
+                <div class="HomePageComponentContainer">
+                    <div class="col-md-12">
+                        <br />
+                        <h4 style="color:#777">My Coworkers</h4>
+                        <hr />
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <caption>
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: | @home.StrengthDisplay |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@home.ComponentName</strong>
+                                        </a>@: | @home.StrengthDisplay |
+                                    }
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@home.ComponentId">Manage Roster</a>@: |
+                                    }
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@home.ComponentId"> View Org Chart </a>
+                                </caption>
+                                <tbody>
+                                    @foreach (var worker in home.Members)
+                                    {
+                                        <tr>
+                                            @if (worker.MemberId == 0)
+                                            {
+                                                if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                                 {
-                                                    if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
-                                                    {
-                                                        <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td class="col-25">Vacant</td>
-                                                    }
+                                                    <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                                 }
                                                 else
                                                 {
-                                                    <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                                    <td class="col-25">Vacant</td>
                                                 }
-                                                <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
-                                                <td class="col-15">@worker.DutyStatus</td>
-                                                <td class="col-15">@worker.ContactNumber</td>
-                                                <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                            }
+                                            else
+                                            {
+                                                <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                            }
+                                            <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                            <td class="col-15">@worker.DutyStatus</td>
+                                            <td class="col-15">@worker.ContactNumber</td>
+                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                }
-                @foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.CurrentUser.Position.ParentComponent.ComponentId))
-                {
-                    <div class="HomePageComponentContainer">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <caption>
-                                        @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
-                                        {
-                                            <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
-                                                <strong>@item.ComponentName</strong>
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>@: | @item.StrengthDisplay |
-                                        }
-                                        else
-                                        {
-                                            <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
-                                                <strong>@item.ComponentName</strong>
-                                            </a>@: | @item.StrengthDisplay |
-                                        }
-                                        @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
-                                        {
-                                            <a asp-controller="Roster" asp-route-id="@item.ComponentId">Manage Roster</a> @: |
-                                        }
-                                        <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
-                                    </caption>
-                                    <tbody>
-                                        @foreach (var worker in item.Members)
-                                        {
-                                            <tr>
-                                                @if (worker.MemberId == 0)
+                </div>
+            }
+            @foreach (var item in Model.ComponentGroups.Where(x => x.ComponentId != Model.CurrentUser.Position.ParentComponent.ComponentId))
+            {
+                <div class="HomePageComponentContainer">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <caption>
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>@: | @item.StrengthDisplay |
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                            <strong>@item.ComponentName</strong>
+                                        </a>@: | @item.StrengthDisplay |
+                                    }
+                                    @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
+                                    {
+                                        <a asp-controller="Roster" asp-route-id="@item.ComponentId">Manage Roster</a> @: |
+                                    }
+                                    <a asp-controller="OrgChart" asp-action="Index" asp-route-componentid="@item.ComponentId"> View Org Chart </a>
+                                </caption>
+                                <tbody>
+                                    @foreach (var worker in item.Members)
+                                    {
+                                        <tr>
+                                            @if (worker.MemberId == 0)
+                                            {
+                                                if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                                 {
-                                                    if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
-                                                    {
-                                                        <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td class="col-25">Vacant</td>
-                                                    }
+                                                    <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                                 }
                                                 else
                                                 {
-                                                    <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                                    <td class="col-25">Vacant</td>
                                                 }
-                                                <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
-                                                <td class="col-15">@worker.DutyStatus</td>
-                                                <td class="col-15">@worker.ContactNumber</td>
-                                                <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                            }
+                                            else
+                                            {
+                                                <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                            }
+                                            <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                            <td class="col-15">@worker.DutyStatus</td>
+                                            <td class="col-15">@worker.ContactNumber</td>
+                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                }
-            
+                </div>
+            }
+
         </div>
-        <div id="exceptionToDuty"  href="#exceptionToDuty" class="tab-pane fade">
+        <div id="exceptionToDuty" href="#exceptionToDuty" class="tab-pane fade">
             <div class="col-md-12">
                 <br />
                 <h4 style="color:#777">Exceptions to Normal Duty</h4>
@@ -191,25 +192,79 @@
                 </div>
             </div>
         </div>
+        <div id="demographics" href="#demographics" class="tab-pane fade">
+            <div class="col-md-12">
+                <br />
+                <h4>Select a Component to view Demographics</h4>
+                <hr />                
+                <form asp-action="GetDemograpicSearchResultViewComponent" id="demographicForm">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <label class="control-label">Component:</label>
+                            @Html.DropDownList("SelectedDemographicComponent",
+                                    new SelectList(Model.Components, "Id", "ComponentName"),
+                                    "Choose Component",
+                                    new { @class = "form-control" })
+                            <small class="text-danger" id="selectedDemographicComponentMessage"></small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Ranks: </label><small> (Hold shift or drag to select multiple)</small>
+                            @Html.DropDownList("SelectedRanks",
+                                    new SelectList(Model.Ranks, "MemberRankId", "RankName"),
+                                    new { @class = "form-control", Multiple = "multiple", Size = 6 })
+                            
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <label class="control-label">Genders:</label>
+                            @foreach (MemberGenderSelectListItem gender in Model.Genders)
+                            {
+                                <div class="radio">
+                                    <label>@Html.RadioButton("SelectedGender", gender.MemberGenderId, false) @gender.MemberGenderFullName</label>
+                                </div>
+
+                            }
+                            <div class="radio">
+                                <label>@Html.RadioButton("SelectedGender", 0, true) All</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Races: </label><small> (Hold shift or drag to select multiple)</small>
+                            @Html.DropDownList("SelectedRaces",
+                                    new SelectList(Model.Races, "MemberRaceId", "RaceFullName"),
+                                    new { @class = "form-control", Multiple = "multiple", Size = 6 })
+                            <small>Hold shift or drag to select multiple</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <a class="btn btn-default" id="demographicSubmitButton">Search</a>
+                            <button class="btn btn-warning" type="reset">Reset</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row" id="demographicSearchResultListTarget" style="min-height:400px;">
+
+                </div>
+            </div>
+        </div>
         <div id="documents" class="tab-pane fade">
             <div class="col-md-12">
                 <br />
                 <h4>Generate Documents</h4>
                 <hr />
-                <div class="row">
-                    <div class="form-inline">
-                        <div class="col-sm-10 form-group">
-                            <label class="control-label">Select a Component:</label>
-                            @Html.DropDownList("SelectedComponent",
-                                 new SelectList(Model.Components, "Id", "ComponentName"),
-                                 "Choose Component",
-                                 new { @class = "form-control" })
-                            <small class="text-danger" id="selectedComponentMessage"></small>
-                        </div>
-
+                <div class="row">                    
+                    <div class="col-sm-10 form-group">
+                        <label class="control-label">Select a Component:</label>
+                        @Html.DropDownList("SelectedComponent",
+                                new SelectList(Model.Components, "Id", "ComponentName"),
+                                "Choose Component",
+                                new { @class = "form-control" })
+                        <small class="text-danger" id="selectedComponentMessage"></small>
                     </div>
-
                 </div>
+
                 <br />
                 <div class="row">
                     <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
@@ -341,6 +396,7 @@
         document.getElementById("GenerateAlphaRoster").addEventListener('click', handleAlphaRosterClick, false);
         document.getElementById("GenerateComponentRoster").addEventListener('click', handleComponentRosterClick, false);
         document.getElementById("GenerateOrgChart").addEventListener('click', handleOrgChartClick, false);
+        
         $("#SelectedComponent").change(function () {
             $("#selectedComponentMessage").text("");
             if ($(this).val() == "") {
@@ -355,6 +411,27 @@
                 document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart/" + componentId;;
             }
 
+        });
+        $("#SelectedDemographicComponent").change(function () {
+            $("#selectedDemographicComponentMessage").text("");
+        });
+        $("#demographicSubmitButton").click(function () {
+            // add validation
+            var componentId = $("#SelectedDemographicComponent").val();
+            if (componentId == "") {
+                $("#selectedDemographicComponentMessage").text("Select a Component")
+                return;
+            }
+            var form = $("#demographicForm");
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function (response) {
+                    var container = $("#demographicSearchResultListTarget").empty();
+                    container.html(response);
+                }
+            });
         });
     });
 

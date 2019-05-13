@@ -29,5 +29,22 @@ namespace BlueDeck.Models.Types
         /// </value>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComponentSelectListItem"/> class.
+        /// </summary>
+        public ComponentSelectListItem()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComponentSelectListItem"/> class.
+        /// </summary>
+        /// <param name="_c">The Component.</param>
+        public ComponentSelectListItem(Component _c)
+        {
+            ComponentName = _c.Name;
+            Id = _c.ComponentId;
+        }
+
     }
 }

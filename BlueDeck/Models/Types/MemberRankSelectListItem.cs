@@ -28,5 +28,17 @@ namespace BlueDeck.Models.Types
         /// The name of the rank.
         /// </value>
         public string RankName { get; set; }
+
+        public string RankShort { get; set; }
+
+        public MemberRankSelectListItem()
+        {
+        }
+        public MemberRankSelectListItem(Rank _rank)
+        {
+            MemberRankId = Convert.ToInt32(_rank.RankId);
+            RankName = _rank.RankFullName;
+            RankShort = _rank.RankShort;
+        }
     }
 }

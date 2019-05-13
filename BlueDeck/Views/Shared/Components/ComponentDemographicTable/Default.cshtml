@@ -1,0 +1,159 @@
+﻿@model ComponentDemographicTableViewComponentViewModel
+
+
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                @foreach(MemberRankSelectListItem rank in Model.Ranks)
+                {
+                    <th>
+                        @rank.RankShort
+                    </th>
+                }
+                <th>
+                    Totals
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                @foreach (MemberRankSelectListItem rank in Model.Ranks)
+                {
+                    <td>
+                        @{
+                            int i = 0;
+                            foreach (MemberGenderSelectListItem gender in Model.Genders)
+                            {
+                                i++;
+                                @gender.Abbreviation;
+                                if (i >= 0 && i < Model.Genders.Count)
+                                {
+                                    @: |
+                                }
+                            }
+                        }
+                    </td>
+                }
+                <td>
+                    @{
+                        int l = 0;
+                        foreach (MemberGenderSelectListItem gender in Model.Genders)
+                        {
+                            l++;
+                            @gender.Abbreviation;
+                            if (l >= 0 && l < Model.Genders.Count)
+                            {
+                                @: |
+                            }
+                        }
+                    }
+                </td>
+            </tr>
+            @foreach(MemberRaceSelectListItem race in Model.Races)
+            {
+                <tr>
+                    <td>
+                        @race.RaceFullName
+                    </td>
+                    @foreach(MemberRankSelectListItem rank in Model.Ranks)
+                    {
+                    <td>
+                        @{
+                            var i = 0;
+                            foreach(MemberGenderSelectListItem gender in Model.Genders)
+                            {
+                                i++;
+                                @Model.Component.MemberCountRecursive(gender.MemberGenderId, race.MemberRaceId, rank.MemberRankId) 
+                                if(i >= 0 && i < Model.Genders.Count)
+                                {
+                                    @: |
+                                }
+                            }
+                        }
+                    </td>
+                    }
+                    <td>
+                        <strong>
+                            @{
+                                int j = 0;
+                                foreach (MemberGenderSelectListItem gender in Model.Genders)
+                                {
+                                    j++;
+                                    int total = 0;
+                                    foreach (MemberRankSelectListItem rank in Model.Ranks)
+                                    {
+
+                                        total += Model.Component.MemberCountRecursive(gender.MemberGenderId, race.MemberRaceId, rank.MemberRankId);
+                                    }
+                                    @total
+                                    if (j >= 0 && j < Model.Genders.Count)
+                                    {
+                                        @: |
+                                    }
+                                }
+                            }
+                        </strong>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    <strong>Totals</strong>
+                </td>
+                @foreach(MemberRankSelectListItem rank in Model.Ranks)
+                {
+                <td>
+                    <strong>
+                        @{
+                            var i = 0;
+                            foreach (MemberGenderSelectListItem gender in Model.Genders)
+                            {
+                                i++;
+                                int total = 0;
+                                @foreach(MemberRaceSelectListItem race in Model.Races)
+                                {
+                                    total += Model.Component.MemberCountRecursive(gender.MemberGenderId, race.MemberRaceId, rank.MemberRankId);
+                                }
+                                @total
+                                if (i >= 0 && i < Model.Genders.Count)
+                                {
+                                    @: |
+                                }
+                            }
+                        }
+                    </strong>
+                </td>
+                }
+                <td>
+                    <strong>
+                        @{
+                            var k = 0;
+                            foreach (MemberGenderSelectListItem gender in Model.Genders)
+                            {
+                                k++;
+                                int total = 0;
+                                foreach (MemberRankSelectListItem rank in Model.Ranks)
+                                {
+                                    foreach (MemberRaceSelectListItem race in Model.Races)
+                                    {
+                                        total += Model.Component.MemberCountRecursive(gender.MemberGenderId, race.MemberRaceId, rank.MemberRankId);
+                                    }
+                                }
+                                @total
+                                if (k >= 0 && k < Model.Genders.Count)
+                                {
+                                    @: |
+                                }
+                            }
+                        }
+                    </strong>
+                </td>
+            </tr>    
+        </tbody>
+    </table>
+</div>

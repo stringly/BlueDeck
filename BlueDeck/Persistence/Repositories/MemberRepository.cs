@@ -311,7 +311,11 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.PhoneNumbers)
                     .ThenInclude(x => x.Type)                
                 .FirstOrDefault();            
-            HomePageViewModel result = new HomePageViewModel(currentUser);
+            HomePageViewModel result = new HomePageViewModel(currentUser,
+                ApplicationDbContext.Components.ToList().ConvertAll(x => new ComponentSelectListItem(x)),
+                ApplicationDbContext.Genders.ToList().ConvertAll(x => new MemberGenderSelectListItem(x)),
+                ApplicationDbContext.Races.ToList().ConvertAll(x => new MemberRaceSelectListItem(x)),
+                ApplicationDbContext.Ranks.ToList().ConvertAll(x => new MemberRankSelectListItem(x)));
             SqlParameter param1 = new SqlParameter("@ComponentId", currentUser.Position.ParentComponent.ComponentId);
 
             List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();

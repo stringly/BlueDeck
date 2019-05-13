@@ -133,6 +133,119 @@ namespace BlueDeck.Models {
             }            
             return total;
         }
+        public int MemberCount(int? genderId = null, int? raceId = null, int? rankId = null)
+        {
+            int total = 0;
+            if (Positions == null || Positions.Count == 0)
+            {
+                return total;
+            }
+            else
+            {
+                foreach (Position p in Positions)
+                {
+                    
+                    total += p?.Members
+                        .Where(x => (genderId == null || x.GenderId == genderId)
+                        && (raceId == null || x.RaceId == raceId)
+                        && (rankId == null || x.RankId == rankId))
+                    .Count() ?? 0;
+                }
+                return total;
+            }
+        }
+        public int MemberCountRecursive(int? genderId = null, int? raceId = null, int? rankId = null)
+        {
+            int total = 0;
+            if (ChildComponents != null && ChildComponents.Count > 0)
+            {
+                foreach (Component c in ChildComponents)
+                {
+                    total += c.MemberCountRecursive(genderId, raceId, rankId);
+                }
+            }
+            if (Positions == null || Positions.Count == 0)
+            {
+                return total;
+            }
+            else
+            {
+                foreach (Position p in Positions)
+                {
+                    
+                    total += p?.Members
+                        .Where(x => (genderId == null || x.GenderId == genderId)
+                        && (raceId == null || x.RaceId == raceId)
+                        && (rankId == null || x.RankId == rankId))
+                    .Count() ?? 0;
+                }
+                return total;
+            }
+        }
 
+        public List<Member> GetComponentMembers()
+        {
+            List<Member> result = new List<Member>();
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach (Position p in Positions)
+                {
+                    result.AddRange(p.Members);
+                }
+            }
+            return result;
+        }
+        public List<Member> GetComponentMembersRecursive()
+        {
+            List<Member> result = new List<Member>();
+            if(ChildComponents != null && ChildComponents.Count > 0)
+            {
+                foreach(Component child in ChildComponents)
+                {
+                    result.AddRange(child.GetComponentMembersRecursive());
+                }
+            }
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach(Position p in Positions)
+                {
+                    result.AddRange(p.Members);
+                }
+            }            
+            return result;
+        }
+
+        public List<Member> GetExceptionToDutyMembers()
+        {
+            List<Member> result = new List<Member>();
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach (Position p in Positions)
+                {
+                    result.AddRange(p.Members.Where(x => x.DutyStatusId != 1).ToList());
+                }
+            }            
+            return result;
+        }
+
+        public List<Member> GetExceptionToDutyMembersRecursive()
+        {
+            List<Member> result = new List<Member>();
+            if(ChildComponents != null && ChildComponents.Count > 0)
+            {
+                foreach(Component child in ChildComponents)
+                {
+                    result.AddRange(child.GetExceptionToDutyMembersRecursive());
+                }
+            }
+            if (Positions != null && Positions.Count > 0)
+            {
+                foreach(Position p in Positions)
+                {
+                    result.AddRange(p.Members.Where(x => x.DutyStatusId != 1).ToList());
+                }
+            }            
+            return result;
+        }
     }
 }
