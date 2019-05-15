@@ -34,7 +34,7 @@ namespace BlueDeck.Models.DocGenerators
 
                 MainDocumentPart mainPart = wordDoc.MainDocumentPart;
                 // populate the header
-                SetTableHeaderContent(mainPart.HeaderParts.ElementAt(0).RootElement.Elements<Table>().ElementAt(0));
+                SetTableHeaderContent(mainPart.HeaderParts.ElementAt(1).RootElement.Elements<Table>().ElementAt(0));
                 // Demographics                
                 SetDemographicTableContent(mainPart.FooterParts.ElementAt(0).RootElement.Elements<Table>().ElementAt(0));
 
@@ -56,12 +56,28 @@ namespace BlueDeck.Models.DocGenerators
                 mainPart.Document.Body.Append(GenerateColumnBreakParagraph());
 
                 // Append Main Component non-supervisory positions
-                foreach (Position position in Components.First().Positions)
+                if (Components.First().Positions != null && Components.First().Positions.Count > 0)
                 {
-                    if (position.IsManager != true)
+                    foreach (Position position in Components.First().Positions)
                     {
-                        mainPart.Document.Body.Append(GenerateLeftJustifiedTable(position));
+                        if (position.IsManager != true)
+                        {
+                            mainPart.Document.Body.Append(GenerateLeftJustifiedTable(position));
+                        }
                     }
+                }
+                else
+                {
+                    RunProperties runProperties5 = new RunProperties();
+                    RunFonts runFonts5 = new RunFonts() { Ascii = "Trebuchet MS" };
+                    FontSize fontSize5 = new FontSize() { Val = "18" };
+                    runProperties5.Append(runFonts5);
+                    runProperties5.Append(fontSize5);
+                    Run run5 = new Run();
+                    Text text5 = new Text("NONE");
+                    run5.Append(runProperties5);
+                    run5.Append(text5);
+                    mainPart.Document.Body.Append(new Paragraph(run5));
                 }
                 // Break Section to move the next table to the left column
                 mainPart.Document.Body.Append(GenerateSectionBreakParagraph());
@@ -105,6 +121,19 @@ namespace BlueDeck.Models.DocGenerators
                             }
                         }
                     }
+                    else
+                    {
+                        RunProperties runProperties3 = new RunProperties();
+                        RunFonts runFonts3 = new RunFonts() { Ascii = "Trebuchet MS" };
+                        FontSize fontSize3 = new FontSize() { Val = "18" };
+                        runProperties3.Append(runFonts3);
+                        runProperties3.Append(fontSize3);
+                        Run run3 = new Run();
+                        Text text3 = new Text("NONE");
+                        run3.Append(runProperties3);
+                        run3.Append(text3);
+                        mainPart.Document.Body.Append(new Paragraph(run3));
+                    }
 
 
                     // move to right column
@@ -124,7 +153,20 @@ namespace BlueDeck.Models.DocGenerators
                     if (c.GetExceptionToDutyMembersRecursive().Count > 0)
                     {
                         mainPart.Document.Body.Append(GenerateExceptionToDutyStatusTable(c.GetExceptionToDutyMembersRecursive()));
-                    }                    
+                    }
+                    else
+                    {
+                        RunProperties runProperties4 = new RunProperties();
+                        RunFonts runFonts4 = new RunFonts() { Ascii = "Trebuchet MS" };
+                        FontSize fontSize4 = new FontSize() { Val = "18" };
+                        runProperties4.Append(runFonts4);
+                        runProperties4.Append(fontSize4);
+                        Run run4 = new Run();
+                        Text text4 = new Text("NONE");
+                        run4.Append(runProperties4);
+                        run4.Append(text4);
+                        mainPart.Document.Body.Append(new Paragraph(run4));
+                    }
                     // back to right column
                     mainPart.Document.Body.Append(GenerateSectionBreakParagraph());
 
