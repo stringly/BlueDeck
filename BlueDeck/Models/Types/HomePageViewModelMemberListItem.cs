@@ -16,6 +16,7 @@ namespace BlueDeck.Models.Types
         public int PositionId { get; set; }
         public int? LineupPosition { get; set; }
         public string DutyStatus { get; set; }
+        public bool IsExceptionToNormalDuty { get; set; }
         public char Gender { get; set; }
         public char Race { get; set; }
 
@@ -30,6 +31,7 @@ namespace BlueDeck.Models.Types
             PositionId = member.Position.PositionId;
             LineupPosition = member.Position.LineupPosition;
             DutyStatus = member?.DutyStatus?.DutyStatusName ?? "-";
+            IsExceptionToNormalDuty = member?.DutyStatus.IsExceptionToNormalDuty ?? false;
             Gender = member.Gender.Abbreviation;
             Race = member.Race.Abbreviation;
 

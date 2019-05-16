@@ -47,6 +47,15 @@ namespace BlueDeck.Models
         [Required]
         public char Abbreviation { get; set; }
 
+        /// <summary>
+        /// Indicates whether the duty status is considered an exception to normal duty.
+        /// </summary>
+        /// <value>
+        /// Status is an exception to normal duty
+        /// </value>
+        [Display(Name = "Exception to Duty")]
+        public bool IsExceptionToNormalDuty { get; set; }
+
         public virtual IEnumerable<Member> Members { get; set; }
     }
 }

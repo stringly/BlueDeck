@@ -2901,7 +2901,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = "Cpl.";
+            text1.Text = _m?.Rank.RankShort ?? "N/A";
 
             run1.Append(runProperties1);
             run1.Append(text1);
@@ -2947,7 +2947,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties2.Append(fontSize4);
             runProperties2.Append(fontSizeComplexScript4);
             Text text2 = new Text();
-            text2.Text = "Lee, Chung";
+            text2.Text = _m?.GetLastNameFirstName() ?? "N/A";
 
             run2.Append(runProperties2);
             run2.Append(text2);
@@ -2995,7 +2995,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties3.Append(fontSize6);
             runProperties3.Append(fontSizeComplexScript6);
             Text text3 = new Text();
-            text3.Text = "2623";
+            text3.Text = _m?.IdNumber ?? "N/A";
 
             run3.Append(runProperties3);
             run3.Append(text3);
@@ -3049,7 +3049,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties4.Append(fontSize8);
             runProperties4.Append(fontSizeComplexScript8);
             Text text4 = new Text();
-            text4.Text = "A";
+            text4.Text = _m?.Race.Abbreviation.ToString() ?? "-";
 
             run4.Append(runProperties4);
             run4.Append(text4);
@@ -3103,7 +3103,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties5.Append(fontSize10);
             runProperties5.Append(fontSizeComplexScript10);
             Text text5 = new Text();
-            text5.Text = "M";
+            text5.Text = _m?.Gender.Abbreviation.ToString() ?? "-";
 
             run5.Append(runProperties5);
             run5.Append(text5);

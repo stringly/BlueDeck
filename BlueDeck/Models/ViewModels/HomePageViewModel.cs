@@ -37,7 +37,7 @@ namespace BlueDeck.Models.ViewModels
             {
                 foreach (HomePageViewModelMemberListItem m in g.Members)
                 {
-                    if (m.MemberDisplayName != "Vacant" && m.DutyStatus != "Full Duty")
+                    if (m.IsExceptionToNormalDuty == true)
                     {
                         ExceptionToDuty.Add(m);
                     }

@@ -222,7 +222,7 @@ namespace BlueDeck.Models {
             {
                 foreach (Position p in Positions)
                 {
-                    result.AddRange(p.Members.Where(x => x.DutyStatusId != 1).ToList());
+                    result.AddRange(p.Members.Where(x => x.DutyStatus.IsExceptionToNormalDuty == true).ToList());
                 }
             }            
             return result;
@@ -242,7 +242,7 @@ namespace BlueDeck.Models {
             {
                 foreach(Position p in Positions)
                 {
-                    result.AddRange(p.Members.Where(x => x.DutyStatusId != 1).ToList());
+                    result.AddRange(p.Members.Where(x => x.DutyStatus.IsExceptionToNormalDuty == true).ToList());
                 }
             }            
             return result;
