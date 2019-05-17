@@ -39,7 +39,15 @@ namespace BlueDeck.Models.DocGenerators
                 SetDemographicTableContent(mainPart.FooterParts.ElementAt(0).RootElement.Elements<Table>().ElementAt(0));
 
                 // Centered, Commander/Assistant Commander spot
-                mainPart.Document.Body.Elements<Paragraph>().ElementAt(0).InsertBeforeSelf(GenerateCenteredSoloTable(Components.First().Positions.FirstOrDefault(x => x.IsManager == true)));
+                Position componentBoss = Components.First()?.Positions?.FirstOrDefault(x => x.IsManager == true);
+                if (componentBoss == null)
+                {
+                    componentBoss = new Position()
+                    {
+                        Name = "NO SUPERVISOR POSITION"
+                    };                    
+                }
+                mainPart.Document.Body.Elements<Paragraph>().ElementAt(0).InsertBeforeSelf(GenerateCenteredSoloTable(componentBoss));
 
 
                 // Append Supervisors from First Gen Children ONLY
@@ -81,9 +89,25 @@ namespace BlueDeck.Models.DocGenerators
                 }
                 // Break Section to move the next table to the left column
                 mainPart.Document.Body.Append(GenerateSectionBreakParagraph());
-
-
-                mainPart.Document.Body.Append(GenerateExceptionToDutyStatusTable(Components.FirstOrDefault().GetExceptionToDutyMembersRecursive()));
+                int fuckyou = Components.FirstOrDefault().GetExceptionToDutyMembersRecursive().Count;
+                if (fuckyou > 0)
+                {
+                    mainPart.Document.Body.Append(GenerateExceptionToDutyStatusTable(Components.FirstOrDefault().GetExceptionToDutyMembersRecursive()));
+                }
+                else
+                {                    
+                    RunProperties runProperties6 = new RunProperties();
+                    RunFonts runFonts6 = new RunFonts() { Ascii = "Trebuchet MS"};
+                    FontSize fontSize6 = new FontSize() { Val = "18" };
+                    runProperties6.Append(runFonts6);
+                    runProperties6.Append(fontSize6);
+                    Run run6  = new Run();
+                    Text text6 = new Text("NONE");
+                    run6.Append(runProperties6);
+                    run6.Append(text6);
+                    mainPart.Document.Body.Append(new Paragraph(run6));                       
+                }
+                
 
                 // Break Section to move the next table to the left column
                 mainPart.Document.Body.Append(GenerateSectionBreakParagraph());
@@ -175,16 +199,16 @@ namespace BlueDeck.Models.DocGenerators
                     {
                         // reset the Odd/Even check
                         ComponentTableCount = 0;
+                        int totalCount = c.ChildComponents.Count;
                         foreach (Component child in c.ChildComponents)
                         {
 
-                            RecursiveComponentTable(mainPart, child);
+                            RecursiveComponentTable(mainPart, child, totalCount);
                         }
                     }
 
 
                     // Break the page, so subsequent components are on a different page
-                    //mainPart.Document.Body.Append(new Paragraph());
                     mainPart.Document.Body.Append(GeneratePageBreakSectionProperties());
                 }
 
@@ -267,7 +291,7 @@ namespace BlueDeck.Models.DocGenerators
             paragraph5.Append(run5);
             summaryCell.Append(paragraph5);
         }
-        public void RecursiveComponentTable(MainDocumentPart mainPart, Component c)
+        public void RecursiveComponentTable(MainDocumentPart mainPart, Component c, int totalCount)
         {
             if (ComponentTableCount % 2 == 0)
             {
@@ -285,6 +309,10 @@ namespace BlueDeck.Models.DocGenerators
             if (ComponentTableCount % 2 != 0)
             {
                 mainPart.Document.Body.Append(GenerateColumnBreakParagraph());
+                if (ComponentTableCount == totalCount)
+                {
+                    mainPart.Document.Body.Append(GenerateSectionBreakParagraph());
+                }
             }
             else
             {
@@ -294,7 +322,7 @@ namespace BlueDeck.Models.DocGenerators
             {
                 foreach (Component child in c.ChildComponents)
                 {
-                    RecursiveComponentTable(mainPart, child);
+                    RecursiveComponentTable(mainPart, child, totalCount);
                 }
             }
         }
@@ -704,7 +732,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text7 = new Text();
 
             // SET Member Name LAST, First
-            text7.Text = _p?.Members?.FirstOrDefault().GetLastNameFirstName() ?? "N/A";
+            text7.Text = _p?.Members?.FirstOrDefault()?.GetLastNameFirstName() ?? "N/A";
 
             run7.Append(runProperties7);
             run7.Append(text7);
@@ -754,7 +782,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text8 = new Text();
 
             // SET Member Badge Number
-            text8.Text = _p?.Members?.FirstOrDefault().IdNumber ?? "N/A";
+            text8.Text = _p?.Members?.FirstOrDefault()?.IdNumber ?? "N/A";
 
             run8.Append(runProperties8);
             run8.Append(text8);
@@ -860,7 +888,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text10 = new Text();
 
             // SET Member Race Abbreviation
-            text10.Text = _p?.Members?.FirstOrDefault().Race?.Abbreviation.ToString() ?? "-";
+            text10.Text = _p?.Members?.FirstOrDefault()?.Race?.Abbreviation.ToString() ?? "-";
 
             run10.Append(runProperties10);
             run10.Append(text10);
@@ -2240,8 +2268,8 @@ namespace BlueDeck.Models.DocGenerators
 
         }
         public Table GenerateExceptionToDutyStatusTable(List<Member> _members)
-        {
-            Member firstMember = _members.First();
+        {            
+            Member firstMember = _members?.First() ?? new Member();
             _members.Remove(firstMember);
             Table table1 = new Table();
 
