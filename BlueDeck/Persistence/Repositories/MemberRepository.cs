@@ -83,6 +83,8 @@ namespace BlueDeck.Persistence.Repositories
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
                     .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.TempPosition)
+                    .ThenInclude(x => x.ParentComponent)
                 .Include(x => x.PhoneNumbers)
                     .ThenInclude(x => x.Type)
                 .Include(x => x.Gender)
@@ -161,6 +163,11 @@ namespace BlueDeck.Persistence.Repositories
             {
                 m.PositionId = 7; // 7 is the current ID of the Unassigned Position
             }
+            //if (form.TempPositionId != 0)
+            //{
+            //    m.TempPositionId = Convert.ToInt32(form.TempPositionId);
+            //}
+            m.TempPositionId = form.TempPositionId;
             m.RankId = Convert.ToInt32(form.MemberRank);
             m.GenderId = Convert.ToInt32(form.MemberGender);
             m.RaceId = Convert.ToInt32(form.MemberRace);
@@ -325,6 +332,8 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(x => x.Race)
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
                 .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Position)
+                    .ThenInclude(z => z.ParentComponent)
                 .Load();
 
             List<HomePageComponentGroup> initial = components.ConvertAll(x => new HomePageComponentGroup(x));

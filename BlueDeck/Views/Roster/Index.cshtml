@@ -43,7 +43,9 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
         // Drag and Drop
         var dragSrcEl = null;
         var stop = true;
@@ -121,12 +123,23 @@
                     // target element IS a member - we need to swap
                     // swapping invokes a Roster refresh, so we return after this
                     var dragMemberId = dragSrcEl.dataset.memberid;
+                    var dragMemberTDY = false;
+                    if (dragSrcEl.dataset.tdy == "true") {
+                        dragMemberTDY = true;
+                    }
                     var dropMemberId = this.dataset.memberid;
+                    var dropMemberTDY = false;
+                    if (this.dataset.tdy == "true") {
+                        dropMemberTDY = true;
+                    }
                     if (dropMemberId == null) {
                         // if the drop event fired on the "insertable", the memberId will be in the dataset of it's first class="member" child
                         dropMemberId = this.getElementsByClassName("member")[0].dataset.memberid;
+                        if (this.getElementsByClassName("member")[0].dataset.tdy == "true") {
+                            dropMemberTDY == true;
+                        }
                     }
-                    DragAndSwap(dragMemberId, dropMemberId);
+                    DragAndSwap(dragMemberId, dragMemberTDY, dropMemberId, dropMemberTDY);
                     return;
                 }
 
@@ -165,8 +178,8 @@
 
                 var dropElem = document.getElementById(this.id).lastChild;
                 addDnDHandlers(dropElem);
-                var moreOptionsButton = dropElem.querySelectorAll('.moreOptions')[0];
-                addShowMoreOptionsHandler(moreOptionsButton);
+                //var moreOptionsButton = dropElem.querySelectorAll('.moreOptions')[0];
+                //addShowMoreOptionsHandler(moreOptionsButton);
                 var moreOptionsReassignEmployee = dropElem.querySelectorAll('.drag-options-reassign')[0];
                 addMoreOptionsReassignEmployeeHandler(moreOptionsReassignEmployee);
                 var moreOptionsEditMember = dropElem.querySelectorAll('.drag-options-edit')[0];
@@ -176,7 +189,13 @@
                 // find: MemberID of dragged member, PositionID of new position.
                 var newPositionId = this.dataset.positionid;
                 var memberId = dragSrcEl.dataset.memberid;
-                reassignMember(memberId, newPositionId);
+                if (dragSrcEl.dataset.tdy === 'true') {
+                    reassignTDYMember(memberId, newPositionId);
+                }
+                else {
+                    reassignMember(memberId, newPositionId);
+                }
+                
             }
             this.classList.remove('over');
             return false;
@@ -225,10 +244,10 @@
                 setTimeout(function () { scroll(step) }, 20);
             }
         }
-        function addShowMoreOptionsHandler(elem) {
-            elem.addEventListener('click', showMoreOptions, false);
-            elem.parentElement.parentElement.querySelectorAll(".drag-options")[0].addEventListener('mouseleave', handleMouseOut, false);
-        }
+        //function addShowMoreOptionsHandler(elem) {
+        //    elem.addEventListener('click', showMoreOptions, false);
+        //    elem.parentElement.parentElement.querySelectorAll(".drag-options")[0].addEventListener('mouseleave', handleMouseOut, false);
+        //}
         function addMoreOptionsReassignEmployeeHandler(elem) {
             elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
         }
@@ -247,8 +266,8 @@
         function handleMouseOut(elem) {
             this.classList.remove("active");
         }
-        function DragAndSwap(dragMId, dropMId) {
-            $.get("/Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
+        function DragAndSwap(dragMId, dragTDY, dropMId, dropTDY) {
+            $.get("/Roster/SwapMemberPositions", { dragMemberId: dragMId, dragIsTDY: dragTDY, dropMemberId: dropMId, dropIsTDY: dropTDY }, function (data) {
 
                 if (data.success == true) {
                     $("#SelectedComponent").trigger('change');
@@ -257,6 +276,27 @@
         }
         function reassignMember(memberId, newPositionId) {
             $.get("/Roster/ReassignMember", { memberId: memberId, positionId: newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
+                // check if a DemoRefresh has been returned
+                if (data.demoDictionary) {
+                    console.log("Refreshing DemoTable");
+                    for (var key in data.demoDictionary) {
+                        // skip loop if the property is from prototype
+                        if (!data.demoDictionary.hasOwnProperty(key)) continue;
+                        var obj = data.demoDictionary[key];
+                        $(key).html(obj);
+                    }
+                }
+                // check if we need to refresh the entire RosterManager
+                else if (data.status == "RefreshRosterManager") {
+                    // if so, manually trigger the click event for the getComponentButton
+                    console.log("Refreshing RosterManager");
+                    $("#SelectedComponent").trigger('change');
+                }
+            });
+        }
+
+        function reassignTDYMember(memberId, newPositionId) {
+            $.get("/Roster/ReassignTDYMember", { memberId: memberId, positionId: newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
                 // check if a DemoRefresh has been returned
                 if (data.demoDictionary) {
                     console.log("Refreshing DemoTable");
@@ -707,7 +747,12 @@
                 return;
             }
             $("#assignMemberModal").modal("hide");
-            reassignMember(member, position);
+            if ($("#TemporaryAssignment").is(":checked")) {
+                reassignTDYMember(member, position);
+            } else {
+                reassignMember(member, position);
+            }
+            
         }
 
         function handleReassignEmployeeModalSubmit() {

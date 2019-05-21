@@ -132,6 +132,12 @@ namespace BlueDeck.Models {
         [Display(Name = "Last Modified By")]
         public virtual Member LastModifiedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the position identifier.
+        /// </summary>
+        /// <value>
+        /// The position identifier.
+        /// </value>
         public int PositionId { get; set; }
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
@@ -142,7 +148,30 @@ namespace BlueDeck.Models {
         [Display(Name = "Current Assignment")]
         [ForeignKey("PositionId")]
         public Position Position { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the temporary <see cref="Position"/> position identifier.
+        /// </summary>
+        /// <remarks>
+        /// A member can be assigned a Temporary (TDY) position, which allows them to be included in the roster
+        /// (but not demographic or staffing) calculations of a second position while preserving their primary position.
+        /// </remarks>
+        /// <value>
+        /// The temporary position identifier.
+        /// </value>
+        public int? TempPositionId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the temporary duty position.
+        /// </summary>
+        /// <value>
+        /// The temporary duty position.
+        /// </value>
+        [Display(Name = "TDY Assignment")]
+        [ForeignKey("TempPositionId")]
+        public Position TempPosition {get;set;}
+
+
         [Display(Name = "Contact Numbers")]
         public ICollection<ContactNumber> PhoneNumbers { get; set; }
 

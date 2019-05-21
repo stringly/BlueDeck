@@ -107,6 +107,15 @@ namespace BlueDeck.Models {
         public virtual List<Member> Members { get; set; }
 
         /// <summary>
+        /// Gets or sets the temporary members.
+        /// </summary>
+        /// <value>
+        /// A collection of Member Entities that represents members assigned to this Position temporarily
+        /// </value>
+        [Display(Name = "Temporary Members")]
+        public virtual List<Member> TempMembers { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Position"/> class.
         /// <remarks>
         /// Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.

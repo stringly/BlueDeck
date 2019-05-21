@@ -93,6 +93,14 @@
                                                                     new { @class = "form-control" })
                                     <span asp-validation-for="DutyStatusId" class="text-danger"></span>
                                 </div>
+                                <div class="col-sm-4 form-group">
+                                    <label asp-for="TempPositionId" class="control-label"></label>
+                                    @Html.DropDownListFor(model => model.TempPositionId,
+                                                                    new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                                    "None",
+                                                                    new { @class = "form-control" })
+                                    <span asp-validation-for="TempPositionId" class="text-danger"></span>
+                                </div>
                             </div>
                             <hr />
                             <div class="row">

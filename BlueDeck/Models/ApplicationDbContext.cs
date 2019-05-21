@@ -104,6 +104,10 @@ namespace BlueDeck.Models {
                 .WithMany(m => m.Members)
                 .HasForeignKey(p => p.PositionId);
             modelBuilder.Entity<Member>()
+                .HasOne(p => p.TempPosition)
+                .WithMany(m => m.TempMembers)
+                .HasForeignKey(p => p.TempPositionId);
+            modelBuilder.Entity<Member>()
                 .HasOne(c => c.Creator)
                 .WithMany(m => m.CreatedMembers)
                 .HasForeignKey(m => m.CreatorId);

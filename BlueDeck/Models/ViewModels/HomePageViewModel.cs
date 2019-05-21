@@ -37,7 +37,7 @@ namespace BlueDeck.Models.ViewModels
             {
                 foreach (HomePageViewModelMemberListItem m in g.Members)
                 {
-                    if (m.IsExceptionToNormalDuty == true)
+                    if (m.IsExceptionToNormalDuty == true || m.TempPositionId != null)
                     {
                         ExceptionToDuty.Add(m);
                     }

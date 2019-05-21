@@ -64,22 +64,72 @@
 
                                                 <span style="float:left;">
                                                     <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
-                                                    <img class="@p.Members[0].Rank.PayGrade" src="@p.Members[0].Rank.GetRankImageSource()"  style="height:16px; width:16px; margin-right:5px" />
-                                                    @p.Members[0].GetTitleName()
+                                                    <img class="@p.Members[0].Rank.PayGrade" src="@p.Members[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                    @p.Members[0].GetTitleName() <small style="color:orangered;">@(p.Members[0].TempPositionId == null ? "" : $"(TDY to {p.Members[0].TempPosition.ParentComponent.Name})" )</small>
                                                 </span>
                                                 <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
-                                                    <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@p.Members[0].MemberId"></span>
+                                                    <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@p.Members[0].MemberId" type="button" data-toggle="dropdown"></span>
+                                                    <ul class="dropdown-menu">
+                                                        <li><span class="drag-options-edit" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                        <li><span class="drag-options-reassign" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-refresh"></i> Reassign Employee</span></li>
+                                                        <li><span class="drag-options-changestatus" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                        <li><span class="drag-options-tdy" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-share-alt"></i> TDY Employee</span></li>
+                                                    </ul>
                                                     <span class="tooltiptext">Show more options</span>
                                                 </div>
                                                 <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@p.Members[0].DutyStatus.DutyStatusName</span>
                                                 <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@p.Members[0].Race.Abbreviation/@p.Members[0].Gender.Abbreviation</span>
-                                                <div class="drag-options" id="options_@p.Members[0].MemberId">
-                                                    <label class="drag-options-label">
-                                                        <span class="drag-options-edit" data-memberId="@p.Members[0].MemberId">Edit Employee Info</span><br />
-                                                        <span class="drag-options-reassign" data-memberId="@p.Members[0].MemberId">Reassign Employee</span><br />
-                                                        <span class="drag-options-changestatus" data-memberId="@p.Members[0].MemberId">Change Duty Status</span><br />
-                                                    </label>
+                                            </div>
+                                        </div>
+                                        if (p?.TempMembers?.Count() > 0)
+                                        {
+                                            uniquePositionId++;
+                                            <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                                <div id="member-id-@p.TempMembers[0].MemberId" class="member tdy-member" draggable="true" data-memberId="@p.TempMembers[0].MemberId" data-tdy="true">
+
+                                                    <span style="float:left;">
+                                                        <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                        <img class="@p.TempMembers[0].Rank.PayGrade" src="@p.TempMembers[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                        @p.TempMembers[0].GetTitleName()<small style="color:royalblue;"> (TDY from @p.TempMembers[0].TempPosition.ParentComponent.Name)</small>
+                                                    </span>
+                                                    <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
+                                                        <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@p.TempMembers[0].MemberId" type="button" data-toggle="dropdown"></span>
+                                                        <ul class="dropdown-menu">
+                                                            <li><span class="drag-options-edit" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                            <li><span class="drag-options-tdy" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                            <li><span class="drag-options-changestatus" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                        </ul>
+                                                        <span class="tooltiptext">Show more options</span>
+                                                    </div>
+                                                    <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@p.TempMembers[0].DutyStatus.DutyStatusName</span>
+                                                    <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@p.TempMembers[0].Race.Abbreviation/@p.TempMembers[0].Gender.Abbreviation</span>
                                                 </div>
+                                            </div>
+                                        }
+                                    }
+                                    // TODO: Null Check
+                                    else if (p?.TempMembers?.Count() > 0)
+                                    {
+                                        uniquePositionId++;
+                                        <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                            <div id="member-id-@p.TempMembers[0].MemberId" class="member tdy-member" draggable="true" data-memberId="@p.TempMembers[0].MemberId" data-tdy="true">
+
+                                                <span style="float:left;">
+                                                    <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                    <img class="@p.TempMembers[0].Rank.PayGrade" src="@p.TempMembers[0].Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                    @p.TempMembers[0].GetTitleName() <small style="color:royalblue;"> (TDY from @p.TempMembers[0].Position.ParentComponent.Name)</small>
+                                                </span>
+                                                <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
+                                                    <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@p.TempMembers[0].MemberId" type="button" data-toggle="dropdown"></span>
+                                                    <ul class="dropdown-menu">
+                                                        <li><span class="drag-options-edit" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                        <li><span class="drag-options-tdy" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                        <li><span class="drag-options-changestatus" data-memberId="@p.TempMembers[0].MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>                                                        
+                                                    </ul>
+                                                    <span class="tooltiptext">Show more options</span>
+                                                </div>
+                                                <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@p.TempMembers[0].DutyStatus.DutyStatusName</span>
+                                                <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@p.TempMembers[0].Race.Abbreviation/@p.TempMembers[0].Gender.Abbreviation</span>
                                             </div>
                                         </div>
                                     }
@@ -104,37 +154,64 @@
                                 </div>
                                 <strong class="callSignSpan pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                                 @if (p.Members.Count() > 0)
-                                {
-                                    foreach (Member m in p.Members)
-                                    {
-                                        <div class="form-group">
-                                            <div class="members">
-                                                @{uniquePositionId++;}
+                                {                                    
+                                    <div class="form-group">
+                                        <div class="members">
+                                            @foreach (Member m in p.Members)
+                                            {
+                                                uniquePositionId++;
                                                 <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
                                                     <div id="member-id-@m.MemberId" class="member" draggable="true" data-memberId="@m.MemberId">
                                                         <span style="float:left;">
                                                             <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
-                                                            <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()"  style="height:16px; width:16px; margin-right:5px" />
-                                                            @m.GetTitleName()
+                                                            <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                            @m.GetTitleName() <small style="color:orangered;">@(p.Members[0].TempPositionId == null ? "" : $"(TDY to {p.Members[0].TempPosition.ParentComponent.Name})" )</small>
                                                         </span>
                                                         <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
-                                                            <span class="glyphicon glyphicon-menu-hamburger moreOptions" data-memberId="@m.MemberId"></span>
+                                                            <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@m.MemberId" type="button" data-toggle="dropdown"></span>
+                                                            <ul class="dropdown-menu">
+                                                                <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                                <li><span class="drag-options-reassign" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-refresh"></i> Reassign Employee</span></li>
+                                                                <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                                <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-share-alt"></i> TDY Employee</span></li>
+                                                            </ul>
                                                             <span class="tooltiptext">Show more options</span>
                                                         </div>
                                                         <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
                                                         <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
-                                                        <div class="drag-options" id="options_@m.MemberId">
-                                                            <label class="drag-options-label">
-                                                                <span class="drag-options-edit" data-memberId="@m.MemberId">Edit Employee Info</span><br />
-                                                                <span class="drag-options-reassign" data-memberId="@m.MemberId">Reassign Employee</span><br />
-                                                                <span class="drag-options-changestatus" data-memberId="@m.MemberId">Change Duty Status</span><br />
-                                                            </label>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            }
+                                            @if (p?.TempMembers?.Count() > 0)
+                                            {
+                                                foreach (Member m in p.TempMembers)
+                                                {
+                                                uniquePositionId++;
+                                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                                    <div id="member-id-@m.MemberId" class="member tdy-member" draggable="true" data-memberId="@m.MemberId" data-tdy="true">
+
+                                                        <span style="float:left;">
+                                                            <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                            <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                            @m.GetTitleName()<small style="color:royalblue;"> (TDY from @m.Position.ParentComponent.Name)</small>
+                                                        </span>
+                                                        <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
+                                                            <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@m.MemberId" type="button" data-toggle="dropdown"></span>
+                                                            <ul class="dropdown-menu">
+                                                                <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                                <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                                <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                            </ul>
+                                                            <span class="tooltiptext">Show more options</span>
+                                                        </div>
+                                                        <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
+                                                        <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
+                                                    </div>
+                                                </div>
+                                                }
+                                            }
                                         </div>
-                                    }
+                                    </div>                                    
                                     <!--Render an empty insertable so that a member can be added to the Non-Unique position-->
                                     <div class="form-group">
                                         <div class="members">

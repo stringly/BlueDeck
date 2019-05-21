@@ -113,16 +113,57 @@ namespace BlueDeck.Controllers
             return Json(new {});
         }
 
-        public JsonResult SwapMemberPositions(int dragMemberId, int dropMemberId)
+        public JsonResult ReassignTDYMember(int memberId, int positionId, int selectedComponentId)
+        {                   
+            // ensure member/position isn't 0
+            if (memberId != 0 && positionId != 0)
+            {
+                // pull Member from Repo
+                Member m = unitOfWork.Members.Get(memberId);
+                m.TempPositionId = positionId;
+                m.LastModified = DateTime.Now;
+                m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                unitOfWork.Complete();
+            }
+            return Json(new { Status = "RefreshRosterManager" });            
+        }
+
+        public JsonResult SwapMemberPositions(int dragMemberId, bool dragIsTDY, int dropMemberId, bool dropIsTDY)
         {
-            Member dragMember = unitOfWork.Members.GetMemberWithPosition(dragMemberId);
-            Member dropMember = unitOfWork.Members.GetMemberWithPosition(dropMemberId);
-            Position dragPosition = dragMember.Position;
-            Position dropPosition = dropMember.Position;
-            dragMember.Position = dropPosition;
+            Member dragMember = unitOfWork.Members.Get(dragMemberId);
+            Member dropMember = unitOfWork.Members.Get(dropMemberId);
+
+            if (dragIsTDY == true && dropIsTDY == true)
+            {
+                int? dragPositionId = dragMember.TempPositionId;
+                int? dropPositionId = dropMember.TempPositionId;
+                dragMember.TempPositionId = dropPositionId;
+                dropMember.TempPositionId = dragPositionId;
+            }
+            else if (dragIsTDY == true && dropIsTDY == false)
+            {
+                int? dragPositionId = dragMember.TempPositionId;
+                int dropPositionId = dropMember.PositionId;
+                dragMember.TempPositionId = dropPositionId;
+                dropMember.PositionId = Convert.ToInt32(dragPositionId);
+            }
+            else if (dragIsTDY == false && dropIsTDY == true)
+            {
+                int dragPositionId = dragMember.PositionId;
+                int? dropPositionId = dropMember.TempPositionId;
+                dragMember.PositionId = Convert.ToInt32(dropPositionId);
+                dropMember.TempPositionId = dragPositionId;
+            }
+            else
+            {
+                int dragPositionId = dragMember.PositionId;
+                int dropPositionId = dropMember.PositionId;
+                dragMember.PositionId = dropPositionId;
+                dropMember.PositionId = dragPositionId;
+            }
+            
             dragMember.LastModified = DateTime.Now;
-            dragMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
-            dropMember.Position = dragPosition;
+            dragMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);            
             dropMember.LastModified = DateTime.Now;
             dropMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
             unitOfWork.Complete();
@@ -138,8 +179,8 @@ namespace BlueDeck.Controllers
         /// <param name="componentId">The ComponentId of the top-level component</param>
         /// <returns></returns>
         public IActionResult GetRosterViewComponent(int componentId){
-            List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
-            //List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
+            //List<Component> result = unitOfWork.Components.GetComponentAndChildren(componentId, new List<Component>());
+            List<Component> result = unitOfWork.Components.GetComponentsAndChildrenSP(componentId);
             return ViewComponent("RosterManager", result.OrderBy(x => x.ComponentId).ToList());    
         }
 

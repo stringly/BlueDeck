@@ -55,7 +55,7 @@ namespace BlueDeck.Models.ViewModels
         /// </summary>
         /// <remarks>
         /// This list is used to populate a Select List from which a user can select a Member to assign.
-        /// See <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/>
+        /// See <see cref="BlueDeck.Models.Types.MemberSelectListItem"/>
         /// </remarks>
         /// <value>
         /// The members.
@@ -64,10 +64,27 @@ namespace BlueDeck.Models.ViewModels
 
         public Position Position { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the assignment is temporary.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [temporary assignment]; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "Temporary Assignment")]
+        public bool TemporaryAssignment { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssignMemberModalViewComponentViewModel"/> class.
+        /// </summary>
         public AssignMemberModalViewComponentViewModel()
         {
         }
-        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssignMemberModalViewComponentViewModel"/> class.
+        /// </summary>
+        /// <param name="p">The p.</param>
+        /// <param name="members">The members.</param>
+        /// <param name="selectedComponentId">The selected component identifier.</param>
         public AssignMemberModalViewComponentViewModel(Position p, List<MemberSelectListItem> members, int selectedComponentId)
         {
             PositionId = p.PositionId;

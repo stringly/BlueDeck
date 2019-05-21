@@ -163,6 +163,7 @@ namespace BlueDeck.Controllers
             "MemberRace," +
             "MemberGender," +
             "PositionId," +
+            "TempPositionId," +
             "IdNumber," +
             "Email," +
             "LDAPName," +
@@ -261,6 +262,7 @@ namespace BlueDeck.Controllers
             "MemberGender," +
             "MemberRace," +
             "PositionId," +
+            "TempPositionId," +
             "IdNumber," +
             "Email," +
             "LDAPName," +
@@ -283,10 +285,12 @@ namespace BlueDeck.Controllers
                 form.RankList = unitOfWork.MemberRanks.GetMemberRankSelectListItems();
                 form.GenderList = unitOfWork.MemberGenders.GetMemberGenderSelectListItems();
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
+                form.AppStatuses = unitOfWork.AppStatuses.GetApplicationStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
                 ViewBag.Title = "Edit Member - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
+                ViewBag.ReturnUrl = returnUrl;
                 return View(form);
             }
             else

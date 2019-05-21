@@ -167,7 +167,13 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
-                .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Gender)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Race)
+                .Include(y => y.TempMembers).ThenInclude(x => x.DutyStatus) 
                 .Load();
             
             return components;
