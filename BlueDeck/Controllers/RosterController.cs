@@ -128,6 +128,29 @@ namespace BlueDeck.Controllers
             return Json(new { Status = "RefreshRosterManager" });            
         }
 
+        public JsonResult CancelTDY(int memberId)
+        {
+            if (memberId != null)
+            {
+                Member m = unitOfWork.Members.Get(memberId);
+                if (m != null)
+                {
+                    m.TempPositionId = null;
+                    unitOfWork.Complete();
+
+                    return Json(new { Status = "Success" });
+                }
+                else
+                {
+                    return Json(new { });
+                }
+            }
+            else
+            {
+                return Json(new { });
+            }
+        }
+
         public JsonResult SwapMemberPositions(int dragMemberId, bool dragIsTDY, int dropMemberId, bool dropIsTDY)
         {
             Member dragMember = unitOfWork.Members.Get(dragMemberId);

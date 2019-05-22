@@ -13,11 +13,27 @@
     <script src="~/lib/compatibility/classList.js"></script>
     <title>@ViewBag.Title</title>
     <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+    <link href="~/lib/bluedeck/css/Loader.css" rel="stylesheet" />
     <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
 
 </head>
 <body>
     @await Component.InvokeAsync("NavigationMenu")
+    <div class="modal" id="waitmodal" role="dialog">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="loader"></div>
+                        <div style="text-align:center">
+                            <h3 style="color:#3e5374">Loading</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-xs-12 pageContentContainer">
         @RenderBody()
     </div>
