@@ -221,8 +221,18 @@ namespace BlueDeck.Models {
         /// Gets the Member's name in "LastName, FirstName" format.
         /// </summary>
         /// <returns>A <see cref="string"/> with the Member's "LastName, FirstName"</returns>
-        public string GetLastNameFirstName() => $"{this.LastName}, {this.FirstName}";
-                
+        public string GetLastNameFirstName()
+        {
+            if (!String.IsNullOrEmpty(FirstName) && !String.IsNullOrEmpty(LastName))
+            {
+                return $"{this.LastName}, {this.FirstName}";
+            }
+            else
+            {
+                return "";
+            }
+            
+        }    
     }
 }
 

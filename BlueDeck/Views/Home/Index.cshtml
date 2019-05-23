@@ -140,10 +140,13 @@
                                             {
                                                 <td class="col-25">
                                                     <a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a>
-                                                    <span>@(worker.TempPositionId == null ? "" : $"(TDY {worker.TempPositionName})")</span>
+                                                    
                                                 </td>
                                             }
-                                            <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                            <td class="col-25">
+                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
+                                                <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                            </td>
                                             <td class="col-15">@worker.DutyStatus</td>
                                             <td class="col-15">@worker.ContactNumber</td>
                                             <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>

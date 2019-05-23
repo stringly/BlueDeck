@@ -11,23 +11,35 @@
                     </button>
                     <h4 class="modal-title" id="reassignEmployeeModalLabel">Reassign @Model.Member.GetTitleName()</h4>
                 </div>
-                
-                <form asp-action="ReassignMemberViaModal" id="reassignEmployeeModalForm">
-                    <div class="modal-body">
-                        <h6 class="text-danger" id="warning">@ViewBag.Message</h6>
+                <div class="modal-body">
+                    <form asp-action="ReassignMemberViaModal" id="reassignEmployeeModalForm">
+                        <span class="text-danger" id="warning">@ViewBag.Message</span>
                         @Html.HiddenFor(model => model.MemberId)
-                        @Html.LabelFor(model => model.PositionId)
-                        @Html.DropDownListFor(model => model.PositionId,
-                                                    new SelectList(Model.Positions, "PositionId", "PositionName"),
-                                                    "Select Position",
-                                                    new { @class = "form-control" })
                         @Html.HiddenFor(model => model.SelectedComponentId)
-
-                    </div>
-                </form>
+                        <div class="row">
+                            <div class="col-sm-8 form-group">
+                                @Html.LabelFor(model => model.PositionId)
+                                @Html.DropDownListFor(model => model.PositionId,
+                                                            new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                            "Select Position",
+                                                            new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <div class="form-checkbox">
+                                    <label>
+                                        <input asp-for="IsTDY" /> @Html.DisplayNameFor(model => model.IsTDY)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal" data-target="#reassignEmployeeModal">Close</button>
-                    <button type="button" id="reassignEmployeeModalSubmit" class="btn btn-primary pull-left">Save changes</button>
+                    <button type="button" id="reassignEmployeeModalSubmit" class="btn btn-primary pull-right">Save changes</button>
                 </div>
             </div>
         </div>

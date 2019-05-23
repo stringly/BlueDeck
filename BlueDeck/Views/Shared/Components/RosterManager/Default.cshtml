@@ -73,7 +73,10 @@
                                                         <li><span class="drag-options-edit" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
                                                         <li><span class="drag-options-reassign" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-refresh"></i> Reassign Employee</span></li>
                                                         <li><span class="drag-options-changestatus" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
-                                                        <li><span class="drag-options-tdy" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-share-alt"></i> TDY Employee</span></li>
+                                                        @if (p.Members[0].TempPositionId != null)
+                                                        {
+                                                            <li><span class="drag-options-tdy" data-memberId="@p.Members[0].MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                        }
                                                     </ul>
                                                     <span class="tooltiptext">Show more options</span>
                                                 </div>
@@ -107,7 +110,6 @@
                                             </div>
                                         }
                                     }
-                                    // TODO: Null Check
                                     else if (p?.TempMembers?.Count() > 0)
                                     {
                                         uniquePositionId++;
@@ -154,7 +156,7 @@
                                 </div>
                                 <strong class="callSignSpan pull-right">@(p.Callsign != null ? p.Callsign : "No Callsign")</strong>
                                 @if (p.Members.Count() > 0)
-                                {                                    
+                                {
                                     <div class="form-group">
                                         <div class="members">
                                             @foreach (Member m in p.Members)
@@ -173,7 +175,10 @@
                                                                 <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
                                                                 <li><span class="drag-options-reassign" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-refresh"></i> Reassign Employee</span></li>
                                                                 <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
-                                                                <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-share-alt"></i> TDY Employee</span></li>
+                                                                @if (m.TempPositionId != null)
+                                                                {
+                                                                    <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                                }
                                                             </ul>
                                                             <span class="tooltiptext">Show more options</span>
                                                         </div>
@@ -186,32 +191,32 @@
                                             {
                                                 foreach (Member m in p.TempMembers)
                                                 {
-                                                uniquePositionId++;
-                                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
-                                                    <div id="member-id-@m.MemberId" class="member tdy-member" draggable="true" data-memberId="@m.MemberId" data-tdy="true">
+                                                    uniquePositionId++;
+                                                    <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                                        <div id="member-id-@m.MemberId" class="member tdy-member" draggable="true" data-memberId="@m.MemberId" data-tdy="true">
 
-                                                        <span style="float:left;">
-                                                            <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
-                                                            <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
-                                                            @m.GetTitleName()<small style="color:royalblue;"> (TDY from @m.Position.ParentComponent.Name)</small>
-                                                        </span>
-                                                        <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
-                                                            <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@m.MemberId" type="button" data-toggle="dropdown"></span>
-                                                            <ul class="dropdown-menu">
-                                                                <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
-                                                                <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
-                                                                <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
-                                                            </ul>
-                                                            <span class="tooltiptext">Show more options</span>
+                                                            <span style="float:left;">
+                                                                <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                                <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                                @m.GetTitleName()<small style="color:royalblue;"> (TDY from @m.Position.ParentComponent.Name)</small>
+                                                            </span>
+                                                            <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
+                                                                <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@m.MemberId" type="button" data-toggle="dropdown"></span>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                                    <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                                    <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                                </ul>
+                                                                <span class="tooltiptext">Show more options</span>
+                                                            </div>
+                                                            <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
+                                                            <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
                                                         </div>
-                                                        <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
-                                                        <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
                                                     </div>
-                                                </div>
                                                 }
                                             }
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <!--Render an empty insertable so that a member can be added to the Non-Unique position-->
                                     <div class="form-group">
                                         <div class="members">
@@ -222,31 +227,70 @@
                                         </div>
                                     </div>
                                 }
-                                else
+                                else if (p?.TempMembers?.Count > 0)
                                 {
                                     <div class="form-group">
                                         <div class="members">
-                                            @{uniquePositionId++;}
+                                            @foreach (Member m in p.TempMembers)
+                                            {
+                                            uniquePositionId++;
                                             <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
-                                                <div class="insertableInner">Drag & Drop or <span class="insertableInnerSelectMember" data-positionid="@p.PositionId">click to select member.</span></div>
+                                                <div id="member-id-@m.MemberId" class="member tdy-member" draggable="true" data-memberId="@m.MemberId" data-tdy="true">
+
+                                                    <span style="float:left;">
+                                                        <span class="glyphicon glyphicon-option-vertical" style="float: left;color:#7d7b78"></span>
+                                                        <img class="@m.Rank.PayGrade" src="@m.Rank.GetRankImageSource()" style="height:16px; width:16px; margin-right:5px" />
+                                                        @m.GetTitleName()<small style="color:royalblue;"> (TDY from @m.Position.ParentComponent.Name)</small>
+                                                    </span>
+                                                    <div class="pull-right moreOptionsButtonGroup" style="margin-left:20px; cursor:pointer">
+                                                        <span class="glyphicon glyphicon-menu-hamburger moreOptions dropdown-toggle" data-memberId="@m.MemberId" type="button" data-toggle="dropdown"></span>
+                                                        <ul class="dropdown-menu">
+                                                            <li><span class="drag-options-edit" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-pencil"></i> Edit Employee Info</span></li>
+                                                            <li><span class="drag-options-tdy" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-remove"></i> Cancel TDY</span></li>
+                                                            <li><span class="drag-options-changestatus" data-memberId="@m.MemberId"><i class="glyphicon glyphicon-check"></i> Change Duty Status</span></li>
+                                                        </ul>
+                                                        <span class="tooltiptext">Show more options</span>
+                                                    </div>
+                                                    <span style="margin: 0px 5px 0px 5px" class="dutyStatusSpan pull-right">@m.DutyStatus.DutyStatusName</span>
+                                                    <span style="margin: 0px 20px 0px 5px" class="raceGenderSpan pull-right">@m.Race.Abbreviation/@m.Gender.Abbreviation</span>
+                                                </div>
+                                            </div>
+                                            }
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <div class="members">
+                                                @{uniquePositionId++;}
+                                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                                    <div class="insertableInner">Drag & Drop or <span class="insertableInnerSelectMember" data-positionid="@p.PositionId">click to select member.</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
+                                        else
+                                        {
+                                        <div class="form-group">
+                                            <div class="members">
+                                                @{uniquePositionId++;}
+                                                <div id="@uniquePositionId" data-positionid="@p.PositionId" data-parentcomponentid="@c.ComponentId" class="insertable">
+                                                    <div class="insertableInner">Drag & Drop or <span class="insertableInnerSelectMember" data-positionid="@p.PositionId">click to select member.</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        }
                                     </div>
+                                    }
                                 }
-                            </div>
-                        }
-                    }
-
-                    <div class="newPositionInsert" data-componentid="@c.ComponentId"></div>
-
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group" id="demographicsgroup_@c.ComponentId">
-                        @c.GetDemographicTableForComponentAndChildren()
+                                <div class="newPositionInsert" data-componentid="@c.ComponentId"></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group" id="demographicsgroup_@c.ComponentId">
+                                        @c.GetDemographicTableForComponentAndChildren()
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+
 }
 

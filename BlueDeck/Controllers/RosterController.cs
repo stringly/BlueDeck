@@ -224,12 +224,20 @@ namespace BlueDeck.Controllers
         /// <summary>
         /// Reassigns the member via POST from the ReassignMemberModal ViewComponent.
         /// </summary>
-        /// <param name="form">A POSTed <see cref="T:BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel"></see></param>
+        /// <param name="form">A POSTed <see cref="ReassignEmployeeModalViewComponentViewModel"></see></param>
         [HttpPost]
-        public void ReassignMemberViaModal([Bind("PositionId","MemberId","SelectedComponentId")] ReassignEmployeeModalViewComponentViewModel form)
+        public void ReassignMemberViaModal([Bind("PositionId","MemberId","SelectedComponentId", "IsTDY")] ReassignEmployeeModalViewComponentViewModel form)
         {            
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == form.MemberId);
-            m.PositionId = form.PositionId;
+            if(form.IsTDY == false)
+            {
+                m.PositionId = form.PositionId;
+            }
+            else
+            {
+                m.TempPositionId = form.PositionId;
+            }
+            
             m.LastModified = DateTime.Now;
             m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
             unitOfWork.Complete();                        
@@ -417,7 +425,7 @@ namespace BlueDeck.Controllers
 
         
         [HttpPost]
-        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,AppStatusId,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,PositionId,TempPositionId,AppStatusId,LDAPName,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             
             if (ModelState.IsValid)

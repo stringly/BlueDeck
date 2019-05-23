@@ -193,6 +193,12 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Gender)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Race)
+                .Include(y => y.TempMembers).ThenInclude(x => x.DutyStatus)
                 .Load();
 
             return componentsWithParents;
@@ -214,6 +220,12 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(x => x.Race)
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
                 .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Gender)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Race)
+                .Include(y => y.TempMembers).ThenInclude(x => x.DutyStatus)
                 .Load();
             foreach (Component c in components)
             {
@@ -235,12 +247,26 @@ namespace BlueDeck.Persistence.Repositories
                             // if no member is assigned to a Position designated as Manager, then we want to render "Vacant" details in the Parent Node
                             if (p.Members.Count == 0)
                             {
-                                n.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";                                
-                                n.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>Vacant</a>";
-                                n.MemberId = -1;
-                                n.CallSign = $"Callsign: {p.Callsign}";
-                                n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
-                                n.ContactNumber = "";
+                                if (p.TempMembers != null && p.TempMembers.Count > 0)
+                                {
+                                    n.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name} (TDY)</a>";
+                                    n.PositionId = p.PositionId;
+                                    n.MemberName = $"<a href='/Members/Details/{p.TempMembers.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.TempMembers.First().GetTitleName()}</a>";
+                                    n.CallSign = $"Callsign: {p.Callsign}";
+                                    n.Email = $"<a href='mailto:{p.TempMembers.First().Email}'style='fill:white'>{p.TempMembers.First().Email}</a>";
+                                    n.ContactNumber = p.TempMembers.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "No Phone";
+                                    n.MemberId = p.TempMembers.First().MemberId;
+                                }
+                                else
+                                {
+                                    n.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
+                                    n.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>Vacant</a>";
+                                    n.MemberId = -1;
+                                    n.CallSign = $"Callsign: {p.Callsign}";
+                                    n.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                                    n.ContactNumber = "";
+                                }
+                                
                             }
                             else
                             {
@@ -251,6 +277,25 @@ namespace BlueDeck.Persistence.Repositories
                                 n.Email = $"<a href='mailto:{p.Members.First().Email}'style='fill:white'>{p.Members.First().Email}</a>";
                                 n.ContactNumber = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "No Phone";
                                 n.MemberId = p.Members.First().MemberId;
+                                if(p.TempMembers != null && p.TempMembers.Count > 0)
+                                {
+                                    dynamicUniqueId--;
+                                    ChartableComponentWithMember d = new ChartableComponentWithMember
+                                    {
+                                        Id = dynamicUniqueId,
+                                        Parentid = n.Id,
+                                        ComponentName = $"<a href='#' style='fill:yellow'>TDY - {p.Name}</a>",
+                                    };
+                                    d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:yellow'>{p.Name}</a>";
+                                    d.PositionId = p.PositionId;
+                                    d.MemberName = $"<a href='/Members/Details/{p.TempMembers.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.TempMembers.First().GetTitleName()}</a>";
+                                    d.CallSign = $"Callsign: {p.Callsign}";
+                                    d.Email = $"<a href='mailto:{p.TempMembers.First().Email}'>{p.TempMembers.First().Email}</a>";
+                                    string phone = p.TempMembers.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
+                                    d.ContactNumber = $"Phone: {phone}";
+                                    d.MemberId = p.TempMembers.First().MemberId;
+                                    results.Add(d);
+                                }
                             }
                         }
                         else if (p.IsUnique)
@@ -264,13 +309,26 @@ namespace BlueDeck.Persistence.Repositories
                             };
                             if (p.Members.Count == 0)
                             {
-                                d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
-                                d.PositionId = p.PositionId;
-                                d.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'>Vacant</a>";
-                                d.CallSign = $"Callsign: {p.Callsign}";
-                                d.MemberId = -1;
-                                d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
-                                d.ContactNumber = $"Phone: None";
+                                if (p.TempMembers != null && p.TempMembers.Count > 0)
+                                {
+                                    d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name} (TDY)</a>";
+                                    d.PositionId = p.PositionId;
+                                    d.MemberName = $"<a href='/Members/Details/{p.TempMembers.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.TempMembers.First().GetTitleName()}</a>";
+                                    d.CallSign = $"Callsign: {p.Callsign}";
+                                    d.Email = $"<a href='mailto:{p.TempMembers.First().Email}'style='fill:white'>{p.TempMembers.First().Email}</a>";
+                                    d.ContactNumber = p.TempMembers.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "No Phone";
+                                    d.MemberId = p.TempMembers.First().MemberId;
+                                }
+                                else
+                                {
+                                    d.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.Name}</a>";
+                                    d.PositionId = p.PositionId;
+                                    d.MemberName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>Vacant</a>";
+                                    d.CallSign = $"Callsign: {p.Callsign}";
+                                    d.MemberId = -1;
+                                    d.Email = "<a href='mailto:Admin@BlueDeck.com'>Mail the Admin</a>";
+                                    d.ContactNumber = $"Phone: None";
+                                }
                             }
                             else
                             {
@@ -282,28 +340,72 @@ namespace BlueDeck.Persistence.Repositories
                                 string phone = p.Members.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
                                 d.ContactNumber = $"Phone: {phone}";
                                 d.MemberId = p.Members.First().MemberId;
+                                if(p.TempMembers != null && p.TempMembers.Count > 0)
+                                {
+                                    dynamicUniqueId--;
+                                    ChartableComponentWithMember e = new ChartableComponentWithMember
+                                    {
+                                        Id = dynamicUniqueId,
+                                        Parentid = n.Id,
+                                        ComponentName = $"<a href='#' style='fill:yellow'>TDY - {p.Name}</a>",
+                                    };
+                                    e.PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:yellow'>{p.Name}</a>";
+                                    e.PositionId = p.PositionId;
+                                    e.MemberName = $"<a href='/Members/Details/{p.TempMembers.First().MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}'style='fill:white'>{p.TempMembers.First().GetTitleName()}</a>";
+                                    e.CallSign = $"Callsign: {p.Callsign}";
+                                    e.Email = $"<a href='mailto:{p.TempMembers.First().Email}'>{p.TempMembers.First().Email}</a>";
+                                    string phone2 = p.TempMembers.First().PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
+                                    e.ContactNumber = $"Phone: {phone2}";
+                                    e.MemberId = p.TempMembers.First().MemberId;
+                                    results.Add(e);
+                                }
                             }
                             results.Add(d);
                         }
-                        else if (p.Members != null ) 
+                        else if (p.Members != null || p.TempMembers != null) 
                             // if position is not manager/unique and has members, we need a new Chartable for each member
                         {
-                            foreach (Member m in p.Members)
+                            if (p.Members != null)
                             {
-                                dynamicUniqueId--;
-                                ChartableComponentWithMember x = new ChartableComponentWithMember {
-                                    Id = dynamicUniqueId,
-                                    PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>",
-                                    Parentid = n.Id,
-                                    ComponentName = $"<a href='/Components/Details/{c.ComponentId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>", // TODO: Change this to "Node Name" in GetOrgChart?
-                                    MemberName = $"<a href='/Members/Details/{m.MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
-                                    CallSign = $"Callsign: {p.Callsign}",
-                                    Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
-                                    ContactNumber = $"Phone: {m.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None"}",
-                                    MemberId = m.MemberId,
-                                    PositionId = p.PositionId
-                                    };                                    
-                                results.Add(x);
+                                foreach (Member m in p.Members)
+                                {
+                                    dynamicUniqueId--;
+                                    ChartableComponentWithMember x = new ChartableComponentWithMember
+                                    {
+                                        Id = dynamicUniqueId,
+                                        PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{p.Name}</a>",
+                                        Parentid = n.Id,
+                                        ComponentName = p.Name, // TODO: Change this to "Node Name" in GetOrgChart?
+                                        MemberName = $"<a href='/Members/Details/{m.MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
+                                        CallSign = $"Callsign: {p.Callsign}",
+                                        Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
+                                        ContactNumber = $"Phone: {m.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None"}",
+                                        MemberId = m.MemberId,
+                                        PositionId = p.PositionId
+                                    };
+                                    results.Add(x);
+                                }
+                            }
+                            if (p.TempMembers != null)
+                            {
+                                foreach (Member m in p.TempMembers)
+                                {
+                                    dynamicUniqueId--;
+                                    ChartableComponentWithMember x = new ChartableComponentWithMember
+                                    {
+                                        Id = dynamicUniqueId,
+                                        PositionName = $"<a href='/Positions/Details/{p.PositionId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:yellow'>{p.Name} (TDY)</a>",
+                                        Parentid = n.Id,
+                                        ComponentName = $"{p.Name} (TDY)", // TODO: Change this to "Node Name" in GetOrgChart?
+                                        MemberName = $"<a href='/Members/Details/{m.MemberId}?returnUrl=/OrgChart/Index?componentid={parentComponentId}' style='fill:white'>{m.GetTitleName()}</a>",
+                                        CallSign = $"Callsign: {p.Callsign}",
+                                        Email = $"<a href='mailto:{m.Email}'>{m.Email}</a>",
+                                        ContactNumber = $"Phone: {m.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None"}",
+                                        MemberId = m.MemberId,
+                                        PositionId = p.PositionId
+                                    };
+                                    results.Add(x);
+                                }
                             }
                         }
                     }
