@@ -153,6 +153,7 @@ namespace BlueDeck.Controllers
             "JobTitle," +
             "Callsign," +
             "IsManager," +
+            "IsAssistantManager," +
             "IsUnique," +
             "CurrentMembers")] PositionWithComponentListViewModel form, string returnUrl)
         {
@@ -183,6 +184,7 @@ namespace BlueDeck.Controllers
                 IsUnique = form.IsUnique,
                 JobTitle = form.JobTitle,
                 IsManager = form.IsManager,
+                IsAssistantManager = form.IsAssistantManager,
                 LineupPosition = form.LineupPosition,
                 Callsign = form.Callsign.ToUpper(),
                 CreatedDate = DateTime.Now,
@@ -214,7 +216,17 @@ namespace BlueDeck.Controllers
                     ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.\n";
                     errors++;
                 }
-            }            
+            }
+            // check if user is attempting to add "Assistant Manager" position to the ParentComponent
+            else if (form.IsAssistantManager)
+            {
+                // check if the Parent Component of the position already has a Position designated as "Assistant Manager"
+                if (unitOfWork.Positions.SingleOrDefault(c => c.ParentComponent.ComponentId == form.ParentComponentId && c.IsAssistantManager == true) != null)
+                {
+                    ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as an Assistant Manager. Only one Assistant Manager Position is permitted.\n";
+                    errors++;
+                }
+            }
             if (errors == 0) {
                 targetParentComponent = unitOfWork.Components.SingleOrDefault(c => c.ComponentId == form.ParentComponentId);
                 unitOfWork.Positions.UpdatePositionAndSetLineup(p);
@@ -231,7 +243,16 @@ namespace BlueDeck.Controllers
                 }                
             }
             else {
-                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                    form.AvailableMembers = unitOfWork.Members.GetAllMemberSelectListItems().ToList();
+                }
+                else if (User.IsInRole("ComponentAdmin"))
+                {
+                    form.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
+                    form.AvailableMembers = JsonConvert.DeserializeObject<List<MemberSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditUsers").Value.ToString());
+                }
                 ViewBag.Title = "New Position: Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.ReturnUrl = returnUrl;
@@ -295,8 +316,9 @@ namespace BlueDeck.Controllers
             "JobTitle," +
             "Callsign," +
             "IsManager," +
+            "IsAssistantManager," +
             "IsUnique," +
-            "CurrentMembers" +
+            "CurrentMembers," +
             "Creator," +
             "CreatedDate," +
             "CreatedById," + 
@@ -338,6 +360,13 @@ namespace BlueDeck.Controllers
                     ViewBag.Message += $"{targetParentComponent.Name} already has a Position designated as Manager. You can not elevate this Position.\n";
                     errors++;              
                 }
+                else if (form.IsAssistantManager && unitOfWork.Positions.Find(x => x.ParentComponent.ComponentId == form.ParentComponentId && x.IsAssistantManager && x.PositionId != form.PositionId).FirstOrDefault() != null)
+                {
+                    // user is attempting to elevate a Position to Manager when the ParentComponent already has a Manager
+
+                    ViewBag.Message += $"{targetParentComponent.Name} already has a Position designated as an Assistant Manager. You can not elevate this Position.\n";
+                    errors++;
+                }
                 else if (form.IsUnique == true && p.IsUnique == false && p.Members.Count() > 1) {
                     // user is attempting to make Position unique when multiple members are assigned
                     ViewBag.Message += $"{p.Name} has {p.Members.Count()} current Members. You can't set this Position to Unique with multiple members.\n";
@@ -353,6 +382,7 @@ namespace BlueDeck.Controllers
                 p.JobTitle = form.JobTitle;
                 p.Callsign = form?.Callsign?.ToUpper() ?? null;
                 p.IsManager = form.IsManager;
+                p.IsAssistantManager = form.IsAssistantManager;
                 p.LineupPosition = form.LineupPosition;
                 p.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
                 p.LastModified = DateTime.Now;

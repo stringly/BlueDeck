@@ -293,7 +293,7 @@ namespace BlueDeck.Controllers
         /// <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
+        public IActionResult AddPositionToComponent([Bind("PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsAssistantManager,IsUnique")] AddPositionToComponentViewComponentViewModel form)
         {
             // populate the Form object's ParentComponent property with it's ParentComponent
             form.ParentComponent = unitOfWork.Components.GetComponentWithChildren(Convert.ToInt32(form.ParentComponentId));
@@ -342,6 +342,14 @@ namespace BlueDeck.Controllers
                             ViewBag.Message +=  $"{p.ParentComponent.Name} already has a Position designated as Manager. Only one Manager Position is permitted.\n";
                         }                        
                     }
+                    else if (form.IsAssistantManager == true && p.PositionId != form.PositionId)
+                    {
+                        if (p.IsAssistantManager == true)
+                        {
+                            errors++;
+                            ViewBag.Message += $"{p.ParentComponent.Name} already has a Position designated as Assistant Manager. Only one Assistant Manager Position is permitted.\n";
+                        }
+                    }
                 }
                 
                 
@@ -356,6 +364,7 @@ namespace BlueDeck.Controllers
                             Name = form.PositionName,
                             JobTitle = form.JobTitle,
                             IsManager = form.IsManager,
+                            IsAssistantManager = form.IsAssistantManager,
                             IsUnique = form.IsUnique,
                             LineupPosition = form.LineupPosition,
                             Callsign = form.Callsign,
@@ -375,11 +384,13 @@ namespace BlueDeck.Controllers
                             Name = form.PositionName,
                             JobTitle = form.JobTitle,
                             IsManager = form.IsManager,
+                            IsAssistantManager = form.IsAssistantManager,
                             IsUnique = form.IsUnique,
                             LineupPosition = form.LineupPosition,
-                            Callsign = form.Callsign,                            
+                            Callsign = form.Callsign,
                             LastModified = DateTime.Now,
-                            LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value)
+                            LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),
+                            Members = null // this needs to be null, or the repo method will reassign the current members
                         };
                         unitOfWork.Positions.UpdatePositionAndSetLineup(p);
                         unitOfWork.Complete();

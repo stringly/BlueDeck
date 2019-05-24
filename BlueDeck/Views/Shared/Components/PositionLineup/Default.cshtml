@@ -7,11 +7,11 @@
         {
             if (item.PositionId != Model.PositionToEdit.PositionId)
             {
-                <li role="option" data-ismanager="@item.IsManager" class="disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : "" )</li>
+                <li role="option" data-ismanager="@item.IsManager" data-isassistantmanager="@item.IsAssistantManager" class="disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : item.IsAssistantManager ? "(Assistant)" : "" )</li>
             }
             else
             {
-                <li id="newPositionInsert" role="option" data-ismanager="@item.IsManager" class="active disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : "" )</li>
+                <li id="newPositionInsert" role="option" data-ismanager="@item.IsManager" data-isassistantmanager="@item.IsAssistantManager" class="active disabled" data-lineupposition="@item.LineupPosition" data-positionid="@item.PositionId">@item.PositionName @(item.IsManager ? "(Manager)" : item.IsAssistantManager ? "(Assistant)" : "" )</li>
             }
 
         }
@@ -20,7 +20,7 @@
             <li id="newPositionInsert" class="active disabled" role="option" aria-selected="true"><span class="glyphicon glyphicon-arrow-right"></span> Insert Position Here</li>
         }
         else if (!Model.Positions.Exists(x => x.PositionId == Model.PositionToEdit.PositionId)) {
-            <li id="newPositionInsert" role="option" data-ismanager="@Model.PositionToEdit.IsManager" class="active disabled" data-lineupposition="@Model.PositionToEdit.LineupPosition" data-positionid="@Model.PositionToEdit.PositionId">@Model.PositionToEdit.Name @(Model.PositionToEdit.IsManager ? "(Manager)" : "" )</li>
+            <li id="newPositionInsert" role="option" data-ismanager="@Model.PositionToEdit.IsManager" data-isassistantmanager="@Model.PositionToEdit.IsAssistantManager" class="active disabled" data-lineupposition="@Model.PositionToEdit.LineupPosition" data-positionid="@Model.PositionToEdit.PositionId">@Model.PositionToEdit.Name @(Model.PositionToEdit.IsManager ? "(Manager)" : Model.PositionToEdit.IsAssistantManager ? "(Assistant)" : "" )</li>
         }
 
     </ul>

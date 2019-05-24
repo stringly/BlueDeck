@@ -11,6 +11,7 @@ namespace BlueDeck.Models.Types
         public int? LineupPosition { get; set; }
         public string PositionName { get; set; }
         public bool IsManager { get; set; }
+        public bool IsAssistantManager { get; set; }
 
         public PositionLineupItem()
         {
@@ -21,6 +22,7 @@ namespace BlueDeck.Models.Types
             LineupPosition = p.LineupPosition;
             PositionName = p.Name;
             IsManager = p.IsManager;
+            IsAssistantManager = p.IsAssistantManager;
         }
     }
 }

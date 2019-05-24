@@ -44,13 +44,24 @@ namespace BlueDeck.Models.ViewModels
         public string JobTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="T:BlueDeck.Models.Component"/>.
+        /// Gets or sets a value indicating whether this Position is designated as the manager of it's parent <see cref="BlueDeck.Models.Component"/>.
         /// </summary>
         /// <value>
         ///   <c>true</c> if this instance is manager; otherwise, <c>false</c>.
         /// </value>
-        [Display(Name = "Manager of Component")] 
+        [Display(Name = "Manager of Component")]
+        [ManageOrAssistantNotBoth("IsAssistantManager", ErrorMessage = "Position cannot be both Manager and Assistant Manager")]
         public bool IsManager { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this position is an assistant manager for it's component <see cref="BlueDeck.Models.Component"/>.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "Assistant Manager for Component")]
+        [ManageOrAssistantNotBoth("IsManager", ErrorMessage = "Position cannot be both Assistant Manager and Manager")]
+        public bool IsAssistantManager { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:BlueDeck.Models.Member"/>s.
@@ -91,6 +102,7 @@ namespace BlueDeck.Models.ViewModels
             PositionName = position.Name;
             JobTitle = position.JobTitle;
             IsManager = position.IsManager;
+            IsAssistantManager = position.IsAssistantManager;
             IsUnique = position.IsUnique;
             LineupPosition = position.LineupPosition;
             Callsign = position.Callsign;
@@ -98,4 +110,5 @@ namespace BlueDeck.Models.ViewModels
             MemberCount = position.Members.Count;
         }
     }
+    
 }

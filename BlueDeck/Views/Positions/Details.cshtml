@@ -57,13 +57,23 @@
                             </span>
                         </div>
                     </div>
-                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                    <div class="col-sm-5 form-group" style="margin-bottom:0px">
                         <div class="form-checkbox">
                             <label>
                                 <input asp-for="IsManager" disabled /> @Html.DisplayNameFor(model => model.IsManager)
                             </label>
                             <span class="note">
-                                This Position will be the Manager for it's Component.
+                                This Position is the Manager for it's Component.
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsAssistantManager" disabled /> @Html.DisplayNameFor(model => model.IsAssistantManager)
+                            </label>
+                            <span class="note">
+                                This Position is an Assistant Manager for it's Component.
                             </span>
                         </div>
                     </div>

@@ -1311,6 +1311,15 @@
               <c>true</c> if this instance is the manager of it's Parent Component.; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Position.IsAssistantManager">
+            <summary>
+            Gets or sets a value indicating whether this Position is an assistant manager.
+            A Component can have exactly one position designated as an assistant manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is an assistant manager of it's Parent Component.; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Position.LineupPosition">
             <summary>
             Gets or sets the lineup position.
@@ -2053,6 +2062,14 @@
               <c>true</c> if this instance is manager; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager">
+            <summary>
+            Gets or sets a value indicating whether this position is an assistant manager for it's component <see cref="T:BlueDeck.Models.Component"/>.
+            </summary>
+            <value>
+              <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsUnique">
             <summary>
             Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:BlueDeck.Models.Member"/>s.
@@ -2445,6 +2462,14 @@
               <c>true</c> if this instance is manager; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager">
+            <summary>
+            Gets or sets a value indicating whether this position is an assistant manager for it's component <see cref="T:BlueDeck.Models.Component"/>.
+            </summary>
+            <value>
+              <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsUnique">
             <summary>
             Gets or sets a value indicating whether this instance is unique, or if it can be assigned multiple <see cref="T:BlueDeck.Models.Member"/>s.
@@ -2453,28 +2478,154 @@
               <c>true</c> if this instance is unique; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.LineupPosition">
+            <summary>
+            Gets or sets the lineup position.
+            </summary>
+            <remarks>
+            The Lineup position determines the order in which a Position is listed among it's siblings. 
+            </remarks>
+            <value>
+            The lineup position.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.Callsign">
+            <summary>
+            Gets or sets the callsign.
+            </summary>
+            <remarks>
+            The Callsign is an optional field indicating the radio identifier for a person assigned to this position.
+            </remarks>
+            <value>
+            The callsign.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.Creator">
+            <summary>
+            Gets or sets the creator.
+            </summary>
+            <remarks>
+            This property is the display name of the <see cref="T:BlueDeck.Models.Member"/> that created the Position
+            </remarks>
+            <value>
+            The creator.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.CreatedDate">
+            <summary>
+            Gets or sets the date that the Member was initially created.
+            </summary>
+            <remarks>
+            This value should be set at initial creation and should never change.
+            </remarks>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.CreatedById">
+            <summary>
+            Gets or sets the MemberId of the <see cref="T:BlueDeck.Models.Member"/> who created the Position.
+            </summary>
+            <remarks>
+            This propery should be set at the time the Position is first created and should never change.
+            </remarks>
+            <value>
+            The created by identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.LastModifiedBy">
+            <summary>
+            Gets or sets the name of the <see cref="T:BlueDeck.Models.Member"/> that last modified the Position.
+            </summary>
+            <remarks>
+            This property is set to the Display Name of the <see cref="T:BlueDeck.Models.Member"/> who last modified the Position.
+            </remarks>
+            <value>
+            The last modified by.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.LastModified">
+            <summary>
+            Gets or sets the date that the Position was last modified.
+            </summary>
+            <value>
+            The date the Position was last modified.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.LastModifiedById">
+            <summary>
+            Gets or sets the MemberId of the <see cref="T:BlueDeck.Models.Member"/> that last modified the Position.
+            </summary>
+            <value>
+            The last modified by identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.Components">
             <summary>
             Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
             </summary>
             <value>
-            The <see cref="T:List{T}"/> of <see cref="T:BlueDeck.Types.ComponentSelectListItem"/>s.
+            The <see cref="T:List{T}"/> of <see cref="!:BlueDeck.Types.ComponentSelectListItem"/>s.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.CurrentMembers">
+            <summary>
+            Gets or sets a List of current <see cref="!:Members"/> Members assigned to this Position.
+            </summary>
+            <value>
+            The current members.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.AvailableMembers">
+            <summary>
+            Gets or sets a list of <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/> that can be assigned to this position
+            </summary>
+            <remarks>
+            As if v1.0, this list is set by the PositionController depending on the Claims of the Current User. 
+            This list will contain all current Members in the Database if the User is a Global Admin, but will otherwise be limited 
+            to Members that are stored in the User's claims, which are loaded via the <see cref="T:BlueDeck.Models.ClaimsLoader"/> middleware.
+            </remarks>
+            <value>
+            The available members.
             </value>
         </member>
         <member name="M:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.#ctor(BlueDeck.Models.Position)">
             TODO: Use a SP to get a list of all Component Names/Ids instead of using EF to pull all Components?
             <summary>
-            Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel"/> class.
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> class.
             </summary>
             <param name="p">The <see cref="T:BlueDeck.Models.Position"/> being displayed by the view</param>
         </member>
         <member name="M:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel"/> class.
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> class.
             <remarks>
-            This parameter-less constructor had to be added in because the <see cref="T:BlueDeck.ViewModels.PositionWithComponentListViewModel(Position, List{Component})"/> constructor overrode the default, and the form POST model-binding failed
+            This parameter-less constructor had to be added in because the <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> constructor overrode the default, and the form POST model-binding failed
             </remarks>
             </summary>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute">
+            <summary>
+            Attribute validator that ensures that a Position is not designated as both Manager and Assistant Manager
+            </summary>
+            <seealso cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute"/> class.
+            </summary>
+            <param name="comparisonProperty">The name of the property to compare.</param>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Returns Success if both Manager and AssistantManager properties are not true.
+            </summary>
+            <param name="value">The value to validate.</param>
+            <param name="validationContext">The context information about the validation operation.</param>
+            <returns>
+            An instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationResult"></see> class.
+            </returns>
+            <exception cref="T:System.ArgumentException">Property with this name not found</exception>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.AppStatusRepository.ApplicationDbContext">
             <summary>

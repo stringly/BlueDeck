@@ -153,8 +153,8 @@
                             <td>
                                 @if (IsAdmin || CanEditComponents.Any(x => x.Id == item.ComponentId))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="Edit Component" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
                                     <a asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
+                                    <a asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="Edit Component" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
                                     <a asp-action="Delete" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="Delete Component" class="glyphicon-ring"><span class="glyphicon glyphicon-trash glyphicon-bordered"></span></a>
                                 }
                                 else

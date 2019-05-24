@@ -413,6 +413,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Components/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Components.RemoveComponent(id);

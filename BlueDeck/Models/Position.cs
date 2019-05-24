@@ -69,6 +69,16 @@ namespace BlueDeck.Models {
         [Display(Name = "Manager")]
         public bool IsManager { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this Position is an assistant manager.
+        /// A Component can have exactly one position designated as an assistant manager.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is an assistant manager of it's Parent Component.; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "Assistant Manager")]
+        public bool IsAssistantManager { get; set; }
+
         [Display(Name = "Call Sign")]
         public string Callsign { get; set; }
 
@@ -124,6 +134,7 @@ namespace BlueDeck.Models {
         public Position()
         {
             Members = new List<Member>();
+            TempMembers = new List<Member>();
         }      
 
 

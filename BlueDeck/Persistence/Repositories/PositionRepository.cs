@@ -237,6 +237,7 @@ namespace BlueDeck.Persistence.Repositories
 
                 // Finally, update the Position with the new values
                 positionToUpdate.IsManager = p.IsManager;
+                positionToUpdate.IsAssistantManager = p.IsAssistantManager;
                 positionToUpdate.IsUnique = p.IsUnique;
                 positionToUpdate.JobTitle = p.JobTitle;
                 positionToUpdate.LineupPosition = p.LineupPosition;

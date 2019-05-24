@@ -66,6 +66,10 @@
                         @Html.LabelFor(model => model.DutyStatus, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.DutyStatus.DutyStatusName, new { @class = "form-control", disabled = "disabled" })
                     </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.TempPosition, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.TempPosition.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
                 </div>
                 <hr />
                 <div class="row">
