@@ -831,6 +831,14 @@
             The parentid of the component.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager">
+            <summary>
+            Gets or sets a value indicating whether this instance is assistant manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ChartableComponentWithMember.ComponentName">
             <summary>
             Gets or sets the name of the component.

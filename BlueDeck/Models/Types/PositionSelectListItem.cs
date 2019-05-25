@@ -29,7 +29,7 @@ namespace BlueDeck.Models.Types
 
         public PositionSelectListItem(Position _p)
         {
-            PositionName = _p.Name;
+            PositionName = $"{_p.Name} ({_p.ParentComponent.Name})";
             PositionId = _p.PositionId;
         }
     }

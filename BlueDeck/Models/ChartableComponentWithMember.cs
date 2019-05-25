@@ -33,6 +33,14 @@ namespace BlueDeck.Models {
         public int? Parentid { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is assistant manager.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsAssistantManager { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the component.
         /// </summary>
         /// <value>

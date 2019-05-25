@@ -213,7 +213,11 @@ namespace BlueDeck.Persistence.Repositories
             List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
             
-            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).OrderBy(x => x.LineupPosition).ToList();            
+            List<Component> components = ApplicationDbContext.Components
+                .FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1)
+                .OrderBy(x => x.ParentComponentId)
+                .ThenBy(x => x.LineupPosition)
+                .ToList();            
             ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
@@ -232,9 +236,10 @@ namespace BlueDeck.Persistence.Repositories
                 // All components will render this at minimum
                 // set a flag to handle Assistant Managers
                 int assistantManagerDynamicId = 0;
+                int parentComponentAssistantNodeId = results?.Where(x => x.Parentid == c.ParentComponentId && x.IsAssistantManager == true).FirstOrDefault()?.Id ?? 0;
                 ChartableComponentWithMember n = new ChartableComponentWithMember  {
                     Id = c.ComponentId,
-                    Parentid = c?.ParentComponent?.ComponentId ?? 0,
+                    Parentid = parentComponentAssistantNodeId != 0 ? parentComponentAssistantNodeId : c?.ParentComponent?.ComponentId ?? 0, // here is the problem... how do I set this to the Chartable ComponentId of it's parent Component's Assistant?
                     ComponentName = c.Name
                     };  
                 // Check if component has child positions
@@ -309,6 +314,7 @@ namespace BlueDeck.Persistence.Repositories
                                 Id = dynamicUniqueId,
                                 Parentid = n.Id,
                                 ComponentName = p.Name,
+                                IsAssistantManager = true
                             };
                             if (p.Members.Count == 0)
                             {
@@ -863,6 +869,38 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(y => y.Members).ThenInclude(x => x.DutyStatus) 
                 .Load();
             return components.FirstOrDefault();
+        }
+
+        public List<ChartableComponentWithMember> GetOrgChartComponents(int parentComponentId)
+        {
+            int dynamicUniqueId = 10000; // don't ask... I need (id) fields that I can assign to (n) dynamic Chartables, and I need to ensure they will be unique and won't collide with the Component.ComponentId  
+            List<ChartableComponentWithMember> results = new List<ChartableComponentWithMember>();
+            SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
+
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).OrderBy(x => x.LineupPosition).ToList();
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.Members).ThenInclude(x => x.PhoneNumbers)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Gender)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Race)
+                .Include(y => y.TempMembers).ThenInclude(x => x.DutyStatus)
+                .Load();
+
+            foreach (Component c in components)
+            {
+
+            }
+
+
+
+
+            return results;
         }
     }
 

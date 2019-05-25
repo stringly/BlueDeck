@@ -54,7 +54,7 @@ namespace BlueDeck.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("DutyStatusId,DutyStatusName,HasPolicePower,Abbreviation")] DutyStatus dutyStatus, string returnUrl)
+        public IActionResult Create([Bind("DutyStatusId,DutyStatusName,HasPolicePower,IsExceptionToNormalDuty,Abbreviation")] DutyStatus dutyStatus, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace BlueDeck.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("DutyStatusId,DutyStatusName,HasPolicePower,Abbreviation")] DutyStatus dutyStatus, string returnUrl)
+        public IActionResult Edit(int id, [Bind("DutyStatusId,DutyStatusName,HasPolicePower,IsExceptionToNormalDuty,Abbreviation")] DutyStatus dutyStatus, string returnUrl)
         {
             if (id != dutyStatus.DutyStatusId)
             {
@@ -158,9 +158,9 @@ namespace BlueDeck.Controllers
         // POST: AppStatus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id, string returnUrl)
+        public IActionResult DeleteConfirmed(int dutyStatusId, string returnUrl)
         {
-            DutyStatus toRemove = unitOfWork.MemberDutyStatus.Find(x => x.DutyStatusId == id).FirstOrDefault();
+            DutyStatus toRemove = unitOfWork.MemberDutyStatus.Find(x => x.DutyStatusId == dutyStatusId).FirstOrDefault();
             if (toRemove != null)
             {
                 unitOfWork.MemberDutyStatus.Remove(toRemove);

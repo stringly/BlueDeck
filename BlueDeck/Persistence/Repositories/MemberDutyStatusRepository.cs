@@ -51,5 +51,20 @@ namespace BlueDeck.Persistence.Repositories
         {
             return ApplicationDbContext.DutyStatuses.Include(x => x.Members).ToList();
         }
+
+        public void Remove(int id)
+        {
+            DutyStatus fullDuty = ApplicationDbContext.DutyStatuses.FirstOrDefault(x => x.IsExceptionToNormalDuty == false);
+            List<Member> MembersInStatus = ApplicationDbContext.Members.Where(x => x.DutyStatusId == id).ToList();
+            foreach(Member m in MembersInStatus)
+            {
+                m.DutyStatusId = fullDuty.DutyStatusId ?? 1;
+            }
+            DutyStatus statusToRemove = ApplicationDbContext.DutyStatuses.Find(id);
+            if (statusToRemove != null){
+                ApplicationDbContext.DutyStatuses.Remove(statusToRemove);
+            }
+            
+        }
     }
 }

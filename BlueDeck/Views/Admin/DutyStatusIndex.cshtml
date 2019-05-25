@@ -31,6 +31,9 @@
                             Has Police Power
                         </th>
                         <th style="text-align:center">
+                            Exception To Normal Duty
+                        </th>
+                        <th style="text-align:center">
                             Abbreviation
                         </th>
                         <th style="text-align:center">
@@ -51,6 +54,9 @@
                         </td>
                         <td style="text-align:center">
                             @Html.DisplayFor(modelItem => item.HasPolicePower)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.IsExceptionToNormalDuty)
                         </td>
                         <td style="text-align:center">
                             @item.Abbreviation
