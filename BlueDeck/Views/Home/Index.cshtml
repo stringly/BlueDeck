@@ -104,14 +104,14 @@
                                 <caption>
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
-                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Home/Index">
                                             <strong>@item.ComponentName</strong>
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </a>@: | @item.StrengthDisplay |
                                     }
                                     else
                                     {
-                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Home/Index">
                                             <strong>@item.ComponentName</strong>
                                         </a>@: | @item.StrengthDisplay |
                                     }

@@ -47,7 +47,7 @@
                 }
                 @if (IsAdmin)
                 {
-                    <li><a asp-action="Create" asp-route-returnUrl="/Members/Index"><i class="ion-md-person-add"></i> Create a New Member</a></li>
+                    <li><a asp-action="Create" asp-route-returnUrl="/Members/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")"><i class="ion-md-person-add"></i> Create a New Member</a></li>
                 }
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -159,7 +159,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a asp-action="Details" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index"  title="View Details" class="glyphicon-ring">
+                                <a asp-action="Details" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")"  title="View Details" class="glyphicon-ring">
                                     <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
                                 </a>
                                 @if (IsAdmin)
@@ -167,19 +167,19 @@
                                     <a asp-controller="Members" asp-action="Edit"  asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Delete Member" class="glyphicon-ring">
+                                    <a asp-action="Delete" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Delete Member" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
                                     </a>
                                 }
                                 else if (CanEditMembers.Any(x => x.MemberId == item.MemberId))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Edit Member" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                     </a>
                                 }
                                 else if (item.MemberId == MemberId)
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index" title="Edit Member" class="glyphicon-ring">
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" asp-route-returnUrl="/Members/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Edit Member" class="glyphicon-ring">
                                         <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                     </a>
                                 }

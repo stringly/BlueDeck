@@ -8,6 +8,10 @@ namespace BlueDeck.Models
     {
         [Key]
         public int RoleId { get; set; }
+        public int RoleTypeId { get; set; }
         public RoleType RoleType { get; set; }
+        public int MemberId { get; set; }
+        public virtual Member Member { get; set;}
+        
     }
 }

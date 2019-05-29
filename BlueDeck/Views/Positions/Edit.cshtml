@@ -87,6 +87,10 @@
                                                             new { @class = "form-control" })
                             <span asp-validation-for="ParentComponentId" class="text-danger"></span>
                         </div>
+                        <div class="col-sm-7 form-group" id="lineupWait" style="display:none">
+                            <label class="control-label">Retrieving Positions</label><br />
+                            <span class="glyphicon glyphicon-refresh spinning"></span>
+                        </div>
                         <div id="lineupSelectionTarget"></div>
                     </div>
                     <hr />
@@ -281,7 +285,9 @@
             if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component
                 var container = $("#lineupSelectionTarget").empty();
+                document.getElementById("lineupWait").style.display = "block";
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: this.value, positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
@@ -302,7 +308,9 @@
             else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
                 var container = $("#lineupSelectionTarget").empty();
                 console.log("Attempting to repoll ViewComponent");
+                document.getElementById("lineupWait").style.display = "block";
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
@@ -347,7 +355,9 @@
             else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
                 var container = $("#lineupSelectionTarget").empty();
                 console.log("Attempting to repoll ViewComponent");
+                document.getElementById("lineupWait").style.display = "block";
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);

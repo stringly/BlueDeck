@@ -8,8 +8,6 @@ using BlueDeck.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using BlueDeck.Models.Auth;
-using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Reflection;
 using System;
 using System.IO;
@@ -116,9 +114,6 @@ namespace BlueDeck
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
-                //routes.MapRoute(
-                //    name: "Edit Member Route",
-                //    template: "{controller=Members}/{action=Index}/{id}/{returnUrl}");
             });
         }
     }

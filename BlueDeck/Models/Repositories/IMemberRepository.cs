@@ -36,6 +36,7 @@ namespace BlueDeck.Models.Repositories
         List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);
         List<Member> GetGlobalAdmins();
         List<Member> GetPendingAccounts();
+        void ReassignMemberAndSetRole(int MemberToReassignId, int newPositionId, bool IsTDY = false);
         Task<MemberApiResult> GetApiMember(int id);
         IEnumerable<RoleType> GetMemberRoles();
     }

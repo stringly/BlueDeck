@@ -173,21 +173,20 @@ namespace BlueDeck.Models {
 
 
         [Display(Name = "Contact Numbers")]
-        public ICollection<ContactNumber> PhoneNumbers { get; set; }
+        public ICollection<ContactNumber> PhoneNumbers { get; set; } = new List<ContactNumber>();
 
         [Display(Name = "Current Roles")]
-        public virtual ICollection<Role> CurrentRoles { get; set; }
+        public virtual ICollection<Role> CurrentRoles { get; set; } = new List<Role>();
 
-        public virtual ICollection<Member> CreatedMembers { get; set; }
-        public virtual ICollection<Position> CreatedPositions { get; set; }
-        public virtual ICollection<Component> CreatedComponents { get; set; }
-        public virtual ICollection<Member> LastModifiedMembers { get; set; }
-        public virtual ICollection<Position> LastModifiedPositions { get; set; }
-        public virtual ICollection<Component> LastModifiedComponents { get; set; }
+        public virtual ICollection<Member> CreatedMembers { get; set; } = new List<Member>();
+        public virtual ICollection<Position> CreatedPositions { get; set; } = new List<Position>();
+        public virtual ICollection<Component> CreatedComponents { get; set; } = new List<Component>();
+        public virtual ICollection<Member> LastModifiedMembers { get; set; } = new List<Member>();
+        public virtual ICollection<Position> LastModifiedPositions { get; set; } = new List<Position>();
+        public virtual ICollection<Component> LastModifiedComponents { get; set; } = new List<Component>();
 
         public Member()
-        {
-            PhoneNumbers = new List<ContactNumber>();
+        {            
         }
         /// <summary>
         /// Gets the formal title form of the Member's name and rank.
@@ -233,6 +232,12 @@ namespace BlueDeck.Models {
             }
             
         }    
+
+        public bool IsComponentAdmin()
+        {
+            return CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+        }
+
     }
 }
 

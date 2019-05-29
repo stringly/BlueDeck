@@ -457,6 +457,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:BlueDeck.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Positions/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Positions.RemovePositionAndReassignMembers(id);

@@ -4,6 +4,253 @@
         <name>BlueDeck</name>
     </assembly>
     <members>
+        <member name="T:BlueDeck.Controllers.AdminController">
+            <summary>
+            Controller that handles Administrative Functions
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="F:BlueDeck.Controllers.AdminController.PageSize">
+            <summary>
+            Property that controls the number of Items per page on the Index views
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.AdminController"/> class.
+            </summary>
+            <param name="unit">The Dependency-Injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the <see cref="M:BlueDeck.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.Index(System.String)">
+            <summary>
+            Indexes the specified return URL.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The Admin/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.MemberIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the Admin/MemberIndex view
+            </summary>
+            <remarks>
+            This view lists Members in the database with additional administrative fields. 
+            </remarks>
+            <param name="sortOrder">
+            <para>
+            Sort by: (ascend/descend)
+            Last Name: [(nothing; LastName ascend is default/lastName_desc)]
+            First Name: [(FirstName/firstName_desc)]
+            Id Number: [(IDNumber/idNumber_desc)]
+            Position Name: [(PositionName/positionName_desc)]
+            By User Role: (filter: on/off) [(IsUserRoleOnly/IsUserRoleAny)]
+            By Component Admin Role: (filter: on/off) [(IsComponentAdminOnly/IsComponentAdminAny)]
+            By Global Admin Role: (filter: on/off) [(IsGlobalAdminOnly/IsGlobalAdminAny)]
+            </para>
+            </param>
+            <param name="searchString">The search string.</param>
+            <para>
+            As of v1.0, the searchString parameter will search Members by Last Name, First Name, Position Name, and Id Number.
+            The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+            </para>
+            <param name="page">
+            <para>
+            This controls pagination. The default value is 1.
+            </para>
+            </param>
+            <returns>The Admin/MemberIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.PositionIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the Admin/PositionIndex view
+            </summary>
+            <remarks>
+            This view lists Positions in the database with additional administrative fields. 
+            </remarks>
+            <param name="sortOrder">
+            <para>
+            Sort by: (ascend/descend)
+            Position Name: [(nothing; PositionName ascend is default/name_desc)]
+            Parent Component Name: [(ParentComponentName/parentName_desc)]        
+            </para>
+            </param>
+            <param name="searchString">The search string.</param>
+            <para>
+            As of v1.0, the searchString parameter will search Positions by Position Name or Parent Component Name.
+            The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+            </para>
+            <param name="page">
+            <para>
+            This controls pagination. The default value is 1.
+            </para>
+            </param>
+            <returns>The Admin/PositionIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.ComponentIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the Admin/ComponentIndex view
+            </summary>
+            <remarks>
+            This view lists Components in the database with additional administrative fields. 
+            </remarks>
+            <param name="sortOrder">
+            <para>
+            Sort by: (ascend/descend)
+            Component Name: [(nothing; Component Name ascend is default/name_desc)]
+            Parent Component Name: [(ParentComponentName/parentName_desc)]        
+            </para>
+            </param>
+            <param name="searchString">The search string.</param>
+            <para>
+            As of v1.0, the searchString parameter will search Components by Component Name or Parent Component Name.
+            The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+            </para>
+            <param name="page">
+            <para>
+            This controls pagination. The default value is 1.
+            </para>
+            </param>         
+            <returns>The Admin/ComponentIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.AppStatusIndex">
+            <summary>
+            Returns the Admin/AppStatusIndex view
+            </summary>
+            <remarks>
+            This view lists App Statuses in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/AppStatusIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.DutyStatusIndex">
+            <summary>
+            Returns the Admin/DutyStatusIndex view
+            </summary>
+            <remarks>
+            This view lists Duty Statuses in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/DutyStatusIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.GenderIndex">
+            <summary>
+            Returns the Admin/GenderIndex view
+            </summary>
+            <remarks>
+            This view lists Genders in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/GenderIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>        
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.RaceIndex">
+            <summary>
+            Returns the Admin/RaceIndex view
+            </summary>
+            <remarks>
+            This view lists Races in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/RaceIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>    
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.RankIndex">
+            <summary>
+            Returns the Admin/RankIndex view
+            </summary>
+            <remarks>
+            This view lists Ranks in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/RankIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>  
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.PhoneTypeIndex">
+            <summary>
+            Returns the Admin/PhoneTypeIndex view
+            </summary>
+            <remarks>
+            This view lists Phone Number Types in the database with additional administrative fields. 
+            </remarks>
+            <returns>The Admin/PhoneTypeIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.RegisterUser(System.Int32,System.String)">
+            <summary>
+            Registers the user with the provided MemberId.
+            </summary>
+            <remarks>
+            This method will change a Member account from "Pending" to "Active".
+            It will also add the ComponentAdmin role if activating a Member assigned to a Manager/Assistant Manager Position.
+            </remarks>
+            <param name="id">The MemberId of the Member to activate.</param>
+            <param name="returnUrl">The optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.DenyUser(System.Int32,System.String)">
+            <summary>
+            Changes a Member Account from "Pending" status back to "New" status.
+            </summary>
+            <param name="id">The MemberId of the Member.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.AppStatusController">
+            <summary>
+            Handles Create, Read, Update, and Delete functionality for the Application Status Enumeration.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.AppStatusController"/> class.
+            </summary>
+            <param name="unit">The unit.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Index">
+            <summary>
+            Returns a view that lists all <see cref="T:BlueDeck.Models.AppStatus"/> in the database.
+            </summary>
+            <returns>The Views/Admin/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Shows details for a specific <see cref="T:BlueDeck.Models.AppStatus"/>
+            </summary>
+            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Create(System.String)">
+            <summary>
+            Returns a <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/> that allows creation of a new <see cref="T:BlueDeck.Models.AppStatus"/>.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Edits the <see cref="T:BlueDeck.Models.AppStatus"/> with specified identifier.
+            </summary>
+            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.AppStatus"/> to edit.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Edit(System.Int32,BlueDeck.Models.AppStatus,System.String)">
+            <summary>
+            Edits the <see cref="T:BlueDeck.Models.AppStatus"/> with the given AppStatusId.
+            </summary>
+            <param name="id">The identifier of the AppStatus.</param>
+            <param name="appStatus">A POSTed form that binds to a <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Deletes the <see cref="T:BlueDeck.Models.AppStatus"/> with specified identifier.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.AppStatus"/> to delete.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns>The Views/AppStatus/Delete <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            Confirms the deletion of an <see cref="T:BlueDeck.Models.AppStatus"/>.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
         <member name="M:BlueDeck.Controllers.ComponentsApiController.GetComponents">
             <summary>
             Gets a List of Component Names/Ids of all Components
@@ -1055,7 +1302,13 @@
             <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository"/>
             <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository"/>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository"/>
-            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/> 
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository"/>
         </member>
         <member name="P:BlueDeck.Models.IUnitOfWork.Positions">
             <summary>
@@ -1091,7 +1344,7 @@
             <value>
             The Interface representing the MemberRanks Entity.
             </value>
-            <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository"/>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
         </member>
         <member name="P:BlueDeck.Models.IUnitOfWork.MemberGenders">
             <summary>
@@ -1119,6 +1372,42 @@
             The Interface representing the MemberRace Entity.
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository"/>
+        </member>
+        <member name="P:BlueDeck.Models.IUnitOfWork.MemberContactNumbers">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
+            </summary>
+            <value>
+            The Interface representing the MemberContactNumber Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
+        </member>
+        <member name="P:BlueDeck.Models.IUnitOfWork.PhoneNumberTypes">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
+            </summary>
+            <value>
+            The Interface representing the PhoneNumberType Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
+        </member>
+        <member name="P:BlueDeck.Models.IUnitOfWork.AppStatuses">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+            </summary>
+            <value>
+            The Interface representing the AppStatus Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+        </member>
+        <member name="P:BlueDeck.Models.IUnitOfWork.RoleTypes">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
+            </summary>
+            <value>
+            The Interface representing the RoleType Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
         </member>
         <member name="M:BlueDeck.Models.IUnitOfWork.Complete">
             <summary>
@@ -2872,6 +3161,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.Remove(System.Int32)">
+            <summary>
+            Removes the Member with the specified Identifier.
+            </summary>
+            <param name="memberId">The MemberId of the Member to remove.</param>
+            <remarks>
+            This is an override of the IRepository's Remove method. This override removes all MemberContact entries
+            when removing a Member.
+            </remarks>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.GetMemberWithRoles(System.String)">
+            <summary>
+            Gets a specific Member with their roles via LDAP Name
+            </summary>
+            <param name="LDAPName">The Windows LDAP Name of the Member.</param>
+            <returns>The <see cref="T:BlueDeck.Models.Member"/> with the given LDAP Name</returns>
+        </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.GetHomePageViewModelForMember(System.Int32)">
             <summary>
             Gets the home page view model for member.
@@ -2922,16 +3228,16 @@
             Represents CRUD actions common to DbContext entities
             </summary>
             <typeparam name="TEntity">The type of the entity.</typeparam>
-            <seealso cref="T:BlueDeck.Models.Repositories.IRepository{TEntity}" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
         <member name="F:BlueDeck.Persistence.Repositories.Repository`1.Context">
             <summary>
-            An <see cref="T:DbContext"/> context
+            An <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/> context
             </summary>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.Repository`1.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
             <summary>
-            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.Repository{TEntity}"/> class.
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.Repository`1"/> class.
             </summary>
             <param name="context">The context.</param>
         </member>
@@ -2941,7 +3247,7 @@
             </summary>
             <param name="id">The identifier for the desired entity.</param>
             <returns>
-            A <see cref="T:TEntity" />
+            A <see cref="!:TEntity" />
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.Repository`1.GetAll">
@@ -2949,7 +3255,7 @@
             Gets Entities in the Repository
             </summary>
             <returns>
-            An <see cref="T:System.Collections.IEnumerable{T}" /> of the Entity.
+            An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of the Entity.
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.Repository`1.Find(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
@@ -2958,7 +3264,7 @@
             </summary>
             <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
             <returns>
-            An <see cref="T:System.Collections.IEnumerable{T}" /> of the Entity.
+            An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of the Entity.
             </returns>
             <remarks>
             This Method can accept LINQ Lambda Expression delegates
@@ -2970,7 +3276,7 @@
             </summary>
             <param name="predicate">The predicate LINQ Lambda Expression delegate.</param>
             <returns>
-            A <see cref="T:TEntity" />
+            A <see cref="!:TEntity" />
             </returns>
             <remarks>
             This Method can accept LINQ Lambda Expression delegates
@@ -2986,19 +3292,19 @@
             <summary>
             Adds a range of Entities.
             </summary>
-            <param name="entities">An <see cref="T:IEnumerable{T}" /> of entities to add.</param>
+            <param name="entities">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of entities to add.</param>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.Repository`1.Remove(`0)">
             <summary>
             Removes the specified entity.
             </summary>
-            <param name="entity">The <see cref="T:TEntity:" /> to add.</param>
+            <param name="entity">The <see cref="!:TEntity" /> to add.</param>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.Repository`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})">
             <summary>
-            Removes a range of <see cref="T:TEntity" />.
+            Removes a range of <see cref="!:TEntity" />.
             </summary>
-            <param name="entities">An <see cref="T:IEnumerable{T}" /> of entities to remove.</param>
+            <param name="entities">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of entities to remove.</param>
         </member>
         <member name="T:BlueDeck.Persistence.UnitOfWork">
             <summary>
@@ -3046,7 +3352,7 @@
             <value>
             The Interface representing the MemberRanks Entity.
             </value>
-            <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository" />
         </member>
         <member name="P:BlueDeck.Persistence.UnitOfWork.MemberGenders">
             <summary>
@@ -3074,6 +3380,42 @@
             The Interface representing the MemberRace Entity.
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.MemberContactNumbers">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
+            </summary>
+            <value>
+            The Interface representing the MemberContactNumber Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.PhoneNumberTypes">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
+            </summary>
+            <value>
+            The Interface representing the PhoneNumberType Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.AppStatuses">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+            </summary>
+            <value>
+            The Interface representing the AppStatus Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.RoleTypes">
+            <summary>
+            Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
+            </summary>
+            <value>
+            The Interface representing the RoleType Entity.
+            </value>
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
         </member>
         <member name="M:BlueDeck.Persistence.UnitOfWork.Complete">
             <summary>

@@ -95,7 +95,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [AllowAnonymous]
         [HttpGet]
-        [Route("Components/Details")]
+        [Route("Components/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)

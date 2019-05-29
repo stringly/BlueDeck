@@ -44,9 +44,11 @@ namespace BlueDeck.Controllers
                     // If the User already has an account (existed at development), then their account status should be set to '1' (New)
                     // If they are accessing the app for the first time, the status will be set to "Pending" so it shows in the admin panel for activation.
                     Member currentMember = unitOfWork.Members.Get(claimMemberId);
-                    if(currentMember.AppStatusId == 1)
+                    int newStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "New").FirstOrDefault()?.AppStatusId ?? 0;
+                    int pendingStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "Pending").FirstOrDefault()?.AppStatusId ?? 0;
+                    if(currentMember.AppStatusId == newStatusId)
                     {
-                        currentMember.AppStatusId = 2;
+                        currentMember.AppStatusId = pendingStatusId;
                         currentMember.LastModified = DateTime.Now;
                         currentMember.LastModifiedById = claimMemberId;                        
                         unitOfWork.Complete();
@@ -131,11 +133,12 @@ namespace BlueDeck.Controllers
         {
             var identity = User.Identities.FirstOrDefault(x => x.IsAuthenticated);
             string logonName = identity.Name.Split('\\')[1];
+            int pendingStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "Pending").FirstOrDefault()?.AppStatusId ?? 0;
             Member newMember = new Member()
             {
                 Email = $"{logonName}@co.pg.md.us",
                 LDAPName = logonName,
-                AppStatusId = 2 // 1 is Pending - Request Activation
+                AppStatusId = pendingStatusId
             };
             MemberAddEditViewModel vm = new MemberAddEditViewModel(newMember,
                 unitOfWork.Positions.GetAllPositionSelectListItems(),

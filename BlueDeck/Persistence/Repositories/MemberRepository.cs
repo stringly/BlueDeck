@@ -90,7 +90,9 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
                 .Include(x => x.Rank)
-                .Include(x => x.DutyStatus)                
+                .Include(x => x.DutyStatus)
+                .Include(x => x.CurrentRoles)
+                    .ThenInclude(x => x.RoleType)
                 .FirstOrDefault();
         }
         public Member GetHomePageMember(int memberId)
@@ -139,34 +141,63 @@ namespace BlueDeck.Persistence.Repositories
             {
                     m = ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
-                .Include(x => x.CurrentRoles)
+                .Include(x => x.CurrentRoles)                
                 .FirstOrDefault(x => x.MemberId == form.MemberId);
-
-                m.LastModifiedById = form.LastModifiedById;
-                m.LastModified = Convert.ToDateTime(form.LastModified);
             }
             else
             {
                 m = new Member();
                 m.CurrentRoles = new List<Role>();
-
-                m.LastModified = Convert.ToDateTime(form.LastModified);
-                m.LastModifiedById = form.LastModifiedById;
                 m.CreatorId = form.CreatedById;
                 m.CreatedDate = Convert.ToDateTime(form.CreatedDate);
 
             }
+
+            /* there are a few things that can happen at this point:
+                1. This is a new Member, which means there are no Roles
+                    - Check for a Position/Temp Position assignment in the form data
+                        -if no Position/Temp Position, then
+                            1. Position should be set to the "Unassigned"
+                            2. Temp Position should be null
+                2. This is an existing Member, which means there MAY be roles
+                    - Check for a Position/Temp Position assignment in the form data
+                        - if no Position/Temp Position, assume the member is to be reassigned to the General Pool
+                            - if so, remove Component Admin Role (Leave Global Admin Role... global should be de-coupled from assignment
+                        - if a Position/Temp Position exists and Neither has ComponentAdmin privilege, check for and Remove the ComponentAdmin role from the Member's CurrentRoles
+                        - if a Position/Temp Position exists and Either has ComponentAdmin privilge, check for and, if necessary, add the Component Admin role to the Member's Current Roles.
+
+            An easy way to do this might be by simply switching the form's "checkbox" property corresponding to the Component Admin role in these cases.
+            
+            */
             if (form.PositionId != null){ 
                 m.PositionId = Convert.ToInt32(form.PositionId);
+                if (m.AppStatusId == 3 || form.AppStatusId == 3) // I only want to add Roles to Active Accounts or Accounts being activated.
+                {
+                    Position formAssignedPosition = ApplicationDbContext.Positions.Find(form.PositionId);
+                    Position formAssignedTempPosition = ApplicationDbContext.Positions.Find(form.TempPositionId); // how will this behave if null?
+                    if (formAssignedPosition.IsManager == true || formAssignedPosition.IsAssistantManager == true || formAssignedTempPosition?.IsManager == true || formAssignedTempPosition?.IsAssistantManager == true )
+                    {
+                        // these positions require ComponentAdmin Privilege
+                        form.IsComponentAdmin = true;
+                    }
+                    else
+                    {
+                        form.IsComponentAdmin = false;
+                    }
+                }
             }
             else if (m.PositionId == 0)
             {
-                m.PositionId = 7; // 7 is the current ID of the Unassigned Position
+                Position unassigned = ApplicationDbContext.Positions.FirstOrDefault(x => x.Name == "Unassigned");
+                if (unassigned != null)
+                {
+                    m.Position = unassigned;
+                }                
+                form.IsComponentAdmin = false;
             }
-            //if (form.TempPositionId != 0)
-            //{
-            //    m.TempPositionId = Convert.ToInt32(form.TempPositionId);
-            //}
+
+
+
             m.TempPositionId = form.TempPositionId;
             m.RankId = Convert.ToInt32(form.MemberRank);
             m.GenderId = Convert.ToInt32(form.MemberGender);
@@ -179,7 +210,22 @@ namespace BlueDeck.Persistence.Repositories
             m.MiddleName = form.MiddleName;
             m.LastName = form.LastName;
             m.LDAPName = form.LDAPName;
-
+            m.LastModified = Convert.ToDateTime(form.LastModified);
+            m.LastModifiedById = form.LastModifiedById;
+            // remove ALL roles from non-active accounts
+            // at this point, the repo Member m data and the form data should match, so I can check the repo Member
+            AppStatus activeStatus = ApplicationDbContext.ApplicationStatuses.FirstOrDefault(x => x.StatusName == "Active");
+            
+            if(m.AppStatusId != activeStatus?.AppStatusId)
+            {
+                 // these will override the checkboxes on the form.
+                 form.IsUser = false;
+                 form.IsComponentAdmin = false;
+            }
+            else
+            {
+                form.IsUser = true;
+            }
             
             foreach(ContactNumber n in form.ContactNumbers)
             {
@@ -213,6 +259,7 @@ namespace BlueDeck.Persistence.Repositories
             {
                 ApplicationDbContext.Members.Add(m);
             }
+
             switch (form.IsUser)
             {
                 case true:
@@ -234,7 +281,7 @@ namespace BlueDeck.Persistence.Repositories
                     }
                     break;
             }
-            // 
+
             switch (form.IsComponentAdmin)
             {
                 case true:
@@ -277,17 +324,33 @@ namespace BlueDeck.Persistence.Repositories
                     }
                     break;
             }
+            
+
         }
+
+        /// <summary>
+        /// Removes the Member with the specified Identifier.
+        /// </summary>
+        /// <param name="memberId">The MemberId of the Member to remove.</param>
+        /// <remarks>
+        /// This is an override of the IRepository's Remove method. This override removes all MemberContact entries
+        /// when removing a Member.
+        /// </remarks>
+        // TODO: Mark removed Entities as inactive instead of deleting?
         public void Remove(int memberId)
         {
             Member m = ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
                 .Include(x => x.CurrentRoles)
                 .FirstOrDefault(x => x.MemberId == memberId);
-            //ApplicationDbContext.ContactNumbers.RemoveRange(m.PhoneNumbers);
-            //ApplicationDbContext.Roles.RemoveRange(m.CurrentRoles);
             ApplicationDbContext.Members.Remove(m);
         }
+
+        /// <summary>
+        /// Gets a specific Member with their roles via LDAP Name
+        /// </summary>
+        /// <param name="LDAPName">The Windows LDAP Name of the Member.</param>
+        /// <returns>The <see cref="Member"/> with the given LDAP Name</returns>
         public Member GetMemberWithRoles(string LDAPName)
         {
             return ApplicationDbContext.Members
@@ -297,6 +360,7 @@ namespace BlueDeck.Persistence.Repositories
                 .Include(x => x.Rank)                
                 .FirstOrDefault(x => x.LDAPName == LDAPName);
         }
+
         /// <summary>
         /// Gets the home page view model for member.
         /// </summary>
@@ -348,10 +412,71 @@ namespace BlueDeck.Persistence.Repositories
                 .FirstOrDefault(x => x.MemberId == memberid);
                 
             return m.Position.ParentComponent.ComponentId;
-                
-                
-
         }
+
+        public void ReassignMemberAndSetRole(int MemberToReassignId, int newPositionId, bool IsTDY = false)
+        {
+            Member memberToReassign = ApplicationDbContext.Members
+                .Where(x => x.MemberId == MemberToReassignId)
+                .Include(x => x.CurrentRoles)
+                .Include(x => x.Position)
+                .Include(x => x.TempPosition)
+                .FirstOrDefault();
+            int activeAccountStatusId = ApplicationDbContext.ApplicationStatuses.FirstOrDefault(x => x.StatusName == "Active")?.AppStatusId ?? 0;
+            if (memberToReassign != null) // ensure the member exists
+            {
+                Position newPosition = ApplicationDbContext.Positions.Find(newPositionId);
+                if (newPosition != null) // ensure the new Position exists
+                {
+                    if (newPosition.IsAssistantManager == true || newPosition.IsManager == true) // check if the new Position is managerial
+                    {
+                         // if the new Position is managerial AND the Member DOES NOT have the ComponentAdmin Role AND the member's Account is active
+                        if (!memberToReassign.IsComponentAdmin() && memberToReassign.AppStatusId == activeAccountStatusId)
+                        {
+                            // assign the Member to the Component Admin Role
+                            Role componentAdminRole = new Role();
+                            RoleType componentAdminRoleType = ApplicationDbContext.RoleTypes.Where(x => x.RoleTypeName == "ComponentAdmin").FirstOrDefault();
+                            componentAdminRole.RoleType = componentAdminRoleType;
+                            memberToReassign.CurrentRoles.Add(componentAdminRole);
+                        }
+                    }
+                    else // if the new Position is not managerial
+                    {
+                        if (memberToReassign.IsComponentAdmin()) // check if the member has the ComponentAdmin Role
+                        {
+                            Role componentAdminRole = memberToReassign.CurrentRoles.Where(x => x.RoleType.RoleTypeName == "ComponentAdmin").FirstOrDefault();
+                            // if role is present, determine if we are assigning them TDY, so we can check inherited permissions
+                            if (IsTDY)
+                            {
+                                // if the new Position is TDY, then either the new Position or the Member's Primary position must be Manager/Assistant, or we remove the role.
+                                if (newPosition.IsManager == false && newPosition.IsManager == false && memberToReassign.Position.IsManager == false && memberToReassign.Position.IsAssistantManager == false)
+                                {
+                                    memberToReassign.CurrentRoles.Remove(componentAdminRole);                                    
+                                }
+                            }
+                            else
+                            {
+                                // if this is not a TDY, then either the reassigned member's Temp Position or the new Position must have Manager/Assistant
+                                if (newPosition.IsManager == false && newPosition.IsManager == false && (memberToReassign.TempPosition == null || (memberToReassign.TempPosition.IsManager == false && memberToReassign.TempPosition.IsAssistantManager == false)))
+                                {
+                                    memberToReassign.CurrentRoles.Remove(componentAdminRole);                                    
+                                }
+                            }
+                        }
+                    }
+                    // finally, make the actual reassignment
+                    if (IsTDY)
+                    {
+                        memberToReassign.TempPosition = newPosition;
+                    }
+                    else
+                    {
+                        memberToReassign.Position = newPosition;
+                    }
+                }
+            }
+        }
+
         public List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId)
         {
             SqlParameter param1 = new SqlParameter("@ComponentId", parentComponentId);
@@ -367,7 +492,8 @@ namespace BlueDeck.Persistence.Repositories
         }
         public List<Member> GetPendingAccounts()
         {
-            return ApplicationDbContext.Members.Where(x => x.AppStatusId == 2).ToList();
+            int pendingAccountStatusId = ApplicationDbContext.ApplicationStatuses.FirstOrDefault(x => x.StatusName == "Pending")?.AppStatusId ?? 0;
+            return ApplicationDbContext.Members.Where(x => x.AppStatusId == pendingAccountStatusId).ToList();
         }
         public async Task<MemberApiResult> GetApiMember(int id)
         {

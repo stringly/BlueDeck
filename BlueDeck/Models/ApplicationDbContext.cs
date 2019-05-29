@@ -135,6 +135,14 @@ namespace BlueDeck.Models {
                 .HasOne(c => c.ParentComponent)
                 .WithMany(c => c.ChildComponents)
                 .HasForeignKey(c => c.ParentComponentId);
+            modelBuilder.Entity<Role>()
+                .HasOne(r => r.RoleType)
+                .WithMany(r => r.CurrentRoles)
+                .HasForeignKey(r => r.RoleTypeId);
+            modelBuilder.Entity<Role>()
+                .HasOne(m => m.Member)
+                .WithMany(m => m.CurrentRoles)
+                .HasForeignKey(m => m.MemberId);
         }
     }
 }

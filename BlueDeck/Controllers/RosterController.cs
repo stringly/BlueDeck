@@ -82,9 +82,39 @@ namespace BlueDeck.Controllers
                 if (m != null && newPosition != null)
                 {
                     // Reassign the member
-                    m.Position = newPosition;
+                    //m.Position = newPosition;
+                    unitOfWork.Members.ReassignMemberAndSetRole(m.MemberId, newPosition.PositionId);
                     m.LastModified = DateTime.Now;
                     m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                    //// Assign ComponentAdminRole as appropriate
+                    //if (newPosition.IsManager == true || newPosition.IsAssistantManager == true)
+                    //{
+                    //    if (m.AppStatusId == 3) // we only want to add roles to active accounts
+                    //    {
+                    //        if (!m.CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin"))
+                    //        {
+                    //            Role componentAdminRole = new Role();
+                    //            RoleType componentAdminRoleType = unitOfWork.RoleTypes.Find(x => x.RoleTypeName == "ComponentAdmin").FirstOrDefault();
+                    //            if (componentAdminRoleType != null)
+                    //            {
+                    //                componentAdminRole.RoleType = componentAdminRoleType;
+                    //                m.CurrentRoles.Add(componentAdminRole);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    if(m.TempPosition.IsAssistantManager == false && m.TempPosition.IsManager == false)
+                    //    {
+                    //        Role componentAdminRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+                    //        if (componentAdminRole != null)
+                    //        {
+                    //            m.CurrentRoles.Remove(componentAdminRole);
+                    //        }
+                    //    }
+                        
+                    //}
                     unitOfWork.Complete();
                 }
                 // next, we check if we have a condition that requires a refresh of the RosterManager View Component
@@ -119,10 +149,39 @@ namespace BlueDeck.Controllers
             if (memberId != 0 && positionId != 0)
             {
                 // pull Member from Repo
-                Member m = unitOfWork.Members.Get(memberId);
-                m.TempPositionId = positionId;
+                Member m = unitOfWork.Members.GetMemberWithPosition(memberId);
+                //m.TempPositionId = positionId;
                 m.LastModified = DateTime.Now;
                 m.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+                unitOfWork.Members.ReassignMemberAndSetRole(m.MemberId, positionId, true);
+                //Position newTempPosition = unitOfWork.Positions.Get(positionId);                    // Assign ComponentAdminRole as appropriate
+                //if (newTempPosition.IsManager == true || newTempPosition.IsAssistantManager == true)
+                //{
+                //    if (m.AppStatusId == 3) // we only want to add roles to active accounts
+                //    {
+                //        if (!m.CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin"))
+                //        {
+                //            Role componentAdminRole = new Role();
+                //            RoleType componentAdminRoleType = unitOfWork.RoleTypes.Find(x => x.RoleTypeName == "ComponentAdmin").FirstOrDefault();
+                //            if (componentAdminRoleType != null)
+                //            {
+                //                componentAdminRole.RoleType = componentAdminRoleType;
+                //                m.CurrentRoles.Add(componentAdminRole);
+                //            }
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    if(m.Position.IsAssistantManager == false && m.Position.IsManager == false)
+                //    {
+                //        Role componentAdminRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+                //        if (componentAdminRole != null)
+                //        {
+                //            m.CurrentRoles.Remove(componentAdminRole);
+                //        }
+                //    }                        
+                //}
                 unitOfWork.Complete();
             }
             return Json(new { Status = "RefreshRosterManager" });            
@@ -130,65 +189,81 @@ namespace BlueDeck.Controllers
 
         public JsonResult CancelTDY(int memberId)
         {
-            if (memberId != null)
+            Member m = unitOfWork.Members.GetMemberWithPosition(memberId);
+            if (m != null)
             {
-                Member m = unitOfWork.Members.Get(memberId);
-                if (m != null)
+                m.TempPositionId = null;
+                if (m.Position.IsManager != true && m.Position.IsAssistantManager != true)
                 {
-                    m.TempPositionId = null;
-                    unitOfWork.Complete();
+                    // in this case, we can assume that the Member inherited the ComponentAdmin Role from the TDY Position we are cancelling, 
+                    // so we need to remove the ComponentAdminRole.
+                    Role componentAdminRole = m.CurrentRoles.FirstOrDefault(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+                    if (componentAdminRole != null)
+                    {
+                        m.CurrentRoles.Remove(componentAdminRole);
+                    }
+                }
+                unitOfWork.Complete();
 
-                    return Json(new { Status = "Success" });
-                }
-                else
-                {
-                    return Json(new { });
-                }
+                return Json(new { Status = "Success" });
             }
             else
             {
                 return Json(new { });
             }
+
         }
 
         public JsonResult SwapMemberPositions(int dragMemberId, bool dragIsTDY, int dropMemberId, bool dropIsTDY)
         {
-            Member dragMember = unitOfWork.Members.Get(dragMemberId);
-            Member dropMember = unitOfWork.Members.Get(dropMemberId);
+            Member dragMember = unitOfWork.Members.GetMemberWithPosition(dragMemberId);
+            Member dropMember = unitOfWork.Members.GetMemberWithPosition(dropMemberId);
+
 
             if (dragIsTDY == true && dropIsTDY == true)
             {
-                int? dragPositionId = dragMember.TempPositionId;
-                int? dropPositionId = dropMember.TempPositionId;
-                dragMember.TempPositionId = dropPositionId;
-                dropMember.TempPositionId = dragPositionId;
+                int dragPositionId = Convert.ToInt32(dragMember.TempPositionId);
+                int dropPositionId = Convert.ToInt32(dropMember.TempPositionId);
+                unitOfWork.Members.ReassignMemberAndSetRole(dragMember.MemberId, dropPositionId, true);
+                unitOfWork.Members.ReassignMemberAndSetRole(dropMember.MemberId, dragPositionId, true);
+                //dragMember.TempPositionId = dropPositionId;
+                //dropMember.TempPositionId = dragPositionId;
             }
             else if (dragIsTDY == true && dropIsTDY == false)
             {
-                int? dragPositionId = dragMember.TempPositionId;
+                int dragPositionId = Convert.ToInt32(dragMember.TempPositionId);
                 int dropPositionId = dropMember.PositionId;
-                dragMember.TempPositionId = dropPositionId;
-                dropMember.PositionId = Convert.ToInt32(dragPositionId);
+                unitOfWork.Members.ReassignMemberAndSetRole(dragMember.MemberId, dropPositionId, true);
+                unitOfWork.Members.ReassignMemberAndSetRole(dropMember.MemberId, dragPositionId);
+                //dragMember.TempPositionId = dropPositionId;
+                //dropMember.PositionId = Convert.ToInt32(dragPositionId);
             }
             else if (dragIsTDY == false && dropIsTDY == true)
             {
                 int dragPositionId = dragMember.PositionId;
-                int? dropPositionId = dropMember.TempPositionId;
-                dragMember.PositionId = Convert.ToInt32(dropPositionId);
-                dropMember.TempPositionId = dragPositionId;
+                int dropPositionId = Convert.ToInt32(dropMember.TempPositionId);
+                unitOfWork.Members.ReassignMemberAndSetRole(dragMember.MemberId, dropPositionId);
+                unitOfWork.Members.ReassignMemberAndSetRole(dropMember.MemberId, dragPositionId, true);
+                
+                //dragMember.PositionId = Convert.ToInt32(dropPositionId);
+                //dropMember.TempPositionId = dragPositionId;
             }
             else
             {
                 int dragPositionId = dragMember.PositionId;
                 int dropPositionId = dropMember.PositionId;
-                dragMember.PositionId = dropPositionId;
-                dropMember.PositionId = dragPositionId;
+                unitOfWork.Members.ReassignMemberAndSetRole(dragMember.MemberId, dropPositionId);
+                unitOfWork.Members.ReassignMemberAndSetRole(dropMember.MemberId, dragPositionId);
+                //dragMember.PositionId = dropPositionId;
+                //dropMember.PositionId = dragPositionId;
             }
             
             dragMember.LastModified = DateTime.Now;
             dragMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);            
             dropMember.LastModified = DateTime.Now;
             dropMember.LastModifiedById = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value);
+
+
             unitOfWork.Complete();
         
             return Json(new { success = true });
@@ -231,11 +306,13 @@ namespace BlueDeck.Controllers
             Member m = unitOfWork.Members.SingleOrDefault(x => x.MemberId == form.MemberId);
             if(form.IsTDY == false)
             {
-                m.PositionId = form.PositionId;
+                unitOfWork.Members.ReassignMemberAndSetRole(m.MemberId, form.PositionId);
+                // m.PositionId = form.PositionId;
             }
             else
             {
-                m.TempPositionId = form.PositionId;
+                unitOfWork.Members.ReassignMemberAndSetRole(m.MemberId, form.PositionId, true);
+                // m.TempPositionId = form.PositionId;
             }
             
             m.LastModified = DateTime.Now;
@@ -487,15 +564,7 @@ namespace BlueDeck.Controllers
                 Member m = unitOfWork.Members.GetMemberWithPosition(Convert.ToInt32(form.MemberId));
                 // retrieve the DutyStatus
                 DutyStatus status = unitOfWork.MemberDutyStatus.Get(Convert.ToInt32(form.DutyStatus));
-                // check if Member needs to be reassigned to the "Exception to Duty" Position in his ParentComponent
-                if (status.DutyStatusName != "Full Duty")
-                {
-                    Position p = unitOfWork.Components.GetComponentWithPositions(Convert.ToInt32(form.ParentComponentId)).Positions.Where(x => x.Name == "Exception To Duty").FirstOrDefault();
-                    if (p != null)
-                    {                        
-                        m.Position = p; 
-                    }
-                }
+
                 // set the Member status to the new Status
                 m.DutyStatusId = Convert.ToInt32(form.DutyStatus);
                 // save changes to the repo
