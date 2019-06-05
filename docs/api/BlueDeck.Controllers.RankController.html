@@ -73,7 +73,8 @@
   
   <h1 id="BlueDeck_Controllers_RankController" data-uid="BlueDeck.Controllers.RankController" class="text-break">Class RankController
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Controller that handles CRUD actions for the <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> entity.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -680,14 +681,15 @@ public class RankController : Controller, IActionFilter, IAsyncActionFilter, IFi
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L16">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L24">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController__ctor_" data-uid="BlueDeck.Controllers.RankController.#ctor*"></a>
   <h4 id="BlueDeck_Controllers_RankController__ctor_BlueDeck_Models_IUnitOfWork_" data-uid="BlueDeck.Controllers.RankController.#ctor(BlueDeck.Models.IUnitOfWork)">RankController(IUnitOfWork)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="BlueDeck.Controllers.RankController.html">RankController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -706,7 +708,8 @@ public class RankController : Controller, IActionFilter, IAsyncActionFilter, IFi
       <tr>
         <td><a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a></td>
         <td><span class="parametername">unit</span></td>
-        <td></td>
+        <td><p>The injected <a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a> obtained from the services middleware.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -714,19 +717,21 @@ public class RankController : Controller, IActionFilter, IAsyncActionFilter, IFi
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Create_BlueDeck_Models_Rank_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Rank%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Create_BlueDeck_Models_Rank_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Rank%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L55">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L90">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Create_" data-uid="BlueDeck.Controllers.RankController.Create*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Create_BlueDeck_Models_Rank_System_String_" data-uid="BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Rank,System.String)">Create(Rank, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Rank/Create</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;Rank/Create&quot;)]
 public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankShort,PayGrade,IsSworn&quot;})] Rank rank, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -742,12 +747,14 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
       <tr>
         <td><a class="xref" href="BlueDeck.Models.Rank.html">Rank</a></td>
         <td><span class="parametername">rank</span></td>
-        <td></td>
+        <td><p>The form data, bound to a <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> object.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -768,18 +775,21 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L46">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L76">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Create_" data-uid="BlueDeck.Controllers.RankController.Create*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Create_System_String_" data-uid="BlueDeck.Controllers.RankController.Create(System.String)">Create(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Rank/Create</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Create(string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Rank/Create&quot;)]
+public IActionResult Create(string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -794,7 +804,8 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -813,20 +824,26 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RankController_Create_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves the view that allows a user to create a new <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a></p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L142">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L201">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Delete_" data-uid="BlueDeck.Controllers.RankController.Delete*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Delete_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RankController.Delete(System.Nullable{System.Int32},System.String)">Delete(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Rank/Delete/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Delete(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Rank/Delete/{id:int}&quot;)]
+public IActionResult Delete(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -841,12 +858,14 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> being edited.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -867,20 +886,22 @@ public IActionResult Create([Bind(new string[]{&quot;RankId,RankFullName,RankSho
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L159">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L223">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_DeleteConfirmed_" data-uid="BlueDeck.Controllers.RankController.DeleteConfirmed*"></a>
   <h4 id="BlueDeck_Controllers_RankController_DeleteConfirmed_System_Int32_System_String_" data-uid="BlueDeck.Controllers.RankController.DeleteConfirmed(System.Int32,System.String)">DeleteConfirmed(Int32, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Rank/Delete/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ActionName(&quot;Delete&quot;)]
 [ValidateAntiForgeryToken]
+[Route(&quot;Rank/Delete/{id:int}&quot;)]
 public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -896,12 +917,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> being deleted.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -922,18 +945,21 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L28">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L49">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Details_" data-uid="BlueDeck.Controllers.RankController.Details*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Details_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RankController.Details(System.Nullable{System.Int32},System.String)">Details(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Rank/Details/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Details(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Rank/Details/{id:int}&quot;)]
+public IActionResult Details(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -948,12 +974,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -974,19 +1002,21 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Edit_System_Int32_BlueDeck_Models_Rank_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Edit(System.Int32%2CBlueDeck.Models.Rank%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Edit_System_Int32_BlueDeck_Models_Rank_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Edit(System.Int32%2CBlueDeck.Models.Rank%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L98">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L151">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Edit_" data-uid="BlueDeck.Controllers.RankController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Edit_System_Int32_BlueDeck_Models_Rank_System_String_" data-uid="BlueDeck.Controllers.RankController.Edit(System.Int32,BlueDeck.Models.Rank,System.String)">Edit(Int32, Rank, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Rank/Edit/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;Rank/Edit/{id:int}&quot;)]
 public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,RankShort,PayGrade,IsSworn&quot;})] Rank rank, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1002,17 +1032,20 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The indentifier of the <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> being edited.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="BlueDeck.Models.Rank.html">Rank</a></td>
         <td><span class="parametername">rank</span></td>
-        <td></td>
+        <td><p>The POSTed form data, bound to a <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> object.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1031,20 +1064,26 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RankController_Edit_System_Int32_BlueDeck_Models_Rank_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Creates a new <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> from POSTed form data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L79">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L123">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Edit_" data-uid="BlueDeck.Controllers.RankController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Edit_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RankController.Edit(System.Nullable{System.Int32},System.String)">Edit(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Rank/Edit/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Edit(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Rank/Edit/{id:int}&quot;)]
+public IActionResult Edit(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1059,12 +1098,14 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> to be edited.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1083,20 +1124,26 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RankController_Edit_System_Nullable_System_Int32__System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Returns a view that allows a user to edit an existing <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a></p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L22">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L36">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RankController_Index_" data-uid="BlueDeck.Controllers.RankController.Index*"></a>
   <h4 id="BlueDeck_Controllers_RankController_Index" data-uid="BlueDeck.Controllers.RankController.Index">Index()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Rank/Index</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Index()</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Rank/Index&quot;)]
+public IActionResult Index()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1113,6 +1160,9 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RankController_Index_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves a view that lists all <a class="xref" href="BlueDeck.Models.Rank.html">Rank</a> entities in the database.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">Microsoft.AspNetCore.Mvc.Filters.IActionFilter</span>
@@ -1126,6 +1176,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
   <div>
       <span class="xref">System.IDisposable</span>
   </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><span class="xref">Microsoft.AspNetCore.Mvc.Controller</span></div>
+  </div>
 </article>
           </div>
           
@@ -1134,10 +1188,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;RankId,RankFullName,R
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RankController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RankController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RankController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RankController.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RankController.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

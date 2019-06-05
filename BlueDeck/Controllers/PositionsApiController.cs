@@ -12,6 +12,10 @@ using BlueDeck.Models.Types;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that handles WebAPI requests for the <see cref="Position"/> entity.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -20,6 +24,10 @@ namespace BlueDeck.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PositionsApiController"/> class.
+        /// </summary>
+        /// <param name="unit">An injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public PositionsApiController(IUnitOfWork unit)
         {
             unitOfWork = unit;

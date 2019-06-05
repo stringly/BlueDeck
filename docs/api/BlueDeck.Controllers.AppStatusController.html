@@ -73,7 +73,8 @@
   
   <h1 id="BlueDeck_Controllers_AppStatusController" data-uid="BlueDeck.Controllers.AppStatusController" class="text-break">Class AppStatusController
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Handles Create, Read, Update, and Delete functionality for the Application Status Enumeration.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -680,14 +681,15 @@ public class AppStatusController : Controller, IActionFilter, IAsyncActionFilter
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L16">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L24">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController__ctor_" data-uid="BlueDeck.Controllers.AppStatusController.#ctor*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController__ctor_BlueDeck_Models_IUnitOfWork_" data-uid="BlueDeck.Controllers.AppStatusController.#ctor(BlueDeck.Models.IUnitOfWork)">AppStatusController(IUnitOfWork)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="BlueDeck.Controllers.AppStatusController.html">AppStatusController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -706,7 +708,8 @@ public class AppStatusController : Controller, IActionFilter, IAsyncActionFilter
       <tr>
         <td><a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a></td>
         <td><span class="parametername">unit</span></td>
-        <td></td>
+        <td><p>The Injected <a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a> obtained from the services middleware.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -714,19 +717,21 @@ public class AppStatusController : Controller, IActionFilter, IAsyncActionFilter
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Create_BlueDeck_Models_AppStatus_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.AppStatus%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Create_BlueDeck_Models_AppStatus_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.AppStatus%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L55">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L84">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Create_" data-uid="BlueDeck.Controllers.AppStatusController.Create*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Create_BlueDeck_Models_AppStatus_System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.AppStatus,System.String)">Create(AppStatus, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates the specified application status.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;AppStatus/Create&quot;)]
 public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot;})] AppStatus appStatus, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -742,12 +747,14 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
       <tr>
         <td><a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a></td>
         <td><span class="parametername">appStatus</span></td>
-        <td></td>
+        <td><p>The application status.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -768,18 +775,21 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L46">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L70">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Create_" data-uid="BlueDeck.Controllers.AppStatusController.Create*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Create_System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Create(System.String)">Create(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">Microsoft.AspNetCore.Mvc.ViewResult</span> that allows creation of a new <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Create(string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;AppStatus/Create&quot;)]
+public IActionResult Create(string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -794,7 +804,8 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -815,18 +826,21 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L139">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L186">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Delete_" data-uid="BlueDeck.Controllers.AppStatusController.Delete*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Delete_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Delete(System.Nullable{System.Int32},System.String)">Delete(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Deletes the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> with specified identifier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Delete(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;AppStatus/Delete/{id:int}&quot;)]
+public IActionResult Delete(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -841,12 +855,14 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> to delete.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -861,26 +877,29 @@ public IActionResult Create([Bind(new string[]{&quot;AppStatusId,StatusName&quot
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td></td>
+        <td><p>The Views/AppStatus/Delete <span class="xref">Microsoft.AspNetCore.Mvc.ViewResult</span></p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L156">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L210">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_DeleteConfirmed_" data-uid="BlueDeck.Controllers.AppStatusController.DeleteConfirmed*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_DeleteConfirmed_System_Int32_System_String_" data-uid="BlueDeck.Controllers.AppStatusController.DeleteConfirmed(System.Int32,System.String)">DeleteConfirmed(Int32, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Confirms the deletion of an <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ActionName(&quot;Delete&quot;)]
 [ValidateAntiForgeryToken]
+[Route(&quot;AppStatus/Delete/{id:int}&quot;)]
 public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -896,12 +915,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -922,18 +943,21 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L28">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L46">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Details_" data-uid="BlueDeck.Controllers.AppStatusController.Details*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Details_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Details(System.Nullable{System.Int32},System.String)">Details(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Shows details for a specific <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Details(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;AppStatus/Details/{id:int}&quot;)]
+public IActionResult Details(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -948,12 +972,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The AppStatusId of the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -974,19 +1000,21 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Edit_System_Int32_BlueDeck_Models_AppStatus_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Edit(System.Int32%2CBlueDeck.Models.AppStatus%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Edit_System_Int32_BlueDeck_Models_AppStatus_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Edit(System.Int32%2CBlueDeck.Models.AppStatus%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L98">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L139">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Edit_" data-uid="BlueDeck.Controllers.AppStatusController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Edit_System_Int32_BlueDeck_Models_AppStatus_System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Edit(System.Int32,BlueDeck.Models.AppStatus,System.String)">Edit(Int32, AppStatus, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Edits the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> with the given AppStatusId.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;AppStatus/Edit/{id:int}&quot;)]
 public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusName&quot;})] AppStatus appStatus, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1002,17 +1030,20 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the AppStatus.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a></td>
         <td><span class="parametername">appStatus</span></td>
-        <td></td>
+        <td><p>A POSTed form that binds to a <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1033,18 +1064,21 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L79">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L114">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Edit_" data-uid="BlueDeck.Controllers.AppStatusController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Edit_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.AppStatusController.Edit(System.Nullable{System.Int32},System.String)">Edit(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Edits the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> with specified identifier.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Edit(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;AppStatus/Edit/{id:int}&quot;)]
+public IActionResult Edit(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1059,12 +1093,14 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The AppStatusId of the <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> to edit.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>The return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1085,18 +1121,21 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L22">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L33">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_AppStatusController_Index_" data-uid="BlueDeck.Controllers.AppStatusController.Index*"></a>
   <h4 id="BlueDeck_Controllers_AppStatusController_Index" data-uid="BlueDeck.Controllers.AppStatusController.Index">Index()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Returns a view that lists all <a class="xref" href="BlueDeck.Models.AppStatus.html">AppStatus</a> in the database.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Index()</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;AppStatus/Index&quot;)]
+public IActionResult Index()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1109,7 +1148,8 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
     <tbody>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Mvc.IActionResult</span></td>
-        <td></td>
+        <td><p>The Views/Admin/Index <span class="xref">Microsoft.AspNetCore.Mvc.ViewResult</span></p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1126,6 +1166,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
   <div>
       <span class="xref">System.IDisposable</span>
   </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><span class="xref">Microsoft.AspNetCore.Mvc.Controller</span></div>
+  </div>
 </article>
           </div>
           
@@ -1134,10 +1178,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;AppStatusId,StatusNam
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_AppStatusController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.AppStatusController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/AppStatusController.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/AppStatusController.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

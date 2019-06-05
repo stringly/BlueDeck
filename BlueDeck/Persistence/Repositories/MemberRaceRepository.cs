@@ -37,6 +37,11 @@ namespace BlueDeck.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberRaceSelectListItem { MemberRaceId = System.Convert.ToInt32(x.MemberRaceId), RaceFullName = x.MemberRaceFullName, Abbreviation = x.Abbreviation });
         }
 
+        /// <summary>
+        /// Gets the race by identifier.
+        /// </summary>
+        /// <param name="memberRaceId">The member race identifier.</param>
+        /// <returns>A <see cref="Race"/></returns>
         public Race GetRaceById(int memberRaceId)
         {
             return ApplicationDbContext.Races
@@ -44,11 +49,26 @@ namespace BlueDeck.Persistence.Repositories
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Gets a lsit of all Races including their members.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="List{Member}" /> of all races including their members.
+        /// </returns>
         public List<Race> GetRacesWithMembers()
         {
             return ApplicationDbContext.Races.Include(x => x.Members).ToList();
         }
 
+        /// <summary>
+        /// Gets a race with it's members.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Race" />.</param>
+        /// <returns></returns>
+        public Race GetRaceWithMembers(int id)
+        {
+            return ApplicationDbContext.Races.Include(x => x.Members).First(x => x.MemberRaceId == id);
+        }
         /// <summary>
         /// Gets the application database context.
         /// </summary>

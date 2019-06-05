@@ -8,18 +8,35 @@ using BlueDeck.Models.ViewModels;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that handles Administrative Functions
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize("IsGlobalAdmin")]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]        
     public class AdminController : Controller
     {
         private IUnitOfWork unitOfWork;
+        
+        /// <summary>
+        /// Property that controls the number of Items per page on the Index views
+        /// </summary>
         public int PageSize = 25;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdminController"/> class.
+        /// </summary>
+        /// <param name="unit">The Dependency-Injected <see cref="IUnitOfWork"/> obtained from the <see cref="Startup.ConfigureServices"/></param>
         public AdminController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
+        /// <summary>
+        /// Indexes the specified return URL.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The Admin/Index <see cref="ViewResult"/></returns>
         public IActionResult Index(string returnUrl)
         {
             AdminIndexViewModel vm = new AdminIndexViewModel();
@@ -32,6 +49,35 @@ namespace BlueDeck.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// Returns the Admin/MemberIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Members in the database with additional administrative fields. 
+        /// </remarks>
+        /// <param name="sortOrder">
+        /// <para>
+        /// Sort by: (ascend/descend)
+        /// Last Name: [(nothing; LastName ascend is default/lastName_desc)]
+        /// First Name: [(FirstName/firstName_desc)]
+        /// Id Number: [(IDNumber/idNumber_desc)]
+        /// Position Name: [(PositionName/positionName_desc)]
+        /// By User Role: (filter: on/off) [(IsUserRoleOnly/IsUserRoleAny)]
+        /// By Component Admin Role: (filter: on/off) [(IsComponentAdminOnly/IsComponentAdminAny)]
+        /// By Global Admin Role: (filter: on/off) [(IsGlobalAdminOnly/IsGlobalAdminAny)]
+        /// </para>
+        /// </param>
+        /// <param name="searchString">The search string.</param>
+        /// <para>
+        /// As of v1.0, the searchString parameter will search Members by Last Name, First Name, Position Name, and Id Number.
+        /// The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+        /// </para>
+        /// <param name="page">
+        /// <para>
+        /// This controls pagination. The default value is 1.
+        /// </para>
+        /// </param>
+        /// <returns>The Admin/MemberIndex <see cref="ViewResult"/></returns>
         public IActionResult MemberIndex(string sortOrder, string searchString, int page = 1)
         {
             AdminMemberIndexListViewModel vm = unitOfWork.Members.GetAdminMemberIndexListViewModel();
@@ -110,6 +156,30 @@ namespace BlueDeck.Controllers
             return View(vm);            
         }
 
+        /// <summary>
+        /// Returns the Admin/PositionIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Positions in the database with additional administrative fields. 
+        /// </remarks>
+        /// <param name="sortOrder">
+        /// <para>
+        /// Sort by: (ascend/descend)
+        /// Position Name: [(nothing; PositionName ascend is default/name_desc)]
+        /// Parent Component Name: [(ParentComponentName/parentName_desc)]        
+        /// </para>
+        /// </param>
+        /// <param name="searchString">The search string.</param>
+        /// <para>
+        /// As of v1.0, the searchString parameter will search Positions by Position Name or Parent Component Name.
+        /// The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+        /// </para>
+        /// <param name="page">
+        /// <para>
+        /// This controls pagination. The default value is 1.
+        /// </para>
+        /// </param>
+        /// <returns>The Admin/PositionIndex <see cref="ViewResult"/></returns>
         public IActionResult PositionIndex(string sortOrder, string searchString, int page = 1)
         {
             AdminPositionIndexListViewModel vm = unitOfWork.Positions.GetAdminPositionIndexListViewModel();
@@ -157,6 +227,30 @@ namespace BlueDeck.Controllers
             return View(vm);  
         }
 
+        /// <summary>
+        /// Returns the Admin/ComponentIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Components in the database with additional administrative fields. 
+        /// </remarks>
+        /// <param name="sortOrder">
+        /// <para>
+        /// Sort by: (ascend/descend)
+        /// Component Name: [(nothing; Component Name ascend is default/name_desc)]
+        /// Parent Component Name: [(ParentComponentName/parentName_desc)]        
+        /// </para>
+        /// </param>
+        /// <param name="searchString">The search string.</param>
+        /// <para>
+        /// As of v1.0, the searchString parameter will search Components by Component Name or Parent Component Name.
+        /// The passed string will be converted to lowercase, and all non-alphanumeric characters will be removed.
+        /// </para>
+        /// <param name="page">
+        /// <para>
+        /// This controls pagination. The default value is 1.
+        /// </para>
+        /// </param>         
+        /// <returns>The Admin/ComponentIndex <see cref="ViewResult"/></returns>
         public IActionResult ComponentIndex(string sortOrder, string searchString, int page = 1)
         {
             AdminComponentIndexListViewModel vm = unitOfWork.Components.GetAdminComponentIndexListViewModel();
@@ -204,6 +298,13 @@ namespace BlueDeck.Controllers
             return View(vm); 
         }
 
+        /// <summary>
+        /// Returns the Admin/AppStatusIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists App Statuses in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/AppStatusIndex <see cref="ViewResult"/></returns>
         public IActionResult AppStatusIndex()
         { 
             ViewBag.Title = "BlueDeck Admin - Application Status Index";
@@ -213,6 +314,13 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.AppStatuses.GetAppStatusesWithMemberCount());
         }
 
+        /// <summary>
+        /// Returns the Admin/DutyStatusIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Duty Statuses in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/DutyStatusIndex <see cref="ViewResult"/></returns>
         public IActionResult DutyStatusIndex()
         {
             ViewBag.Title = "BlueDeck Admin - Duty Status Index";
@@ -222,6 +330,13 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.MemberDutyStatus.GetDutyStatusesWithMemberCount());
         }
 
+        /// <summary>
+        /// Returns the Admin/GenderIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Genders in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/GenderIndex <see cref="ViewResult"/></returns>        
         public IActionResult GenderIndex()
         {
             ViewBag.Title = "BlueDeck Admin - Gender Index";
@@ -231,6 +346,13 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.MemberGenders.GetGendersWithMembers());
         }
 
+        /// <summary>
+        /// Returns the Admin/RaceIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Races in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/RaceIndex <see cref="ViewResult"/></returns>    
         public IActionResult RaceIndex()
         {
             ViewBag.Title = "BlueDeck Admin - Race Index";
@@ -240,6 +362,13 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.MemberRaces.GetRacesWithMembers());
         }
 
+        /// <summary>
+        /// Returns the Admin/RankIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Ranks in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/RankIndex <see cref="ViewResult"/></returns>  
         public IActionResult RankIndex()
         {
             ViewBag.Title = "BlueDeck Admin - Rank Index";
@@ -249,6 +378,13 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.MemberRanks.GetRanksWithMembers());
         }
 
+        /// <summary>
+        /// Returns the Admin/PhoneTypeIndex view
+        /// </summary>
+        /// <remarks>
+        /// This view lists Phone Number Types in the database with additional administrative fields. 
+        /// </remarks>
+        /// <returns>The Admin/PhoneTypeIndex <see cref="ViewResult"/></returns>
         public IActionResult PhoneTypeIndex()
         {
             ViewBag.Title = "BlueDeck Admin - Phone Types Index";
@@ -258,16 +394,54 @@ namespace BlueDeck.Controllers
             return View(unitOfWork.PhoneNumberTypes.GetPhoneNumberTypesWithPhoneNumbers());
         }
 
+        /// <summary>
+        /// Registers the user with the provided MemberId.
+        /// </summary>
+        /// <remarks>
+        /// This method will change a Member account from "Pending" to "Active".
+        /// It will also add the ComponentAdmin role if activating a Member assigned to a Manager/Assistant Manager Position.
+        /// </remarks>
+        /// <param name="id">The MemberId of the Member to activate.</param>
+        /// <param name="returnUrl">The optional return URL.</param>
+        /// <returns></returns>
         public IActionResult RegisterUser(int id, string returnUrl)
         {
-            Member m = unitOfWork.Members.Get(id);
+            Member m = unitOfWork.Members.GetMemberWithPosition(id);
             if (m != null)
             {
+                // retrieve the current user's Id to update the "Modified" fields on the Member being Registered
                 var identity = (ClaimsIdentity)User.Identity;
                 var claimMemberId = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
-                m.AppStatusId = 3;
                 m.LastModified = DateTime.Now;
                 m.LastModifiedById = claimMemberId;
+                // set the Member's Account Status to Active
+                AppStatus activeStatus = unitOfWork.AppStatuses.Find(x => x.StatusName == "Active").FirstOrDefault();
+                if (activeStatus != null)
+                {
+                    m.AppStatus = activeStatus;
+                }                
+                // Add the "User" Role to the Member's Role Collection
+                Role userRole = new Role();
+                RoleType userRoleType = unitOfWork.RoleTypes.Find(x => x.RoleTypeName == "User").First();
+                if (userRoleType != null)
+                {
+                    userRole.RoleType = userRoleType;
+                    m.CurrentRoles.Add(userRole);
+                }
+                // check if the Member is in Manager/Assistant Manager Position, and add the ComponentAdmin role if so.
+                // This should apply whether the Member is permanently assigned to the Position or is only TDY
+                if (m?.Position?.IsManager == true || m?.Position?.IsAssistantManager == true || m?.TempPosition?.IsManager == true || m?.TempPosition?.IsAssistantManager == true)
+                {
+                    Role componentAdminRole = new Role();
+                    RoleType componentAdminRoleType = unitOfWork.RoleTypes.Find(x => x.RoleTypeName == "ComponentAdmin").First();
+                    if (componentAdminRoleType != null)
+                    {
+                        componentAdminRole.RoleType = componentAdminRoleType;
+                        m.CurrentRoles.Add(componentAdminRole);
+                    }
+                }
+                
+                
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Member account successfully activated.";
@@ -287,6 +461,12 @@ namespace BlueDeck.Controllers
             }
         }
 
+        /// <summary>
+        /// Changes a Member Account from "Pending" status back to "New" status.
+        /// </summary>
+        /// <param name="id">The MemberId of the Member.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         public IActionResult DenyUser(int id, string returnUrl)
         {
             Member m = unitOfWork.Members.Get(id);
@@ -294,7 +474,8 @@ namespace BlueDeck.Controllers
             {
                 var identity = (ClaimsIdentity)User.Identity;
                 var claimMemberId = Convert.ToInt32(identity.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value.ToString());
-                m.AppStatusId = 1;
+                int newAccountStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "New")?.FirstOrDefault()?.AppStatusId ?? 0;
+                m.AppStatusId = newAccountStatusId;
                 m.LastModified = DateTime.Now;
                 m.LastModifiedById = claimMemberId;
                 unitOfWork.Complete();

@@ -10,6 +10,10 @@ using System.Security.Claims;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that contains actions for the Home Page views.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Authorize]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : Controller
@@ -24,8 +28,16 @@ namespace BlueDeck.Controllers
         {
             unitOfWork = unit;
         }
+
+        /// <summary>
+        /// Returns the Home/Index view
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves the User's Claims and will return the /Index view or redirect to the /About or /Pending views as appropriate.
+        /// </remarks>
+        /// <returns></returns>
         public IActionResult Index()
-        {
+        {            
             var identity = (ClaimsIdentity)User.Identity;
             if (identity.HasClaim(claim => claim.Type == "MemberId"))
             {                
@@ -44,9 +56,11 @@ namespace BlueDeck.Controllers
                     // If the User already has an account (existed at development), then their account status should be set to '1' (New)
                     // If they are accessing the app for the first time, the status will be set to "Pending" so it shows in the admin panel for activation.
                     Member currentMember = unitOfWork.Members.Get(claimMemberId);
-                    if(currentMember.AppStatusId == 1)
+                    int newStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "New").FirstOrDefault()?.AppStatusId ?? 0;
+                    int pendingStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "Pending").FirstOrDefault()?.AppStatusId ?? 0;
+                    if(currentMember.AppStatusId == newStatusId)
                     {
-                        currentMember.AppStatusId = 2;
+                        currentMember.AppStatusId = pendingStatusId;
                         currentMember.LastModified = DateTime.Now;
                         currentMember.LastModifiedById = claimMemberId;                        
                         unitOfWork.Complete();
@@ -57,6 +71,11 @@ namespace BlueDeck.Controllers
             }
             return RedirectToAction(nameof(About));
         }
+
+        /// <summary>
+        /// Returns the /About view.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         [Route("Home/About")]
@@ -65,7 +84,11 @@ namespace BlueDeck.Controllers
             ViewBag.Title = "About BlueDeck";
             return View();
         }
-        // TODO: Auth handler for User Role?
+
+        /// <summary>
+        /// Returns the /Pending view.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Home/Pending")]
         public IActionResult Pending()
@@ -77,7 +100,12 @@ namespace BlueDeck.Controllers
             ViewBag.Title = "Registration Pending";
             return View();
         }
-        
+
+        /// <summary>
+        /// Retrieves the member search view component.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
         public IActionResult GetMemberSearchViewComponent(string searchString)
         {
             char[] arr = searchString.ToCharArray();
@@ -106,6 +134,14 @@ namespace BlueDeck.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the demograpic search result view component.
+        /// </summary>
+        /// <param name="SelectedDemographicComponent">The selected demographic component.</param>
+        /// <param name="SelectedRanks">The selected ranks.</param>
+        /// <param name="SelectedGender">The selected gender.</param>
+        /// <param name="SelectedRaces">The selected races.</param>
+        /// <returns></returns>
         public IActionResult GetDemograpicSearchResultViewComponent(int SelectedDemographicComponent, List<int> SelectedRanks, int SelectedGender, List<int> SelectedRaces)
         {
             Component c = unitOfWork.Components.GetComponentForDemographics(SelectedDemographicComponent);
@@ -125,17 +161,23 @@ namespace BlueDeck.Controllers
             }
 
         }
+
+        /// <summary>
+        /// Retrieves the view that allows a user to register for a new account.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Home/Register")]
         public IActionResult Register()
         {
             var identity = User.Identities.FirstOrDefault(x => x.IsAuthenticated);
             string logonName = identity.Name.Split('\\')[1];
+            int pendingStatusId = unitOfWork.AppStatuses.Find(x => x.StatusName == "Pending").FirstOrDefault()?.AppStatusId ?? 0;
             Member newMember = new Member()
             {
                 Email = $"{logonName}@co.pg.md.us",
                 LDAPName = logonName,
-                AppStatusId = 2 // 1 is Pending - Request Activation
+                AppStatusId = pendingStatusId
             };
             MemberAddEditViewModel vm = new MemberAddEditViewModel(newMember,
                 unitOfWork.Positions.GetAllPositionSelectListItems(),
@@ -148,6 +190,12 @@ namespace BlueDeck.Controllers
             ViewBag.Title = "Register";
             return View(vm);
         }
+
+        /// <summary>
+        /// Creates a new user account.
+        /// </summary>
+        /// <param name="form">The POSTed form data bound to a <see cref="MemberAddEditViewModel"/> object.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Register([Bind("FirstName,LastName,MiddleName,MemberRank,DutyStatusId,MemberRace,MemberGender,PositionId,IdNumber,Email,LDAPName,AppStatusId,ContactNumbers")] MemberAddEditViewModel form)
@@ -178,6 +226,12 @@ namespace BlueDeck.Controllers
                 return RedirectToAction(nameof(Pending));
             }            
         }
+
+        /// <summary>
+        /// Downloads an alphabetical roster for the Component with the provided identity.
+        /// </summary>
+        /// <param name="id">The identity of the Component.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Home/DownloadAlphaRoster/{id:int}")]
         public IActionResult DownloadAlphaRoster(int id)
@@ -189,6 +243,12 @@ namespace BlueDeck.Controllers
 
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
+
+        /// <summary>
+        /// Downloads an Component roster for the Component with the provided identity.
+        /// </summary>
+        /// <param name="id">The identity of the Component.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Home/DownloadComponentRoster/{id:int}")]
         public IActionResult DownloadComponentRoster(int id)
@@ -198,6 +258,12 @@ namespace BlueDeck.Controllers
             string fileName = $"{unitOfWork.Components.Get(id).Name} Roster {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
             return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
         }
+
+        /// <summary>
+        /// Downloads an organization chart for the Component with the provided id.
+        /// </summary>
+        /// <param name="id">The identity of the Component.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Home/DownloadOrganizationChart/{id:int}")]
         public IActionResult DownloadOrganizationChart(int id)

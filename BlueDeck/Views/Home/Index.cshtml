@@ -51,7 +51,7 @@
                                 <tbody>
                                     @foreach (var worker in home.Members)
                                     {
-                                        <tr>
+                                        <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
                                             @if (worker.MemberId == 0)
                                             {
                                                 if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
@@ -67,7 +67,23 @@
                                             {
                                                 <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
                                             }
-                                            <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                            <td class="col-25">
+                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
+                                                <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                            </td>
+                                            <td class="col-15">@worker.DutyStatus</td>
+                                            <td class="col-15">@worker.ContactNumber</td>
+                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        </tr>
+                                    }
+                                    @foreach (var worker in home.TempMembers)
+                                    {
+                                        <tr class="homePageTDYInRow">
+                                            <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>                                            
+                                            <td class="col-25">
+                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
+                                                <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
+                                            </td>
                                             <td class="col-15">@worker.DutyStatus</td>
                                             <td class="col-15">@worker.ContactNumber</td>
                                             <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
@@ -88,14 +104,14 @@
                                 <caption>
                                     @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                                     {
-                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                        <a asp-controller="Components" asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Home/Index">
                                             <strong>@item.ComponentName</strong>
                                             <span class="glyphicon glyphicon-pencil"></span>
                                         </a>@: | @item.StrengthDisplay |
                                     }
                                     else
                                     {
-                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@home.ComponentId" asp-route-returnUrl="/Home/Index">
+                                        <a asp-controller="Components" asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Home/Index">
                                             <strong>@item.ComponentName</strong>
                                         </a>@: | @item.StrengthDisplay |
                                     }
@@ -108,7 +124,7 @@
                                 <tbody>
                                     @foreach (var worker in item.Members)
                                     {
-                                        <tr>
+                                        <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
                                             @if (worker.MemberId == 0)
                                             {
                                                 if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
@@ -122,9 +138,28 @@
                                             }
                                             else
                                             {
-                                                <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                                <td class="col-25">
+                                                    <a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a>
+                                                    
+                                                </td>
                                             }
-                                            <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
+                                            <td class="col-25">
+                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
+                                                <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                            </td>
+                                            <td class="col-15">@worker.DutyStatus</td>
+                                            <td class="col-15">@worker.ContactNumber</td>
+                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                        </tr>
+                                    }
+                                    @foreach (var worker in item.TempMembers)
+                                    {
+                                        <tr class="homePageTDYInRow">
+                                            <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                            <td class="col-25">
+                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
+                                                <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
+                                            </td>
                                             <td class="col-15">@worker.DutyStatus</td>
                                             <td class="col-15">@worker.ContactNumber</td>
                                             <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
@@ -146,27 +181,34 @@
                     <table class="table table-hover">
                         @foreach (HomePageViewModelMemberListItem worker in Model.ExceptionToDuty)
                         {
-                            <tr>
-                                @if (worker.MemberId == 0)
+                        <tr>
+                            @if (worker.MemberId == 0)
+                            {
+                                if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                 {
-                                    if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
-                                    {
-                                        <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
-                                    }
-                                    else
-                                    {
-                                        <td class="col-25">Vacant</td>
-                                    }
+                                    <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                 }
                                 else
                                 {
-                                    <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                    <td class="col-25">Vacant</td>
                                 }
+                            }
+                            else
+                            {
+                                <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                            }
+                            @if (worker.TempPositionId != null)
+                            {
+                                <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">TDY to @worker.TempParentComponentName</a></td>
+                            }
+                            else
+                            {
                                 <td class="col-25"><a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a></td>
-                                <td class="col-15">@worker.DutyStatus</td>
-                                <td class="col-15">@worker.ContactNumber</td>
-                                <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                            </tr>
+                            }
+                            <td class="col-15">@worker.DutyStatus</td>
+                            <td class="col-15">@worker.ContactNumber</td>
+                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                        </tr>
                         }
                     </table>
                 </div>
@@ -341,6 +383,10 @@
                     <div class="col-sm-3 form-group">
                         @Html.LabelFor(model => model.CurrentUser.DutyStatus, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.CurrentUser.DutyStatus.DutyStatusName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.TempPosition, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.TempPosition.Name, new { @class = "form-control", disabled = "disabled" })
                     </div>
                 </div>
                 <hr />

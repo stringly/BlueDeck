@@ -47,7 +47,7 @@
                 }
                 @if (IsAdmin || IsComponentSupervisor)
                 {
-                    <li><a asp-action="Create" asp-route-returnUrl="/Components/Index"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a></li>
+                    <li><a asp-action="Create" asp-route-returnUrl="/Components/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")"><span class="glyphicon glyphicon-plus" style="margin-right:2px"></span>Create a New Component</a></li>
                 }
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -153,13 +153,13 @@
                             <td>
                                 @if (IsAdmin || CanEditComponents.Any(x => x.Id == item.ComponentId))
                                 {
-                                    <a asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="Edit Component" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
-                                    <a asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
-                                    <a asp-action="Delete" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="Delete Component" class="glyphicon-ring"><span class="glyphicon glyphicon-trash glyphicon-bordered"></span></a>
+                                    <a asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
+                                    <a asp-action="Edit" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Edit Component" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
+                                    <a asp-action="Delete" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Delete Component" class="glyphicon-ring"><span class="glyphicon glyphicon-trash glyphicon-bordered"></span></a>
                                 }
                                 else
                                 {
-                                    <a asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
+                                    <a asp-action="Details" asp-route-id="@item.ComponentId" asp-route-returnUrl="/Components/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
                                 }
 
                             </td>

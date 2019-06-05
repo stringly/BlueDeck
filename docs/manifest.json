@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.AdminController.html",
-          "hash": "7qCt4XL/08iBpvwhTQIIrA=="
+          "hash": "ycztsND5Tp1FrlSp2xUdLg=="
         }
       },
       "is_incremental": true,
@@ -21,19 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.AppStatusController.html",
-          "hash": "l/jEthNxqqYjwxVzhPmBDQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Controllers.ComponentListApiListItem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Controllers.ComponentListApiListItem.html",
-          "hash": "gqTIgBKL16k0DHCJpZX5zw=="
+          "hash": "LNo+v30lH+Xet1R4ORC57A=="
         }
       },
       "is_incremental": true,
@@ -45,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.ComponentsApiController.html",
-          "hash": "OfvEkg6YtUE+zbw+1Z+ehA=="
+          "hash": "KnpxDE1mR6jqfElPwPMkkA=="
         }
       },
       "is_incremental": true,
@@ -57,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.ComponentsController.html",
-          "hash": "t84mRwUjtkDAWrQNkIKfQg=="
+          "hash": "8jVXyOSc+xuZdLk9dGx8kQ=="
         }
       },
       "is_incremental": true,
@@ -69,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.DutyStatusController.html",
-          "hash": "dX3dU42XLVGH0Tw1tSHz4A=="
+          "hash": "ztux9M4cOdtjkD7HW39e/A=="
         }
       },
       "is_incremental": true,
@@ -81,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.EnumsApiController.html",
-          "hash": "TNIvFHfnqY8f3cdw0z8ZIA=="
+          "hash": "kiGvNfG7Vg/k7fwBLJI/GQ=="
         }
       },
       "is_incremental": true,
@@ -93,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.ErrorController.html",
-          "hash": "DAgswvdkrpXO7nSP/BoWPg=="
+          "hash": "FTCy16taMSMutRzpXSjtZA=="
         }
       },
       "is_incremental": true,
@@ -105,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.GenderController.html",
-          "hash": "MZb3sOTLV3qzbf/c31aG5Q=="
+          "hash": "11RMaCApTGQ3PZwvK6yDag=="
         }
       },
       "is_incremental": true,
@@ -117,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.HomeController.html",
-          "hash": "YRTMZBvtjNLTX6s7xJ2QuQ=="
+          "hash": "O2lDYxxO4S9unouc7GaxFA=="
         }
       },
       "is_incremental": true,
@@ -129,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.MembersApiController.html",
-          "hash": "9iJzkL3rlfJzf+1QZvt/6Q=="
+          "hash": "qKcUzT7qUXQHMgOhSZy+aQ=="
         }
       },
       "is_incremental": true,
@@ -141,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.MembersController.html",
-          "hash": "c9Pp1pJTGMaEPH4fF9Qn4Q=="
+          "hash": "ceECaV6oVDO2mK8ZGF7tpw=="
         }
       },
       "is_incremental": true,
@@ -153,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.OrgChartController.html",
-          "hash": "8W31d9tWBZnLbGRRYU6M9Q=="
+          "hash": "YEVCLjd4OeGyfGvpxVq9ZQ=="
         }
       },
       "is_incremental": true,
@@ -165,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.PhoneTypeController.html",
-          "hash": "IgJXtpKiEg9k0P5xW9YkmA=="
+          "hash": "xOv1l6HvvzXfDnjJcxlI5w=="
         }
       },
       "is_incremental": true,
@@ -177,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.PositionsApiController.html",
-          "hash": "qYqDwwB248nDSpGat69ZFQ=="
+          "hash": "t4Q1TmPh5V1rZWm+AflIbQ=="
         }
       },
       "is_incremental": true,
@@ -189,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.PositionsController.html",
-          "hash": "zXwr2fu1OMx47dPMOeehpA=="
+          "hash": "BcnOVmVu3GZh1GopUiBGfw=="
         }
       },
       "is_incremental": true,
@@ -201,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.RaceController.html",
-          "hash": "oL1wmxoaSx/cYFPbcW76xQ=="
+          "hash": "PxKFNDWZU1+o8Fz4iQDtIQ=="
         }
       },
       "is_incremental": true,
@@ -213,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.RankController.html",
-          "hash": "vpnqXlV+fZ2GmNKNHAZYOQ=="
+          "hash": "IcSXbLiau2MbLJS7PQMVEw=="
         }
       },
       "is_incremental": true,
@@ -225,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.RosterController.html",
-          "hash": "kOyfoHa8KB6WGd1jK6V4pA=="
+          "hash": "kGk2yILCn5VgZxoeEDc8Ew=="
         }
       },
       "is_incremental": true,
@@ -237,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Controllers.html",
-          "hash": "9vHzxIR6XcHhxSYckdQrQg=="
+          "hash": "GOE8EPUezcj+ZSjBWyCJXw=="
         }
       },
       "is_incremental": true,
@@ -249,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Infrastructure.PageLinkTagHelper.html",
-          "hash": "zSrq7cbo7lrmdQRCbG3aWg=="
+          "hash": "5hf9lJeMvw2bxvx3FgVsHQ=="
         }
       },
       "is_incremental": true,
@@ -261,79 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Infrastructure.html",
-          "hash": "cGFfQptF+ltRLoHv4KYn5g=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.AppStatus.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.AppStatus.html",
-          "hash": "uxrZ9zIzh1wrqKxUQkezlw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.EntityMetaFields.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.EntityMetaFields.html",
-          "hash": "yjuj84ihwHblyfKdPRZ7/Q=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.EntityMetaFields2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.EntityMetaFields2.html",
-          "hash": "omUAPqn104LpvmaT3Ey2zQ=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.IsExceptionToDuty.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.IsExceptionToDuty.html",
-          "hash": "xv5gS6P16ziXE9aGuThmog=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.IsExceptionToDutyBool.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.IsExceptionToDutyBool.html",
-          "hash": "xqH+g32XutRU0udWyNoqDA=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.RoleTypes.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.RoleTypes.html",
-          "hash": "n4o9kwotsmXwyv0FdTan7Q=="
+          "hash": "yvy+DzINzqZL/pG8m9vRiA=="
         }
       },
       "is_incremental": true,
@@ -345,31 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Migrations.initial.html",
-          "hash": "clM0IQW1+0wbu24UjY9piw=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.removeMemberPrefix.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.removeMemberPrefix.html",
-          "hash": "5vrX4EFB4at8kUQrcPRP6w=="
-        }
-      },
-      "is_incremental": true,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/BlueDeck.Migrations.removeUserPrefix.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/BlueDeck.Migrations.removeUserPrefix.html",
-          "hash": "2usnrK6OqbfOl9D2JhvOvQ=="
+          "hash": "OxV9sziUPfHr2JgK1RTIog=="
         }
       },
       "is_incremental": true,
@@ -381,7 +273,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Migrations.html",
-          "hash": "hy/SLyQxARd0W01MvPfqYQ=="
+          "hash": "b70BY6+aJW00K782E+HnHQ=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.APIModels.AppStatusApiResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.APIModels.AppStatusApiResult.html",
+          "hash": "DIIRh1eoGNQDZ7oijtUqUQ=="
         }
       },
       "is_incremental": true,
@@ -393,7 +297,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.ComponentApiResult.html",
-          "hash": "nKmzeANI0a/AaRm/tcSpmg=="
+          "hash": "+3IJbK2qlf3uPgbUezWiIA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.APIModels.ComponentListApiListItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.APIModels.ComponentListApiListItem.html",
+          "hash": "H8DkHG4KHd3AULjhh8mDqA=="
         }
       },
       "is_incremental": true,
@@ -405,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.ContactNumberApiResult.html",
-          "hash": "q0q+rdHVc76sD/lAzxkxVQ=="
+          "hash": "RzJOBHKxq72NwX6oxwUebA=="
         }
       },
       "is_incremental": true,
@@ -417,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.DutyStatusApiResult.html",
-          "hash": "Fi96bdWw/KuVxW7R+VtrGw=="
+          "hash": "uHGpEfBRLfbjpwEFc5fhQA=="
         }
       },
       "is_incremental": true,
@@ -429,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.EnumApiCollectionResult.html",
-          "hash": "5PaB1pSjCc5h0Oxgvr6Jfw=="
+          "hash": "+NdkNqDeRKewtiuDsYFyEw=="
         }
       },
       "is_incremental": true,
@@ -441,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.GenderApiResult.html",
-          "hash": "ICkhd6Y1aLnM/VGO8VVmnA=="
+          "hash": "4OnBsMCcj840DXP2q455AQ=="
         }
       },
       "is_incremental": true,
@@ -453,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.MemberApiResult.html",
-          "hash": "URXz5XK924c77hG2TOoArw=="
+          "hash": "o9HvPTwIxKdRIK/359XEFw=="
         }
       },
       "is_incremental": true,
@@ -465,7 +381,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.MemberListAPIListItem.html",
-          "hash": "pOP/XavFLzDLBQrGpfV+aA=="
+          "hash": "uqybIj0fS6hYFG/TDlvViA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html",
+          "hash": "teWKn10t44Ufed/eg8G9Ww=="
         }
       },
       "is_incremental": true,
@@ -477,7 +405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.PositionApiResult.html",
-          "hash": "ku/xrLfYHhrBlroxPHiahw=="
+          "hash": "3OJFCHrT6TjOmSKFCa77qg=="
         }
       },
       "is_incremental": true,
@@ -489,7 +417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.PositionListAPIListItem.html",
-          "hash": "10uM2HopjF6o8vzRkK8gFA=="
+          "hash": "Ex9Wi27s6C0MLSVPeWrtsw=="
         }
       },
       "is_incremental": true,
@@ -501,7 +429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.RaceApiResult.html",
-          "hash": "WGFxTSY41iOJQE8v0louDw=="
+          "hash": "tAchqS1AjECdjUKNnsM70Q=="
         }
       },
       "is_incremental": true,
@@ -513,7 +441,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.RankApiResult.html",
-          "hash": "n7vQGfeo7Bzh93RSxJRQZQ=="
+          "hash": "xeo6egDriDcR49byXyC+6A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.APIModels.RoleTypeApiResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.APIModels.RoleTypeApiResult.html",
+          "hash": "irBFilr4vWBoro6/BvsjYw=="
         }
       },
       "is_incremental": true,
@@ -525,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.SubComponentApiResult.html",
-          "hash": "G94+3Qxq9vBsYttACqfApg=="
+          "hash": "I8HDhcVQCBSaQskB0tl3/Q=="
         }
       },
       "is_incremental": true,
@@ -537,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.SubMemberApiResult.html",
-          "hash": "R2TaSx5HfHeuQxi8brhy6g=="
+          "hash": "AxRxqvSmB4uuVIEEyL7y2w=="
         }
       },
       "is_incremental": true,
@@ -549,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.SubPositionApiResult.html",
-          "hash": "XKs/0UULFB2qRHybt4yNqA=="
+          "hash": "CnfOs3I4ptkz5szKqxx4Lg=="
         }
       },
       "is_incremental": true,
@@ -561,7 +501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.APIModels.html",
-          "hash": "ReloTqggl7PJ8xeEvQkQGA=="
+          "hash": "NMjQ7YmCgbWJ7BVUB/i8Uw=="
         }
       },
       "is_incremental": true,
@@ -573,7 +513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.AppStatus.html",
-          "hash": "AuOhM8DA93UNpyEUfpRqSQ=="
+          "hash": "Av5shTBicZYM01kZh2mSOg=="
         }
       },
       "is_incremental": true,
@@ -585,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ApplicationDbContext.html",
-          "hash": "OaV5Su3QrpDDlEiAK9M03g=="
+          "hash": "aaWy7+CmGpGdW+jSwE4/Vw=="
         }
       },
       "is_incremental": true,
@@ -597,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.CanCreateComponent.html",
-          "hash": "Z97hHklEPJuOIpeczicLbg=="
+          "hash": "9GtJ6ei+k4ozwRd1QRf6eg=="
         }
       },
       "is_incremental": true,
@@ -609,7 +549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.CanCreatePositionHandler.html",
-          "hash": "MZwOfQNdgRN+85LcSGRczQ=="
+          "hash": "aWCzFn66bybP1n40Xt7B0g=="
         }
       },
       "is_incremental": true,
@@ -621,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.CanEditComponentRequirement.html",
-          "hash": "ShhKCzFfaMpicaW33mFTfA=="
+          "hash": "gDqXRf67et7cA3mWU0nZ+Q=="
         }
       },
       "is_incremental": true,
@@ -633,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.CanEditPositionRequirement.html",
-          "hash": "qDlNJhoR3EaElBElBnzYyQ=="
+          "hash": "rnJ8A94djt101nJNo+ptbg=="
         }
       },
       "is_incremental": true,
@@ -645,7 +585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.CanEditUserRequirement.html",
-          "hash": "Or91+NBhEe21T2nJPCc+3Q=="
+          "hash": "hCx7EYGL2kCb+qVWL1eFZw=="
         }
       },
       "is_incremental": true,
@@ -657,7 +597,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsComponentSupervisorHandler.html",
-          "hash": "3i0ir0dUpYBG1/eQ6O3sSw=="
+          "hash": "z1wet/ps5RiJFCQ8/+IPEA=="
         }
       },
       "is_incremental": true,
@@ -669,7 +609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsGlobalAdmin.html",
-          "hash": "QeNShn99+92appBn2yZ7sA=="
+          "hash": "BzBdi6cg5KCYvUKfbN4vTA=="
         }
       },
       "is_incremental": true,
@@ -681,7 +621,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsGlobalAdminForComponentHandler.html",
-          "hash": "58lV8Y46M4sbo61n1dcWeA=="
+          "hash": "Mi/UJIkw2bnZyJfKAEPxzw=="
         }
       },
       "is_incremental": true,
@@ -693,7 +633,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsGlobalAdminForPositionHandler.html",
-          "hash": "2/U+F8FxSK/X9zjW1f91qw=="
+          "hash": "mxCud2p61uT9WiIGzhBYXw=="
         }
       },
       "is_incremental": true,
@@ -705,7 +645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsGlobalAdminForUserHandler.html",
-          "hash": "eZ1KfzFVuVhwm2Oks+559A=="
+          "hash": "Nz1A+NnRjIPwVRxGP1P00A=="
         }
       },
       "is_incremental": true,
@@ -717,7 +657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsGlobalAdminRequirement.html",
-          "hash": "9ZTjGaozznA/mIMVnuVrOA=="
+          "hash": "JJI0TJbS2EqXnnLxD21Sew=="
         }
       },
       "is_incremental": true,
@@ -729,7 +669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsMemberSupervisorHandler.html",
-          "hash": "jpwQ30Hra7+16QHilDsZmw=="
+          "hash": "XRhMkV3VLyovtOx22CUFuw=="
         }
       },
       "is_incremental": true,
@@ -741,7 +681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsOwnerHandler.html",
-          "hash": "3qlBpFQNthU7qjH8Bvl16w=="
+          "hash": "x9LNSAgdmZaZsfWMWrhBYg=="
         }
       },
       "is_incremental": true,
@@ -753,7 +693,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Auth.IsPositionComponentSupervisorHandler.html",
-          "hash": "YaWFWFAJmwzNCshRljwtug=="
+          "hash": "h+ddqQ6r245CpQbUHqwIOg=="
         }
       },
       "is_incremental": true,
@@ -777,7 +717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ChartableComponent.html",
-          "hash": "QL/hD33f380z/pAT3uryfg=="
+          "hash": "9M4398YXoy8ZbL0qiLZsxw=="
         }
       },
       "is_incremental": true,
@@ -789,7 +729,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ChartableComponentWithMember.html",
-          "hash": "tTnyv1Q63/jOk5zobM8shA=="
+          "hash": "4VAn7Ig6snkq0bqeveBZgg=="
         }
       },
       "is_incremental": true,
@@ -801,7 +741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ClaimsLoader.html",
-          "hash": "1rx1rRkyfPdHxyFaqE+vBQ=="
+          "hash": "9T4XI8g+qI38ZFoJODi3rQ=="
         }
       },
       "is_incremental": true,
@@ -813,7 +753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Component.html",
-          "hash": "G3P4mXC4Q5uyvff8Ris+Xg=="
+          "hash": "+VF+R2+PYDqGroV57IS3EQ=="
         }
       },
       "is_incremental": true,
@@ -825,7 +765,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ContactNumber.html",
-          "hash": "//WjOVKpZPeA7S05cLJDDQ=="
+          "hash": "0ehZq09uwEVKYIasJfFz5Q=="
         }
       },
       "is_incremental": true,
@@ -837,7 +777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.DocGenerators.AlphaRosterGenerator.html",
-          "hash": "KG1RkoEyn5tA83EitfRH8A=="
+          "hash": "pBqqvsV3XihNo5aSC/+pUQ=="
         }
       },
       "is_incremental": true,
@@ -849,7 +789,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.DocGenerators.ComponentRosterGenerator.html",
-          "hash": "KIO6FHCBpTVsBRcLcD912w=="
+          "hash": "2iAV0MmsWT1qkFrI3B7Sww=="
         }
       },
       "is_incremental": true,
@@ -861,7 +801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.DocGenerators.OrgChartGenerator.html",
-          "hash": "5xNtUoawfkuNN3wFKDEcIQ=="
+          "hash": "cnOK9auKbOhgQ1jjD3QJDw=="
         }
       },
       "is_incremental": true,
@@ -873,7 +813,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html",
-          "hash": "p8xTKToV3Zb+tiSeMUULDg=="
+          "hash": "FMKd5wLj6zM/RRjmNeSsAw=="
         }
       },
       "is_incremental": true,
@@ -897,7 +837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.DutyStatus.html",
-          "hash": "dDqKqewwXA1+vTwJphZhZQ=="
+          "hash": "sFujz0bOzQxQhAC8tpI/tQ=="
         }
       },
       "is_incremental": true,
@@ -909,7 +849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ExtensionMethods.ExtensionMethods.html",
-          "hash": "8eIak/pM8fe+iGmOWxSDSw=="
+          "hash": "LstjFI4up/clYJo5QvBwaw=="
         }
       },
       "is_incremental": true,
@@ -933,7 +873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Gender.html",
-          "hash": "+1f3+36PTMDtf3tx268Ukw=="
+          "hash": "uZ6rDspvwmid4tB/nVjeUw=="
         }
       },
       "is_incremental": true,
@@ -945,7 +885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.IUnitOfWork.html",
-          "hash": "I+ovT/Cz+YYxujodIZVzZA=="
+          "hash": "4eez7qUoByPUXhe6uQ8j2g=="
         }
       },
       "is_incremental": true,
@@ -957,7 +897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Member.html",
-          "hash": "12111XfVJKsmq4heD/Flgw=="
+          "hash": "F2jBsknj1I71P6xGFdKWyQ=="
         }
       },
       "is_incremental": true,
@@ -969,7 +909,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.PhoneNumberType.html",
-          "hash": "VMFGijQ9G4mf97BauuaAzA=="
+          "hash": "11YRGwd0S0hiEA/YD+Pn3g=="
         }
       },
       "is_incremental": true,
@@ -981,7 +921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Position.html",
-          "hash": "cbw9VHZ+BbxPIxRHxHjD2A=="
+          "hash": "BFiAxEcu5oL6VfLXhQ+nGw=="
         }
       },
       "is_incremental": true,
@@ -993,7 +933,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Race.html",
-          "hash": "GbMN0NLSSsHNs7BuRJhE2Q=="
+          "hash": "qW8/sH3bhRugo/qLJM2ZTQ=="
         }
       },
       "is_incremental": true,
@@ -1005,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Rank.html",
-          "hash": "pBG7sWaztD4A9bP9AI+dZQ=="
+          "hash": "yiMpp0w5sN+GAZha/nCdtg=="
         }
       },
       "is_incremental": true,
@@ -1017,7 +957,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IAppStatusRepository.html",
-          "hash": "ytuZM8BIJUxirrcPEX3z9w=="
+          "hash": "iQuJSaFvp2asIEGNGEDbLA=="
         }
       },
       "is_incremental": true,
@@ -1029,7 +969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IComponentRepository.html",
-          "hash": "IM/eC7Hdmgv7Qd2opLnTvw=="
+          "hash": "TQTfjOXGG08N7sKxajt80w=="
         }
       },
       "is_incremental": true,
@@ -1041,7 +981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberContactNumberRepository.html",
-          "hash": "ggy27CaypJ3tvQGh1CZVsw=="
+          "hash": "FwS8O+NngiociZkecTI1KQ=="
         }
       },
       "is_incremental": true,
@@ -1053,7 +993,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.html",
-          "hash": "O6yUvdLLQ3ObN9Ya+N3PnQ=="
+          "hash": "9+u5bXhZZoZUcDOQxwkLSA=="
         }
       },
       "is_incremental": true,
@@ -1065,7 +1005,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberGenderRepository.html",
-          "hash": "x7QzIBLOP6uuLlzi6svvDw=="
+          "hash": "8ZnHndpMfVSbsDFyrFGUzQ=="
         }
       },
       "is_incremental": true,
@@ -1077,7 +1017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberRaceRepository.html",
-          "hash": "hbxO/G0RqVPNnF8blMSBow=="
+          "hash": "xEVgizXrnr4HRO3YrmCLiw=="
         }
       },
       "is_incremental": true,
@@ -1089,7 +1029,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberRankRepository.html",
-          "hash": "cKhJYP9mfj6YMv9PzG8GAA=="
+          "hash": "B0ZztiAWMZd1PUqlvygsRg=="
         }
       },
       "is_incremental": true,
@@ -1101,7 +1041,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IMemberRepository.html",
-          "hash": "iChMHNL4MnraW0rw3cWc6w=="
+          "hash": "3csVW70cisiRW7Sns5wetw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.Repositories.IMemberRoleTypeRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.Repositories.IMemberRoleTypeRepository.html",
+          "hash": "PqG9YymbRDXsyava02AbxA=="
         }
       },
       "is_incremental": true,
@@ -1113,7 +1065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.html",
-          "hash": "lsV48w78Ntmvxms+DIKYJw=="
+          "hash": "kAlkG5LFwn+AR1KAqduY6A=="
         }
       },
       "is_incremental": true,
@@ -1125,7 +1077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IPositionRepository.html",
-          "hash": "jit8OKUnvAvi7wTuJGmtCg=="
+          "hash": "KWwsFs0O4JLxypoJTuDc7Q=="
         }
       },
       "is_incremental": true,
@@ -1137,7 +1089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.IRepository-1.html",
-          "hash": "HGwXwvQi+qa4nkvaUqcqRA=="
+          "hash": "CcGuP5AlRqnM6BQeXohZqg=="
         }
       },
       "is_incremental": true,
@@ -1149,7 +1101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Repositories.html",
-          "hash": "QSru7S5zaDPumdCm9BPD0g=="
+          "hash": "Nr+MvF8ukEqWwB6r/KBIOQ=="
         }
       },
       "is_incremental": true,
@@ -1161,7 +1113,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Role.html",
-          "hash": "9PwjGjp7WK+BXA6IagYw1A=="
+          "hash": "JziyvLVHaUJZzUdPGrRgIA=="
         }
       },
       "is_incremental": true,
@@ -1173,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.RoleType.html",
-          "hash": "xTioTNEkWVwcB8ri2Vcr9w=="
+          "hash": "04d0pEBXa3D7k6v/VOriYQ=="
         }
       },
       "is_incremental": true,
@@ -1185,7 +1137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.AdminComponentIndexViewModelListItem.html",
-          "hash": "euFxiv4ztQct0eMxajlyFQ=="
+          "hash": "lquHOXz6mTgjVm8mNo+adA=="
         }
       },
       "is_incremental": true,
@@ -1197,7 +1149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.AdminMemberIndexViewModelListItem.html",
-          "hash": "iOkInxkestJkLa7bFJtKjg=="
+          "hash": "oa9xUuEROJqD2pHA/vZuAw=="
         }
       },
       "is_incremental": true,
@@ -1209,7 +1161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.AdminPositionIndexViewModelListItem.html",
-          "hash": "9THp0DnSRr5R7Ty80vP7uw=="
+          "hash": "cdlqPbnfoITTcBFf3Ykoag=="
         }
       },
       "is_incremental": true,
@@ -1221,7 +1173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.ApplicationStatusSelectListItem.html",
-          "hash": "pfkLC1flap+RyJQTwZK2sg=="
+          "hash": "mab7wV+Aoslb5eammzfEgA=="
         }
       },
       "is_incremental": true,
@@ -1233,7 +1185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.BundledGenderRankDemoCollectionObject.html",
-          "hash": "bJBVCP4Irp5JDkjPK1I3mA=="
+          "hash": "z424XdJvmQr9+Xa2xfF1eA=="
         }
       },
       "is_incremental": true,
@@ -1245,7 +1197,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.ChartablePosition.html",
-          "hash": "Y/WR3zhhXOSKa/ied8qT0g=="
+          "hash": "4Wu32KZGAoXbJjCjyLMw0Q=="
         }
       },
       "is_incremental": true,
@@ -1257,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.ComponentIndexViewModelComponentListItem.html",
-          "hash": "1VwnmqdxpvkmFGCE7mlqGA=="
+          "hash": "9L61l+Pyua6bEUamuxE3Kw=="
         }
       },
       "is_incremental": true,
@@ -1269,7 +1221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.ComponentPositionLineupItem.html",
-          "hash": "MMyWoIXhkHvm4GJ3rahh+A=="
+          "hash": "bUW4fnow3j29wJkbnjVEnQ=="
         }
       },
       "is_incremental": true,
@@ -1281,7 +1233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.ComponentSelectListItem.html",
-          "hash": "+ZVL9RICf3Z5AssEz5/CtQ=="
+          "hash": "U3SWObcSOJEL49THMKjuyw=="
         }
       },
       "is_incremental": true,
@@ -1293,7 +1245,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.DemoTableDataObject.html",
-          "hash": "wM22uFubypeVDI/i3dMe5w=="
+          "hash": "mDFogy+Bh2efwYoo8gqClA=="
         }
       },
       "is_incremental": true,
@@ -1305,7 +1257,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.GenderRankDemoCollectionObject.html",
-          "hash": "UXxH1uuPeex9H9+Fs7fBbg=="
+          "hash": "x8CRk1MiMXG1cXZSRgjCQg=="
         }
       },
       "is_incremental": true,
@@ -1317,7 +1269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.HomePageComponentGroup.html",
-          "hash": "xUzrzKswBqsuzszZBW4vig=="
+          "hash": "YjYXX3wHC4bQqut6EtXlJw=="
         }
       },
       "is_incremental": true,
@@ -1329,7 +1281,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html",
-          "hash": "ta0AJs+1Rq6DdAVl6aQHBA=="
+          "hash": "oxb1u3oATd+dvymRBFbcKg=="
         }
       },
       "is_incremental": true,
@@ -1341,7 +1293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MappedField.html",
-          "hash": "KQfcDY0cLm5ThkuvX+3LHw=="
+          "hash": "0B6NZSI/jhTFv8uvEPVnKQ=="
         }
       },
       "is_incremental": true,
@@ -1353,7 +1305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberDutyStatusSelectListItem.html",
-          "hash": "atF5y6PIYP3MeW7m05KsiA=="
+          "hash": "LhmmCRVR3K3FLvzfLYTBfQ=="
         }
       },
       "is_incremental": true,
@@ -1365,7 +1317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberGenderSelectListItem.html",
-          "hash": "oEHCItRLwDH+SJx4mVBTxg=="
+          "hash": "dyTjSqycZP9SEC58M/5lrw=="
         }
       },
       "is_incremental": true,
@@ -1377,7 +1329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberIndexViewModelMemberListItem.html",
-          "hash": "oFPChWwvvtAaBStCRpo+6Q=="
+          "hash": "j+TLbTpvXP84u3j6RIDYPw=="
         }
       },
       "is_incremental": true,
@@ -1389,7 +1341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberLineupItem.html",
-          "hash": "TZLgLx5q4rvPmYRka4i60w=="
+          "hash": "c6jfKnX+Rx3XTSwcIu6H1A=="
         }
       },
       "is_incremental": true,
@@ -1401,7 +1353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberRaceSelectListItem.html",
-          "hash": "+mBcAs5K5BsxaLAR4zR+cw=="
+          "hash": "KFxe6ea/PHyECLveW69n2A=="
         }
       },
       "is_incremental": true,
@@ -1413,7 +1365,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberRankSelectListItem.html",
-          "hash": "jCbIX8oS8yXB6nJod36YpQ=="
+          "hash": "iOryNgfVAn55I956hXnVxg=="
         }
       },
       "is_incremental": true,
@@ -1425,7 +1377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.MemberSelectListItem.html",
-          "hash": "wtneWL3AaliNy/21uKUc7w=="
+          "hash": "CmzSPYnrJZzepAcEDrgbAA=="
         }
       },
       "is_incremental": true,
@@ -1437,7 +1389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.PhoneNumberTypeSelectListItem.html",
-          "hash": "BR8Uw0CybYsn7CtewziqnQ=="
+          "hash": "l7AD+9vvuJyMyCvRWhu+Pw=="
         }
       },
       "is_incremental": true,
@@ -1449,7 +1401,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.PositionIndexViewModelPositionListItem.html",
-          "hash": "m2SRfQuc8HZvEII1Nq/52w=="
+          "hash": "cuaB4pZF50xoVZMMwsS4Kw=="
         }
       },
       "is_incremental": true,
@@ -1461,7 +1413,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.PositionLineupItem.html",
-          "hash": "sdKrfTZyMh3kcBX2G32Kmg=="
+          "hash": "refkwX8a2BDx135osp1Z0w=="
         }
       },
       "is_incremental": true,
@@ -1473,7 +1425,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.PositionSelectListItem.html",
-          "hash": "3n3Q0sbXiAB+yDOEZu0ejw=="
+          "hash": "t9QV+25O9dOFEJMZ4IEhUg=="
         }
       },
       "is_incremental": true,
@@ -1485,7 +1437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.Types.RosterManagerViewModelComponent.html",
-          "hash": "OCXDAmtmQpvGiNBjpBTFJg=="
+          "hash": "jMA/6dYNEayZ23vRP9bzTw=="
         }
       },
       "is_incremental": true,
@@ -1509,7 +1461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html",
-          "hash": "WUK60C31jJhkthK4Y5Iapw=="
+          "hash": "e+CyPEbYPLeLt7Rv0O0uxA=="
         }
       },
       "is_incremental": true,
@@ -1521,7 +1473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminAppStatusIndexListViewModel.html",
-          "hash": "bWtl2dpJIY0g9xsqfw4tyw=="
+          "hash": "nexwOyX38Suk5wNSJck3iQ=="
         }
       },
       "is_incremental": true,
@@ -1533,7 +1485,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.html",
-          "hash": "ZvoPGQlN9D0C9M060GIWsg=="
+          "hash": "n4M25kdR2vy20aca5JfdVg=="
         }
       },
       "is_incremental": true,
@@ -1545,7 +1497,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminIndexViewModel.html",
-          "hash": "2QC6lrz+rdwooUy0J4N8Hw=="
+          "hash": "Lali6rSbawRpFAM5B0TkIw=="
         }
       },
       "is_incremental": true,
@@ -1557,7 +1509,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminMemberIndexListViewModel.html",
-          "hash": "3J+URDHBlS8vapEkKZQ2Jg=="
+          "hash": "EEi0fTsaIWedea1oGtjLZg=="
         }
       },
       "is_incremental": true,
@@ -1569,7 +1521,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminPositionIndexListViewModel.html",
-          "hash": "eX7kMicqNvcadVnRmArM/A=="
+          "hash": "ZIKJ5ikz/qH+xKjasLqF4A=="
         }
       },
       "is_incremental": true,
@@ -1581,7 +1533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AdminSideBarViewModel.html",
-          "hash": "PIHBP4rqH9HIoxe+9VVT9w=="
+          "hash": "oe9oBLiJDbkikpnXI0gGGQ=="
         }
       },
       "is_incremental": true,
@@ -1593,7 +1545,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.html",
-          "hash": "rBfEeZLGdd+/PvlOTBN1pw=="
+          "hash": "u0sdXuMdmhUEfOQX63dtlQ=="
         }
       },
       "is_incremental": true,
@@ -1605,7 +1557,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.AssignMemberToPositionViewModel.html",
-          "hash": "X46RDnPLRAmEXGTSjWo13Q=="
+          "hash": "nQeZnJIzZ564dj+4DVRapw=="
         }
       },
       "is_incremental": true,
@@ -1617,7 +1569,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.html",
-          "hash": "f06oGLfVwR4OVsWuR5QgrA=="
+          "hash": "qy2x3xcPPabI8mDph7W3HA=="
         }
       },
       "is_incremental": true,
@@ -1629,7 +1581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html",
-          "hash": "/czC2eHK84caBCu2enFAVg=="
+          "hash": "uXenFz8q+DgDAB+vw0aiZw=="
         }
       },
       "is_incremental": true,
@@ -1641,7 +1593,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ComponentIndexListViewModel.html",
-          "hash": "csFU5yftEa9+VMA9CiCEkA=="
+          "hash": "Ys7pQStxbDncVig7dtEJ6w=="
         }
       },
       "is_incremental": true,
@@ -1653,7 +1605,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ComponentLineupViewComponentViewModel.html",
-          "hash": "7ib+uNwkaBzapaqQe3/XxA=="
+          "hash": "KF7RvTxz2fujBLu630MwZA=="
         }
       },
       "is_incremental": true,
@@ -1665,7 +1617,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel.html",
-          "hash": "z8kbHZuQsDN2e3BWHl3hlw=="
+          "hash": "u0OuWCHYGj304mAY/aqxWA=="
         }
       },
       "is_incremental": true,
@@ -1677,7 +1629,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.HomePageMemberSearchResultViewComponentViewModel.html",
-          "hash": "ZWcuGpCMVJLzS3F+StCBTg=="
+          "hash": "Ancy6KmAUjmhnGhph4nhZw=="
         }
       },
       "is_incremental": true,
@@ -1689,7 +1641,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.HomePageViewModel.html",
-          "hash": "KjR59XwUqN+Du/Yz2E0FhQ=="
+          "hash": "FHBq1a4G6jHj0h7ICIfgXg=="
         }
       },
       "is_incremental": true,
@@ -1701,7 +1653,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.MainNavMenuViewModel.html",
-          "hash": "hW8PQNVVTZjxsI6Ri3LLOg=="
+          "hash": "g9rJpzd4oOsFw27BEsKPGA=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html",
+          "hash": "4O0BFiHaVRTe3G0oLl5U7Q=="
         }
       },
       "is_incremental": true,
@@ -1713,7 +1677,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html",
-          "hash": "mJ6l6LEe9Bwqk4cxNF7PeQ=="
+          "hash": "IdtVAi6OiWC9SHWrGZ8lsw=="
         }
       },
       "is_incremental": true,
@@ -1725,7 +1689,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.MemberContactNumberViewComponentViewModel.html",
-          "hash": "uZiuuM5RrmDemeoF7hN6lw=="
+          "hash": "RGwz00+1A+Jlt56APXfUFg=="
         }
       },
       "is_incremental": true,
@@ -1737,7 +1701,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.MemberIndexListViewModel.html",
-          "hash": "UOaqAyCdHRGMJK7DBzzmog=="
+          "hash": "aW5+aS+zf9wkdy13WyplQQ=="
         }
       },
       "is_incremental": true,
@@ -1749,7 +1713,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.OrgChartIndexViewModel.html",
-          "hash": "JFtYRcXu0G3o4IPyIJApPw=="
+          "hash": "Zlxx6P59CCetW5yvOQwGCA=="
         }
       },
       "is_incremental": true,
@@ -1761,7 +1725,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.PagingInfo.html",
-          "hash": "lfqVTh7dZGMiU1Vulh1MYg=="
+          "hash": "wYviKatnOx3unAK6iRtkCQ=="
         }
       },
       "is_incremental": true,
@@ -1773,7 +1737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.PositionIndexListViewModel.html",
-          "hash": "+k+rw7w4tbMKVkcbJwtmlg=="
+          "hash": "u2+GR/0xM7/fWIOE2Zks0Q=="
         }
       },
       "is_incremental": true,
@@ -1785,7 +1749,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.PositionLineupViewComponentViewModel.html",
-          "hash": "GTFP027H8naLs4KqC7zrLg=="
+          "hash": "5EbpzhwNj3XXVlEJYzjWcw=="
         }
       },
       "is_incremental": true,
@@ -1797,7 +1761,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.html",
-          "hash": "vfBZK55/aAaNQLl8gTVW+A=="
+          "hash": "Xkq8SbcJcScKcXD7+ugsmw=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html",
+          "hash": "cCFdqDlJGwqlQkEf7yyIOw=="
         }
       },
       "is_incremental": true,
@@ -1809,7 +1785,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html",
-          "hash": "X5X+crCMXxRscFxSMgwXAw=="
+          "hash": "ZUXPSy1QfnibqlV4z+HkVA=="
         }
       },
       "is_incremental": true,
@@ -1821,7 +1797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewComponentViewModel.html",
-          "hash": "35ijdARL9NNPvN68cgb3JA=="
+          "hash": "D5X5tPj7morB+cqiwE9PPA=="
         }
       },
       "is_incremental": true,
@@ -1833,7 +1809,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.RosterManagerViewModel.html",
-          "hash": "MDbyVcXtLGTbspI0vGE9SQ=="
+          "hash": "IbQP/QbEp3yqYBoioZObkw=="
         }
       },
       "is_incremental": true,
@@ -1845,7 +1821,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Models.ViewModels.html",
-          "hash": "qULrKE6EVmn65JtCNd7sZA=="
+          "hash": "SLo2VcUY2xAfj8wf7KIdtw=="
         }
       },
       "is_incremental": true,
@@ -1869,7 +1845,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.AppStatusRepository.html",
-          "hash": "3rDCrLQjJN4eBHMqcHyY5w=="
+          "hash": "tDAqNDWhgP6jbwpOdRfT1w=="
         }
       },
       "is_incremental": true,
@@ -1881,7 +1857,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.ComponentRepository.html",
-          "hash": "xFKw0JpDMMFaJ93q2HKz2Q=="
+          "hash": "pp/NeebiaazAdu18RCVweA=="
         }
       },
       "is_incremental": true,
@@ -1893,7 +1869,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberContactNumberRepository.html",
-          "hash": "EgQuYO0/P0iS8PwWSAGTIg=="
+          "hash": "uciSAXKIgySCRCA/QICQnA=="
         }
       },
       "is_incremental": true,
@@ -1905,7 +1881,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html",
-          "hash": "ywNkw5tabuz9GHKxkOuxLg=="
+          "hash": "OTwje6C/t7pXb6Yu7wqH3A=="
         }
       },
       "is_incremental": true,
@@ -1917,7 +1893,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html",
-          "hash": "hCMb5R2HF0FC7+zDZCAezw=="
+          "hash": "+rpLzjGAisn09L2BstDPBg=="
         }
       },
       "is_incremental": true,
@@ -1929,7 +1905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRaceRepository.html",
-          "hash": "r7L6HTS7rJKNzdZbwoMbAw=="
+          "hash": "m+KkUAOD8rhHG5sgsxTXlQ=="
         }
       },
       "is_incremental": true,
@@ -1941,7 +1917,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRankRepository.html",
-          "hash": "zcJT6C3ankmRWhQR9rVx0Q=="
+          "hash": "oM6p4R5tnvLsYMbw/doVzw=="
         }
       },
       "is_incremental": true,
@@ -1953,7 +1929,19 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRepository.html",
-          "hash": "7Cve7nuLNRz17up0SfzuXQ=="
+          "hash": "bOSmO1FJ025lNV1vkEbK8A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html",
+          "hash": "X+tBMoJSdcZWHQD+h+nWGA=="
         }
       },
       "is_incremental": true,
@@ -1965,7 +1953,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.html",
-          "hash": "sVvlFC5c5OYfdlkNgUwWWg=="
+          "hash": "rAWCPexN7l/SOs5q8vHqEA=="
         }
       },
       "is_incremental": true,
@@ -1977,7 +1965,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.PositionRepository.html",
-          "hash": "zKltpbF6tGb6+VCCkJ58xA=="
+          "hash": "WiXBDjwjMwB5c0hat62JnQ=="
         }
       },
       "is_incremental": true,
@@ -1989,7 +1977,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.Repository-1.html",
-          "hash": "5vZ/WU/Lm1MveXtPVaRQRw=="
+          "hash": "1Q2Enayd/L5GC1QE6zBvhA=="
         }
       },
       "is_incremental": true,
@@ -2001,7 +1989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.Repositories.html",
-          "hash": "qR5PU+GB98c3VNGtd0uRlw=="
+          "hash": "3sLOKts/FlBAUupHpd4rNQ=="
         }
       },
       "is_incremental": true,
@@ -2013,7 +2001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Persistence.UnitOfWork.html",
-          "hash": "F9LqiTu9iUDhoBW0Gu2K4g=="
+          "hash": "hLd8+NwKwZQfDJUf2fG0Yg=="
         }
       },
       "is_incremental": true,
@@ -2037,7 +2025,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Program.html",
-          "hash": "wK1ZHAqhNd7aTorOPaYRJQ=="
+          "hash": "ZzJ3sLE6FLwzpPFLu7NRiQ=="
         }
       },
       "is_incremental": true,
@@ -2049,7 +2037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.Startup.html",
-          "hash": "Cu+ikbGPrGZAZ5g1tR+2Rw=="
+          "hash": "o84lX9Ws6t6YgPI4WV1YoA=="
         }
       },
       "is_incremental": true,
@@ -2061,7 +2049,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.AddPositionToComponentViewComponent.html",
-          "hash": "b5yIrtBhvbiFzEAaIJAuTQ=="
+          "hash": "v+lheExakSrAT/TPzBurPA=="
         }
       },
       "is_incremental": true,
@@ -2073,7 +2061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.AssignMemberModalViewComponent.html",
-          "hash": "wRGLpncqQVGjlkncyIOzvQ=="
+          "hash": "/ulbhRzu0h7VXaRnIUzkyw=="
         }
       },
       "is_incremental": true,
@@ -2085,7 +2073,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ChangeEmployeeStatusModalViewComponent.html",
-          "hash": "uMbiB4oXuV+H1KuD06pfXQ=="
+          "hash": "OQlGew2D67cZZ2PggVpPMg=="
         }
       },
       "is_incremental": true,
@@ -2097,7 +2085,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ComponentAddEditModalViewComponent.html",
-          "hash": "OZ5+dOHUEqV6PTwU40JuqA=="
+          "hash": "fh2vSFqNHXj+I/WLyG+c1g=="
         }
       },
       "is_incremental": true,
@@ -2109,7 +2097,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.html",
-          "hash": "I8yZUVe6u2TGuG+UAsPeLg=="
+          "hash": "3c0VPLRSyhhqSr5QLUvL/Q=="
         }
       },
       "is_incremental": true,
@@ -2121,7 +2109,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ComponentLineupViewComponent.html",
-          "hash": "WXid7e1QKy3jbBc54C+dPA=="
+          "hash": "s+H/M+JUY5HCH3lY2Rpzsw=="
         }
       },
       "is_incremental": true,
@@ -2133,7 +2121,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ConfirmComponentDeleteModalViewComponent.html",
-          "hash": "8ZCHWTyK70qR6qMHBbu07Q=="
+          "hash": "a+7L6oEy4JEc0qTAIX+5bw=="
         }
       },
       "is_incremental": true,
@@ -2145,7 +2133,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.EditMemberModalViewComponent.html",
-          "hash": "ZjCsX7yCGtXeLPwNss/SPg=="
+          "hash": "0tfnZdgbylyBdKKdK4ZKUg=="
         }
       },
       "is_incremental": true,
@@ -2157,7 +2145,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.FooterMenuViewComponent.html",
-          "hash": "C+MCLQJCjrmVZPu7PYzKig=="
+          "hash": "qdilTlWQtcnYYCrhEHpB9A=="
         }
       },
       "is_incremental": true,
@@ -2169,7 +2157,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.HomePageMemberSearchResultViewComponent.html",
-          "hash": "sU7TkNfkVLPZpGPgCdtH1g=="
+          "hash": "YyXTdfw/flMMLlVLYu2VJQ=="
         }
       },
       "is_incremental": true,
@@ -2181,7 +2169,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.MemberContactNumberViewComponent.html",
-          "hash": "FdlxexZILIdlTxF+wIN8pw=="
+          "hash": "ZHGziZyCF+pbNGveSc6cvg=="
         }
       },
       "is_incremental": true,
@@ -2193,7 +2181,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.NavigationMenuViewComponent.html",
-          "hash": "deD9bQF3bhcG/J012VuX+g=="
+          "hash": "uwfnmBuv+lq5ouGd2AaCHA=="
         }
       },
       "is_incremental": true,
@@ -2205,7 +2193,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.PositionLineupViewComponent.html",
-          "hash": "aXVRrJhGCueYelSd3QG60A=="
+          "hash": "rQqZTlDPNnyDd+aHjPb5Ug=="
         }
       },
       "is_incremental": true,
@@ -2217,7 +2205,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.ReassignEmployeeModalViewComponent.html",
-          "hash": "LZzfPL5Fun2euKbMdYqNvw=="
+          "hash": "TYwRUxvyiZqid0pRmJHnSw=="
         }
       },
       "is_incremental": true,
@@ -2229,7 +2217,7 @@
       "output": {
         ".html": {
           "relative_path": "api/BlueDeck.ViewComponents.RosterManagerViewComponent.html",
-          "hash": "9JajeqvRhMa9db9/HfkMeQ=="
+          "hash": "+arbAwRgw2mXgo4fgjjXgg=="
         }
       },
       "is_incremental": true,
@@ -2277,7 +2265,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "uY84zUB9DEvBKdyaCBr+Pg=="
+          "hash": "hlmM5k314aeRzYLSrUzXzQ=="
         }
       },
       "is_incremental": false,
@@ -2452,12 +2440,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "help/logging_on.md",
       "output": {
         ".html": {
           "relative_path": "help/logging_on.html",
-          "hash": "n7ce3kPtoX3UrPwfJxTJIA=="
+          "hash": "uAWA0KBRtdQ5PEUZacfUwQ=="
         }
       },
       "is_incremental": false,
@@ -2574,6 +2565,12 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 18,
+          "skipped_file_count": 17
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -2581,17 +2578,11 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 18,
-          "skipped_file_count": 17
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 188,
-          "skipped_file_count": 188
+          "total_file_count": 187,
+          "skipped_file_count": 187
         }
       }
     },

@@ -36,6 +36,16 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsExceptionToNormalDuty" /> @Html.DisplayNameFor(model => model.IsExceptionToNormalDuty)
+                                </label>
+                                <span class="note">
+                                    Members in status will be counted as Exceptions to Normal Duty.
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <hr />
                     <div class="row">

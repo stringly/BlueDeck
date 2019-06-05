@@ -312,69 +312,6 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.AppStatusController.Index
   nameWithType: AppStatusController.Index
-- uid: BlueDeck.Controllers.ComponentListApiListItem
-  name: ComponentListApiListItem
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html
-  commentId: T:BlueDeck.Controllers.ComponentListApiListItem
-  fullName: BlueDeck.Controllers.ComponentListApiListItem
-  nameWithType: ComponentListApiListItem
-- uid: BlueDeck.Controllers.ComponentListApiListItem.#ctor
-  name: ComponentListApiListItem()
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem__ctor
-  commentId: M:BlueDeck.Controllers.ComponentListApiListItem.#ctor
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentListApiListItem()
-  nameWithType: ComponentListApiListItem.ComponentListApiListItem()
-- uid: BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Controllers.ComponentListApiListItem)
-  name: ComponentListApiListItem(ComponentListApiListItem)
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem__ctor_BlueDeck_Controllers_ComponentListApiListItem_
-  commentId: M:BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Controllers.ComponentListApiListItem)
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Controllers.ComponentListApiListItem)
-  nameWithType: ComponentListApiListItem.ComponentListApiListItem(ComponentListApiListItem)
-- uid: BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Models.Component)
-  name: ComponentListApiListItem(Component)
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem__ctor_BlueDeck_Models_Component_
-  commentId: M:BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Models.Component)
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Models.Component)
-  nameWithType: ComponentListApiListItem.ComponentListApiListItem(Component)
-- uid: BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Models.Types.ComponentSelectListItem)
-  name: ComponentListApiListItem(ComponentSelectListItem)
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem__ctor_BlueDeck_Models_Types_ComponentSelectListItem_
-  commentId: M:BlueDeck.Controllers.ComponentListApiListItem.#ctor(BlueDeck.Models.Types.ComponentSelectListItem)
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Models.Types.ComponentSelectListItem)
-  nameWithType: ComponentListApiListItem.ComponentListApiListItem(ComponentSelectListItem)
-- uid: BlueDeck.Controllers.ComponentListApiListItem.#ctor*
-  name: ComponentListApiListItem
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem__ctor_
-  commentId: Overload:BlueDeck.Controllers.ComponentListApiListItem.#ctor
-  isSpec: "True"
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentListApiListItem
-  nameWithType: ComponentListApiListItem.ComponentListApiListItem
-- uid: BlueDeck.Controllers.ComponentListApiListItem.ComponentId
-  name: ComponentId
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem_ComponentId
-  commentId: P:BlueDeck.Controllers.ComponentListApiListItem.ComponentId
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentId
-  nameWithType: ComponentListApiListItem.ComponentId
-- uid: BlueDeck.Controllers.ComponentListApiListItem.ComponentId*
-  name: ComponentId
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem_ComponentId_
-  commentId: Overload:BlueDeck.Controllers.ComponentListApiListItem.ComponentId
-  isSpec: "True"
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.ComponentId
-  nameWithType: ComponentListApiListItem.ComponentId
-- uid: BlueDeck.Controllers.ComponentListApiListItem.Name
-  name: Name
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem_Name
-  commentId: P:BlueDeck.Controllers.ComponentListApiListItem.Name
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.Name
-  nameWithType: ComponentListApiListItem.Name
-- uid: BlueDeck.Controllers.ComponentListApiListItem.Name*
-  name: Name
-  href: api/BlueDeck.Controllers.ComponentListApiListItem.html#BlueDeck_Controllers_ComponentListApiListItem_Name_
-  commentId: Overload:BlueDeck.Controllers.ComponentListApiListItem.Name
-  isSpec: "True"
-  fullName: BlueDeck.Controllers.ComponentListApiListItem.Name
-  nameWithType: ComponentListApiListItem.Name
 - uid: BlueDeck.Controllers.ComponentsApiController
   name: ComponentsApiController
   href: api/BlueDeck.Controllers.ComponentsApiController.html
@@ -720,6 +657,97 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.EnumsApiController.GetAll
   nameWithType: EnumsApiController.GetAll
+- uid: BlueDeck.Controllers.EnumsApiController.GetAppStatuses
+  name: GetAppStatuses()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetAppStatuses
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetAppStatuses
+  fullName: BlueDeck.Controllers.EnumsApiController.GetAppStatuses()
+  nameWithType: EnumsApiController.GetAppStatuses()
+- uid: BlueDeck.Controllers.EnumsApiController.GetAppStatuses*
+  name: GetAppStatuses
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetAppStatuses_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetAppStatuses
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetAppStatuses
+  nameWithType: EnumsApiController.GetAppStatuses
+- uid: BlueDeck.Controllers.EnumsApiController.GetDutyStatuses
+  name: GetDutyStatuses()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetDutyStatuses
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetDutyStatuses
+  fullName: BlueDeck.Controllers.EnumsApiController.GetDutyStatuses()
+  nameWithType: EnumsApiController.GetDutyStatuses()
+- uid: BlueDeck.Controllers.EnumsApiController.GetDutyStatuses*
+  name: GetDutyStatuses
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetDutyStatuses_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetDutyStatuses
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetDutyStatuses
+  nameWithType: EnumsApiController.GetDutyStatuses
+- uid: BlueDeck.Controllers.EnumsApiController.GetGenders
+  name: GetGenders()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetGenders
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetGenders
+  fullName: BlueDeck.Controllers.EnumsApiController.GetGenders()
+  nameWithType: EnumsApiController.GetGenders()
+- uid: BlueDeck.Controllers.EnumsApiController.GetGenders*
+  name: GetGenders
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetGenders_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetGenders
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetGenders
+  nameWithType: EnumsApiController.GetGenders
+- uid: BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes
+  name: GetPhoneNumberTypes()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetPhoneNumberTypes
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes
+  fullName: BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes()
+  nameWithType: EnumsApiController.GetPhoneNumberTypes()
+- uid: BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes*
+  name: GetPhoneNumberTypes
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetPhoneNumberTypes_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes
+  nameWithType: EnumsApiController.GetPhoneNumberTypes
+- uid: BlueDeck.Controllers.EnumsApiController.GetRaces
+  name: GetRaces()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRaces
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetRaces
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRaces()
+  nameWithType: EnumsApiController.GetRaces()
+- uid: BlueDeck.Controllers.EnumsApiController.GetRaces*
+  name: GetRaces
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRaces_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetRaces
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRaces
+  nameWithType: EnumsApiController.GetRaces
+- uid: BlueDeck.Controllers.EnumsApiController.GetRanks
+  name: GetRanks()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRanks
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetRanks
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRanks()
+  nameWithType: EnumsApiController.GetRanks()
+- uid: BlueDeck.Controllers.EnumsApiController.GetRanks*
+  name: GetRanks
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRanks_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetRanks
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRanks
+  nameWithType: EnumsApiController.GetRanks
+- uid: BlueDeck.Controllers.EnumsApiController.GetRoleTypes
+  name: GetRoleTypes()
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRoleTypes
+  commentId: M:BlueDeck.Controllers.EnumsApiController.GetRoleTypes
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRoleTypes()
+  nameWithType: EnumsApiController.GetRoleTypes()
+- uid: BlueDeck.Controllers.EnumsApiController.GetRoleTypes*
+  name: GetRoleTypes
+  href: api/BlueDeck.Controllers.EnumsApiController.html#BlueDeck_Controllers_EnumsApiController_GetRoleTypes_
+  commentId: Overload:BlueDeck.Controllers.EnumsApiController.GetRoleTypes
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.EnumsApiController.GetRoleTypes
+  nameWithType: EnumsApiController.GetRoleTypes
 - uid: BlueDeck.Controllers.ErrorController
   name: ErrorController
   href: api/BlueDeck.Controllers.ErrorController.html
@@ -742,6 +770,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.ErrorController.Error
   nameWithType: ErrorController.Error
+- uid: BlueDeck.Controllers.ErrorController.Error500
+  name: Error500()
+  href: api/BlueDeck.Controllers.ErrorController.html#BlueDeck_Controllers_ErrorController_Error500
+  commentId: M:BlueDeck.Controllers.ErrorController.Error500
+  fullName: BlueDeck.Controllers.ErrorController.Error500()
+  nameWithType: ErrorController.Error500()
+- uid: BlueDeck.Controllers.ErrorController.Error500*
+  name: Error500
+  href: api/BlueDeck.Controllers.ErrorController.html#BlueDeck_Controllers_ErrorController_Error500_
+  commentId: Overload:BlueDeck.Controllers.ErrorController.Error500
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.ErrorController.Error500
+  nameWithType: ErrorController.Error500
 - uid: BlueDeck.Controllers.GenderController
   name: GenderController
   href: api/BlueDeck.Controllers.GenderController.html
@@ -1024,19 +1065,58 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.MembersApiController.MembersApiController
   nameWithType: MembersApiController.MembersApiController
-- uid: BlueDeck.Controllers.MembersApiController.GetMember(System.Int32)
-  name: GetMember(Int32)
-  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMember_System_Int32_
-  commentId: M:BlueDeck.Controllers.MembersApiController.GetMember(System.Int32)
-  fullName: BlueDeck.Controllers.MembersApiController.GetMember(System.Int32)
-  nameWithType: MembersApiController.GetMember(Int32)
-- uid: BlueDeck.Controllers.MembersApiController.GetMember*
-  name: GetMember
-  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMember_
-  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetMember
+- uid: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId(System.Int32)
+  name: GetAssistantSupervisorOrSupervisorForBlueDeckId(Int32)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetAssistantSupervisorOrSupervisorForBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId(System.Int32)
+  fullName: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId(System.Int32)
+  nameWithType: MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId(Int32)
+- uid: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId*
+  name: GetAssistantSupervisorOrSupervisorForBlueDeckId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetAssistantSupervisorOrSupervisorForBlueDeckId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId
   isSpec: "True"
-  fullName: BlueDeck.Controllers.MembersApiController.GetMember
-  nameWithType: MembersApiController.GetMember
+  fullName: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId
+  nameWithType: MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId
+- uid: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId(System.String)
+  name: GetAssistantSupervisorOrSupervisorForOrgId(String)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetAssistantSupervisorOrSupervisorForOrgId_System_String_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId(System.String)
+  fullName: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId(System.String)
+  nameWithType: MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId(String)
+- uid: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId*
+  name: GetAssistantSupervisorOrSupervisorForOrgId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetAssistantSupervisorOrSupervisorForOrgId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId
+  nameWithType: MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId
+- uid: BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId(System.Int32)
+  name: GetMemberByBlueDeckId(Int32)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMemberByBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId(System.Int32)
+  fullName: BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId(System.Int32)
+  nameWithType: MembersApiController.GetMemberByBlueDeckId(Int32)
+- uid: BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId*
+  name: GetMemberByBlueDeckId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMemberByBlueDeckId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId
+  nameWithType: MembersApiController.GetMemberByBlueDeckId
+- uid: BlueDeck.Controllers.MembersApiController.GetMemberByOrgId(System.String)
+  name: GetMemberByOrgId(String)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMemberByOrgId_System_String_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetMemberByOrgId(System.String)
+  fullName: BlueDeck.Controllers.MembersApiController.GetMemberByOrgId(System.String)
+  nameWithType: MembersApiController.GetMemberByOrgId(String)
+- uid: BlueDeck.Controllers.MembersApiController.GetMemberByOrgId*
+  name: GetMemberByOrgId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMemberByOrgId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetMemberByOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetMemberByOrgId
+  nameWithType: MembersApiController.GetMemberByOrgId
 - uid: BlueDeck.Controllers.MembersApiController.GetMembers
   name: GetMembers()
   href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetMembers
@@ -1050,6 +1130,58 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.MembersApiController.GetMembers
   nameWithType: MembersApiController.GetMembers
+- uid: BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId(System.Int32)
+  name: GetSubordinatesForBlueDeckId(Int32)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSubordinatesForBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId(System.Int32)
+  fullName: BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId(System.Int32)
+  nameWithType: MembersApiController.GetSubordinatesForBlueDeckId(Int32)
+- uid: BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId*
+  name: GetSubordinatesForBlueDeckId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSubordinatesForBlueDeckId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId
+  nameWithType: MembersApiController.GetSubordinatesForBlueDeckId
+- uid: BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId(System.String)
+  name: GetSubordinatesForOrgId(String)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSubordinatesForOrgId_System_String_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId(System.String)
+  fullName: BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId(System.String)
+  nameWithType: MembersApiController.GetSubordinatesForOrgId(String)
+- uid: BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId*
+  name: GetSubordinatesForOrgId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSubordinatesForOrgId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId
+  nameWithType: MembersApiController.GetSubordinatesForOrgId
+- uid: BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId(System.Int32)
+  name: GetSupervisorForBlueDeckId(Int32)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSupervisorForBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId(System.Int32)
+  fullName: BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId(System.Int32)
+  nameWithType: MembersApiController.GetSupervisorForBlueDeckId(Int32)
+- uid: BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId*
+  name: GetSupervisorForBlueDeckId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSupervisorForBlueDeckId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId
+  nameWithType: MembersApiController.GetSupervisorForBlueDeckId
+- uid: BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId(System.String)
+  name: GetSupervisorForOrgId(String)
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSupervisorForOrgId_System_String_
+  commentId: M:BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId(System.String)
+  fullName: BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId(System.String)
+  nameWithType: MembersApiController.GetSupervisorForOrgId(String)
+- uid: BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId*
+  name: GetSupervisorForOrgId
+  href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_GetSupervisorForOrgId_
+  commentId: Overload:BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId
+  nameWithType: MembersApiController.GetSupervisorForOrgId
 - uid: BlueDeck.Controllers.MembersApiController.SearchMembers(System.String)
   name: SearchMembers(String)
   href: api/BlueDeck.Controllers.MembersApiController.html#BlueDeck_Controllers_MembersApiController_SearchMembers_System_String_
@@ -1855,6 +1987,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.RosterController.AddPositionToComponent
   nameWithType: RosterController.AddPositionToComponent
+- uid: BlueDeck.Controllers.RosterController.CancelTDY(System.Int32)
+  name: CancelTDY(Int32)
+  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_CancelTDY_System_Int32_
+  commentId: M:BlueDeck.Controllers.RosterController.CancelTDY(System.Int32)
+  fullName: BlueDeck.Controllers.RosterController.CancelTDY(System.Int32)
+  nameWithType: RosterController.CancelTDY(Int32)
+- uid: BlueDeck.Controllers.RosterController.CancelTDY*
+  name: CancelTDY
+  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_CancelTDY_
+  commentId: Overload:BlueDeck.Controllers.RosterController.CancelTDY
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.RosterController.CancelTDY
+  nameWithType: RosterController.CancelTDY
 - uid: BlueDeck.Controllers.RosterController.ChangeEmployeeStatus(BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel)
   name: ChangeEmployeeStatus(ChangeEmployeeStatusModalViewComponentViewModel)
   href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_ChangeEmployeeStatus_BlueDeck_Models_ViewModels_ChangeEmployeeStatusModalViewComponentViewModel_
@@ -2056,12 +2201,25 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.RosterController.ReassignMemberViaModal
   nameWithType: RosterController.ReassignMemberViaModal
-- uid: BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Int32)
-  name: SwapMemberPositions(Int32, Int32)
-  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Int32_
-  commentId: M:BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Int32)
-  fullName: BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32, System.Int32)
-  nameWithType: RosterController.SwapMemberPositions(Int32, Int32)
+- uid: BlueDeck.Controllers.RosterController.ReassignTDYMember(System.Int32,System.Int32,System.Int32)
+  name: ReassignTDYMember(Int32, Int32, Int32)
+  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_ReassignTDYMember_System_Int32_System_Int32_System_Int32_
+  commentId: M:BlueDeck.Controllers.RosterController.ReassignTDYMember(System.Int32,System.Int32,System.Int32)
+  fullName: BlueDeck.Controllers.RosterController.ReassignTDYMember(System.Int32, System.Int32, System.Int32)
+  nameWithType: RosterController.ReassignTDYMember(Int32, Int32, Int32)
+- uid: BlueDeck.Controllers.RosterController.ReassignTDYMember*
+  name: ReassignTDYMember
+  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_ReassignTDYMember_
+  commentId: Overload:BlueDeck.Controllers.RosterController.ReassignTDYMember
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.RosterController.ReassignTDYMember
+  nameWithType: RosterController.ReassignTDYMember
+- uid: BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Boolean,System.Int32,System.Boolean)
+  name: SwapMemberPositions(Int32, Boolean, Int32, Boolean)
+  href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Boolean_System_Int32_System_Boolean_
+  commentId: M:BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Boolean,System.Int32,System.Boolean)
+  fullName: BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32, System.Boolean, System.Int32, System.Boolean)
+  nameWithType: RosterController.SwapMemberPositions(Int32, Boolean, Int32, Boolean)
 - uid: BlueDeck.Controllers.RosterController.SwapMemberPositions*
   name: SwapMemberPositions
   href: api/BlueDeck.Controllers.RosterController.html#BlueDeck_Controllers_RosterController_SwapMemberPositions_
@@ -2230,141 +2388,6 @@ references:
   commentId: N:BlueDeck.Migrations
   fullName: BlueDeck.Migrations
   nameWithType: BlueDeck.Migrations
-- uid: BlueDeck.Migrations.AppStatus
-  name: AppStatus
-  href: api/BlueDeck.Migrations.AppStatus.html
-  commentId: T:BlueDeck.Migrations.AppStatus
-  fullName: BlueDeck.Migrations.AppStatus
-  nameWithType: AppStatus
-- uid: BlueDeck.Migrations.AppStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.AppStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.AppStatus.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: AppStatus.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.AppStatus.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.AppStatus.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.AppStatus.BuildTargetModel
-  nameWithType: AppStatus.BuildTargetModel
-- uid: BlueDeck.Migrations.AppStatus.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.AppStatus.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.AppStatus.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: AppStatus.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.AppStatus.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_Down_
-  commentId: Overload:BlueDeck.Migrations.AppStatus.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.AppStatus.Down
-  nameWithType: AppStatus.Down
-- uid: BlueDeck.Migrations.AppStatus.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.AppStatus.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.AppStatus.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: AppStatus.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.AppStatus.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.AppStatus.html#BlueDeck_Migrations_AppStatus_Up_
-  commentId: Overload:BlueDeck.Migrations.AppStatus.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.AppStatus.Up
-  nameWithType: AppStatus.Up
-- uid: BlueDeck.Migrations.EntityMetaFields
-  name: EntityMetaFields
-  href: api/BlueDeck.Migrations.EntityMetaFields.html
-  commentId: T:BlueDeck.Migrations.EntityMetaFields
-  fullName: BlueDeck.Migrations.EntityMetaFields
-  nameWithType: EntityMetaFields
-- uid: BlueDeck.Migrations.EntityMetaFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: EntityMetaFields.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields.BuildTargetModel
-  nameWithType: EntityMetaFields.BuildTargetModel
-- uid: BlueDeck.Migrations.EntityMetaFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: EntityMetaFields.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_Down_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields.Down
-  nameWithType: EntityMetaFields.Down
-- uid: BlueDeck.Migrations.EntityMetaFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: EntityMetaFields.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.EntityMetaFields.html#BlueDeck_Migrations_EntityMetaFields_Up_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields.Up
-  nameWithType: EntityMetaFields.Up
-- uid: BlueDeck.Migrations.EntityMetaFields2
-  name: EntityMetaFields2
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html
-  commentId: T:BlueDeck.Migrations.EntityMetaFields2
-  fullName: BlueDeck.Migrations.EntityMetaFields2
-  nameWithType: EntityMetaFields2
-- uid: BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: EntityMetaFields2.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields2.BuildTargetModel
-  nameWithType: EntityMetaFields2.BuildTargetModel
-- uid: BlueDeck.Migrations.EntityMetaFields2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: EntityMetaFields2.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields2.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_Down_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields2.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields2.Down
-  nameWithType: EntityMetaFields2.Down
-- uid: BlueDeck.Migrations.EntityMetaFields2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.EntityMetaFields2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.EntityMetaFields2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: EntityMetaFields2.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.EntityMetaFields2.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.EntityMetaFields2.html#BlueDeck_Migrations_EntityMetaFields2_Up_
-  commentId: Overload:BlueDeck.Migrations.EntityMetaFields2.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.EntityMetaFields2.Up
-  nameWithType: EntityMetaFields2.Up
 - uid: BlueDeck.Migrations.initial
   name: initial
   href: api/BlueDeck.Migrations.initial.html
@@ -2410,231 +2433,6 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Migrations.initial.Up
   nameWithType: initial.Up
-- uid: BlueDeck.Migrations.IsExceptionToDuty
-  name: IsExceptionToDuty
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html
-  commentId: T:BlueDeck.Migrations.IsExceptionToDuty
-  fullName: BlueDeck.Migrations.IsExceptionToDuty
-  nameWithType: IsExceptionToDuty
-- uid: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: IsExceptionToDuty.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel
-  nameWithType: IsExceptionToDuty.BuildTargetModel
-- uid: BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: IsExceptionToDuty.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDuty.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Down_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.Down
-  nameWithType: IsExceptionToDuty.Down
-- uid: BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: IsExceptionToDuty.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDuty.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Up_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDuty.Up
-  nameWithType: IsExceptionToDuty.Up
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool
-  name: IsExceptionToDutyBool
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html
-  commentId: T:BlueDeck.Migrations.IsExceptionToDutyBool
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool
-  nameWithType: IsExceptionToDutyBool
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: IsExceptionToDutyBool.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel
-  nameWithType: IsExceptionToDutyBool.BuildTargetModel
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: IsExceptionToDutyBool.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Down_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Down
-  nameWithType: IsExceptionToDutyBool.Down
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: IsExceptionToDutyBool.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Up_
-  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Up
-  nameWithType: IsExceptionToDutyBool.Up
-- uid: BlueDeck.Migrations.removeMemberPrefix
-  name: removeMemberPrefix
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html
-  commentId: T:BlueDeck.Migrations.removeMemberPrefix
-  fullName: BlueDeck.Migrations.removeMemberPrefix
-  nameWithType: removeMemberPrefix
-- uid: BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: removeMemberPrefix.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeMemberPrefix.BuildTargetModel
-  nameWithType: removeMemberPrefix.BuildTargetModel
-- uid: BlueDeck.Migrations.removeMemberPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.removeMemberPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.removeMemberPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: removeMemberPrefix.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.removeMemberPrefix.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_Down_
-  commentId: Overload:BlueDeck.Migrations.removeMemberPrefix.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeMemberPrefix.Down
-  nameWithType: removeMemberPrefix.Down
-- uid: BlueDeck.Migrations.removeMemberPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.removeMemberPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.removeMemberPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: removeMemberPrefix.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.removeMemberPrefix.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.removeMemberPrefix.html#BlueDeck_Migrations_removeMemberPrefix_Up_
-  commentId: Overload:BlueDeck.Migrations.removeMemberPrefix.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeMemberPrefix.Up
-  nameWithType: removeMemberPrefix.Up
-- uid: BlueDeck.Migrations.removeUserPrefix
-  name: removeUserPrefix
-  href: api/BlueDeck.Migrations.removeUserPrefix.html
-  commentId: T:BlueDeck.Migrations.removeUserPrefix
-  fullName: BlueDeck.Migrations.removeUserPrefix
-  nameWithType: removeUserPrefix
-- uid: BlueDeck.Migrations.removeUserPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.removeUserPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.removeUserPrefix.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: removeUserPrefix.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.removeUserPrefix.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.removeUserPrefix.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeUserPrefix.BuildTargetModel
-  nameWithType: removeUserPrefix.BuildTargetModel
-- uid: BlueDeck.Migrations.removeUserPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.removeUserPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.removeUserPrefix.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: removeUserPrefix.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.removeUserPrefix.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_Down_
-  commentId: Overload:BlueDeck.Migrations.removeUserPrefix.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeUserPrefix.Down
-  nameWithType: removeUserPrefix.Down
-- uid: BlueDeck.Migrations.removeUserPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.removeUserPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.removeUserPrefix.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: removeUserPrefix.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.removeUserPrefix.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.removeUserPrefix.html#BlueDeck_Migrations_removeUserPrefix_Up_
-  commentId: Overload:BlueDeck.Migrations.removeUserPrefix.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.removeUserPrefix.Up
-  nameWithType: removeUserPrefix.Up
-- uid: BlueDeck.Migrations.RoleTypes
-  name: RoleTypes
-  href: api/BlueDeck.Migrations.RoleTypes.html
-  commentId: T:BlueDeck.Migrations.RoleTypes
-  fullName: BlueDeck.Migrations.RoleTypes
-  nameWithType: RoleTypes
-- uid: BlueDeck.Migrations.RoleTypes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  name: BuildTargetModel(ModelBuilder)
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
-  commentId: M:BlueDeck.Migrations.RoleTypes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  fullName: BlueDeck.Migrations.RoleTypes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
-  nameWithType: RoleTypes.BuildTargetModel(ModelBuilder)
-- uid: BlueDeck.Migrations.RoleTypes.BuildTargetModel*
-  name: BuildTargetModel
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_BuildTargetModel_
-  commentId: Overload:BlueDeck.Migrations.RoleTypes.BuildTargetModel
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.RoleTypes.BuildTargetModel
-  nameWithType: RoleTypes.BuildTargetModel
-- uid: BlueDeck.Migrations.RoleTypes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Down(MigrationBuilder)
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.RoleTypes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.RoleTypes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: RoleTypes.Down(MigrationBuilder)
-- uid: BlueDeck.Migrations.RoleTypes.Down*
-  name: Down
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_Down_
-  commentId: Overload:BlueDeck.Migrations.RoleTypes.Down
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.RoleTypes.Down
-  nameWithType: RoleTypes.Down
-- uid: BlueDeck.Migrations.RoleTypes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  name: Up(MigrationBuilder)
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
-  commentId: M:BlueDeck.Migrations.RoleTypes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  fullName: BlueDeck.Migrations.RoleTypes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
-  nameWithType: RoleTypes.Up(MigrationBuilder)
-- uid: BlueDeck.Migrations.RoleTypes.Up*
-  name: Up
-  href: api/BlueDeck.Migrations.RoleTypes.html#BlueDeck_Migrations_RoleTypes_Up_
-  commentId: Overload:BlueDeck.Migrations.RoleTypes.Up
-  isSpec: "True"
-  fullName: BlueDeck.Migrations.RoleTypes.Up
-  nameWithType: RoleTypes.Up
 - uid: BlueDeck.Models
   name: BlueDeck.Models
   href: api/BlueDeck.Models.html
@@ -2647,6 +2445,51 @@ references:
   commentId: N:BlueDeck.Models.APIModels
   fullName: BlueDeck.Models.APIModels
   nameWithType: BlueDeck.Models.APIModels
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult
+  name: AppStatusApiResult
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html
+  commentId: T:BlueDeck.Models.APIModels.AppStatusApiResult
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult
+  nameWithType: AppStatusApiResult
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.#ctor(BlueDeck.Models.AppStatus)
+  name: AppStatusApiResult(AppStatus)
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult__ctor_BlueDeck_Models_AppStatus_
+  commentId: M:BlueDeck.Models.APIModels.AppStatusApiResult.#ctor(BlueDeck.Models.AppStatus)
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusApiResult(BlueDeck.Models.AppStatus)
+  nameWithType: AppStatusApiResult.AppStatusApiResult(AppStatus)
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.#ctor*
+  name: AppStatusApiResult
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult__ctor_
+  commentId: Overload:BlueDeck.Models.APIModels.AppStatusApiResult.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusApiResult
+  nameWithType: AppStatusApiResult.AppStatusApiResult
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId
+  name: AppStatusId
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult_AppStatusId
+  commentId: P:BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId
+  nameWithType: AppStatusApiResult.AppStatusId
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId*
+  name: AppStatusId
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult_AppStatusId_
+  commentId: Overload:BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId
+  nameWithType: AppStatusApiResult.AppStatusId
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.StatusName
+  name: StatusName
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult_StatusName
+  commentId: P:BlueDeck.Models.APIModels.AppStatusApiResult.StatusName
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.StatusName
+  nameWithType: AppStatusApiResult.StatusName
+- uid: BlueDeck.Models.APIModels.AppStatusApiResult.StatusName*
+  name: StatusName
+  href: api/BlueDeck.Models.APIModels.AppStatusApiResult.html#BlueDeck_Models_APIModels_AppStatusApiResult_StatusName_
+  commentId: Overload:BlueDeck.Models.APIModels.AppStatusApiResult.StatusName
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.AppStatusApiResult.StatusName
+  nameWithType: AppStatusApiResult.StatusName
 - uid: BlueDeck.Models.APIModels.ComponentApiResult
   name: ComponentApiResult
   href: api/BlueDeck.Models.APIModels.ComponentApiResult.html
@@ -2737,6 +2580,69 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.ComponentApiResult.Positions
   nameWithType: ComponentApiResult.Positions
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem
+  name: ComponentListApiListItem
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html
+  commentId: T:BlueDeck.Models.APIModels.ComponentListApiListItem
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem
+  nameWithType: ComponentListApiListItem
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor
+  name: ComponentListApiListItem()
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem__ctor
+  commentId: M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentListApiListItem()
+  nameWithType: ComponentListApiListItem.ComponentListApiListItem()
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.APIModels.ComponentListApiListItem)
+  name: ComponentListApiListItem(ComponentListApiListItem)
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem__ctor_BlueDeck_Models_APIModels_ComponentListApiListItem_
+  commentId: M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.APIModels.ComponentListApiListItem)
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Models.APIModels.ComponentListApiListItem)
+  nameWithType: ComponentListApiListItem.ComponentListApiListItem(ComponentListApiListItem)
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Component)
+  name: ComponentListApiListItem(Component)
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem__ctor_BlueDeck_Models_Component_
+  commentId: M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Component)
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Models.Component)
+  nameWithType: ComponentListApiListItem.ComponentListApiListItem(Component)
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Types.ComponentSelectListItem)
+  name: ComponentListApiListItem(ComponentSelectListItem)
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem__ctor_BlueDeck_Models_Types_ComponentSelectListItem_
+  commentId: M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Types.ComponentSelectListItem)
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentListApiListItem(BlueDeck.Models.Types.ComponentSelectListItem)
+  nameWithType: ComponentListApiListItem.ComponentListApiListItem(ComponentSelectListItem)
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor*
+  name: ComponentListApiListItem
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem__ctor_
+  commentId: Overload:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentListApiListItem
+  nameWithType: ComponentListApiListItem.ComponentListApiListItem
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId
+  name: ComponentId
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem_ComponentId
+  commentId: P:BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId
+  nameWithType: ComponentListApiListItem.ComponentId
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId*
+  name: ComponentId
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem_ComponentId_
+  commentId: Overload:BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId
+  nameWithType: ComponentListApiListItem.ComponentId
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.Name
+  name: Name
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem_Name
+  commentId: P:BlueDeck.Models.APIModels.ComponentListApiListItem.Name
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.Name
+  nameWithType: ComponentListApiListItem.Name
+- uid: BlueDeck.Models.APIModels.ComponentListApiListItem.Name*
+  name: Name
+  href: api/BlueDeck.Models.APIModels.ComponentListApiListItem.html#BlueDeck_Models_APIModels_ComponentListApiListItem_Name_
+  commentId: Overload:BlueDeck.Models.APIModels.ComponentListApiListItem.Name
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.ComponentListApiListItem.Name
+  nameWithType: ComponentListApiListItem.Name
 - uid: BlueDeck.Models.APIModels.ContactNumberApiResult
   name: ContactNumberApiResult
   href: api/BlueDeck.Models.APIModels.ContactNumberApiResult.html
@@ -3000,19 +2906,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.GenderApiResult.Abbreviation
   nameWithType: GenderApiResult.Abbreviation
-- uid: BlueDeck.Models.APIModels.GenderApiResult.Name
-  name: Name
-  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_Name
-  commentId: P:BlueDeck.Models.APIModels.GenderApiResult.Name
-  fullName: BlueDeck.Models.APIModels.GenderApiResult.Name
-  nameWithType: GenderApiResult.Name
-- uid: BlueDeck.Models.APIModels.GenderApiResult.Name*
-  name: Name
-  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_Name_
-  commentId: Overload:BlueDeck.Models.APIModels.GenderApiResult.Name
+- uid: BlueDeck.Models.APIModels.GenderApiResult.GenderId
+  name: GenderId
+  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_GenderId
+  commentId: P:BlueDeck.Models.APIModels.GenderApiResult.GenderId
+  fullName: BlueDeck.Models.APIModels.GenderApiResult.GenderId
+  nameWithType: GenderApiResult.GenderId
+- uid: BlueDeck.Models.APIModels.GenderApiResult.GenderId*
+  name: GenderId
+  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_GenderId_
+  commentId: Overload:BlueDeck.Models.APIModels.GenderApiResult.GenderId
   isSpec: "True"
-  fullName: BlueDeck.Models.APIModels.GenderApiResult.Name
-  nameWithType: GenderApiResult.Name
+  fullName: BlueDeck.Models.APIModels.GenderApiResult.GenderId
+  nameWithType: GenderApiResult.GenderId
+- uid: BlueDeck.Models.APIModels.GenderApiResult.GenderName
+  name: GenderName
+  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_GenderName
+  commentId: P:BlueDeck.Models.APIModels.GenderApiResult.GenderName
+  fullName: BlueDeck.Models.APIModels.GenderApiResult.GenderName
+  nameWithType: GenderApiResult.GenderName
+- uid: BlueDeck.Models.APIModels.GenderApiResult.GenderName*
+  name: GenderName
+  href: api/BlueDeck.Models.APIModels.GenderApiResult.html#BlueDeck_Models_APIModels_GenderApiResult_GenderName_
+  commentId: Overload:BlueDeck.Models.APIModels.GenderApiResult.GenderName
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.GenderApiResult.GenderName
+  nameWithType: GenderApiResult.GenderName
 - uid: BlueDeck.Models.APIModels.MemberApiResult
   name: MemberApiResult
   href: api/BlueDeck.Models.APIModels.MemberApiResult.html
@@ -3251,6 +3170,64 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.MemberListAPIListItem.Name
   nameWithType: MemberListAPIListItem.Name
+- uid: BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId
+  name: OrgId
+  href: api/BlueDeck.Models.APIModels.MemberListAPIListItem.html#BlueDeck_Models_APIModels_MemberListAPIListItem_OrgId
+  commentId: P:BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId
+  fullName: BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId
+  nameWithType: MemberListAPIListItem.OrgId
+- uid: BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId*
+  name: OrgId
+  href: api/BlueDeck.Models.APIModels.MemberListAPIListItem.html#BlueDeck_Models_APIModels_MemberListAPIListItem_OrgId_
+  commentId: Overload:BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId
+  nameWithType: MemberListAPIListItem.OrgId
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult
+  name: PhoneNumberTypeApiResult
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html
+  commentId: T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult
+  nameWithType: PhoneNumberTypeApiResult
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor(BlueDeck.Models.PhoneNumberType)
+  name: PhoneNumberTypeApiResult(PhoneNumberType)
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult__ctor_BlueDeck_Models_PhoneNumberType_
+  commentId: M:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor(BlueDeck.Models.PhoneNumberType)
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeApiResult(BlueDeck.Models.PhoneNumberType)
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeApiResult(PhoneNumberType)
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor*
+  name: PhoneNumberTypeApiResult
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult__ctor_
+  commentId: Overload:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeApiResult
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeApiResult
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId
+  name: PhoneNumberTypeId
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult_PhoneNumberTypeId
+  commentId: P:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeId
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId*
+  name: PhoneNumberTypeId
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult_PhoneNumberTypeId_
+  commentId: Overload:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeId
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName
+  name: PhoneNumberTypeName
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult_PhoneNumberTypeName
+  commentId: P:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeName
+- uid: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName*
+  name: PhoneNumberTypeName
+  href: api/BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.html#BlueDeck_Models_APIModels_PhoneNumberTypeApiResult_PhoneNumberTypeName_
+  commentId: Overload:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName
+  nameWithType: PhoneNumberTypeApiResult.PhoneNumberTypeName
 - uid: BlueDeck.Models.APIModels.PositionApiResult
   name: PositionApiResult
   href: api/BlueDeck.Models.APIModels.PositionApiResult.html
@@ -3462,19 +3439,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.RaceApiResult.Abbreviation
   nameWithType: RaceApiResult.Abbreviation
-- uid: BlueDeck.Models.APIModels.RaceApiResult.Name
-  name: Name
-  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_Name
-  commentId: P:BlueDeck.Models.APIModels.RaceApiResult.Name
-  fullName: BlueDeck.Models.APIModels.RaceApiResult.Name
-  nameWithType: RaceApiResult.Name
-- uid: BlueDeck.Models.APIModels.RaceApiResult.Name*
-  name: Name
-  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_Name_
-  commentId: Overload:BlueDeck.Models.APIModels.RaceApiResult.Name
+- uid: BlueDeck.Models.APIModels.RaceApiResult.RaceId
+  name: RaceId
+  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_RaceId
+  commentId: P:BlueDeck.Models.APIModels.RaceApiResult.RaceId
+  fullName: BlueDeck.Models.APIModels.RaceApiResult.RaceId
+  nameWithType: RaceApiResult.RaceId
+- uid: BlueDeck.Models.APIModels.RaceApiResult.RaceId*
+  name: RaceId
+  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_RaceId_
+  commentId: Overload:BlueDeck.Models.APIModels.RaceApiResult.RaceId
   isSpec: "True"
-  fullName: BlueDeck.Models.APIModels.RaceApiResult.Name
-  nameWithType: RaceApiResult.Name
+  fullName: BlueDeck.Models.APIModels.RaceApiResult.RaceId
+  nameWithType: RaceApiResult.RaceId
+- uid: BlueDeck.Models.APIModels.RaceApiResult.RaceName
+  name: RaceName
+  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_RaceName
+  commentId: P:BlueDeck.Models.APIModels.RaceApiResult.RaceName
+  fullName: BlueDeck.Models.APIModels.RaceApiResult.RaceName
+  nameWithType: RaceApiResult.RaceName
+- uid: BlueDeck.Models.APIModels.RaceApiResult.RaceName*
+  name: RaceName
+  href: api/BlueDeck.Models.APIModels.RaceApiResult.html#BlueDeck_Models_APIModels_RaceApiResult_RaceName_
+  commentId: Overload:BlueDeck.Models.APIModels.RaceApiResult.RaceName
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.RaceApiResult.RaceName
+  nameWithType: RaceApiResult.RaceName
 - uid: BlueDeck.Models.APIModels.RankApiResult
   name: RankApiResult
   href: api/BlueDeck.Models.APIModels.RankApiResult.html
@@ -3526,6 +3516,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.RankApiResult.PayGrade
   nameWithType: RankApiResult.PayGrade
+- uid: BlueDeck.Models.APIModels.RankApiResult.RankId
+  name: RankId
+  href: api/BlueDeck.Models.APIModels.RankApiResult.html#BlueDeck_Models_APIModels_RankApiResult_RankId
+  commentId: P:BlueDeck.Models.APIModels.RankApiResult.RankId
+  fullName: BlueDeck.Models.APIModels.RankApiResult.RankId
+  nameWithType: RankApiResult.RankId
+- uid: BlueDeck.Models.APIModels.RankApiResult.RankId*
+  name: RankId
+  href: api/BlueDeck.Models.APIModels.RankApiResult.html#BlueDeck_Models_APIModels_RankApiResult_RankId_
+  commentId: Overload:BlueDeck.Models.APIModels.RankApiResult.RankId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.RankApiResult.RankId
+  nameWithType: RankApiResult.RankId
 - uid: BlueDeck.Models.APIModels.RankApiResult.RankName
   name: RankName
   href: api/BlueDeck.Models.APIModels.RankApiResult.html#BlueDeck_Models_APIModels_RankApiResult_RankName
@@ -3552,6 +3555,51 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.APIModels.RankApiResult.RankShort
   nameWithType: RankApiResult.RankShort
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult
+  name: RoleTypeApiResult
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html
+  commentId: T:BlueDeck.Models.APIModels.RoleTypeApiResult
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult
+  nameWithType: RoleTypeApiResult
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.#ctor(BlueDeck.Models.RoleType)
+  name: RoleTypeApiResult(RoleType)
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult__ctor_BlueDeck_Models_RoleType_
+  commentId: M:BlueDeck.Models.APIModels.RoleTypeApiResult.#ctor(BlueDeck.Models.RoleType)
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeApiResult(BlueDeck.Models.RoleType)
+  nameWithType: RoleTypeApiResult.RoleTypeApiResult(RoleType)
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.#ctor*
+  name: RoleTypeApiResult
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult__ctor_
+  commentId: Overload:BlueDeck.Models.APIModels.RoleTypeApiResult.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeApiResult
+  nameWithType: RoleTypeApiResult.RoleTypeApiResult
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId
+  name: RoleTypeId
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult_RoleTypeId
+  commentId: P:BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId
+  nameWithType: RoleTypeApiResult.RoleTypeId
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId*
+  name: RoleTypeId
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult_RoleTypeId_
+  commentId: Overload:BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeId
+  nameWithType: RoleTypeApiResult.RoleTypeId
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName
+  name: RoleTypeName
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult_RoleTypeName
+  commentId: P:BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName
+  nameWithType: RoleTypeApiResult.RoleTypeName
+- uid: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName*
+  name: RoleTypeName
+  href: api/BlueDeck.Models.APIModels.RoleTypeApiResult.html#BlueDeck_Models_APIModels_RoleTypeApiResult_RoleTypeName_
+  commentId: Overload:BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName
+  isSpec: "True"
+  fullName: BlueDeck.Models.APIModels.RoleTypeApiResult.RoleTypeName
+  nameWithType: RoleTypeApiResult.RoleTypeName
 - uid: BlueDeck.Models.APIModels.SubComponentApiResult
   name: SubComponentApiResult
   href: api/BlueDeck.Models.APIModels.SubComponentApiResult.html
@@ -4504,6 +4552,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ChartableComponentWithMember.Id
   nameWithType: ChartableComponentWithMember.Id
+- uid: BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ChartableComponentWithMember.html#BlueDeck_Models_ChartableComponentWithMember_IsAssistantManager
+  commentId: P:BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager
+  fullName: BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager
+  nameWithType: ChartableComponentWithMember.IsAssistantManager
+- uid: BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager*
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ChartableComponentWithMember.html#BlueDeck_Models_ChartableComponentWithMember_IsAssistantManager_
+  commentId: Overload:BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager
+  isSpec: "True"
+  fullName: BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager
+  nameWithType: ChartableComponentWithMember.IsAssistantManager
 - uid: BlueDeck.Models.ChartableComponentWithMember.MemberId
   name: MemberId
   href: api/BlueDeck.Models.ChartableComponentWithMember.html#BlueDeck_Models_ChartableComponentWithMember_MemberId
@@ -5300,12 +5361,12 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable
   nameWithType: TraditionalRosterGenerator.GenerateComponentTable
-- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
-  name: GenerateComponentTableRow(Member)
-  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTableRow_BlueDeck_Models_Member_
-  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
-  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
-  nameWithType: TraditionalRosterGenerator.GenerateComponentTableRow(Member)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member,System.Boolean)
+  name: GenerateComponentTableRow(Member, Boolean)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTableRow_BlueDeck_Models_Member_System_Boolean_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member,System.Boolean)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member, System.Boolean)
+  nameWithType: TraditionalRosterGenerator.GenerateComponentTableRow(Member, Boolean)
 - uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow*
   name: GenerateComponentTableRow
   href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTableRow_
@@ -5413,6 +5474,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable
   nameWithType: TraditionalRosterGenerator.GenerateLeftJustifiedTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow(BlueDeck.Models.Member,System.Int32)
+  name: GenerateLeftJustifiedTableRow(Member, Int32)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateLeftJustifiedTableRow_BlueDeck_Models_Member_System_Int32_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow(BlueDeck.Models.Member,System.Int32)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow(BlueDeck.Models.Member, System.Int32)
+  nameWithType: TraditionalRosterGenerator.GenerateLeftJustifiedTableRow(Member, Int32)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow*
+  name: GenerateLeftJustifiedTableRow
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateLeftJustifiedTableRow_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTableRow
+  nameWithType: TraditionalRosterGenerator.GenerateLeftJustifiedTableRow
 - uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties
   name: GeneratePageBreakSectionProperties()
   href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GeneratePageBreakSectionProperties
@@ -5823,6 +5897,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.IUnitOfWork.Positions
   nameWithType: IUnitOfWork.Positions
+- uid: BlueDeck.Models.IUnitOfWork.RoleTypes
+  name: RoleTypes
+  href: api/BlueDeck.Models.IUnitOfWork.html#BlueDeck_Models_IUnitOfWork_RoleTypes
+  commentId: P:BlueDeck.Models.IUnitOfWork.RoleTypes
+  fullName: BlueDeck.Models.IUnitOfWork.RoleTypes
+  nameWithType: IUnitOfWork.RoleTypes
+- uid: BlueDeck.Models.IUnitOfWork.RoleTypes*
+  name: RoleTypes
+  href: api/BlueDeck.Models.IUnitOfWork.html#BlueDeck_Models_IUnitOfWork_RoleTypes_
+  commentId: Overload:BlueDeck.Models.IUnitOfWork.RoleTypes
+  isSpec: "True"
+  fullName: BlueDeck.Models.IUnitOfWork.RoleTypes
+  nameWithType: IUnitOfWork.RoleTypes
 - uid: BlueDeck.Models.Member
   name: Member
   href: api/BlueDeck.Models.Member.html
@@ -6076,6 +6163,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Member.IdNumber
   nameWithType: Member.IdNumber
+- uid: BlueDeck.Models.Member.IsComponentAdmin
+  name: IsComponentAdmin()
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_IsComponentAdmin
+  commentId: M:BlueDeck.Models.Member.IsComponentAdmin
+  fullName: BlueDeck.Models.Member.IsComponentAdmin()
+  nameWithType: Member.IsComponentAdmin()
+- uid: BlueDeck.Models.Member.IsComponentAdmin*
+  name: IsComponentAdmin
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_IsComponentAdmin_
+  commentId: Overload:BlueDeck.Models.Member.IsComponentAdmin
+  isSpec: "True"
+  fullName: BlueDeck.Models.Member.IsComponentAdmin
+  nameWithType: Member.IsComponentAdmin
 - uid: BlueDeck.Models.Member.LastModified
   name: LastModified
   href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_LastModified
@@ -6297,6 +6397,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Member.RankId
   nameWithType: Member.RankId
+- uid: BlueDeck.Models.Member.TempPosition
+  name: TempPosition
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_TempPosition
+  commentId: P:BlueDeck.Models.Member.TempPosition
+  fullName: BlueDeck.Models.Member.TempPosition
+  nameWithType: Member.TempPosition
+- uid: BlueDeck.Models.Member.TempPosition*
+  name: TempPosition
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_TempPosition_
+  commentId: Overload:BlueDeck.Models.Member.TempPosition
+  isSpec: "True"
+  fullName: BlueDeck.Models.Member.TempPosition
+  nameWithType: Member.TempPosition
+- uid: BlueDeck.Models.Member.TempPositionId
+  name: TempPositionId
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_TempPositionId
+  commentId: P:BlueDeck.Models.Member.TempPositionId
+  fullName: BlueDeck.Models.Member.TempPositionId
+  nameWithType: Member.TempPositionId
+- uid: BlueDeck.Models.Member.TempPositionId*
+  name: TempPositionId
+  href: api/BlueDeck.Models.Member.html#BlueDeck_Models_Member_TempPositionId_
+  commentId: Overload:BlueDeck.Models.Member.TempPositionId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Member.TempPositionId
+  nameWithType: Member.TempPositionId
 - uid: BlueDeck.Models.PhoneNumberType
   name: PhoneNumberType
   href: api/BlueDeck.Models.PhoneNumberType.html
@@ -6413,6 +6539,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Position.CreatorId
   nameWithType: Position.CreatorId
+- uid: BlueDeck.Models.Position.IsAssistantManager
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.Position.html#BlueDeck_Models_Position_IsAssistantManager
+  commentId: P:BlueDeck.Models.Position.IsAssistantManager
+  fullName: BlueDeck.Models.Position.IsAssistantManager
+  nameWithType: Position.IsAssistantManager
+- uid: BlueDeck.Models.Position.IsAssistantManager*
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.Position.html#BlueDeck_Models_Position_IsAssistantManager_
+  commentId: Overload:BlueDeck.Models.Position.IsAssistantManager
+  isSpec: "True"
+  fullName: BlueDeck.Models.Position.IsAssistantManager
+  nameWithType: Position.IsAssistantManager
 - uid: BlueDeck.Models.Position.IsManager
   name: IsManager
   href: api/BlueDeck.Models.Position.html#BlueDeck_Models_Position_IsManager
@@ -6569,6 +6708,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Position.PositionId
   nameWithType: Position.PositionId
+- uid: BlueDeck.Models.Position.TempMembers
+  name: TempMembers
+  href: api/BlueDeck.Models.Position.html#BlueDeck_Models_Position_TempMembers
+  commentId: P:BlueDeck.Models.Position.TempMembers
+  fullName: BlueDeck.Models.Position.TempMembers
+  nameWithType: Position.TempMembers
+- uid: BlueDeck.Models.Position.TempMembers*
+  name: TempMembers
+  href: api/BlueDeck.Models.Position.html#BlueDeck_Models_Position_TempMembers_
+  commentId: Overload:BlueDeck.Models.Position.TempMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Position.TempMembers
+  nameWithType: Position.TempMembers
 - uid: BlueDeck.Models.Race
   name: Race
   href: api/BlueDeck.Models.Race.html
@@ -6762,6 +6914,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusesWithMemberCount
   nameWithType: IAppStatusRepository.GetAppStatusesWithMemberCount
+- uid: BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  name: GetAppStatusWithMemberCount(Int32)
+  href: api/BlueDeck.Models.Repositories.IAppStatusRepository.html#BlueDeck_Models_Repositories_IAppStatusRepository_GetAppStatusWithMemberCount_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  nameWithType: IAppStatusRepository.GetAppStatusWithMemberCount(Int32)
+- uid: BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount*
+  name: GetAppStatusWithMemberCount
+  href: api/BlueDeck.Models.Repositories.IAppStatusRepository.html#BlueDeck_Models_Repositories_IAppStatusRepository_GetAppStatusWithMemberCount_
+  commentId: Overload:BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount
+  nameWithType: IAppStatusRepository.GetAppStatusWithMemberCount
 - uid: BlueDeck.Models.Repositories.IComponentRepository
   name: IComponentRepository
   href: api/BlueDeck.Models.Repositories.IComponentRepository.html
@@ -7082,6 +7247,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusesWithMemberCount
   nameWithType: IMemberDutyStatusRepository.GetDutyStatusesWithMemberCount
+- uid: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  name: GetDutyStatusWithMemberCount(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.html#BlueDeck_Models_Repositories_IMemberDutyStatusRepository_GetDutyStatusWithMemberCount_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  nameWithType: IMemberDutyStatusRepository.GetDutyStatusWithMemberCount(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount*
+  name: GetDutyStatusWithMemberCount
+  href: api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.html#BlueDeck_Models_Repositories_IMemberDutyStatusRepository_GetDutyStatusWithMemberCount_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount
+  nameWithType: IMemberDutyStatusRepository.GetDutyStatusWithMemberCount
 - uid: BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetMemberDutyStatusSelectListItems
   name: GetMemberDutyStatusSelectListItems()
   href: api/BlueDeck.Models.Repositories.IMemberDutyStatusRepository.html#BlueDeck_Models_Repositories_IMemberDutyStatusRepository_GetMemberDutyStatusSelectListItems
@@ -7140,6 +7318,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberGenderRepository.GetGendersWithMembers
   nameWithType: IMemberGenderRepository.GetGendersWithMembers
+- uid: BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers(System.Int32)
+  name: GetGenderWithMembers(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberGenderRepository.html#BlueDeck_Models_Repositories_IMemberGenderRepository_GetGenderWithMembers_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers(System.Int32)
+  nameWithType: IMemberGenderRepository.GetGenderWithMembers(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers*
+  name: GetGenderWithMembers
+  href: api/BlueDeck.Models.Repositories.IMemberGenderRepository.html#BlueDeck_Models_Repositories_IMemberGenderRepository_GetGenderWithMembers_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers
+  nameWithType: IMemberGenderRepository.GetGenderWithMembers
 - uid: BlueDeck.Models.Repositories.IMemberGenderRepository.GetMemberGenderSelectListItems
   name: GetMemberGenderSelectListItems()
   href: api/BlueDeck.Models.Repositories.IMemberGenderRepository.html#BlueDeck_Models_Repositories_IMemberGenderRepository_GetMemberGenderSelectListItems
@@ -7198,6 +7389,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberRaceRepository.GetRacesWithMembers
   nameWithType: IMemberRaceRepository.GetRacesWithMembers
+- uid: BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers(System.Int32)
+  name: GetRaceWithMembers(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRaceRepository.html#BlueDeck_Models_Repositories_IMemberRaceRepository_GetRaceWithMembers_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers(System.Int32)
+  nameWithType: IMemberRaceRepository.GetRaceWithMembers(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers*
+  name: GetRaceWithMembers
+  href: api/BlueDeck.Models.Repositories.IMemberRaceRepository.html#BlueDeck_Models_Repositories_IMemberRaceRepository_GetRaceWithMembers_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers
+  nameWithType: IMemberRaceRepository.GetRaceWithMembers
 - uid: BlueDeck.Models.Repositories.IMemberRankRepository
   name: IMemberRankRepository
   href: api/BlueDeck.Models.Repositories.IMemberRankRepository.html
@@ -7243,12 +7447,77 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberRankRepository.GetRanksWithMembers
   nameWithType: IMemberRankRepository.GetRanksWithMembers
+- uid: BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers(System.Int32)
+  name: GetRankWithMembers(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRankRepository.html#BlueDeck_Models_Repositories_IMemberRankRepository_GetRankWithMembers_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers(System.Int32)
+  nameWithType: IMemberRankRepository.GetRankWithMembers(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers*
+  name: GetRankWithMembers
+  href: api/BlueDeck.Models.Repositories.IMemberRankRepository.html#BlueDeck_Models_Repositories_IMemberRankRepository_GetRankWithMembers_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers
+  nameWithType: IMemberRankRepository.GetRankWithMembers
 - uid: BlueDeck.Models.Repositories.IMemberRepository
   name: IMemberRepository
   href: api/BlueDeck.Models.Repositories.IMemberRepository.html
   commentId: T:BlueDeck.Models.Repositories.IMemberRepository
   fullName: BlueDeck.Models.Repositories.IMemberRepository
   nameWithType: IMemberRepository
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  name: FindNearestAssistantManagerOrManagerForComponentId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestAssistantManagerOrManagerForComponentId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  nameWithType: IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId*
+  name: FindNearestAssistantManagerOrManagerForComponentId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestAssistantManagerOrManagerForComponentId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+  nameWithType: IMemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  name: FindNearestAssistantManagerOrManagerForMemberId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestAssistantManagerOrManagerForMemberId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  nameWithType: IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId*
+  name: FindNearestAssistantManagerOrManagerForMemberId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestAssistantManagerOrManagerForMemberId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+  nameWithType: IMemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId(System.Int32)
+  name: FindNearestManagerForComponentId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestManagerForComponentId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId(System.Int32)
+  nameWithType: IMemberRepository.FindNearestManagerForComponentId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId*
+  name: FindNearestManagerForComponentId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestManagerForComponentId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForComponentId
+  nameWithType: IMemberRepository.FindNearestManagerForComponentId
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId(System.Int32)
+  name: FindNearestManagerForMemberId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestManagerForMemberId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId(System.Int32)
+  nameWithType: IMemberRepository.FindNearestManagerForMemberId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId*
+  name: FindNearestManagerForMemberId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_FindNearestManagerForMemberId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.FindNearestManagerForMemberId
+  nameWithType: IMemberRepository.FindNearestManagerForMemberId
 - uid: BlueDeck.Models.Repositories.IMemberRepository.GetAdminMemberIndexListViewModel
   name: GetAdminMemberIndexListViewModel()
   href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetAdminMemberIndexListViewModel
@@ -7275,19 +7544,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberRepository.GetAllMemberSelectListItems
   nameWithType: IMemberRepository.GetAllMemberSelectListItems
-- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMember(System.Int32)
-  name: GetApiMember(Int32)
-  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMember_System_Int32_
-  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.GetApiMember(System.Int32)
-  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMember(System.Int32)
-  nameWithType: IMemberRepository.GetApiMember(Int32)
-- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMember*
-  name: GetApiMember
-  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMember_
-  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.GetApiMember
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  name: GetApiMemberByBlueDeckId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMemberByBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  nameWithType: IMemberRepository.GetApiMemberByBlueDeckId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId*
+  name: GetApiMemberByBlueDeckId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMemberByBlueDeckId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId
   isSpec: "True"
-  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMember
-  nameWithType: IMemberRepository.GetApiMember
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByBlueDeckId
+  nameWithType: IMemberRepository.GetApiMemberByBlueDeckId
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId(System.String)
+  name: GetApiMemberByOrgId(String)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMemberByOrgId_System_String_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId(System.String)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId(System.String)
+  nameWithType: IMemberRepository.GetApiMemberByOrgId(String)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId*
+  name: GetApiMemberByOrgId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetApiMemberByOrgId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetApiMemberByOrgId
+  nameWithType: IMemberRepository.GetApiMemberByOrgId
 - uid: BlueDeck.Models.Repositories.IMemberRepository.GetGlobalAdmins
   name: GetGlobalAdmins()
   href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetGlobalAdmins
@@ -7444,6 +7726,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberRepository.GetPendingAccounts
   nameWithType: IMemberRepository.GetPendingAccounts
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  name: GetSubordinateMemberApiMemberForBlueDeckId(Int32)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetSubordinateMemberApiMemberForBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  nameWithType: IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(Int32)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId*
+  name: GetSubordinateMemberApiMemberForBlueDeckId
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_GetSubordinateMemberApiMemberForBlueDeckId_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+  nameWithType: IMemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+- uid: BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole(System.Int32,System.Int32,System.Boolean)
+  name: ReassignMemberAndSetRole(Int32, Int32, Boolean)
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_ReassignMemberAndSetRole_System_Int32_System_Int32_System_Boolean_
+  commentId: M:BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole(System.Int32,System.Int32,System.Boolean)
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole(System.Int32, System.Int32, System.Boolean)
+  nameWithType: IMemberRepository.ReassignMemberAndSetRole(Int32, Int32, Boolean)
+- uid: BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole*
+  name: ReassignMemberAndSetRole
+  href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_ReassignMemberAndSetRole_
+  commentId: Overload:BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IMemberRepository.ReassignMemberAndSetRole
+  nameWithType: IMemberRepository.ReassignMemberAndSetRole
 - uid: BlueDeck.Models.Repositories.IMemberRepository.Remove(System.Int32)
   name: Remove(Int32)
   href: api/BlueDeck.Models.Repositories.IMemberRepository.html#BlueDeck_Models_Repositories_IMemberRepository_Remove_System_Int32_
@@ -7470,6 +7778,12 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IMemberRepository.UpdateMember
   nameWithType: IMemberRepository.UpdateMember
+- uid: BlueDeck.Models.Repositories.IMemberRoleTypeRepository
+  name: IMemberRoleTypeRepository
+  href: api/BlueDeck.Models.Repositories.IMemberRoleTypeRepository.html
+  commentId: T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository
+  fullName: BlueDeck.Models.Repositories.IMemberRoleTypeRepository
+  nameWithType: IMemberRoleTypeRepository
 - uid: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository
   name: IPhoneNumberTypeRepository
   href: api/BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.html
@@ -7502,6 +7816,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers
   nameWithType: IPhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers
+- uid: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  name: GetPhoneNumberTypeWithPhoneNumbers(Int32)
+  href: api/BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.html#BlueDeck_Models_Repositories_IPhoneNumberTypeRepository_GetPhoneNumberTypeWithPhoneNumbers_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  nameWithType: IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(Int32)
+- uid: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers*
+  name: GetPhoneNumberTypeWithPhoneNumbers
+  href: api/BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.html#BlueDeck_Models_Repositories_IPhoneNumberTypeRepository_GetPhoneNumberTypeWithPhoneNumbers_
+  commentId: Overload:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
+  nameWithType: IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
 - uid: BlueDeck.Models.Repositories.IPositionRepository
   name: IPositionRepository
   href: api/BlueDeck.Models.Repositories.IPositionRepository.html
@@ -7793,6 +8120,32 @@ references:
   commentId: T:BlueDeck.Models.Role
   fullName: BlueDeck.Models.Role
   nameWithType: Role
+- uid: BlueDeck.Models.Role.Member
+  name: Member
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_Member
+  commentId: P:BlueDeck.Models.Role.Member
+  fullName: BlueDeck.Models.Role.Member
+  nameWithType: Role.Member
+- uid: BlueDeck.Models.Role.Member*
+  name: Member
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_Member_
+  commentId: Overload:BlueDeck.Models.Role.Member
+  isSpec: "True"
+  fullName: BlueDeck.Models.Role.Member
+  nameWithType: Role.Member
+- uid: BlueDeck.Models.Role.MemberId
+  name: MemberId
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_MemberId
+  commentId: P:BlueDeck.Models.Role.MemberId
+  fullName: BlueDeck.Models.Role.MemberId
+  nameWithType: Role.MemberId
+- uid: BlueDeck.Models.Role.MemberId*
+  name: MemberId
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_MemberId_
+  commentId: Overload:BlueDeck.Models.Role.MemberId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Role.MemberId
+  nameWithType: Role.MemberId
 - uid: BlueDeck.Models.Role.RoleId
   name: RoleId
   href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_RoleId
@@ -7819,12 +8172,38 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Role.RoleType
   nameWithType: Role.RoleType
+- uid: BlueDeck.Models.Role.RoleTypeId
+  name: RoleTypeId
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_RoleTypeId
+  commentId: P:BlueDeck.Models.Role.RoleTypeId
+  fullName: BlueDeck.Models.Role.RoleTypeId
+  nameWithType: Role.RoleTypeId
+- uid: BlueDeck.Models.Role.RoleTypeId*
+  name: RoleTypeId
+  href: api/BlueDeck.Models.Role.html#BlueDeck_Models_Role_RoleTypeId_
+  commentId: Overload:BlueDeck.Models.Role.RoleTypeId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Role.RoleTypeId
+  nameWithType: Role.RoleTypeId
 - uid: BlueDeck.Models.RoleType
   name: RoleType
   href: api/BlueDeck.Models.RoleType.html
   commentId: T:BlueDeck.Models.RoleType
   fullName: BlueDeck.Models.RoleType
   nameWithType: RoleType
+- uid: BlueDeck.Models.RoleType.CurrentRoles
+  name: CurrentRoles
+  href: api/BlueDeck.Models.RoleType.html#BlueDeck_Models_RoleType_CurrentRoles
+  commentId: P:BlueDeck.Models.RoleType.CurrentRoles
+  fullName: BlueDeck.Models.RoleType.CurrentRoles
+  nameWithType: RoleType.CurrentRoles
+- uid: BlueDeck.Models.RoleType.CurrentRoles*
+  name: CurrentRoles
+  href: api/BlueDeck.Models.RoleType.html#BlueDeck_Models_RoleType_CurrentRoles_
+  commentId: Overload:BlueDeck.Models.RoleType.CurrentRoles
+  isSpec: "True"
+  fullName: BlueDeck.Models.RoleType.CurrentRoles
+  nameWithType: RoleType.CurrentRoles
 - uid: BlueDeck.Models.RoleType.RoleTypeId
   name: RoleTypeId
   href: api/BlueDeck.Models.RoleType.html#BlueDeck_Models_RoleType_RoleTypeId
@@ -8975,6 +9354,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
   nameWithType: HomePageComponentGroup.StrengthDisplay
+- uid: BlueDeck.Models.Types.HomePageComponentGroup.TempMembers
+  name: TempMembers
+  href: api/BlueDeck.Models.Types.HomePageComponentGroup.html#BlueDeck_Models_Types_HomePageComponentGroup_TempMembers
+  commentId: P:BlueDeck.Models.Types.HomePageComponentGroup.TempMembers
+  fullName: BlueDeck.Models.Types.HomePageComponentGroup.TempMembers
+  nameWithType: HomePageComponentGroup.TempMembers
+- uid: BlueDeck.Models.Types.HomePageComponentGroup.TempMembers*
+  name: TempMembers
+  href: api/BlueDeck.Models.Types.HomePageComponentGroup.html#BlueDeck_Models_Types_HomePageComponentGroup_TempMembers_
+  commentId: Overload:BlueDeck.Models.Types.HomePageComponentGroup.TempMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageComponentGroup.TempMembers
+  nameWithType: HomePageComponentGroup.TempMembers
 - uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem
   name: HomePageViewModelMemberListItem
   href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html
@@ -9117,6 +9509,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.MemberRankImageUri
   nameWithType: HomePageViewModelMemberListItem.MemberRankImageUri
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId
+  name: ParentComponentId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_ParentComponentId
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId
+  nameWithType: HomePageViewModelMemberListItem.ParentComponentId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId*
+  name: ParentComponentId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_ParentComponentId_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentId
+  nameWithType: HomePageViewModelMemberListItem.ParentComponentId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName
+  name: ParentComponentName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_ParentComponentName
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName
+  nameWithType: HomePageViewModelMemberListItem.ParentComponentName
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName*
+  name: ParentComponentName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_ParentComponentName_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.ParentComponentName
+  nameWithType: HomePageViewModelMemberListItem.ParentComponentName
 - uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.PositionId
   name: PositionId
   href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_PositionId
@@ -9156,6 +9574,58 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.Race
   nameWithType: HomePageViewModelMemberListItem.Race
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId
+  name: TempParentComponentId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempParentComponentId
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId
+  nameWithType: HomePageViewModelMemberListItem.TempParentComponentId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId*
+  name: TempParentComponentId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempParentComponentId_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentId
+  nameWithType: HomePageViewModelMemberListItem.TempParentComponentId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName
+  name: TempParentComponentName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempParentComponentName
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName
+  nameWithType: HomePageViewModelMemberListItem.TempParentComponentName
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName*
+  name: TempParentComponentName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempParentComponentName_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempParentComponentName
+  nameWithType: HomePageViewModelMemberListItem.TempParentComponentName
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId
+  name: TempPositionId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempPositionId
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId
+  nameWithType: HomePageViewModelMemberListItem.TempPositionId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId*
+  name: TempPositionId
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempPositionId_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionId
+  nameWithType: HomePageViewModelMemberListItem.TempPositionId
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName
+  name: TempPositionName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempPositionName
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName
+  nameWithType: HomePageViewModelMemberListItem.TempPositionName
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName*
+  name: TempPositionName
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_TempPositionName_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.TempPositionName
+  nameWithType: HomePageViewModelMemberListItem.TempPositionName
 - uid: BlueDeck.Models.Types.MappedField
   name: MappedField
   href: api/BlueDeck.Models.Types.MappedField.html
@@ -9965,6 +10435,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.PositionLineupItem.PositionLineupItem
   nameWithType: PositionLineupItem.PositionLineupItem
+- uid: BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.Types.PositionLineupItem.html#BlueDeck_Models_Types_PositionLineupItem_IsAssistantManager
+  commentId: P:BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager
+  fullName: BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager
+  nameWithType: PositionLineupItem.IsAssistantManager
+- uid: BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager*
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.Types.PositionLineupItem.html#BlueDeck_Models_Types_PositionLineupItem_IsAssistantManager_
+  commentId: Overload:BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.PositionLineupItem.IsAssistantManager
+  nameWithType: PositionLineupItem.IsAssistantManager
 - uid: BlueDeck.Models.Types.PositionLineupItem.IsManager
   name: IsManager
   href: api/BlueDeck.Models.Types.PositionLineupItem.html#BlueDeck_Models_Types_PositionLineupItem_IsManager
@@ -10205,6 +10688,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.ComponentList
   nameWithType: AddPositionToComponentViewComponentViewModel.ComponentList
+- uid: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html#BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_IsAssistantManager
+  commentId: P:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager
+  fullName: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager
+  nameWithType: AddPositionToComponentViewComponentViewModel.IsAssistantManager
+- uid: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager*
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html#BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_IsAssistantManager_
+  commentId: Overload:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsAssistantManager
+  nameWithType: AddPositionToComponentViewComponentViewModel.IsAssistantManager
 - uid: BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.IsManager
   name: IsManager
   href: api/BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.html#BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_IsManager
@@ -10894,6 +11390,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.SelectedComponentId
   nameWithType: AssignMemberModalViewComponentViewModel.SelectedComponentId
+- uid: BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment
+  name: TemporaryAssignment
+  href: api/BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.html#BlueDeck_Models_ViewModels_AssignMemberModalViewComponentViewModel_TemporaryAssignment
+  commentId: P:BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment
+  fullName: BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment
+  nameWithType: AssignMemberModalViewComponentViewModel.TemporaryAssignment
+- uid: BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment*
+  name: TemporaryAssignment
+  href: api/BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.html#BlueDeck_Models_ViewModels_AssignMemberModalViewComponentViewModel_TemporaryAssignment_
+  commentId: Overload:BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.TemporaryAssignment
+  nameWithType: AssignMemberModalViewComponentViewModel.TemporaryAssignment
 - uid: BlueDeck.Models.ViewModels.AssignMemberToPositionViewModel
   name: AssignMemberToPositionViewModel
   href: api/BlueDeck.Models.ViewModels.AssignMemberToPositionViewModel.html
@@ -11663,6 +12172,38 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.MainNavMenuViewModel.NavLinks
   nameWithType: MainNavMenuViewModel.NavLinks
+- uid: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute
+  name: ManageOrAssistantNotBothAttribute
+  href: api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html
+  commentId: T:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute
+  fullName: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute
+  nameWithType: ManageOrAssistantNotBothAttribute
+- uid: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.#ctor(System.String)
+  name: ManageOrAssistantNotBothAttribute(String)
+  href: api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html#BlueDeck_Models_ViewModels_ManageOrAssistantNotBothAttribute__ctor_System_String_
+  commentId: M:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.#ctor(System.String)
+  fullName: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.ManageOrAssistantNotBothAttribute(System.String)
+  nameWithType: ManageOrAssistantNotBothAttribute.ManageOrAssistantNotBothAttribute(String)
+- uid: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.#ctor*
+  name: ManageOrAssistantNotBothAttribute
+  href: api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html#BlueDeck_Models_ViewModels_ManageOrAssistantNotBothAttribute__ctor_
+  commentId: Overload:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.ManageOrAssistantNotBothAttribute
+  nameWithType: ManageOrAssistantNotBothAttribute.ManageOrAssistantNotBothAttribute
+- uid: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)
+  name: IsValid(Object, ValidationContext)
+  href: api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html#BlueDeck_Models_ViewModels_ManageOrAssistantNotBothAttribute_IsValid_System_Object_System_ComponentModel_DataAnnotations_ValidationContext_
+  commentId: M:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)
+  fullName: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid(System.Object, System.ComponentModel.DataAnnotations.ValidationContext)
+  nameWithType: ManageOrAssistantNotBothAttribute.IsValid(Object, ValidationContext)
+- uid: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid*
+  name: IsValid
+  href: api/BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.html#BlueDeck_Models_ViewModels_ManageOrAssistantNotBothAttribute_IsValid_
+  commentId: Overload:BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ManageOrAssistantNotBothAttribute.IsValid
+  nameWithType: ManageOrAssistantNotBothAttribute.IsValid
 - uid: BlueDeck.Models.ViewModels.MemberAddEditViewModel
   name: MemberAddEditViewModel
   href: api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html
@@ -12103,6 +12644,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.MemberAddEditViewModel.RankList
   nameWithType: MemberAddEditViewModel.RankList
+- uid: BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId
+  name: TempPositionId
+  href: api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html#BlueDeck_Models_ViewModels_MemberAddEditViewModel_TempPositionId
+  commentId: P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId
+  fullName: BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId
+  nameWithType: MemberAddEditViewModel.TempPositionId
+- uid: BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId*
+  name: TempPositionId
+  href: api/BlueDeck.Models.ViewModels.MemberAddEditViewModel.html#BlueDeck_Models_ViewModels_MemberAddEditViewModel_TempPositionId_
+  commentId: Overload:BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.MemberAddEditViewModel.TempPositionId
+  nameWithType: MemberAddEditViewModel.TempPositionId
 - uid: BlueDeck.Models.ViewModels.MemberContactNumberViewComponentViewModel
   name: MemberContactNumberViewComponentViewModel
   href: api/BlueDeck.Models.ViewModels.MemberContactNumberViewComponentViewModel.html
@@ -12669,6 +13223,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.CurrentMembers
   nameWithType: PositionWithComponentListViewModel.CurrentMembers
+- uid: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.html#BlueDeck_Models_ViewModels_PositionWithComponentListViewModel_IsAssistantManager
+  commentId: P:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager
+  fullName: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager
+  nameWithType: PositionWithComponentListViewModel.IsAssistantManager
+- uid: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager*
+  name: IsAssistantManager
+  href: api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.html#BlueDeck_Models_ViewModels_PositionWithComponentListViewModel_IsAssistantManager_
+  commentId: Overload:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsAssistantManager
+  nameWithType: PositionWithComponentListViewModel.IsAssistantManager
 - uid: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.IsManager
   name: IsManager
   href: api/BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.html#BlueDeck_Models_ViewModels_PositionWithComponentListViewModel_IsManager
@@ -12799,6 +13366,38 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.PositionWithComponentListViewModel.PositionName
   nameWithType: PositionWithComponentListViewModel.PositionName
+- uid: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute
+  name: PrimaryAndTempPositionNotEqualAttribute
+  href: api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html
+  commentId: T:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute
+  fullName: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute
+  nameWithType: PrimaryAndTempPositionNotEqualAttribute
+- uid: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.#ctor(System.String)
+  name: PrimaryAndTempPositionNotEqualAttribute(String)
+  href: api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html#BlueDeck_Models_ViewModels_PrimaryAndTempPositionNotEqualAttribute__ctor_System_String_
+  commentId: M:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.#ctor(System.String)
+  fullName: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.PrimaryAndTempPositionNotEqualAttribute(System.String)
+  nameWithType: PrimaryAndTempPositionNotEqualAttribute.PrimaryAndTempPositionNotEqualAttribute(String)
+- uid: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.#ctor*
+  name: PrimaryAndTempPositionNotEqualAttribute
+  href: api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html#BlueDeck_Models_ViewModels_PrimaryAndTempPositionNotEqualAttribute__ctor_
+  commentId: Overload:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.PrimaryAndTempPositionNotEqualAttribute
+  nameWithType: PrimaryAndTempPositionNotEqualAttribute.PrimaryAndTempPositionNotEqualAttribute
+- uid: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)
+  name: IsValid(Object, ValidationContext)
+  href: api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html#BlueDeck_Models_ViewModels_PrimaryAndTempPositionNotEqualAttribute_IsValid_System_Object_System_ComponentModel_DataAnnotations_ValidationContext_
+  commentId: M:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid(System.Object,System.ComponentModel.DataAnnotations.ValidationContext)
+  fullName: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid(System.Object, System.ComponentModel.DataAnnotations.ValidationContext)
+  nameWithType: PrimaryAndTempPositionNotEqualAttribute.IsValid(Object, ValidationContext)
+- uid: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid*
+  name: IsValid
+  href: api/BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.html#BlueDeck_Models_ViewModels_PrimaryAndTempPositionNotEqualAttribute_IsValid_
+  commentId: Overload:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.IsValid
+  nameWithType: PrimaryAndTempPositionNotEqualAttribute.IsValid
 - uid: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel
   name: ReassignEmployeeModalViewComponentViewModel
   href: api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html
@@ -12827,6 +13426,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.ReassignEmployeeModalViewComponentViewModel
   nameWithType: ReassignEmployeeModalViewComponentViewModel.ReassignEmployeeModalViewComponentViewModel
+- uid: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY
+  name: IsTDY
+  href: api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html#BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_IsTDY
+  commentId: P:BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY
+  fullName: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY
+  nameWithType: ReassignEmployeeModalViewComponentViewModel.IsTDY
+- uid: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY*
+  name: IsTDY
+  href: api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html#BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_IsTDY_
+  commentId: Overload:BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.IsTDY
+  nameWithType: ReassignEmployeeModalViewComponentViewModel.IsTDY
 - uid: BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.Member
   name: Member
   href: api/BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel.html#BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_Member
@@ -13042,6 +13654,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusesWithMemberCount
   nameWithType: AppStatusRepository.GetAppStatusesWithMemberCount
+- uid: BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  name: GetAppStatusWithMemberCount(Int32)
+  href: api/BlueDeck.Persistence.Repositories.AppStatusRepository.html#BlueDeck_Persistence_Repositories_AppStatusRepository_GetAppStatusWithMemberCount_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount(System.Int32)
+  nameWithType: AppStatusRepository.GetAppStatusWithMemberCount(Int32)
+- uid: BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount*
+  name: GetAppStatusWithMemberCount
+  href: api/BlueDeck.Persistence.Repositories.AppStatusRepository.html#BlueDeck_Persistence_Repositories_AppStatusRepository_GetAppStatusWithMemberCount_
+  commentId: Overload:BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount
+  nameWithType: AppStatusRepository.GetAppStatusWithMemberCount
 - uid: BlueDeck.Persistence.Repositories.ComponentRepository
   name: ComponentRepository
   href: api/BlueDeck.Persistence.Repositories.ComponentRepository.html
@@ -13440,6 +14065,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusesWithMemberCount
   nameWithType: MemberDutyStatusRepository.GetDutyStatusesWithMemberCount
+- uid: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  name: GetDutyStatusWithMemberCount(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html#BlueDeck_Persistence_Repositories_MemberDutyStatusRepository_GetDutyStatusWithMemberCount_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)
+  nameWithType: MemberDutyStatusRepository.GetDutyStatusWithMemberCount(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount*
+  name: GetDutyStatusWithMemberCount
+  href: api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html#BlueDeck_Persistence_Repositories_MemberDutyStatusRepository_GetDutyStatusWithMemberCount_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount
+  nameWithType: MemberDutyStatusRepository.GetDutyStatusWithMemberCount
 - uid: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetMemberDutyStatusSelectListItems
   name: GetMemberDutyStatusSelectListItems()
   href: api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html#BlueDeck_Persistence_Repositories_MemberDutyStatusRepository_GetMemberDutyStatusSelectListItems
@@ -13466,6 +14104,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetStatusById
   nameWithType: MemberDutyStatusRepository.GetStatusById
+- uid: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove(System.Int32)
+  name: Remove(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html#BlueDeck_Persistence_Repositories_MemberDutyStatusRepository_Remove_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove(System.Int32)
+  nameWithType: MemberDutyStatusRepository.Remove(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove*
+  name: Remove
+  href: api/BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.html#BlueDeck_Persistence_Repositories_MemberDutyStatusRepository_Remove_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove
+  nameWithType: MemberDutyStatusRepository.Remove
 - uid: BlueDeck.Persistence.Repositories.MemberGenderRepository
   name: MemberGenderRepository
   href: api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html
@@ -13524,6 +14175,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGendersWithMembers
   nameWithType: MemberGenderRepository.GetGendersWithMembers
+- uid: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers(System.Int32)
+  name: GetGenderWithMembers(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html#BlueDeck_Persistence_Repositories_MemberGenderRepository_GetGenderWithMembers_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers(System.Int32)
+  nameWithType: MemberGenderRepository.GetGenderWithMembers(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers*
+  name: GetGenderWithMembers
+  href: api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html#BlueDeck_Persistence_Repositories_MemberGenderRepository_GetGenderWithMembers_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers
+  nameWithType: MemberGenderRepository.GetGenderWithMembers
 - uid: BlueDeck.Persistence.Repositories.MemberGenderRepository.GetMemberGenderSelectListItems
   name: GetMemberGenderSelectListItems()
   href: api/BlueDeck.Persistence.Repositories.MemberGenderRepository.html#BlueDeck_Persistence_Repositories_MemberGenderRepository_GetMemberGenderSelectListItems
@@ -13608,6 +14272,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRacesWithMembers
   nameWithType: MemberRaceRepository.GetRacesWithMembers
+- uid: BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers(System.Int32)
+  name: GetRaceWithMembers(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRaceRepository.html#BlueDeck_Persistence_Repositories_MemberRaceRepository_GetRaceWithMembers_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers(System.Int32)
+  nameWithType: MemberRaceRepository.GetRaceWithMembers(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers*
+  name: GetRaceWithMembers
+  href: api/BlueDeck.Persistence.Repositories.MemberRaceRepository.html#BlueDeck_Persistence_Repositories_MemberRaceRepository_GetRaceWithMembers_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers
+  nameWithType: MemberRaceRepository.GetRaceWithMembers
 - uid: BlueDeck.Persistence.Repositories.MemberRankRepository
   name: MemberRankRepository
   href: api/BlueDeck.Persistence.Repositories.MemberRankRepository.html
@@ -13679,6 +14356,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRankRepository.GetRanksWithMembers
   nameWithType: MemberRankRepository.GetRanksWithMembers
+- uid: BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers(System.Int32)
+  name: GetRankWithMembers(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRankRepository.html#BlueDeck_Persistence_Repositories_MemberRankRepository_GetRankWithMembers_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers(System.Int32)
+  nameWithType: MemberRankRepository.GetRankWithMembers(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers*
+  name: GetRankWithMembers
+  href: api/BlueDeck.Persistence.Repositories.MemberRankRepository.html#BlueDeck_Persistence_Repositories_MemberRankRepository_GetRankWithMembers_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers
+  nameWithType: MemberRankRepository.GetRankWithMembers
 - uid: BlueDeck.Persistence.Repositories.MemberRepository
   name: MemberRepository
   href: api/BlueDeck.Persistence.Repositories.MemberRepository.html
@@ -13711,6 +14401,58 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRepository.ApplicationDbContext
   nameWithType: MemberRepository.ApplicationDbContext
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  name: FindNearestAssistantManagerOrManagerForComponentId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestAssistantManagerOrManagerForComponentId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId(System.Int32)
+  nameWithType: MemberRepository.FindNearestAssistantManagerOrManagerForComponentId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId*
+  name: FindNearestAssistantManagerOrManagerForComponentId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestAssistantManagerOrManagerForComponentId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+  nameWithType: MemberRepository.FindNearestAssistantManagerOrManagerForComponentId
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  name: FindNearestAssistantManagerOrManagerForMemberId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestAssistantManagerOrManagerForMemberId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId(System.Int32)
+  nameWithType: MemberRepository.FindNearestAssistantManagerOrManagerForMemberId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId*
+  name: FindNearestAssistantManagerOrManagerForMemberId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestAssistantManagerOrManagerForMemberId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+  nameWithType: MemberRepository.FindNearestAssistantManagerOrManagerForMemberId
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId(System.Int32)
+  name: FindNearestManagerForComponentId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestManagerForComponentId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId(System.Int32)
+  nameWithType: MemberRepository.FindNearestManagerForComponentId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId*
+  name: FindNearestManagerForComponentId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestManagerForComponentId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForComponentId
+  nameWithType: MemberRepository.FindNearestManagerForComponentId
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId(System.Int32)
+  name: FindNearestManagerForMemberId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestManagerForMemberId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId(System.Int32)
+  nameWithType: MemberRepository.FindNearestManagerForMemberId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId*
+  name: FindNearestManagerForMemberId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_FindNearestManagerForMemberId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.FindNearestManagerForMemberId
+  nameWithType: MemberRepository.FindNearestManagerForMemberId
 - uid: BlueDeck.Persistence.Repositories.MemberRepository.GetAdminMemberIndexListViewModel
   name: GetAdminMemberIndexListViewModel()
   href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetAdminMemberIndexListViewModel
@@ -13737,19 +14479,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetAllMemberSelectListItems
   nameWithType: MemberRepository.GetAllMemberSelectListItems
-- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember(System.Int32)
-  name: GetApiMember(Int32)
-  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMember_System_Int32_
-  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember(System.Int32)
-  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember(System.Int32)
-  nameWithType: MemberRepository.GetApiMember(Int32)
-- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember*
-  name: GetApiMember
-  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMember_
-  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  name: GetApiMemberByBlueDeckId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMemberByBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId(System.Int32)
+  nameWithType: MemberRepository.GetApiMemberByBlueDeckId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId*
+  name: GetApiMemberByBlueDeckId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMemberByBlueDeckId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId
   isSpec: "True"
-  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMember
-  nameWithType: MemberRepository.GetApiMember
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByBlueDeckId
+  nameWithType: MemberRepository.GetApiMemberByBlueDeckId
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId(System.String)
+  name: GetApiMemberByOrgId(String)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMemberByOrgId_System_String_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId(System.String)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId(System.String)
+  nameWithType: MemberRepository.GetApiMemberByOrgId(String)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId*
+  name: GetApiMemberByOrgId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetApiMemberByOrgId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetApiMemberByOrgId
+  nameWithType: MemberRepository.GetApiMemberByOrgId
 - uid: BlueDeck.Persistence.Repositories.MemberRepository.GetGlobalAdmins
   name: GetGlobalAdmins()
   href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetGlobalAdmins
@@ -13919,6 +14674,32 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetPendingAccounts
   nameWithType: MemberRepository.GetPendingAccounts
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  name: GetSubordinateMemberApiMemberForBlueDeckId(Int32)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetSubordinateMemberApiMemberForBlueDeckId_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(System.Int32)
+  nameWithType: MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId(Int32)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId*
+  name: GetSubordinateMemberApiMemberForBlueDeckId
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_GetSubordinateMemberApiMemberForBlueDeckId_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+  nameWithType: MemberRepository.GetSubordinateMemberApiMemberForBlueDeckId
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole(System.Int32,System.Int32,System.Boolean)
+  name: ReassignMemberAndSetRole(Int32, Int32, Boolean)
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_ReassignMemberAndSetRole_System_Int32_System_Int32_System_Boolean_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole(System.Int32,System.Int32,System.Boolean)
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole(System.Int32, System.Int32, System.Boolean)
+  nameWithType: MemberRepository.ReassignMemberAndSetRole(Int32, Int32, Boolean)
+- uid: BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole*
+  name: ReassignMemberAndSetRole
+  href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_ReassignMemberAndSetRole_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole
+  nameWithType: MemberRepository.ReassignMemberAndSetRole
 - uid: BlueDeck.Persistence.Repositories.MemberRepository.Remove(System.Int32)
   name: Remove(Int32)
   href: api/BlueDeck.Persistence.Repositories.MemberRepository.html#BlueDeck_Persistence_Repositories_MemberRepository_Remove_System_Int32_
@@ -13945,6 +14726,38 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.MemberRepository.UpdateMember
   nameWithType: MemberRepository.UpdateMember
+- uid: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository
+  name: MemberRoleTypeRepository
+  href: api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html
+  commentId: T:BlueDeck.Persistence.Repositories.MemberRoleTypeRepository
+  fullName: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository
+  nameWithType: MemberRoleTypeRepository
+- uid: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.#ctor(BlueDeck.Models.ApplicationDbContext)
+  name: MemberRoleTypeRepository(ApplicationDbContext)
+  href: api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html#BlueDeck_Persistence_Repositories_MemberRoleTypeRepository__ctor_BlueDeck_Models_ApplicationDbContext_
+  commentId: M:BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.#ctor(BlueDeck.Models.ApplicationDbContext)
+  fullName: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.MemberRoleTypeRepository(BlueDeck.Models.ApplicationDbContext)
+  nameWithType: MemberRoleTypeRepository.MemberRoleTypeRepository(ApplicationDbContext)
+- uid: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.#ctor*
+  name: MemberRoleTypeRepository
+  href: api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html#BlueDeck_Persistence_Repositories_MemberRoleTypeRepository__ctor_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.MemberRoleTypeRepository
+  nameWithType: MemberRoleTypeRepository.MemberRoleTypeRepository
+- uid: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext
+  name: ApplicationDbContext
+  href: api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html#BlueDeck_Persistence_Repositories_MemberRoleTypeRepository_ApplicationDbContext
+  commentId: P:BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext
+  fullName: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext
+  nameWithType: MemberRoleTypeRepository.ApplicationDbContext
+- uid: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext*
+  name: ApplicationDbContext
+  href: api/BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.html#BlueDeck_Persistence_Repositories_MemberRoleTypeRepository_ApplicationDbContext_
+  commentId: Overload:BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.MemberRoleTypeRepository.ApplicationDbContext
+  nameWithType: MemberRoleTypeRepository.ApplicationDbContext
 - uid: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository
   name: PhoneNumberTypeRepository
   href: api/BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.html
@@ -14003,6 +14816,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers
   nameWithType: PhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers
+- uid: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  name: GetPhoneNumberTypeWithPhoneNumbers(Int32)
+  href: api/BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.html#BlueDeck_Persistence_Repositories_PhoneNumberTypeRepository_GetPhoneNumberTypeWithPhoneNumbers_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)
+  nameWithType: PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(Int32)
+- uid: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers*
+  name: GetPhoneNumberTypeWithPhoneNumbers
+  href: api/BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.html#BlueDeck_Persistence_Repositories_PhoneNumberTypeRepository_GetPhoneNumberTypeWithPhoneNumbers_
+  commentId: Overload:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
+  nameWithType: PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers
 - uid: BlueDeck.Persistence.Repositories.PositionRepository
   name: PositionRepository
   href: api/BlueDeck.Persistence.Repositories.PositionRepository.html
@@ -14514,6 +15340,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.UnitOfWork.Positions
   nameWithType: UnitOfWork.Positions
+- uid: BlueDeck.Persistence.UnitOfWork.RoleTypes
+  name: RoleTypes
+  href: api/BlueDeck.Persistence.UnitOfWork.html#BlueDeck_Persistence_UnitOfWork_RoleTypes
+  commentId: P:BlueDeck.Persistence.UnitOfWork.RoleTypes
+  fullName: BlueDeck.Persistence.UnitOfWork.RoleTypes
+  nameWithType: UnitOfWork.RoleTypes
+- uid: BlueDeck.Persistence.UnitOfWork.RoleTypes*
+  name: RoleTypes
+  href: api/BlueDeck.Persistence.UnitOfWork.html#BlueDeck_Persistence_UnitOfWork_RoleTypes_
+  commentId: Overload:BlueDeck.Persistence.UnitOfWork.RoleTypes
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.UnitOfWork.RoleTypes
+  nameWithType: UnitOfWork.RoleTypes
 - uid: BlueDeck.Program
   name: Program
   href: api/BlueDeck.Program.html

@@ -15,7 +15,7 @@ namespace BlueDeck.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -165,6 +165,8 @@ namespace BlueDeck.Migrations
 
                     b.Property<int>("RankId");
 
+                    b.Property<int?>("TempPositionId");
+
                     b.HasKey("MemberId");
 
                     b.HasIndex("AppStatusId");
@@ -182,6 +184,8 @@ namespace BlueDeck.Migrations
                     b.HasIndex("RaceId");
 
                     b.HasIndex("RankId");
+
+                    b.HasIndex("TempPositionId");
 
                     b.ToTable("Members");
                 });
@@ -210,6 +214,8 @@ namespace BlueDeck.Migrations
                     b.Property<DateTime>("CreatedDate");
 
                     b.Property<int?>("CreatorId");
+
+                    b.Property<bool>("IsAssistantManager");
 
                     b.Property<bool>("IsManager");
 
@@ -282,9 +288,9 @@ namespace BlueDeck.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MemberId");
+                    b.Property<int>("MemberId");
 
-                    b.Property<int?>("RoleTypeId");
+                    b.Property<int>("RoleTypeId");
 
                     b.HasKey("RoleId");
 
@@ -373,6 +379,10 @@ namespace BlueDeck.Migrations
                         .WithMany("Members")
                         .HasForeignKey("RankId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BlueDeck.Models.Position", "TempPosition")
+                        .WithMany("TempMembers")
+                        .HasForeignKey("TempPositionId");
                 });
 
             modelBuilder.Entity("BlueDeck.Models.Position", b =>
@@ -393,13 +403,15 @@ namespace BlueDeck.Migrations
 
             modelBuilder.Entity("BlueDeck.Models.Role", b =>
                 {
-                    b.HasOne("BlueDeck.Models.Member")
+                    b.HasOne("BlueDeck.Models.Member", "Member")
                         .WithMany("CurrentRoles")
-                        .HasForeignKey("MemberId");
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BlueDeck.Models.RoleType", "RoleType")
-                        .WithMany()
-                        .HasForeignKey("RoleTypeId");
+                        .WithMany("CurrentRoles")
+                        .HasForeignKey("RoleTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

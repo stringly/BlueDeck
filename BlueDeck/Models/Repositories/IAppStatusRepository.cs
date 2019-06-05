@@ -7,6 +7,7 @@ namespace BlueDeck.Models.Repositories
     {
         List<ApplicationStatusSelectListItem> GetApplicationStatusSelectListItems();
         List<AppStatus> GetAppStatusesWithMemberCount();
+        AppStatus GetAppStatusWithMemberCount(int id);
     }
 }
 

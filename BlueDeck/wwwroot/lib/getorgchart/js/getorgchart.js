@@ -2605,7 +2605,8 @@ getOrgChart.util._3 = function (a) {
     var c = b.indexOf(a);
     b.splice(c, 1);
     var d = Math.floor((Math.random() * 16) + 1);
-    return b[d]
+    //return b[d]
+    return 'lightblue'
 };
 getOrgChart.util._al = function (b, a) {
     var c = b.parent;

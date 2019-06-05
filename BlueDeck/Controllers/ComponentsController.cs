@@ -8,33 +8,37 @@ using BlueDeck.Models;
 using BlueDeck.Models.Types;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using BlueDeck.Models.Auth;
 
 namespace BlueDeck.Controllers
 {
     /// <summary>
     /// Controller for Component CRUD actions
     /// </summary>
-    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ComponentsController : Controller
     {
         private IUnitOfWork unitOfWork;
+        /// <summary>
+        /// Property that determines the page length of List views returned from this controller.
+        /// </summary>
         public int PageSize = 25;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsController"/> class.
+        /// Initializes a new instance of the <see cref="ComponentsController"/> class.
         /// </summary>
-        /// <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit"><see cref="IUnitOfWork"/>.</param>
         public ComponentsController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
         /// <summary>
-        /// GET: Components
+        /// Retrieves a List view showing all <see cref="Component"/> entities in the database.
         /// </summary>
         /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.ComponentIndexListViewModel"/>
+        /// This View requires an <see cref="IEnumerable{ComponentIndexListViewModel}"/> objects.
         /// </remarks>
         /// <permission>
         /// Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
@@ -42,7 +46,8 @@ namespace BlueDeck.Controllers
         /// </permission>
         /// <param name="sortOrder">The sort order.</param>
         /// <param name="searchString">The search string.</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="page">An integer to handle pagination. The default value for this parameter is 1.</param>
+        /// <returns>An <see cref="IActionResult"/></returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("Components/Index")]
@@ -92,10 +97,11 @@ namespace BlueDeck.Controllers
         /// GET: Components/Details/5.
         /// </summary>
         /// <param name="id">The identifier for a Component.</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="returnUrl">An optional URI to allow redirects.</param>
+        /// <returns>An <see cref="IActionResult"/></returns>
         [AllowAnonymous]
         [HttpGet]
-        [Route("Components/Details")]
+        [Route("Components/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -112,11 +118,15 @@ namespace BlueDeck.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(component);
         }
-        
+
         /// <summary>
-        /// GET: Component/Create.
+        /// Returns a view that allows the creation of a new <see cref="Component"/>
         /// </summary>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// The Components/Create view depends on the <see cref="ComponentWithComponentListViewModel"/> view model.
+        /// </remarks>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [Authorize("CanEditComponent")]
         [HttpGet]
         [Route("Components/Create")]
@@ -150,10 +160,11 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// POST: Components/Create.
+        /// Creates a <see cref="Component"/> from the POSTed form.
         /// </summary>
-        /// <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="form">The form data, which will be bound to a <see cref="ComponentWithComponentListViewModel"/>.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Components/Create")]
@@ -208,10 +219,15 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// Components/Edit/5
+        /// Retrieves the View that allows a user to Edit an existing <see cref="Component"/> entity.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// This view depends on the <see cref="ComponentWithComponentListViewModel"/> view model.
+        /// This method is protected by the <see cref="CanEditComponentRequirement"/>
+        /// </remarks>
+        /// <param name="id">The identity of the <see cref="Component"/> to edit.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize("CanEditComponent")]
         [Route("Components/Edit/{id:int}")]
@@ -250,11 +266,12 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// POST: Components/Edit/5
+        /// Handles POSTed form data to edit an existing <see cref="Component"/>.
         /// </summary>
-        /// <param name="id">The ComponentId for the <see cref="T:BlueDeck.Models.Component"/> being edited</param>
-        /// <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="id">The identity of the <see cref="Component"/> being editied.</param>
+        /// <param name="form">The form data, which will be bound to a <see cref="ComponentWithComponentListViewModel"/> object.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Components/Edit/{id:int}")]
@@ -367,10 +384,14 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// GET: Components/Delete/5
+        /// Deletes the <see cref="Component"/> with the specified identifier.
         /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// This method is protected by the <see cref="CanEditComponentRequirement"/>
+        /// </remarks>
+        /// <param name="id">The identity of the <see cref="Component"/> to delete.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [Authorize("CanEditComponent")]
         [HttpGet]
         [Route("Components/Delete/{id:int}")]
@@ -407,12 +428,14 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// POST: Components/Delete/5
+        /// Deletes the <see cref="Component"/> with the provided id.
         /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="id">The identity of the <see cref="Component"/> to delete.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Components/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Components.RemoveComponent(id);
@@ -426,16 +449,17 @@ namespace BlueDeck.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        /// <summary>
-        /// Determines if a Component exists with the provided ComponentId .
-        /// </summary>
-        /// <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/></param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
         private bool ComponentExists(int id)
         {
             return (unitOfWork.Components.Find(e => e.ComponentId == id) != null);
         }
 
+        /// <summary>
+        /// Gets the component lineup view component.
+        /// </summary>
+        /// <param name="parentComponentId">The parent component identifier.</param>
+        /// <param name="componentBeingEditedId">The component being edited identifier.</param>
+        /// <returns></returns>
         public IActionResult GetComponentLineupViewComponent(int parentComponentId, int componentBeingEditedId = 0)
         {
             // the Ajax request will sent the ComponentId of the desired Parent Component when a component is being created

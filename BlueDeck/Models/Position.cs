@@ -69,6 +69,16 @@ namespace BlueDeck.Models {
         [Display(Name = "Manager")]
         public bool IsManager { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this Position is an assistant manager.
+        /// A Component can have exactly one position designated as an assistant manager.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance is an assistant manager of it's Parent Component.; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "Assistant Manager")]
+        public bool IsAssistantManager { get; set; }
+
         [Display(Name = "Call Sign")]
         public string Callsign { get; set; }
 
@@ -107,6 +117,15 @@ namespace BlueDeck.Models {
         public virtual List<Member> Members { get; set; }
 
         /// <summary>
+        /// Gets or sets the temporary members.
+        /// </summary>
+        /// <value>
+        /// A collection of Member Entities that represents members assigned to this Position temporarily
+        /// </value>
+        [Display(Name = "Temporary Members")]
+        public virtual List<Member> TempMembers { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Position"/> class.
         /// <remarks>
         /// Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
@@ -115,6 +134,7 @@ namespace BlueDeck.Models {
         public Position()
         {
             Members = new List<Member>();
+            TempMembers = new List<Member>();
         }      
 
 

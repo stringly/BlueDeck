@@ -1,7 +1,5 @@
 ﻿@model AdminIndexViewModel
 
-<h3>Admin Index Page</h3>
-<hr />
 
 @if (ViewBag.Status == "Warning!")
 {
@@ -21,42 +19,12 @@ else if (ViewBag.Status == "Success!")
         </div>
     </div>
 }
-<h4>Global Administrators</h4>
 <div class="table-responsive">
-    <table class="table table-condensed">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                BlueDeckId
-            </th>
-            <th>
-                Email
-            </th>
-        </tr>
-        @foreach (Member m in Model.GlobalAdmins)
-        {
-            <tr>
-                <td>
-                    @m.GetTitleName()
-                </td>
-                <td>
-                    @m.MemberId
-                </td>
-                <td>
-                    @m.Email
-                </td>
-            </tr>
-        }
-    </table>
-</div>
-
-<h4>Pending Registration Requests</h4>
-<div class="table-responsive">
-    @if (Model.PendingAccounts.Count() > 0)
-    {
-        <table class="table table-condensed">
+    <table class="table indexTable table-condensed">
+        <caption>
+            Global Administrators
+        </caption>
+        <thead>
             <tr>
                 <th>
                     Name
@@ -67,12 +35,10 @@ else if (ViewBag.Status == "Success!")
                 <th>
                     Email
                 </th>
-                <th>
-                    Request Date
-                </th>
-                <th></th>
             </tr>
-            @foreach (Member m in Model.PendingAccounts)
+        </thead>
+        <tbody>
+            @foreach (Member m in Model.GlobalAdmins)
             {
                 <tr>
                     <td>
@@ -84,19 +50,62 @@ else if (ViewBag.Status == "Success!")
                     <td>
                         @m.Email
                     </td>
-                    <td>
-                        @m.LastModified
-                    </td>
-                    <td>
-                        <a asp-action="RegisterUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Activate" class="glyphicon-ring-green">
-                            <span class="glyphicon glyphicon-ok glyphicon-bordered"></span>
-                        </a>
-                        <a asp-action="DenyUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Edit Member" class="glyphicon-ring-red">
-                            <span class="glyphicon glyphicon-remove glyphicon-bordered"></span>
-                        </a>
-                    </td>
                 </tr>
             }
+        </tbody>
+    </table>
+</div>
+<div class="table-responsive">
+    @if (Model.PendingAccounts.Count() > 0)
+    {
+        <table class="table indexTable table-condensed">
+            <caption>
+                Pending Registration Requests
+            </caption>
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        BlueDeckId
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Request Date
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Member m in Model.PendingAccounts)
+                {
+                    <tr>
+                        <td>
+                            @m.GetTitleName()
+                        </td>
+                        <td>
+                            @m.MemberId
+                        </td>
+                        <td>
+                            @m.Email
+                        </td>
+                        <td>
+                            @m.LastModified
+                        </td>
+                        <td>
+                            <a asp-action="RegisterUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Activate" class="glyphicon-ring-green">
+                                <span class="glyphicon glyphicon-ok glyphicon-bordered"></span>
+                            </a>
+                            <a asp-action="DenyUser" asp-controller="Admin" asp-route-id="@m.MemberId" asp-route-returnUrl="/Admin/Index" title="Edit Member" class="glyphicon-ring-red">
+                                <span class="glyphicon glyphicon-remove glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     }
     else
@@ -107,6 +116,7 @@ else if (ViewBag.Status == "Success!")
     }
 </div>
 <hr />
+</div>
 
 <script>
     // close any alert after 3 seconds

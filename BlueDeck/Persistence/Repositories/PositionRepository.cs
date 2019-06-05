@@ -51,15 +51,17 @@ namespace BlueDeck.Persistence.Repositories
         }
 
         public List<PositionSelectListItem> GetAllPositionSelectListItems(){
-            return GetAll().ToList().ConvertAll(x => new PositionSelectListItem(x));
+            return ApplicationDbContext.Positions.Include(x => x.ParentComponent).ToList().ConvertAll(x => new PositionSelectListItem(x));
+            //return GetAll().ToList().ConvertAll(x => new PositionSelectListItem(x));
         }
 
         public IEnumerable<PositionSelectListItem> GetUnoccupiedAndNonUniquePositionSelectListItems()
         {
             return ApplicationDbContext.Positions
+                        .Include(x => x.ParentComponent)
                         .Include(x => x.Members)
                         .Where(x => x.IsUnique == false || x.Members.Count() == 0).ToList()
-                        .ConvertAll(x => new PositionSelectListItem { PositionId = x.PositionId, PositionName = x.Name});
+                        .ConvertAll(x => new PositionSelectListItem(x));
         }
        
         public Position GetPositionAndAllCurrentMembers(int positionId)
@@ -237,6 +239,7 @@ namespace BlueDeck.Persistence.Repositories
 
                 // Finally, update the Position with the new values
                 positionToUpdate.IsManager = p.IsManager;
+                positionToUpdate.IsAssistantManager = p.IsAssistantManager;
                 positionToUpdate.IsUnique = p.IsUnique;
                 positionToUpdate.JobTitle = p.JobTitle;
                 positionToUpdate.LineupPosition = p.LineupPosition;

@@ -36,7 +36,14 @@ namespace BlueDeck.Models.Repositories
         List<MemberSelectListItem> GetMembersUserCanEdit(int parentComponentId);
         List<Member> GetGlobalAdmins();
         List<Member> GetPendingAccounts();
-        Task<MemberApiResult> GetApiMember(int id);
+        void ReassignMemberAndSetRole(int MemberToReassignId, int newPositionId, bool IsTDY = false);
+        Task<MemberApiResult> GetApiMemberByBlueDeckId(int id);
+        Task<MemberApiResult> GetApiMemberByOrgId(string id);
+        Task<Member> FindNearestManagerForComponentId(int _componentId);
+        Task<Member> FindNearestAssistantManagerOrManagerForComponentId(int _componentId);
+        Task<Member> FindNearestManagerForMemberId(int memberid);
+        Task<Member> FindNearestAssistantManagerOrManagerForMemberId(int memberid);
+        Task<List<MemberListAPIListItem>> GetSubordinateMemberApiMemberForBlueDeckId(int id);
         IEnumerable<RoleType> GetMemberRoles();
     }
 }

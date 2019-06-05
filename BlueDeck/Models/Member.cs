@@ -132,6 +132,12 @@ namespace BlueDeck.Models {
         [Display(Name = "Last Modified By")]
         public virtual Member LastModifiedBy { get; set; }
 
+        /// <summary>
+        /// Gets or sets the position identifier.
+        /// </summary>
+        /// <value>
+        /// The position identifier.
+        /// </value>
         public int PositionId { get; set; }
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
@@ -142,23 +148,45 @@ namespace BlueDeck.Models {
         [Display(Name = "Current Assignment")]
         [ForeignKey("PositionId")]
         public Position Position { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the temporary <see cref="Position"/> position identifier.
+        /// </summary>
+        /// <remarks>
+        /// A member can be assigned a Temporary (TDY) position, which allows them to be included in the roster
+        /// (but not demographic or staffing) calculations of a second position while preserving their primary position.
+        /// </remarks>
+        /// <value>
+        /// The temporary position identifier.
+        /// </value>
+        public int? TempPositionId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the temporary duty position.
+        /// </summary>
+        /// <value>
+        /// The temporary duty position.
+        /// </value>
+        [Display(Name = "TDY Assignment")]
+        [ForeignKey("TempPositionId")]
+        public Position TempPosition {get;set;}
+
+
         [Display(Name = "Contact Numbers")]
-        public ICollection<ContactNumber> PhoneNumbers { get; set; }
+        public ICollection<ContactNumber> PhoneNumbers { get; set; } = new List<ContactNumber>();
 
         [Display(Name = "Current Roles")]
-        public virtual ICollection<Role> CurrentRoles { get; set; }
+        public virtual ICollection<Role> CurrentRoles { get; set; } = new List<Role>();
 
-        public virtual ICollection<Member> CreatedMembers { get; set; }
-        public virtual ICollection<Position> CreatedPositions { get; set; }
-        public virtual ICollection<Component> CreatedComponents { get; set; }
-        public virtual ICollection<Member> LastModifiedMembers { get; set; }
-        public virtual ICollection<Position> LastModifiedPositions { get; set; }
-        public virtual ICollection<Component> LastModifiedComponents { get; set; }
+        public virtual ICollection<Member> CreatedMembers { get; set; } = new List<Member>();
+        public virtual ICollection<Position> CreatedPositions { get; set; } = new List<Position>();
+        public virtual ICollection<Component> CreatedComponents { get; set; } = new List<Component>();
+        public virtual ICollection<Member> LastModifiedMembers { get; set; } = new List<Member>();
+        public virtual ICollection<Position> LastModifiedPositions { get; set; } = new List<Position>();
+        public virtual ICollection<Component> LastModifiedComponents { get; set; } = new List<Component>();
 
         public Member()
-        {
-            PhoneNumbers = new List<ContactNumber>();
+        {            
         }
         /// <summary>
         /// Gets the formal title form of the Member's name and rank.
@@ -192,8 +220,24 @@ namespace BlueDeck.Models {
         /// Gets the Member's name in "LastName, FirstName" format.
         /// </summary>
         /// <returns>A <see cref="string"/> with the Member's "LastName, FirstName"</returns>
-        public string GetLastNameFirstName() => $"{this.LastName}, {this.FirstName}";
-                
+        public string GetLastNameFirstName()
+        {
+            if (!String.IsNullOrEmpty(FirstName) && !String.IsNullOrEmpty(LastName))
+            {
+                return $"{this.LastName}, {this.FirstName}";
+            }
+            else
+            {
+                return "";
+            }
+            
+        }    
+
+        public bool IsComponentAdmin()
+        {
+            return CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin");
+        }
+
     }
 }
 

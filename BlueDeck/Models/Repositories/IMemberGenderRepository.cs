@@ -18,7 +18,23 @@ namespace BlueDeck.Models.Repositories
         /// </remarks>
         /// <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberGenderSelectListItem}"/></returns>
         List<MemberGenderSelectListItem> GetMemberGenderSelectListItems();
+        /// <summary>
+        /// Gets a list of all <see cref="Gender"/> with members.
+        /// </summary>
+        /// <returns>A <see cref="List{Gender}"/> containing all current <see cref="Gender"/></returns>
         List<Gender> GetGendersWithMembers();
+        /// <summary>
+        /// Gets a <see cref="Gender"/> with it's current <see cref="Member"/>s.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Gender"/>.</param>
+        /// <returns>A <see cref="Gender"/></returns>
+        Gender GetGenderWithMembers(int id);
+
+        /// <summary>
+        /// Gets the gender by identifier.
+        /// </summary>
+        /// <param name="memberGenderId">The <see cref="Gender"/> identifier.</param>
+        /// <returns>A <see cref="Gender"/></returns>
         Gender GetGenderById(int memberGenderId);
     }
 }

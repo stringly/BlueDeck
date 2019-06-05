@@ -121,6 +121,16 @@ namespace BlueDeck.Models.ViewModels
         public int? PositionId { get; set; }
 
         /// <summary>
+        /// Gets or sets the Position identifier for the Member's Temporary Position.
+        /// </summary>
+        /// <value>
+        /// The position identifier for the member's Temporary (TDY) position.
+        /// </value>
+        [Display(Name = "TDY Assignment")]
+        [PrimaryAndTempPositionNotEqual("PositionId", ErrorMessage = "Temporary Assignment cannot be the same as primary assignment.")]
+        public int? TempPositionId { get; set; }
+
+        /// <summary>
         /// Gets or sets the display name.
         /// </summary>
         /// <value>
@@ -256,6 +266,7 @@ namespace BlueDeck.Models.ViewModels
             DutyStatusId = _member?.DutyStatus?.DutyStatusId;
             Email = _member.Email;
             PositionId = _member?.Position?.PositionId;
+            TempPositionId = _member?.TempPositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
             ContactNumbers = _member?.PhoneNumbers.ToList() ?? new List<ContactNumber>();
@@ -313,6 +324,7 @@ namespace BlueDeck.Models.ViewModels
             DutyStatusId = _member?.DutyStatus?.DutyStatusId;
             Email = _member.Email;
             PositionId = _member?.Position?.PositionId;
+            TempPositionId = _member?.TempPositionId;
             MemberGender = _member?.Gender?.GenderId;
             MemberRace = _member?.Race?.MemberRaceId;
             ContactNumbers = _member?.PhoneNumbers.ToList() ?? new List<ContactNumber>();
@@ -337,5 +349,37 @@ namespace BlueDeck.Models.ViewModels
            
         }
 
+    }
+    public class PrimaryAndTempPositionNotEqualAttribute : ValidationAttribute
+    {
+        private readonly string _comparisonProperty;
+
+        public PrimaryAndTempPositionNotEqualAttribute(string comparisonProperty)
+        {
+             _comparisonProperty = comparisonProperty;
+        }
+
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value == null)
+            {
+                return ValidationResult.Success;
+            }
+
+            ErrorMessage = ErrorMessageString;            
+            var currentValue = (int)value;
+
+            var property = validationContext.ObjectType.GetProperty(_comparisonProperty);
+
+            if (property == null)
+                throw new ArgumentException("Property with this name not found");
+
+            var comparisonValue = (int)property.GetValue(validationContext.ObjectInstance);
+
+            if (currentValue == comparisonValue)
+                return new ValidationResult(ErrorMessage);
+
+            return ValidationResult.Success;
+        }
     }
 }

@@ -13,6 +13,8 @@ namespace BlueDeck.Models.ViewModels
         public int PositionId { get; set; }
         public int MemberId { get; set; }
         public int SelectedComponentId { get; set; }
+        [Display(Name = "Assign Temporarily (TDY)")]
+        public bool IsTDY { get; set; }
 
         public ReassignEmployeeModalViewComponentViewModel()
         {

@@ -78,7 +78,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <form asp-action="Delete">
+                        <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
                             <input type="hidden" asp-for="PositionId" />
                             <a asp-action="Index" class="btn btn-primary">Cancel</a>
                             <a asp-action="Edit" asp-route-id="@Model.PositionId" class="btn btn-default">Edit</a>

@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that handles Web API requests for the <see cref="Component"/> entity.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.ControllerBase" />
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -18,6 +22,10 @@ namespace BlueDeck.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComponentsApiController"/> class.
+        /// </summary>
+        /// <param name="unit">The injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public ComponentsApiController(IUnitOfWork unit)
         {
             unitOfWork = unit;

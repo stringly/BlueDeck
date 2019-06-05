@@ -22,6 +22,8 @@
                         @Html.HiddenFor(model => model.IsComponentAdmin)
                         @Html.HiddenFor(model => model.IsGlobalAdmin)
                         @Html.HiddenFor(model => model.LDAPName)
+                        @Html.HiddenFor(model => model.PositionId)
+                        @Html.HiddenFor(model => model.TempPositionId)
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-3 form-group">
@@ -99,7 +101,7 @@
                                                 "Number Type",
                                                 new { @class = "phoneNumberTypeList form-control" })
 
-                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control phoneNumber" />
                                         <span class="input-group-btn deleteNumber" data-contactid="@i">
                                             <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
                                         </span>
@@ -112,7 +114,7 @@
                                     @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
                                             new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
                                             new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
-                                    <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                                    <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control phoneNumber" />
                                     <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
                                     <span class="input-group-btn deleteNumber" style="visibility:hidden;">
                                         <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>

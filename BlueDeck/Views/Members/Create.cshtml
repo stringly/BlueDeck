@@ -91,6 +91,14 @@
                                                             new { @class = "form-control" })
                             <span asp-validation-for="DutyStatusId" class="text-danger"></span>
                         </div>
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="TempPositionId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.TempPositionId,
+                                                            new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                            "Assign to Temp Position",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="TempPositionId" class="text-danger"></span>
+                        </div>
                     </div>
                     <hr />
                     <div class="row">
@@ -112,7 +120,7 @@
                                                 "Number Type",
                                                 new { @class = "phoneNumberTypeList form-control" })
 
-                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control" />
+                                        <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control phoneNumber" />
                                         <span class="input-group-btn deleteNumber" data-contactid="@i">
                                             <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
                                         </span>
@@ -125,7 +133,7 @@
                                 @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
                                         new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
                                         new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
-                                <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control" />
+                                <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control phoneNumber" />
                                 <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
                                 <span class="input-group-btn deleteNumber" style="visibility:hidden;">
                                     <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
@@ -210,8 +218,24 @@
                 }
             }
         });
+        var phoneInputs = document.querySelectorAll(".phoneNumber");
+        [].forEach.call(phoneInputs, function (elem) {
+            elem.addEventListener("keydown", phoneMask, false);
+        });
     })
-
+    function phoneMask(e) {
+        if (e.which != 8 && e.which != 0 && ((e.which < 48 || e.which > 57) && (e.which < 96 || e.which > 105))) {
+            return false;
+        }
+        var curchr = this.value.length;
+        var curval = $(this).val();
+        if (curchr == 3 && e.which != 8 && e.which != 0) {
+            $(this).val(curval + "-");
+        } else if (curchr == 7 && e.which != 8 && e.which != 0) {
+            $(this).val(curval + "-");
+        }
+        $(this).attr('maxlength', '12');
+    }
     function handleAddPhoneNumberClick(e) {
         var currentContactCount = parseInt($("#contactsCount").val()) + 1;
         var target = document.getElementById('newPhoneTarget');
@@ -238,6 +262,8 @@
         var newInput = document.createElement("input");
         newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
         newInput.classList.add("form-control");
+        newInput.classList.add("phoneNumber");
+        newInput.addEventListener("keydown", phoneMask, false);
 
         // create the span delete button wrapper span
         // this will be added to the previous text input

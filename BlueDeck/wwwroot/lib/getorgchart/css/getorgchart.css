@@ -600,10 +600,11 @@
         stop-color: #5DB2FF
     }
 
-    .get-lightblue .get-box, g.get-lightblue .get-box {
-        fill: #5DB2FF;
-        stroke: #0073D8
-    }
+.get-lightblue .get-box, g.get-lightblue .get-box {
+    /*fill: #5DB2FF;*/
+    fill: #007acc;
+    stroke: #0073D8
+}
 
     .get-blue.get-org-chart {
         /*background-color: #dfe3ee;*/

@@ -30,5 +30,10 @@ namespace BlueDeck.Persistence.Repositories
         {
             return ApplicationDbContext.ApplicationStatuses.Include(x => x.Members).ToList();
         }
+
+        public AppStatus GetAppStatusWithMemberCount(int id)
+        {
+            return ApplicationDbContext.ApplicationStatuses.Include(x => x.Members).First(x => x.AppStatusId == id);
+        }
     }
 }

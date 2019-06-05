@@ -73,7 +73,8 @@
   
   <h1 id="BlueDeck_Controllers_RaceController" data-uid="BlueDeck.Controllers.RaceController" class="text-break">Class RaceController
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Controller that handles CRUD actions for the <a class="xref" href="BlueDeck.Models.Race.html">Race</a> entity.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -680,14 +681,15 @@ public class RaceController : Controller, IActionFilter, IAsyncActionFilter, IFi
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L16">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L24">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController__ctor_" data-uid="BlueDeck.Controllers.RaceController.#ctor*"></a>
   <h4 id="BlueDeck_Controllers_RaceController__ctor_BlueDeck_Models_IUnitOfWork_" data-uid="BlueDeck.Controllers.RaceController.#ctor(BlueDeck.Models.IUnitOfWork)">RaceController(IUnitOfWork)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="BlueDeck.Controllers.RaceController.html">RaceController</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -706,7 +708,8 @@ public class RaceController : Controller, IActionFilter, IAsyncActionFilter, IFi
       <tr>
         <td><a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a></td>
         <td><span class="parametername">unit</span></td>
-        <td></td>
+        <td><p>The injected <a class="xref" href="BlueDeck.Models.IUnitOfWork.html">IUnitOfWork</a> obtained from the services middleware.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -714,19 +717,21 @@ public class RaceController : Controller, IActionFilter, IAsyncActionFilter, IFi
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Create_BlueDeck_Models_Race_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Race%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Create_BlueDeck_Models_Race_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Race%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L55">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L96">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Create_" data-uid="BlueDeck.Controllers.RaceController.Create*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Create_BlueDeck_Models_Race_System_String_" data-uid="BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Race,System.String)">Create(Race, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Race/Create</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;Race/Create&quot;)]
 public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFullName,Abbreviation&quot;})] Race race, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -742,12 +747,14 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
       <tr>
         <td><a class="xref" href="BlueDeck.Models.Race.html">Race</a></td>
         <td><span class="parametername">race</span></td>
-        <td></td>
+        <td><p>The POSTed form data, bound to <a class="xref" href="BlueDeck.Models.Race.html">Race</a></p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -766,20 +773,26 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RaceController_Create_BlueDeck_Models_Race_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Creates a new <a class="xref" href="BlueDeck.Models.Race.html">Race</a> from the POSTed form data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Create_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Create(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L46">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L79">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Create_" data-uid="BlueDeck.Controllers.RaceController.Create*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Create_System_String_" data-uid="BlueDeck.Controllers.RaceController.Create(System.String)">Create(String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Race/Create</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Create(string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Race/Create&quot;)]
+public IActionResult Create(string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -794,7 +807,8 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -813,20 +827,26 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RaceController_Create_System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves a view that allows a user to create a new <a class="xref" href="BlueDeck.Models.Race.html">Race</a></p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Delete_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Delete(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L140">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L202">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Delete_" data-uid="BlueDeck.Controllers.RaceController.Delete*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Delete_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RaceController.Delete(System.Nullable{System.Int32},System.String)">Delete(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Race/Delete/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Delete(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Race/Delete/{id:int}&quot;)]
+public IActionResult Delete(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -841,12 +861,14 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Race.html">Race</a> to delete.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -867,20 +889,22 @@ public IActionResult Create([Bind(new string[]{&quot;MemberRaceId,MemberRaceFull
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_DeleteConfirmed_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.DeleteConfirmed(System.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L157">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L224">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_DeleteConfirmed_" data-uid="BlueDeck.Controllers.RaceController.DeleteConfirmed*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_DeleteConfirmed_System_Int32_System_String_" data-uid="BlueDeck.Controllers.RaceController.DeleteConfirmed(System.Int32,System.String)">DeleteConfirmed(Int32, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Race/Delete/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ActionName(&quot;Delete&quot;)]
 [ValidateAntiForgeryToken]
+[Route(&quot;Race/Delete/{id:int}&quot;)]
 public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -896,12 +920,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Race.html">Race</a> being deleted.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -922,18 +948,21 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Details_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Details(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L28">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L52">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Details_" data-uid="BlueDeck.Controllers.RaceController.Details*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Details_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RaceController.Details(System.Nullable{System.Int32},System.String)">Details(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Race/Details/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Details(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Race/Details/{id:int}&quot;)]
+public IActionResult Details(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -948,12 +977,14 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Race.html">Race</a>.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -972,21 +1003,26 @@ public IActionResult DeleteConfirmed(int id, string returnUrl)</code></pre>
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RaceController_Details_System_Nullable_System_Int32__System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves a view that shows details for a <a class="xref" href="BlueDeck.Models.Race.html">Race</a></p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Edit_System_Int32_BlueDeck_Models_Race_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Edit(System.Int32%2CBlueDeck.Models.Race%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Edit_System_Int32_BlueDeck_Models_Race_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Edit(System.Int32%2CBlueDeck.Models.Race%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L98">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L154">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Edit_" data-uid="BlueDeck.Controllers.RaceController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Edit_System_Int32_BlueDeck_Models_Race_System_String_" data-uid="BlueDeck.Controllers.RaceController.Edit(System.Int32,BlueDeck.Models.Race,System.String)">Edit(Int32, Race, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>POST: Race/Edit/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
 [ValidateAntiForgeryToken]
+[Route(&quot;Race/Edit/{id:int}&quot;)]
 public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRaceFullName,Abbreviation&quot;})] Race race, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1002,17 +1038,20 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier of the <a class="xref" href="BlueDeck.Models.Race.html">Race</a> being edited.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="BlueDeck.Models.Race.html">Race</a></td>
         <td><span class="parametername">race</span></td>
-        <td></td>
+        <td><p>The POSTed form data, bound to a <a class="xref" href="BlueDeck.Models.Race.html">Race</a> object.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1033,18 +1072,21 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Edit_System_Nullable_System_Int32__System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Edit(System.Nullable%7BSystem.Int32%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L79">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L129">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Edit_" data-uid="BlueDeck.Controllers.RaceController.Edit*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Edit_System_Nullable_System_Int32__System_String_" data-uid="BlueDeck.Controllers.RaceController.Edit(System.Nullable{System.Int32},System.String)">Edit(Nullable&lt;Int32&gt;, String)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Race/Edit/5</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Edit(int? id, string returnUrl)</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Race/Edit/{id:int}&quot;)]
+public IActionResult Edit(int? id, string returnUrl)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1059,12 +1101,14 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>The identifier if the <a class="xref" href="BlueDeck.Models.Race.html">Race</a> being edited.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">returnUrl</span></td>
-        <td></td>
+        <td><p>An optional return URL.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1083,20 +1127,26 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RaceController_Edit_System_Nullable_System_Int32__System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves a view that allows a user to edit a <a class="xref" href="BlueDeck.Models.Race.html">Race</a> entity.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController_Index.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController.Index%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L22">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L36">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RaceController_Index_" data-uid="BlueDeck.Controllers.RaceController.Index*"></a>
   <h4 id="BlueDeck_Controllers_RaceController_Index" data-uid="BlueDeck.Controllers.RaceController.Index">Index()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>GET: Race/Index</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IActionResult Index()</code></pre>
+    <pre><code class="lang-csharp hljs">[HttpGet]
+[Route(&quot;Race/Index&quot;)]
+public IActionResult Index()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1113,6 +1163,9 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
       </tr>
     </tbody>
   </table>
+  <h5 id="BlueDeck_Controllers_RaceController_Index_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Retrieves a view that lists all <a class="xref" href="BlueDeck.Models.Race.html">Race</a> entities in the database.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">Microsoft.AspNetCore.Mvc.Filters.IActionFilter</span>
@@ -1126,6 +1179,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
   <div>
       <span class="xref">System.IDisposable</span>
   </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><span class="xref">Microsoft.AspNetCore.Mvc.Controller</span></div>
+  </div>
 </article>
           </div>
           
@@ -1134,10 +1191,10 @@ public IActionResult Edit(int id, [Bind(new string[]{&quot;MemberRaceId,MemberRa
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RaceController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RaceController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RaceController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RaceController.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RaceController.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

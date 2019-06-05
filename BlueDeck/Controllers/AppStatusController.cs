@@ -7,24 +7,44 @@ using BlueDeck.Models;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Handles Create, Read, Update, and Delete functionality for the Application Status Enumeration.
+    /// </summary>
+    /// <seealso cref="Controller" />
     [Authorize("IsGlobalAdmin")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AppStatusController : Controller
     {
         private IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AppStatusController"/> class.
+        /// </summary>
+        /// <param name="unit">The Injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public AppStatusController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
-        // GET: AppStatus
+        /// <summary>
+        /// Returns a view that lists all <see cref="AppStatus"/> in the database.
+        /// </summary>
+        /// <returns>The Views/Admin/Index <see cref="ViewResult"/></returns>
+        [HttpGet]
+        [Route("AppStatus/Index")]
         public IActionResult Index()
         {
             return View(unitOfWork.AppStatuses.GetAll());
         }
 
-        // GET: AppStatus/Details/5
+        /// <summary>
+        /// Shows details for a specific <see cref="AppStatus"/>
+        /// </summary>
+        /// <param name="id">The AppStatusId of the <see cref="AppStatus"/>.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("AppStatus/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -42,18 +62,28 @@ namespace BlueDeck.Controllers
             return View(appStatus);
         }
 
-        // GET: AppStatus/Create
+        /// <summary>
+        /// Returns a <see cref="ViewResult"/> that allows creation of a new <see cref="AppStatus"/>.
+        /// </summary>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("AppStatus/Create")]
         public IActionResult Create(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        // POST: AppStatus/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified application status.
+        /// </summary>
+        /// <param name="appStatus">The application status.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("AppStatus/Create")]
         public IActionResult Create([Bind("AppStatusId,StatusName")] AppStatus appStatus, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -75,7 +105,14 @@ namespace BlueDeck.Controllers
             return View(appStatus);
         }
 
-        // GET: AppStatus/Edit/5
+        /// <summary>
+        /// Edits the <see cref="AppStatus"/> with specified identifier.
+        /// </summary>
+        /// <param name="id">The AppStatusId of the <see cref="AppStatus"/> to edit.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("AppStatus/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -92,11 +129,16 @@ namespace BlueDeck.Controllers
             return View(appStatus);
         }
 
-        // POST: AppStatus/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the <see cref="AppStatus"/> with the given AppStatusId.
+        /// </summary>
+        /// <param name="id">The identifier of the AppStatus.</param>
+        /// <param name="appStatus">A POSTed form that binds to a <see cref="AppStatus"/>.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("AppStatus/Edit/{id:int}")]
         public IActionResult Edit(int id, [Bind("AppStatusId,StatusName")] AppStatus appStatus, string returnUrl)
         {
             if (id != appStatus.AppStatusId)
@@ -135,36 +177,56 @@ namespace BlueDeck.Controllers
             return View(appStatus);
         }
 
-        // GET: AppStatus/Delete/5
+        /// <summary>
+        /// Deletes the <see cref="AppStatus"/> with specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="AppStatus"/> to delete.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns>The Views/AppStatus/Delete <see cref="ViewResult"/></returns>
+        [HttpGet]
+        [Route("AppStatus/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var appStatus = unitOfWork.AppStatuses.Find(m => m.AppStatusId == id).FirstOrDefault();
-            if (appStatus == null)
+            if (AppStatusExists(id))
             {
+                ViewBag.ReturnUrl = returnUrl;
+                return View(unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id));
+            }
+            else {
                 return NotFound();
             }
-            ViewBag.ReturnUrl = returnUrl;
-            return View(appStatus);
         }
 
-        // POST: AppStatus/Delete/5
+        /// <summary>
+        /// Confirms the deletion of an <see cref="AppStatus"/>.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="AppStatus"/>.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("AppStatus/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
-            AppStatus toRemove = unitOfWork.AppStatuses.Find(x => x.AppStatusId == id).FirstOrDefault();
-            if (toRemove != null)
+            AppStatus toRemove = unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id);
+            if (toRemove != null && toRemove.Members.Count() == 0)
             {
                 unitOfWork.AppStatuses.Remove(toRemove);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Status successfully deleted.";
-            }            
+            }
+            else
+            {
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You cannot delete an Application Status with active Members.";
+                ViewBag.ReturnUrl = returnUrl;
+                return View(unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id));
+            }
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);

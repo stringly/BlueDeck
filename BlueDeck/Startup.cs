@@ -8,8 +8,6 @@ using BlueDeck.Persistence;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using BlueDeck.Models.Auth;
-using Microsoft.AspNetCore.Server.IISIntegration;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Reflection;
 using System;
 using System.IO;
@@ -41,7 +39,8 @@ namespace BlueDeck
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
-            
+            // The following line enables Application Insights telemetry collection.
+            services.AddApplicationInsightsTelemetry();
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
@@ -99,8 +98,13 @@ namespace BlueDeck
         /// <param name="app">An <see cref="IApplicationBuilder"/> object.</param>
         /// <param name="env">An <see cref="IHostingEnvironment"/> object.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error/500");
             }
             app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
             app.UseAuthentication();
@@ -116,9 +120,6 @@ namespace BlueDeck
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}");
-                //routes.MapRoute(
-                //    name: "Edit Member Route",
-                //    template: "{controller=Members}/{action=Index}/{id}/{returnUrl}");
             });
         }
     }

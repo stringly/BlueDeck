@@ -1,25 +1,27 @@
 ﻿@model AdminMemberIndexListViewModel
 
 
-<form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Members" />
-            <div class="input-group-btn">
-                <button class="btn btn-search-addon" type="submit">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
+<div class="container">
+    <form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" name="SearchString" style="z-index:0;" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Members" />
+                <div class="input-group-btn">
+                    <button class="btn btn-search-addon" type="submit" style="z-index:0;">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    @{
-        if (Model.CurrentFilter != null)
-        {
-            <a asp-page="/MemberIndex"><i class="ion-md-arrow-round-back"></i> Back to full List</a><span> | </span>
+        @{
+            if (Model.CurrentFilter != null)
+            {
+                <a asp-page="/MemberIndex"><i class="ion-md-arrow-round-back"></i> Back to full List</a><span> | </span>
+            }
         }
-    }
-    <a asp-action="Create" asp-controller="Members" asp-route-returnUrl="/Admin/MemberIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Member</a>
-</form>
+        <a asp-action="Create" asp-controller="Members" asp-route-returnUrl="/Admin/MemberIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Member</a>
+    </form>
+</div>
 
 <div>
     @if (ViewBag.Status == "Success!")
@@ -46,7 +48,7 @@
     @if (Model.Members.Count() > 0)
     {
         <div class="table-responsive">
-            <table class="table table-condensed">
+            <table class="table indexTable table-condensed">
                 <thead>
                     <tr class="tablePageControlHeaderRow">
                         <th colspan="11">
@@ -161,7 +163,7 @@
 
                             </td>
                             <td>
-                                <a href="mailto:@item.Email" target="_top" title="Click to send and Email">
+                                <a href="mailto:@item.Email" target="_top" title="Click to send an Email">
                                     @item.Email
                                 </a>
                             </td>

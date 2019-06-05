@@ -37,6 +37,13 @@ namespace BlueDeck.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberRankSelectListItem(x));
         }
 
+        /// <summary>
+        /// Gets the rank by identifier.
+        /// </summary>
+        /// <param name="memberRankId">The member rank identifier.</param>
+        /// <returns>
+        /// A <see cref="Rank" /> object.
+        /// </returns>
         public Rank GetRankById(int memberRankId)
         {
             return ApplicationDbContext.Ranks
@@ -44,9 +51,27 @@ namespace BlueDeck.Persistence.Repositories
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Gets a list of all ranks with their members.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="List{Rank}"/> of <see cref="Rank" /> with all of their <see cref="Member" />s.
+        /// </returns>
         public List<Rank> GetRanksWithMembers()
         {
             return ApplicationDbContext.Ranks.Include(x => x.Members).ToList();
+        }
+
+        /// <summary>
+        /// Gets a specific rank with its members.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Rank" />.</param>
+        /// <returns>
+        /// A <see cref="Rank" /> with it's <see cref="Member" />s.
+        /// </returns>
+        public Rank GetRankWithMembers(int id)
+        {
+            return ApplicationDbContext.Ranks.Include(x => x.Members).First(x => x.RankId == id);
         }
 
         /// <summary>

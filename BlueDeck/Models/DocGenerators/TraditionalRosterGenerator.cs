@@ -54,7 +54,12 @@ namespace BlueDeck.Models.DocGenerators
                 List<Position> firstGenSupervisors = new List<Position>();
                 foreach (Component child in Components.First().ChildComponents)
                 {
-                    firstGenSupervisors.Add(child?.Positions?.Where(p => p.IsManager == true).FirstOrDefault());
+                    Position p = child?.Positions?.Where(x => x.IsManager == true).FirstOrDefault();
+                    if (p != null)
+                    {
+                        firstGenSupervisors.Add(p);
+                    }
+                    
                 }
                 foreach (Position supervisor in firstGenSupervisors)
                 {
@@ -1295,9 +1300,41 @@ namespace BlueDeck.Models.DocGenerators
             tableRow1.Append(tableCell3);
             tableRow1.Append(tableCell4);
             tableRow1.Append(tableCell5);
-            //tableRow1.Append(tableCell6);
 
-            TableRow tableRow2 = new TableRow() { RsidTableRowMarkRevision = "00443C9F", RsidTableRowAddition = "00D317D3", RsidTableRowProperties = "00E369F0" };
+
+            table1.Append(tableProperties1);
+            table1.Append(tableGrid1);
+            table1.Append(tableRow1);
+            // primary member row should be generated regardless of Vacancy
+            Member primaryMember = _p?.Members?.FirstOrDefault();
+            Member tdyMember = _p?.TempMembers?.FirstOrDefault();
+            if (primaryMember == null && tdyMember == null)
+            {
+                primaryMember = new Member()
+                {
+                    Position = _p
+                };
+                table1.Append(GenerateLeftJustifiedTableRow(primaryMember, _p.PositionId));
+            }
+            else if(primaryMember == null && tdyMember != null)
+            {
+                table1.Append(GenerateLeftJustifiedTableRow(tdyMember, _p.PositionId));
+            }
+            else if(primaryMember != null && tdyMember == null)
+            {
+                table1.Append(GenerateLeftJustifiedTableRow(primaryMember, _p.PositionId));
+            }
+            else
+            {
+                table1.Append(GenerateLeftJustifiedTableRow(primaryMember, _p.PositionId));
+                table1.Append(GenerateLeftJustifiedTableRow(tdyMember, _p.PositionId));
+            }
+            return table1;
+        }
+
+        public TableRow GenerateLeftJustifiedTableRow(Member _m, int currentPositionId)
+        {
+            TableRow tableRow2 = new TableRow();
 
             TableCell tableCell7 = new TableCell();
 
@@ -1308,7 +1345,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties7.Append(tableCellWidth7);
             tableCellProperties7.Append(tableCellVerticalAlignment7);
 
-            Paragraph paragraph7 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph7 = new Paragraph();
 
             ParagraphProperties paragraphProperties7 = new ParagraphProperties();
 
@@ -1334,7 +1371,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties6.Append(fontSize13);
             runProperties6.Append(fontSizeComplexScript13);
             Text text6 = new Text();
-            text6.Text = _p?.Members?.FirstOrDefault()?.Rank?.RankShort ?? "N/A";
+            text6.Text = _m?.Rank?.RankShort ?? "N/A";
 
             run6.Append(runProperties6);
             run6.Append(text6);
@@ -1354,7 +1391,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties8.Append(tableCellWidth8);
             tableCellProperties8.Append(tableCellVerticalAlignment8);
 
-            Paragraph paragraph8 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph8 = new Paragraph();
 
             ParagraphProperties paragraphProperties8 = new ParagraphProperties();
 
@@ -1380,7 +1417,26 @@ namespace BlueDeck.Models.DocGenerators
             runProperties7.Append(fontSize15);
             runProperties7.Append(fontSizeComplexScript15);
             Text text7 = new Text();
-            text7.Text = _p?.Members?.FirstOrDefault()?.GetLastNameFirstName() ?? "VACANT";
+            string displayName = _m?.GetLastNameFirstName();
+            if (String.IsNullOrEmpty(displayName))
+            {
+                displayName = "VACANT";
+            }
+            if (_m.TempPositionId != null)
+            {
+                if (_m.TempPositionId == currentPositionId)
+                {
+                    text7.Text = $"{displayName} (TDY IN)";
+                }
+                else
+                {
+                    text7.Text = $"{displayName} (TDY OUT)";
+                }
+            }
+            else
+            {
+                text7.Text = displayName;
+            }           
 
             run7.Append(runProperties7);
             run7.Append(text7);
@@ -1400,7 +1456,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties9.Append(tableCellWidth9);
             tableCellProperties9.Append(tableCellVerticalAlignment9);
 
-            Paragraph paragraph9 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph9 = new Paragraph();
 
             ParagraphProperties paragraphProperties9 = new ParagraphProperties();
             Justification justification5 = new Justification() { Val = JustificationValues.Center };
@@ -1428,7 +1484,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties8.Append(fontSize17);
             runProperties8.Append(fontSizeComplexScript17);
             Text text8 = new Text();
-            text8.Text = _p?.Members?.FirstOrDefault()?.IdNumber ?? "N/A";
+            text8.Text = _m?.IdNumber ?? "N/A";
 
             run8.Append(runProperties8);
             run8.Append(text8);
@@ -1448,7 +1504,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties10.Append(tableCellWidth10);
             tableCellProperties10.Append(tableCellVerticalAlignment10);
 
-            Paragraph paragraph10 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph10 = new Paragraph();
 
             ParagraphProperties paragraphProperties10 = new ParagraphProperties();
             Justification justification6 = new Justification() { Val = JustificationValues.Center };
@@ -1476,7 +1532,15 @@ namespace BlueDeck.Models.DocGenerators
             runProperties9.Append(fontSize19);
             runProperties9.Append(fontSizeComplexScript19);
             Text text9 = new Text();
-            text9.Text = _p?.Callsign ?? "NONE";
+            // check for TDY member assigned to this component
+            if (_m.TempPositionId != null)
+            {
+                text9.Text = _m.TempPosition?.Callsign ?? "NONE";
+            }
+            else {
+                text9.Text = _m?.Position.Callsign ?? "NONE";
+            }
+            
 
             run9.Append(runProperties9);
             run9.Append(text9);
@@ -1502,7 +1566,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties11.Append(tableCellBorders3);
             tableCellProperties11.Append(tableCellVerticalAlignment11);
 
-            Paragraph paragraph11 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph11 = new Paragraph();
 
             ParagraphProperties paragraphProperties11 = new ParagraphProperties();
             Justification justification7 = new Justification() { Val = JustificationValues.Center };
@@ -1530,7 +1594,8 @@ namespace BlueDeck.Models.DocGenerators
             runProperties10.Append(fontSize21);
             runProperties10.Append(fontSizeComplexScript21);
             Text text10 = new Text();
-            text10.Text = _p?.Members?.FirstOrDefault()?.Race?.Abbreviation.ToString() ?? "-";
+
+            text10.Text = _m?.Race?.Abbreviation.ToString() ?? "-";
 
             run10.Append(runProperties10);
             run10.Append(text10);
@@ -1556,7 +1621,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties12.Append(tableCellBorders4);
             tableCellProperties12.Append(tableCellVerticalAlignment12);
 
-            Paragraph paragraph12 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph12 = new Paragraph();
 
             ParagraphProperties paragraphProperties12 = new ParagraphProperties();
             Justification justification8 = new Justification() { Val = JustificationValues.Center };
@@ -1584,7 +1649,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties11.Append(fontSize23);
             runProperties11.Append(fontSizeComplexScript23);
             Text text11 = new Text();
-            text11.Text = _p?.Members?.FirstOrDefault()?.Gender.Abbreviation.ToString() ?? "-";
+            text11.Text = _m?.Gender?.Abbreviation.ToString() ?? "-";
 
             run11.Append(runProperties11);
             run11.Append(text11);
@@ -1608,7 +1673,7 @@ namespace BlueDeck.Models.DocGenerators
             tableCellProperties13.Append(tableCellWidth13);
             tableCellProperties13.Append(tableCellVerticalAlignment13);
 
-            Paragraph paragraph13 = new Paragraph() { RsidParagraphMarkRevision = "00443C9F", RsidParagraphAddition = "00D317D3", RsidParagraphProperties = "00D7521E", RsidRunAdditionDefault = "00D317D3" };
+            Paragraph paragraph13 = new Paragraph();
 
             ParagraphProperties paragraphProperties13 = new ParagraphProperties();
 
@@ -1634,14 +1699,9 @@ namespace BlueDeck.Models.DocGenerators
             tableRow2.Append(tableCell10);
             tableRow2.Append(tableCell11);
             tableRow2.Append(tableCell12);
-            //tableRow2.Append(tableCell13);
-
-            table1.Append(tableProperties1);
-            table1.Append(tableGrid1);
-            table1.Append(tableRow1);
-            table1.Append(tableRow2);
-            return table1;
+            return tableRow2;
         }
+
         public Table GenerateFloatRightTable(string _title, List<Member> members)
         {
             // Grab the first member from the list... I have to add the first row
@@ -2862,7 +2922,14 @@ namespace BlueDeck.Models.DocGenerators
             runProperties11.Append(fontSize31);
             runProperties11.Append(fontSizeComplexScript31);
             Text text11 = new Text();
-            text11.Text = firstMember?.DutyStatus?.DutyStatusName ?? "N/A";
+            if (firstMember?.TempPositionId != null)
+            {
+                text11.Text = $"TDY to {firstMember?.TempPosition?.ParentComponent.Name}";
+            }
+            else
+            {
+                text11.Text = firstMember?.DutyStatus?.DutyStatusName ?? "N/A";
+            }            
 
             run11.Append(runProperties11);
             run11.Append(text11);
@@ -3184,7 +3251,15 @@ namespace BlueDeck.Models.DocGenerators
             runProperties6.Append(fontSize12);
             runProperties6.Append(fontSizeComplexScript12);
             Text text6 = new Text();
-            text6.Text = _m?.DutyStatus?.DutyStatusName ?? "N/A";
+            if (_m?.TempPositionId != null)
+            {
+                text6.Text = $"TDY to {_m?.TempPosition?.ParentComponent.Name}";
+            }
+            else
+            {
+                text6.Text = _m?.DutyStatus?.DutyStatusName ?? "N/A";
+            }
+            
 
             run6.Append(runProperties6);
             run6.Append(text6);
@@ -4479,6 +4554,10 @@ namespace BlueDeck.Models.DocGenerators
         public Table GenerateComponentTable(Component _c)
         {
             Member supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager).Members.FirstOrDefault();
+            if (supervisor == null)
+            {
+                supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager).TempMembers?.FirstOrDefault();
+            }
             Table table1 = new Table();
 
             TableProperties tableProperties1 = new TableProperties();
@@ -4867,7 +4946,18 @@ namespace BlueDeck.Models.DocGenerators
             runProperties7.Append(fontSize14);
             runProperties7.Append(fontSizeComplexScript14);
             Text text7 = new Text();
-            text7.Text = supervisor?.GetLastNameFirstName() ?? "N/A";
+            if(supervisor?.TempPosition?.ParentComponentId == _c.ComponentId)
+            {
+                text7.Text = $"{supervisor?.GetLastNameFirstName()} (TDY IN)";
+            }
+            else if (supervisor?.TempPositionId != null)
+            {
+                text7.Text = $"{supervisor?.GetLastNameFirstName()} (TDY OUT)";
+            }
+            else
+            {
+                text7.Text = supervisor?.GetLastNameFirstName() ?? "VACANT";
+            }           
 
             run7.Append(runProperties7);
             run7.Append(text7);
@@ -5107,6 +5197,13 @@ namespace BlueDeck.Models.DocGenerators
                         {
                             table1.Append(GenerateComponentTableRow(m));
                         }
+                        if (p.TempMembers != null && p.TempMembers.Count > 0)
+                        {
+                            foreach (Member m in p.TempMembers)
+                            {
+                                table1.Append(GenerateComponentTableRow(m, true));
+                            }
+                        }
                     }                    
                 }
             }            
@@ -5229,7 +5326,7 @@ namespace BlueDeck.Models.DocGenerators
 
 
         }
-        public TableRow GenerateComponentTableRow(Member _m)
+        public TableRow GenerateComponentTableRow(Member _m, bool IsTDYIn = false)
         {
             TableRow tableRow1 = new TableRow() { RsidTableRowMarkRevision = "00443C9F", RsidTableRowAddition = "00D317D3", RsidTableRowProperties = "00E369F0" };
 
@@ -5314,7 +5411,19 @@ namespace BlueDeck.Models.DocGenerators
             runProperties2.Append(fontSize4);
             runProperties2.Append(fontSizeComplexScript4);
             Text text2 = new Text();
-            text2.Text = _m.GetLastNameFirstName();
+            if(IsTDYIn == true)
+            {
+                text2.Text = $"{_m.GetLastNameFirstName()} (TDY IN)";
+            }
+            else if (_m.TempPositionId != null)
+            {
+                text2.Text = $"{_m.GetLastNameFirstName()} (TDY OUT)";
+            }
+            else
+            {
+                text2.Text = _m.GetLastNameFirstName();
+            }
+            
 
             run2.Append(runProperties2);
             run2.Append(text2);

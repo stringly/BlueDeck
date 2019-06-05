@@ -7,17 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link href="~/lib/getorgchart/css/getorgchart.css" rel="stylesheet" />
     <link asp-href-include="lib/bootstrap/css/*.min.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
+    <link href="~/lib/bluedeck/css/Loader.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/getorgchart/js/getorgchart.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/lib/compatibility/classList.js"></script>
-    <title>@ViewBag.Title</title>
-    <link href="~/lib/bluedeck/css/bluedeck.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="~/lib/bluedeck/css/images/favicon.ico" />
-
+    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
     @await Component.InvokeAsync("NavigationMenu")
+    <div class="modal" id="waitmodal" role="dialog">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog vertical-align-center">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="loader"></div>
+                        <div style="text-align:center">
+                            <h3 style="color:#3e5374">Loading</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-xs-12 pageContentContainer">
         @RenderBody()
     </div>

@@ -1,25 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using BlueDeck.Models;
+﻿using BlueDeck.Models;
 using BlueDeck.Models.Repositories;
 using BlueDeck.Persistence.Repositories;
-using System.Linq;
 
 namespace BlueDeck.Persistence
 {
     /// <summary>
-    /// An instance of <see cref="T:BlueDeck.Models.IUnitOfWork"/>
+    /// An instance of <see cref="IUnitOfWork"/>
     /// </summary>
-    /// <seealso cref="T:BlueDeck.Models.IUnitOfWork" />
+    /// <seealso cref="IUnitOfWork" />
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
-        //private readonly Member CurrentUser;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.UnitOfWork"/> class.
+        /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
         /// </summary>
-        /// <param name="context">An <see cref="T:BlueDeck.Models.ApplicationDbContext"/>.</param>
+        /// <param name="context">An <see cref="ApplicationDbContext"/>.</param>
         public UnitOfWork(ApplicationDbContext context/*, IHttpContextAccessor httpContext*/)
         {
             _context = context;
@@ -33,77 +29,105 @@ namespace BlueDeck.Persistence
             MemberContactNumbers = new MemberContactNumberRepository(_context);
             PhoneNumberTypes = new PhoneNumberTypeRepository(_context);
             AppStatuses = new AppStatusRepository(_context);
+            RoleTypes = new MemberRoleTypeRepository(_context);
 
         }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
+        /// Gets an <see cref="IPositionRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Position Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
+        /// <seealso cref="IPositionRepository" />
         public IPositionRepository Positions { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IComponentRepository" />
+        /// Gets an <see cref="IComponentRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Component Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository" />
+        /// <seealso cref="IComponentRepository" />
         public IComponentRepository Components { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
+        /// Gets an <see cref="IMemberRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the Member Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
+        /// <seealso cref="IMemberRepository" />
         public IMemberRepository Members { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRankRepository" />
+        /// Gets an <see cref="IMemberRankRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRanks Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository" />
+        /// <seealso cref="IMemberRankRepository" />
         public IMemberRankRepository MemberRanks { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository" />
+        /// Gets an <see cref="IMemberGenderRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberGender Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository" />
+        /// <seealso cref="IMemberGenderRepository" />
         public IMemberGenderRepository MemberGenders { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository" />
+        /// Gets an <see cref="IMemberRaceRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRace Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository" />
+        /// <seealso cref="IMemberRaceRepository" />
         public IMemberRaceRepository MemberRaces { get; private set; }
 
         /// <summary>
-        /// Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
+        /// Gets an <see cref="IMemberDutyStatusRepository" />
         /// </summary>
         /// <value>
         /// The Interface representing the MemberRace Entity.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
+        /// <seealso cref="IMemberDutyStatusRepository" />
         public IMemberDutyStatusRepository MemberDutyStatus { get; private set; }
 
+        /// <summary>
+        /// Gets an <see cref="IMemberContactNumberRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the MemberContactNumber Entity.
+        /// </value>
+        /// <seealso cref="IMemberContactNumberRepository" />
         public IMemberContactNumberRepository MemberContactNumbers { get; private set; }
-
+        /// <summary>
+        /// Gets an <see cref="IPhoneNumberTypeRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the PhoneNumberType Entity.
+        /// </value>
+        /// <seealso cref="IPhoneNumberTypeRepository" />
         public IPhoneNumberTypeRepository PhoneNumberTypes { get; private set; }
-
+        /// <summary>
+        /// Gets an <see cref="IAppStatusRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the AppStatus Entity.
+        /// </value>
+        /// <seealso cref="IAppStatusRepository" />
         public IAppStatusRepository AppStatuses { get; private set; }
+        /// <summary>
+        /// Gets an <see cref="IMemberRoleTypeRepository" />
+        /// </summary>
+        /// <value>
+        /// The Interface representing the RoleType Entity.
+        /// </value>
+        /// <seealso cref="IMemberRoleTypeRepository" />
+        public IMemberRoleTypeRepository RoleTypes {get; private set;}
 
         /// <summary>
         /// Saves changes made in the Unit of Work to ensure consistent updates

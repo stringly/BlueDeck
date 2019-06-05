@@ -14,6 +14,12 @@ namespace BlueDeck.Models.Types
         public string ContactNumber { get; set; }
         public string PositionName { get; set; }
         public int PositionId { get; set; }
+        public int ParentComponentId {get;set;}
+        public string ParentComponentName {get;set;}
+        public string TempPositionName { get; set; }
+        public int? TempPositionId { get; set; }
+        public int? TempParentComponentId {get;set;}
+        public string TempParentComponentName {get;set;}
         public int? LineupPosition { get; set; }
         public string DutyStatus { get; set; }
         public bool IsExceptionToNormalDuty { get; set; }
@@ -29,13 +35,17 @@ namespace BlueDeck.Models.Types
             ContactNumber = member?.PhoneNumbers?.FirstOrDefault()?.PhoneNumber ?? "None";
             PositionName = member.Position.Name;
             PositionId = member.Position.PositionId;
+            ParentComponentId = member.Position.ParentComponentId;
+            ParentComponentName = member.Position.ParentComponent.Name;
+            TempPositionName = member?.TempPosition?.Name;
+            TempPositionId = member?.TempPositionId;
+            TempParentComponentId = member?.TempPosition?.ParentComponentId;
+            TempParentComponentName = member.TempPosition?.ParentComponent.Name;
             LineupPosition = member.Position.LineupPosition;
             DutyStatus = member?.DutyStatus?.DutyStatusName ?? "-";
             IsExceptionToNormalDuty = member?.DutyStatus.IsExceptionToNormalDuty ?? false;
             Gender = member.Gender.Abbreviation;
-            Race = member.Race.Abbreviation;
-
-
+            Race = member.Race.Abbreviation;     
         }
         public HomePageViewModelMemberListItem(Position p)
         {

@@ -1,13 +1,30 @@
 ﻿@model BlueDeck.Models.Race
-
+@{
+    bool canDelete = Model.Members.Count() > 0 ? false : true;
+}
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
-    <div class="formHeader">
-        <h2 class="formHeader-heading">Confirm Delete</h2>
-        <p class="formHeader-description">
-            Are you certain that you want to delete @Model.MemberRaceFullName? This action cannot be undone.
-        </p>
-    </div>
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger">
+            <strong>@ViewBag.Status</strong> @ViewBag.Message
+        </div>
+    }
+        <div class="formHeader">
+            <h2 class="formHeader-heading">Confirm Delete</h2>
+            @if (canDelete)
+            {
+                <p class="formHeader-description">
+                    Are you certain that you want to delete @Model.MemberRaceFullName? This action cannot be undone.
+                </p>
+            }
+            else
+            {
+                <p class="formHeader-description">
+                    There are @Model.Members.Count() Members currently assigned this race. You cannot delete a race with active Members.
+                </p>
+            }
+        </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
@@ -32,7 +49,10 @@
                             <input type="hidden" asp-for="MemberRaceId" />
                             <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
                             <a asp-action="Edit" asp-route-id="@Model.MemberRaceId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
-                            <input type="submit" value="Delete" class="btn btn-danger pull-right" />
+                            @if (canDelete)
+                            {
+                                <input type="submit" value="Delete" class="btn btn-danger pull-right" />
+                            }
                         </form>
                     </div>
                 </div>

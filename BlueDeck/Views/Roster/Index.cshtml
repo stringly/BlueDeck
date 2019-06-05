@@ -43,10 +43,16 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        
         // Drag and Drop
         var dragSrcEl = null;
         var stop = true;
+        var cols = document.querySelectorAll('.members .member');
+        [].forEach.call(cols, addDnDHandlers);
+
         function handleDragStart(e) {
             // Target (this) element is the source node.
             dragSrcEl = this;
@@ -121,12 +127,23 @@
                     // target element IS a member - we need to swap
                     // swapping invokes a Roster refresh, so we return after this
                     var dragMemberId = dragSrcEl.dataset.memberid;
+                    var dragMemberTDY = false;
+                    if (dragSrcEl.dataset.tdy == "true") {
+                        dragMemberTDY = true;
+                    }
                     var dropMemberId = this.dataset.memberid;
+                    var dropMemberTDY = false;
+                    if (this.dataset.tdy == "true") {
+                        dropMemberTDY = true;
+                    }
                     if (dropMemberId == null) {
                         // if the drop event fired on the "insertable", the memberId will be in the dataset of it's first class="member" child
                         dropMemberId = this.getElementsByClassName("member")[0].dataset.memberid;
+                        if (this.getElementsByClassName("member")[0].dataset.tdy == "true") {
+                            dropMemberTDY == true;
+                        }
                     }
-                    DragAndSwap(dragMemberId, dropMemberId);
+                    DragAndSwap(dragMemberId, dragMemberTDY, dropMemberId, dropMemberTDY);
                     return;
                 }
 
@@ -165,18 +182,44 @@
 
                 var dropElem = document.getElementById(this.id).lastChild;
                 addDnDHandlers(dropElem);
-                var moreOptionsButton = dropElem.querySelectorAll('.moreOptions')[0];
-                addShowMoreOptionsHandler(moreOptionsButton);
+
+                // Register click events for Member extended options
+
+                // Reassign employee- only applies to Non-TDY Members
                 var moreOptionsReassignEmployee = dropElem.querySelectorAll('.drag-options-reassign')[0];
-                addMoreOptionsReassignEmployeeHandler(moreOptionsReassignEmployee);
+                // this will be null for a TDY Member
+                if (moreOptionsReassignEmployee) {
+                    addMoreOptionsReassignEmployeeHandler(moreOptionsReassignEmployee);
+                }                
+
+                // Cancel TDY - only applies to TDY Members
+                var moreOptionsCancelTDY = dropElem.querySelectorAll('.drag-options-tdy')[0];
+                if (moreOptionsCancelTDY) {
+                    addMoreOptionsCancelTDYHandler(moreOptionsCancelTDY);
+                }
+
+                // Edit Member Info click event
                 var moreOptionsEditMember = dropElem.querySelectorAll('.drag-options-edit')[0];
-                addMoreOptionsEditMemberHandler(moreOptionsEditMember);
+                if (moreOptionsEditMember) {
+                    addMoreOptionsEditMemberHandler(moreOptionsEditMember);
+                }
+                
+                // Change Duty Status click event
                 var moreOptionsChangeDutyStatus = dropElem.querySelectorAll('.drag-options-changestatus')[0];
-                addMoreOptionsChangeDutyStatusHandler(moreOptionsChangeDutyStatus);
+                if (moreOptionsChangeDutyStatus) {
+                    addMoreOptionsChangeDutyStatusHandler(moreOptionsChangeDutyStatus);
+                }                
+
                 // find: MemberID of dragged member, PositionID of new position.
                 var newPositionId = this.dataset.positionid;
                 var memberId = dragSrcEl.dataset.memberid;
-                reassignMember(memberId, newPositionId);
+                if (dragSrcEl.dataset.tdy === 'true') {
+                    reassignTDYMember(memberId, newPositionId);
+                }
+                else {
+                    reassignMember(memberId, newPositionId);
+                }
+                
             }
             this.classList.remove('over');
             return false;
@@ -200,14 +243,11 @@
             elem.addEventListener('drop', handleDrop, false);
             elem.addEventListener('dragend', handleDragEnd, false);
         }
-        var cols = document.querySelectorAll('.members .member');
-        [].forEach.call(cols, addDnDHandlers);
 
         // attempt drag scroll
         
         function handleDragScroll(e) {            
             stop = true;
-            console.log("X: " + e.clientX + ",Y: " + e.clientY);
             if (e.clientY < 150) {
                 stop = false;
                 scroll(-1)
@@ -225,10 +265,10 @@
                 setTimeout(function () { scroll(step) }, 20);
             }
         }
-        function addShowMoreOptionsHandler(elem) {
-            elem.addEventListener('click', showMoreOptions, false);
-            elem.parentElement.parentElement.querySelectorAll(".drag-options")[0].addEventListener('mouseleave', handleMouseOut, false);
-        }
+        //function addShowMoreOptionsHandler(elem) {
+        //    elem.addEventListener('click', showMoreOptions, false);
+        //    elem.parentElement.parentElement.querySelectorAll(".drag-options")[0].addEventListener('mouseleave', handleMouseOut, false);
+        //}
         function addMoreOptionsReassignEmployeeHandler(elem) {
             elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
         }
@@ -238,6 +278,10 @@
         function addMoreOptionsEditMemberHandler(elem) {
             elem.addEventListener('click', handleMoreOptionsEditMemberClick, false);
         }
+        function addMoreOptionsCancelTDYHandler(elem) {
+            elem.addEventListener('click', handleMoreOptionsCancelTDYClick, false);
+        }
+
         function showMoreOptions(e) {
             var memberId = $(e.target).data('memberid');
             console.log('More options clicked for Member: ' + memberId);
@@ -247,8 +291,8 @@
         function handleMouseOut(elem) {
             this.classList.remove("active");
         }
-        function DragAndSwap(dragMId, dropMId) {
-            $.get("/Roster/SwapMemberPositions", { dragMemberId: dragMId, dropMemberId: dropMId }, function (data) {
+        function DragAndSwap(dragMId, dragTDY, dropMId, dropTDY) {
+            $.get("/Roster/SwapMemberPositions", { dragMemberId: dragMId, dragIsTDY: dragTDY, dropMemberId: dropMId, dropIsTDY: dropTDY }, function (data) {
 
                 if (data.success == true) {
                     $("#SelectedComponent").trigger('change');
@@ -275,6 +319,36 @@
                 }
             });
         }
+
+        function reassignTDYMember(memberId, newPositionId) {
+            $.get("/Roster/ReassignTDYMember", { memberId: memberId, positionId: newPositionId, selectedComponentId: $("#Component").val() }, function (data) {
+                // check if a DemoRefresh has been returned
+                if (data.demoDictionary) {
+                    console.log("Refreshing DemoTable");
+                    for (var key in data.demoDictionary) {
+                        // skip loop if the property is from prototype
+                        if (!data.demoDictionary.hasOwnProperty(key)) continue;
+                        var obj = data.demoDictionary[key];
+                        $(key).html(obj);
+                    }
+                }
+                // check if we need to refresh the entire RosterManager
+                else if (data.status == "RefreshRosterManager") {
+                    // if so, manually trigger the click event for the getComponentButton
+                    console.log("Refreshing RosterManager");
+                    $("#SelectedComponent").trigger('change');
+                }
+            });
+        }
+
+        function handleMoreOptionsCancelTDYClick(e) {
+            var memberId = e.target.dataset.memberid;
+            $.get("/Roster/CancelTDY", { memberId: memberId }, function (data) {
+                if (data.status == "Success") {
+                    $("#SelectedComponent").trigger('change');
+                }
+            })
+        }
         function handleMoreOptionsReassignEmployeeClick(e) {
             var elem = e.currentTarget;
             elem.removeEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
@@ -282,6 +356,7 @@
             var memberId = $(e.target).data('memberid');
             // clear any extant modal from the modal container
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             // retrieve the ReassignEmployee from the server
             $.get("/Roster/GetReassignMemberViewComponent", { memberId: memberId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
@@ -292,6 +367,8 @@
                 $('#reassignEmployeeModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleMoreOptionsReassignEmployeeClick, false);
                 });
+                $("#waitmodal").modal("hide");
+                // show the modal
                 $("#reassignEmployeeModal").modal("show");
             })
         }
@@ -303,6 +380,7 @@
             var componentId = e.target.dataset.componentid;
             // clear any extant modal from the modal container
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             // retrieve the AddPositionModal from the server
             $.get('/Roster/GetAddPositionToComponentViewComponent', { componentId: componentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
@@ -314,14 +392,20 @@
                 parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
                 var isManagerCheckBox = document.getElementById('IsManager');
                 isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
-                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
-                    $("#lineupSelectionTarget").html(data);
-                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
-                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
-                });
+                var isAssistantManagerCheckBox = document.getElementById('IsAssistantManager');
+                isAssistantManagerCheckBox.addEventListener('change', handleIsAssistantManagerChange, false);
+                if (!document.getElementById('IsManager').checked && !document.getElementById('IsAssistantManager').checked) {
+                    $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
+                        $("#lineupSelectionTarget").html(data);
+                        document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                        document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    });
+                }
+
                 $('#addPositionToComponentModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleAddNewPositionButtonClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -338,6 +422,7 @@
             var member = e.target.dataset.memberid;
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             // retrieve the EditEmployeeModal from the server
             $.get('/Roster/GetEditEmployeeModalViewComponent', { memberId: member }, function (data) {
                 // inject the ViewComponent HTML into the modal container
@@ -350,12 +435,30 @@
                 [].forEach.call(deleteNumberButtons, function (elem) {
                     elem.addEventListener("click", handleDeletePhoneNumberClick, false);
                 });
+                var phoneInputs = document.querySelectorAll(".phoneNumber");
+                [].forEach.call(phoneInputs, function (elem) {
+                    elem.addEventListener("keydown", phoneMask, false);
+                });
                 $('#editMemberModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleMoreOptionsEditMemberClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#editMemberModal").modal("show");
             })
+        }
+        function phoneMask(e) {
+            if (e.which != 8 && e.which != 0 && ((e.which < 48 || e.which > 57) && (e.which < 96 || e.which > 105))) {
+                return false;
+            }
+            var curchr = this.value.length;
+            var curval = $(this).val();
+            if (curchr == 3 && e.which != 8 && e.which != 0) {
+                $(this).val(curval + "-");
+            } else if (curchr == 7 && e.which != 8 && e.which != 0) {
+                $(this).val(curval + "-");
+            }
+            $(this).attr('maxlength', '12');
         }
         function handleAddPhoneNumberClick(e) {
             var currentContactCount = parseInt($("#contactsCount").val()) + 1;
@@ -383,6 +486,8 @@
             var newInput = document.createElement("input");
             newInput.name = "ContactNumbers[" + currentContactCount + "].PhoneNumber";
             newInput.classList.add("form-control");
+            newInput.classList.add("phoneNumber");
+            newInput.addEventListener("keydown", phoneMask, false);
 
             // create the span delete button wrapper span
             // this will be added to the previous text input
@@ -460,6 +565,7 @@
             var member = e.target.dataset.memberid;
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             // retrieve the ChangeDutyStatus modal from the server
             $.get('/Roster/GetChangeEmployeeStatusModalViewComponent', { memberId: member }, function (data) {
                 // inject the ViewComponent HTML into the container
@@ -470,6 +576,7 @@
                 $('#changeEmployeeStatusModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleMoreOptionsChangeDutyStatusClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#changeEmployeeStatusModal").modal("show");
             })
@@ -487,6 +594,7 @@
             var position = e.target.dataset.positionid;
             // clear any modals from the container
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             // retrieve the EditPositionModal from the server
             $.get('/Roster/GetAddPositionToComponentViewComponent', { componentId: '0', positionId: position }, function (data) {
                 // inject the viewcomponent HTML into the container
@@ -502,11 +610,15 @@
                 parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
                 var isManagerCheckBox = document.getElementById('IsManager');
                 isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
-                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
-                    $("#lineupSelectionTarget").html(data);
-                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
-                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
-                });
+                var isAssistantManagerCheckBox = document.getElementById('IsAssistantManager');
+                isAssistantManagerCheckBox.addEventListener('change', handleIsAssistantManagerChange, false);
+                if (!document.getElementById('IsManager').checked && !document.getElementById('IsAssistantManager').checked) {
+                    $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                        $("#lineupSelectionTarget").html(data);
+                        document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                        document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    });
+                }
                 var isUniqueCheckBox = document.getElementById("IsUnique");
                 isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
                 var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
@@ -514,6 +626,7 @@
                 $('#addPositionToComponentModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleEditPositionButtonClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#addPositionToComponentModal").modal("show");
             })
@@ -535,19 +648,71 @@
         function handleIsManagerChange(e) {
             console.log("ParentComponent value is: " + $("#ParentComponentId").val());
             console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            console.log("Initial LineupPosition is: " + $("#LineupPosition").val());
             if (this.checked) {
                 $("#lineupSelectionTarget").empty();
+                $("#IsAssistantManager").prop("checked", false);
+                $("#LineupPosition").val(0);
             }
             else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
                 var container = $("#lineupSelectionTarget").empty();
                 console.log("Attempting to repoll ViewComponent");
-                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val() }, function (data) {
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    console.log("Re-polled Lineup, reset Lineup index is: " + $("#newPositionInsert").index());
                     $("#LineupPosition").val($("#newPositionInsert").index());
+                    console.log("Lineup Position reset to: " + $("#LineupPosition").val());
                 });
             }
+        }
+
+        function handleIsAssistantManagerChange(e) {
+            console.log("ParentComponent value is: " + $("#ParentComponentId").val());
+            console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            console.log("Initial LineupPosition is: " + $("#LineupPosition").val());
+            if (this.checked) {
+                // if assistant manager is checked, determine if the Component has a Manager, and set the LineupPosition to just below the manager if so
+                var lineupBox = document.getElementById("lineupSelection");
+                if (lineupBox) {
+                    var lineupItems = lineupBox.getElementsByTagName("li");
+                    var managerPresent = false;
+                    var currentPosition = $("#PositionId").val();
+                    for (var i = 0; i < lineupItems.length; i++) {
+                        if (lineupItems[i].dataset.ismanager == "True" && lineupItems[i].dataset.positionid != currentPosition) {
+                            managerPresent = true;
+                        }
+                    }
+                    if (managerPresent == true) {
+                        console.log("Manager Position is present.");
+                        $("#LineupPosition").val(1); // if there is a Manager, then set this position to index 1. The Manager will always be index 0
+                        console.log("LineupPosition set to: " + $("#LineupPosition").val());
+                    }
+                    else {
+                        console.log("Manager Position not present");
+                        $("#LineupPosition").val(0); // if no Manager, then this position should be at the Top of the Lineup in lieu of a manager
+                        console.log("LineupPosition set to: " + $("#LineupPosition").val());
+                    }
+                    $("#lineupSelectionTarget").empty();
+                }
+                // clear the lineup box... we will need to re-poll the lineup from the server to reset the lineup properly if the Assistant Manager box is unchecked later
+                $("#IsManager").prop("checked", false); // ensure that the "Manager" Position is unchecked.
+
+            }
+            else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
+                var container = $("#lineupSelectionTarget").empty();
+                console.log("Attempting to repoll ViewComponent");
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    console.log("Re-polled Lineup, reset Lineup index is: " + $("#newPositionInsert").index());
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                    console.log("Lineup Position reset to: " + $("#LineupPosition").val());
+                });
+            }
+
         }
 
         function handleIsUniqueChange(e) {
@@ -571,14 +736,14 @@
             var newItem = document.getElementById('newPositionInsert');
             var previousItem = newItem.previousElementSibling;
             console.log("Manager dataset is : " + previousItem.dataset.ismanager);
-            if (previousItem.dataset.ismanager != "True") {
+            if (previousItem.dataset.ismanager != "True" && previousItem.dataset.isassistantmanager != "True") {
                 // move the newInsert item up the list
                 list.insertBefore(newItem, previousItem);
                 // set the form field to the new position index
                 $("#LineupPosition").val($("#newPositionInsert").index());
                 console.log("New item is now at position: " + $("#newPositionInsert").index());
             } else {
-                console.log("Cant move above manager");
+                console.log("Cant move above manager/assistant manager");
             }
 
         }
@@ -643,6 +808,7 @@
             // clear any existing modals from the container
             var container = $("#modalTarget").empty();
             // retrieve the AssignMemberModal from the server
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             $.get('/Roster/GetAssignMemberModalViewComponent', { positionId: position, selectedComponentId: selectedComponent }, function (data) {
                 // inject the viewcomponent HTML into the container
                 container.html(data);
@@ -652,7 +818,8 @@
                 document.getElementById('filterMemberListButton').addEventListener('click', handlefilterMemberListButtonClick, false);
                 document.getElementById('clearFilterMemberListButton').addEventListener('click', handleClearFilterMemberListButtonClick, false);
                 document.getElementById('MemberId').addEventListener('change', handleSelectMemberChange, false);
-                 // show the modal
+                $("#waitmodal").modal("hide");
+                // show the modal
                 $('#assignMemberModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', HandleAssignMemberClick, false);
                 });
@@ -707,7 +874,12 @@
                 return;
             }
             $("#assignMemberModal").modal("hide");
-            reassignMember(member, position);
+            if ($("#TemporaryAssignment").is(":checked")) {
+                reassignTDYMember(member, position);
+            } else {
+                reassignMember(member, position);
+            }
+            
         }
 
         function handleReassignEmployeeModalSubmit() {
@@ -762,11 +934,15 @@
                         parentComponentSelect.addEventListener('change', handleParentComponentChange, false);
                         var isManagerCheckBox = document.getElementById('IsManager');
                         isManagerCheckBox.addEventListener('change', handleIsManagerChange, false);
-                        $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
-                            $("#lineupSelectionTarget").html(data);
-                            document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
-                            document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
-                        });
+                        var isAssistantManagerCheckBox = document.getElementById('IsAssistantManager');
+                        isAssistantManagerCheckBox.addEventListener('change', handleIsAssistantManagerChange, false);
+                        if (!document.getElementById('IsManager').checked && !document.getElementById('IsAssistantManager').checked) {
+                            $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                                $("#lineupSelectionTarget").html(data);
+                                document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                                document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                            });
+                        }                        
                         var isUniqueCheckBox = document.getElementById("IsManager");
                         isUniqueCheckBox.addEventListener('change', handleIsUniqueChange, false);
                         //var uniqueWarningCancelButton = document.getElementById("uniqueWarningSubModalCancel")
@@ -887,7 +1063,7 @@
 
         function handleAddEditComponentSubmit() {
             var form = $("#addEditComponentModalForm");
-            // TODO: add Component Validation here
+            // TODO: add Component Validation here            
             $.ajax({
                 url: form.attr('action'),
                 type: form.attr('method'),
@@ -945,6 +1121,7 @@
             elem.removeEventListener('click', handleEditComponentClick, false);
             var componentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             $.get('/Roster/GetAddEditComponentViewComponent', { componentId: componentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
@@ -960,13 +1137,14 @@
                 $('#addEditComponentModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleEditComponentClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#addEditComponentModal").modal("show");
             })
         }
         function handleParentComponentChange(e) {
             // retrieve the Lineup Interface view Component
-            var container = $("#lineupSelectionTarget").empty();
+            var container = $("#lineupSelectionTarget").empty();            
             $.get("/Components/GetComponentLineupViewComponent", { parentComponentId: this.value, componentBeingEditedId: $("#ComponentId").val() }, function (data) {
                 container.html(data);
                 document.getElementById('lineupMoveUp').addEventListener('click', handleComponentLineupMoveUp, false);
@@ -980,6 +1158,7 @@
             elem.removeEventListener('click', handleAddComponentClick, false);
             var parentComponentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             $.get('/Roster/GetAddEditComponentViewComponent', { parentComponentId: parentComponentId }, function (data) {
                 // inject the ViewComponent HTML into the modal container
                 container.html(data);
@@ -995,6 +1174,7 @@
                 $('#addEditComponentModal').on('hide.bs.modal', function () {
                     elem.addEventListener('click', handleAddComponentClick, false);
                 });
+                $("#waitmodal").modal("hide");
                 // show the modal
                 $("#addEditComponentModal").modal("show");
             })
@@ -1010,24 +1190,31 @@
             elem.removeEventListener('click', handleDeleteComponentClick, false);
             var componentId = e.target.dataset.componentid;
             var container = $("#modalTarget").empty();
-            $.get('/Roster/GetConfirmComponentDeleteModal', { componentId: componentId }, function (data) {
-                // inject the ViewComponent markup into the Modal Target
-                container.html(data);
-                // register the Confirm Delete Yes button
-                document.getElementById('confirmDeleteComponentYesButton').addEventListener('click', function (e) {
-                    $.get('/Roster/DeleteComponent', { componentId: e.target.dataset.componentid }, function (response) {
-                        if (response.success == true) {
-                            $("#ConfirmComponentDeleteModal").modal("hide");
-                            $("#SelectedComponent").trigger('change');
-                            // TODO: This fails if the "Selected" Component is the Component that was just deleted.
-                        }
-                    })
-                }, false)
-                $('#ConfirmComponentDeleteModal').on('hide.bs.modal', function () {
-                    elem.addEventListener('click', handleDeleteComponentClick, false);
-                });
-                $("#ConfirmComponentDeleteModal").modal("show");
-            })
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
+            try {            
+                $.get('/Roster/GetConfirmComponentDeleteModal', { componentId: componentId }, function (data) {
+                    // inject the ViewComponent markup into the Modal Target
+                    container.html(data);
+                    // register the Confirm Delete Yes button
+                    document.getElementById('confirmDeleteComponentYesButton').addEventListener('click', function (e) {
+                        $.get('/Roster/DeleteComponent', { componentId: e.target.dataset.componentid }, function (response) {
+                            if (response.success == true) {
+                                $("#ConfirmComponentDeleteModal").modal("hide");
+                                $("#SelectedComponent").trigger('change');
+                                // TODO: This fails if the "Selected" Component is the Component that was just deleted.
+                            }
+                        })
+                    }, false)
+                    $('#ConfirmComponentDeleteModal').on('hide.bs.modal', function () {
+                        elem.addEventListener('click', handleDeleteComponentClick, false);
+                    });
+                    $("#waitmodal").modal("hide");
+                    $("#ConfirmComponentDeleteModal").modal("show");
+                })
+            }
+            catch (err) {
+                $("#waitmodal").modal("hide");
+            }
         }
         $("#ReloadRoster").click(function () {
             $("#SelectedComponent").trigger('change');
@@ -1060,9 +1247,11 @@
         //    $("body").removeClass("noScroll");
         //});
         $("#SelectedComponent").change(function () {
+            
             var selectedComponentId = $("#SelectedComponent").children("option:selected").val();
             //$.getJSON("/Roster/GetComponents", { componentId: selectedComponentId }, function (source) {});
             var container = $("#rosterContainer");
+            $("#waitmodal").modal({ backdrop: 'static', keyboard: false });
             $.get("/Roster/GetRosterViewComponent", { componentId: selectedComponentId }, function (data) {
                 container.html(data);
                 console.log("Grabbing new elements");
@@ -1145,10 +1334,16 @@
                 [].forEach.call(componentLinkButtons, function (elem) {
                     elem.addEventListener('click', handleComponentNameLinkClick, false);
                 });
+                var cancelTDYLinkButtons = document.querySelectorAll(".drag-options-tdy");
+                [].forEach.call(cancelTDYLinkButtons, function (elem) {
+                    elem.addEventListener('click', handleMoreOptionsCancelTDYClick, false);
+                });
                 
                 $("#ReloadRoster").show();
                 $("#CollapseRoster").show();
+                $("#waitmodal").modal("hide");
             });
+            
         });
         if ($("#SelectedComponent").val() != 0 && $("#rosterContainer").children().length == 0) {
             $("#SelectedComponent").trigger('change');

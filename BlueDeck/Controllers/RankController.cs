@@ -7,24 +7,47 @@ using BlueDeck.Models;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that handles CRUD actions for the <see cref="Rank"/> entity.
+    /// </summary>
+    /// <seealso cref="Controller" />
     [Authorize("IsGlobalAdmin")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RankController : Controller
     {
         private IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RankController"/> class.
+        /// </summary>
+        /// <param name="unit">The injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public RankController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
-        // GET: Rank
+        /// <summary>
+        /// GET: Rank/Index
+        /// </summary>
+        /// <remarks>
+        /// Retrieves a view that lists all <see cref="Rank"/> entities in the database.
+        /// </remarks>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Rank/Index")]
         public IActionResult Index()
         {
             return View(unitOfWork.MemberRanks.GetAll());
         }
 
-        // GET: Rank/Details/5
+        /// <summary>
+        /// GET: Rank/Details/5
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Rank/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -42,18 +65,31 @@ namespace BlueDeck.Controllers
             return View(rank);
         }
 
-        // GET: Rank/Create
+        /// <summary>
+        /// GET: Rank/Create
+        /// </summary>
+        /// <remarks>
+        /// Retrieves the view that allows a user to create a new <see cref="Rank"/>
+        /// </remarks>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Rank/Create")]
         public IActionResult Create(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        // POST: Rank/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Rank/Create
+        /// </summary>
+        /// <param name="rank">The form data, bound to a <see cref="Rank"/> object.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Rank/Create")]
         public IActionResult Create([Bind("RankId,RankFullName,RankShort,PayGrade,IsSworn")] Rank rank, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -75,7 +111,17 @@ namespace BlueDeck.Controllers
             return View(rank);
         }
 
-        // GET: Rank/Edit/5
+        /// <summary>
+        /// GET: Rank/Edit/5
+        /// </summary>
+        /// <remarks>
+        /// Returns a view that allows a user to edit an existing <see cref="Rank"/>
+        /// </remarks>
+        /// <param name="id">The identifier of the <see cref="Rank"/> to be edited.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Rank/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -92,11 +138,19 @@ namespace BlueDeck.Controllers
             return View(rank);
         }
 
-        // POST: Rank/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: Rank/Edit/5
+        /// </summary>
+        /// <remarks>
+        /// Creates a new <see cref="Rank"/> from POSTed form data.
+        /// </remarks>
+        /// <param name="id">The indentifier of the <see cref="Rank"/> being edited.</param>
+        /// <param name="rank">The POSTed form data, bound to a <see cref="Rank"/> object.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Rank/Edit/{id:int}")]
         public IActionResult Edit(int id, [Bind("RankId,RankFullName,RankShort,PayGrade,IsSworn")] Rank rank, string returnUrl)
         {
             if (id != rank.RankId)
@@ -138,36 +192,54 @@ namespace BlueDeck.Controllers
             return View(rank);
         }
 
-        // GET: Rank/Delete/5
+        /// <summary>
+        /// GET: Rank/Delete/5
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Rank"/> being edited.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Rank/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
-            if (id == null)
+            if (id == null || !RankExists(id))
             {
                 return NotFound();
             }
-
-            var race = unitOfWork.MemberRanks.Find(m => m.RankId == id).FirstOrDefault();
-            if (race == null)
+            else
             {
-                return NotFound();
+                var race = unitOfWork.MemberRanks.GetRankWithMembers((Int32)id);
+                ViewBag.ReturnUrl = returnUrl;
+                return View(race);
             }
-            ViewBag.ReturnUrl = returnUrl;
-            return View(race);
         }
 
-        // POST: Rank/Delete/5
+        /// <summary>
+        /// POST: Rank/Delete/5
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Rank"/> being deleted.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Rank/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
-            Rank toRemove = unitOfWork.MemberRanks.Find(x => x.RankId == id).FirstOrDefault();
-            if (toRemove != null)
+            Rank toRemove = unitOfWork.MemberRanks.GetRankWithMembers((Int32)id);
+            if (toRemove != null && toRemove.Members.Count() == 0)
             {
                 unitOfWork.MemberRanks.Remove(toRemove);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Rank successfully deleted.";
-            }            
+            }
+            else
+            {
+                ViewBag.Status = "Warning";
+                ViewBag.Message = "You cannot delete a Rank with active members.";
+                ViewBag.ReturnUrl = returnUrl;
+                return View(toRemove);
+            }
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);

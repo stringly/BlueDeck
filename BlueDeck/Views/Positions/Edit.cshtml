@@ -56,13 +56,23 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
                             <div class="form-checkbox">
                                 <label>
                                     <input asp-for="IsManager" /> @Html.DisplayNameFor(model => model.IsManager)
                                 </label>
                                 <span class="note">
-                                    This Position will be the Manager for it's Component.
+                                    This Position is the Manager for it's Component.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsAssistantManager" /> @Html.DisplayNameFor(model => model.IsAssistantManager)
+                                </label>
+                                <span class="note">
+                                    This Position is an Assistant Manager for it's Component.
                                 </span>
                             </div>
                         </div>
@@ -76,6 +86,10 @@
                                                             "Choose Parent Component",
                                                             new { @class = "form-control" })
                             <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-7 form-group" id="lineupWait" style="display:none">
+                            <label class="control-label">Retrieving Positions</label><br />
+                            <span class="glyphicon glyphicon-refresh spinning"></span>
                         </div>
                         <div id="lineupSelectionTarget"></div>
                     </div>
@@ -170,11 +184,14 @@
                 }
             }
         });
-        $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
-            $("#lineupSelectionTarget").html(data);
-            document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
-            document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
-        });
+        if(!document.getElementById('IsManager').checked && !document.getElementById('IsAssistantManager').checked){
+            $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                $("#lineupSelectionTarget").html(data);
+                document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+            });
+        }
+
 
         var removeButtons = document.getElementsByClassName('unassignButton');
         [].forEach.call(removeButtons, function (elem) {
@@ -268,33 +285,90 @@
             if (this.value != null && !document.getElementById('IsManager').checked) {
                 // retrieve the Lineup Interface view Component
                 var container = $("#lineupSelectionTarget").empty();
+                document.getElementById("lineupWait").style.display = "block";
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: this.value, positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
                     $("#LineupPosition").val($("#newPositionInsert").index());
+
                 });
             }
         });
         $("#IsManager").on('change', function () {
             console.log("ParentComponent value is: " + $("#ParentComponentId").val());
             console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            console.log("Initial LineupPosition is: " + $("#LineupPosition").val());
             if (this.checked) {
                 $("#lineupSelectionTarget").empty();
+                $("#IsAssistantManager").prop("checked", false);
                 $("#LineupPosition").val(0);
             }
             else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
                 var container = $("#lineupSelectionTarget").empty();
                 console.log("Attempting to repoll ViewComponent");
+                document.getElementById("lineupWait").style.display = "block";
                 $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
                     container.html(data);
                     document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
                     document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    console.log("Re-polled Lineup, reset Lineup index is: " + $("#newPositionInsert").index());
                     $("#LineupPosition").val($("#newPositionInsert").index());
+                    console.log("Lineup Position reset to: " + $("#LineupPosition").val());
+                });
+            }            
+        });
+        $("#IsAssistantManager").on('change', function () {
+            console.log("ParentComponent value is: " + $("#ParentComponentId").val());
+            console.log("LineupBox isEmpty? " + $("#lineupSelectionTarget").is(':empty'));
+            console.log("Initial LineupPosition is: " + $("#LineupPosition").val());
+            if (this.checked) {
+                // if assistant manager is checked, determine if the Component has a Manager, and set the LineupPosition to just below the manager if so
+                var lineupBox = document.getElementById("lineupSelection");
+                if (lineupBox){
+                    var lineupItems = lineupBox.getElementsByTagName("li");
+                    var managerPresent = false;
+                    var currentPosition = $("#PositionId").val();
+                    for (var i = 0; i < lineupItems.length; i++){
+                        if (lineupItems[i].dataset.ismanager == "True" && lineupItems[i].dataset.positionid != currentPosition){
+                            managerPresent = true;
+                        }
+                    }
+                    if (managerPresent == true){
+                        console.log("Manager Position is present.");
+                        $("#LineupPosition").val(1); // if there is a Manager, then set this position to index 1. The Manager will always be index 0
+                        console.log("LineupPosition set to: " + $("#LineupPosition").val());
+                    }
+                    else{
+                        console.log("Manager Position not present");
+                        $("#LineupPosition").val(0); // if no Manager, then this position should be at the Top of the Lineup in lieu of a manager
+                        console.log("LineupPosition set to: " + $("#LineupPosition").val());
+                    }
+                    $("#lineupSelectionTarget").empty();
+                }
+                // clear the lineup box... we will need to re-poll the lineup from the server to reset the lineup properly if the Assistant Manager box is unchecked later
+                $("#IsManager").prop("checked", false); // ensure that the "Manager" Position is unchecked.
+                
+            }
+            else if ($("#ParentComponentId").val() != null && $("#lineupSelectionTarget").is(':empty')) {
+                var container = $("#lineupSelectionTarget").empty();
+                console.log("Attempting to repoll ViewComponent");
+                document.getElementById("lineupWait").style.display = "block";
+                $.get("/Positions/GetPositionLineupViewComponent", { componentId: $("#ParentComponentId").val(), positionBeingEditedId: $("#PositionId").val() }, function (data) {
+                    document.getElementById("lineupWait").style.display = "none";
+                    container.html(data);
+                    document.getElementById('lineupMoveUp').addEventListener('click', handleLineupMoveUp, false);
+                    document.getElementById('lineupMoveDown').addEventListener('click', handleLineupMoveDown, false);
+                    console.log("Re-polled Lineup, reset Lineup index is: " + $("#newPositionInsert").index());
+                    $("#LineupPosition").val($("#newPositionInsert").index());
+                    console.log("Lineup Position reset to: " + $("#LineupPosition").val());
                 });
             }
-
+            
         });
+
         $("#IsUnique").on('change', function () {
             if (this.checked) {
                 $("#currentMembersSubText").text(" (This is a unique position, so only a single member can be assigned.)");
