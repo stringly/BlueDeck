@@ -9,29 +9,99 @@ using BlueDeck.Models.ViewModels;
 
 namespace BlueDeck.Infrastructure
 {
+    /// <summary>
+    /// A Pagination Control Tag Helper Class
+    /// </summary>
+    /// <seealso cref="TagHelper" />
     [HtmlTargetElement("div", Attributes = "page-model")]
     public class PageLinkTagHelper : TagHelper
     {
         private IUrlHelperFactory urlHelperFactory;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PageLinkTagHelper"/> class.
+        /// </summary>
+        /// <param name="helperFactory">The helper factory.</param>
         public PageLinkTagHelper(IUrlHelperFactory helperFactory)
         {
             urlHelperFactory = helperFactory;
         }
 
+        /// <summary>
+        /// Gets or sets the view context.
+        /// </summary>
+        /// <value>
+        /// The view context.
+        /// </value>
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
+        /// <summary>
+        /// Gets or sets the page model.
+        /// </summary>
+        /// <remarks>
+        /// This property is a <see cref="PagingInfo"/> class object.
+        /// </remarks>
+        /// <value>
+        /// The page model.
+        /// </value>
         public PagingInfo PageModel { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page action.
+        /// </summary>
+        /// <value>
+        /// The page action.
+        /// </value>
         public string PageAction { get; set; }
 
+        /// <summary>
+        /// Gets or sets the page URL values.
+        /// </summary>
+        /// <value>
+        /// The page URL values.
+        /// </value>
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [page classes enabled].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [page classes enabled]; otherwise, <c>false</c>.
+        /// </value>
         public bool PageClassesEnabled { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page class.
+        /// </summary>
+        /// <value>
+        /// The page class.
+        /// </value>
         public string PageClass { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page class normal.
+        /// </summary>
+        /// <value>
+        /// The page class normal.
+        /// </value>
         public string PageClassNormal { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page class selected.
+        /// </summary>
+        /// <value>
+        /// The page class selected.
+        /// </value>
         public string PageClassSelected { get; set; }
 
+        /// <summary>
+        /// Synchronously executes the <see cref="TagHelper" /> with the given <paramref name="context" /> and
+        /// <paramref name="output" />.
+        /// </summary>
+        /// <param name="context">Contains information associated with the current HTML tag.</param>
+        /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);

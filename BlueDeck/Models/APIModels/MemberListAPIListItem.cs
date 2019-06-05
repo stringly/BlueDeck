@@ -10,6 +10,7 @@ namespace BlueDeck.Models.APIModels
     {
         public string Name { get; set; }
         public int BlueDeckId { get; set; }
+        public string OrgId {get;set;}
 
         public MemberListAPIListItem()
         {
@@ -25,6 +26,7 @@ namespace BlueDeck.Models.APIModels
         {
             Name = _member.GetTitleName();
             BlueDeckId = _member.MemberId;
+            OrgId = _member.IdNumber;
         }
     }
 }

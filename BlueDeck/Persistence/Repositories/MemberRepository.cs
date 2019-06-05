@@ -495,7 +495,7 @@ namespace BlueDeck.Persistence.Repositories
             int pendingAccountStatusId = ApplicationDbContext.ApplicationStatuses.FirstOrDefault(x => x.StatusName == "Pending")?.AppStatusId ?? 0;
             return ApplicationDbContext.Members.Where(x => x.AppStatusId == pendingAccountStatusId).ToList();
         }
-        public async Task<MemberApiResult> GetApiMember(int id)
+        public async Task<MemberApiResult> GetApiMemberByBlueDeckId(int id)
         {
             var member = await ApplicationDbContext.Members
                 .Include(x => x.PhoneNumbers)
@@ -520,7 +520,7 @@ namespace BlueDeck.Persistence.Repositories
                 MemberApiResult result = new MemberApiResult(member);
                 if (member.Position.IsManager)
                 {
-                    var supervisor = await FindNearestManager(Convert.ToInt32(member.Position.ParentComponent.ParentComponentId));
+                    var supervisor = await FindNearestManagerForComponentId(Convert.ToInt32(member.Position.ParentComponent.ParentComponentId));
                     if (supervisor != null)
                     {
                         result.Supervisor = new SubMemberApiResult(supervisor);
@@ -528,7 +528,7 @@ namespace BlueDeck.Persistence.Repositories
                 }
                 else
                 {
-                    var supervisor = await FindNearestManager(member.Position.ParentComponentId);
+                    var supervisor = await FindNearestManagerForComponentId(member.Position.ParentComponentId);
                     if (supervisor != null)
                     {
                         result.Supervisor = new SubMemberApiResult(supervisor);
@@ -538,7 +538,49 @@ namespace BlueDeck.Persistence.Repositories
             }
             
         }
-        private async Task<Member> FindNearestManager(int _componentId)
+        public async Task<MemberApiResult> GetApiMemberByOrgId(string id)
+        {
+            var member = await ApplicationDbContext.Members
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.Race)
+                .Include(x => x.Gender)
+                .Include(x => x.DutyStatus)
+                .Include(x => x.Rank)
+                .FirstOrDefaultAsync(x => x.IdNumber == id);
+            if (member == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (member.Position.IsManager)
+                {
+                    // start looking for manager in Member's position's ParentComponent
+                }
+                MemberApiResult result = new MemberApiResult(member);
+                if (member.Position.IsManager)
+                {
+                    var supervisor = await FindNearestManagerForComponentId(Convert.ToInt32(member.Position.ParentComponent.ParentComponentId));
+                    if (supervisor != null)
+                    {
+                        result.Supervisor = new SubMemberApiResult(supervisor);
+                    }                    
+                }
+                else
+                {
+                    var supervisor = await FindNearestManagerForComponentId(member.Position.ParentComponentId);
+                    if (supervisor != null)
+                    {
+                        result.Supervisor = new SubMemberApiResult(supervisor);
+                    }  
+                }                
+                return result;
+            }
+        }
+        public async Task<Member> FindNearestManagerForComponentId(int _componentId)
         {
             // attempt to locate a manager in the current component's positions
             Position p = await ApplicationDbContext.Positions
@@ -551,7 +593,7 @@ namespace BlueDeck.Persistence.Repositories
                 Component component = await ApplicationDbContext.Components.FindAsync(_componentId);
                 if (component?.ParentComponentId != null)
                 {                    
-                    return await FindNearestManager(Convert.ToInt32(component.ParentComponentId));                    
+                    return await FindNearestManagerForComponentId(Convert.ToInt32(component.ParentComponentId));                    
                 }
                 else
                 {
@@ -571,7 +613,168 @@ namespace BlueDeck.Persistence.Repositories
                 .FirstOrDefaultAsync();
                 return m;
             }                                    
-        }        
+        }
+        public async Task<Member> FindNearestAssistantManagerOrManagerForComponentId(int _componentId)
+        {
+            // attempt to locate a manager in the current component's positions
+            Position p = await ApplicationDbContext.Positions
+                .Where(x => x.ParentComponentId == _componentId && x.IsAssistantManager == true)
+                .FirstOrDefaultAsync();
+
+            // if no assistant Manager, try to find Primary Manager
+            if (p == null)
+            {
+                p = await ApplicationDbContext.Positions
+                    .Where(x => x.ParentComponentId == _componentId && x.IsManager == true)
+                    .FirstOrDefaultAsync();
+            }
+            // if no primary manager is found, retrieve parent and recurse
+            if (p == null)
+            {
+                Component component = await ApplicationDbContext.Components.FindAsync(_componentId);
+                if (component?.ParentComponentId != null)
+                {                    
+                    return await FindNearestAssistantManagerOrManagerForComponentId(Convert.ToInt32(component.ParentComponentId));                    
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                Member m = await ApplicationDbContext.Members
+                .Where(x => x.PositionId == p.PositionId)
+                .Include(x => x.Gender)
+                .Include(x => x.Race)
+                .Include(x => x.Rank)
+                .Include(x => x.DutyStatus)
+                .Include(x => x.PhoneNumbers)
+                    .ThenInclude(x => x.Type)
+                .FirstOrDefaultAsync();
+                return m;
+            }                                    
+        } 
+        public async Task<Member> FindNearestManagerForMemberId(int memberid)
+        {
+            // retrieve the member
+            Member m = await ApplicationDbContext.Members
+                .Include(x => x.Position)
+                .FirstOrDefaultAsync(x => x.MemberId == memberid);
+            // determine if the member is the supervisor... if so, we need to move up one component
+            if (m.Position.IsManager)
+            {
+                // re-fetch the Member's position to include the ParentComponent
+                Position p = await ApplicationDbContext.Positions
+                    .Include(x => x.ParentComponent)                        
+                    .Where(x => x.PositionId == m.PositionId)
+                    .FirstOrDefaultAsync();
+                // start the parsing from the Parent Component of the Member's Current Component
+                return await FindNearestManagerForComponentId((Int32)p.ParentComponent.ParentComponentId);
+            }
+            else
+            {
+                return await FindNearestManagerForComponentId(m.Position.ParentComponentId);
+            }
+            
+        }
+        public async Task<Member> FindNearestAssistantManagerOrManagerForMemberId(int memberid)
+        {
+            // The challenge here is:
+            // 1. If the Member is the Manager, we need to start recursion from the Member's Position's Parent Component's Parent Component
+            // 2. If the Member is the Assistant Manager, we need to start with the current component, but 
+
+            // retrieve the member
+            Member m = await ApplicationDbContext.Members
+                .Include(x => x.Position)
+                .FirstOrDefaultAsync(x => x.MemberId == memberid);
+            if (m.Position.IsManager)
+            {
+                // re-fetch the Member's position to include the ParentComponent
+                Position p = await ApplicationDbContext.Positions
+                    .Include(x => x.ParentComponent)                        
+                    .Where(x => x.PositionId == m.PositionId)
+                    .FirstOrDefaultAsync();
+
+                return await FindNearestAssistantManagerOrManagerForComponentId((Int32)p.ParentComponent.ParentComponentId);
+            }
+            else if (m.Position.IsAssistantManager)
+            {
+                // if the member in question is an Assistant, we want to try and retrive the Primary Manager from the Component
+                Position primaryManager = await ApplicationDbContext.Positions
+                    .Include(x => x.Members).ThenInclude(x => x.Rank)
+                    .Include(x => x.Members).ThenInclude(x => x.Gender)
+                    .Include(x => x.Members).ThenInclude(x => x.Race)
+                    .Include(x => x.Members).ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
+                    .Include(x => x.Members).ThenInclude(x => x.DutyStatus)
+                    .Include(x => x.TempMembers).ThenInclude(x => x.Rank)
+                    .Include(x => x.TempMembers).ThenInclude(x => x.Gender)
+                    .Include(x => x.TempMembers).ThenInclude(x => x.Race)
+                    .Include(x => x.TempMembers).ThenInclude(x => x.PhoneNumbers).ThenInclude(x => x.Type)
+                    .Include(x => x.TempMembers).ThenInclude(x => x.DutyStatus)
+                    .Where(x => x.ParentComponentId == m.Position.ParentComponentId && x.IsManager == true)
+                    .FirstOrDefaultAsync();
+                if (primaryManager != null)
+                {
+                    if (primaryManager.Members.Count != 0)
+                    {
+                        return primaryManager.Members.First();
+                    }
+                    else if (primaryManager.TempMembers.Count != 0)
+                    {
+                        return primaryManager.TempMembers.First();
+                    }                    
+                }
+                // re-fetch the Member's position to include the ParentComponent
+                Position p = await ApplicationDbContext.Positions
+                    .Include(x => x.ParentComponent)                        
+                    .Where(x => x.PositionId == m.PositionId)
+                    .FirstOrDefaultAsync();
+
+                return await FindNearestAssistantManagerOrManagerForComponentId((Int32)p.ParentComponent.ParentComponentId);
+            }
+            return await FindNearestAssistantManagerOrManagerForComponentId(m.Position.ParentComponentId);
+        }
+
+        public async Task<List<MemberListAPIListItem>> GetSubordinateMemberApiMemberForBlueDeckId(int id)
+        {
+            List<MemberListAPIListItem> result = new List<MemberListAPIListItem>();
+            Member currentMember = ApplicationDbContext.Members
+                .Include(x => x.Position)
+                    .ThenInclude(x => x.ParentComponent)
+                .Where(x => x.MemberId == id)
+                .FirstOrDefault();
+
+            if(currentMember == null || (!currentMember.Position.IsManager && !currentMember.Position.IsAssistantManager))
+            {
+                return result;
+            }
+            else
+            {
+                SqlParameter param1 = new SqlParameter("@ComponentId", currentMember.Position.ParentComponent.ComponentId);
+                List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+                ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                    .Include(y => y.Members).ThenInclude(z => z.Rank)
+                    .Include(y => y.TempMembers).ThenInclude(x => x.Rank)                        
+                    .Load();
+                foreach (Component c in components)
+                {
+                    foreach(Position p in c.Positions)
+                    {
+                        foreach(Member m in p.Members)
+                        {
+                            result.Add(new MemberListAPIListItem(m));
+                        }
+                        foreach(Member m in p.TempMembers)
+                        {
+                            result.Add(new MemberListAPIListItem(m));
+                        }
+                    }                    
+                }
+                return result;
+            }
+
+        }
         public IEnumerable<RoleType> GetMemberRoles()
         {
             return ApplicationDbContext.RoleTypes.ToList();

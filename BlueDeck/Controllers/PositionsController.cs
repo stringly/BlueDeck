@@ -14,30 +14,42 @@ namespace BlueDeck.Controllers
     /// <summary>
     /// Controller for Position CRUD actions
     /// </summary>
-    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PositionsController : Controller
     {
         private IUnitOfWork unitOfWork;
+
+        /// <summary>
+        /// Property that sets the length of the index view pages
+        /// </summary>
         public int PageSize = 25;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsController"/> class.
+        /// Initializes a new instance of the <see cref="PositionsController"/> class.
         /// </summary>
-        /// <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit">An injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public PositionsController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
-       
         /// <summary>
-        /// GET: Positions
+        /// GET: Positions/Index
         /// </summary>
-        /// <remarks>
-        /// This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.PositionWithMemberCountItem"/>
-        /// </remarks>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="sortOrder">
+        /// An optional sort order parameter.
+        /// The method can sort by: (Asc/Desc)
+        /// Position Name : (default)/"name_desc"
+        /// Parent Component Name: "ParentComponentName"/"parentName_desc"
+        /// </param>
+        /// <param name="searchString">
+        /// An optional search string parameter.
+        /// The method will search against the PositionName and ParentComponentName fields.
+        /// Non-alphanumeric characters will be removed, and both the search text and the property text will be converted to lowercase prior to the comparison.
+        /// </param>
+        /// <param name="page">The page.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Positions/Index")]
         [AllowAnonymous]
@@ -84,10 +96,11 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// GET: Positions/Details/5.
+        /// GET: Positions/Details/5
         /// </summary>
-        /// <param name="id">The identifier for a Position.</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="id">The identifier of the <see cref="Position"/>.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("Positions/Details/{id:int}")]
         [AllowAnonymous]
@@ -110,9 +123,13 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// GET: Positions/Create.
+        /// GET: Positions/Create
         /// </summary>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// Returns a view that allows a User to create a new <see cref="Position"/>.
+        /// </remarks>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize("CanEditPosition")]
         [Route("Positions/Create")]
@@ -139,10 +156,14 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// POST: Positions/Create.
+        /// POST: Positions/Create
         /// </summary>
-        /// <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// Creates a new Position from POSTed form data
+        /// </remarks>
+        /// <param name="form">The form data, bound to a <see cref="PositionIndexViewModelPositionListItem"/>.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Positions/Create")]
@@ -261,10 +282,11 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// Positions/Edit/5
+        /// GET: Positions/Edit
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="id">The identifier of the <see cref="Position"/> being edited.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize("CanEditPosition")]
         [Route("Positions/Edit/{id:int}")]
@@ -300,11 +322,12 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// POST: Positions/Edit/5
+        /// POST: Positions/Edit
         /// </summary>
-        /// <param name="id">The PositionId for the <see cref="T:BlueDeck.Models.Position"/> being edited</param>
-        /// <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <param name="id">The identifier of the <see cref="Position"/> being edited.</param>
+        /// <param name="form">The form data, bound to a <see cref="PositionWithComponentListViewModel"/>.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Positions/Edit/{id:int}")]
@@ -422,12 +445,16 @@ namespace BlueDeck.Controllers
             }
             
         }
-        
+
         /// <summary>
         /// GET: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// Returns a view that allows a user to confirm the deletion of a position.
+        /// </remarks>
+        /// <param name="id">The identifier of the Position to delete.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize("CanEditPosition")]
         [Route("Positions/Delete/{id:int}")]
@@ -449,12 +476,15 @@ namespace BlueDeck.Controllers
             return View(position);
         }
 
-        /// TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
         /// <summary>
         /// POST: Positions/Delete/5
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
-        /// <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:BlueDeck.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
+        /// <remarks>
+        /// This method will delete a <see cref="Position"/> and reassign any assigned members to the "Unassigned" pool.
+        /// </remarks>
+        /// <param name="id">The identifier of the <see cref="Position"/> being deleted.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Route("Positions/Delete/{id:int}")]
@@ -472,15 +502,21 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// Determines if a Position exists with the provided PositionId .
+        /// Determines if a position exists based on PositionId.
         /// </summary>
-        /// <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/></param>
-        /// <returns>True if a <see cref="T:BlueDeck.Models.Position"/> with the given id exists</returns>
+        /// <param name="id">The identifier of the Position.</param>
+        /// <returns>True if the Position is found, otherwise False</returns>
         private bool PositionExists(int id)
         {
             return (unitOfWork.Positions.Find(e => e.PositionId == id) != null);
         }
 
+        /// <summary>
+        /// Gets the position lineup view component.
+        /// </summary>
+        /// <param name="componentId">The component identifier.</param>
+        /// <param name="positionBeingEditedId">The position being edited identifier.</param>
+        /// <returns></returns>
         public IActionResult GetPositionLineupViewComponent(int componentId, int positionBeingEditedId = 0)
         {
             List<PositionLineupItem> positions = unitOfWork.Components.GetPositionLineupItemsForComponent(componentId);
@@ -496,6 +532,13 @@ namespace BlueDeck.Controllers
             }
         }
 
+        /// <summary>
+        /// Assigns the member.
+        /// </summary>
+        /// <param name="addOrRemove">The add or remove.</param>
+        /// <param name="PositionId">The position identifier.</param>
+        /// <param name="MemberId">The member identifier.</param>
+        /// <returns></returns>
         public IActionResult AssignMember(string addOrRemove, int PositionId, int MemberId)
         {
             Member m = unitOfWork.Members.Get(MemberId);

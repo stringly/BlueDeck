@@ -18,22 +18,39 @@ namespace BlueDeck.Controllers
     public class MembersController : Controller
     {
         private IUnitOfWork unitOfWork;
+
+        /// <summary>
+        /// Property that determines the page length of List views returned from this controller.
+        /// </summary>
         public int PageSize = 25;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MembersController"/> class.
         /// </summary>
-        /// <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="BlueDeck.Persistence.UnitOfWork"/>.</param>
+        /// <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="IUnitOfWork"/>.</param>
         public MembersController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
         /// <summary>
-        /// GET: Members
+        /// GET: The Members/Index view.
         /// </summary>
-        /// <remarks>        
+        /// <remarks>
+        /// This method can return a paginated list of members with an optional sort order or search string.
         /// </remarks>
+        /// <param name="sortOrder">
+        /// An optional String parameter that will control the order of the result set. The options are:
+        /// Last Name: (Ascending: Default)/"lastName_desc"
+        /// First Name: "FirstName"/"firstName_desc"
+        /// ID Number: "IDNumber"/"idNumber_desc"
+        /// Position Name: "PositionName"/"positionName_desc"
+        /// </param>
+        /// <param name="searchString">
+        /// An optional string parameter that will search for a match in 
+        /// LastName, FirstName, PositionName, IdNumber.
+        /// Non-alphanumeric characters will be removed prior to comparison. Both the searchString and the comparison text will be converted to lower case prior to comparing.
+        /// </param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpGet]
         [Route("Members/Index")]
@@ -106,6 +123,7 @@ namespace BlueDeck.Controllers
         /// GET: Members/Details/5.
         /// </summary>
         /// <param name="id">The identifier for a Member.</param>
+        /// <param name="returnUrl">An optional return Url</param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpGet]
         [Route("Members/Details/{id:int}")]
@@ -129,6 +147,7 @@ namespace BlueDeck.Controllers
         /// <summary>
         /// GET: Members/Create.
         /// </summary>
+        /// <param name="returnUrl">An optional returnUrl parameter.</param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpGet]
         [Route("Members/Create")]
@@ -151,9 +170,11 @@ namespace BlueDeck.Controllers
         /// POST: Members/Create.
         /// </summary>
         /// <param name="form">A <see cref="MemberAddEditViewModel"/> with certain fields bound on submit</param>
+        /// <param name="returnUrl">An optional return URL.</param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Members/Create")]
         public IActionResult Create([Bind(
             "FirstName," +
             "LastName," +
@@ -213,7 +234,8 @@ namespace BlueDeck.Controllers
         /// <summary>
         /// Members/Edit/5
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The identity of the Member being edited.</param>
+        /// <param name="returnUrl">An optional return URL</param>
         /// <returns>An <see cref="IActionResult"/></returns>
         [HttpGet]
         [Authorize("CanEditUser")]
@@ -327,6 +349,7 @@ namespace BlueDeck.Controllers
         /// GET: Member/Delete/5
         /// </summary>
         /// <param name="id">The MemberId of the <see cref="Member"/> being deleted</param>
+        /// <param name="returnUrl">An optional URI to redirect the user via the "Cancel" button or as a pass-through.</param>
         /// <returns>An <see cref="IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
         [HttpGet]
         [Authorize("IsGlobalAdmin")]
@@ -355,6 +378,7 @@ namespace BlueDeck.Controllers
         /// <returns>An <see cref="IActionResult"/> that redirects to <see cref="MembersController.Index"/> on successful deletion of a Member.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("Members/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
             unitOfWork.Members.Remove(id);

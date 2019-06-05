@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BlueDeck.Models.AppStatus>
 
-<div style="padding-top:10px; padding-bottom:10px">
+<div class="container" style="padding-top:10px; padding-bottom:10px">
     <a asp-action="Create" asp-controller="AppStatus" asp-route-returnUrl="/Admin/AppStatusIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Status</a>
 </div>
 <div>
@@ -18,7 +18,7 @@
     @if (Model.Count() > 0)
     {
         <div class="table-responsive">
-            <table class="table table-condensed">
+            <table class="table indexTable table-condensed">
                 <thead>
                     <tr>
                         <th>
@@ -62,7 +62,6 @@
                 </tbody>
             </table>
         </div>
-
     }
 </div>
 

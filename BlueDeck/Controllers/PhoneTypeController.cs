@@ -7,24 +7,50 @@ using BlueDeck.Models;
 
 namespace BlueDeck.Controllers
 {
+    /// <summary>
+    /// Controller that handles views for CRUD function for the <see cref="PhoneNumberType"/> entity.
+    /// </summary>
+    /// <seealso cref="Controller" />
     [Authorize("IsGlobalAdmin")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class PhoneTypeController : Controller
     {
         private IUnitOfWork unitOfWork;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PhoneTypeController"/> class.
+        /// </summary>
+        /// <param name="unit">An injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public PhoneTypeController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
 
-        // GET: PhoneType
+        /// <summary>
+        /// GET: PhoneType/Index
+        /// </summary>
+        /// <remarks>
+        /// This view shows a list of all <see cref="PhoneNumberType"/> entities in the database.
+        /// </remarks>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("PhoneType/Index")]
         public IActionResult Index()
         {
             return View(unitOfWork.PhoneNumberTypes.GetAll());
         }
 
-        // GET: PhoneType/Details/5
+        /// <summary>
+        /// GET: PhoneType/Details/5
+        /// </summary>
+        /// <remarks>
+        /// This view displays detailed information for a <see cref="PhoneNumberType"/> entity.
+        /// </remarks>
+        /// <param name="id">The identifier of the <see cref="PhoneNumberType"/>.</param>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("PhoneType/Details/{id:int}")]
         public IActionResult Details(int? id, string returnUrl)
         {
             if (id == null)
@@ -42,18 +68,28 @@ namespace BlueDeck.Controllers
             return View(phoneType);
         }
 
-        // GET: PhoneType/Create
+        /// <summary>
+        /// GET: PhoneType/Create
+        /// </summary>
+        /// <param name="returnUrl">An optional return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("PhoneType/Create")]
         public IActionResult Create(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        // POST: PhoneType/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: PhoneType/Create
+        /// </summary>
+        /// <param name="phoneType">A POSTed form object bound to a <see cref="PhoneNumberType"/> object.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("PhoneType/Create")]
         public IActionResult Create([Bind("PhoneNumberTypeId,PhoneNumberTypeName")] PhoneNumberType phoneType, string returnUrl)
         {
             if (ModelState.IsValid)
@@ -75,7 +111,14 @@ namespace BlueDeck.Controllers
             return View(phoneType);
         }
 
-        // GET: PhoneType/Edit/5
+        /// <summary>
+        /// GET: PhoneType/Edit
+        /// </summary>
+        /// <param name="id">The identity of the <see cref="PhoneNumberType"/> entity.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("PhoneType/Edit/{id:int}")]
         public IActionResult Edit(int? id, string returnUrl)
         {
             if (id == null)
@@ -92,11 +135,16 @@ namespace BlueDeck.Controllers
             return View(phoneType);
         }
 
-        // POST: PhoneType/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST: PhoneType/Edit/5
+        /// </summary>
+        /// <param name="id">The identity of the <see cref="PhoneNumberType"/> entity being edited.</param>
+        /// <param name="phoneType">A POSTed form object, bound to a <see cref="PhoneNumberType"/> object.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("PhoneType/Edit/{id:int}")]
         public IActionResult Edit(int id, [Bind("PhoneNumberTypeId,PhoneNumberTypeName")] PhoneNumberType phoneType, string returnUrl)
         {
             if (id != phoneType.PhoneNumberTypeId)
@@ -135,36 +183,54 @@ namespace BlueDeck.Controllers
             return View(phoneType);
         }
 
-        // GET: PhoneType/Delete/5
+        /// <summary>
+        /// GET: PhoneType/Delete/5
+        /// </summary>
+        /// <param name="id">The identity of the <see cref="PhoneNumberType"/> being edited.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("PhoneType/Delete/{id:int}")]
         public IActionResult Delete(int? id, string returnUrl)
         {
-            if (id == null)
+            if (id == null || !PhoneTypeExists(id))
             {
                 return NotFound();
             }
-
-            var phoneType = unitOfWork.PhoneNumberTypes.Find(m => m.PhoneNumberTypeId == id).FirstOrDefault();
-            if (phoneType == null)
+            else
             {
-                return NotFound();
-            }
-            ViewBag.ReturnUrl = returnUrl;
-            return View(phoneType);
+                var phoneType = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeWithPhoneNumbers((Int32)id);
+                ViewBag.ReturnUrl = returnUrl;
+                return View(phoneType);
+            }            
         }
 
-        // POST: PhoneType/Delete/5
+        /// <summary>
+        /// POST: PhoneType/Delete/5
+        /// </summary>
+        /// <param name="id">The identity of the <see cref="PhoneNumberType"/> entity being edited.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Route("PhoneType/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
-            PhoneNumberType toRemove = unitOfWork.PhoneNumberTypes.Find(x => x.PhoneNumberTypeId == id).FirstOrDefault();
-            if (toRemove != null)
+            PhoneNumberType toRemove = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeWithPhoneNumbers((Int32)id);
+            if (toRemove != null && toRemove.ContactNumbers.Count() == 0)
             {
                 unitOfWork.PhoneNumberTypes.Remove(toRemove);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Phone Type successfully deleted.";
-            }            
+            }
+            else
+            {
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You cannot delete a Phone Number Type with active Phone Numbers.";
+                ViewBag.ReturnUrl = returnUrl;
+                return View(toRemove);
+            }
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);

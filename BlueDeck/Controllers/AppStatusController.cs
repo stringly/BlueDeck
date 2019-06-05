@@ -10,7 +10,7 @@ namespace BlueDeck.Controllers
     /// <summary>
     /// Handles Create, Read, Update, and Delete functionality for the Application Status Enumeration.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     [Authorize("IsGlobalAdmin")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class AppStatusController : Controller
@@ -20,7 +20,7 @@ namespace BlueDeck.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="AppStatusController"/> class.
         /// </summary>
-        /// <param name="unit">The unit.</param>
+        /// <param name="unit">The Injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
         public AppStatusController(IUnitOfWork unit)
         {
             unitOfWork = unit;
@@ -67,15 +67,20 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns></returns>
+        [HttpGet]
+        [Route("AppStatus/Create")]
         public IActionResult Create(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
-        // POST: AppStatus/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates the specified application status.
+        /// </summary>
+        /// <param name="appStatus">The application status.</param>
+        /// <param name="returnUrl">The return URL.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("AppStatus/Create")]
@@ -186,14 +191,14 @@ namespace BlueDeck.Controllers
             {
                 return NotFound();
             }
-
-            var appStatus = unitOfWork.AppStatuses.Find(m => m.AppStatusId == id).FirstOrDefault();
-            if (appStatus == null)
+            if (AppStatusExists(id))
             {
+                ViewBag.ReturnUrl = returnUrl;
+                return View(unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id));
+            }
+            else {
                 return NotFound();
             }
-            ViewBag.ReturnUrl = returnUrl;
-            return View(appStatus);
         }
 
         /// <summary>
@@ -207,14 +212,21 @@ namespace BlueDeck.Controllers
         [Route("AppStatus/Delete/{id:int}")]
         public IActionResult DeleteConfirmed(int id, string returnUrl)
         {
-            AppStatus toRemove = unitOfWork.AppStatuses.Find(x => x.AppStatusId == id).FirstOrDefault();
-            if (toRemove != null)
+            AppStatus toRemove = unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id);
+            if (toRemove != null && toRemove.Members.Count() == 0)
             {
                 unitOfWork.AppStatuses.Remove(toRemove);
                 unitOfWork.Complete();
                 TempData["Status"] = "Success!";
                 TempData["Message"] = "Status successfully deleted.";
-            }            
+            }
+            else
+            {
+                ViewBag.Status = "Warning!";
+                ViewBag.Message = "You cannot delete an Application Status with active Members.";
+                ViewBag.ReturnUrl = returnUrl;
+                return View(unitOfWork.AppStatuses.GetAppStatusWithMemberCount((Int32)id));
+            }
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);

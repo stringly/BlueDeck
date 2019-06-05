@@ -1,30 +1,30 @@
 ﻿@model AdminIndexViewModel
 
-<div class="container">
-    <h4>Admin Index Page</h4>
-    <hr />
 
-    @if (ViewBag.Status == "Warning!")
-    {
-        <div class="alert alert-danger alert-dismissible fade in">
+@if (ViewBag.Status == "Warning!")
+{
+    <div class="alert alert-danger alert-dismissible fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong>
+        <span>@ViewBag.Message</span>
+    </div>
+}
+else if (ViewBag.Status == "Success!")
+{
+    <div class="indexAlertWrapper">
+        <div class="alert alert-success alert-dismissible fade in">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Warning!</strong>
+            <strong>Success!</strong>
             <span>@ViewBag.Message</span>
         </div>
-    }
-    else if (ViewBag.Status == "Success!")
-    {
-        <div class="indexAlertWrapper">
-            <div class="alert alert-success alert-dismissible fade in">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Success!</strong>
-                <span>@ViewBag.Message</span>
-            </div>
-        </div>
-    }
-    <h5>Global Administrators</h5>
-    <div class="table-responsive">
-        <table class="table table-condensed">
+    </div>
+}
+<div class="table-responsive">
+    <table class="table indexTable table-condensed">
+        <caption>
+            Global Administrators
+        </caption>
+        <thead>
             <tr>
                 <th>
                     Name
@@ -34,8 +34,10 @@
                 </th>
                 <th>
                     Email
-                </th>                
+                </th>
             </tr>
+        </thead>
+        <tbody>
             @foreach (Member m in Model.GlobalAdmins)
             {
                 <tr>
@@ -50,14 +52,17 @@
                     </td>
                 </tr>
             }
-        </table>
-    </div>
-
-    <h5>Pending Registration Requests</h5>
-    <div class="table-responsive">
-        @if (Model.PendingAccounts.Count() > 0)
-        {
-            <table class="table table-condensed">
+        </tbody>
+    </table>
+</div>
+<div class="table-responsive">
+    @if (Model.PendingAccounts.Count() > 0)
+    {
+        <table class="table indexTable table-condensed">
+            <caption>
+                Pending Registration Requests
+            </caption>
+            <thead>
                 <tr>
                     <th>
                         Name
@@ -73,6 +78,8 @@
                     </th>
                     <th></th>
                 </tr>
+            </thead>
+            <tbody>
                 @foreach (Member m in Model.PendingAccounts)
                 {
                     <tr>
@@ -98,16 +105,17 @@
                         </td>
                     </tr>
                 }
-            </table>
-        }
-        else
-        {
-            <div style="text-align:center">
-                <strong>No Pending Requests</strong>
-            </div>
-        }
-    </div>
-    <hr />
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div style="text-align:center">
+            <strong>No Pending Requests</strong>
+        </div>
+    }
+</div>
+<hr />
 </div>
 
 <script>

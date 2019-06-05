@@ -1,24 +1,26 @@
 ﻿@model AdminComponentIndexListViewModel
 
-<form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
-    <div class="form-group">
-        <div class="input-group">
-            <input type="text" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Components" />
-            <div class="input-group-btn">
-                <button class="btn btn-search-addon" type="submit">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
+<div class="container">
+    <form asp-page="/Index" method="get" class="navbar-form navbar-search adminPageHeader">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" style="z-index:0;" name="SearchString" class="bigControl searchBox form-control" value="@Model.CurrentFilter" placeholder="Search Components" />
+                <div class="input-group-btn">
+                    <button class="btn btn-search-addon" style="z-index:0;" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    @{
-        if (Model.CurrentFilter != null)
-        {
-            <a asp-page="/ComnponentIndex"><i class="ion-md-arrow-round-back"></i> Back to full List</a><span> | </span>
+        @{
+            if (Model.CurrentFilter != null)
+            {
+                <a asp-page="/ComnponentIndex"><i class="ion-md-arrow-round-back"></i> Back to full List</a><span> | </span>
+            }
         }
-    }
-    <a asp-action="Create" asp-controller="Components" asp-route-returnUrl="/Admin/ComponentIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Component</a>
-</form>
+        <a asp-action="Create" asp-controller="Components" asp-route-returnUrl="/Admin/ComponentIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Component</a>
+    </form>
+</div>
 
 <div>
     @if (ViewBag.Status == "Success!")
@@ -45,7 +47,7 @@
     @if (Model.Components.Count() > 0)
     {
         <div class="table-responsive">
-            <table class="table table-condensed">
+            <table class="table indexTable table-condensed">
                 <thead>
                     <tr class="tablePageControlHeaderRow">
                         <th colspan="11">

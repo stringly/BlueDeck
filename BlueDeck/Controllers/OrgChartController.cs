@@ -11,7 +11,7 @@ namespace BlueDeck.Controllers
     /// <summary>
     /// Serves Views and data that renders in <a href="http://www.getorgchart.com/Documentation#separationMixedHierarchyNodes" >GetOrgChart</a> Plugin
     /// </summary>
-    /// <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+    /// <seealso cref="Controller" />
     [ApiExplorerSettings(IgnoreApi = true)]
     public class OrgChartController : Controller
     {
@@ -27,9 +27,10 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
-        /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library
+        /// Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
         /// </summary>
-        /// <returns></returns>
+        /// <param name="parentComponentId">The component id of the Top-level component in the desired result set.</param>
+        /// <returns>A JSON object containing a list of <see cref="ChartableComponentWithMember"/> objects.</returns>
         [AllowAnonymous]
         [HttpGet]
         public JsonResult GetComponents(int parentComponentId)
@@ -40,15 +41,25 @@ namespace BlueDeck.Controllers
             return Json(components);
         }
 
+        /// <summary>
+        /// Gets the component select list items.
+        /// </summary>
+        /// <remarks>
+        /// This method retrieves a list of <see cref="ComponentSelectListItem"/> items for use in the Component select list drop-down.
+        /// </remarks>
+        /// <returns>A JSON object containing all <see cref="ComponentSelectListItem"/> items.</returns>
         [HttpGet]
         public JsonResult GetComponentSelectListItems()
         {            
             return Json(unitOfWork.Components.GetComponentSelectListItems());
         }
         /// <summary>
-        /// GET /OrgChart/
+        /// GET /OrgChart/Index
         /// </summary>
-        /// <returns>An <see cref="T:IActionResult"/></returns>
+        /// <remarks>
+        /// Retrieves the OrgChart/Index view, which loads the GetOrgChart plugin.
+        /// </remarks>
+        /// <returns>An <see cref="IActionResult"/></returns>
         [HttpGet]
         [Route("OrgChart/Index/{id:int?}")]
         public IActionResult Index(int? componentid)

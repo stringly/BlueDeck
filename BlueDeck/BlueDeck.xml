@@ -195,7 +195,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.AppStatusController"/> class.
             </summary>
-            <param name="unit">The unit.</param>
+            <param name="unit">The Injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Index">
             <summary>
@@ -215,6 +215,14 @@
             <summary>
             Returns a <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/> that allows creation of a new <see cref="T:BlueDeck.Models.AppStatus"/>.
             </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.AppStatus,System.String)">
+            <summary>
+            Creates the specified application status.
+            </summary>
+            <param name="appStatus">The application status.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -250,6 +258,18 @@
             <param name="id">The identifier of the <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.ComponentsApiController">
+            <summary>
+            Controller that handles Web API requests for the <see cref="T:BlueDeck.Models.Component"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:BlueDeck.Controllers.ComponentsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsApiController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsApiController.GetComponents">
             <summary>
@@ -320,18 +340,23 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
+        <member name="F:BlueDeck.Controllers.ComponentsController.PageSize">
+            <summary>
+            Property that determines the page length of List views returned from this controller.
+            </summary>
+        </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.#ctor(BlueDeck.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsController"/> class.
             </summary>
-            <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
+            <param name="unit"><see cref="T:BlueDeck.Models.IUnitOfWork"/>.</param>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Index(System.String,System.String,System.Int32)">
             <summary>
-            GET: Components
+            Retrieves a List view showing all <see cref="T:BlueDeck.Models.Component"/> entities in the database.
             </summary>
             <remarks>
-            This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.ComponentIndexListViewModel"/>
+            This View requires an <see cref="T:System.Collections.Generic.IEnumerable`1"/> objects.
             </remarks>
             <permission>
             Any authenticated User can view the Component Index. Auth is handled via Windows. The Components/Index.cshtml view contains
@@ -339,67 +364,175 @@
             </permission>
             <param name="sortOrder">The sort order.</param>
             <param name="searchString">The search string.</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="page">An integer to handle pagination. The default value for this parameter is 1.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Components/Details/5.
             </summary>
             <param name="id">The identifier for a Component.</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="returnUrl">An optional URI to allow redirects.</param>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Create(System.String)">
             <summary>
-            GET: Component/Create.
+            Returns a view that allows the creation of a new <see cref="T:BlueDeck.Models.Component"/>
             </summary>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            The Components/Create view depends on the <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> view model.
+            </remarks>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Create(BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel,System.String)">
             <summary>
-            POST: Components/Create.
+            Creates a <see cref="T:BlueDeck.Models.Component"/> from the POSTed form.
             </summary>
-            <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> with certain fields bound on submit</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="form">The form data, which will be bound to a <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/>.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
-            Components/Edit/5
+            Retrieves the View that allows a user to Edit an existing <see cref="T:BlueDeck.Models.Component"/> entity.
             </summary>
-            <param name="id"></param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            This view depends on the <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> view model.
+            This method is protected by the <see cref="T:BlueDeck.Models.Auth.CanEditComponentRequirement"/>
+            </remarks>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Component"/> to edit.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Edit(System.Int32,BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel,System.String)">
             <summary>
-            POST: Components/Edit/5
+            Handles POSTed form data to edit an existing <see cref="T:BlueDeck.Models.Component"/>.
             </summary>
-            <param name="id">The ComponentId for the <see cref="T:BlueDeck.Models.Component"/> being edited</param>
-            <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Component"/> being editied.</param>
+            <param name="form">The form data, which will be bound to a <see cref="T:BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
-            GET: Components/Delete/5
+            Deletes the <see cref="T:BlueDeck.Models.Component"/> with the specified identifier.
             </summary>
-            <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            This method is protected by the <see cref="T:BlueDeck.Models.Auth.CanEditComponentRequirement"/>
+            </remarks>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Component"/> to delete.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
-            POST: Components/Delete/5
+            Deletes the <see cref="T:BlueDeck.Models.Component"/> with the provided id.
             </summary>
-            <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/> being deleted</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Component"/> to delete.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.ComponentsController.ComponentExists(System.Int32)">
+        <member name="M:BlueDeck.Controllers.ComponentsController.GetComponentLineupViewComponent(System.Int32,System.Int32)">
             <summary>
-            Determines if a Component exists with the provided ComponentId .
+            Gets the component lineup view component.
             </summary>
-            <param name="id">The ComponentId of the <see cref="T:BlueDeck.Models.Component"/></param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="parentComponentId">The parent component identifier.</param>
+            <param name="componentBeingEditedId">The component being edited identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.DutyStatusController">
+            <summary>
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            </summary>
+            <remarks>
+            Actions in this controller are restricted by the <see cref="T:BlueDeck.Models.Auth.IsGlobalAdminRequirement"/>
+            </remarks>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.DutyStatusController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Index">
+            <summary>
+            Returns a List view of all of the <see cref="T:BlueDeck.Models.DutyStatus"/> entities.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns a view that displays details of a <see cref="T:BlueDeck.Models.DutyStatus"/>
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.DutyStatus"/></param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Create(System.String)">
+            <summary>
+            Returns a view that allows the user to create a new <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            </summary>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Create(BlueDeck.Models.DutyStatus,System.String)">
+            <summary>
+            Creates the specified duty status.
+            </summary>
+            <param name="dutyStatus">The form data, bound to a <see cref="T:BlueDeck.Models.DutyStatus"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.DutyStatus"/> to be edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Edit(System.Int32,BlueDeck.Models.DutyStatus,System.String)">
+            <summary>
+            Edits the <see cref="T:BlueDeck.Models.DutyStatus"/> with the specified identifier.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.DutyStatus"/> entity being edited.</param>
+            <param name="dutyStatus">The POSTed form data, which will be bound to a <see cref="T:BlueDeck.Models.DutyStatus"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Retrieves the view to confirm the deletion of a Duty Status
+            </summary>
+            <param name="id">The DutyStatusId of the Duty Status to be deleted.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DutyStatusController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            Deletes the Duty Status with the given DutyStatusId.
+            </summary>
+            <param name="id">The DutyStatusId of the Duty Status to be deleted.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.EnumsApiController">
+            <summary>
+            API Controller that retrieves BlueDeck Enumerables
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.EnumsApiController"/> class.
+            </summary>
+            <param name="unit">The unit.</param>
         </member>
         <member name="M:BlueDeck.Controllers.EnumsApiController.GetAll">
             <summary>
-            Gets a List of all BlueDeck enumberable types
+            Gets a List of all BlueDeck enumerable types
             </summary>
             <remarks>
             Sample request:
@@ -446,9 +579,395 @@
             <returns>A collection of all BlueDeck Enumerable types</returns>
             <response code="200">Returns a JSON object containing all BlueDeck Enumerable types</response>
         </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetGenders">
+            <summary>
+            Gets a list of BlueDeck Gender Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck genders.
+            Sample request:
+            
+                GET: EnumsApi/GetGenders
+                [
+                    {
+                        "genderId": 1,
+                        "genderName": "Unknown",
+                        "abbreviation": "U"
+                    },
+                    {
+                        "genderId": 2,
+                        "genderName": "Male",
+                        "abbreviation": "M"
+                    },
+                    {
+                        "genderId": 3,
+                        "genderName": "Female",
+                        "abbreviation": "F"
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> of all current gender types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck gender enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetRanks">
+            <summary>
+            Gets a list of BlueDeck Rank Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck ranks.
+            Sample request:
+            
+                GET: EnumsApi/GetRanks
+                [
+                    {
+                        "rankId": 1,
+                        "rankName": "Police Officer ",
+                        "rankShort": "P/O",
+                        "payGrade": "L01",
+                        "isSworn": true
+                    },
+                    {
+                        "rankId": 2,
+                        "rankName": "Police Officer First Class",
+                        "rankShort": "POFC",
+                        "payGrade": "L02",
+                        "isSworn": true
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.RankApiResult"/> of all current rank types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck rank enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetRaces">
+            <summary>
+            Gets a list of BlueDeck Race Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck races.
+            Sample request:
+            
+                GET: EnumsApi/GetRaces
+                [
+                    {
+                        "raceId": 1,
+                        "raceName": "Black",
+                        "abbreviation": "B"
+                    },
+                    {
+                        "raceId": 2,
+                        "raceName": "White",
+                        "abbreviation": "W"
+                    },
+                    {
+                        "raceId": 3,
+                        "raceName": "Asian",
+                        "abbreviation": "A"
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.RaceApiResult"/> of all current race types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck race enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetDutyStatuses">
+            <summary>
+            Gets a list of BlueDeck Duty Status Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck Duty Statuses.
+            Sample request:
+            
+                GET: EnumsApi/GetDutyStatuses
+                [
+                     {
+                       "name": "Full Duty",
+                       "abbreviation": "F",
+                       "hasPolicePower": true
+                     },
+                     {
+                       "name": "Light Duty",
+                       "abbreviation": "L",
+                       "hasPolicePower": true
+                     },
+                     {
+                       "name": "No Duty",
+                       "abbreviation": "N",
+                       "hasPolicePower": true
+                     }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> of all current duty status types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck duty status enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetPhoneNumberTypes">
+            <summary>
+            Gets a list of BlueDeck Phone Number Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck Phone Number Types.
+            Sample request:
+            
+                GET: EnumsApi/GetPhoneNumberTypes
+                [
+                    {
+                        "phoneNumberTypeId": 1,
+                        "phoneNumberTypeName": "Cell (Personal)"
+                    },
+                    {
+                        "phoneNumberTypeId": 2,
+                        "phoneNumberTypeName": "Cell (Work)"
+                    },
+                    {
+                        "phoneNumberTypeId": 3,
+                        "phoneNumberTypeName": "Office"
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult"/> of all current phone number types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck phone number enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetRoleTypes">
+            <summary>
+            Gets a list of BlueDeck Member Role Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck Member Role Types.
+            Sample request:
+            
+                GET: EnumsApi/GetRoleTypes
+                [
+                    {
+                        "roleTypeId": 1,
+                        "roleTypeName": "GlobalAdmin"
+                    },
+                    {
+                        "roleTypeId": 2,
+                        "roleTypeName": "ComponentAdmin"
+                    },
+                    {
+                        "roleTypeId": 3,
+                        "roleTypeName": "User"
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.RoleTypeApiResult"/> of all current member role types types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck member role type enumerables.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.EnumsApiController.GetAppStatuses">
+            <summary>
+            Gets a list of BlueDeck Application Status Types.
+            </summary>
+            <remarks>
+            Use this method to create Select Lists that allow a user to select one of the available BlueDeck Member Account application status Types.
+            Sample request:
+            
+                GET: EnumsApi/GetAppStatuses
+                [
+                    {
+                        "appStatusId": 1,
+                        "statusName": "New"
+                    },
+                    {
+                        "appStatusId": 2,
+                        "statusName": "Pending"
+                    },
+                    {
+                        "appStatusId": 3,
+                        "statusName": "Active"
+                    }
+                ]
+            </remarks>
+            <returns>A list of <see cref="T:BlueDeck.Models.APIModels.AppStatusApiResult"/> of all current member account application status types in the BlueDeck Database</returns>
+            <response code="200">Returns a JSON Object containing all current BlueDeck member account application status type enumerables.</response>
+        </member>
+        <member name="T:BlueDeck.Controllers.ErrorController">
+            <summary>
+            Controller that handles views for custom error pages.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.ErrorController.Error(System.Nullable{System.Int32})">
+            <summary>
+            Errors the specified status code.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.ErrorController.Error500">
+            <summary>
+            Returns the view for Server errors handled by the global error handling middleware.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.GenderController">
+            <summary>
+            Controller that handles CRUD actions and views for the <see cref="T:BlueDeck.Models.Gender"/> entity.
+            </summary>
+            <remarks>
+            Actions in this view are restricted by the <see cref="T:BlueDeck.Models.Auth.IsGlobalAdminRequirement"/>
+            </remarks>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.GenderController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Index">
+            <summary>
+            Returns a view that lists all current <see cref="T:BlueDeck.Models.Gender"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns a view that shows details for a specific <see cref="T:BlueDeck.Models.Gender"/> entity.
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Create(System.String)">
+            <summary>
+            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Gender"/>
+            </summary>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Create(BlueDeck.Models.Gender,System.String)">
+            <summary>
+            Creates the specified gender.
+            </summary>
+            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Gender"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Gender"/>
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Gender"/> to be edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Edit(System.Int32,BlueDeck.Models.Gender,System.String)">
+            <summary>
+            Edits the specified identifier.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> being edited.</param>
+            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Gender"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Retrieves a view to confirm the deletion of the <see cref="T:BlueDeck.Models.Gender"/> with the provided id.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> to be deleted.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.GenderController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            Deletes the <see cref="T:BlueDeck.Models.Gender"/> with the provided id.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> to be deleted.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.HomeController">
+            <summary>
+            Controller that contains actions for the Home Page views.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
         <member name="M:BlueDeck.Controllers.HomeController.#ctor(BlueDeck.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.HomeController"/> class.
+            </summary>
+            <param name="unit">The unit.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.Index">
+            <summary>
+            Returns the Home/Index view
+            </summary>
+            <remarks>
+            This method retrieves the User's Claims and will return the /Index view or redirect to the /About or /Pending views as appropriate.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.About">
+            <summary>
+            Returns the /About view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.Pending">
+            <summary>
+            Returns the /Pending view.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.GetMemberSearchViewComponent(System.String)">
+            <summary>
+            Retrieves the member search view component.
+            </summary>
+            <param name="searchString">The search string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent(System.Int32,System.Collections.Generic.List{System.Int32},System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Gets the demograpic search result view component.
+            </summary>
+            <param name="SelectedDemographicComponent">The selected demographic component.</param>
+            <param name="SelectedRanks">The selected ranks.</param>
+            <param name="SelectedGender">The selected gender.</param>
+            <param name="SelectedRaces">The selected races.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.Register">
+            <summary>
+            Retrieves the view that allows a user to register for a new account.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.Register(BlueDeck.Models.ViewModels.MemberAddEditViewModel)">
+            <summary>
+            Creates a new user account.
+            </summary>
+            <param name="form">The POSTed form data bound to a <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.DownloadAlphaRoster(System.Int32)">
+            <summary>
+            Downloads an alphabetical roster for the Component with the provided identity.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.DownloadComponentRoster(System.Int32)">
+            <summary>
+            Downloads an Component roster for the Component with the provided identity.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.HomeController.DownloadOrganizationChart(System.Int32)">
+            <summary>
+            Downloads an organization chart for the Component with the provided id.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.MembersApiController">
+            <summary>
+            API Controller that Retrieves BlueDeck Member information
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.MembersApiController"/> class.
             </summary>
             <param name="unit">The unit.</param>
         </member>
@@ -500,14 +1019,14 @@
             <response code="200">Returns a list of Members that match the search string</response>
             <response code="400">No members match the search string</response>
         </member>
-        <member name="M:BlueDeck.Controllers.MembersApiController.GetMember(System.Int32)">
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetMemberByBlueDeckId(System.Int32)">
             <summary>
             Gets detailed information for a specific member by BlueDeck Id.
             </summary>
             <remarks>
             Sample request:
             
-                GET /MembersApi/GetMember/1
+                GET /MembersApi/GetMemberByBlueDeckId/1
                 {
                     "memberId": 1,
                     "firstName": "John",
@@ -600,24 +1119,417 @@
             <response code="200">Detailed information for the Member with the provided BlueDeckId</response>
             <response code="400">No member with the provided BlueDeck Id was found</response>
         </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetMemberByOrgId(System.String)">
+            <summary>
+            Gets detailed information for a specific member by Organization Id.
+            </summary>
+            <remarks>
+            Use this method to attempt to retrieve Member details using the Member's known Organization Id Number. The Organization Id is distinct from the Member's BlueDeck Id
+            Sample request:
+            
+                GET /MembersApi/GetMemberByOrgId/1234
+                {
+                    "memberId": 1,
+                    "firstName": "John",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "example@email.com",
+                    "contactNumbers": [
+                        {
+                            "type": "Cell (Personal)",
+                            "phoneNumber": "(123) 456-7890"
+                        }
+                    ],
+                    "rank": {
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "name": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "name": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 13,
+                        "name": "Assistant District Commander, District I",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": null,
+                    },
+                    "supervisor": {
+                        "memberId": 1234,
+                        "firstName": "Judy",
+                        "lastName": "Johnson",
+                        "pgpdId": "4321",
+                        "email": "example2@email.net",
+                        "contactNumbers": [
+                            {
+                                "type": "Cell (Work)",
+                                "phoneNumber": "(123) 456-7890"
+                            }
+                        ],
+                        "rank": {
+                            "rankName": "Captain",
+                            "rankShort": "Capt.",
+                            "payGrade": "L06",
+                            "isSworn": true
+                        },
+                        "gender": {
+                            "name": "Female",
+                            "abbreviation": "F"
+                        },
+                        "race": {
+                            "name": "White",
+                            "abbreviation": "W"
+                        },
+                        "dutyStatus": {
+                            "name": "Full Duty",
+                            "abbreviation": "F",
+                            "hasPolicePower": true
+                        },
+                        "position": {
+                            "positionId": 12,
+                            "name": "Commander, District I",
+                            "isManager": true,
+                            "isUnique": true,
+                            "callsign": "CAR-11",
+                            "component": {
+                                "componentId": null,
+                                "name": "",
+                                "acronym": "",
+                                "parentComponent": null
+                            }
+                        },
+                        "supervisor": null
+                    }
+                } 
+                
+            </remarks>
+            <param name="id">The Organization Id of the member.</param>
+            <returns>A collection of detailed information for the Member with the provided Organization Id</returns>
+            <response code="200">Detailed information for the Member with the provided Organization Id</response>
+            <response code="400">No member with the provided Organization Id was found</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetSupervisorForBlueDeckId(System.Int32)">
+            <summary>
+            Gets the first supervisor for the Member with the given BlueDeck Id.
+            </summary>
+            <remarks>
+            This method will parse the current organizational hierarchy and retrieve the first supervisory employee in the chain of command above the member with the given BlueDeck Id.
+            
+                GET /MembersApi/GetSupervisorForBlueDeckId/1
+                {
+                    "memberId": 1,
+                    "firstName": "Bob",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "test@mail.com",
+                    "contactNumbers": [],
+                    "rank": {
+                        "rankId": 5,
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "genderId": 2,
+                        "genderName": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "raceId": 2,
+                        "raceName": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 1,
+                        "name": "Shift Commander",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": "31-ADAM"
+                    },
+                    "supervisor": null
+                }
+                
+            </remarks>
+            <param name="id">The BlueDeck Id of the Member whose supervisor you are trying to retrieve.</param>
+            <returns></returns>
+            <response code="200">Detailed information for the supervisor of the Member with the provided BlueDeck Id</response>
+            <response code="400">No member with the provided BlueDeck Id was found</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetSupervisorForOrgId(System.String)">
+            <summary>
+            Gets the first supervisor for the Member with the given BlueDeck Id.
+            </summary>
+            <remarks>
+            This method will parse the current organizational hierarchy and retrieve the first supervisory employee in the chain of command above the member with the given BlueDeck Id.
+            
+                GET /MembersApi/GetSupervisorForOrgId/1
+                {
+                    "memberId": 1,
+                    "firstName": "Bob",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "test@mail.com",
+                    "contactNumbers": [],
+                    "rank": {
+                        "rankId": 5,
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "genderId": 2,
+                        "genderName": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "raceId": 2,
+                        "raceName": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 1,
+                        "name": "Shift Commander",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": "31-ADAM"
+                    },
+                    "supervisor": null
+                }
+                
+            </remarks>
+            <param name="id">The Organization Id of the Member whose supervisor you are trying to retrieve.</param>
+            <returns></returns>
+            <response code="200">Detailed information for the supervisor of the Member with the provided Organization Id</response>
+            <response code="400">No member with the provided Organization Id was found</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForBlueDeckId(System.Int32)">
+            <summary>
+            Gets the first assistant supervisor or supervisor for the Member with the given BlueDeck Id.
+            </summary>
+            <remarks>
+            This method will parse the current organizational hierarchy and retrieve the first supervisory employee in the chain of command above the member with the given BlueDeck Id.
+            Use this method if you want to retrieve the Member's "9-Car."
+            
+                GET /MembersApi/GetAssistantSupervisorOrSupervisorForBlueDeckId/1234
+                {
+                    "memberId": 1,
+                    "firstName": "Bob",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "test@mail.com",
+                    "contactNumbers": [],
+                    "rank": {
+                        "rankId": 5,
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "genderId": 2,
+                        "genderName": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "raceId": 2,
+                        "raceName": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 1,
+                        "name": "Shift Commander",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": "31-ADAM"
+                    },
+                    "supervisor": null
+                }
+            </remarks>
+            <param name="id">The BlueDeck Id of the Member whose supervisor you are trying to retrieve.</param>
+            <returns></returns>
+            <response code="200">Detailed information for the supervisor of the Member with the provided BlueDeck Id</response>
+            <response code="400">No member with the provided Organization Id was found</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetAssistantSupervisorOrSupervisorForOrgId(System.String)">
+            <summary>
+            Gets the first assistant supervisor or supervisor for the Member with the given Organization Id.
+            </summary>
+            <remarks>
+            This method will parse the current organizational hierarchy and retrieve the first supervisory employee in the chain of command above the member with the given Organization Id.
+            Use this method if you want to retrieve the Member's "9-Car."
+            
+                GET /MembersApi/GetAssistantSupervisorOrSupervisorForOrgId/1234
+                {
+                    "memberId": 1,
+                    "firstName": "Bob",
+                    "lastName": "Smith",
+                    "pgpdId": "1234",
+                    "email": "test@mail.com",
+                    "contactNumbers": [],
+                    "rank": {
+                        "rankId": 5,
+                        "rankName": "Lieutenant",
+                        "rankShort": "Lt.",
+                        "payGrade": "L05",
+                        "isSworn": true
+                    },
+                    "gender": {
+                        "genderId": 2,
+                        "genderName": "Male",
+                        "abbreviation": "M"
+                    },
+                    "race": {
+                        "raceId": 2,
+                        "raceName": "White",
+                        "abbreviation": "W"
+                    },
+                    "dutyStatus": {
+                        "name": "Full Duty",
+                        "abbreviation": "F",
+                        "hasPolicePower": true
+                    },
+                    "position": {
+                        "positionId": 1,
+                        "name": "Shift Commander",
+                        "isManager": true,
+                        "isUnique": true,
+                        "callsign": "31-ADAM"
+                    },
+                    "supervisor": null
+                }
+            </remarks>
+            <param name="id">The Organization Id of the Member whose supervisor you are trying to retrieve.</param>
+            <returns></returns>
+            <response code="200">Detailed information for the supervisor of the Member with the provided Organization Id</response>
+            <response code="400">No member with the provided Organization Id was found</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetSubordinatesForBlueDeckId(System.Int32)">
+            <summary>
+            Gets a list of subordinates for a given Member by BlueDeck Id.
+            </summary>
+            <remarks>
+            
+                GET: /MembersApi/GetSubordinatesForBlueDeckId/1234
+                [
+                    {
+                        "name": "Lt. Bob Jones #1234",
+                        "blueDeckId": 1,
+                        "orgId": "1234"
+                    },
+                    {
+                        "name": "P/O John Smith #1111",
+                        "blueDeckId": 1410,
+                        "orgId": "1111"
+                    },
+                    {
+                        "name": "Sgt. John Doe #2222",
+                        "blueDeckId": 1065,
+                        "orgId": "2222"
+                    }
+                ]
+            Use this method to retrieve a basic list of Members who are subordinate to the Member with a given BlueDeck Id.
+            </remarks>
+            <param name="id">The BlueDeck Id of the Supervisor for whom you would like a subordinate list.</param>
+            <returns>A JSON Object containing a list of all members subordinate to the Member with the given BlueDeck Id.</returns>
+            <response code="200">A list of Members subordinate to the Member with the given BlueDeck Id.</response>
+            <response code="400">No member with the provided Organization Id was found, or the Member has no subordinates.</response>
+        </member>
+        <member name="M:BlueDeck.Controllers.MembersApiController.GetSubordinatesForOrgId(System.String)">
+            <summary>
+            Gets a list of subordinates for a given Member by Organization Id.
+            </summary>
+            <remarks>
+            
+                GET: /MembersApi/GetSubordinatesForOrgId/1234
+                [
+                    {
+                        "name": "Lt. Bob Jones #1234",
+                        "blueDeckId": 1,
+                        "orgId": "1234"
+                    },
+                    {
+                        "name": "P/O John Smith #1111",
+                        "blueDeckId": 1410,
+                        "orgId": "1111"
+                    },
+                    {
+                        "name": "Sgt. John Doe #2222",
+                        "blueDeckId": 1065,
+                        "orgId": "2222"
+                    }
+                ]
+            Use this method to retrieve a basic list of Members who are subordinate to the Member with a given Organization Id.
+            </remarks>
+            <param name="id">The Organization Id of the Supervisor for whom you would like a subordinate list.</param>
+            <returns>A JSON Object containing a list of all members subordinate to the Member with the given Organization Id.</returns>
+            <response code="200">A list of Members subordinate to the Member with the given Organization Id.</response>
+            <response code="400">No member with the provided Organization Id was found, or the Member has no subordinates.</response>
+        </member>
         <member name="T:BlueDeck.Controllers.MembersController">
             <summary>
             Controller for Member CRUD actions
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
+        <member name="F:BlueDeck.Controllers.MembersController.PageSize">
+            <summary>
+            Property that determines the page length of List views returned from this controller.
+            </summary>
+        </member>
         <member name="M:BlueDeck.Controllers.MembersController.#ctor(BlueDeck.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.MembersController"/> class.
             </summary>
-            <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
+            <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="T:BlueDeck.Models.IUnitOfWork"/>.</param>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Index(System.String,System.String,System.Int32)">
             <summary>
-            GET: Members
+            GET: The Members/Index view.
             </summary>
-            <remarks>        
+            <remarks>
+            This method can return a paginated list of members with an optional sort order or search string.
             </remarks>
+            <param name="sortOrder">
+            An optional String parameter that will control the order of the result set. The options are:
+            Last Name: (Ascending: Default)/"lastName_desc"
+            First Name: "FirstName"/"firstName_desc"
+            ID Number: "IDNumber"/"idNumber_desc"
+            Position Name: "PositionName"/"positionName_desc"
+            </param>
+            <param name="searchString">
+            An optional string parameter that will search for a match in 
+            LastName, FirstName, PositionName, IdNumber.
+            Non-alphanumeric characters will be removed prior to comparison. Both the searchString and the comparison text will be converted to lower case prior to comparing.
+            </param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Details(System.Nullable{System.Int32},System.String)">
@@ -625,12 +1537,14 @@
             GET: Members/Details/5.
             </summary>
             <param name="id">The identifier for a Member.</param>
+            <param name="returnUrl">An optional return Url</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Create(System.String)">
             <summary>
             GET: Members/Create.
             </summary>
+            <param name="returnUrl">An optional returnUrl parameter.</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Create(BlueDeck.Models.ViewModels.MemberAddEditViewModel,System.String)">
@@ -638,13 +1552,15 @@
             POST: Members/Create.
             </summary>
             <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> with certain fields bound on submit</param>
+            <param name="returnUrl">An optional return URL.</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
             Members/Edit/5
             </summary>
-            <param name="id"></param>
+            <param name="id">The identity of the Member being edited.</param>
+            <param name="returnUrl">An optional return URL</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Edit(System.Int32,BlueDeck.Models.ViewModels.MemberAddEditViewModel,System.String)">
@@ -660,6 +1576,7 @@
             GET: Member/Delete/5
             </summary>
             <param name="id">The MemberId of the <see cref="T:BlueDeck.Models.Member"/> being deleted</param>
+            <param name="returnUrl">An optional URI to redirect the user via the "Cancel" button or as a pass-through.</param>
             <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> that prompts the user to confirm the deletion of the Member with the given id</returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.DeleteConfirmed(System.Int32,System.String)">
@@ -700,15 +1617,120 @@
         </member>
         <member name="M:BlueDeck.Controllers.OrgChartController.GetComponents(System.Int32)">
             <summary>
-            Gets the components. (async, JSON result from the GetOrgChart JQuery Library
+            Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
             </summary>
-            <returns></returns>
+            <param name="parentComponentId">The component id of the Top-level component in the desired result set.</param>
+            <returns>A JSON object containing a list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects.</returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.OrgChartController.GetComponentSelectListItems">
+            <summary>
+            Gets the component select list items.
+            </summary>
+            <remarks>
+            This method retrieves a list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> items for use in the Component select list drop-down.
+            </remarks>
+            <returns>A JSON object containing all <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> items.</returns>
         </member>
         <member name="M:BlueDeck.Controllers.OrgChartController.Index(System.Nullable{System.Int32})">
             <summary>
-            GET /OrgChart/
+            GET /OrgChart/Index
             </summary>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            Retrieves the OrgChart/Index view, which loads the GetOrgChart plugin.
+            </remarks>
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.PhoneTypeController">
+            <summary>
+            Controller that handles views for CRUD function for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PhoneTypeController"/> class.
+            </summary>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Index">
+            <summary>
+            GET: PhoneType/Index
+            </summary>
+            <remarks>
+            This view shows a list of all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities in the database.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: PhoneType/Details/5
+            </summary>
+            <remarks>
+            This view displays detailed information for a <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            </remarks>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.PhoneNumberType"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Create(System.String)">
+            <summary>
+            GET: PhoneType/Create
+            </summary>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Create(BlueDeck.Models.PhoneNumberType,System.String)">
+            <summary>
+            POST: PhoneType/Create
+            </summary>
+            <param name="phoneType">A POSTed form object bound to a <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: PhoneType/Edit
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Edit(System.Int32,BlueDeck.Models.PhoneNumberType,System.String)">
+            <summary>
+            POST: PhoneType/Edit/5
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity being edited.</param>
+            <param name="phoneType">A POSTed form object, bound to a <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: PhoneType/Delete/5
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> being edited.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: PhoneType/Delete/5
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity being edited.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.PositionsApiController">
+            <summary>
+            Controller that handles WebAPI requests for the <see cref="T:BlueDeck.Models.Position"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsApiController"/> class.
+            </summary>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsApiController.GetPositions">
             <summary>
@@ -820,77 +1842,301 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
+        <member name="F:BlueDeck.Controllers.PositionsController.PageSize">
+            <summary>
+            Property that sets the length of the index view pages
+            </summary>
+        </member>
         <member name="M:BlueDeck.Controllers.PositionsController.#ctor(BlueDeck.Models.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsController"/> class.
             </summary>
-            <param name="unit"><see cref="T:BlueDeck.Persistence.UnitOfWork"/>.</param>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Index(System.String,System.String,System.Int32)">
             <summary>
-            GET: Positions
+            GET: Positions/Index
             </summary>
-            <remarks>
-            This View requires an <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ViewModels.PositionWithMemberCountItem"/>
-            </remarks>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="sortOrder">
+            An optional sort order parameter.
+            The method can sort by: (Asc/Desc)
+            Position Name : (default)/"name_desc"
+            Parent Component Name: "ParentComponentName"/"parentName_desc"
+            </param>
+            <param name="searchString">
+            An optional search string parameter.
+            The method will search against the PositionName and ParentComponentName fields.
+            Non-alphanumeric characters will be removed, and both the search text and the property text will be converted to lowercase prior to the comparison.
+            </param>
+            <param name="page">The page.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
-            GET: Positions/Details/5.
+            GET: Positions/Details/5
             </summary>
-            <param name="id">The identifier for a Position.</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Position"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Create(System.String)">
             <summary>
-            GET: Positions/Create.
+            GET: Positions/Create
             </summary>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            Returns a view that allows a User to create a new <see cref="T:BlueDeck.Models.Position"/>.
+            </remarks>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Create(BlueDeck.Models.ViewModels.PositionWithComponentListViewModel,System.String)">
             <summary>
-            POST: Positions/Create.
+            POST: Positions/Create
             </summary>
-            <param name="form">A <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> with certain fields bound on submit</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            Creates a new Position from POSTed form data
+            </remarks>
+            <param name="form">The form data, bound to a <see cref="T:BlueDeck.Models.Types.PositionIndexViewModelPositionListItem"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
-            Positions/Edit/5
+            GET: Positions/Edit
             </summary>
-            <param name="id"></param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Position"/> being edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Edit(System.Int32,BlueDeck.Models.ViewModels.PositionWithComponentListViewModel,System.String)">
             <summary>
-            POST: Positions/Edit/5
+            POST: Positions/Edit
             </summary>
-            <param name="id">The PositionId for the <see cref="T:BlueDeck.Models.Position"/> being edited</param>
-            <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/> object to which the POSTed form is Bound</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Position"/> being edited.</param>
+            <param name="form">The form data, bound to a <see cref="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
             GET: Positions/Delete/5
             </summary>
-            <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
-            <returns>An <see cref="T:IActionResult"/></returns>
+            <remarks>
+            Returns a view that allows a user to confirm the deletion of a position.
+            </remarks>
+            <param name="id">The identifier of the Position to delete.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.DeleteConfirmed(System.Int32,System.String)">
-            TODO: PositionsController: Handle Deleting a Position with members? Move all to Unassigned?
             <summary>
             POST: Positions/Delete/5
             </summary>
-            <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/> being deleted</param>
-            <returns>An <see cref="T:IActionResult"/> that redirects to <see cref="T:BlueDeck.Controllers.PositionsController.Index"/> on successful deletion of a Position.</returns>
+            <remarks>
+            This method will delete a <see cref="T:BlueDeck.Models.Position"/> and reassign any assigned members to the "Unassigned" pool.
+            </remarks>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Position"/> being deleted.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.PositionExists(System.Int32)">
             <summary>
-            Determines if a Position exists with the provided PositionId .
+            Determines if a position exists based on PositionId.
             </summary>
-            <param name="id">The PositionId of the <see cref="T:BlueDeck.Models.Position"/></param>
-            <returns>True if a <see cref="T:BlueDeck.Models.Position"/> with the given id exists</returns>
+            <param name="id">The identifier of the Position.</param>
+            <returns>True if the Position is found, otherwise False</returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsController.GetPositionLineupViewComponent(System.Int32,System.Int32)">
+            <summary>
+            Gets the position lineup view component.
+            </summary>
+            <param name="componentId">The component identifier.</param>
+            <param name="positionBeingEditedId">The position being edited identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.PositionsController.AssignMember(System.String,System.Int32,System.Int32)">
+            <summary>
+            Assigns the member.
+            </summary>
+            <param name="addOrRemove">The add or remove.</param>
+            <param name="PositionId">The position identifier.</param>
+            <param name="MemberId">The member identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.RaceController">
+            <summary>
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Race"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RaceController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Index">
+            <summary>
+            GET: Race/Index
+            </summary>
+            <remarks>
+            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Race"/> entities in the database.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Race/Details/5
+            </summary>
+            <remarks>
+            Retrieves a view that shows details for a <see cref="T:BlueDeck.Models.Race"/>
+            </remarks>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/>.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Create(System.String)">
+            <summary>
+            GET: Race/Create
+            </summary>
+            <remarks>
+            Retrieves a view that allows a user to create a new <see cref="T:BlueDeck.Models.Race"/>
+            </remarks>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Race,System.String)">
+            <summary>
+            POST: Race/Create
+            </summary>
+            <remarks>
+            Creates a new <see cref="T:BlueDeck.Models.Race"/> from the POSTed form data.
+            </remarks>
+            <param name="race">The POSTed form data, bound to <see cref="T:BlueDeck.Models.Race"/></param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Race/Edit/5
+            </summary>
+            <remarks>
+            Retrieves a view that allows a user to edit a <see cref="T:BlueDeck.Models.Race"/> entity.
+            </remarks>
+            <param name="id">The identifier if the <see cref="T:BlueDeck.Models.Race"/> being edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Edit(System.Int32,BlueDeck.Models.Race,System.String)">
+            <summary>
+            POST: Race/Edit/5
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> being edited.</param>
+            <param name="race">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Race"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>        
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Race/Delete/5
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> to delete.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RaceController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: Race/Delete/5
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> being deleted.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.RankController">
+            <summary>
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Rank"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.#ctor(BlueDeck.Models.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RankController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Index">
+            <summary>
+            GET: Rank/Index
+            </summary>
+            <remarks>
+            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Rank"/> entities in the database.
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Rank/Details/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Create(System.String)">
+            <summary>
+            GET: Rank/Create
+            </summary>
+            <remarks>
+            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Rank"/>
+            </remarks>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Rank,System.String)">
+            <summary>
+            POST: Rank/Create
+            </summary>
+            <param name="rank">The form data, bound to a <see cref="T:BlueDeck.Models.Rank"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Rank/Edit/5
+            </summary>
+            <remarks>
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Rank"/>
+            </remarks>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> to be edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Edit(System.Int32,BlueDeck.Models.Rank,System.String)">
+            <summary>
+            POST: Rank/Edit/5
+            </summary>
+            <remarks>
+            Creates a new <see cref="T:BlueDeck.Models.Rank"/> from POSTed form data.
+            </remarks>
+            <param name="id">The indentifier of the <see cref="T:BlueDeck.Models.Rank"/> being edited.</param>
+            <param name="rank">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Rank"/> object.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: Rank/Delete/5
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> being edited.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.RankController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: Rank/Delete/5
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> being deleted.</param>
+            <param name="returnUrl">An optional return URL.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.RosterController.#ctor(BlueDeck.Models.IUnitOfWork)">
             <summary>
@@ -944,6 +2190,59 @@
             </summary>
             <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
             <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.ComponentListApiListItem">
+            <summary>
+            Class that represents an API List item result for the <see cref="T:BlueDeck.Models.Component"/> entity.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentListApiListItem.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentListApiListItem.ComponentId">
+            <summary>
+            Gets or sets the component identifier.
+            </summary>
+            <value>
+            The component identifier.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.APIModels.ComponentListApiListItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/> class.
+            </summary>
+            <remarks>
+            Constructor that accepts a <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/>
+            </remarks>
+            <param name="_c">The <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/></param>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Types.ComponentSelectListItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/> class.
+            </summary>
+            <remarks>
+            Constructor that converts a <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> to a <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/>
+            </remarks>
+            <param name="_c">The <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/></param>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentListApiListItem.#ctor(BlueDeck.Models.Component)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/> class.
+            </summary>
+            <remarks>
+            Constructor that accepts a <see cref="T:BlueDeck.Models.Component"/> entity and creates a <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/>
+            </remarks>
+            <param name="_c">The <see cref="T:BlueDeck.Models.Component"/></param>
         </member>
         <member name="T:BlueDeck.Models.ApplicationDbContext">
             <summary>
@@ -1822,6 +3121,26 @@
             </remarks>
             <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem}"/></returns>
         </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetStatusById(System.Int32)">
+            <summary>
+            Gets the Duty Status with the given identifier.
+            </summary>
+            <param name="memberDutyStatus">The DutyStatusId of the desired Duty Status.</param>
+            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusesWithMemberCount">
+            <summary>
+            Gets the a list of all current duty statuses with member count.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of all current Duty Status types</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)">
+            <summary>
+            Gets a duty status with member count.
+            </summary>
+            <param name="id">The DutyStatusId of the desired Duty Status.</param>
+            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+        </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberGenderRepository">
             <summary>
             An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
@@ -1837,35 +3156,95 @@
             </remarks>
             <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberGenderSelectListItem}"/></returns>
         </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGendersWithMembers">
+            <summary>
+            Gets a list of all <see cref="T:BlueDeck.Models.Gender"/> with members.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Gender"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers(System.Int32)">
+            <summary>
+            Gets a <see cref="T:BlueDeck.Models.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderById(System.Int32)">
+            <summary>
+            Gets the gender by identifier.
+            </summary>
+            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Gender"/> identifier.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
+        </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRaceRepository">
             <summary>
-            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
+            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository`1"/> that handles database actions for the <see cref="T:BlueDeck.Models.Race"/> entity.
             </summary>
-            <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Types.MemberRace}" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberRaceRepository.GetMemberRaceSelectListItems">
             <summary>
-            Gets a list of <see cref="T:BlueDeck.Types.MemberRaceSelectListItem"/>s.
+            Gets a list of <see cref="T:BlueDeck.Models.Types.MemberRaceSelectListItem"/>s.
             </summary>
             <remarks>
             This method is used to populate Rank select lists.
             </remarks>
-            <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberRaceSelectListItem}"/></returns>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceById(System.Int32)">
+            <summary>
+            Gets the race by identifier.
+            </summary>
+            <param name="memberRaceId">The member race identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRaceRepository.GetRacesWithMembers">
+            <summary>
+            Gets a lsit of all Races including their members.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of all races including their members.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRaceRepository.GetRaceWithMembers(System.Int32)">
+            <summary>
+            Gets a race with it's members.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/>.</param>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRankRepository">
             <summary>
-            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
+            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository`1"/> 
             </summary>
-            <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.MemberRank}" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetMemberRankSelectListItems">
             <summary>
-            Gets a list of <see cref="T:BlueDeck.Types.MemberRankSelectListItem"/>s.
+            Gets a list of <see cref="T:BlueDeck.Models.Types.MemberRankSelectListItem"/>s.
             </summary>
             <remarks>
             This method is used to populate Rank select lists.
             </remarks>
-            <returns>A <see cref="T:List{BlueDeck.Models.Types.MemberRankSelectListItem}"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Types.MemberRankSelectListItem"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRankById(System.Int32)">
+            <summary>
+            Gets the rank by identifier.
+            </summary>
+            <param name="memberRankId">The member rank identifier.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Rank"/> object.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRanksWithMembers">
+            <summary>
+            Gets the all ranks with their members.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Rank"/> with all of their <see cref="T:BlueDeck.Models.Member"/>s.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers(System.Int32)">
+            <summary>
+            Gets a specific rank with its members.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Rank"/> with it's <see cref="T:BlueDeck.Models.Member"/>s.</returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRepository">
             <summary>
@@ -1882,6 +3261,34 @@
             when removing a Member.
             </remarks>
             <param name="memberId">The member identifier.</param>
+        </member>
+        <member name="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository">
+            <summary>
+            Repository that handles database interactions for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            </summary>
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem"/> items for all phone number types in the database.
+            </summary>
+            <remarks>
+            This method is used to populate select lists for Phone Number Types
+            </remarks>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers">
+            <summary>
+            Gets a list of all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)">
+            <summary>
+            Gets a specific <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/></param>
+            <returns>A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IPositionRepository">
             <summary>
@@ -3013,6 +4420,13 @@
             /// </remarks>
             <param name="c">The <seealso cref="T:BlueDeck.Models.Component"/> being added or edited.</param>
         </member>
+        <member name="T:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository">
+            <summary>
+            Repository that Controls CRUD operations for the <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            </summary>
+            <seealso cref="!:Repositories.Repository&lt;Models.DutyStatus&gt;" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
+        </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Persistence.MemberDutyStatusRepository"/> class.
@@ -3030,6 +4444,13 @@
             A <see cref="T:List{BlueDeck.Models.Types.MemberGenderSelectListItem}" />
             </returns>
         </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetStatusById(System.Int32)">
+            <summary>
+            Gets the Duty Status with the given identifier.
+            </summary>
+            <param name="memberDutyStatus">The DutyStatusId of the desired Duty Status.</param>
+            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+        </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -3037,6 +4458,29 @@
             <value>
             The application database context.
             </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusesWithMemberCount">
+            <summary>
+            Gets the a list of all current duty statuses with member count.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of all current Duty Status types</returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.GetDutyStatusWithMemberCount(System.Int32)">
+            <summary>
+            Gets a duty status with member count.
+            </summary>
+            <param name="id">The DutyStatusId of the desired Duty Status.</param>
+            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove(System.Int32)">
+            <summary>
+            Removes the Duty Status with the specified identifier.
+            </summary>
+            <remarks>
+            If the Duty Status being deleted has Members assigned to it, this method will try to reassign them the to "Full Duty" status, or, failing that, assign them to DutyStatusId = 1.
+            This is to prevent orphaning Members. The current calling methods are supposed to prevent allowing this method to be called on Duty Statuses with active Members.
+            </remarks>
+            <param name="id">The DutyStatusId of the Duty Status to remove.</param>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.MemberGenderRepository">
             <summary>
@@ -3061,6 +4505,28 @@
             <returns>
             A <see cref="T:List{BlueDeck.Models.Types.MemberGenderSelectListItem}" />
             </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderById(System.Int32)">
+            <summary>
+            Gets the gender by identifier.
+            </summary>
+            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Gender" /> identifier.</param>
+            <returns>
+            A <see cref="T:BlueDeck.Models.Gender" />
+            </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGendersWithMembers">
+            <summary>
+            Gets a list of all <see cref="T:BlueDeck.Models.Gender"/> with members.
+            </summary>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Gender"/></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers(System.Int32)">
+            <summary>
+            Gets a <see cref="T:BlueDeck.Models.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberGenderRepository.ApplicationDbContext">
             <summary>
@@ -3094,6 +4560,28 @@
             A <see cref="T:List{BlueDeck.Models.Types.MemberRaceSelectListItem}" />
             </returns>
         </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceById(System.Int32)">
+            <summary>
+            Gets the race by identifier.
+            </summary>
+            <param name="memberRaceId">The member race identifier.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Race"/></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRacesWithMembers">
+            <summary>
+            Gets a lsit of all Races including their members.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1" /> of all races including their members.
+            </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRaceWithMembers(System.Int32)">
+            <summary>
+            Gets a race with it's members.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race" />.</param>
+            <returns></returns>
+        </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberRaceRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -3125,6 +4613,32 @@
             <remarks>
             This method is used to populate Rank select lists.
             </remarks>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankById(System.Int32)">
+            <summary>
+            Gets the rank by identifier.
+            </summary>
+            <param name="memberRankId">The member rank identifier.</param>
+            <returns>
+            A <see cref="T:BlueDeck.Models.Rank" /> object.
+            </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRanksWithMembers">
+            <summary>
+            Gets a list of all ranks with their members.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Rank" /> with all of their <see cref="T:BlueDeck.Models.Member" />s.
+            </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers(System.Int32)">
+            <summary>
+            Gets a specific rank with its members.
+            </summary>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank" />.</param>
+            <returns>
+            A <see cref="T:BlueDeck.Models.Rank" /> with it's <see cref="T:BlueDeck.Models.Member" />s.
+            </returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberRankRepository.ApplicationDbContext">
             <summary>
@@ -3188,6 +4702,55 @@
             </remarks>
             <param name="memberId">The member identifier.</param>
             <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository">
+            <summary>
+            An implementation of the <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository"/> that handles CRUD interactions for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities.
+            </summary>
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository"/> class.
+            </summary>
+            <param name="context">An injected <see cref="P:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.ApplicationDbContext"/> database context obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeSelectListItems">
+            <summary>
+            Gets a list of <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem" /> items for all phone number types in the database.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1" />
+            </returns>
+            <remarks>
+            This method is used to populate select lists for Phone Number Types
+            </remarks>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers">
+            <summary>
+            Gets a list of all <see cref="T:BlueDeck.Models.PhoneNumberType" /> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.List`1"/> that includes all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities and their related <see cref="T:BlueDeck.Models.ContactNumber"/>.
+            </returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)">
+            <summary>
+            Gets a specific <see cref="T:BlueDeck.Models.PhoneNumberType" /> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
+            </summary>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType" /></param>
+            <returns>
+            A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.
+            </returns>
+        </member>
+        <member name="P:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.ApplicationDbContext">
+            <summary>
+            Exposes the injected DB Context to class methods.
+            </summary>
+            <value>
+            The application database context.
+            </value>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.PositionRepository">
             <summary>

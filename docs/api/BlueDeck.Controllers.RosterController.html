@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class RosterController
    ">
-    <meta name="generator" content="docfx 2.42.1.0">
+    <meta name="generator" content="docfx 2.40.11.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -680,10 +680,10 @@ public class RosterController : Controller, IActionFilter, IAsyncActionFilter, I
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController__ctor_BlueDeck_Models_IUnitOfWork_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.%23ctor(BlueDeck.Models.IUnitOfWork)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L24">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L24">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController__ctor_" data-uid="BlueDeck.Controllers.RosterController.#ctor*"></a>
   <h4 id="BlueDeck_Controllers_RosterController__ctor_BlueDeck_Models_IUnitOfWork_" data-uid="BlueDeck.Controllers.RosterController.#ctor(BlueDeck.Models.IUnitOfWork)">RosterController(IUnitOfWork)</h4>
@@ -716,10 +716,10 @@ public class RosterController : Controller, IActionFilter, IAsyncActionFilter, I
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_AddPositionToComponent_BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.AddPositionToComponent(BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_AddPositionToComponent_BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.AddPositionToComponent(BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L223">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L372">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_AddPositionToComponent_" data-uid="BlueDeck.Controllers.RosterController.AddPositionToComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_AddPositionToComponent_BlueDeck_Models_ViewModels_AddPositionToComponentViewComponentViewModel_" data-uid="BlueDeck.Controllers.RosterController.AddPositionToComponent(BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel)">AddPositionToComponent(AddPositionToComponentViewComponentViewModel)</h4>
@@ -729,7 +729,7 @@ public class RosterController : Controller, IActionFilter, IAsyncActionFilter, I
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
-public IActionResult AddPositionToComponent([Bind(new string[]{&quot;PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsUnique&quot;})] AddPositionToComponentViewComponentViewModel form)</code></pre>
+public IActionResult AddPositionToComponent([Bind(new string[]{&quot;PositionId,ParentComponentId,LineupPosition,Callsign,PositionName,JobTitle,IsManager,IsAssistantManager,IsUnique&quot;})] AddPositionToComponentViewComponentViewModel form)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -766,10 +766,57 @@ public IActionResult AddPositionToComponent([Bind(new string[]{&quot;PositionId,
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ChangeEmployeeStatus_BlueDeck_Models_ViewModels_ChangeEmployeeStatusModalViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ChangeEmployeeStatus(BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_CancelTDY_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.CancelTDY(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L397">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L190">View Source</a>
+  </span>
+  <a id="BlueDeck_Controllers_RosterController_CancelTDY_" data-uid="BlueDeck.Controllers.RosterController.CancelTDY*"></a>
+  <h4 id="BlueDeck_Controllers_RosterController_CancelTDY_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.CancelTDY(System.Int32)">CancelTDY(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonResult CancelTDY(int memberId)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">memberId</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.JsonResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ChangeEmployeeStatus_BlueDeck_Models_ViewModels_ChangeEmployeeStatusModalViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ChangeEmployeeStatus(BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L557">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_ChangeEmployeeStatus_" data-uid="BlueDeck.Controllers.RosterController.ChangeEmployeeStatus*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_ChangeEmployeeStatus_BlueDeck_Models_ViewModels_ChangeEmployeeStatusModalViewComponentViewModel_" data-uid="BlueDeck.Controllers.RosterController.ChangeEmployeeStatus(BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel)">ChangeEmployeeStatus(ChangeEmployeeStatusModalViewComponentViewModel)</h4>
@@ -814,10 +861,10 @@ public IActionResult ChangeEmployeeStatus([Bind(new string[]{&quot;MemberId,Duty
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_DeleteComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.DeleteComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_DeleteComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.DeleteComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L558">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L710">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_DeleteComponent_" data-uid="BlueDeck.Controllers.RosterController.DeleteComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_DeleteComponent_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.DeleteComponent(System.Int32)">DeleteComponent(Int32)</h4>
@@ -861,10 +908,10 @@ public IActionResult ChangeEmployeeStatus([Bind(new string[]{&quot;MemberId,Duty
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_DeletePosition_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.DeletePosition(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_DeletePosition_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.DeletePosition(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L333">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L493">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_DeletePosition_" data-uid="BlueDeck.Controllers.RosterController.DeletePosition*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_DeletePosition_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.DeletePosition(System.Int32)">DeletePosition(Int32)</h4>
@@ -909,10 +956,10 @@ public IActionResult DeletePosition(int PositionId)</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_EditMemberModal_BlueDeck_Models_ViewModels_MemberAddEditViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.EditMemberModal(BlueDeck.Models.ViewModels.MemberAddEditViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_EditMemberModal_BlueDeck_Models_ViewModels_MemberAddEditViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.EditMemberModal(BlueDeck.Models.ViewModels.MemberAddEditViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L355">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L515">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_EditMemberModal_" data-uid="BlueDeck.Controllers.RosterController.EditMemberModal*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_EditMemberModal_BlueDeck_Models_ViewModels_MemberAddEditViewModel_" data-uid="BlueDeck.Controllers.RosterController.EditMemberModal(BlueDeck.Models.ViewModels.MemberAddEditViewModel)">EditMemberModal(MemberAddEditViewModel)</h4>
@@ -921,7 +968,7 @@ public IActionResult DeletePosition(int PositionId)</code></pre>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
-public IActionResult EditMemberModal([Bind(new string[]{&quot;MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,AppStatusId,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers&quot;})] MemberAddEditViewModel form)</code></pre>
+public IActionResult EditMemberModal([Bind(new string[]{&quot;MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,PositionId,TempPositionId,AppStatusId,LDAPName,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers&quot;})] MemberAddEditViewModel form)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -957,10 +1004,10 @@ public IActionResult EditMemberModal([Bind(new string[]{&quot;MemberId,MemberRan
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAddEditComponentViewComponent_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAddEditComponentViewComponent(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAddEditComponentViewComponent_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAddEditComponentViewComponent(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L464">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L616">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetAddEditComponentViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetAddEditComponentViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetAddEditComponentViewComponent_System_Int32_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetAddEditComponentViewComponent(System.Int32,System.Int32)">GetAddEditComponentViewComponent(Int32, Int32)</h4>
@@ -1009,10 +1056,10 @@ public IActionResult EditMemberModal([Bind(new string[]{&quot;MemberId,MemberRan
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAddPositionToComponentViewComponent_System_Int32_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAddPositionToComponentViewComponent(System.Int32%2CSystem.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAddPositionToComponentViewComponent_System_Int32_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAddPositionToComponentViewComponent(System.Int32%2CSystem.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L183">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L332">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetAddPositionToComponentViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetAddPositionToComponentViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetAddPositionToComponentViewComponent_System_Int32_System_Nullable_System_Int32__" data-uid="BlueDeck.Controllers.RosterController.GetAddPositionToComponentViewComponent(System.Int32,System.Nullable{System.Int32})">GetAddPositionToComponentViewComponent(Int32, Nullable&lt;Int32&gt;)</h4>
@@ -1064,10 +1111,10 @@ public IActionResult EditMemberModal([Bind(new string[]{&quot;MemberId,MemberRan
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAssignMemberModalViewComponent_System_Int32_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAssignMemberModalViewComponent(System.Int32%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetAssignMemberModalViewComponent_System_Int32_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetAssignMemberModalViewComponent(System.Int32%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L436">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L588">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetAssignMemberModalViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetAssignMemberModalViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetAssignMemberModalViewComponent_System_Int32_System_Int32_System_String_" data-uid="BlueDeck.Controllers.RosterController.GetAssignMemberModalViewComponent(System.Int32,System.Int32,System.String)">GetAssignMemberModalViewComponent(Int32, Int32, String)</h4>
@@ -1122,10 +1169,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetChangeEmployeeStatusModalViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetChangeEmployeeStatusModalViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetChangeEmployeeStatusModalViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetChangeEmployeeStatusModalViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L382">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L542">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetChangeEmployeeStatusModalViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetChangeEmployeeStatusModalViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetChangeEmployeeStatusModalViewComponent_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetChangeEmployeeStatusModalViewComponent(System.Int32)">GetChangeEmployeeStatusModalViewComponent(Int32)</h4>
@@ -1169,10 +1216,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetConfirmComponentDeleteModal_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetConfirmComponentDeleteModal(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetConfirmComponentDeleteModal_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetConfirmComponentDeleteModal(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L552">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L704">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetConfirmComponentDeleteModal_" data-uid="BlueDeck.Controllers.RosterController.GetConfirmComponentDeleteModal*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetConfirmComponentDeleteModal_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetConfirmComponentDeleteModal(System.Int32)">GetConfirmComponentDeleteModal(Int32)</h4>
@@ -1216,10 +1263,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetEditEmployeeModalViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetEditEmployeeModalViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetEditEmployeeModalViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetEditEmployeeModalViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L341">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L501">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetEditEmployeeModalViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetEditEmployeeModalViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetEditEmployeeModalViewComponent_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetEditEmployeeModalViewComponent(System.Int32)">GetEditEmployeeModalViewComponent(Int32)</h4>
@@ -1263,10 +1310,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetReassignMemberViewComponent_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetReassignMemberViewComponent(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetReassignMemberViewComponent_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetReassignMemberViewComponent(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L153">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L292">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetReassignMemberViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetReassignMemberViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetReassignMemberViewComponent_System_Int32_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetReassignMemberViewComponent(System.Int32,System.Int32)">GetReassignMemberViewComponent(Int32, Int32)</h4>
@@ -1318,10 +1365,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetRosterViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetRosterViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_GetRosterViewComponent_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.GetRosterViewComponent(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L140">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L279">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_GetRosterViewComponent_" data-uid="BlueDeck.Controllers.RosterController.GetRosterViewComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_GetRosterViewComponent_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.GetRosterViewComponent(System.Int32)">GetRosterViewComponent(Int32)</h4>
@@ -1367,10 +1414,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_Index_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.Index(System.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_Index_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.Index(System.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L30">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L30">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_Index_" data-uid="BlueDeck.Controllers.RosterController.Index*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_Index_System_Nullable_System_Int32__" data-uid="BlueDeck.Controllers.RosterController.Index(System.Nullable{System.Int32})">Index(Nullable&lt;Int32&gt;)</h4>
@@ -1414,10 +1461,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ReassignMember_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ReassignMember(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ReassignMember_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ReassignMember(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L66">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L66">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_ReassignMember_" data-uid="BlueDeck.Controllers.RosterController.ReassignMember*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_ReassignMember_System_Int32_System_Int32_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.ReassignMember(System.Int32,System.Int32,System.Int32)">ReassignMember(Int32, Int32, Int32)</h4>
@@ -1478,10 +1525,10 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ReassignMemberViaModal_BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ReassignMemberViaModal(BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ReassignMemberViaModal_BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ReassignMemberViaModal(BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L164">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L303">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_ReassignMemberViaModal_" data-uid="BlueDeck.Controllers.RosterController.ReassignMemberViaModal*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_ReassignMemberViaModal_BlueDeck_Models_ViewModels_ReassignEmployeeModalViewComponentViewModel_" data-uid="BlueDeck.Controllers.RosterController.ReassignMemberViaModal(BlueDeck.Models.ViewModels.ReassignEmployeeModalViewComponentViewModel)">ReassignMemberViaModal(ReassignEmployeeModalViewComponentViewModel)</h4>
@@ -1491,7 +1538,7 @@ public IActionResult GetAssignMemberModalViewComponent(int positionId, int selec
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[HttpPost]
-public void ReassignMemberViaModal([Bind(new string[]{&quot;PositionId&quot;, &quot;MemberId&quot;, &quot;SelectedComponentId&quot;})] ReassignEmployeeModalViewComponentViewModel form)</code></pre>
+public void ReassignMemberViaModal([Bind(new string[]{&quot;PositionId&quot;, &quot;MemberId&quot;, &quot;SelectedComponentId&quot;, &quot;IsTDY&quot;})] ReassignEmployeeModalViewComponentViewModel form)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1513,18 +1560,18 @@ public void ReassignMemberViaModal([Bind(new string[]{&quot;PositionId&quot;, &q
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_ReassignTDYMember_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.ReassignTDYMember(System.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L116">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L146">View Source</a>
   </span>
-  <a id="BlueDeck_Controllers_RosterController_SwapMemberPositions_" data-uid="BlueDeck.Controllers.RosterController.SwapMemberPositions*"></a>
-  <h4 id="BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Int32)">SwapMemberPositions(Int32, Int32)</h4>
+  <a id="BlueDeck_Controllers_RosterController_ReassignTDYMember_" data-uid="BlueDeck.Controllers.RosterController.ReassignTDYMember*"></a>
+  <h4 id="BlueDeck_Controllers_RosterController_ReassignTDYMember_System_Int32_System_Int32_System_Int32_" data-uid="BlueDeck.Controllers.RosterController.ReassignTDYMember(System.Int32,System.Int32,System.Int32)">ReassignTDYMember(Int32, Int32, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public JsonResult SwapMemberPositions(int dragMemberId, int dropMemberId)</code></pre>
+    <pre><code class="lang-csharp hljs">public JsonResult ReassignTDYMember(int memberId, int positionId, int selectedComponentId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1538,12 +1585,17 @@ public void ReassignMemberViaModal([Bind(new string[]{&quot;PositionId&quot;, &q
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">dragMemberId</span></td>
+        <td><span class="parametername">memberId</span></td>
         <td></td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><span class="parametername">dropMemberId</span></td>
+        <td><span class="parametername">positionId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">selectedComponentId</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1565,10 +1617,72 @@ public void ReassignMemberViaModal([Bind(new string[]{&quot;PositionId&quot;, &q
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController_UpdateComponent_BlueDeck_Models_ViewModels_ComponentWithComponentListViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.UpdateComponent(BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Boolean_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32%2CSystem.Boolean%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L498">View Source</a>
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L217">View Source</a>
+  </span>
+  <a id="BlueDeck_Controllers_RosterController_SwapMemberPositions_" data-uid="BlueDeck.Controllers.RosterController.SwapMemberPositions*"></a>
+  <h4 id="BlueDeck_Controllers_RosterController_SwapMemberPositions_System_Int32_System_Boolean_System_Int32_System_Boolean_" data-uid="BlueDeck.Controllers.RosterController.SwapMemberPositions(System.Int32,System.Boolean,System.Int32,System.Boolean)">SwapMemberPositions(Int32, Boolean, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public JsonResult SwapMemberPositions(int dragMemberId, bool dragIsTDY, int dropMemberId, bool dropIsTDY)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">dragMemberId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">dragIsTDY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">dropMemberId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">dropIsTDY</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Mvc.JsonResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController_UpdateComponent_BlueDeck_Models_ViewModels_ComponentWithComponentListViewModel_.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController.UpdateComponent(BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L650">View Source</a>
   </span>
   <a id="BlueDeck_Controllers_RosterController_UpdateComponent_" data-uid="BlueDeck.Controllers.RosterController.UpdateComponent*"></a>
   <h4 id="BlueDeck_Controllers_RosterController_UpdateComponent_BlueDeck_Models_ViewModels_ComponentWithComponentListViewModel_" data-uid="BlueDeck.Controllers.RosterController.UpdateComponent(BlueDeck.Models.ViewModels.ComponentWithComponentListViewModel)">UpdateComponent(ComponentWithComponentListViewModel)</h4>
@@ -1632,10 +1746,10 @@ public IActionResult UpdateComponent([Bind(new string[]{&quot;ComponentId,Parent
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/new/master/apiSpec/new?filename=BlueDeck_Controllers_RosterController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/stringly/BlueDeck/new/AssistantManager/apiSpec/new?filename=BlueDeck_Controllers_RosterController.md&amp;value=---%0Auid%3A%20BlueDeck.Controllers.RosterController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/stringly/BlueDeck/blob/master/BlueDeck/Controllers/RosterController.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/stringly/BlueDeck/blob/AssistantManager/BlueDeck/Controllers/RosterController.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

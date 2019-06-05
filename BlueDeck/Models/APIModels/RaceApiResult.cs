@@ -7,7 +7,8 @@ namespace BlueDeck.Models.APIModels
 {
     public class RaceApiResult
     {
-        public string Name { get; set; }
+        public int RaceId {get;set;}
+        public string RaceName { get; set; }
         public string Abbreviation { get; set; }
 
         public RaceApiResult()
@@ -16,7 +17,8 @@ namespace BlueDeck.Models.APIModels
 
         public RaceApiResult(Race _race)
         {
-            Name = _race.MemberRaceFullName;
+            RaceId = (Int32)_race.MemberRaceId;
+            RaceName = _race.MemberRaceFullName;
             Abbreviation = _race.Abbreviation.ToString();
         }
     }

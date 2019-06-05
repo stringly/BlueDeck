@@ -36,6 +36,13 @@ namespace BlueDeck.Persistence.Repositories
             return GetAll().ToList().ConvertAll(x => new MemberGenderSelectListItem { MemberGenderId = System.Convert.ToInt32(x.GenderId), MemberGenderFullName = x.GenderFullName , Abbreviation = x.Abbreviation });
         }
 
+        /// <summary>
+        /// Gets the gender by identifier.
+        /// </summary>
+        /// <param name="memberGenderId">The <see cref="Gender" /> identifier.</param>
+        /// <returns>
+        /// A <see cref="Gender" />
+        /// </returns>
         public Gender GetGenderById(int memberGenderId)
         {
             return ApplicationDbContext.Genders
@@ -43,9 +50,23 @@ namespace BlueDeck.Persistence.Repositories
                 .FirstOrDefault();
         }
 
+        /// <summary>
+        /// Gets a list of all <see cref="Gender"/> with members.
+        /// </summary>
+        /// <returns>A <see cref="List{Gender}"/> containing all current <see cref="Gender"/></returns>
         public List<Gender> GetGendersWithMembers()
         {
             return ApplicationDbContext.Genders.Include(x => x.Members).ToList();
+        }
+
+        /// <summary>
+        /// Gets a <see cref="Gender"/> with it's current <see cref="Member"/>s.
+        /// </summary>
+        /// <param name="id">The identifier of the <see cref="Gender"/>.</param>
+        /// <returns>A <see cref="Gender"/></returns>
+        public Gender GetGenderWithMembers(int id)
+        {
+            return ApplicationDbContext.Genders.Include(x => x.Members).First(x => x.GenderId == id);
         }
 
         /// <summary>

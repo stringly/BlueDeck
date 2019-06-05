@@ -39,7 +39,8 @@ namespace BlueDeck
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:OrgChartComponents:ConnectionString"]));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddAuthentication(Microsoft.AspNetCore.Server.IISIntegration.IISDefaults.AuthenticationScheme);
-            
+            // The following line enables Application Insights telemetry collection.
+            services.AddApplicationInsightsTelemetry();
             services.AddMvc();
             services.AddSwaggerGen(c =>
             {
@@ -97,8 +98,13 @@ namespace BlueDeck
         /// <param name="app">An <see cref="IApplicationBuilder"/> object.</param>
         /// <param name="env">An <see cref="IHostingEnvironment"/> object.</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
-            if (env.IsDevelopment()) {
+            if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error/500");
             }
             app.UseStatusCodePagesWithReExecute("/Error/Error", "?statusCode={0}");
             app.UseAuthentication();
