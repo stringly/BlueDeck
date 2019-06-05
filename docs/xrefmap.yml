@@ -931,6 +931,22 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Controllers.HomeController.DownloadOrganizationChart
   nameWithType: HomeController.DownloadOrganizationChart
+- uid: BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent(System.Int32,System.Collections.Generic.List{System.Int32},System.Int32,System.Collections.Generic.List{System.Int32})
+  name: GetDemograpicSearchResultViewComponent(Int32, List<Int32>, Int32, List<Int32>)
+  href: api/BlueDeck.Controllers.HomeController.html#BlueDeck_Controllers_HomeController_GetDemograpicSearchResultViewComponent_System_Int32_System_Collections_Generic_List_System_Int32__System_Int32_System_Collections_Generic_List_System_Int32__
+  commentId: M:BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent(System.Int32,System.Collections.Generic.List{System.Int32},System.Int32,System.Collections.Generic.List{System.Int32})
+  name.vb: GetDemograpicSearchResultViewComponent(Int32, List(Of Int32), Int32, List(Of Int32))
+  fullName: BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent(System.Int32, System.Collections.Generic.List<System.Int32>, System.Int32, System.Collections.Generic.List<System.Int32>)
+  fullName.vb: BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent(System.Int32, System.Collections.Generic.List(Of System.Int32), System.Int32, System.Collections.Generic.List(Of System.Int32))
+  nameWithType: HomeController.GetDemograpicSearchResultViewComponent(Int32, List<Int32>, Int32, List<Int32>)
+  nameWithType.vb: HomeController.GetDemograpicSearchResultViewComponent(Int32, List(Of Int32), Int32, List(Of Int32))
+- uid: BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent*
+  name: GetDemograpicSearchResultViewComponent
+  href: api/BlueDeck.Controllers.HomeController.html#BlueDeck_Controllers_HomeController_GetDemograpicSearchResultViewComponent_
+  commentId: Overload:BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent
+  isSpec: "True"
+  fullName: BlueDeck.Controllers.HomeController.GetDemograpicSearchResultViewComponent
+  nameWithType: HomeController.GetDemograpicSearchResultViewComponent
 - uid: BlueDeck.Controllers.HomeController.GetMemberSearchViewComponent(System.String)
   name: GetMemberSearchViewComponent(String)
   href: api/BlueDeck.Controllers.HomeController.html#BlueDeck_Controllers_HomeController_GetMemberSearchViewComponent_System_String_
@@ -2394,6 +2410,96 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Migrations.initial.Up
   nameWithType: initial.Up
+- uid: BlueDeck.Migrations.IsExceptionToDuty
+  name: IsExceptionToDuty
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html
+  commentId: T:BlueDeck.Migrations.IsExceptionToDuty
+  fullName: BlueDeck.Migrations.IsExceptionToDuty
+  nameWithType: IsExceptionToDuty
+- uid: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  name: BuildTargetModel(ModelBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  nameWithType: IsExceptionToDuty.BuildTargetModel(ModelBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel*
+  name: BuildTargetModel
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_BuildTargetModel_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.BuildTargetModel
+  nameWithType: IsExceptionToDuty.BuildTargetModel
+- uid: BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Down(MigrationBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: IsExceptionToDuty.Down(MigrationBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDuty.Down*
+  name: Down
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Down_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.Down
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.Down
+  nameWithType: IsExceptionToDuty.Down
+- uid: BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Up(MigrationBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: IsExceptionToDuty.Up(MigrationBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDuty.Up*
+  name: Up
+  href: api/BlueDeck.Migrations.IsExceptionToDuty.html#BlueDeck_Migrations_IsExceptionToDuty_Up_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDuty.Up
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDuty.Up
+  nameWithType: IsExceptionToDuty.Up
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool
+  name: IsExceptionToDutyBool
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html
+  commentId: T:BlueDeck.Migrations.IsExceptionToDutyBool
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool
+  nameWithType: IsExceptionToDutyBool
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  name: BuildTargetModel(ModelBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  nameWithType: IsExceptionToDutyBool.BuildTargetModel(ModelBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel*
+  name: BuildTargetModel
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_BuildTargetModel_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.BuildTargetModel
+  nameWithType: IsExceptionToDutyBool.BuildTargetModel
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Down(MigrationBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: IsExceptionToDutyBool.Down(MigrationBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Down*
+  name: Down
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Down_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.Down
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Down
+  nameWithType: IsExceptionToDutyBool.Down
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Up(MigrationBuilder)
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: IsExceptionToDutyBool.Up(MigrationBuilder)
+- uid: BlueDeck.Migrations.IsExceptionToDutyBool.Up*
+  name: Up
+  href: api/BlueDeck.Migrations.IsExceptionToDutyBool.html#BlueDeck_Migrations_IsExceptionToDutyBool_Up_
+  commentId: Overload:BlueDeck.Migrations.IsExceptionToDutyBool.Up
+  isSpec: "True"
+  fullName: BlueDeck.Migrations.IsExceptionToDutyBool.Up
+  nameWithType: IsExceptionToDutyBool.Up
 - uid: BlueDeck.Migrations.removeMemberPrefix
   name: removeMemberPrefix
   href: api/BlueDeck.Migrations.removeMemberPrefix.html
@@ -4592,6 +4698,58 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Component.CreatorId
   nameWithType: Component.CreatorId
+- uid: BlueDeck.Models.Component.GetComponentMembers
+  name: GetComponentMembers()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetComponentMembers
+  commentId: M:BlueDeck.Models.Component.GetComponentMembers
+  fullName: BlueDeck.Models.Component.GetComponentMembers()
+  nameWithType: Component.GetComponentMembers()
+- uid: BlueDeck.Models.Component.GetComponentMembers*
+  name: GetComponentMembers
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetComponentMembers_
+  commentId: Overload:BlueDeck.Models.Component.GetComponentMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetComponentMembers
+  nameWithType: Component.GetComponentMembers
+- uid: BlueDeck.Models.Component.GetComponentMembersRecursive
+  name: GetComponentMembersRecursive()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetComponentMembersRecursive
+  commentId: M:BlueDeck.Models.Component.GetComponentMembersRecursive
+  fullName: BlueDeck.Models.Component.GetComponentMembersRecursive()
+  nameWithType: Component.GetComponentMembersRecursive()
+- uid: BlueDeck.Models.Component.GetComponentMembersRecursive*
+  name: GetComponentMembersRecursive
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetComponentMembersRecursive_
+  commentId: Overload:BlueDeck.Models.Component.GetComponentMembersRecursive
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetComponentMembersRecursive
+  nameWithType: Component.GetComponentMembersRecursive
+- uid: BlueDeck.Models.Component.GetExceptionToDutyMembers
+  name: GetExceptionToDutyMembers()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetExceptionToDutyMembers
+  commentId: M:BlueDeck.Models.Component.GetExceptionToDutyMembers
+  fullName: BlueDeck.Models.Component.GetExceptionToDutyMembers()
+  nameWithType: Component.GetExceptionToDutyMembers()
+- uid: BlueDeck.Models.Component.GetExceptionToDutyMembers*
+  name: GetExceptionToDutyMembers
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetExceptionToDutyMembers_
+  commentId: Overload:BlueDeck.Models.Component.GetExceptionToDutyMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetExceptionToDutyMembers
+  nameWithType: Component.GetExceptionToDutyMembers
+- uid: BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive
+  name: GetExceptionToDutyMembersRecursive()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetExceptionToDutyMembersRecursive
+  commentId: M:BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive
+  fullName: BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive()
+  nameWithType: Component.GetExceptionToDutyMembersRecursive()
+- uid: BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive*
+  name: GetExceptionToDutyMembersRecursive
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetExceptionToDutyMembersRecursive_
+  commentId: Overload:BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive
+  nameWithType: Component.GetExceptionToDutyMembersRecursive
 - uid: BlueDeck.Models.Component.GetManager
   name: GetManager()
   href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetManager
@@ -4605,6 +4763,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Component.GetManager
   nameWithType: Component.GetManager
+- uid: BlueDeck.Models.Component.GetManagerCount
+  name: GetManagerCount()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetManagerCount
+  commentId: M:BlueDeck.Models.Component.GetManagerCount
+  fullName: BlueDeck.Models.Component.GetManagerCount()
+  nameWithType: Component.GetManagerCount()
+- uid: BlueDeck.Models.Component.GetManagerCount*
+  name: GetManagerCount
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetManagerCount_
+  commentId: Overload:BlueDeck.Models.Component.GetManagerCount
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetManagerCount
+  nameWithType: Component.GetManagerCount
 - uid: BlueDeck.Models.Component.GetManagerDisplayName
   name: GetManagerDisplayName()
   href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetManagerDisplayName
@@ -4618,6 +4789,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Component.GetManagerDisplayName
   nameWithType: Component.GetManagerDisplayName
+- uid: BlueDeck.Models.Component.GetWorkerCount
+  name: GetWorkerCount()
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetWorkerCount
+  commentId: M:BlueDeck.Models.Component.GetWorkerCount
+  fullName: BlueDeck.Models.Component.GetWorkerCount()
+  nameWithType: Component.GetWorkerCount()
+- uid: BlueDeck.Models.Component.GetWorkerCount*
+  name: GetWorkerCount
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_GetWorkerCount_
+  commentId: Overload:BlueDeck.Models.Component.GetWorkerCount
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.GetWorkerCount
+  nameWithType: Component.GetWorkerCount
 - uid: BlueDeck.Models.Component.LastModified
   name: LastModified
   href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_LastModified
@@ -4670,6 +4854,38 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Component.LineupPosition
   nameWithType: Component.LineupPosition
+- uid: BlueDeck.Models.Component.MemberCount(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})
+  name: MemberCount(Nullable<Int32>, Nullable<Int32>, Nullable<Int32>)
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_MemberCount_System_Nullable_System_Int32__System_Nullable_System_Int32__System_Nullable_System_Int32__
+  commentId: M:BlueDeck.Models.Component.MemberCount(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})
+  name.vb: MemberCount(Nullable(Of Int32), Nullable(Of Int32), Nullable(Of Int32))
+  fullName: BlueDeck.Models.Component.MemberCount(System.Nullable<System.Int32>, System.Nullable<System.Int32>, System.Nullable<System.Int32>)
+  fullName.vb: BlueDeck.Models.Component.MemberCount(System.Nullable(Of System.Int32), System.Nullable(Of System.Int32), System.Nullable(Of System.Int32))
+  nameWithType: Component.MemberCount(Nullable<Int32>, Nullable<Int32>, Nullable<Int32>)
+  nameWithType.vb: Component.MemberCount(Nullable(Of Int32), Nullable(Of Int32), Nullable(Of Int32))
+- uid: BlueDeck.Models.Component.MemberCount*
+  name: MemberCount
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_MemberCount_
+  commentId: Overload:BlueDeck.Models.Component.MemberCount
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.MemberCount
+  nameWithType: Component.MemberCount
+- uid: BlueDeck.Models.Component.MemberCountRecursive(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})
+  name: MemberCountRecursive(Nullable<Int32>, Nullable<Int32>, Nullable<Int32>)
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_MemberCountRecursive_System_Nullable_System_Int32__System_Nullable_System_Int32__System_Nullable_System_Int32__
+  commentId: M:BlueDeck.Models.Component.MemberCountRecursive(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})
+  name.vb: MemberCountRecursive(Nullable(Of Int32), Nullable(Of Int32), Nullable(Of Int32))
+  fullName: BlueDeck.Models.Component.MemberCountRecursive(System.Nullable<System.Int32>, System.Nullable<System.Int32>, System.Nullable<System.Int32>)
+  fullName.vb: BlueDeck.Models.Component.MemberCountRecursive(System.Nullable(Of System.Int32), System.Nullable(Of System.Int32), System.Nullable(Of System.Int32))
+  nameWithType: Component.MemberCountRecursive(Nullable<Int32>, Nullable<Int32>, Nullable<Int32>)
+  nameWithType.vb: Component.MemberCountRecursive(Nullable(Of Int32), Nullable(Of Int32), Nullable(Of Int32))
+- uid: BlueDeck.Models.Component.MemberCountRecursive*
+  name: MemberCountRecursive
+  href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_MemberCountRecursive_
+  commentId: Overload:BlueDeck.Models.Component.MemberCountRecursive
+  isSpec: "True"
+  fullName: BlueDeck.Models.Component.MemberCountRecursive
+  nameWithType: Component.MemberCountRecursive
 - uid: BlueDeck.Models.Component.Name
   name: Name
   href: api/BlueDeck.Models.Component.html#BlueDeck_Models_Component_Name
@@ -4991,6 +5207,290 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.DocGenerators.OrgChartGenerator.ParseComponentToNestedXMLList
   nameWithType: OrgChartGenerator.ParseComponentToNestedXMLList
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator
+  name: TraditionalRosterGenerator
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html
+  commentId: T:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator
+  nameWithType: TraditionalRosterGenerator
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor
+  name: TraditionalRosterGenerator()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator__ctor
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.TraditionalRosterGenerator()
+  nameWithType: TraditionalRosterGenerator.TraditionalRosterGenerator()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor(System.Collections.Generic.List{BlueDeck.Models.Component})
+  name: TraditionalRosterGenerator(List<Component>)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator__ctor_System_Collections_Generic_List_BlueDeck_Models_Component__
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor(System.Collections.Generic.List{BlueDeck.Models.Component})
+  name.vb: TraditionalRosterGenerator(List(Of Component))
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.TraditionalRosterGenerator(System.Collections.Generic.List<BlueDeck.Models.Component>)
+  fullName.vb: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.TraditionalRosterGenerator(System.Collections.Generic.List(Of BlueDeck.Models.Component))
+  nameWithType: TraditionalRosterGenerator.TraditionalRosterGenerator(List<Component>)
+  nameWithType.vb: TraditionalRosterGenerator.TraditionalRosterGenerator(List(Of Component))
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor*
+  name: TraditionalRosterGenerator
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator__ctor_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.TraditionalRosterGenerator
+  nameWithType: TraditionalRosterGenerator.TraditionalRosterGenerator
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components
+  name: Components
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_Components
+  commentId: P:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components
+  nameWithType: TraditionalRosterGenerator.Components
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components*
+  name: Components
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_Components_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Components
+  nameWithType: TraditionalRosterGenerator.Components
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate
+  name: Generate()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_Generate
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate()
+  nameWithType: TraditionalRosterGenerator.Generate()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate*
+  name: Generate
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_Generate_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.Generate
+  nameWithType: TraditionalRosterGenerator.Generate
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable(BlueDeck.Models.Position)
+  name: GenerateCenteredSoloTable(Position)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateCenteredSoloTable_BlueDeck_Models_Position_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable(BlueDeck.Models.Position)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable(BlueDeck.Models.Position)
+  nameWithType: TraditionalRosterGenerator.GenerateCenteredSoloTable(Position)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable*
+  name: GenerateCenteredSoloTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateCenteredSoloTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateCenteredSoloTable
+  nameWithType: TraditionalRosterGenerator.GenerateCenteredSoloTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph
+  name: GenerateColumnBreakParagraph()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateColumnBreakParagraph
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph()
+  nameWithType: TraditionalRosterGenerator.GenerateColumnBreakParagraph()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph*
+  name: GenerateColumnBreakParagraph
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateColumnBreakParagraph_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateColumnBreakParagraph
+  nameWithType: TraditionalRosterGenerator.GenerateColumnBreakParagraph
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable(BlueDeck.Models.Component)
+  name: GenerateComponentTable(Component)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTable_BlueDeck_Models_Component_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable(BlueDeck.Models.Component)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable(BlueDeck.Models.Component)
+  nameWithType: TraditionalRosterGenerator.GenerateComponentTable(Component)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable*
+  name: GenerateComponentTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTable
+  nameWithType: TraditionalRosterGenerator.GenerateComponentTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
+  name: GenerateComponentTableRow(Member)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTableRow_BlueDeck_Models_Member_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow(BlueDeck.Models.Member)
+  nameWithType: TraditionalRosterGenerator.GenerateComponentTableRow(Member)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow*
+  name: GenerateComponentTableRow
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateComponentTableRow_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateComponentTableRow
+  nameWithType: TraditionalRosterGenerator.GenerateComponentTableRow
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow(System.String,System.Collections.Generic.List{BlueDeck.Models.Member},System.Boolean)
+  name: GenerateDemographicTableRow(String, List<Member>, Boolean)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateDemographicTableRow_System_String_System_Collections_Generic_List_BlueDeck_Models_Member__System_Boolean_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow(System.String,System.Collections.Generic.List{BlueDeck.Models.Member},System.Boolean)
+  name.vb: GenerateDemographicTableRow(String, List(Of Member), Boolean)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow(System.String, System.Collections.Generic.List<BlueDeck.Models.Member>, System.Boolean)
+  fullName.vb: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow(System.String, System.Collections.Generic.List(Of BlueDeck.Models.Member), System.Boolean)
+  nameWithType: TraditionalRosterGenerator.GenerateDemographicTableRow(String, List<Member>, Boolean)
+  nameWithType.vb: TraditionalRosterGenerator.GenerateDemographicTableRow(String, List(Of Member), Boolean)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow*
+  name: GenerateDemographicTableRow
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateDemographicTableRow_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateDemographicTableRow
+  nameWithType: TraditionalRosterGenerator.GenerateDemographicTableRow
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(System.Collections.Generic.List{BlueDeck.Models.Member})
+  name: GenerateExceptionToDutyStatusTable(List<Member>)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateExceptionToDutyStatusTable_System_Collections_Generic_List_BlueDeck_Models_Member__
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(System.Collections.Generic.List{BlueDeck.Models.Member})
+  name.vb: GenerateExceptionToDutyStatusTable(List(Of Member))
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(System.Collections.Generic.List<BlueDeck.Models.Member>)
+  fullName.vb: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(System.Collections.Generic.List(Of BlueDeck.Models.Member))
+  nameWithType: TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(List<Member>)
+  nameWithType.vb: TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable(List(Of Member))
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable*
+  name: GenerateExceptionToDutyStatusTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateExceptionToDutyStatusTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable
+  nameWithType: TraditionalRosterGenerator.GenerateExceptionToDutyStatusTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow(BlueDeck.Models.Member)
+  name: GenerateExceptionToDutyStatusTableRow(Member)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateExceptionToDutyStatusTableRow_BlueDeck_Models_Member_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow(BlueDeck.Models.Member)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow(BlueDeck.Models.Member)
+  nameWithType: TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow(Member)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow*
+  name: GenerateExceptionToDutyStatusTableRow
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateExceptionToDutyStatusTableRow_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow
+  nameWithType: TraditionalRosterGenerator.GenerateExceptionToDutyStatusTableRow
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable(System.String,System.Collections.Generic.List{BlueDeck.Models.Member})
+  name: GenerateFloatRightTable(String, List<Member>)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFloatRightTable_System_String_System_Collections_Generic_List_BlueDeck_Models_Member__
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable(System.String,System.Collections.Generic.List{BlueDeck.Models.Member})
+  name.vb: GenerateFloatRightTable(String, List(Of Member))
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable(System.String, System.Collections.Generic.List<BlueDeck.Models.Member>)
+  fullName.vb: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable(System.String, System.Collections.Generic.List(Of BlueDeck.Models.Member))
+  nameWithType: TraditionalRosterGenerator.GenerateFloatRightTable(String, List<Member>)
+  nameWithType.vb: TraditionalRosterGenerator.GenerateFloatRightTable(String, List(Of Member))
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable*
+  name: GenerateFloatRightTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFloatRightTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTable
+  nameWithType: TraditionalRosterGenerator.GenerateFloatRightTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow(BlueDeck.Models.Member)
+  name: GenerateFloatRightTableRow(Member)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFloatRightTableRow_BlueDeck_Models_Member_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow(BlueDeck.Models.Member)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow(BlueDeck.Models.Member)
+  nameWithType: TraditionalRosterGenerator.GenerateFloatRightTableRow(Member)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow*
+  name: GenerateFloatRightTableRow
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFloatRightTableRow_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFloatRightTableRow
+  nameWithType: TraditionalRosterGenerator.GenerateFloatRightTableRow
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable(BlueDeck.Models.Component)
+  name: GenerateFullWidthTable(Component)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFullWidthTable_BlueDeck_Models_Component_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable(BlueDeck.Models.Component)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable(BlueDeck.Models.Component)
+  nameWithType: TraditionalRosterGenerator.GenerateFullWidthTable(Component)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable*
+  name: GenerateFullWidthTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateFullWidthTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateFullWidthTable
+  nameWithType: TraditionalRosterGenerator.GenerateFullWidthTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable(BlueDeck.Models.Position)
+  name: GenerateLeftJustifiedTable(Position)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateLeftJustifiedTable_BlueDeck_Models_Position_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable(BlueDeck.Models.Position)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable(BlueDeck.Models.Position)
+  nameWithType: TraditionalRosterGenerator.GenerateLeftJustifiedTable(Position)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable*
+  name: GenerateLeftJustifiedTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateLeftJustifiedTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateLeftJustifiedTable
+  nameWithType: TraditionalRosterGenerator.GenerateLeftJustifiedTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties
+  name: GeneratePageBreakSectionProperties()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GeneratePageBreakSectionProperties
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties()
+  nameWithType: TraditionalRosterGenerator.GeneratePageBreakSectionProperties()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties*
+  name: GeneratePageBreakSectionProperties
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GeneratePageBreakSectionProperties_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GeneratePageBreakSectionProperties
+  nameWithType: TraditionalRosterGenerator.GeneratePageBreakSectionProperties
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph
+  name: GenerateSectionBreakParagraph()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateSectionBreakParagraph
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph()
+  nameWithType: TraditionalRosterGenerator.GenerateSectionBreakParagraph()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph*
+  name: GenerateSectionBreakParagraph
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateSectionBreakParagraph_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateSectionBreakParagraph
+  nameWithType: TraditionalRosterGenerator.GenerateSectionBreakParagraph
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph
+  name: GenerateTwoColumnParagraph()
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateTwoColumnParagraph
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph()
+  nameWithType: TraditionalRosterGenerator.GenerateTwoColumnParagraph()
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph*
+  name: GenerateTwoColumnParagraph
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_GenerateTwoColumnParagraph_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.GenerateTwoColumnParagraph
+  nameWithType: TraditionalRosterGenerator.GenerateTwoColumnParagraph
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable(DocumentFormat.OpenXml.Packaging.MainDocumentPart,BlueDeck.Models.Component,System.Int32)
+  name: RecursiveComponentTable(MainDocumentPart, Component, Int32)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_RecursiveComponentTable_DocumentFormat_OpenXml_Packaging_MainDocumentPart_BlueDeck_Models_Component_System_Int32_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable(DocumentFormat.OpenXml.Packaging.MainDocumentPart,BlueDeck.Models.Component,System.Int32)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable(DocumentFormat.OpenXml.Packaging.MainDocumentPart, BlueDeck.Models.Component, System.Int32)
+  nameWithType: TraditionalRosterGenerator.RecursiveComponentTable(MainDocumentPart, Component, Int32)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable*
+  name: RecursiveComponentTable
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_RecursiveComponentTable_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.RecursiveComponentTable
+  nameWithType: TraditionalRosterGenerator.RecursiveComponentTable
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  name: SetDemographicTableContent(Table)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_SetDemographicTableContent_DocumentFormat_OpenXml_Wordprocessing_Table_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  nameWithType: TraditionalRosterGenerator.SetDemographicTableContent(Table)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent*
+  name: SetDemographicTableContent
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_SetDemographicTableContent_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetDemographicTableContent
+  nameWithType: TraditionalRosterGenerator.SetDemographicTableContent
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  name: SetTableHeaderContent(Table)
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_SetTableHeaderContent_DocumentFormat_OpenXml_Wordprocessing_Table_
+  commentId: M:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent(DocumentFormat.OpenXml.Wordprocessing.Table)
+  nameWithType: TraditionalRosterGenerator.SetTableHeaderContent(Table)
+- uid: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent*
+  name: SetTableHeaderContent
+  href: api/BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.html#BlueDeck_Models_DocGenerators_TraditionalRosterGenerator_SetTableHeaderContent_
+  commentId: Overload:BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent
+  isSpec: "True"
+  fullName: BlueDeck.Models.DocGenerators.TraditionalRosterGenerator.SetTableHeaderContent
+  nameWithType: TraditionalRosterGenerator.SetTableHeaderContent
 - uid: BlueDeck.Models.DutyStatus
   name: DutyStatus
   href: api/BlueDeck.Models.DutyStatus.html
@@ -5049,6 +5549,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.DutyStatus.HasPolicePower
   nameWithType: DutyStatus.HasPolicePower
+- uid: BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty
+  name: IsExceptionToNormalDuty
+  href: api/BlueDeck.Models.DutyStatus.html#BlueDeck_Models_DutyStatus_IsExceptionToNormalDuty
+  commentId: P:BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty
+  fullName: BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty
+  nameWithType: DutyStatus.IsExceptionToNormalDuty
+- uid: BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty*
+  name: IsExceptionToNormalDuty
+  href: api/BlueDeck.Models.DutyStatus.html#BlueDeck_Models_DutyStatus_IsExceptionToNormalDuty_
+  commentId: Overload:BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty
+  isSpec: "True"
+  fullName: BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty
+  nameWithType: DutyStatus.IsExceptionToNormalDuty
 - uid: BlueDeck.Models.DutyStatus.Members
   name: Members
   href: api/BlueDeck.Models.DutyStatus.html#BlueDeck_Models_DutyStatus_Members
@@ -6336,6 +6849,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Repositories.IComponentRepository.GetComponentAndChildren
   nameWithType: IComponentRepository.GetComponentAndChildren
+- uid: BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics(System.Int32)
+  name: GetComponentForDemographics(Int32)
+  href: api/BlueDeck.Models.Repositories.IComponentRepository.html#BlueDeck_Models_Repositories_IComponentRepository_GetComponentForDemographics_System_Int32_
+  commentId: M:BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics(System.Int32)
+  fullName: BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics(System.Int32)
+  nameWithType: IComponentRepository.GetComponentForDemographics(Int32)
+- uid: BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics*
+  name: GetComponentForDemographics
+  href: api/BlueDeck.Models.Repositories.IComponentRepository.html#BlueDeck_Models_Repositories_IComponentRepository_GetComponentForDemographics_
+  commentId: Overload:BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics
+  isSpec: "True"
+  fullName: BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics
+  nameWithType: IComponentRepository.GetComponentForDemographics
 - uid: BlueDeck.Models.Repositories.IComponentRepository.GetComponentLineupItemsForComponent(System.Int32)
   name: GetComponentLineupItemsForComponent(Int32)
   href: api/BlueDeck.Models.Repositories.IComponentRepository.html#BlueDeck_Models_Repositories_IComponentRepository_GetComponentLineupItemsForComponent_System_Int32_
@@ -8188,6 +8714,25 @@ references:
   commentId: T:BlueDeck.Models.Types.ComponentSelectListItem
   fullName: BlueDeck.Models.Types.ComponentSelectListItem
   nameWithType: ComponentSelectListItem
+- uid: BlueDeck.Models.Types.ComponentSelectListItem.#ctor
+  name: ComponentSelectListItem()
+  href: api/BlueDeck.Models.Types.ComponentSelectListItem.html#BlueDeck_Models_Types_ComponentSelectListItem__ctor
+  commentId: M:BlueDeck.Models.Types.ComponentSelectListItem.#ctor
+  fullName: BlueDeck.Models.Types.ComponentSelectListItem.ComponentSelectListItem()
+  nameWithType: ComponentSelectListItem.ComponentSelectListItem()
+- uid: BlueDeck.Models.Types.ComponentSelectListItem.#ctor(BlueDeck.Models.Component)
+  name: ComponentSelectListItem(Component)
+  href: api/BlueDeck.Models.Types.ComponentSelectListItem.html#BlueDeck_Models_Types_ComponentSelectListItem__ctor_BlueDeck_Models_Component_
+  commentId: M:BlueDeck.Models.Types.ComponentSelectListItem.#ctor(BlueDeck.Models.Component)
+  fullName: BlueDeck.Models.Types.ComponentSelectListItem.ComponentSelectListItem(BlueDeck.Models.Component)
+  nameWithType: ComponentSelectListItem.ComponentSelectListItem(Component)
+- uid: BlueDeck.Models.Types.ComponentSelectListItem.#ctor*
+  name: ComponentSelectListItem
+  href: api/BlueDeck.Models.Types.ComponentSelectListItem.html#BlueDeck_Models_Types_ComponentSelectListItem__ctor_
+  commentId: Overload:BlueDeck.Models.Types.ComponentSelectListItem.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.ComponentSelectListItem.ComponentSelectListItem
+  nameWithType: ComponentSelectListItem.ComponentSelectListItem
 - uid: BlueDeck.Models.Types.ComponentSelectListItem.ComponentName
   name: ComponentName
   href: api/BlueDeck.Models.Types.ComponentSelectListItem.html#BlueDeck_Models_Types_ComponentSelectListItem_ComponentName
@@ -8417,6 +8962,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.HomePageComponentGroup.ParentComponentId
   nameWithType: HomePageComponentGroup.ParentComponentId
+- uid: BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
+  name: StrengthDisplay
+  href: api/BlueDeck.Models.Types.HomePageComponentGroup.html#BlueDeck_Models_Types_HomePageComponentGroup_StrengthDisplay
+  commentId: P:BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
+  fullName: BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
+  nameWithType: HomePageComponentGroup.StrengthDisplay
+- uid: BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay*
+  name: StrengthDisplay
+  href: api/BlueDeck.Models.Types.HomePageComponentGroup.html#BlueDeck_Models_Types_HomePageComponentGroup_StrengthDisplay_
+  commentId: Overload:BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageComponentGroup.StrengthDisplay
+  nameWithType: HomePageComponentGroup.StrengthDisplay
 - uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem
   name: HomePageViewModelMemberListItem
   href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html
@@ -8494,6 +9052,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.Gender
   nameWithType: HomePageViewModelMemberListItem.Gender
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+  name: IsExceptionToNormalDuty
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_IsExceptionToNormalDuty
+  commentId: P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+  nameWithType: HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+- uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty*
+  name: IsExceptionToNormalDuty
+  href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_IsExceptionToNormalDuty_
+  commentId: Overload:BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.HomePageViewModelMemberListItem.IsExceptionToNormalDuty
+  nameWithType: HomePageViewModelMemberListItem.IsExceptionToNormalDuty
 - uid: BlueDeck.Models.Types.HomePageViewModelMemberListItem.LineupPosition
   name: LineupPosition
   href: api/BlueDeck.Models.Types.HomePageViewModelMemberListItem.html#BlueDeck_Models_Types_HomePageViewModelMemberListItem_LineupPosition
@@ -8720,6 +9291,25 @@ references:
   commentId: T:BlueDeck.Models.Types.MemberGenderSelectListItem
   fullName: BlueDeck.Models.Types.MemberGenderSelectListItem
   nameWithType: MemberGenderSelectListItem
+- uid: BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor
+  name: MemberGenderSelectListItem()
+  href: api/BlueDeck.Models.Types.MemberGenderSelectListItem.html#BlueDeck_Models_Types_MemberGenderSelectListItem__ctor
+  commentId: M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor
+  fullName: BlueDeck.Models.Types.MemberGenderSelectListItem.MemberGenderSelectListItem()
+  nameWithType: MemberGenderSelectListItem.MemberGenderSelectListItem()
+- uid: BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor(BlueDeck.Models.Gender)
+  name: MemberGenderSelectListItem(Gender)
+  href: api/BlueDeck.Models.Types.MemberGenderSelectListItem.html#BlueDeck_Models_Types_MemberGenderSelectListItem__ctor_BlueDeck_Models_Gender_
+  commentId: M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor(BlueDeck.Models.Gender)
+  fullName: BlueDeck.Models.Types.MemberGenderSelectListItem.MemberGenderSelectListItem(BlueDeck.Models.Gender)
+  nameWithType: MemberGenderSelectListItem.MemberGenderSelectListItem(Gender)
+- uid: BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor*
+  name: MemberGenderSelectListItem
+  href: api/BlueDeck.Models.Types.MemberGenderSelectListItem.html#BlueDeck_Models_Types_MemberGenderSelectListItem__ctor_
+  commentId: Overload:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.MemberGenderSelectListItem.MemberGenderSelectListItem
+  nameWithType: MemberGenderSelectListItem.MemberGenderSelectListItem
 - uid: BlueDeck.Models.Types.MemberGenderSelectListItem.Abbreviation
   name: Abbreviation
   href: api/BlueDeck.Models.Types.MemberGenderSelectListItem.html#BlueDeck_Models_Types_MemberGenderSelectListItem_Abbreviation
@@ -8997,6 +9587,25 @@ references:
   commentId: T:BlueDeck.Models.Types.MemberRaceSelectListItem
   fullName: BlueDeck.Models.Types.MemberRaceSelectListItem
   nameWithType: MemberRaceSelectListItem
+- uid: BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor
+  name: MemberRaceSelectListItem()
+  href: api/BlueDeck.Models.Types.MemberRaceSelectListItem.html#BlueDeck_Models_Types_MemberRaceSelectListItem__ctor
+  commentId: M:BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor
+  fullName: BlueDeck.Models.Types.MemberRaceSelectListItem.MemberRaceSelectListItem()
+  nameWithType: MemberRaceSelectListItem.MemberRaceSelectListItem()
+- uid: BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor(BlueDeck.Models.Race)
+  name: MemberRaceSelectListItem(Race)
+  href: api/BlueDeck.Models.Types.MemberRaceSelectListItem.html#BlueDeck_Models_Types_MemberRaceSelectListItem__ctor_BlueDeck_Models_Race_
+  commentId: M:BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor(BlueDeck.Models.Race)
+  fullName: BlueDeck.Models.Types.MemberRaceSelectListItem.MemberRaceSelectListItem(BlueDeck.Models.Race)
+  nameWithType: MemberRaceSelectListItem.MemberRaceSelectListItem(Race)
+- uid: BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor*
+  name: MemberRaceSelectListItem
+  href: api/BlueDeck.Models.Types.MemberRaceSelectListItem.html#BlueDeck_Models_Types_MemberRaceSelectListItem__ctor_
+  commentId: Overload:BlueDeck.Models.Types.MemberRaceSelectListItem.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.MemberRaceSelectListItem.MemberRaceSelectListItem
+  nameWithType: MemberRaceSelectListItem.MemberRaceSelectListItem
 - uid: BlueDeck.Models.Types.MemberRaceSelectListItem.Abbreviation
   name: Abbreviation
   href: api/BlueDeck.Models.Types.MemberRaceSelectListItem.html#BlueDeck_Models_Types_MemberRaceSelectListItem_Abbreviation
@@ -9042,6 +9651,25 @@ references:
   commentId: T:BlueDeck.Models.Types.MemberRankSelectListItem
   fullName: BlueDeck.Models.Types.MemberRankSelectListItem
   nameWithType: MemberRankSelectListItem
+- uid: BlueDeck.Models.Types.MemberRankSelectListItem.#ctor
+  name: MemberRankSelectListItem()
+  href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem__ctor
+  commentId: M:BlueDeck.Models.Types.MemberRankSelectListItem.#ctor
+  fullName: BlueDeck.Models.Types.MemberRankSelectListItem.MemberRankSelectListItem()
+  nameWithType: MemberRankSelectListItem.MemberRankSelectListItem()
+- uid: BlueDeck.Models.Types.MemberRankSelectListItem.#ctor(BlueDeck.Models.Rank)
+  name: MemberRankSelectListItem(Rank)
+  href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem__ctor_BlueDeck_Models_Rank_
+  commentId: M:BlueDeck.Models.Types.MemberRankSelectListItem.#ctor(BlueDeck.Models.Rank)
+  fullName: BlueDeck.Models.Types.MemberRankSelectListItem.MemberRankSelectListItem(BlueDeck.Models.Rank)
+  nameWithType: MemberRankSelectListItem.MemberRankSelectListItem(Rank)
+- uid: BlueDeck.Models.Types.MemberRankSelectListItem.#ctor*
+  name: MemberRankSelectListItem
+  href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem__ctor_
+  commentId: Overload:BlueDeck.Models.Types.MemberRankSelectListItem.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.MemberRankSelectListItem.MemberRankSelectListItem
+  nameWithType: MemberRankSelectListItem.MemberRankSelectListItem
 - uid: BlueDeck.Models.Types.MemberRankSelectListItem.MemberRankId
   name: MemberRankId
   href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem_MemberRankId
@@ -9068,6 +9696,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.Types.MemberRankSelectListItem.RankName
   nameWithType: MemberRankSelectListItem.RankName
+- uid: BlueDeck.Models.Types.MemberRankSelectListItem.RankShort
+  name: RankShort
+  href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem_RankShort
+  commentId: P:BlueDeck.Models.Types.MemberRankSelectListItem.RankShort
+  fullName: BlueDeck.Models.Types.MemberRankSelectListItem.RankShort
+  nameWithType: MemberRankSelectListItem.RankShort
+- uid: BlueDeck.Models.Types.MemberRankSelectListItem.RankShort*
+  name: RankShort
+  href: api/BlueDeck.Models.Types.MemberRankSelectListItem.html#BlueDeck_Models_Types_MemberRankSelectListItem_RankShort_
+  commentId: Overload:BlueDeck.Models.Types.MemberRankSelectListItem.RankShort
+  isSpec: "True"
+  fullName: BlueDeck.Models.Types.MemberRankSelectListItem.RankShort
+  nameWithType: MemberRankSelectListItem.RankShort
 - uid: BlueDeck.Models.Types.MemberSelectListItem
   name: MemberSelectListItem
   href: api/BlueDeck.Models.Types.MemberSelectListItem.html
@@ -10404,6 +11045,80 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.ChangeEmployeeStatusModalViewComponentViewModel.StatusList
   nameWithType: ChangeEmployeeStatusModalViewComponentViewModel.StatusList
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel
+  name: ComponentDemographicTableViewComponentViewModel
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html
+  commentId: T:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel
+  nameWithType: ComponentDemographicTableViewComponentViewModel
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.#ctor(BlueDeck.Models.Component,System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem})
+  name: ComponentDemographicTableViewComponentViewModel(Component, List<MemberGenderSelectListItem>, List<MemberRaceSelectListItem>, List<MemberRankSelectListItem>)
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel__ctor_BlueDeck_Models_Component_System_Collections_Generic_List_BlueDeck_Models_Types_MemberGenderSelectListItem__System_Collections_Generic_List_BlueDeck_Models_Types_MemberRaceSelectListItem__System_Collections_Generic_List_BlueDeck_Models_Types_MemberRankSelectListItem__
+  commentId: M:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.#ctor(BlueDeck.Models.Component,System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem})
+  name.vb: ComponentDemographicTableViewComponentViewModel(Component, List(Of MemberGenderSelectListItem), List(Of MemberRaceSelectListItem), List(Of MemberRankSelectListItem))
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel(BlueDeck.Models.Component, System.Collections.Generic.List<BlueDeck.Models.Types.MemberGenderSelectListItem>, System.Collections.Generic.List<BlueDeck.Models.Types.MemberRaceSelectListItem>, System.Collections.Generic.List<BlueDeck.Models.Types.MemberRankSelectListItem>)
+  fullName.vb: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel(BlueDeck.Models.Component, System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberGenderSelectListItem), System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberRaceSelectListItem), System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberRankSelectListItem))
+  nameWithType: ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel(Component, List<MemberGenderSelectListItem>, List<MemberRaceSelectListItem>, List<MemberRankSelectListItem>)
+  nameWithType.vb: ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel(Component, List(Of MemberGenderSelectListItem), List(Of MemberRaceSelectListItem), List(Of MemberRankSelectListItem))
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.#ctor*
+  name: ComponentDemographicTableViewComponentViewModel
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel__ctor_
+  commentId: Overload:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.#ctor
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel
+  nameWithType: ComponentDemographicTableViewComponentViewModel.ComponentDemographicTableViewComponentViewModel
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component
+  name: Component
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Component
+  commentId: P:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Component
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component*
+  name: Component
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Component_
+  commentId: Overload:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Component
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Component
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders
+  name: Genders
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Genders
+  commentId: P:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Genders
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders*
+  name: Genders
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Genders_
+  commentId: Overload:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Genders
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Genders
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races
+  name: Races
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Races
+  commentId: P:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Races
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races*
+  name: Races
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Races_
+  commentId: Overload:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Races
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Races
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks
+  name: Ranks
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Ranks
+  commentId: P:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Ranks
+- uid: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks*
+  name: Ranks
+  href: api/BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.html#BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_Ranks_
+  commentId: Overload:BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel.Ranks
+  nameWithType: ComponentDemographicTableViewComponentViewModel.Ranks
 - uid: BlueDeck.Models.ViewModels.ComponentIndexListViewModel
   name: ComponentIndexListViewModel
   href: api/BlueDeck.Models.ViewModels.ComponentIndexListViewModel.html
@@ -10777,12 +11492,15 @@ references:
   commentId: T:BlueDeck.Models.ViewModels.HomePageViewModel
   fullName: BlueDeck.Models.ViewModels.HomePageViewModel
   nameWithType: HomePageViewModel
-- uid: BlueDeck.Models.ViewModels.HomePageViewModel.#ctor(BlueDeck.Models.Member)
-  name: HomePageViewModel(Member)
-  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel__ctor_BlueDeck_Models_Member_
-  commentId: M:BlueDeck.Models.ViewModels.HomePageViewModel.#ctor(BlueDeck.Models.Member)
-  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.HomePageViewModel(BlueDeck.Models.Member)
-  nameWithType: HomePageViewModel.HomePageViewModel(Member)
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.ComponentSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem})
+  name: HomePageViewModel(Member, List<ComponentSelectListItem>, List<MemberGenderSelectListItem>, List<MemberRaceSelectListItem>, List<MemberRankSelectListItem>)
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel__ctor_BlueDeck_Models_Member_System_Collections_Generic_List_BlueDeck_Models_Types_ComponentSelectListItem__System_Collections_Generic_List_BlueDeck_Models_Types_MemberGenderSelectListItem__System_Collections_Generic_List_BlueDeck_Models_Types_MemberRaceSelectListItem__System_Collections_Generic_List_BlueDeck_Models_Types_MemberRankSelectListItem__
+  commentId: M:BlueDeck.Models.ViewModels.HomePageViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.ComponentSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem})
+  name.vb: HomePageViewModel(Member, List(Of ComponentSelectListItem), List(Of MemberGenderSelectListItem), List(Of MemberRaceSelectListItem), List(Of MemberRankSelectListItem))
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.HomePageViewModel(BlueDeck.Models.Member, System.Collections.Generic.List<BlueDeck.Models.Types.ComponentSelectListItem>, System.Collections.Generic.List<BlueDeck.Models.Types.MemberGenderSelectListItem>, System.Collections.Generic.List<BlueDeck.Models.Types.MemberRaceSelectListItem>, System.Collections.Generic.List<BlueDeck.Models.Types.MemberRankSelectListItem>)
+  fullName.vb: BlueDeck.Models.ViewModels.HomePageViewModel.HomePageViewModel(BlueDeck.Models.Member, System.Collections.Generic.List(Of BlueDeck.Models.Types.ComponentSelectListItem), System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberGenderSelectListItem), System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberRaceSelectListItem), System.Collections.Generic.List(Of BlueDeck.Models.Types.MemberRankSelectListItem))
+  nameWithType: HomePageViewModel.HomePageViewModel(Member, List<ComponentSelectListItem>, List<MemberGenderSelectListItem>, List<MemberRaceSelectListItem>, List<MemberRankSelectListItem>)
+  nameWithType.vb: HomePageViewModel.HomePageViewModel(Member, List(Of ComponentSelectListItem), List(Of MemberGenderSelectListItem), List(Of MemberRaceSelectListItem), List(Of MemberRankSelectListItem))
 - uid: BlueDeck.Models.ViewModels.HomePageViewModel.#ctor*
   name: HomePageViewModel
   href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel__ctor_
@@ -10829,6 +11547,71 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Models.ViewModels.HomePageViewModel.CurrentUser
   nameWithType: HomePageViewModel.CurrentUser
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty
+  name: ExceptionToDuty
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_ExceptionToDuty
+  commentId: P:BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty
+  nameWithType: HomePageViewModel.ExceptionToDuty
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty*
+  name: ExceptionToDuty
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_ExceptionToDuty_
+  commentId: Overload:BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.ExceptionToDuty
+  nameWithType: HomePageViewModel.ExceptionToDuty
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Genders
+  name: Genders
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Genders
+  commentId: P:BlueDeck.Models.ViewModels.HomePageViewModel.Genders
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Genders
+  nameWithType: HomePageViewModel.Genders
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Genders*
+  name: Genders
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Genders_
+  commentId: Overload:BlueDeck.Models.ViewModels.HomePageViewModel.Genders
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Genders
+  nameWithType: HomePageViewModel.Genders
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers
+  name: GetExceptionToDutyMembers()
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_GetExceptionToDutyMembers
+  commentId: M:BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers()
+  nameWithType: HomePageViewModel.GetExceptionToDutyMembers()
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers*
+  name: GetExceptionToDutyMembers
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_GetExceptionToDutyMembers_
+  commentId: Overload:BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.GetExceptionToDutyMembers
+  nameWithType: HomePageViewModel.GetExceptionToDutyMembers
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Races
+  name: Races
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Races
+  commentId: P:BlueDeck.Models.ViewModels.HomePageViewModel.Races
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Races
+  nameWithType: HomePageViewModel.Races
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Races*
+  name: Races
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Races_
+  commentId: Overload:BlueDeck.Models.ViewModels.HomePageViewModel.Races
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Races
+  nameWithType: HomePageViewModel.Races
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Ranks
+  name: Ranks
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Ranks
+  commentId: P:BlueDeck.Models.ViewModels.HomePageViewModel.Ranks
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Ranks
+  nameWithType: HomePageViewModel.Ranks
+- uid: BlueDeck.Models.ViewModels.HomePageViewModel.Ranks*
+  name: Ranks
+  href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_Ranks_
+  commentId: Overload:BlueDeck.Models.ViewModels.HomePageViewModel.Ranks
+  isSpec: "True"
+  fullName: BlueDeck.Models.ViewModels.HomePageViewModel.Ranks
+  nameWithType: HomePageViewModel.Ranks
 - uid: BlueDeck.Models.ViewModels.HomePageViewModel.RecurseAndReorderComponents(System.Collections.Generic.List{BlueDeck.Models.Types.HomePageComponentGroup})
   name: RecurseAndReorderComponents(List<HomePageComponentGroup>)
   href: api/BlueDeck.Models.ViewModels.HomePageViewModel.html#BlueDeck_Models_ViewModels_HomePageViewModel_RecurseAndReorderComponents_System_Collections_Generic_List_BlueDeck_Models_Types_HomePageComponentGroup__
@@ -12372,6 +13155,19 @@ references:
   isSpec: "True"
   fullName: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentAndChildren
   nameWithType: ComponentRepository.GetComponentAndChildren
+- uid: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics(System.Int32)
+  name: GetComponentForDemographics(Int32)
+  href: api/BlueDeck.Persistence.Repositories.ComponentRepository.html#BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentForDemographics_System_Int32_
+  commentId: M:BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics(System.Int32)
+  fullName: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics(System.Int32)
+  nameWithType: ComponentRepository.GetComponentForDemographics(Int32)
+- uid: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics*
+  name: GetComponentForDemographics
+  href: api/BlueDeck.Persistence.Repositories.ComponentRepository.html#BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentForDemographics_
+  commentId: Overload:BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics
+  isSpec: "True"
+  fullName: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentForDemographics
+  nameWithType: ComponentRepository.GetComponentForDemographics
 - uid: BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentLineupItemsForComponent(System.Int32)
   name: GetComponentLineupItemsForComponent(Int32)
   href: api/BlueDeck.Persistence.Repositories.ComponentRepository.html#BlueDeck_Persistence_Repositories_ComponentRepository_GetComponentLineupItemsForComponent_System_Int32_
@@ -13883,6 +14679,25 @@ references:
   isSpec: "True"
   fullName: BlueDeck.ViewComponents.ComponentAddEditModalViewComponent.Invoke
   nameWithType: ComponentAddEditModalViewComponent.Invoke
+- uid: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent
+  name: ComponentDemographicTableViewComponent
+  href: api/BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.html
+  commentId: T:BlueDeck.ViewComponents.ComponentDemographicTableViewComponent
+  fullName: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent
+  nameWithType: ComponentDemographicTableViewComponent
+- uid: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke(BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel)
+  name: Invoke(ComponentDemographicTableViewComponentViewModel)
+  href: api/BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.html#BlueDeck_ViewComponents_ComponentDemographicTableViewComponent_Invoke_BlueDeck_Models_ViewModels_ComponentDemographicTableViewComponentViewModel_
+  commentId: M:BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke(BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel)
+  fullName: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke(BlueDeck.Models.ViewModels.ComponentDemographicTableViewComponentViewModel)
+  nameWithType: ComponentDemographicTableViewComponent.Invoke(ComponentDemographicTableViewComponentViewModel)
+- uid: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke*
+  name: Invoke
+  href: api/BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.html#BlueDeck_ViewComponents_ComponentDemographicTableViewComponent_Invoke_
+  commentId: Overload:BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke
+  isSpec: "True"
+  fullName: BlueDeck.ViewComponents.ComponentDemographicTableViewComponent.Invoke
+  nameWithType: ComponentDemographicTableViewComponent.Invoke
 - uid: BlueDeck.ViewComponents.ComponentLineupViewComponent
   name: ComponentLineupViewComponent
   href: api/BlueDeck.ViewComponents.ComponentLineupViewComponent.html

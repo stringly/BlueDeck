@@ -347,14 +347,6 @@ $(function () {
     } else {
       $('#navbar ul a.active').parents('li').addClass(active);
       renderBreadcrumb();
-      showSearch();
-    }
-    
-    function showSearch() {
-      if ($('#search-results').length !== 0) {
-          $('#search').show();
-          $('body').trigger("searchEvent");
-      }
     }
 
     function loadNavbar() {
@@ -367,7 +359,10 @@ $(function () {
       if (tocPath) tocPath = tocPath.replace(/\\/g, '/');
       $.get(navbarPath, function (data) {
         $(data).find("#toc>ul").appendTo("#navbar");
-        showSearch();
+        if ($('#search-results').length !== 0) {
+          $('#search').show();
+          $('body').trigger("searchEvent");
+        }
         var index = navbarPath.lastIndexOf('/');
         var navrel = '';
         if (index > -1) {
