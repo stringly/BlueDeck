@@ -20,8 +20,8 @@
                     <li class="mr-3"><a asp-controller="Home" asp-action="Index">Home</a></li>
                 }
                 <li class="mr-3"><a href="mailto:Admin@BlueDeck.net">Contact BlueDeck</a></li>
-                <li class="mr-3"><a href="/swagger">API</a></li>
-                <li class="mr-3"><a href="#">Help</a></li>
+                <li class="mr-3"><a href="/swagger" target="_blank">API</a></li>
+                <li class="mr-3"><a href="https://stringly.github.io/BlueDeck/" target="_blank">Help</a></li>
                 @if (User.IsInRole("GlobalAdmin") || User.IsInRole("ComponentAdmin"))
                 {
                     <li><a asp-action="About" asp-controller="Home">About</a></li>

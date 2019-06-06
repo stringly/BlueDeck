@@ -2256,7 +2256,7 @@
           "hash": "9tFYtbjwmUkUZDcynLFe5A=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2309,14 +2309,14 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "faq/i_dont_understand.md",
+      "source_relative_path": "faq/frequently_asked_questions.md",
       "output": {
         ".html": {
-          "relative_path": "faq/i_dont_understand.html",
-          "hash": "ayGps9ZhymvRoCLq0Kevsg=="
+          "relative_path": "faq/frequently_asked_questions.html",
+          "hash": "1Zybhhra4vUuZ9sgfqferA=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -2325,22 +2325,10 @@
       "output": {
         ".html": {
           "relative_path": "faq/toc.html",
-          "hash": "4uiW9/FRzxfzMqE7+EW51w=="
+          "hash": "ZfkId8rZgnXTpVOACrmY4A=="
         }
       },
       "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "faq/what_the_hell.md",
-      "output": {
-        ".html": {
-          "relative_path": "faq/what_the_hell.html",
-          "hash": "GcVt2gdRK9tknuKKytNCow=="
-        }
-      },
-      "is_incremental": true,
       "version": ""
     },
     {
@@ -2352,7 +2340,7 @@
           "hash": "zCxySCsyVAnyL7jkFlfzvw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2424,7 +2412,7 @@
           "hash": "QvlHVfQ0UsANftz0bT7ZiQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2448,7 +2436,7 @@
           "hash": "n7ce3kPtoX3UrPwfJxTJIA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2563,7 +2551,7 @@
           "hash": "abS6Bwm1uwKEV6u/mUvWkQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2572,7 +2560,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "ElpkeIQBH8tu/UAorm3Ypg=="
+          "hash": "s+b6PJITuXbdU0bPcC0FIw=="
         }
       },
       "is_incremental": false,
@@ -2595,11 +2583,12 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 18,
-          "skipped_file_count": 14
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
@@ -2607,12 +2596,11 @@
           "total_file_count": 187,
           "skipped_file_count": 187
         },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
+          "total_file_count": 17,
+          "skipped_file_count": 16
         }
       }
     },
