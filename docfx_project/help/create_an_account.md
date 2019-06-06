@@ -1,4 +1,4 @@
-# Creating an Account
+### Creating a new BlueDeck Account
 
 If you do not have a current BlueDeck account, then you will be directed to the "About" Page. To create an account, click the "Get an Account" button:
 
