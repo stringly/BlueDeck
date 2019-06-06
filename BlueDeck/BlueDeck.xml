@@ -2191,6 +2191,182 @@
             <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
             <returns></returns>
         </member>
+        <member name="T:BlueDeck.Infrastructure.PageLinkTagHelper">
+            <summary>
+            A Pagination Control Tag Helper Class
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+        </member>
+        <member name="M:BlueDeck.Infrastructure.PageLinkTagHelper.#ctor(Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Infrastructure.PageLinkTagHelper"/> class.
+            </summary>
+            <param name="helperFactory">The helper factory.</param>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.ViewContext">
+            <summary>
+            Gets or sets the view context.
+            </summary>
+            <value>
+            The view context.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageModel">
+            <summary>
+            Gets or sets the page model.
+            </summary>
+            <remarks>
+            This property is a <see cref="T:BlueDeck.Models.ViewModels.PagingInfo"/> class object.
+            </remarks>
+            <value>
+            The page model.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageAction">
+            <summary>
+            Gets or sets the page action.
+            </summary>
+            <value>
+            The page action.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageUrlValues">
+            <summary>
+            Gets or sets the page URL values.
+            </summary>
+            <value>
+            The page URL values.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageClassesEnabled">
+            <summary>
+            Gets or sets a value indicating whether [page classes enabled].
+            </summary>
+            <value>
+              <c>true</c> if [page classes enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageClass">
+            <summary>
+            Gets or sets the page class.
+            </summary>
+            <value>
+            The page class.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageClassNormal">
+            <summary>
+            Gets or sets the page class normal.
+            </summary>
+            <value>
+            The page class normal.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Infrastructure.PageLinkTagHelper.PageClassSelected">
+            <summary>
+            Gets or sets the page class selected.
+            </summary>
+            <value>
+            The page class selected.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Infrastructure.PageLinkTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)">
+            <summary>
+            Synchronously executes the <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" /> with the given <paramref name="context" /> and
+            <paramref name="output" />.
+            </summary>
+            <param name="context">Contains information associated with the current HTML tag.</param>
+            <param name="output">A stateful HTML element used to generate an HTML tag.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.AppStatusApiResult">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.AppStatus"/> entity in a WebAPI result set.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId">
+            <summary>
+            Gets or sets the application status identifier.
+            </summary>
+            <value>
+            The application status identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.AppStatusApiResult.StatusName">
+            <summary>
+            Gets or sets the name of the status.
+            </summary>
+            <value>
+            The name of the status.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.AppStatusApiResult.#ctor(BlueDeck.Models.AppStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.AppStatusApiResult"/> class.
+            </summary>
+            <param name="_appStatus">An <see cref="T:BlueDeck.Models.AppStatus"/> class object</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.ComponentApiResult">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.Component"/> entity in a WebAPI request.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentApiResult.ComponentId">
+            <summary>
+            Gets or sets the component identifier.
+            </summary>
+            <value>
+            The component identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentApiResult.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentApiResult.Acronym">
+            <summary>
+            Gets or sets the acronym.
+            </summary>
+            <value>
+            The acronym.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentApiResult.ParentComponent">
+            <summary>
+            Gets or sets the parent component.
+            </summary>
+            <remarks>
+            This property is a <see cref="T:BlueDeck.Models.APIModels.SubComponentApiResult"/> object.
+            </remarks>
+            <value>
+            The parent component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ComponentApiResult.Positions">
+            <summary>
+            Gets or sets the positions.
+            </summary>
+            <remarks>
+            This property is a <see cref="T:System.Collections.Generic.List`1"/>
+            </remarks>
+            <value>
+            The positions.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentApiResult"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ComponentApiResult.#ctor(BlueDeck.Models.Component)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ComponentApiResult"/> class.
+            </summary>
+            <param name="_component">The <see cref="T:BlueDeck.Models.Component"/> class object from which the <see cref="T:BlueDeck.Models.APIModels.ComponentApiResult"/> object will be constructed.</param>
+        </member>
         <member name="T:BlueDeck.Models.APIModels.ComponentListApiListItem">
             <summary>
             Class that represents an API List item result for the <see cref="T:BlueDeck.Models.Component"/> entity.
@@ -2243,6 +2419,184 @@
             Constructor that accepts a <see cref="T:BlueDeck.Models.Component"/> entity and creates a <see cref="T:BlueDeck.Models.APIModels.ComponentListApiListItem"/>
             </remarks>
             <param name="_c">The <see cref="T:BlueDeck.Models.Component"/></param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.ContactNumberApiResult">
+            <summary>
+            Class object representing a <see cref="T:BlueDeck.Models.ContactNumber"/> in a WebAPI response.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ContactNumberApiResult.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The phone number type, which is derived from the name of the <see cref="T:BlueDeck.Models.ContactNumber"/> <see cref="T:BlueDeck.Models.PhoneNumberType"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.ContactNumberApiResult.PhoneNumber">
+            <summary>
+            Gets or sets the phone number.
+            </summary>
+            <value>
+            The phone number.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ContactNumberApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ContactNumberApiResult"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.ContactNumberApiResult.#ctor(BlueDeck.Models.ContactNumber)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.ContactNumberApiResult"/> class.
+            </summary>
+            <param name="_number">The number.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.DutyStatusApiResult">
+            <summary>
+            A Class that represents a <see cref="T:BlueDeck.Models.DutyStatus"/> entity in a WebAPI response.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.DutyStatusApiResult.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.DutyStatusApiResult.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.DutyStatusApiResult.HasPolicePower">
+            <summary>
+            Gets or sets a value indicating whether this instance has police power.
+            </summary>
+            <value>
+              <c>true</c> if this instance has police power; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.DutyStatusApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.DutyStatusApiResult.#ctor(BlueDeck.Models.DutyStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> class.
+            </summary>
+            <param name="_dutyStatus">The duty status.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.EnumApiCollectionResult">
+            <summary>
+            A Class that represents a collection of results for all BlueDeck enumerated types in a WebAPI request.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.Genders">
+            <summary>
+            Gets or sets the genders.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.Ranks">
+            <summary>
+            Gets or sets the ranks.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.RankApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.Races">
+            <summary>
+            Gets or sets the races.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.RaceApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.DutyStatuses">
+            <summary>
+            Gets or sets the duty statuses.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.RoleTypes">
+            <summary>
+            Gets or sets the role types.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.RoleTypeApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.PhoneTypes">
+            <summary>
+            Gets or sets the phone types.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.EnumApiCollectionResult.AppStatuses">
+            <summary>
+            Gets or sets the application statuses.
+            </summary>
+            <value>
+            A collection of <see cref="T:BlueDeck.Models.APIModels.AppStatusApiResult"/>
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.EnumApiCollectionResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.EnumApiCollectionResult"/> class.
+            </summary>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.GenderApiResult">
+            <summary>
+            A Class that represents the <see cref="T:BlueDeck.Models.Gender"/> entity in a WebAPI request.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.GenderApiResult.GenderId">
+            <summary>
+            Gets or sets the gender identifier.
+            </summary>
+            <value>
+            The gender identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.GenderApiResult.GenderName">
+            <summary>
+            Gets or sets the name of the gender.
+            </summary>
+            <value>
+            The name of the gender.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.GenderApiResult.Abbreviation">
+            <summary>
+            Gets or sets the abbreviation.
+            </summary>
+            <value>
+            The abbreviation.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.GenderApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.GenderApiResult.#ctor(BlueDeck.Models.Gender)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> class.
+            </summary>
+            <param name="_gender">The gender.</param>
         </member>
         <member name="T:BlueDeck.Models.ApplicationDbContext">
             <summary>
