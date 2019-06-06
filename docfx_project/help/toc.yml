@@ -1,5 +1,8 @@
 - name: BlueDeck Help
   href: bluedeck_help_main.md
+  items:
+    - name: Definitions
+    - href: definitions.md
 - name: Logging On
   href: logging_on.md
   items:

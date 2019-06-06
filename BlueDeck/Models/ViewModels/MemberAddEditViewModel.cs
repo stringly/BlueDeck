@@ -87,6 +87,7 @@ namespace BlueDeck.Models.ViewModels
         /// </value>
         [StringLength(50), Required]
         [Display(Name = "ID Number")]
+        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Only alphanumeric characters are allowed.")]
         public string IdNumber { get; set; }
 
         /// <summary>
