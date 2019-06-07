@@ -220,7 +220,7 @@ namespace BlueDeck.Controllers
             {
                 return Ok(unitOfWork.MemberRaces.GetAll().ToList().ConvertAll(x => new RaceApiResult(x)));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }

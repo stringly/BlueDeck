@@ -65,7 +65,7 @@ namespace BlueDeck.Controllers
                 .ToList()
                 .ConvertAll(x => new MemberListAPIListItem(x)));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }

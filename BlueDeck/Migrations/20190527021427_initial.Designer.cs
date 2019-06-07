@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
+# pragma warning disable 1591
 namespace BlueDeck.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
@@ -419,3 +419,4 @@ namespace BlueDeck.Migrations
         }
     }
 }
+#pragma warning restore 1591

@@ -143,7 +143,7 @@ namespace BlueDeck.Controllers
                     return NotFound(new { status = "Not Found", message = $"No positions match {searchString}" });
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Message = "The service encountered an error." });
             }

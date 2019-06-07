@@ -15,14 +15,14 @@ namespace BlueDeck.Persistence.Repositories
     /// <summary>
     /// A repository for the Member entity
     /// </summary>
-    /// <seealso cref="T:BlueDeck.Persistence.Repositories.Repository{BlueDeck.Models.Member}" />
-    /// <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
+    /// <seealso cref="Repository{Member}" />
+    /// <seealso cref="IMemberRepository" />
     public class MemberRepository : Repository<Member>, IMemberRepository
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.MemberRepository"/> class.
+        /// Initializes a new instance of the <see cref="MemberRepository"/> class.
         /// </summary>
-        /// <param name="context">The <see cref="T:BlueDeck.Models.ApplicationDbContext"/>.</param>
+        /// <param name="context">The <see cref="ApplicationDbContext"/>.</param>
         public MemberRepository(ApplicationDbContext context)
          : base(context)
         {
