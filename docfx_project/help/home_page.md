@@ -49,9 +49,9 @@ The Documents tab allows you to generate and download Rosters and Organizational
 ![picture alt](../images/homepage_documents.JPG "Documents")
 
 As of now, there are 3 types of Documents that BlueDeck can generate for you:
-1. Alpha Roster - this will generate a Word Document roster showing all Members of the selected Component *and all of it's subordinate (child) components*. The Members will be listed in alphabetical order by Last Name.
-2. Component Roster - this will generate a Word Document roster showing all of the selected Component's current Positions, Members assigned to those Positions, and all Positions and Members of the selected Component's subordinate (child) Components. The Roster will broken down by individual Components. The Component Roster is formatted similarly to the Division Rosters that are used on the Shared drive.
-3. Organizational Chart - this will attempt to generate a Word Document Organization Chart for the selected Component. As of the current version of BlueDeck, the Organizational Charts that this generates are not ideal for a selected Component that Contains more than around 75 Members. A more robust version of this feature is in development.
+1. **Alpha Roster**: this will generate a Word Document roster showing all Members of the selected Component *and all of it's subordinate (child) components*. The Members will be listed in alphabetical order by Last Name.
+2. **Component Roster**: this will generate a Word Document roster showing all of the selected Component's current Positions, Members assigned to those Positions, and all Positions and Members of the selected Component's subordinate (child) Components. The Roster will broken down by individual Components. The Component Roster is formatted similarly to the Division Rosters that are used on the Shared drive.
+3. **Organizational Chart**: this will attempt to generate a Word Document Organization Chart for the selected Component. As of the current version of BlueDeck, the Organizational Charts that this generates are not ideal for a selected Component that Contains more than around 75 Members. A more robust version of this feature is in development.
 
 #### My Info Tab
 The My Info tab shows the information currently contained in your BlueDeck account profile. It includes an option to update your profile information. Please ensure that you keep your profile information, including contact numbers, up to date.
