@@ -13,8 +13,14 @@
 - name: BlueDeck Pages
   href: bluedeck_pages.md
   items:
+    - name: Navigation Bar
+      href: navbar.md
+    - name: Footer Bar
+      href: footer.md
     - name: Home Page
       href: home_page.md
+    - name: Org Chart
+      href: orgChart.md  
     - name: Component Index
       href: component_index.md
     - name: Position Index

@@ -2340,7 +2340,7 @@
           "hash": "uMYWlRSYNS4+ZJehiXGW+Q=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2352,7 +2352,7 @@
           "hash": "IrYt0u+iKF/+afvpqwP/qA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2364,19 +2364,16 @@
           "hash": "JWcgPMUv9CjrwFXEZlFI8w=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "help/bluedeck_help_main.md",
       "output": {
         ".html": {
           "relative_path": "help/bluedeck_help_main.html",
-          "hash": "wvp8dvn/uCCuZMIL4CfWnw=="
+          "hash": "ZgTn1n/dh83jeY7tmHHu4g=="
         }
       },
       "is_incremental": false,
@@ -2391,7 +2388,7 @@
           "hash": "g6DyvRZkaYQkXOJ36NnQUg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2403,7 +2400,7 @@
           "hash": "XdskNgAQ+mAiNDlktnjalw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2415,7 +2412,7 @@
           "hash": "M4r5Yc1aAMzMM72ZMaQEOQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2430,19 +2427,37 @@
           "hash": "A0McB37zavOxePdolabaUw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "help/footer.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/footer.html",
+          "hash": "b1ZCCJlwSjsKWA+1lF5stg=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Conceptual",
       "source_relative_path": "help/home_page.md",
       "output": {
         ".html": {
           "relative_path": "help/home_page.html",
-          "hash": "onnJKdcualm9Hf2y6cl4mQ=="
+          "hash": "ftChrkUMKEGNS7uQ3c+oWg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2454,7 +2469,7 @@
           "hash": "AnV8dTV2bmJG+HznKQh4uA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2466,7 +2481,22 @@
           "hash": "Y1m8csyIN0L9bj020P6uZA=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "help/navbar.md",
+      "output": {
+        ".html": {
+          "relative_path": "help/navbar.html",
+          "hash": "ReUMfSLbjKWHSoGEHOon8w=="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2478,7 +2508,7 @@
           "hash": "XFkft8JaMv4g9cLQ7A9qww=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -2490,16 +2520,19 @@
           "hash": "Y9r99Evya3974x2hG6e9SQ=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Toc",
       "source_relative_path": "help/toc.yml",
       "output": {
         ".html": {
           "relative_path": "help/toc.html",
-          "hash": "/OY3riZmWN8zKFJwyPTcNg=="
+          "hash": "zM3HgxTDhBdz1NXKZ1iNsQ=="
         }
       },
       "is_incremental": false,
@@ -2540,6 +2573,50 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/footer.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/footer.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/homepage_demographics.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/homepage_demographics.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/homepage_documents.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/homepage_documents.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/homepage_exceptionToDuty.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/homepage_exceptionToDuty.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/homepage_home.JPG",
       "output": {
         "resource": {
@@ -2562,10 +2639,43 @@
     },
     {
       "type": "Resource",
+      "source_relative_path": "images/homepage_myInfo.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/homepage_myInfo.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/homepage_searchPeople.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/homepage_searchPeople.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
       "source_relative_path": "images/homepage_tabs.JPG",
       "output": {
         "resource": {
           "relative_path": "images/homepage_tabs.JPG"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/navbar.JPG",
+      "output": {
+        "resource": {
+          "relative_path": "images/navbar.JPG"
         }
       },
       "is_incremental": false,
@@ -2634,17 +2744,17 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 20,
+          "skipped_file_count": 19
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 187,
           "skipped_file_count": 187
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 18,
-          "skipped_file_count": 16
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
