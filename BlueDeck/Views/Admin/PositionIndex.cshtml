@@ -52,7 +52,7 @@
             <table class="table indexTable table-condensed">
                 <thead>
                     <tr class="tablePageControlHeaderRow">
-                        <th colspan="6">
+                        <th colspan="10">
                             <div page-model="@Model.PagingInfo" page-action="PositionIndex" page-classes-enabled="true"
                                  page-class="" page-class-normal=""
                                  page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
@@ -61,6 +61,9 @@
                         </th>
                     </tr>
                     <tr>
+                        <th>
+                            PositionId
+                        </th>
                         <th>
                             <a asp-page="/PositionIndex" asp-route-sortOrder="@Model.PositionNameSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by Position Name">
@@ -114,6 +117,9 @@
                     @foreach (var item in Model.Positions)
                     {
                     <tr>
+                        <td>
+                            @item.PositionId
+                        </td>
                         <td>
                             @item.PositionName
                         </td>

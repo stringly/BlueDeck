@@ -207,7 +207,7 @@ namespace BlueDeck.Controllers
                 IsManager = form.IsManager,
                 IsAssistantManager = form.IsAssistantManager,
                 LineupPosition = form.LineupPosition,
-                Callsign = form.Callsign.ToUpper(),
+                Callsign = form?.Callsign?.ToUpper() ?? "NONE",
                 CreatedDate = DateTime.Now,
                 LastModified = DateTime.Now,
                 CreatorId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "MemberId").Value),

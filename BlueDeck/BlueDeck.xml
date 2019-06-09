@@ -2598,6 +2598,321 @@
             </summary>
             <param name="_gender">The gender.</param>
         </member>
+        <member name="T:BlueDeck.Models.APIModels.MemberApiResult">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.Member"/> entity in a WebAPI response
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.MemberId">
+            <summary>
+            Gets or sets the member identifier.
+            </summary>
+            <value>
+            The member identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value>
+            The first name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value>
+            The last name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.PGPDId">
+            <summary>
+            Gets or sets the PGPD identifier.
+            </summary>
+            <remarks>
+            This value maps to the <see cref="P:BlueDeck.Models.Member.IdNumber"/>
+            </remarks>
+            <value>
+            The PGPD identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.ContactNumbers">
+            <summary>
+            Gets or sets the Member's contact numbers.
+            </summary>
+            <remarks>
+            This is a list of <see cref="T:BlueDeck.Models.APIModels.ContactNumberApiResult"/> objects created from the <see cref="P:BlueDeck.Models.Member.PhoneNumbers"/> property
+            </remarks>
+            <value>
+            The contact numbers.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Rank">
+            <summary>
+            Gets or sets the Member's rank.
+            </summary>
+            <value>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.RankApiResult"/> object.
+            </remarks>
+            The rank.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Gender">
+            <summary>
+            Gets or sets the gender.
+            </summary>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> object.
+            </remarks>
+            <value>
+            The gender.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Race">
+            <summary>
+            Gets or sets the Member's race.
+            </summary>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.RaceApiResult"/> object.
+            </remarks>
+            <value>
+            The race.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.DutyStatus">
+            <summary>
+            Gets or sets the duty status.
+            </summary>
+            <value>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> object.
+            </remarks>
+            The duty status.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.SubPositionApiResult"/> object.
+            </remarks>
+            The position.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberApiResult.Supervisor">
+            <summary>
+            Gets or sets the supervisor.
+            </summary>
+            <remarks>
+            This is a <see cref="T:BlueDeck.Models.APIModels.SubPositionApiResult"/> object.
+            </remarks>
+            <value>
+            The supervisor.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.MemberApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.MemberApiResult"/> class.        
+            </summary>
+            <remarks>
+            Default, parameterless constructor.
+            </remarks>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.MemberApiResult.#ctor(BlueDeck.Models.Member)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.MemberApiResult"/> class.
+            </summary>
+            <param name="_member">A <see cref="T:BlueDeck.Models.Member"/> object.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.MemberListAPIListItem">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.Member"/> entity when used as part of a list result for a WebAPI request.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberListAPIListItem.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <remarks>
+            The name is used as a display in a list, so it should be a "Display" name derived from the <see cref="T:BlueDeck.Models.Member"/> Rank, First Name, Last Name, and ID Number.
+            </remarks>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberListAPIListItem.BlueDeckId">
+            <summary>
+            Gets or sets the blue deck identifier.
+            </summary>
+            <remarks>
+            This is the <see cref="P:BlueDeck.Models.Member.MemberId"/>. It is called "BlueDeck ID" here because it is used in a WebAPI.
+            </remarks>
+            <value>
+            The blue deck identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.MemberListAPIListItem.OrgId">
+            <summary>
+            Gets or sets the org identifier.
+            </summary>
+            <remarks>
+            This is mapped to the <see cref="P:BlueDeck.Models.Member.IdNumber"/>, which is the Member's organization-unique ID (distinct from the BlueDeckID)
+            </remarks>
+            <value>
+            The org identifier.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.MemberListAPIListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.MemberListAPIListItem"/> class.
+            </summary>
+            <remarks>
+            Default constructor that takes no parameters.
+            </remarks>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.MemberListAPIListItem.#ctor(BlueDeck.Models.Types.MemberSelectListItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.MemberListAPIListItem"/> class.
+            </summary>
+            <remarks>
+            The class constructor that can take a <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/> as a constructor.
+            <see cref="T:BlueDeck.Models.APIModels.MemberListAPIListItem"/> objects constructed from <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/> will have a nullstring "OrgID" property.
+            </remarks>
+            <param name="_item">A <see cref="T:BlueDeck.Models.Types.MemberSelectListItem"/></param>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.MemberListAPIListItem.#ctor(BlueDeck.Models.Member)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.MemberListAPIListItem"/> class.
+            </summary>
+            <remarks>
+            The class constructor that can take a <see cref="T:BlueDeck.Models.Member"/> parameter.
+            </remarks>
+            <param name="_member">A <see cref="T:BlueDeck.Models.Member"/> object.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.PhoneNumberType"/> enumeration used in a WebAPI response.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId">
+            <summary>
+            Gets or sets the phone number type identifier.
+            </summary>
+            <remarks>
+            This corresponds to the <see cref="P:BlueDeck.Models.PhoneNumberType.PhoneNumberTypeId"/> field.
+            </remarks>
+            <value>
+            The phone number type identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeName">
+            <summary>
+            Gets or sets the name of the phone number type.
+            </summary>
+            <remarks>
+            This correspondes to the <see cref="P:BlueDeck.Models.PhoneNumberType.PhoneNumberTypeName"/> field.
+            </remarks>
+            <value>
+            The name of the phone number type.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor(BlueDeck.Models.PhoneNumberType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult"/> class.
+            </summary>
+            <param name="_phoneNumberType">A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+        </member>
+        <member name="T:BlueDeck.Models.APIModels.PositionApiResult">
+            <summary>
+            Class that represents a <see cref="T:BlueDeck.Models.Position"/> entity in a WebAPI response.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.PositionId">
+            <summary>
+            Gets or sets the position identifier.
+            </summary>
+            <value>
+            The position identifier, derived from <see cref="P:BlueDeck.Models.Position.PositionId"/>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name, derived from <see cref="P:BlueDeck.Models.Position.Name"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.IsManager">
+            <summary>
+            Gets or sets a value indicating whether this instance is manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is manager; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.IsUnique">
+            <summary>
+            Gets or sets a value indicating whether this instance is unique.
+            </summary>
+            <value>
+              <c>true</c> if this instance is unique; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.Callsign">
+            <summary>
+            Gets or sets the callsign.
+            </summary>
+            <value>
+            The callsign.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.Component">
+            <summary>
+            Gets or sets the Parent Component of this Position.
+            </summary>
+            <value>
+            The component, which is a <see cref="T:BlueDeck.Models.APIModels.SubComponentApiResult"/> derived from <see cref="P:BlueDeck.Models.Position.ParentComponent"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.APIModels.PositionApiResult.Members">
+            <summary>
+            Gets or sets the members assigned to this Position.
+            </summary>
+            <value>
+            The members, which is a list of <see cref="T:BlueDeck.Models.APIModels.SubMemberApiResult"/> objects derived from the <see cref="P:BlueDeck.Models.Position.Members"/>
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.PositionApiResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.PositionApiResult"/> class.
+            <remarks>
+            Default, parameterless constructor.
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.APIModels.PositionApiResult.#ctor(BlueDeck.Models.Position)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.PositionApiResult"/> class.
+            </summary>
+            <remarks>
+            Constructor that accepts a <see cref="T:BlueDeck.Models.Position"/> parameter.
+            </remarks>
+            <param name="_position">A <see cref="T:BlueDeck.Models.Position"/>.</param>
+        </member>
         <member name="T:BlueDeck.Models.ApplicationDbContext">
             <summary>
             Entity Framework DbContext Class
@@ -5006,14 +5321,14 @@
             <summary>
             A repository for the Member entity
             </summary>
-            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository{BlueDeck.Models.Member}" />
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.MemberRepository"/> class.
             </summary>
-            <param name="context">The <see cref="T:BlueDeck.Models.ApplicationDbContext"/>.</param>
+            <param name="context">The <see cref="P:BlueDeck.Persistence.Repositories.MemberRepository.ApplicationDbContext"/>.</param>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberRepository.ApplicationDbContext">
             <summary>

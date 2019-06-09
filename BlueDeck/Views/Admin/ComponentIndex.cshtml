@@ -50,7 +50,7 @@
             <table class="table indexTable table-condensed">
                 <thead>
                     <tr class="tablePageControlHeaderRow">
-                        <th colspan="11">
+                        <th colspan="7">
                             <div page-model="@Model.PagingInfo" page-action="ComponentIndex" page-classes-enabled="true"
                                  page-class="" page-class-normal=""
                                  page-class-selected="active" page-url-searchString="@Model.CurrentFilter" page-url-sortOrder="@Model.CurrentSort"
@@ -59,6 +59,9 @@
                         </th>
                     </tr>
                     <tr>
+                        <th>
+                            ComponentId
+                        </th>
                         <th>
                             <a asp-page="/ComponentIndex" asp-route-sortOrder="@Model.NameSort"
                                asp-route-searchString="@Model.CurrentFilter" title="Sort by Component Name">
@@ -103,6 +106,9 @@
                     @foreach (var item in Model.Components)
                     {
                         <tr>
+                            <td>
+                                @item.ComponentId
+                            </td>
                             <td>
                                 @item.ComponentName
                             </td>
