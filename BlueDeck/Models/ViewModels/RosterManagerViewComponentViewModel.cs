@@ -14,8 +14,7 @@ namespace BlueDeck.Models.ViewModels
         public RosterManagerViewComponentViewModel(List<Component> _components)
         {
             List<RosterManagerViewModelComponent> initial = _components.ConvertAll(x => new RosterManagerViewModelComponent(x));
-            
-            
+
             foreach (RosterManagerViewModelComponent c in initial)
             {
                 if (c.ParentComponent != null)
@@ -25,11 +24,23 @@ namespace BlueDeck.Models.ViewModels
                     {
                         parent.Children.Add(c);
                     }
-                }      
+                }
             }
-            ComponentList = new List<RosterManagerViewModelComponent>();            
-            SetComponentListOrder(initial);
-            
+            ComponentList = new List<RosterManagerViewModelComponent>();
+
+            // this is such a hack. Earlier iterations, the Components on the Component List were likely to be in order already, so the Parent would get evaluated first.
+            // I realized this was a problem when this ran for a Parent Component with a ComponentId HIGHER than the ComponentId of one of it's children.
+            // To hack around this, I manually extract and push the "root" component (which means the Component on the "initial" list that has a NULL ParentComponent)
+            // to the ComponentList Property and then remove it from the "intial" list prior to calling the SetComponentListOrder method.
+            RosterManagerViewModelComponent rootComponent = initial.Where(x => x.ParentComponent == null).First();
+            rootComponent.NestedLevel = 0;
+            ComponentList.Add(rootComponent);
+            initial.Remove(rootComponent);
+            if(initial.Count() > 0)
+            {
+                SetComponentListOrder(initial.OrderBy(x => x.ParentComponentId).ToList());
+            }           
+
         }
 
         private void SetComponentListOrder(List<RosterManagerViewModelComponent> initial)

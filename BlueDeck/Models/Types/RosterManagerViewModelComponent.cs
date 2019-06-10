@@ -17,6 +17,7 @@ namespace BlueDeck.Models.Types
             this.ComponentId = c.ComponentId;
             this.Name = c.Name;
             this.ParentComponent = c.ParentComponent;
+            this.ParentComponentId = c.ParentComponentId;
             this.Positions = c?.Positions ?? new List<Position>();
             this.Children = new List<RosterManagerViewModelComponent>();
             this.LineupPosition = c.LineupPosition;

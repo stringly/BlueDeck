@@ -52,7 +52,7 @@ namespace BlueDeck.Models.DocGenerators
 
                 // Append Supervisors from First Gen Children ONLY
                 List<Position> firstGenSupervisors = new List<Position>();
-                foreach (Component child in Components.First().ChildComponents)
+                foreach (Component child in Components.First().ChildComponents.OrderBy(x => x.LineupPosition))
                 {
                     Position p = child?.Positions?.Where(x => x.IsManager == true).FirstOrDefault();
                     if (p != null)
@@ -121,7 +121,7 @@ namespace BlueDeck.Models.DocGenerators
                 mainPart.Document.Body.Append(GeneratePageBreakSectionProperties());
 
                 // Render First-Gen Children
-                foreach (Component c in Components.FirstOrDefault().ChildComponents)
+                foreach (Component c in Components.FirstOrDefault().ChildComponents.OrderBy(x => x.LineupPosition))
                 {
                     // Render the Manager's Box
                     mainPart.Document.Body.Append(GenerateFullWidthTable(c));
@@ -1051,7 +1051,7 @@ namespace BlueDeck.Models.DocGenerators
             runProperties1.Append(fontSize2);
             runProperties1.Append(fontSizeComplexScript2);
             Text text1 = new Text();
-            text1.Text = _p?.Name;
+            text1.Text = $"{_p?.Name} - {_p?.ParentComponent?.Name}";
 
             run1.Append(runProperties1);
             run1.Append(text1);
@@ -3616,7 +3616,7 @@ namespace BlueDeck.Models.DocGenerators
                 tableCellProperties1.Append(shading1);
             }
 
-            Paragraph paragraph1 = new Paragraph() { RsidParagraphMarkRevision = "00417BB5", RsidParagraphAddition = "00417BB5", RsidParagraphProperties = "00417BB5", RsidRunAdditionDefault = "00417BB5" };
+            Paragraph paragraph1 = new Paragraph();
 
             ParagraphProperties paragraphProperties1 = new ParagraphProperties();
             SpacingBetweenLines spacingBetweenLines1 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
@@ -3675,7 +3675,7 @@ namespace BlueDeck.Models.DocGenerators
                 tableCellProperties2.Append(shading2);
             }
 
-            Paragraph paragraph2 = new Paragraph() { RsidParagraphMarkRevision = "00417BB5", RsidParagraphAddition = "00417BB5", RsidParagraphProperties = "00417BB5", RsidRunAdditionDefault = "00417BB5" };
+            Paragraph paragraph2 = new Paragraph();
 
             ParagraphProperties paragraphProperties2 = new ParagraphProperties();
             SpacingBetweenLines spacingBetweenLines2 = new SpacingBetweenLines() { After = "0", Line = "240", LineRule = LineSpacingRuleValues.Auto };
@@ -3764,7 +3764,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text3 = new Text();
 
             // H/M Count
-            text3.Text = _members.Where(x => x.GenderId == 2 && (x.RaceId == 7 || x.RaceId == 8)).Count().ToString(); ;
+            text3.Text = _members.Where(x => x.GenderId == 2 && (x.RaceId == 6 || x.RaceId == 7)).Count().ToString(); ;
 
             run3.Append(runProperties3);
             run3.Append(text3);
@@ -3821,7 +3821,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text4 = new Text();
 
             // A/M Count
-            text4.Text = _members.Where(x => x.GenderId == 2 && x.RaceId == 4).Count().ToString();
+            text4.Text = _members.Where(x => x.GenderId == 2 && x.RaceId == 3).Count().ToString();
 
             run4.Append(runProperties4);
             run4.Append(text4);
@@ -3884,7 +3884,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text5 = new Text();
 
             // W/M Count
-            text5.Text = _members.Where(x => x.GenderId == 2 && x.RaceId == 3).Count().ToString();
+            text5.Text = _members.Where(x => x.GenderId == 2 && x.RaceId == 2).Count().ToString();
 
             run5.Append(runProperties5);
             run5.Append(text5);
@@ -3996,7 +3996,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text7 = new Text();
 
             // H/F Count
-            text7.Text = _members.Where(x => x.GenderId == 3 && (x.RaceId == 7 || x.RaceId == 8)).Count().ToString();
+            text7.Text = _members.Where(x => x.GenderId == 3 && (x.RaceId == 6 || x.RaceId == 7)).Count().ToString();
 
             run7.Append(runProperties7);
             run7.Append(text7);
@@ -4052,7 +4052,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text8 = new Text();
 
             // A/F Count
-            text8.Text = _members.Where(x => x.GenderId == 3 && x.RaceId == 4).Count().ToString();
+            text8.Text = _members.Where(x => x.GenderId == 3 && x.RaceId == 3).Count().ToString();
 
             run8.Append(runProperties8);
             run8.Append(text8);
@@ -4114,7 +4114,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text9 = new Text();
 
             // W/F Count
-            text9.Text = _members.Where(x => x.GenderId == 3 && x.RaceId == 3).Count().ToString();
+            text9.Text = _members.Where(x => x.GenderId == 3 && x.RaceId == 2).Count().ToString();
 
             run9.Append(runProperties9);
             run9.Append(text9);
@@ -4226,7 +4226,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text11 = new Text();
 
             // H/All Count
-            text11.Text = _members.Where(x => x.RaceId == 7 || x.RaceId == 8).Count().ToString();
+            text11.Text = _members.Where(x => x.RaceId == 6 || x.RaceId == 7).Count().ToString();
 
             run11.Append(runProperties11);
             run11.Append(text11);
@@ -4282,7 +4282,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text12 = new Text();
 
             // A/All count
-            text12.Text = _members.Where(x => x.RaceId == 4).Count().ToString();
+            text12.Text = _members.Where(x => x.RaceId == 3).Count().ToString();
 
             run12.Append(runProperties12);
             run12.Append(text12);
@@ -4344,7 +4344,7 @@ namespace BlueDeck.Models.DocGenerators
             Text text13 = new Text();
 
             // W/All Count
-            text13.Text = _members.Where(x => x.RaceId == 3).Count().ToString();
+            text13.Text = _members.Where(x => x.RaceId == 2).Count().ToString();
 
             run13.Append(runProperties13);
             run13.Append(text13);
@@ -4553,10 +4553,10 @@ namespace BlueDeck.Models.DocGenerators
         }
         public Table GenerateComponentTable(Component _c)
         {
-            Member supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager).Members.FirstOrDefault();
+            Member supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager)?.Members?.FirstOrDefault();
             if (supervisor == null)
             {
-                supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager).TempMembers?.FirstOrDefault();
+                supervisor = _c?.Positions?.FirstOrDefault(x => x.IsManager)?.TempMembers?.FirstOrDefault();
             }
             Table table1 = new Table();
 
@@ -4626,13 +4626,14 @@ namespace BlueDeck.Models.DocGenerators
             RunProperties runProperties1 = new RunProperties();
             RunFonts runFonts2 = new RunFonts() { Ascii = "Trebuchet MS", HighAnsi = "Trebuchet MS" };
             Bold bold2 = new Bold();
+            
             FontSize fontSize2 = new FontSize() { Val = "18" };
             FontSizeComplexScript fontSizeComplexScript2 = new FontSizeComplexScript() { Val = "18" };
 
             runProperties1.Append(runFonts2);
             runProperties1.Append(bold2);
             runProperties1.Append(fontSize2);
-            runProperties1.Append(fontSizeComplexScript2);
+            runProperties1.Append(fontSizeComplexScript2);            
             Text text1 = new Text();
 
             text1.Text = $"{_c.Name.ToUpper()} ({_c.GetManagerCount()} and {_c.GetWorkerCount()})";
@@ -5159,11 +5160,13 @@ namespace BlueDeck.Models.DocGenerators
             RunProperties runProperties11 = new RunProperties();
             RunFonts runFonts22 = new RunFonts() { Ascii = "Trebuchet MS", HighAnsi = "Trebuchet MS" };
             FontSize fontSize22 = new FontSize() { Val = "18" };
+            Color color22 = new Color() { Val = "365F91" };
             FontSizeComplexScript fontSizeComplexScript22 = new FontSizeComplexScript() { Val = "18" };
 
             runProperties11.Append(runFonts22);
             runProperties11.Append(fontSize22);
             runProperties11.Append(fontSizeComplexScript22);
+            runProperties11.Append(color22);
             Text text11 = new Text();
             text11.Text = "Supervisor";
 
@@ -5189,7 +5192,7 @@ namespace BlueDeck.Models.DocGenerators
             table1.Append(tableRow2);
             if(_c.Positions != null && _c.Positions.Count > 0)
             {
-                foreach (Position p in _c.Positions)
+                foreach (Position p in _c.Positions.OrderBy(x => x.LineupPosition))
                 {
                     if (!p.IsManager)
                     {
@@ -5627,7 +5630,29 @@ namespace BlueDeck.Models.DocGenerators
             runProperties6.Append(fontSize12);
             runProperties6.Append(fontSizeComplexScript12);
             Text text6 = new Text();
-            text6.Text = _m.DutyStatus?.DutyStatusName ?? "-";
+            string displayText = "";
+            if (_m.Position.IsAssistantManager)
+            {
+                runProperties6.Append(new Color() { Val = "365F91" });
+                displayText = "Assistant";
+            }
+            else if (_m.DutyStatus.IsExceptionToNormalDuty)
+            {
+                runProperties6.Append(new Color() { Val = "913535" });
+                displayText = _m.DutyStatus?.DutyStatusName ?? "-";
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(_m?.Position?.Callsign))
+                {
+                    displayText = _m.Position.Callsign;
+                }
+                else
+                {
+                    displayText = _m.DutyStatus?.DutyStatusName ?? "-";
+                }                
+            }
+            text6.Text = displayText;
 
             run6.Append(runProperties6);
             run6.Append(text6);
