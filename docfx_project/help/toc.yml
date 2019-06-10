@@ -1,4 +1,4 @@
-- name: BlueDeck Help
+- name: Intro
   href: bluedeck_help_main.md
   items:
     - name: Definitions
@@ -20,7 +20,7 @@
     - name: Home Page
       href: home_page.md
     - name: Org Chart
-      href: orgChart.md  
+      href: org_chart.md  
     - name: Component Index
       href: component_index.md
     - name: Position Index
