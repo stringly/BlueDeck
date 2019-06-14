@@ -99,7 +99,13 @@ namespace BlueDeck.Models.ViewModels
         [Required]
         [Display(Name = "Duty Status")]
         public int? DutyStatusId { get; set; }
-        
+
+        /// <summary>
+        /// Gets or sets the application status identifier.
+        /// </summary>
+        /// <value>
+        /// The application status identifier.
+        /// </value>
         [Display(Name = "Account Status")]
         public int? AppStatusId { get; set; }
         /// <summary>
@@ -139,28 +145,133 @@ namespace BlueDeck.Models.ViewModels
         /// </value>
         public string DisplayName { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the Member's LDAP Name.
+        /// </summary>
+        /// <remarks>
+        /// The LDAP name is essential, as it is what BlueDeck uses to identify Windows users when they log on.
+        /// </remarks>
+        /// <value>
+        /// The name of the LDAP.
+        /// </value>
         [Display(Name = "Windows Logon Name")]
         [Required]
         public string LDAPName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Member's payroll identifier.
+        /// </summary>
+        /// <remarks>
+        /// As of Version 1, this is the Stromberg ETS Id Number for the Member.
+        /// This may change when the new Payroll System goes live.
+        /// </remarks>
+        /// <value>
+        /// The payroll identifier.
+        /// </value>
+        [Display(Name = "Payroll ID")]
+        [Required]
+        public string PayrollID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date that the Member was hired by the Organization.
+        /// </summary>
+        /// <value>
+        /// The hire date.
+        /// </value>
+        [Display(Name = "Hire Date")]
+        [Required]
+        public DateTime HireDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's Organizational position number.
+        /// </summary>
+        /// <remarks>
+        /// This is distinct from the Member's PositionId. The Organization assigns position numbers to Employees based on rules that I don't full understand.
+        /// For now, I'm going to treat them as Member-specific.
+        /// </remarks>
+        /// <value>
+        /// The org position number.
+        /// </value>
+        [Display(Name = "Position Number")]
+        public string OrgPositionNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this Member is in the "User" <see cref="Role"/>
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this Member is in the "User" <see cref="Role"/>; otherwise, <c>false</c>.
+        /// </value>
         [Display(Name = "User")]
         public bool IsUser { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this Member is in the "ComponentAdmin" <see cref="Role"/>
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this Member is in the "ComponentAdmin" <see cref="Role"/>; otherwise, <c>false</c>.
+        /// </value>
         [Display(Name = "Component Admin")]
         public bool IsComponentAdmin { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this Member is in the "GlobalAdmin" <see cref="Role"/>
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this Member is in the "GlobalAdmin" <see cref="Role"/>; otherwise, <c>false</c>.
+        /// </value>
         [Display(Name = "Global Admin")]
         public bool IsGlobalAdmin { get; set; }
 
+        /// <summary>
+        /// Gets or sets the "Display Name" of the Member who created this Member.
+        /// </summary>
+        /// <value>
+        /// The Display name of the Member who created this Member
+        /// </value>
         [Display(Name = "Created By")]
         public string Creator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date that this Member was created.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
         [Display(Name = "Created")]
         public DateTime? CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the "Display Name" of the Member who last modified this Member.
+        /// </summary>
+        /// <value>
+        /// The Display name of the Member who last modified this Member
+        /// </value>
         [Display(Name = "Last Modified By")]
         public string LastModifiedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets date that this member was last modified.
+        /// </summary>
+        /// <value>
+        /// The last modified.
+        /// </value>
         [Display(Name = "Last Modified")]
         public DateTime? LastModified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberId of the <see cref="Member"/> who last modified this Member.
+        /// </summary>
+        /// <value>
+        /// The last modified by identifier.
+        /// </value>
         public int? LastModifiedById { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberID of the Member who created this Member
+        /// </summary>
+        /// <value>
+        /// The creator identifier.
+        /// </value>
         public int? CreatedById { get; set; }
 
         /// <summary>
@@ -218,6 +329,12 @@ namespace BlueDeck.Models.ViewModels
         /// </value>
         public List<MemberDutyStatusSelectListItem> DutyStatus { get; set; }
 
+        /// <summary>
+        /// Gets or sets a list of <see cref="ApplicationStatusSelectListItem"/> for use in select menus.
+        /// </summary>
+        /// <value>
+        /// The list of <see cref="ApplicationStatusSelectListItem"/>.
+        /// </value>
         public List<ApplicationStatusSelectListItem> AppStatuses { get; set; }
 
         /// <summary>
@@ -279,6 +396,9 @@ namespace BlueDeck.Models.ViewModels
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
             LDAPName = _member.LDAPName;
+            PayrollID = _member.PayrollID;
+            HireDate = _member.HireDate;
+            OrgPositionNumber = _member.OrgPositionNumber;
             Positions = _positionList;
             AppStatuses = _appStatusList;
             Creator = _member.Creator?.GetTitleName() ?? "";
@@ -289,9 +409,7 @@ namespace BlueDeck.Models.ViewModels
             LastModified = _member?.LastModified;
             IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
             IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
-            IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;
-           
-
+            IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false; 
         }
 
         /// <summary>
@@ -337,6 +455,9 @@ namespace BlueDeck.Models.ViewModels
             PhoneNumberTypes = _phoneNumberTypes;
             DisplayName = _member.GetTitleName();
             LDAPName = _member?.LDAPName;
+            PayrollID = _member.PayrollID;
+            HireDate = _member.HireDate;
+            OrgPositionNumber = _member.OrgPositionNumber;
             AppStatuses = _appStatusList;
             Creator = _member.Creator?.GetTitleName() ?? "";
             CreatedById = _member?.CreatorId;
@@ -351,10 +472,19 @@ namespace BlueDeck.Models.ViewModels
         }
 
     }
+
+    /// <summary>
+    /// Validates that the Primary PositionId and the TempPositionId are not the same value.
+    /// </summary>
+    /// <seealso cref="ValidationAttribute" />
     public class PrimaryAndTempPositionNotEqualAttribute : ValidationAttribute
     {
         private readonly string _comparisonProperty;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PrimaryAndTempPositionNotEqualAttribute"/> class.
+        /// </summary>
+        /// <param name="comparisonProperty">The comparison property.</param>
         public PrimaryAndTempPositionNotEqualAttribute(string comparisonProperty)
         {
              _comparisonProperty = comparisonProperty;

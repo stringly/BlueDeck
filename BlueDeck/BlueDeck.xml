@@ -1569,6 +1569,7 @@
             </summary>
             <param name="id">The MemberId for the <see cref="T:BlueDeck.Models.Member"/> being edited</param>
             <param name="form">The <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> object to which the POSTed form is Bound</param>
+            <param name="returnUrl">An optional return URL</param>
             <returns>An <see cref="T:IActionResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Delete(System.Nullable{System.Int32},System.String)">
@@ -3396,6 +3397,14 @@
             The Member's Id (PK).
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Member.RankId">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.Rank"/> Id.
+            </summary>
+            <value>
+            The rank identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Member.Rank">
             <summary>
             Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.Rank"/>.
@@ -3436,14 +3445,33 @@
             The Departmental Id Number of the Member.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Member.GenderId">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.Gender"/> Id Number.
+            </summary>
+            <value>
+            The gender identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Member.Gender">
             <summary>
-            Gets or sets the Member's gender.
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.Gender"/>.
             </summary>
+            <remarks>
+            This is an EF navigation property that must be manually loaded if using Lazy Loading.
+            </remarks>
             <value>
             The Member's gender.
             </value>
-            <seealso cref="T:BlueDeck.Models.Types.MemberGender"/>
+            <seealso cref="P:BlueDeck.Models.Member.Gender"/>
+        </member>
+        <member name="P:BlueDeck.Models.Member.RaceId">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.Race"/> Id Number.
+            </summary>
+            <value>
+            The race identifier.
+            </value>
         </member>
         <member name="P:BlueDeck.Models.Member.Race">
             <summary>
@@ -3452,16 +3480,43 @@
             <value>
             The Member's race.
             </value>
-            <seealso cref="T:BlueDeck.Models.Types.MemberRace"/>
+            <seealso cref="P:BlueDeck.Models.Member.Race"/>
+        </member>
+        <member name="P:BlueDeck.Models.Member.DutyStatusId">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.DutyStatus"/> Id.
+            </summary>
+            <value>
+            The duty status identifier.
+            </value>
         </member>
         <member name="P:BlueDeck.Models.Member.DutyStatus">
             <summary>
-            Gets or sets the Member's duty status.
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.DutyStatus"/>
             </summary>
             <value>
-            The Member's race.
+            The Member's current Duty Status.
             </value>
-            <seealso cref="T:BlueDeck.Models.Types.MemberDutyStatus"/>
+            <seealso cref="P:BlueDeck.Models.Member.DutyStatus"/>
+        </member>
+        <member name="P:BlueDeck.Models.Member.AppStatusId">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.AppStatus"/> Id.
+            </summary>
+            <value>
+            The application status identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.AppStatus">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.AppStatus"/>.
+            </summary>
+            <remarks>
+            This is an EF navigation property.
+            </remarks>
+            <value>
+            The application status.
+            </value>
         </member>
         <member name="P:BlueDeck.Models.Member.Email">
             <summary>
@@ -3469,6 +3524,103 @@
             </summary>
             <value>
             The Member's email.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LDAPName">
+            <summary>
+            Gets or sets the Member's LDAP Name.
+            </summary>
+            <remarks>
+            The LDAP name is essential, as it is what BlueDeck uses to identify Windows users when they log on.
+            </remarks>
+            <value>
+            The name of the LDAP.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.PayrollID">
+            <summary>
+            Gets or sets the Member's payroll identifier.
+            </summary>
+            <remarks>
+            As of Version 1, this is the Stromberg ETS Id Number for the Member.
+            This may change when the new Payroll System goes live.
+            </remarks>
+            <value>
+            The payroll identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.HireDate">
+            <summary>
+            Gets or sets the date that the Member was hired by the Organization.
+            </summary>
+            <value>
+            The hire date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.OrgPositionNumber">
+            <summary>
+            Gets or sets the Member's Organizational position number.
+            </summary>
+            <remarks>
+            This is distinct from the Member's PositionId. The Organization assigns position numbers to Employees based on rules that I don't full understand.
+            For now, I'm going to treat them as Member-specific.
+            </remarks>
+            <value>
+            The org position number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CreatorId">
+            <summary>
+            Gets or sets the MemberID of the Member who created this Member
+            </summary>
+            <value>
+            The creator identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.Creator">
+            <summary>
+            Gets or sets the <see cref="T:BlueDeck.Models.Member"/> who created this Member
+            </summary>
+            <remarks>
+            EF Navigation property
+            </remarks>
+            <value>
+            The creator.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CreatedDate">
+            <summary>
+            Gets or sets the date that this Member was created.
+            </summary>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModified">
+            <summary>
+            Gets or sets date that this member was last modified.
+            </summary>
+            <value>
+            The last modified.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModifiedById">
+            <summary>
+            Gets or sets the MemberId of the <see cref="T:BlueDeck.Models.Member"/> who last modified this Member.
+            </summary>
+            <value>
+            The last modified by identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModifiedBy">
+            <summary>
+            Gets or sets the <see cref="T:BlueDeck.Models.Member"/> who last modified this Member.
+            </summary>
+            <remarks>
+            EF navigation property.
+            </remarks>
+            <value>
+            The <see cref="T:BlueDeck.Models.Member"/> who last modified this Member.
             </value>
         </member>
         <member name="P:BlueDeck.Models.Member.PositionId">
@@ -3507,6 +3659,75 @@
             The temporary duty position.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Member.PhoneNumbers">
+            <summary>
+            Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.PhoneNumbers"/> collection.
+            </summary>
+            <value>
+            The Member's Phone Numbers collection
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CurrentRoles">
+            <summary>
+            Gets or sets the Member's current <see cref="T:BlueDeck.Models.Role"/> collection
+            </summary>
+            <value>
+            The Member's current <see cref="T:BlueDeck.Models.Role"/> collection.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CreatedMembers">
+            <summary>
+            Gets or sets the collection of <see cref="T:BlueDeck.Models.Member"/>s created by this Member
+            </summary>
+            <value>
+            The collection of <see cref="T:BlueDeck.Models.Member"/>s that this Member has created.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CreatedPositions">
+            <summary>
+            Gets or sets the collection of <see cref="P:BlueDeck.Models.Member.Position"/>s that this Member has created..
+            </summary>
+            <value>
+            The created positions.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.CreatedComponents">
+            <summary>
+            Gets or sets a collection of <see cref="T:BlueDeck.Models.Component"/> that this Member has created.
+            </summary>
+            <value>
+            The created components.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModifiedMembers">
+            <summary>
+            Gets or sets the collection of <see cref="T:BlueDeck.Models.Member"/> that this Member has Last Modified.
+            </summary>
+            <value>
+            The last modified members.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModifiedPositions">
+            <summary>
+            Gets or sets the collection of <see cref="P:BlueDeck.Models.Member.Position"/> that this Member has last modified.
+            </summary>
+            <value>
+            The last modified positions.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.LastModifiedComponents">
+            <summary>
+            Gets or sets the collection of <see cref="T:BlueDeck.Models.Component"/> that this Member has last Modified.
+            </summary>
+            <value>
+            The last modified components.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Member.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Member"/> class.
+            </summary>
+        </member>
         <member name="M:BlueDeck.Models.Member.GetTitleName">
             <summary>
             Gets the formal title form of the Member's name and rank.
@@ -3521,6 +3742,14 @@
             Gets the Member's name in "LastName, FirstName" format.
             </summary>
             <returns>A <see cref="T:System.String"/> with the Member's "LastName, FirstName"</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Member.IsComponentAdmin">
+            <summary>
+            Determines whether the Member has the ComponentAdmin role.
+            </summary>
+            <returns>
+              <c>true</c> if the Member is in the ComponentAdmin role; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:BlueDeck.Models.Position">
             <summary>
@@ -4659,6 +4888,14 @@
             The Member's Duty Status Index.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.AppStatusId">
+            <summary>
+            Gets or sets the application status identifier.
+            </summary>
+            <value>
+            The application status identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.Email">
             <summary>
             Gets or sets the Member's email.
@@ -4689,6 +4926,121 @@
             </summary>
             <value>
             The Member's display name, used only for Display. This is not a model-bound editable field.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.LDAPName">
+            <summary>
+            Gets or sets the Member's LDAP Name.
+            </summary>
+            <remarks>
+            The LDAP name is essential, as it is what BlueDeck uses to identify Windows users when they log on.
+            </remarks>
+            <value>
+            The name of the LDAP.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.PayrollID">
+            <summary>
+            Gets or sets the Member's payroll identifier.
+            </summary>
+            <remarks>
+            As of Version 1, this is the Stromberg ETS Id Number for the Member.
+            This may change when the new Payroll System goes live.
+            </remarks>
+            <value>
+            The payroll identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.HireDate">
+            <summary>
+            Gets or sets the date that the Member was hired by the Organization.
+            </summary>
+            <value>
+            The hire date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.OrgPositionNumber">
+            <summary>
+            Gets or sets the Member's Organizational position number.
+            </summary>
+            <remarks>
+            This is distinct from the Member's PositionId. The Organization assigns position numbers to Employees based on rules that I don't full understand.
+            For now, I'm going to treat them as Member-specific.
+            </remarks>
+            <value>
+            The org position number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.IsUser">
+            <summary>
+            Gets or sets a value indicating whether this Member is in the "User" <see cref="T:BlueDeck.Models.Role"/>
+            </summary>
+            <value>
+              <c>true</c> if this Member is in the "User" <see cref="T:BlueDeck.Models.Role"/>; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.IsComponentAdmin">
+            <summary>
+            Gets or sets a value indicating whether this Member is in the "ComponentAdmin" <see cref="T:BlueDeck.Models.Role"/>
+            </summary>
+            <value>
+              <c>true</c> if this Member is in the "ComponentAdmin" <see cref="T:BlueDeck.Models.Role"/>; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.IsGlobalAdmin">
+            <summary>
+            Gets or sets a value indicating whether this Member is in the "GlobalAdmin" <see cref="T:BlueDeck.Models.Role"/>
+            </summary>
+            <value>
+              <c>true</c> if this Member is in the "GlobalAdmin" <see cref="T:BlueDeck.Models.Role"/>; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.Creator">
+            <summary>
+            Gets or sets the "Display Name" of the Member who created this Member.
+            </summary>
+            <value>
+            The Display name of the Member who created this Member
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.CreatedDate">
+            <summary>
+            Gets or sets the date that this Member was created.
+            </summary>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.LastModifiedBy">
+            <summary>
+            Gets or sets the "Display Name" of the Member who last modified this Member.
+            </summary>
+            <value>
+            The Display name of the Member who last modified this Member
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.LastModified">
+            <summary>
+            Gets or sets date that this member was last modified.
+            </summary>
+            <value>
+            The last modified.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.LastModifiedById">
+            <summary>
+            Gets or sets the MemberId of the <see cref="T:BlueDeck.Models.Member"/> who last modified this Member.
+            </summary>
+            <value>
+            The last modified by identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.CreatedById">
+            <summary>
+            Gets or sets the MemberID of the Member who created this Member
+            </summary>
+            <value>
+            The creator identifier.
             </value>
         </member>
         <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.ContactNumbers">
@@ -4745,6 +5097,14 @@
             The races.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.AppStatuses">
+            <summary>
+            Gets or sets a list of <see cref="T:BlueDeck.Models.Types.ApplicationStatusSelectListItem"/> for use in select menus.
+            </summary>
+            <value>
+            The list of <see cref="T:BlueDeck.Models.Types.ApplicationStatusSelectListItem"/>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.PhoneNumberTypes">
             <summary>
             Gets or sets the list of <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem"/>.
@@ -4789,6 +5149,18 @@
             <param name="_dutyStatusList">A List of  <see cref="T:BlueDeck.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
             <param name="_phoneNumberTypes">A List of  <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
             <param name="_appStatusList">A List of  <see cref="T:BlueDeck.Models.Types.ApplicationStatusSelectListItem"/>.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute">
+            <summary>
+            Validates that the Primary PositionId and the TempPositionId are not the same value.
+            </summary>
+            <seealso cref="T:System.ComponentModel.DataAnnotations.ValidationAttribute" />
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.PrimaryAndTempPositionNotEqualAttribute"/> class.
+            </summary>
+            <param name="comparisonProperty">The comparison property.</param>
         </member>
         <member name="T:BlueDeck.Models.ViewModels.PositionWithComponentListViewModel">
             <summary>

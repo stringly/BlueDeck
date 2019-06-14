@@ -76,6 +76,23 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4 form-group">
+                                    <label asp-for="PayrollID" class="control-label"></label>
+                                    <input asp-for="PayrollID" class="form-control" />
+                                    <span asp-validation-for="PayrollID" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="HireDate" class="control-label"></label>
+                                    <input asp-for="HireDate" class="form-control" />
+                                    <span asp-validation-for="HireDate" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-3 form-group">
+                                    <label asp-for="OrgPositionNumber" class="control-label"></label>
+                                    <input asp-for="OrgPositionNumber" class="form-control" />
+                                    <span asp-validation-for="OrgPositionNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4 form-group">
                                     <label asp-for="DutyStatusId" class="control-label"></label>
                                     @Html.DropDownListFor(model => model.DutyStatusId,
                                                                     new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),

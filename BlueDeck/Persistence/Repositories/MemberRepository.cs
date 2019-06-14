@@ -210,6 +210,9 @@ namespace BlueDeck.Persistence.Repositories
             m.MiddleName = form.MiddleName;
             m.LastName = form.LastName;
             m.LDAPName = form.LDAPName;
+            m.PayrollID = form.PayrollID;
+            m.HireDate = form.HireDate;
+            m.OrgPositionNumber = form.OrgPositionNumber;
             m.LastModified = Convert.ToDateTime(form.LastModified);
             m.LastModifiedById = form.LastModifiedById;
             // remove ALL roles from non-active accounts

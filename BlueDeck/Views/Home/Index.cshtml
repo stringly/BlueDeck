@@ -377,6 +377,20 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.PayrollID, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.PayrollID, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.HireDate, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.HireDate, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.CurrentUser.OrgPositionNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.CurrentUser.OrgPositionNumber, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
                         @Html.LabelFor(model => model.CurrentUser.Position, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.CurrentUser.Position.Name, new { @class = "form-control", disabled = "disabled" })
                     </div>

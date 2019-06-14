@@ -188,6 +188,9 @@ namespace BlueDeck.Controllers
             "IdNumber," +
             "Email," +
             "LDAPName," +
+            "PayrollID," +
+            "HireDate," +
+            "OrgPositionNumber," +
             "AppStatusId," +
             "ContactNumbers," +
             "IsUser," +
@@ -270,6 +273,7 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The MemberId for the <see cref="Member"/> being edited</param>
         /// <param name="form">The <see cref="MemberAddEditViewModel"/> object to which the POSTed form is Bound</param>
+        /// <param name="returnUrl">An optional return URL</param>
         /// <returns>An <see cref="T:IActionResult"/></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -288,6 +292,9 @@ namespace BlueDeck.Controllers
             "IdNumber," +
             "Email," +
             "LDAPName," +
+            "PayrollID," +
+            "HireDate," +
+            "OrgPositionNumber," +
             "AppStatusId," +
             "ContactNumbers," +
             "IsUser," +

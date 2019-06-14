@@ -21,6 +21,12 @@ namespace BlueDeck.Models {
         [Key]
         public int MemberId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Member's <see cref="Rank"/> Id.
+        /// </summary>
+        /// <value>
+        /// The rank identifier.
+        /// </value>
         public int RankId { get; set; }
         /// <summary>
         /// Gets or sets the Member's <see cref="Rank"/>.
@@ -68,45 +74,86 @@ namespace BlueDeck.Models {
         [Display(Name = "ID Number")]
         public string IdNumber { get; set; }
 
-        public int GenderId { get; set; }
         /// <summary>
-        /// Gets or sets the Member's gender.
+        /// Gets or sets the Member's <see cref="Gender"/> Id Number.
         /// </summary>
+        /// <value>
+        /// The gender identifier.
+        /// </value>
+        public int GenderId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's <see cref="Gender"/>.
+        /// </summary>
+        /// <remarks>
+        /// This is an EF navigation property that must be manually loaded if using Lazy Loading.
+        /// </remarks>
         /// <value>
         /// The Member's gender.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Types.MemberGender"/>
+        /// <seealso cref="Gender"/>
         [Display(Name = "Gender")]
         [ForeignKey("GenderId")]
         public virtual Gender Gender { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Member's <see cref="Race"/> Id Number.
+        /// </summary>
+        /// <value>
+        /// The race identifier.
+        /// </value>
         public int RaceId { get; set; }
+
         /// <summary>
         /// Gets or sets the Member's race.
         /// </summary>
         /// <value>
         /// The Member's race.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Types.MemberRace"/>
+        /// <seealso cref="Race"/>
         [Display(Name = "Race")]
         public virtual Race Race { get; set; }
 
-        public int DutyStatusId {get;set;}
         /// <summary>
-        /// Gets or sets the Member's duty status.
+        /// Gets or sets the Member's <see cref="DutyStatus"/> Id.
         /// </summary>
         /// <value>
-        /// The Member's race.
+        /// The duty status identifier.
         /// </value>
-        /// <seealso cref="T:BlueDeck.Models.Types.MemberDutyStatus"/>
+        public int DutyStatusId {get;set;}
+
+        /// <summary>
+        /// Gets or sets the Member's <see cref="DutyStatus"/>
+        /// </summary>
+        /// <value>
+        /// The Member's current Duty Status.
+        /// </value>
+        /// <seealso cref="DutyStatus"/>
         [Display(Name = "Duty Status")]
         [ForeignKey("DutyStatusId")]
         public virtual DutyStatus DutyStatus { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Member's <see cref="AppStatus"/> Id.
+        /// </summary>
+        /// <value>
+        /// The application status identifier.
+        /// </value>
         [Display(Name = "Account Status")]
         public int? AppStatusId { get;set; }
+
+        /// <summary>
+        /// Gets or sets the Member's <see cref="AppStatus"/>.
+        /// </summary>
+        /// <remarks>
+        /// This is an EF navigation property.
+        /// </remarks>
+        /// <value>
+        /// The application status.
+        /// </value>
         [ForeignKey("AppStatusId")]
         public AppStatus AppStatus { get;set; }
+
         /// <summary>
         /// Gets or sets the Member's email.
         /// </summary>
@@ -116,18 +163,112 @@ namespace BlueDeck.Models {
         [Display(Name = "Email Address")]
         public string Email {get; set; }
 
+        /// <summary>
+        /// Gets or sets the Member's LDAP Name.
+        /// </summary>
+        /// <remarks>
+        /// The LDAP name is essential, as it is what BlueDeck uses to identify Windows users when they log on.
+        /// </remarks>
+        /// <value>
+        /// The name of the LDAP.
+        /// </value>
         [Display(Name = "Windows Logon Name")]
+        [Required]
         public string LDAPName {get; set;}
 
+        /// <summary>
+        /// Gets or sets the Member's payroll identifier.
+        /// </summary>
+        /// <remarks>
+        /// As of Version 1, this is the Stromberg ETS Id Number for the Member.
+        /// This may change when the new Payroll System goes live.
+        /// </remarks>
+        /// <value>
+        /// The payroll identifier.
+        /// </value>
+        [Display(Name = "Payroll ID")]
+        [Required]
+        public string PayrollID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date that the Member was hired by the Organization.
+        /// </summary>
+        /// <value>
+        /// The hire date.
+        /// </value>
+        [Display(Name = "Hire Date")]
+        [Required]
+        public DateTime HireDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Member's Organizational position number.
+        /// </summary>
+        /// <remarks>
+        /// This is distinct from the Member's PositionId. The Organization assigns position numbers to Employees based on rules that I don't full understand.
+        /// For now, I'm going to treat them as Member-specific.
+        /// </remarks>
+        /// <value>
+        /// The org position number.
+        /// </value>
+        [Display(Name = "Position Number")]
+        public string OrgPositionNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberID of the Member who created this Member
+        /// </summary>
+        /// <value>
+        /// The creator identifier.
+        /// </value>
         public int? CreatorId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Member"/> who created this Member
+        /// </summary>
+        /// <remarks>
+        /// EF Navigation property
+        /// </remarks>
+        /// <value>
+        /// The creator.
+        /// </value>
         [ForeignKey("CreatorId")]
         [Display(Name = "Created By")]
         public virtual Member Creator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date that this Member was created.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
         [Display(Name = "Date Created")]
         public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets date that this member was last modified.
+        /// </summary>
+        /// <value>
+        /// The last modified.
+        /// </value>
         [Display(Name = "Date Last Modified")]
         public DateTime LastModified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the MemberId of the <see cref="Member"/> who last modified this Member.
+        /// </summary>
+        /// <value>
+        /// The last modified by identifier.
+        /// </value>
         public int? LastModifiedById { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="Member"/> who last modified this Member.
+        /// </summary>
+        /// <remarks>
+        /// EF navigation property.
+        /// </remarks>
+        /// <value>
+        /// The <see cref="Member"/> who last modified this Member.
+        /// </value>
         [ForeignKey("LastModifiedById")]
         [Display(Name = "Last Modified By")]
         public virtual Member LastModifiedBy { get; set; }
@@ -139,6 +280,7 @@ namespace BlueDeck.Models {
         /// The position identifier.
         /// </value>
         public int PositionId { get; set; }
+
         /// <summary>
         /// Gets or sets the <see cref="Position"/> to which the Member is assigned.
         /// </summary>
@@ -171,20 +313,75 @@ namespace BlueDeck.Models {
         [ForeignKey("TempPositionId")]
         public Position TempPosition {get;set;}
 
-
+        /// <summary>
+        /// Gets or sets the Member's <see cref="PhoneNumbers"/> collection.
+        /// </summary>
+        /// <value>
+        /// The Member's Phone Numbers collection
+        /// </value>
         [Display(Name = "Contact Numbers")]
         public ICollection<ContactNumber> PhoneNumbers { get; set; } = new List<ContactNumber>();
 
+        /// <summary>
+        /// Gets or sets the Member's current <see cref="Role"/> collection
+        /// </summary>
+        /// <value>
+        /// The Member's current <see cref="Role"/> collection.
+        /// </value>
         [Display(Name = "Current Roles")]
         public virtual ICollection<Role> CurrentRoles { get; set; } = new List<Role>();
 
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Member"/>s created by this Member
+        /// </summary>
+        /// <value>
+        /// The collection of <see cref="Member"/>s that this Member has created.
+        /// </value>
         public virtual ICollection<Member> CreatedMembers { get; set; } = new List<Member>();
+
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Position"/>s that this Member has created..
+        /// </summary>
+        /// <value>
+        /// The created positions.
+        /// </value>
         public virtual ICollection<Position> CreatedPositions { get; set; } = new List<Position>();
+
+        /// <summary>
+        /// Gets or sets a collection of <see cref="Component"/> that this Member has created.
+        /// </summary>
+        /// <value>
+        /// The created components.
+        /// </value>
         public virtual ICollection<Component> CreatedComponents { get; set; } = new List<Component>();
+
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Member"/> that this Member has Last Modified.
+        /// </summary>
+        /// <value>
+        /// The last modified members.
+        /// </value>
         public virtual ICollection<Member> LastModifiedMembers { get; set; } = new List<Member>();
+
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Position"/> that this Member has last modified.
+        /// </summary>
+        /// <value>
+        /// The last modified positions.
+        /// </value>
         public virtual ICollection<Position> LastModifiedPositions { get; set; } = new List<Position>();
+
+        /// <summary>
+        /// Gets or sets the collection of <see cref="Component"/> that this Member has last Modified.
+        /// </summary>
+        /// <value>
+        /// The last modified components.
+        /// </value>
         public virtual ICollection<Component> LastModifiedComponents { get; set; } = new List<Component>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
         public Member()
         {            
         }
@@ -231,8 +428,14 @@ namespace BlueDeck.Models {
                 return "";
             }
             
-        }    
+        }
 
+        /// <summary>
+        /// Determines whether the Member has the ComponentAdmin role.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if the Member is in the ComponentAdmin role; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsComponentAdmin()
         {
             return CurrentRoles.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin");

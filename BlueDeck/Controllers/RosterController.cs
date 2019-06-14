@@ -513,7 +513,7 @@ namespace BlueDeck.Controllers
 
         
         [HttpPost]
-        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,PositionId,TempPositionId,AppStatusId,LDAPName,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
+        public IActionResult EditMemberModal([Bind("MemberId,MemberRank,MemberGender,MemberRace,FirstName,LastName,MiddleName,IdNumber,PositionId,TempPositionId,AppStatusId,LDAPName,PayrollID,HireDate,OrgPositionNumber,IsUser,IsComponentAdmin,IsGlobalAdmin,DutyStatusId,Email,ContactNumbers")] MemberAddEditViewModel form)
         {
             
             if (ModelState.IsValid)

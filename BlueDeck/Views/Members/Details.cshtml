@@ -59,6 +59,20 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-4 form-group">
+                        @Html.LabelFor(model => model.PayrollID, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.PayrollID, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.HireDate, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.HireDate, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        @Html.LabelFor(model => model.OrgPositionNumber, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.OrgPositionNumber, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
                         @Html.LabelFor(model => model.Position, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.Position.Name, new { @class = "form-control", disabled = "disabled" })
                     </div>
@@ -66,7 +80,7 @@
                         @Html.LabelFor(model => model.DutyStatus, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.DutyStatus.DutyStatusName, new { @class = "form-control", disabled = "disabled" })
                     </div>
-                    <div class="col-sm-3 form-group">
+                    <div class="col-sm-4 form-group">
                         @Html.LabelFor(model => model.TempPosition, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.TempPosition.Name, new { @class = "form-control", disabled = "disabled" })
                     </div>
