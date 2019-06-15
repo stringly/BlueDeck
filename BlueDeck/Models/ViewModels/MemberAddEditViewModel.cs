@@ -179,7 +179,9 @@ namespace BlueDeck.Models.ViewModels
         /// The hire date.
         /// </value>
         [Display(Name = "Hire Date")]
+        [DataType(DataType.Date, ErrorMessage = "Please enter the date in format yyyy-mm-dd or mm/dd/yyyy")]
         [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
 
         /// <summary>
