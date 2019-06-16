@@ -12,6 +12,9 @@ namespace BlueDeck.Models.APIModels
         public string LastName { get; set; }
         public string PGPDId { get; set; }
         public string Email { get; set; }
+        public string OrgPositionNumber { get; set; }
+        public string HireDate { get; set; }
+        public string PayrollId { get; set; }
         public IEnumerable<ContactNumberApiResult> ContactNumbers { get; set; }
         public RankApiResult Rank { get; set; }
         public GenderApiResult Gender { get; set; }
@@ -29,6 +32,9 @@ namespace BlueDeck.Models.APIModels
             LastName = _m.LastName;
             PGPDId = _m.IdNumber;
             Email = _m.Email;
+            OrgPositionNumber = _m.OrgPositionNumber;
+            HireDate = _m.HireDate.ToShortDateString();
+            PayrollId = _m.PayrollID;
             ContactNumbers = _m.PhoneNumbers.ToList().ConvertAll(x => new ContactNumberApiResult(x));
             Rank = new RankApiResult(_m.Rank);
             Gender = new GenderApiResult(_m.Gender);

@@ -197,8 +197,9 @@ namespace BlueDeck.Models {
         /// The hire date.
         /// </value>
         [Display(Name = "Hire Date")]
+        [DataType(DataType.Date)]
         [Required]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
 
         /// <summary>

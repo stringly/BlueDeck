@@ -54,6 +54,30 @@ namespace BlueDeck.Models.APIModels
         public string Email { get; set; }
 
         /// <summary>
+        /// Gets or sets the org position number.
+        /// </summary>
+        /// <value>
+        /// The org position number.
+        /// </value>
+        public string OrgPositionNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the hire date.
+        /// </summary>
+        /// <value>
+        /// The hire date.
+        /// </value>
+        public string HireDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the payroll identifier.
+        /// </summary>
+        /// <value>
+        /// The payroll identifier.
+        /// </value>
+        public string PayrollId { get; set; }
+
+        /// <summary>
         /// Gets or sets the Member's contact numbers.
         /// </summary>
         /// <remarks>
@@ -151,6 +175,9 @@ namespace BlueDeck.Models.APIModels
             LastName = _member.LastName;
             PGPDId = _member.IdNumber;
             Email = _member.Email;
+            OrgPositionNumber = _member.OrgPositionNumber;
+            HireDate = _member.HireDate.ToShortDateString();
+            PayrollId = _member.PayrollID;
             ContactNumbers = _member.PhoneNumbers.ToList().ConvertAll(x => new ContactNumberApiResult(x));
             Rank = new RankApiResult(_member.Rank);
             Gender = new GenderApiResult(_member.Gender);
