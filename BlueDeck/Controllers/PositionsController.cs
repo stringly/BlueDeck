@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using BlueDeck.Models.Repositories;
 
 namespace BlueDeck.Controllers
 {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlueDeck.Models {
+namespace BlueDeck.Models.Types
+{
 
     /// <summary>
     /// An extension of <see cref="T:BlueDeck.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.

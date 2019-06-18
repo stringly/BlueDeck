@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BlueDeck.Models;
 using BlueDeck.Models.Auth;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Controllers
 {

@@ -1,4 +1,5 @@
 ﻿using System;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models.APIModels
 {

@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlueDeck.Models {
+namespace BlueDeck.Models.Enums
+{
     /// <summary>
     /// A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:BlueDeck.Models.Member"/>
     /// </summary>

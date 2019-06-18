@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.Enums
 {
     public class AppStatus
     {
