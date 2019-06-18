@@ -9,6 +9,7 @@ using BlueDeck.Models.Types;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using BlueDeck.Models.Auth;
+using BlueDeck.Models.Repositories;
 
 namespace BlueDeck.Controllers
 {

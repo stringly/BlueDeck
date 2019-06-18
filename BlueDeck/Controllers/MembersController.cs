@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using BlueDeck.Models;
 using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
+using BlueDeck.Models.Repositories;
 
 namespace BlueDeck.Controllers
 {

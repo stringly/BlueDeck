@@ -1,4 +1,5 @@
-﻿
+﻿using BlueDeck.Models.Enums;
+
 namespace BlueDeck.Models.Types
 {
     public class PhoneNumberTypeSelectListItem

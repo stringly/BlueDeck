@@ -1,4 +1,6 @@
-﻿namespace BlueDeck.Models.APIModels
+﻿using BlueDeck.Models.Enums;
+
+namespace BlueDeck.Models.APIModels
 {
     /// <summary>
     /// A Class that represents a <see cref="DutyStatus"/> entity in a WebAPI response.

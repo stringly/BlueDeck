@@ -1,4 +1,4 @@
-﻿@model BlueDeck.Models.Rank
+﻿@model BlueDeck.Models.Enums.Rank
 @{
     bool canDelete = Model.Members.Count() > 0 ? false : true;
 }
@@ -10,21 +10,21 @@
             <strong>@ViewBag.Status</strong> @ViewBag.Message
         </div>
     }
-        <div class="formHeader">
-            <h2 class="formHeader-heading">Confirm Delete</h2>
-            @if (canDelete)
-            {
-                <p class="formHeader-description">
-                    Are you certain that you want to delete @Model.RankFullName? This action cannot be undone.
-                </p>
-            }
-            else
-            {
-                <p class="formHeader-description">
-                    There are @Model.Members.Count() Members currently assigned this rank. You cannot delete a rank with active Members.
-                </p>
-            }
-        </div>
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Confirm Delete</h2>
+        @if (canDelete)
+        {
+            <p class="formHeader-description">
+                Are you certain that you want to delete @Model.RankFullName? This action cannot be undone.
+            </p>
+        }
+        else
+        {
+            <p class="formHeader-description">
+                There are @Model.Members.Count() Members currently assigned this rank. You cannot delete a rank with active Members.
+            </p>
+        }
+    </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">

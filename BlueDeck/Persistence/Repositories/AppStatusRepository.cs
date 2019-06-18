@@ -4,6 +4,7 @@ using BlueDeck.Models.Repositories;
 using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.Linq;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Persistence.Repositories
 {

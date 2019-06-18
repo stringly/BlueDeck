@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.Enums
 {
     /// <summary>
     /// A Class that represents racial demographic group.  Contains properties and methods used in displaying the race of a <see cref="T:BlueDeck.Models.Member"/>

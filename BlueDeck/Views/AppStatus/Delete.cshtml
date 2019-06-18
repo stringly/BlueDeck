@@ -1,4 +1,4 @@
-﻿@model BlueDeck.Models.AppStatus
+﻿@model BlueDeck.Models.Enums.AppStatus
 @{
     bool canDelete = Model.Members.Count() > 0 ? false : true;
 }
@@ -44,7 +44,7 @@
                         <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
                             <input type="hidden" asp-for="AppStatusId" />
                             <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Edit" asp-route-id="@Model.AppStatusId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>                            
+                            <a asp-action="Edit" asp-route-id="@Model.AppStatusId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
                             @if (canDelete)
                             {
                                 <input type="submit" value="Delete" class="btn btn-danger pull-right" />

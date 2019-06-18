@@ -1,4 +1,4 @@
-﻿
+﻿using BlueDeck.Models.Enums;
 using System;
 
 namespace BlueDeck.Models.Types

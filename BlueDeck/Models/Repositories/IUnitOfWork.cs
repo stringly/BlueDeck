@@ -1,7 +1,6 @@
 ﻿using System;
-using BlueDeck.Models.Repositories;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.Repositories
 {
     /// <summary>
     /// An interface that represents the encapsulated Entity Repository Interfaces 

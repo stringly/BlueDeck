@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.Enums
 {
     /// <summary>
     /// A Class that represents a member's duty status.  Contains properties and methods used in displaying the duty status of a <see cref="T:BlueDeck.Models.Member"/>

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Controllers
 {

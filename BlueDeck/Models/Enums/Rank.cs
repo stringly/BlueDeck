@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.Enums
 {
     /// <summary>
     /// A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:BlueDeck.Models.Member"/>

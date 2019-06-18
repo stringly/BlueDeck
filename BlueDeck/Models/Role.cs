@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models
 {

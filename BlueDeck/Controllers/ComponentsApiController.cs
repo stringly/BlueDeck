@@ -7,6 +7,7 @@ using BlueDeck.Models.APIModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BlueDeck.Models.Repositories;
 
 namespace BlueDeck.Controllers
 {

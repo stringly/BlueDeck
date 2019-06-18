@@ -5,6 +5,7 @@ using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using BlueDeck.Models.ViewModels;
 using System;
+using BlueDeck.Models.Repositories;
 
 namespace BlueDeck.Controllers
 {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using BlueDeck.Models;
+using BlueDeck.Models.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using BlueDeck.Persistence;

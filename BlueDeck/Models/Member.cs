@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
-using BlueDeck.Models.Types;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models {
     /// <summary>

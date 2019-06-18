@@ -1,6 +1,7 @@
 ﻿using BlueDeck.Models.Types;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models
 {
