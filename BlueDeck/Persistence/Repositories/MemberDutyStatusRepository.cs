@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using BlueDeck.Models;
 using BlueDeck.Models.Repositories;
 using BlueDeck.Models.Types;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Persistence.Repositories
 {

@@ -9,6 +9,7 @@ using System;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using BlueDeck.Models.Repositories;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Controllers
 {

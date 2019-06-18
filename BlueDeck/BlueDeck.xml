@@ -15,11 +15,11 @@
             Property that controls the number of Items per page on the Index views
             </summary>
         </member>
-        <member name="M:BlueDeck.Controllers.AdminController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.AdminController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.AdminController"/> class.
             </summary>
-            <param name="unit">The Dependency-Injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the <see cref="M:BlueDeck.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
+            <param name="unit">The Dependency-Injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the <see cref="M:BlueDeck.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)"/></param>
         </member>
         <member name="M:BlueDeck.Controllers.AdminController.Index(System.String)">
             <summary>
@@ -191,34 +191,34 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.AppStatusController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.AppStatusController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.AppStatusController"/> class.
             </summary>
-            <param name="unit">The Injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The Injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Index">
             <summary>
-            Returns a view that lists all <see cref="T:BlueDeck.Models.AppStatus"/> in the database.
+            Returns a view that lists all <see cref="T:BlueDeck.Models.Enums.AppStatus"/> in the database.
             </summary>
             <returns>The Views/Admin/Index <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
-            Shows details for a specific <see cref="T:BlueDeck.Models.AppStatus"/>
+            Shows details for a specific <see cref="T:BlueDeck.Models.Enums.AppStatus"/>
             </summary>
-            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.Enums.AppStatus"/>.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Create(System.String)">
             <summary>
-            Returns a <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/> that allows creation of a new <see cref="T:BlueDeck.Models.AppStatus"/>.
+            Returns a <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/> that allows creation of a new <see cref="T:BlueDeck.Models.Enums.AppStatus"/>.
             </summary>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.AppStatus,System.String)">
+        <member name="M:BlueDeck.Controllers.AppStatusController.Create(BlueDeck.Models.Enums.AppStatus,System.String)">
             <summary>
             Creates the specified application status.
             </summary>
@@ -228,34 +228,34 @@
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
-            Edits the <see cref="T:BlueDeck.Models.AppStatus"/> with specified identifier.
+            Edits the <see cref="T:BlueDeck.Models.Enums.AppStatus"/> with specified identifier.
             </summary>
-            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.AppStatus"/> to edit.</param>
+            <param name="id">The AppStatusId of the <see cref="T:BlueDeck.Models.Enums.AppStatus"/> to edit.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.AppStatusController.Edit(System.Int32,BlueDeck.Models.AppStatus,System.String)">
+        <member name="M:BlueDeck.Controllers.AppStatusController.Edit(System.Int32,BlueDeck.Models.Enums.AppStatus,System.String)">
             <summary>
-            Edits the <see cref="T:BlueDeck.Models.AppStatus"/> with the given AppStatusId.
+            Edits the <see cref="T:BlueDeck.Models.Enums.AppStatus"/> with the given AppStatusId.
             </summary>
             <param name="id">The identifier of the AppStatus.</param>
-            <param name="appStatus">A POSTed form that binds to a <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="appStatus">A POSTed form that binds to a <see cref="T:BlueDeck.Models.Enums.AppStatus"/>.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
-            Deletes the <see cref="T:BlueDeck.Models.AppStatus"/> with specified identifier.
+            Deletes the <see cref="T:BlueDeck.Models.Enums.AppStatus"/> with specified identifier.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.AppStatus"/> to delete.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.AppStatus"/> to delete.</param>
             <param name="returnUrl">The return URL.</param>
             <returns>The Views/AppStatus/Delete <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
         </member>
         <member name="M:BlueDeck.Controllers.AppStatusController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
-            Confirms the deletion of an <see cref="T:BlueDeck.Models.AppStatus"/>.
+            Confirms the deletion of an <see cref="T:BlueDeck.Models.Enums.AppStatus"/>.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.AppStatus"/>.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.AppStatus"/>.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -265,11 +265,11 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
         </member>
-        <member name="M:BlueDeck.Controllers.ComponentsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.ComponentsApiController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsApiController"/> class.
             </summary>
-            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsApiController.GetComponents">
             <summary>
@@ -345,11 +345,11 @@
             Property that determines the page length of List views returned from this controller.
             </summary>
         </member>
-        <member name="M:BlueDeck.Controllers.ComponentsController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.ComponentsController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.ComponentsController"/> class.
             </summary>
-            <param name="unit"><see cref="T:BlueDeck.Models.IUnitOfWork"/>.</param>
+            <param name="unit"><see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/>.</param>
         </member>
         <member name="M:BlueDeck.Controllers.ComponentsController.Index(System.String,System.String,System.Int32)">
             <summary>
@@ -443,62 +443,62 @@
         </member>
         <member name="T:BlueDeck.Controllers.DutyStatusController">
             <summary>
-            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity.
             </summary>
             <remarks>
             Actions in this controller are restricted by the <see cref="T:BlueDeck.Models.Auth.IsGlobalAdminRequirement"/>
             </remarks>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.DutyStatusController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.DutyStatusController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.DutyStatusController"/> class.
             </summary>
-            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.DutyStatusController.Index">
             <summary>
-            Returns a List view of all of the <see cref="T:BlueDeck.Models.DutyStatus"/> entities.
+            Returns a List view of all of the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entities.
             </summary>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.DutyStatusController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
-            Returns a view that displays details of a <see cref="T:BlueDeck.Models.DutyStatus"/>
+            Returns a view that displays details of a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/>
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.DutyStatus"/></param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/></param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.DutyStatusController.Create(System.String)">
             <summary>
-            Returns a view that allows the user to create a new <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            Returns a view that allows the user to create a new <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity.
             </summary>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.DutyStatusController.Create(BlueDeck.Models.DutyStatus,System.String)">
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Create(BlueDeck.Models.Enums.DutyStatus,System.String)">
             <summary>
             Creates the specified duty status.
             </summary>
-            <param name="dutyStatus">The form data, bound to a <see cref="T:BlueDeck.Models.DutyStatus"/> object.</param>
+            <param name="dutyStatus">The form data, bound to a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.DutyStatusController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
-            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity.
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.DutyStatus"/> to be edited.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> to be edited.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.DutyStatusController.Edit(System.Int32,BlueDeck.Models.DutyStatus,System.String)">
+        <member name="M:BlueDeck.Controllers.DutyStatusController.Edit(System.Int32,BlueDeck.Models.Enums.DutyStatus,System.String)">
             <summary>
-            Edits the <see cref="T:BlueDeck.Models.DutyStatus"/> with the specified identifier.
+            Edits the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> with the specified identifier.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.DutyStatus"/> entity being edited.</param>
-            <param name="dutyStatus">The POSTed form data, which will be bound to a <see cref="T:BlueDeck.Models.DutyStatus"/> object.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity being edited.</param>
+            <param name="dutyStatus">The POSTed form data, which will be bound to a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -524,7 +524,7 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
         </member>
-        <member name="M:BlueDeck.Controllers.EnumsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.EnumsApiController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.EnumsApiController"/> class.
             </summary>
@@ -800,78 +800,78 @@
         </member>
         <member name="T:BlueDeck.Controllers.GenderController">
             <summary>
-            Controller that handles CRUD actions and views for the <see cref="T:BlueDeck.Models.Gender"/> entity.
+            Controller that handles CRUD actions and views for the <see cref="T:BlueDeck.Models.Enums.Gender"/> entity.
             </summary>
             <remarks>
             Actions in this view are restricted by the <see cref="T:BlueDeck.Models.Auth.IsGlobalAdminRequirement"/>
             </remarks>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.GenderController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.GenderController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.GenderController"/> class.
             </summary>
-            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.Index">
             <summary>
-            Returns a view that lists all current <see cref="T:BlueDeck.Models.Gender"/>
+            Returns a view that lists all current <see cref="T:BlueDeck.Models.Enums.Gender"/>
             </summary>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
-            Returns a view that shows details for a specific <see cref="T:BlueDeck.Models.Gender"/> entity.
+            Returns a view that shows details for a specific <see cref="T:BlueDeck.Models.Enums.Gender"/> entity.
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.Gender"/>.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.Create(System.String)">
             <summary>
-            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Gender"/>
+            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Enums.Gender"/>
             </summary>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.GenderController.Create(BlueDeck.Models.Gender,System.String)">
+        <member name="M:BlueDeck.Controllers.GenderController.Create(BlueDeck.Models.Enums.Gender,System.String)">
             <summary>
             Creates the specified gender.
             </summary>
-            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Gender"/> object.</param>
+            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Enums.Gender"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.Edit(System.Nullable{System.Int32},System.String)">
             <summary>
-            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Gender"/>
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Enums.Gender"/>
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Gender"/> to be edited.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.Gender"/> to be edited.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.GenderController.Edit(System.Int32,BlueDeck.Models.Gender,System.String)">
+        <member name="M:BlueDeck.Controllers.GenderController.Edit(System.Int32,BlueDeck.Models.Enums.Gender,System.String)">
             <summary>
             Edits the specified identifier.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> being edited.</param>
-            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Gender"/> object.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Gender"/> being edited.</param>
+            <param name="gender">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Enums.Gender"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.Delete(System.Nullable{System.Int32},System.String)">
             <summary>
-            Retrieves a view to confirm the deletion of the <see cref="T:BlueDeck.Models.Gender"/> with the provided id.
+            Retrieves a view to confirm the deletion of the <see cref="T:BlueDeck.Models.Enums.Gender"/> with the provided id.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> to be deleted.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Gender"/> to be deleted.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
         <member name="M:BlueDeck.Controllers.GenderController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
-            Deletes the <see cref="T:BlueDeck.Models.Gender"/> with the provided id.
+            Deletes the <see cref="T:BlueDeck.Models.Enums.Gender"/> with the provided id.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/> to be deleted.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Gender"/> to be deleted.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -881,7 +881,7 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.HomeController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.HomeController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.HomeController"/> class.
             </summary>
@@ -965,7 +965,7 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
         </member>
-        <member name="M:BlueDeck.Controllers.MembersApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.MembersApiController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.MembersApiController"/> class.
             </summary>
@@ -1505,11 +1505,11 @@
             Property that determines the page length of List views returned from this controller.
             </summary>
         </member>
-        <member name="M:BlueDeck.Controllers.MembersController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.MembersController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.MembersController"/> class.
             </summary>
-            <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="T:BlueDeck.Models.IUnitOfWork"/>.</param>
+            <param name="unit">A Dependency-Injected IUnitOfWork object.<see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/>.</param>
         </member>
         <member name="M:BlueDeck.Controllers.MembersController.Index(System.String,System.String,System.Int32)">
             <summary>
@@ -1610,7 +1610,7 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.OrgChartController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.OrgChartController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.HomeController"/> class.
             </summary>
@@ -1621,7 +1621,7 @@
             Gets the components. (async, JSON result from the GetOrgChart JQuery Library)
             </summary>
             <param name="parentComponentId">The component id of the Top-level component in the desired result set.</param>
-            <returns>A JSON object containing a list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects.</returns>
+            <returns>A JSON object containing a list of <see cref="T:BlueDeck.Models.Types.ChartableComponentWithMember"/> objects.</returns>
         </member>
         <member name="M:BlueDeck.Controllers.OrgChartController.GetComponentSelectListItems">
             <summary>
@@ -1643,22 +1643,22 @@
         </member>
         <member name="T:BlueDeck.Controllers.PhoneTypeController">
             <summary>
-            Controller that handles views for CRUD function for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            Controller that handles views for CRUD function for the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.PhoneTypeController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PhoneTypeController"/> class.
             </summary>
-            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.PhoneTypeController.Index">
             <summary>
             GET: PhoneType/Index
             </summary>
             <remarks>
-            This view shows a list of all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities in the database.
+            This view shows a list of all <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entities in the database.
             </remarks>
             <returns></returns>
         </member>
@@ -1667,9 +1667,9 @@
             GET: PhoneType/Details/5
             </summary>
             <remarks>
-            This view displays detailed information for a <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            This view displays detailed information for a <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity.
             </remarks>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.PhoneNumberType"/>.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/>.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -1680,11 +1680,11 @@
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.PhoneTypeController.Create(BlueDeck.Models.PhoneNumberType,System.String)">
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Create(BlueDeck.Models.Enums.PhoneNumberType,System.String)">
             <summary>
             POST: PhoneType/Create
             </summary>
-            <param name="phoneType">A POSTed form object bound to a <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+            <param name="phoneType">A POSTed form object bound to a <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> object.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -1692,16 +1692,16 @@
             <summary>
             GET: PhoneType/Edit
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.PhoneTypeController.Edit(System.Int32,BlueDeck.Models.PhoneNumberType,System.String)">
+        <member name="M:BlueDeck.Controllers.PhoneTypeController.Edit(System.Int32,BlueDeck.Models.Enums.PhoneNumberType,System.String)">
             <summary>
             POST: PhoneType/Edit/5
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity being edited.</param>
-            <param name="phoneType">A POSTed form object, bound to a <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity being edited.</param>
+            <param name="phoneType">A POSTed form object, bound to a <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> object.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -1709,7 +1709,7 @@
             <summary>
             GET: PhoneType/Delete/5
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> being edited.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> being edited.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -1717,7 +1717,7 @@
             <summary>
             POST: PhoneType/Delete/5
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity being edited.</param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity being edited.</param>
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
@@ -1727,11 +1727,11 @@
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.ControllerBase" />
         </member>
-        <member name="M:BlueDeck.Controllers.PositionsApiController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.PositionsApiController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsApiController"/> class.
             </summary>
-            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsApiController.GetPositions">
             <summary>
@@ -1848,11 +1848,11 @@
             Property that sets the length of the index view pages
             </summary>
         </member>
-        <member name="M:BlueDeck.Controllers.PositionsController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.PositionsController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.PositionsController"/> class.
             </summary>
-            <param name="unit">An injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.PositionsController.Index(System.String,System.String,System.Int32)">
             <summary>
@@ -1966,22 +1966,22 @@
         </member>
         <member name="T:BlueDeck.Controllers.RaceController">
             <summary>
-            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Race"/> entity.
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Enums.Race"/> entity.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.RaceController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.RaceController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RaceController"/> class.
             </summary>
-            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.RaceController.Index">
             <summary>
             GET: Race/Index
             </summary>
             <remarks>
-            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Race"/> entities in the database.
+            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Enums.Race"/> entities in the database.
             </remarks>
             <returns></returns>
         </member>
@@ -1990,9 +1990,9 @@
             GET: Race/Details/5
             </summary>
             <remarks>
-            Retrieves a view that shows details for a <see cref="T:BlueDeck.Models.Race"/>
+            Retrieves a view that shows details for a <see cref="T:BlueDeck.Models.Enums.Race"/>
             </remarks>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/>.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race"/>.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2001,19 +2001,19 @@
             GET: Race/Create
             </summary>
             <remarks>
-            Retrieves a view that allows a user to create a new <see cref="T:BlueDeck.Models.Race"/>
+            Retrieves a view that allows a user to create a new <see cref="T:BlueDeck.Models.Enums.Race"/>
             </remarks>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Race,System.String)">
+        <member name="M:BlueDeck.Controllers.RaceController.Create(BlueDeck.Models.Enums.Race,System.String)">
             <summary>
             POST: Race/Create
             </summary>
             <remarks>
-            Creates a new <see cref="T:BlueDeck.Models.Race"/> from the POSTed form data.
+            Creates a new <see cref="T:BlueDeck.Models.Enums.Race"/> from the POSTed form data.
             </remarks>
-            <param name="race">The POSTed form data, bound to <see cref="T:BlueDeck.Models.Race"/></param>
+            <param name="race">The POSTed form data, bound to <see cref="T:BlueDeck.Models.Enums.Race"/></param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2022,18 +2022,18 @@
             GET: Race/Edit/5
             </summary>
             <remarks>
-            Retrieves a view that allows a user to edit a <see cref="T:BlueDeck.Models.Race"/> entity.
+            Retrieves a view that allows a user to edit a <see cref="T:BlueDeck.Models.Enums.Race"/> entity.
             </remarks>
-            <param name="id">The identifier if the <see cref="T:BlueDeck.Models.Race"/> being edited.</param>
+            <param name="id">The identifier if the <see cref="T:BlueDeck.Models.Enums.Race"/> being edited.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.RaceController.Edit(System.Int32,BlueDeck.Models.Race,System.String)">
+        <member name="M:BlueDeck.Controllers.RaceController.Edit(System.Int32,BlueDeck.Models.Enums.Race,System.String)">
             <summary>
             POST: Race/Edit/5
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> being edited.</param>
-            <param name="race">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Race"/> object.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race"/> being edited.</param>
+            <param name="race">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Enums.Race"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>        
         </member>
@@ -2041,7 +2041,7 @@
             <summary>
             GET: Race/Delete/5
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> to delete.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race"/> to delete.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2049,28 +2049,28 @@
             <summary>
             POST: Race/Delete/5
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/> being deleted.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race"/> being deleted.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Controllers.RankController">
             <summary>
-            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Rank"/> entity.
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Enums.Rank"/> entity.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="M:BlueDeck.Controllers.RankController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.RankController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RankController"/> class.
             </summary>
-            <param name="unit">The injected <see cref="T:BlueDeck.Models.IUnitOfWork"/> obtained from the services middleware.</param>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
         <member name="M:BlueDeck.Controllers.RankController.Index">
             <summary>
             GET: Rank/Index
             </summary>
             <remarks>
-            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Rank"/> entities in the database.
+            Retrieves a view that lists all <see cref="T:BlueDeck.Models.Enums.Rank"/> entities in the database.
             </remarks>
             <returns></returns>
         </member>
@@ -2087,16 +2087,16 @@
             GET: Rank/Create
             </summary>
             <remarks>
-            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Rank"/>
+            Retrieves the view that allows a user to create a new <see cref="T:BlueDeck.Models.Enums.Rank"/>
             </remarks>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Rank,System.String)">
+        <member name="M:BlueDeck.Controllers.RankController.Create(BlueDeck.Models.Enums.Rank,System.String)">
             <summary>
             POST: Rank/Create
             </summary>
-            <param name="rank">The form data, bound to a <see cref="T:BlueDeck.Models.Rank"/> object.</param>
+            <param name="rank">The form data, bound to a <see cref="T:BlueDeck.Models.Enums.Rank"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2105,21 +2105,21 @@
             GET: Rank/Edit/5
             </summary>
             <remarks>
-            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Rank"/>
+            Returns a view that allows a user to edit an existing <see cref="T:BlueDeck.Models.Enums.Rank"/>
             </remarks>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> to be edited.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Rank"/> to be edited.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.RankController.Edit(System.Int32,BlueDeck.Models.Rank,System.String)">
+        <member name="M:BlueDeck.Controllers.RankController.Edit(System.Int32,BlueDeck.Models.Enums.Rank,System.String)">
             <summary>
             POST: Rank/Edit/5
             </summary>
             <remarks>
-            Creates a new <see cref="T:BlueDeck.Models.Rank"/> from POSTed form data.
+            Creates a new <see cref="T:BlueDeck.Models.Enums.Rank"/> from POSTed form data.
             </remarks>
-            <param name="id">The indentifier of the <see cref="T:BlueDeck.Models.Rank"/> being edited.</param>
-            <param name="rank">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Rank"/> object.</param>
+            <param name="id">The indentifier of the <see cref="T:BlueDeck.Models.Enums.Rank"/> being edited.</param>
+            <param name="rank">The POSTed form data, bound to a <see cref="T:BlueDeck.Models.Enums.Rank"/> object.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2127,7 +2127,7 @@
             <summary>
             GET: Rank/Delete/5
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> being edited.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Rank"/> being edited.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
@@ -2135,11 +2135,11 @@
             <summary>
             POST: Rank/Delete/5
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/> being deleted.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Rank"/> being deleted.</param>
             <param name="returnUrl">An optional return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.RosterController.#ctor(BlueDeck.Models.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.RosterController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Controllers.RosterController"/> class.
             </summary>
@@ -2281,7 +2281,7 @@
         </member>
         <member name="T:BlueDeck.Models.APIModels.AppStatusApiResult">
             <summary>
-            Class that represents a <see cref="T:BlueDeck.Models.AppStatus"/> entity in a WebAPI result set.
+            Class that represents a <see cref="T:BlueDeck.Models.Enums.AppStatus"/> entity in a WebAPI result set.
             </summary>
         </member>
         <member name="P:BlueDeck.Models.APIModels.AppStatusApiResult.AppStatusId">
@@ -2300,11 +2300,11 @@
             The name of the status.
             </value>
         </member>
-        <member name="M:BlueDeck.Models.APIModels.AppStatusApiResult.#ctor(BlueDeck.Models.AppStatus)">
+        <member name="M:BlueDeck.Models.APIModels.AppStatusApiResult.#ctor(BlueDeck.Models.Enums.AppStatus)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.AppStatusApiResult"/> class.
             </summary>
-            <param name="_appStatus">An <see cref="T:BlueDeck.Models.AppStatus"/> class object</param>
+            <param name="_appStatus">An <see cref="T:BlueDeck.Models.Enums.AppStatus"/> class object</param>
         </member>
         <member name="T:BlueDeck.Models.APIModels.ComponentApiResult">
             <summary>
@@ -2431,7 +2431,7 @@
             Gets or sets the type.
             </summary>
             <value>
-            The phone number type, which is derived from the name of the <see cref="T:BlueDeck.Models.ContactNumber"/> <see cref="T:BlueDeck.Models.PhoneNumberType"/>
+            The phone number type, which is derived from the name of the <see cref="T:BlueDeck.Models.ContactNumber"/> <see cref="!:PhoneNumberType"/>
             </value>
         </member>
         <member name="P:BlueDeck.Models.APIModels.ContactNumberApiResult.PhoneNumber">
@@ -2455,7 +2455,7 @@
         </member>
         <member name="T:BlueDeck.Models.APIModels.DutyStatusApiResult">
             <summary>
-            A Class that represents a <see cref="T:BlueDeck.Models.DutyStatus"/> entity in a WebAPI response.
+            A Class that represents a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity in a WebAPI response.
             </summary>
         </member>
         <member name="P:BlueDeck.Models.APIModels.DutyStatusApiResult.Name">
@@ -2487,7 +2487,7 @@
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> class.
             </summary>
         </member>
-        <member name="M:BlueDeck.Models.APIModels.DutyStatusApiResult.#ctor(BlueDeck.Models.DutyStatus)">
+        <member name="M:BlueDeck.Models.APIModels.DutyStatusApiResult.#ctor(BlueDeck.Models.Enums.DutyStatus)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.DutyStatusApiResult"/> class.
             </summary>
@@ -2561,7 +2561,7 @@
         </member>
         <member name="T:BlueDeck.Models.APIModels.GenderApiResult">
             <summary>
-            A Class that represents the <see cref="T:BlueDeck.Models.Gender"/> entity in a WebAPI request.
+            A Class that represents the <see cref="T:BlueDeck.Models.Enums.Gender"/> entity in a WebAPI request.
             </summary>
         </member>
         <member name="P:BlueDeck.Models.APIModels.GenderApiResult.GenderId">
@@ -2593,7 +2593,7 @@
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> class.
             </summary>
         </member>
-        <member name="M:BlueDeck.Models.APIModels.GenderApiResult.#ctor(BlueDeck.Models.Gender)">
+        <member name="M:BlueDeck.Models.APIModels.GenderApiResult.#ctor(BlueDeck.Models.Enums.Gender)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.GenderApiResult"/> class.
             </summary>
@@ -2829,7 +2829,7 @@
         </member>
         <member name="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult">
             <summary>
-            Class that represents a <see cref="T:BlueDeck.Models.PhoneNumberType"/> enumeration used in a WebAPI response.
+            Class that represents a <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> enumeration used in a WebAPI response.
             </summary>
         </member>
         <member name="P:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.PhoneNumberTypeId">
@@ -2837,7 +2837,7 @@
             Gets or sets the phone number type identifier.
             </summary>
             <remarks>
-            This corresponds to the <see cref="P:BlueDeck.Models.PhoneNumberType.PhoneNumberTypeId"/> field.
+            This corresponds to the <see cref="P:BlueDeck.Models.Enums.PhoneNumberType.PhoneNumberTypeId"/> field.
             </remarks>
             <value>
             The phone number type identifier.
@@ -2848,17 +2848,17 @@
             Gets or sets the name of the phone number type.
             </summary>
             <remarks>
-            This correspondes to the <see cref="P:BlueDeck.Models.PhoneNumberType.PhoneNumberTypeName"/> field.
+            This correspondes to the <see cref="P:BlueDeck.Models.Enums.PhoneNumberType.PhoneNumberTypeName"/> field.
             </remarks>
             <value>
             The name of the phone number type.
             </value>
         </member>
-        <member name="M:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor(BlueDeck.Models.PhoneNumberType)">
+        <member name="M:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult.#ctor(BlueDeck.Models.Enums.PhoneNumberType)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.APIModels.PhoneNumberTypeApiResult"/> class.
             </summary>
-            <param name="_phoneNumberType">A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</param>
+            <param name="_phoneNumberType">A <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> object.</param>
         </member>
         <member name="T:BlueDeck.Models.APIModels.PositionApiResult">
             <summary>
@@ -3078,12 +3078,12 @@
             <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
             <returns></returns>
         </member>
-        <member name="T:BlueDeck.Models.DutyStatus">
+        <member name="T:BlueDeck.Models.Enums.DutyStatus">
             <summary>
             A Class that represents a member's duty status.  Contains properties and methods used in displaying the duty status of a <see cref="T:BlueDeck.Models.Member"/>
             </summary>
         </member>
-        <member name="P:BlueDeck.Models.DutyStatus.DutyStatusId">
+        <member name="P:BlueDeck.Models.Enums.DutyStatus.DutyStatusId">
             <summary>
             Gets or sets the duty status identifier.
             </summary>
@@ -3091,7 +3091,7 @@
             The duty status identifier.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.DutyStatus.DutyStatusName">
+        <member name="P:BlueDeck.Models.Enums.DutyStatus.DutyStatusName">
             <summary>
             Gets or sets the name of the duty status.
             </summary>
@@ -3099,7 +3099,7 @@
             The name of the duty status.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.DutyStatus.HasPolicePower">
+        <member name="P:BlueDeck.Models.Enums.DutyStatus.HasPolicePower">
             <summary>
             Gets or sets a value indicating whether this instance has police power.
             </summary>
@@ -3107,7 +3107,7 @@
               <c>true</c> if this instance has police power; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.DutyStatus.Abbreviation">
+        <member name="P:BlueDeck.Models.Enums.DutyStatus.Abbreviation">
             <summary>
             Gets or sets the abbreviation.
             </summary>
@@ -3115,7 +3115,7 @@
             The abbreviation.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.DutyStatus.IsExceptionToNormalDuty">
+        <member name="P:BlueDeck.Models.Enums.DutyStatus.IsExceptionToNormalDuty">
             <summary>
             Indicates whether the duty status is considered an exception to normal duty.
             </summary>
@@ -3123,12 +3123,12 @@
             Status is an exception to normal duty
             </value>
         </member>
-        <member name="T:BlueDeck.Models.Gender">
+        <member name="T:BlueDeck.Models.Enums.Gender">
             <summary>
             A Class that represents a Gender.  Contains properties and methods used in displaying the gender of a <see cref="T:BlueDeck.Models.Member"/>
             </summary>
         </member>
-        <member name="P:BlueDeck.Models.Gender.GenderId">
+        <member name="P:BlueDeck.Models.Enums.Gender.GenderId">
             <summary>
             Gets or sets the gender's Id.
             </summary>
@@ -3136,7 +3136,7 @@
             The gender Id.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Gender.GenderFullName">
+        <member name="P:BlueDeck.Models.Enums.Gender.GenderFullName">
             <summary>
             Gets or sets the full name of the gender.
             </summary>
@@ -3144,7 +3144,7 @@
             The full name of the gender.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Gender.Abbreviation">
+        <member name="P:BlueDeck.Models.Enums.Gender.Abbreviation">
             <summary>
             Gets or sets the gender's single-character abbreviation.
             </summary>
@@ -3152,12 +3152,12 @@
             The gender's single-character abbreviation.
             </value>
         </member>
-        <member name="T:BlueDeck.Models.Race">
+        <member name="T:BlueDeck.Models.Enums.Race">
             <summary>
             A Class that represents racial demographic group.  Contains properties and methods used in displaying the race of a <see cref="T:BlueDeck.Models.Member"/>
             </summary>
         </member>
-        <member name="P:BlueDeck.Models.Race.MemberRaceId">
+        <member name="P:BlueDeck.Models.Enums.Race.MemberRaceId">
             <summary>
             Gets or sets the member race identifier.
             </summary>
@@ -3165,7 +3165,7 @@
             The member race identifier.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Race.MemberRaceFullName">
+        <member name="P:BlueDeck.Models.Enums.Race.MemberRaceFullName">
             <summary>
             Gets or sets the full name of the member race.
             </summary>
@@ -3173,7 +3173,7 @@
             The full name of the member race.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Race.Abbreviation">
+        <member name="P:BlueDeck.Models.Enums.Race.Abbreviation">
             <summary>
             Gets or sets the race's abbreviation.
             </summary>
@@ -3181,12 +3181,12 @@
             The race's abbreviation.
             </value>
         </member>
-        <member name="T:BlueDeck.Models.Rank">
+        <member name="T:BlueDeck.Models.Enums.Rank">
             <summary>
             A Class that represents a Organizational Rank.  Contains properties and methods used in displaying the rank of a <see cref="T:BlueDeck.Models.Member"/>
             </summary>
         </member>
-        <member name="P:BlueDeck.Models.Rank.RankId">
+        <member name="P:BlueDeck.Models.Enums.Rank.RankId">
             <summary>
             Gets or sets the rank Id.
             </summary>
@@ -3194,7 +3194,7 @@
             The rank Id.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Rank.RankFullName">
+        <member name="P:BlueDeck.Models.Enums.Rank.RankFullName">
             <summary>
             Gets or sets the full name of the rank.
             </summary>
@@ -3205,7 +3205,7 @@
             The full name of the rank.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Rank.RankShort">
+        <member name="P:BlueDeck.Models.Enums.Rank.RankShort">
             <summary>
             Gets or sets the rank abbreviation.
             </summary>
@@ -3216,7 +3216,7 @@
             The rank abbreviation.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Rank.PayGrade">
+        <member name="P:BlueDeck.Models.Enums.Rank.PayGrade">
             <summary>
             Gets or sets the pay grade for a rank.
             </summary>
@@ -3806,7 +3806,7 @@
             Gets the Duty Status with the given identifier.
             </summary>
             <param name="memberDutyStatus">The DutyStatusId of the desired Duty Status.</param>
-            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.DutyStatus"/></returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberDutyStatusRepository.GetDutyStatusesWithMemberCount">
             <summary>
@@ -3819,7 +3819,7 @@
             Gets a duty status with member count.
             </summary>
             <param name="id">The DutyStatusId of the desired Duty Status.</param>
-            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.DutyStatus"/></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberGenderRepository">
             <summary>
@@ -3838,27 +3838,27 @@
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGendersWithMembers">
             <summary>
-            Gets a list of all <see cref="T:BlueDeck.Models.Gender"/> with members.
+            Gets a list of all <see cref="T:BlueDeck.Models.Enums.Gender"/> with members.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Gender"/></returns>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Enums.Gender"/></returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderWithMembers(System.Int32)">
             <summary>
-            Gets a <see cref="T:BlueDeck.Models.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
+            Gets a <see cref="T:BlueDeck.Models.Enums.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Gender"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Gender"/></returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberGenderRepository.GetGenderById(System.Int32)">
             <summary>
             Gets the gender by identifier.
             </summary>
-            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Gender"/> identifier.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
+            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Enums.Gender"/> identifier.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Gender"/></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRaceRepository">
             <summary>
-            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository`1"/> that handles database actions for the <see cref="T:BlueDeck.Models.Race"/> entity.
+            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository`1"/> that handles database actions for the <see cref="T:BlueDeck.Models.Enums.Race"/> entity.
             </summary>
             <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
@@ -3888,7 +3888,7 @@
             <summary>
             Gets a race with it's members.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race"/>.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race"/>.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRankRepository">
@@ -3911,20 +3911,20 @@
             Gets the rank by identifier.
             </summary>
             <param name="memberRankId">The member rank identifier.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Rank"/> object.</returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Rank"/> object.</returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRanksWithMembers">
             <summary>
             Gets the all ranks with their members.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Rank"/> with all of their <see cref="T:BlueDeck.Models.Member"/>s.</returns>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Enums.Rank"/> with all of their <see cref="T:BlueDeck.Models.Member"/>s.</returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IMemberRankRepository.GetRankWithMembers(System.Int32)">
             <summary>
             Gets a specific rank with its members.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank"/>.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Rank"/> with it's <see cref="T:BlueDeck.Models.Member"/>s.</returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Rank"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Rank"/> with it's <see cref="T:BlueDeck.Models.Member"/>s.</returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberRepository">
             <summary>
@@ -3944,7 +3944,7 @@
         </member>
         <member name="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository">
             <summary>
-            Repository that handles database interactions for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity.
+            Repository that handles database interactions for the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity.
             </summary>
             <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
@@ -3959,16 +3959,16 @@
         </member>
         <member name="M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers">
             <summary>
-            Gets a list of all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
+            Gets a list of all <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
             </summary>
             <returns>A <see cref="T:System.Collections.Generic.List`1"/></returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)">
             <summary>
-            Gets a specific <see cref="T:BlueDeck.Models.PhoneNumberType"/> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
+            Gets a specific <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber"/>
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType"/></param>
-            <returns>A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.</returns>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/></param>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> object.</returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IPositionRepository">
             <summary>
@@ -4060,7 +4060,7 @@
             </summary>
             <param name="entities">An <see cref="T:IEnumerable{T}"/> of entities to remove.</param>
         </member>
-        <member name="T:BlueDeck.Models.IUnitOfWork">
+        <member name="T:BlueDeck.Models.Repositories.IUnitOfWork">
             <summary>
             An interface that represents the encapsulated Entity Repository Interfaces 
             </summary>
@@ -4076,7 +4076,7 @@
             <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.Positions">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.Positions">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IPositionRepository"/>
             </summary>
@@ -4085,7 +4085,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IPositionRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.Components">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.Components">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IComponentRepository"/>
             </summary>
@@ -4094,7 +4094,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IComponentRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.Members">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.Members">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRepository"/>
             </summary>
@@ -4103,7 +4103,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.MemberRanks">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberRanks">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
             </summary>
@@ -4112,7 +4112,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.MemberGenders">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberGenders">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository"/>
             </summary>
@@ -4121,7 +4121,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberGenderRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.MemberRaces">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberRaces">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository"/>
             </summary>
@@ -4130,7 +4130,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRaceRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.MemberDutyStatus">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberDutyStatus">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository"/>
             </summary>
@@ -4139,7 +4139,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository"/>
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.MemberContactNumbers">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberContactNumbers">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
             </summary>
@@ -4148,7 +4148,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberContactNumberRepository" />
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.PhoneNumberTypes">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.PhoneNumberTypes">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
             </summary>
@@ -4157,7 +4157,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.AppStatuses">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.AppStatuses">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
             </summary>
@@ -4166,7 +4166,7 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
         </member>
-        <member name="P:BlueDeck.Models.IUnitOfWork.RoleTypes">
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.RoleTypes">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
             </summary>
@@ -4175,11 +4175,132 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRoleTypeRepository" />
         </member>
-        <member name="M:BlueDeck.Models.IUnitOfWork.Complete">
+        <member name="M:BlueDeck.Models.Repositories.IUnitOfWork.Complete">
             <summary>
             Saves changes made in the Unit of Work to ensure consistent updates
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Models.Types.ChartableComponent">
+            <summary>
+            Base class for creating an Organization Chart using GetOrgChart
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponent.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponent.Parentid">
+            <summary>
+            Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+            </summary>
+            <value>
+            The parentid of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponent.ComponentName">
+            <summary>
+            Gets or sets the name of the component.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Types.ChartableComponentWithMember">
+            <summary>
+            An extension of <see cref="T:BlueDeck.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
+            </summary>
+            <remarks>
+            This is not a direct representation of a <see cref="T:BlueDeck.Models.Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
+            GetOrgChart</a> cannot render a component with multiple positions or multiple members.
+            This class is used to map GetOrgChart Components, NOT domain <see cref="T:BlueDeck.Models.Component"/>s.
+            When rendering <see cref="T:BlueDeck.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
+            </remarks>
+            <seealso cref="T:BlueDeck.Models.ChartableComponent" />
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.Parentid">
+            <summary>
+            Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
+            </summary>
+            <value>
+            The parentid of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.IsAssistantManager">
+            <summary>
+            Gets or sets a value indicating whether this instance is assistant manager.
+            </summary>
+            <value>
+              <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.ComponentName">
+            <summary>
+            Gets or sets the name of the component.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.PositionId">
+            <summary>
+            Gets or sets the position id.
+            </summary>
+            <value>
+            The position identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.PositionName">
+            <summary>
+            Gets or sets the name of the position.
+            </summary>
+            <value>
+            The name of the position.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.MemberId">
+            <summary>
+            Gets or sets the member identifier.
+            </summary>
+            <value>
+            The member identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.MemberName">
+            <summary>
+            Gets or sets the name of the member.
+            </summary>
+            <value>
+            The name of the member.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value>
+            The email.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.ChartableComponentWithMember.ContactNumber">
+            <summary>
+            Gets or sets the contact number.
+            </summary>
+            <value>
+            The contact number.
+            </value>
         </member>
         <member name="T:BlueDeck.Models.Types.ComponentSelectListItem">
             <summary>
@@ -4342,7 +4463,7 @@
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/> class.
             </summary>
         </member>
-        <member name="M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor(BlueDeck.Models.Gender)">
+        <member name="M:BlueDeck.Models.Types.MemberGenderSelectListItem.#ctor(BlueDeck.Models.Enums.Gender)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/> class.
             </summary>
@@ -4526,127 +4647,6 @@
             <summary>
             Gets or sets the Rank Id
             </summary>
-        </member>
-        <member name="T:BlueDeck.Models.ChartableComponent">
-            <summary>
-            Base class for creating an Organization Chart using GetOrgChart
-            </summary>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponent.Id">
-            <summary>
-            Gets or sets the id.
-            </summary>
-            <value>
-            The id of the component.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponent.Parentid">
-            <summary>
-            Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
-            </summary>
-            <value>
-            The parentid of the component.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponent.ComponentName">
-            <summary>
-            Gets or sets the name of the component.
-            </summary>
-            <value>
-            The name of the component.
-            </value>
-        </member>
-        <member name="T:BlueDeck.Models.ChartableComponentWithMember">
-            <summary>
-            An extension of <see cref="T:BlueDeck.Models.ChartableComponent"/> that adds additional display information to render in a <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a> org chart.
-            </summary>
-            <remarks>
-            This is not a direct representation of a <see cref="T:BlueDeck.Models.Component"/> entity. A <a href="http://www.getorgchart.com/Documentation">
-            GetOrgChart</a> cannot render a component with multiple positions or multiple members.
-            This class is used to map GetOrgChart Components, NOT domain <see cref="T:BlueDeck.Models.Component"/>s.
-            When rendering <see cref="T:BlueDeck.Models.Member"/> information into GetOrgChart, an instance of this class will be generated for each.
-            </remarks>
-            <seealso cref="T:BlueDeck.Models.ChartableComponent" />
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.Id">
-            <summary>
-            Gets or sets the id.
-            </summary>
-            <value>
-            The id of the component.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.Parentid">
-            <summary>
-            Gets or sets the parentid. Combined with <see cref="T:BlueDeck.Models.ChartableComponent.Id"/>, this establishes the Child/Parent relationship for rendering using <a href="http://www.getorgchart.com/Documentation">GetOrgChart</a>.
-            </summary>
-            <value>
-            The parentid of the component.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.IsAssistantManager">
-            <summary>
-            Gets or sets a value indicating whether this instance is assistant manager.
-            </summary>
-            <value>
-              <c>true</c> if this instance is assistant manager; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.ComponentName">
-            <summary>
-            Gets or sets the name of the component.
-            </summary>
-            <value>
-            The name of the component.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.PositionId">
-            <summary>
-            Gets or sets the position id.
-            </summary>
-            <value>
-            The position identifier.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.PositionName">
-            <summary>
-            Gets or sets the name of the position.
-            </summary>
-            <value>
-            The name of the position.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.MemberId">
-            <summary>
-            Gets or sets the member identifier.
-            </summary>
-            <value>
-            The member identifier.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.MemberName">
-            <summary>
-            Gets or sets the name of the member.
-            </summary>
-            <value>
-            The name of the member.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.Email">
-            <summary>
-            Gets or sets the email.
-            </summary>
-            <value>
-            The email.
-            </value>
-        </member>
-        <member name="P:BlueDeck.Models.ChartableComponentWithMember.ContactNumber">
-            <summary>
-            Gets or sets the contact number.
-            </summary>
-            <value>
-            The contact number.
-            </value>
         </member>
         <member name="T:BlueDeck.Models.Vehicle">
             <summary>
@@ -5485,9 +5485,9 @@
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">
             <summary>
-            Gets the list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/>s.
+            Gets the list of <see cref="!:BlueDeck.Models.ChartableComponentWithMember"/>s.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="!:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembersNoMarkup(System.Int32)">
             <summary>
@@ -5508,7 +5508,7 @@
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository">
             <summary>
-            Repository that Controls CRUD operations for the <see cref="T:BlueDeck.Models.DutyStatus"/> entity.
+            Repository that Controls CRUD operations for the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity.
             </summary>
             <seealso cref="!:Repositories.Repository&lt;Models.DutyStatus&gt;" />
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository" />
@@ -5535,7 +5535,7 @@
             Gets the Duty Status with the given identifier.
             </summary>
             <param name="memberDutyStatus">The DutyStatusId of the desired Duty Status.</param>
-            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.DutyStatus"/></returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.ApplicationDbContext">
             <summary>
@@ -5556,7 +5556,7 @@
             Gets a duty status with member count.
             </summary>
             <param name="id">The DutyStatusId of the desired Duty Status.</param>
-            <returns>A <see cref="T:BlueDeck.Models.DutyStatus"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.DutyStatus"/></returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository.Remove(System.Int32)">
             <summary>
@@ -5596,23 +5596,23 @@
             <summary>
             Gets the gender by identifier.
             </summary>
-            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Gender" /> identifier.</param>
+            <param name="memberGenderId">The <see cref="T:BlueDeck.Models.Enums.Gender" /> identifier.</param>
             <returns>
-            A <see cref="T:BlueDeck.Models.Gender" />
+            A <see cref="T:BlueDeck.Models.Enums.Gender" />
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGendersWithMembers">
             <summary>
-            Gets a list of all <see cref="T:BlueDeck.Models.Gender"/> with members.
+            Gets a list of all <see cref="T:BlueDeck.Models.Enums.Gender"/> with members.
             </summary>
-            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Gender"/></returns>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> containing all current <see cref="T:BlueDeck.Models.Enums.Gender"/></returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberGenderRepository.GetGenderWithMembers(System.Int32)">
             <summary>
-            Gets a <see cref="T:BlueDeck.Models.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
+            Gets a <see cref="T:BlueDeck.Models.Enums.Gender"/> with it's current <see cref="T:BlueDeck.Models.Member"/>s.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Gender"/>.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Gender"/></returns>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Gender"/>.</param>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Gender"/></returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberGenderRepository.ApplicationDbContext">
             <summary>
@@ -5651,7 +5651,7 @@
             Gets the race by identifier.
             </summary>
             <param name="memberRaceId">The member race identifier.</param>
-            <returns>A <see cref="T:BlueDeck.Models.Race"/></returns>
+            <returns>A <see cref="T:BlueDeck.Models.Enums.Race"/></returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberRaceRepository.GetRacesWithMembers">
             <summary>
@@ -5665,7 +5665,7 @@
             <summary>
             Gets a race with it's members.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Race" />.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Race" />.</param>
             <returns></returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberRaceRepository.ApplicationDbContext">
@@ -5706,7 +5706,7 @@
             </summary>
             <param name="memberRankId">The member rank identifier.</param>
             <returns>
-            A <see cref="T:BlueDeck.Models.Rank" /> object.
+            A <see cref="T:BlueDeck.Models.Enums.Rank" /> object.
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRanksWithMembers">
@@ -5714,16 +5714,16 @@
             Gets a list of all ranks with their members.
             </summary>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Rank" /> with all of their <see cref="T:BlueDeck.Models.Member" />s.
+            A <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:BlueDeck.Models.Enums.Rank" /> with all of their <see cref="T:BlueDeck.Models.Member" />s.
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.MemberRankRepository.GetRankWithMembers(System.Int32)">
             <summary>
             Gets a specific rank with its members.
             </summary>
-            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Rank" />.</param>
+            <param name="id">The identifier of the <see cref="T:BlueDeck.Models.Enums.Rank" />.</param>
             <returns>
-            A <see cref="T:BlueDeck.Models.Rank" /> with it's <see cref="T:BlueDeck.Models.Member" />s.
+            A <see cref="T:BlueDeck.Models.Enums.Rank" /> with it's <see cref="T:BlueDeck.Models.Member" />s.
             </returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.MemberRankRepository.ApplicationDbContext">
@@ -5791,7 +5791,7 @@
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository">
             <summary>
-            An implementation of the <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository"/> that handles CRUD interactions for the <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities.
+            An implementation of the <see cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository"/> that handles CRUD interactions for the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entities.
             </summary>
             <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
             <seealso cref="T:BlueDeck.Models.Repositories.IPhoneNumberTypeRepository" />
@@ -5815,19 +5815,19 @@
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypesWithPhoneNumbers">
             <summary>
-            Gets a list of all <see cref="T:BlueDeck.Models.PhoneNumberType" /> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
+            Gets a list of all <see cref="T:BlueDeck.Models.Enums.PhoneNumberType" /> entities including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
             </summary>
             <returns>
-            A <see cref="T:System.Collections.Generic.List`1"/> that includes all <see cref="T:BlueDeck.Models.PhoneNumberType"/> entities and their related <see cref="T:BlueDeck.Models.ContactNumber"/>.
+            A <see cref="T:System.Collections.Generic.List`1"/> that includes all <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> entities and their related <see cref="T:BlueDeck.Models.ContactNumber"/>.
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.GetPhoneNumberTypeWithPhoneNumbers(System.Int32)">
             <summary>
-            Gets a specific <see cref="T:BlueDeck.Models.PhoneNumberType" /> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
+            Gets a specific <see cref="T:BlueDeck.Models.Enums.PhoneNumberType" /> entity including all associated <see cref="T:BlueDeck.Models.ContactNumber" />
             </summary>
-            <param name="id">The identity of the <see cref="T:BlueDeck.Models.PhoneNumberType" /></param>
+            <param name="id">The identity of the <see cref="T:BlueDeck.Models.Enums.PhoneNumberType" /></param>
             <returns>
-            A <see cref="T:BlueDeck.Models.PhoneNumberType"/> object.
+            A <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/> object.
             </returns>
         </member>
         <member name="P:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository.ApplicationDbContext">
@@ -5957,9 +5957,9 @@
         </member>
         <member name="T:BlueDeck.Persistence.UnitOfWork">
             <summary>
-            An instance of <see cref="T:BlueDeck.Models.IUnitOfWork"/>
+            An instance of <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/>
             </summary>
-            <seealso cref="T:BlueDeck.Models.IUnitOfWork" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IUnitOfWork" />
         </member>
         <member name="M:BlueDeck.Persistence.UnitOfWork.#ctor(BlueDeck.Models.ApplicationDbContext)">
             <summary>

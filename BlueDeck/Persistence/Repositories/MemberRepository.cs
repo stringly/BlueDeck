@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using BlueDeck.Models.APIModels;
 using System.Threading.Tasks;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Persistence.Repositories
 {

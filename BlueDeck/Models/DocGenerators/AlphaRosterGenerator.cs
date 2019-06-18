@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models.DocGenerators
 {

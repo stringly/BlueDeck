@@ -7,6 +7,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using BlueDeck.Models.Types;
+using BlueDeck.Models.Enums;
 
 // TODO: Rewire to use ChildComponent Collection of a single component
 namespace BlueDeck.Models.DocGenerators

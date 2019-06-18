@@ -9,6 +9,7 @@ using A = DocumentFormat.OpenXml.Drawing;
 using Dgm = DocumentFormat.OpenXml.Drawing.Diagrams;
 using System.Xml;
 using System.Xml.Linq;
+using BlueDeck.Models.Types;
 
 namespace BlueDeck.Models.DocGenerators
 {

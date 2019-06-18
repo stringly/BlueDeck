@@ -3,6 +3,7 @@ using BlueDeck.Models.Types;
 using BlueDeck.Models.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models.Repositories
 {
