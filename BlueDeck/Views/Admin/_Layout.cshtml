@@ -43,6 +43,12 @@
                             <span class="sidebar-title">Components</span>
                         </a>
                     </li>
+                    <li class="@(ViewBag.Title == "BlueDeck Admin - Vehicle Index" ? "active" : "")">
+                        <a href="/Admin/VehicleIndex">
+                            <span class="sidebar-icon"><i class="fa fa-sitemap"></i></span>
+                            <span class="sidebar-title">Vehicles</span>
+                        </a>
+                    </li>
                     <li>
                         @if (ViewBag.Enumeration == true)
                         {
@@ -70,6 +76,12 @@
                                 <li class="@(ViewBag.Title == "BlueDeck Admin - Phone Types Index" ? "active" : "")">
                                     <a href="/Admin/PhoneTypeIndex"><i class="fa fa-caret-right"></i>Phone Types</a>
                                 </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Vehicle Models Index" ? "active" : "")">
+                                    <a href="/Admin/VehicleModelIndex"><i class="fa fa-caret-right"></i>Vehicle Models</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Vehicle Makes Index" ? "active" : "")">
+                                    <a href="/Admin/VehicleManufacturerIndex"><i class="fa fa-caret-right"></i>Vehicle Makes</a>
+                                </li>
                             </ul>
                         }
                         else
@@ -78,7 +90,7 @@
                                 <span class="sidebar-icon"><i class="fa fa-database"></i></span>
                                 <span class="sidebar-title">Enumerations</span>
                                 <b class="caret"></b>
-                            </a>                        
+                            </a>
                             <ul id="submenu-2" class="panel-collapse collapse panel-switch" role="menu">
                                 <li class="@(ViewBag.Title == "BlueDeck Admin - Application Status Index" ? "active" : "")">
                                     <a href="/Admin/AppStatusIndex"><i class="fa fa-caret-right"></i>Account Status</a>
@@ -97,6 +109,12 @@
                                 </li>
                                 <li class="@(ViewBag.Title == "BlueDeck Admin - Phone Types Index" ? "active" : "")">
                                     <a href="/Admin/PhoneTypeIndex"><i class="fa fa-caret-right"></i>Phone Types</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Vehicle Models Index" ? "active" : "")">
+                                    <a href="/Admin/VehicleModelIndex"><i class="fa fa-caret-right"></i>Vehicle Models</a>
+                                </li>
+                                <li class="@(ViewBag.Title == "BlueDeck Admin - Vehicle Makes Index" ? "active" : "")">
+                                    <a href="/Admin/VehicleManufacturerIndex"><i class="fa fa-caret-right"></i>Vehicle Makes</a>
                                 </li>
                             </ul>
                         }

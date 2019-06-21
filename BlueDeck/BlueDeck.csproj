@@ -22,6 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190620174301_vehicle.cs" />
+    <Compile Remove="Migrations\20190620174301_vehicle.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\lib\getorgchart\js\getorgchart.min.js" />

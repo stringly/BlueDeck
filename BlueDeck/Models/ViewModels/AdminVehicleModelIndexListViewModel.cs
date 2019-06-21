@@ -1,23 +1,23 @@
-﻿using BlueDeck.Models.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Models.ViewModels
 {
     /// <summary>
-    /// Viewmodel used for the Component Entity used in the Admin/ComponentIndex View
+    /// 
     /// </summary>
-    public class AdminComponentIndexListViewModel
+    public class AdminVehicleModelIndexListViewModel
     {
-        /// <summary>
-        /// Gets or sets the components.
+                /// <summary>
+        /// Gets or sets the vehicles.
         /// </summary>
         /// <value>
-        /// The components.
+        /// The vehicles.
         /// </value>
-        public IEnumerable<AdminComponentIndexViewModelListItem> Components { get; set; }
+        public IEnumerable<VehicleModel> VehicleModels { get; set; }
 
         /// <summary>
         /// Gets or sets the paging information.
@@ -36,12 +36,12 @@ namespace BlueDeck.Models.ViewModels
         public string NameSort { get; set; }
 
         /// <summary>
-        /// Gets or sets the parent component name sort.
+        /// Gets or sets the manufacturer name sort.
         /// </summary>
         /// <value>
-        /// The parent component name sort.
+        /// The manufacturer name sort.
         /// </value>
-        public string ParentComponentNameSort { get; set; }
+        public string ManufacturerNameSort { get; set; }
 
         /// <summary>
         /// Gets or sets the current filter.
@@ -60,20 +60,20 @@ namespace BlueDeck.Models.ViewModels
         public string CurrentSort { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AdminComponentIndexListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AdminVehicleModelIndexListViewModel"/> class.
         /// </summary>
-        public AdminComponentIndexListViewModel()
+        public AdminVehicleModelIndexListViewModel()
         {
-            Components = new List<AdminComponentIndexViewModelListItem>();
+            VehicleModels = new List<VehicleModel>();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AdminComponentIndexListViewModel"/> class.
+        /// Initializes a new instance of the <see cref="AdminVehicleModelIndexListViewModel"/> class.
         /// </summary>
-        /// <param name="_components">The components.</param>
-        public AdminComponentIndexListViewModel(List<Component> _components)
+        /// <param name="_v">The vehicles.</param>
+        public AdminVehicleModelIndexListViewModel(List<VehicleModel> _v)
         {
-            Components = _components.ConvertAll(x => new AdminComponentIndexViewModelListItem(x));
+            VehicleModels = _v;
         }
     }
 }

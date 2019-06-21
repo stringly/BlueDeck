@@ -46,6 +46,30 @@ namespace BlueDeck.Models.Repositories
         IMemberRepository Members { get; }
 
         /// <summary>
+        /// Gets the vehicles.
+        /// </summary>
+        /// <value>
+        /// The vehicles.
+        /// </value>
+        IVehicleRepository Vehicles { get; }
+
+        /// <summary>
+        /// Gets the vehicle models.
+        /// </summary>
+        /// <value>
+        /// The vehicle models.
+        /// </value>
+        IVehicleModelRepository VehicleModels { get; }
+
+        /// <summary>
+        /// Gets the vehicle manufacturers.
+        /// </summary>
+        /// <value>
+        /// The vehicle manufacturers.
+        /// </value>
+        IVehicleManufacturerRepository VehicleManufacturers { get; }
+
+        /// <summary>
         /// Gets an <see cref="IMemberRankRepository"/>
         /// </summary>
         /// <value>

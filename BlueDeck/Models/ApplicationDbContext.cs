@@ -8,18 +8,18 @@ namespace BlueDeck.Models {
     /// <summary>
     /// Entity Framework DbContext Class
     /// </summary>
-    /// <seealso cref="T:Microsoft.EntityFrameworkCore.DbContext" />
+    /// <seealso cref="DbContext" />
     public class ApplicationDbContext : DbContext {
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.ApplicationDbContext"/> class.
+        /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
         /// </summary>
-        /// <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
+        /// <param name="options">A <see cref="DbContextOptions"/> of <see cref="ApplicationDbContext"/></param>
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {   
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.ApplicationDbContext"/> class.
+        /// Initializes a new instance of the <see cref="ApplicationDbContext"/> class.
         /// </summary>
         /// <remarks>
         /// Parameterless Constructor
@@ -31,7 +31,7 @@ namespace BlueDeck.Models {
         /// Gets or sets the Components.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Component"/>s.
+        /// A DbSet of <see cref="Component"/>s.
         /// </value>
         public virtual DbSet<Component> Components { get; set; }
 
@@ -39,7 +39,7 @@ namespace BlueDeck.Models {
         /// Gets or sets the Members.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Member"/>s
+        /// A DbSet of <see cref="Member"/>s
         /// </value>
         public virtual DbSet<Member> Members { get; set; }
 
@@ -47,15 +47,39 @@ namespace BlueDeck.Models {
         /// Gets or sets the Positions.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Position"/>s
+        /// A DbSet of <see cref="Position"/>s
         /// </value>
         public virtual DbSet<Position> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vehicles.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="Vehicle"/>
+        /// </value>
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the vehicle models.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="VehicleModel"/>
+        /// </value>
+        public virtual DbSet<VehicleModel> VehicleModels { get; set;}
+
+        /// <summary>
+        /// Gets or sets the vehicle manufacturers.
+        /// </summary>
+        /// <value>
+        /// A SbSet of <see cref="VehicleManufacturer">
+        /// </value>
+        public virtual DbSet<VehicleManufacturer> VehicleManufacturers { get; set; }
 
         /// <summary>
         /// Gets or sets the MemberRanks.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRank"/>s
+        /// A DbSet of <see cref="Rank"/>s
         /// </value>
         public virtual DbSet<Rank> Ranks { get; set; }
 
@@ -63,7 +87,7 @@ namespace BlueDeck.Models {
         /// Gets or sets the MemberRaces.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRace"/>s
+        /// A DbSet of <see cref="Race"/>s
         /// </value>
         public virtual DbSet<Race> Races { get; set; }
 
@@ -71,7 +95,7 @@ namespace BlueDeck.Models {
         /// Gets or sets the MemberGenders.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberGender"/>s
+        /// A DbSet of <see cref="Gender"/>s
         /// </value>
         public virtual DbSet<Gender> Genders { get; set; }
 
@@ -79,25 +103,95 @@ namespace BlueDeck.Models {
         /// Gets or sets the MemberGenders.
         /// </summary>
         /// <value>
-        /// A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberDutyStatus"/>s
+        /// A DbSet of <see cref="DutyStatus"/>s
         /// </value>
         public virtual DbSet<DutyStatus> DutyStatuses { get; set; }
 
+        /// <summary>
+        /// Gets or sets the application statuses.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="AppStatus"/>
+        /// </value>
         public virtual DbSet<AppStatus> ApplicationStatuses {get;set;}
 
+        /// <summary>
+        /// Gets or sets the contact numbers.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="ContactNumber"/>
+        /// </value>
         public virtual DbSet<ContactNumber> ContactNumbers { get; set; }
 
+        /// <summary>
+        /// Gets or sets the phone number types.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="PhoneNumberType"/>
+        /// </value>
         public virtual DbSet<PhoneNumberType> PhoneNumberTypes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the roles.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="Role"/>
+        /// </value>
         public virtual DbSet<Role> Roles { get; set; }
+
+        /// <summary>
+        /// Gets or sets the role types.
+        /// </summary>
+        /// <value>
+        /// A DbSet of <see cref="RoleType"/>
+        /// </value>
         public virtual DbSet<RoleType> RoleTypes { get; set; }
 
 
+        /// <summary>
+        /// Gets or sets the member index view model member list items.
+        /// </summary>
+        /// <value>
+        /// The member index view model member list items.
+        /// </value>
         public DbQuery<MemberIndexViewModelMemberListItem> MemberIndexViewModelMemberListItems { get; set; }
+
+        /// <summary>
+        /// Gets or sets the get child components for component identifier.
+        /// </summary>
+        /// <value>
+        /// The get child components for component identifier.
+        /// </value>
         public DbQuery<ComponentSelectListItem> GetChildComponentsForComponentId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the get positions user can edit.
+        /// </summary>
+        /// <value>
+        /// The get positions user can edit.
+        /// </value>
         public DbQuery<PositionSelectListItem> GetPositionsUserCanEdit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the get members user can edit.
+        /// </summary>
+        /// <value>
+        /// The get members user can edit.
+        /// </value>
         public DbQuery<MemberSelectListItem> GetMembersUserCanEdit { get; set; }
 
+        /// <summary>
+        /// Override this method to further configure the model that was discovered by convention from the entity types
+        /// exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
+        /// and re-used for subsequent instances of your derived context.
+        /// </summary>
+        /// <param name="modelBuilder">The builder being used to construct the model for this context. Databases (and other extensions) typically
+        /// define extension methods on this object that allow you to configure aspects of the model that are specific
+        /// to a given database.</param>
+        /// <remarks>
+        /// If a model is explicitly set on the options for this context (via <see cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
+        /// then this method will not be run.
+        /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Member>()
@@ -136,6 +230,22 @@ namespace BlueDeck.Models {
                 .HasOne(c => c.ParentComponent)
                 .WithMany(c => c.ChildComponents)
                 .HasForeignKey(c => c.ParentComponentId);
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.Model)
+                .WithMany(v => v.Vehicles)
+                .HasForeignKey(v => v.ModelId);
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.AssignedToPosition)
+                .WithMany(v => v.AssignedVehicles)
+                .HasForeignKey(v => v.AssignedToPositionId);
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.AssignedToComponent)
+                .WithMany(v => v.AssignedVehicles)
+                .HasForeignKey(v => v.AssignedToComponentId);
+            modelBuilder.Entity<VehicleModel>()
+                .HasOne(vm => vm.Manufacturer)
+                .WithMany(vm => vm.Models)
+                .HasForeignKey(vm => vm.ManufacturerId);
             modelBuilder.Entity<Role>()
                 .HasOne(r => r.RoleType)
                 .WithMany(r => r.CurrentRoles)

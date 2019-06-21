@@ -301,6 +301,144 @@ namespace BlueDeck.Controllers
         }
 
         /// <summary>
+        /// Vehicles the index.
+        /// </summary>
+        /// <param name="sortOrder">The sort order.</param>
+        /// <param name="searchString">The search string.</param>
+        /// <param name="page">The page.</param>
+        /// <returns></returns>
+        public IActionResult VehicleIndex(string sortOrder, string searchString, int page = 1)
+        {
+            AdminVehicleIndexListViewModel vm = new AdminVehicleIndexListViewModel(unitOfWork.Vehicles.GetVehiclesWithModels());
+            vm.CurrentSort = sortOrder;
+            vm.NumberSort = string.IsNullOrEmpty(sortOrder) ? "number_desc" : "";
+            vm.CurrentFilter = searchString;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                char[] arr = searchString.ToCharArray();
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) 
+                                  || char.IsWhiteSpace(c) 
+                                  || c == '-')));
+                string lowerString = new string(arr);
+                lowerString = lowerString.ToLower();
+                vm.Vehicles = vm.Vehicles
+                    .Where(x => x.CruiserNumber.ToLower().Contains(lowerString));
+            }
+
+            switch (sortOrder)
+            {
+                case "number_desc":
+                    vm.Vehicles = vm.Vehicles.OrderByDescending(x => x.CruiserNumber);
+                    break;
+            }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.Vehicles.Count()
+            };
+            ViewBag.Title = "BlueDeck Admin - Vehicles Index";
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.Vehicles = vm.Vehicles.Skip((page - 1) * PageSize).Take(PageSize);
+
+            return View(vm); 
+        }
+
+        /// <summary>
+        /// Returns the VehicleModel Index list
+        /// </summary>
+        /// <param name="sortOrder">The sort order.</param>
+        /// <param name="searchString">The search string.</param>
+        /// <param name="page">The page.</param>
+        /// <returns></returns>
+        public IActionResult VehicleModelIndex(string sortOrder, string searchString, int page = 1)
+        {
+            AdminVehicleModelIndexListViewModel vm = new AdminVehicleModelIndexListViewModel(unitOfWork.VehicleModels.GetAll().ToList());
+            vm.CurrentSort = sortOrder;
+            vm.NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            vm.CurrentFilter = searchString;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                char[] arr = searchString.ToCharArray();
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) 
+                                  || char.IsWhiteSpace(c) 
+                                  || c == '-')));
+                string lowerString = new string(arr);
+                lowerString = lowerString.ToLower();
+                vm.VehicleModels = vm.VehicleModels
+                    .Where(x => x.VehicleModelName.ToLower().Contains(lowerString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vm.VehicleModels = vm.VehicleModels.OrderByDescending(x => x.VehicleModelName);
+                    break;
+            }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.VehicleModels.Count()
+            };
+            ViewBag.Title = "BlueDeck Admin - Vehicles Index";
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.VehicleModels = vm.VehicleModels.Skip((page - 1) * PageSize).Take(PageSize);
+
+            return View(vm); 
+        }
+
+        /// <summary>
+        /// Returns the Admin/VehicleManufacturerIndex view
+        /// </summary>
+        /// <param name="sortOrder">The sort order.</param>
+        /// <param name="searchString">The search string.</param>
+        /// <param name="page">The page.</param>
+        /// <returns></returns>
+        public IActionResult VehicleManufacturerIndex(string sortOrder, string searchString, int page = 1)
+        {
+            AdminVehicleManufacturerIndexListViewModel vm = new AdminVehicleManufacturerIndexListViewModel(unitOfWork.VehicleManufacturers.GetAll().ToList());
+            vm.CurrentSort = sortOrder;
+            vm.NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            vm.CurrentFilter = searchString;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                char[] arr = searchString.ToCharArray();
+                arr = Array.FindAll<char>(arr, (c => (char.IsLetterOrDigit(c) 
+                                  || char.IsWhiteSpace(c) 
+                                  || c == '-')));
+                string lowerString = new string(arr);
+                lowerString = lowerString.ToLower();
+                vm.VehicleManufacturers = vm.VehicleManufacturers
+                    .Where(x => x.VehicleManufacturerName.ToLower().Contains(lowerString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    vm.VehicleManufacturers = vm.VehicleManufacturers.OrderByDescending(x => x.VehicleManufacturerName);
+                    break;
+            }
+            vm.PagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.VehicleManufacturers.Count()
+            };
+            ViewBag.Title = "BlueDeck Admin - Vehicles Index";
+            ViewBag.Status = TempData["Status"]?.ToString() ?? "";
+            ViewBag.Message = TempData["Message"]?.ToString() ?? "";
+            vm.VehicleManufacturers = vm.VehicleManufacturers.Skip((page - 1) * PageSize).Take(PageSize);
+
+            return View(vm); 
+        }
+
+        /// <summary>
         /// Returns the Admin/AppStatusIndex view
         /// </summary>
         /// <remarks>

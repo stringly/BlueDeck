@@ -1,22 +1,23 @@
-﻿using BlueDeck.Models.Enums;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+using BlueDeck.Models.Types;
 
-namespace BlueDeck.Models
+namespace BlueDeck.Models.ViewModels
 {
     /// <summary>
-    /// Vehicle Entity
+    /// View Model used in Views that Create or Edit <see cref="Vehicle"/> objects.
     /// </summary>
-    public class Vehicle
+    public class AddEditVehicleViewModel
     {
         /// <summary>
         /// Gets or sets the vehicle identifier (PK).
         /// </summary>
         /// <value>
         /// The vehicle identifier.
-        /// </value>
-        [Key]
+        /// </value>        
         [Display(Name = "VehicleId")]
         public int VehicleId { get; set; }
 
@@ -27,6 +28,7 @@ namespace BlueDeck.Models
         /// The model year.
         /// </value>
         [Display(Name = "Model Year")]
+        [Required]
         public int ModelYear { get; set; }
 
         /// <summary>
@@ -36,15 +38,8 @@ namespace BlueDeck.Models
         /// The model identifier.
         /// </value>
         [Display(Name = "Model")]
+        [Required]
         public int ModelId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the model.
-        /// </summary>
-        /// <value>
-        /// The model.
-        /// </value>        
-        public virtual VehicleModel Model { get; set; }
 
         /// <summary>
         /// Gets or sets the vin.
@@ -53,6 +48,7 @@ namespace BlueDeck.Models
         /// The vin.
         /// </value>
         [Display(Name = "VIN")]
+        [Required]
         public string VIN { get; set; }
 
         /// <summary>
@@ -62,6 +58,7 @@ namespace BlueDeck.Models
         /// The tag number.
         /// </value>
         [Display(Name = "Tag Number")]
+        [Required]
         public string TagNumber { get; set; }
 
 
@@ -72,6 +69,7 @@ namespace BlueDeck.Models
         /// The state of the tag.
         /// </value>
         [Display(Name = "State")]
+        [Required]
         public string TagState { get; set; }
 
         /// <summary>
@@ -81,6 +79,7 @@ namespace BlueDeck.Models
         /// The cruiser number.
         /// </value>
         [Display(Name = "Cruiser Number")]
+        [Required]
         public string CruiserNumber { get; set; }
 
         /// <summary>
@@ -103,14 +102,6 @@ namespace BlueDeck.Models
         public int? AssignedToMemberId { get; set; }
 
         /// <summary>
-        /// Gets or sets the assigned to member.
-        /// </summary>
-        /// <value>
-        /// The assigned to member.
-        /// </value>        
-        public virtual Member AssignedToMember { get; set; }
-
-        /// <summary>
         /// Gets or sets the assigned to position identifier.
         /// </summary>
         /// <remarks>
@@ -120,14 +111,6 @@ namespace BlueDeck.Models
         /// The assigned to position identifier.
         /// </value>
         public int? AssignedToPositionId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the assigned to position.
-        /// </summary>
-        /// <value>
-        /// The assigned to position.
-        /// </value>        
-        public virtual Position AssignedToPosition { get; set; }
 
         /// <summary>
         /// Gets or sets the assigned to component identifier.
@@ -141,53 +124,61 @@ namespace BlueDeck.Models
         public int? AssignedToComponentId { get; set; }
 
         /// <summary>
-        /// Gets or sets the assigned to component.
+        /// Gets or sets the models.
         /// </summary>
         /// <value>
-        /// The assigned to component.
-        /// </value>        
-        public virtual Component AssignedToComponent { get; set; }
+        /// The models.
+        /// </value>
+        public List<VehicleModelSelectListItem> Models { get;set; }
 
         /// <summary>
-        /// Reassigns the vehicle to the member with the provided identifier.
+        /// Gets or sets the members list for use in select lists
         /// </summary>
-        /// <remarks>
-        /// Assigning the vehicle to a member will nullify any Position/Component assignment for the vehicle.
-        /// </remarks>
-        /// <param name="_memberId">The member identifier.</param>
-        public void ReassignToMemberId(int _memberId)
-        {
-            AssignedToMemberId = Convert.ToInt32(_memberId);
-            AssignedToPositionId = null;
-            AssignedToComponentId = null;
+        /// <value>
+        /// The members.
+        /// </value>
+        public List<MemberSelectListItem> Members { get; set; }
+
+        /// <summary>
+        /// Gets or sets the positions for use in select lists.
+        /// </summary>
+        /// <value>
+        /// The positions.
+        /// </value>
+        public List<PositionSelectListItem> Positions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the components for use in select lists.
+        /// </summary>
+        /// <value>
+        /// The components.
+        /// </value>
+        public List<ComponentSelectListItem> Components { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddEditVehicleViewModel"/> class.
+        /// </summary>
+        public AddEditVehicleViewModel()
+        {            
         }
 
         /// <summary>
-        /// Reassigns the vehicle to the position witht he provided identifier.
+        /// Initializes a new instance of the <see cref="AddEditVehicleViewModel"/> class.
         /// </summary>
-        /// <remarks>
-        /// Assigning the vehicle to a Position will nullify any Member/Component assignment for the vehicle.
-        /// </remarks>
-        /// <param name="_positionId">The position identifier.</param>
-        public void ReassignToPositionId(int _positionId)
+        /// <param name="_v">A vehicle object.</param>
+        public AddEditVehicleViewModel(Vehicle _v)
         {
-            AssignedToPositionId = Convert.ToInt32(_positionId);
-            AssignedToMemberId = null;
-            AssignedToComponentId = null;
-        }
-
-        /// <summary>
-        /// Reassigns the vehicle to the component with the provided identifier.
-        /// </summary>
-        /// <remarks>
-        /// Assigning the vehicle to a Componetn will nullify any Member/Position assignment for the vehicle.
-        /// </remarks>
-        /// <param name="_componentId">The component identifier.</param>
-        public void ReassignToComponentId(int _componentId)
-        {
-            AssignedToComponentId = Convert.ToInt32(_componentId);
-            AssignedToPositionId = null;
-            AssignedToMemberId = null;
+            VehicleId = _v.VehicleId;
+            ModelYear = _v.ModelYear;
+            ModelId = _v.ModelId;
+            VIN = _v.VIN;
+            TagNumber = _v.TagNumber;
+            TagState = _v.TagState;
+            CruiserNumber = _v.CruiserNumber;
+            IsMarked = _v.IsMarked;
+            AssignedToMemberId = _v.AssignedToMemberId;
+            AssignedToPositionId = _v.AssignedToPositionId;
+            AssignedToComponentId = _v.AssignedToComponentId;
         }
 
     }

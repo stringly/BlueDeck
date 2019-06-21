@@ -1,0 +1,76 @@
+﻿@model AdminVehicleManufacturerIndexListViewModel
+
+<div class="container" style="padding-top:10px; padding-bottom:10px">
+    <a asp-action="Create" asp-controller="VehicleManufacturers" asp-route-returnUrl="/Admin/VehicleManufacturerIndex"><i class="glyphicon glyphicon-plus"></i>Create a New Manufacturer</a>
+</div>
+<div>
+    @if (ViewBag.Status == "Success!")
+    {
+        <div class="indexAlertWrapper">
+            <div class="alert alert-success alert-dismissible fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong>
+                <span>@ViewBag.Message</span>
+            </div>
+        </div>
+
+    }
+    @if (Model.VehicleManufacturers.Count() > 0)
+    {
+        <div class="table-responsive">
+            <table class="table indexTable table-condensed">
+                <thead>
+                    <tr>
+                        <th>
+                            ManufacturerId
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Models
+                        </th>                        
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.VehicleManufacturers)
+                    {
+                        <tr>
+                            <td>
+                                @item.VehicleManufacturerId
+                            </td>
+                            <td style="text-align:center">
+                                @item.VehicleManufacturerName
+                            </td>
+                            <td style="text-align:center">
+                                @item.Models.Count()
+                            </td>
+                            <td style="text-align:center">
+                                <a asp-action="Details" asp-controller="VehicleManufacturers" asp-route-id="@item.VehicleManufacturerId" asp-route-returnUrl="/Admin/VehicleManufacturerIndex" title="View Details" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                                </a>
+                                <a asp-action="Edit" asp-controller="VehicleManufacturers" asp-route-id="@item.VehicleManufacturerId" asp-route-returnUrl="/Admin/VehicleManufacturerIndex" title="Edit Manufacturer" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                                </a>
+                                <a asp-action="Delete" asp-controller="VehicleManufacturers" asp-route-id="@item.VehicleManufacturerId" asp-route-returnUrl="/Admin/VehicleManufacturerIndex" title="Delete Manufacturer" class="glyphicon-ring">
+                                    <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    }
+</div>
+
+<script>
+    // close any alert after 3 seconds
+    window.setTimeout(function () {
+        $(".alert").fadeTo(500, 0).slideUp(500, function () {
+            $(this).remove();
+        });
+    }, 3000);
+</script>

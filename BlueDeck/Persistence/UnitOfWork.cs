@@ -16,12 +16,15 @@ namespace BlueDeck.Persistence
         /// Initializes a new instance of the <see cref="UnitOfWork"/> class.
         /// </summary>
         /// <param name="context">An <see cref="ApplicationDbContext"/>.</param>
-        public UnitOfWork(ApplicationDbContext context/*, IHttpContextAccessor httpContext*/)
+        public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Positions = new PositionRepository(_context);
             Components = new ComponentRepository(_context);
             Members = new MemberRepository(_context);
+            Vehicles = new VehicleRepository(_context);
+            VehicleModels = new VehicleModelRepository(_context);
+            VehicleManufacturers = new VehicleManufacturerRepository(_context);
             MemberRanks = new MemberRankRepository(_context);
             MemberGenders = new MemberGenderRepository(_context);
             MemberRaces = new MemberRaceRepository(_context);
@@ -59,6 +62,30 @@ namespace BlueDeck.Persistence
         /// </value>
         /// <seealso cref="IMemberRepository" />
         public IMemberRepository Members { get; private set; }
+
+        /// <summary>
+        /// Gets the vehicles.
+        /// </summary>
+        /// <value>
+        /// The vehicles.
+        /// </value>
+        public IVehicleRepository Vehicles { get; private set; }
+
+        /// <summary>
+        /// Gets the vehicle models.
+        /// </summary>
+        /// <value>
+        /// The vehicle models.
+        /// </value>
+        public IVehicleModelRepository VehicleModels { get; private set; }
+
+        /// <summary>
+        /// Gets the vehicle manufacturers.
+        /// </summary>
+        /// <value>
+        /// The vehicle manufacturers.
+        /// </value>
+        public IVehicleManufacturerRepository VehicleManufacturers { get; private set; }
 
         /// <summary>
         /// Gets an <see cref="IMemberRankRepository" />

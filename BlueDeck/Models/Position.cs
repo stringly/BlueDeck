@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace BlueDeck.Models {
+namespace BlueDeck.Models
+{
     /// <summary>
     /// Position Entity
     /// </summary>
@@ -19,7 +18,13 @@ namespace BlueDeck.Models {
         /// </value>
         [Key]
         public int PositionId { get; set;}
-                
+
+        /// <summary>
+        /// Gets or sets the parent component identifier.
+        /// </summary>
+        /// <value>
+        /// The parent component identifier.
+        /// </value>
         public int ParentComponentId { get; set; }
 
         /// <summary>
@@ -79,6 +84,12 @@ namespace BlueDeck.Models {
         [Display(Name = "Assistant Manager")]
         public bool IsAssistantManager { get; set; }
 
+        /// <summary>
+        /// Gets or sets the callsign.
+        /// </summary>
+        /// <value>
+        /// The callsign.
+        /// </value>
         [Display(Name = "Call Sign")]
         public string Callsign { get; set; }
 
@@ -94,15 +105,56 @@ namespace BlueDeck.Models {
         [Display(Name = "Queue Position")]
         public int? LineupPosition {get;set;}
 
+        /// <summary>
+        /// Gets or sets the creator identifier.
+        /// </summary>
+        /// <value>
+        /// The creator identifier.
+        /// </value>
         public int? CreatorId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the creator.
+        /// </summary>
+        /// <value>
+        /// The creator.
+        /// </value>
         [Display(Name = "Created By")]
         [ForeignKey("CreatorId")]
         public virtual Member Creator { get; set; }
+
+        /// <summary>
+        /// Gets or sets the created date.
+        /// </summary>
+        /// <value>
+        /// The created date.
+        /// </value>
         [Display(Name = "Date Created")]
         public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified.
+        /// </summary>
+        /// <value>
+        /// The last modified.
+        /// </value>
         [Display(Name = "Date Last Modified")]
         public DateTime LastModified { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified by identifier.
+        /// </summary>
+        /// <value>
+        /// The last modified by identifier.
+        /// </value>
         public int? LastModifiedById { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last modified by.
+        /// </summary>
+        /// <value>
+        /// The last modified by.
+        /// </value>
         [ForeignKey("LastModifiedById")]
         [Display(Name = "Last Modified By")]
         public virtual Member LastModifiedBy { get; set; }
@@ -126,9 +178,21 @@ namespace BlueDeck.Models {
         public virtual List<Member> TempMembers { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:BlueDeck.Models.Position"/> class.
+        /// Gets or sets the assigned vehicles.
+        /// </summary>
         /// <remarks>
-        /// Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
+        /// Represents a list of <see cref="Vehicle"/> that have been assigned to this Position.
+        /// </remarks>
+        /// <value>
+        /// The assigned vehicles.
+        /// </value>
+        [Display(Name = "Assigned Vehicles")]
+        public virtual List<Vehicle> AssignedVehicles { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Position"/> class.
+        /// <remarks>
+        /// Parameter-less constructor used to ensure that the <see cref="Member"/> list  is initialized.
         /// </remarks>
         /// </summary>
         public Position()

@@ -111,6 +111,33 @@
             </param>         
             <returns>The Admin/ComponentIndex <see cref="T:Microsoft.AspNetCore.Mvc.ViewResult"/></returns>
         </member>
+        <member name="M:BlueDeck.Controllers.AdminController.VehicleIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Vehicles the index.
+            </summary>
+            <param name="sortOrder">The sort order.</param>
+            <param name="searchString">The search string.</param>
+            <param name="page">The page.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.VehicleModelIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the VehicleModel Index list
+            </summary>
+            <param name="sortOrder">The sort order.</param>
+            <param name="searchString">The search string.</param>
+            <param name="page">The page.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.AdminController.VehicleManufacturerIndex(System.String,System.String,System.Int32)">
+            <summary>
+            Returns the Admin/VehicleManufacturerIndex view
+            </summary>
+            <param name="sortOrder">The sort order.</param>
+            <param name="searchString">The search string.</param>
+            <param name="page">The page.</param>
+            <returns></returns>
+        </member>
         <member name="M:BlueDeck.Controllers.AdminController.AppStatusIndex">
             <summary>
             Returns the Admin/AppStatusIndex view
@@ -2192,6 +2219,89 @@
             <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
             <returns></returns>
         </member>
+        <member name="T:BlueDeck.Controllers.VehicleController">
+            <summary>
+            Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Vehicle"/> entity.
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="F:BlueDeck.Controllers.VehicleController.PageSize">
+            <summary>
+            Property that sets the length of the index view pages
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.VehicleController"/> class.
+            </summary>
+            <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Index(System.String,System.String,System.Int32)">
+            <summary>
+            GET: Vehicles/Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            Detailses the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Create(System.String)">
+            <summary>
+            Creates this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Create(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
+            <summary>
+            Creates the specified form.
+            </summary>
+            <param name="form">The form data, bound to a <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel"/></param>
+            <param name="returnUrl">An optional returnUrl used for redirection.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Edit(System.Int32,System.String)">
+            <summary>
+            GET: Vehicles/Edit/4
+            </summary>
+            <remarks>
+            Returns a view that allows a user to edit an existing vehicle.
+            </remarks>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">The return URL.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Edit(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
+            <summary>
+            POST: Vehicle/Edit/5
+            </summary>
+            <remarks>
+            Creates a new vehicle based on a POSTed form object, bound to a <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel"/>
+            </remarks>
+            <param name="form">The form data, bound to a <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel"/>.</param>
+            <param name="returnUrl">An optional return URL used for pass-through redirects.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.Delete(System.Int32,System.String)">
+            <summary>
+            GET: Vehicles/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional return URL used for pass-through redirects.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: Vehicle/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional returnUrl used for pass-through redirects.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Infrastructure.PageLinkTagHelper">
             <summary>
             A Pagination Control Tag Helper Class
@@ -2948,7 +3058,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.ApplicationDbContext"/> class.
             </summary>
-            <param name="options">A <see cref="T:Microsoft.EntityFrameWorkCore.DbContextOptions"/> of <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
+            <param name="options">A <see cref="T:Microsoft.EntityFrameworkCore.DbContextOptions"/> of <see cref="T:BlueDeck.Models.ApplicationDbContext"/></param>
         </member>
         <member name="M:BlueDeck.Models.ApplicationDbContext.#ctor">
             <summary>
@@ -2963,7 +3073,7 @@
             Gets or sets the Components.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Component"/>s.
+            A DbSet of <see cref="T:BlueDeck.Models.Component"/>s.
             </value>
         </member>
         <member name="P:BlueDeck.Models.ApplicationDbContext.Members">
@@ -2971,7 +3081,7 @@
             Gets or sets the Members.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Member"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Member"/>s
             </value>
         </member>
         <member name="P:BlueDeck.Models.ApplicationDbContext.Positions">
@@ -2979,15 +3089,32 @@
             Gets or sets the Positions.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.Position"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Position"/>s
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.Vehicles">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Vehicle"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.VehicleModels">
+            <summary>
+            Gets or sets the vehicle models.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.VehicleModel"/>
+            </value>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:BlueDeck.Models.ApplicationDbContext.VehicleManufacturers" -->
         <member name="P:BlueDeck.Models.ApplicationDbContext.Ranks">
             <summary>
             Gets or sets the MemberRanks.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRank"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.Rank"/>s
             </value>
         </member>
         <member name="P:BlueDeck.Models.ApplicationDbContext.Races">
@@ -2995,7 +3122,7 @@
             Gets or sets the MemberRaces.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberRace"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.Race"/>s
             </value>
         </member>
         <member name="P:BlueDeck.Models.ApplicationDbContext.Genders">
@@ -3003,7 +3130,7 @@
             Gets or sets the MemberGenders.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberGender"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.Gender"/>s
             </value>
         </member>
         <member name="P:BlueDeck.Models.ApplicationDbContext.DutyStatuses">
@@ -3011,8 +3138,94 @@
             Gets or sets the MemberGenders.
             </summary>
             <value>
-            A <see cref="T:Microsoft.EntityFrameWorkCore.DbSet{TEntity}"/> of <see cref="T:BlueDeck.Models.MemberDutyStatus"/>s
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.DutyStatus"/>s
             </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.ApplicationStatuses">
+            <summary>
+            Gets or sets the application statuses.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.AppStatus"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.ContactNumbers">
+            <summary>
+            Gets or sets the contact numbers.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.ContactNumber"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.PhoneNumberTypes">
+            <summary>
+            Gets or sets the phone number types.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.PhoneNumberType"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.Roles">
+            <summary>
+            Gets or sets the roles.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Role"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.RoleTypes">
+            <summary>
+            Gets or sets the role types.
+            </summary>
+            <value>
+            A DbSet of <see cref="T:BlueDeck.Models.Enums.RoleType"/>
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.MemberIndexViewModelMemberListItems">
+            <summary>
+            Gets or sets the member index view model member list items.
+            </summary>
+            <value>
+            The member index view model member list items.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.GetChildComponentsForComponentId">
+            <summary>
+            Gets or sets the get child components for component identifier.
+            </summary>
+            <value>
+            The get child components for component identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.GetPositionsUserCanEdit">
+            <summary>
+            Gets or sets the get positions user can edit.
+            </summary>
+            <value>
+            The get positions user can edit.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.GetMembersUserCanEdit">
+            <summary>
+            Gets or sets the get members user can edit.
+            </summary>
+            <value>
+            The get members user can edit.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <summary>
+            Override this method to further configure the model that was discovered by convention from the entity types
+            exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
+            and re-used for subsequent instances of your derived context.
+            </summary>
+            <param name="modelBuilder">The builder being used to construct the model for this context. Databases (and other extensions) typically
+            define extension methods on this object that allow you to configure aspects of the model that are specific
+            to a given database.</param>
+            <remarks>
+            If a model is explicitly set on the options for this context (via <see cref="M:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseModel(Microsoft.EntityFrameworkCore.Metadata.IModel)" />)
+            then this method will not be run.
+            </remarks>
         </member>
         <member name="T:BlueDeck.Models.Component">
             <summary>
@@ -3025,6 +3238,14 @@
             </summary>
             <value>
             The Component's (PK) identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.ParentComponentId">
+            <summary>
+            Gets or sets the parent component identifier.
+            </summary>
+            <value>
+            The parent component identifier.
             </value>
         </member>
         <member name="P:BlueDeck.Models.Component.ParentComponent">
@@ -3062,13 +3283,151 @@
             The lineup position.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Component.AssignedVehicles">
+            <summary>
+            Gets or sets the assigned vehicles.
+            </summary>
+            <remarks>
+            Represents a list of <see cref="T:BlueDeck.Models.Vehicle"/> that have been assigned to this Position.
+            </remarks>
+            <value>
+            The assigned vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.CreatorId">
+            <summary>
+            Gets or sets the creator identifier.
+            </summary>
+            <value>
+            The creator identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.Creator">
+            <summary>
+            Gets or sets the creator.
+            </summary>
+            <value>
+            The creator.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.CreatedDate">
+            <summary>
+            Gets or sets the created date.
+            </summary>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+            <value>
+            The last modified.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.LastModifiedById">
+            <summary>
+            Gets or sets the last modified by identifier.
+            </summary>
+            <value>
+            The last modified by identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.LastModifiedBy">
+            <summary>
+            Gets or sets the last modified by.
+            </summary>
+            <value>
+            The last modified by.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Component.Positions">
             <summary>
             Gets or sets the list of the <see cref="T:BlueDeck.Models.Position"/>s assinged to this Component.
             </summary>
             <value>
-            An <see cref="T:ICollection{T}"/> of <see cref="T:BlueDeck.Models.Position"/>s.
+            A list of <see cref="T:BlueDeck.Models.Position"/>s.
             </value>
+        </member>
+        <member name="P:BlueDeck.Models.Component.ChildComponents">
+            <summary>
+            Gets or sets the child components.
+            </summary>
+            <value>
+            The child components.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Component.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Component"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetManagerDisplayName">
+            <summary>
+            Gets the display name of the manager.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetManager">
+            <summary>
+            Gets the manager.
+            </summary>
+            <returns>A <see cref="T:BlueDeck.Models.Member"/> object that represents the Component's manageer, or null if no manager is found.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetWorkerCount">
+            <summary>
+            Gets the worker count.
+            </summary>
+            <returns>An integer result of the count of all members assigned to non-managerial positions within the component and all of the component's children.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetManagerCount">
+            <summary>
+            Gets the manager count.
+            </summary>
+            <returns>An integer result of the count of all members assigned to Managerial positions within the component and all of it's children.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.MemberCount(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns a count of Members assigned to positions within the component that match the provided demographic parameters.
+            </summary>
+            <param name="genderId">The gender identifier.</param>
+            <param name="raceId">The race identifier.</param>
+            <param name="rankId">The rank identifier.</param>
+            <returns>An integer count of matching members.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.MemberCountRecursive(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Counts the number of Members assigned to Positions within the Component and all of it's children that match the provided demographic parameters.
+            </summary>
+            <param name="genderId">The gender identifier.</param>
+            <param name="raceId">The race identifier.</param>
+            <param name="rankId">The rank identifier.</param>
+            <returns>An integer count of matching members.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetComponentMembers">
+            <summary>
+            Gets the component members.
+            </summary>
+            <returns>A list of <see cref="T:BlueDeck.Models.Member"/> objects of the members assigned to Positions within this component.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetComponentMembersRecursive">
+            <summary>
+            Gets the members assigned to Positions in the Component and the Component's children.
+            </summary>
+            <returns>A list of <see cref="T:BlueDeck.Models.Member"/> objects of the Members assigned to Positions within this component and all of it's children.</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetExceptionToDutyMembers">
+            <summary>
+            Gets the exception to duty members.
+            </summary>
+            <returns>A list of <see cref="T:BlueDeck.Models.Member"/> objects assigned to Positions within the Component that are in a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> that is an "Exception to Normal Duty."</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Component.GetExceptionToDutyMembersRecursive">
+            <summary>
+            Gets the exception to duty members from the component and all of it's children.
+            </summary>
+            <returns>A list of <see cref="T:BlueDeck.Models.Member"/> objects assigned to Positions within the Component and all of it's children that are in a <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> that is an "Exception to Normal Duty."</returns>
         </member>
         <member name="M:BlueDeck.Models.DocGenerators.ComponentRosterGenerator.GenerateComponentTableHeaderRow(System.String,System.Int32)">
             <summary>
@@ -3077,6 +3436,35 @@
             <param name="_componentName">Name of the component. This is required to populate the Table title and the link Bookmark</param>
             <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
             <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Models.Enums.AppStatus">
+            <summary>
+            Enumeration Class for Application Statuses
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.AppStatus.AppStatusId">
+            <summary>
+            Gets or sets the application status identifier.
+            </summary>
+            <value>
+            The application status identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.AppStatus.StatusName">
+            <summary>
+            Gets or sets the name of the status.
+            </summary>
+            <value>
+            The name of the status.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.AppStatus.Members">
+            <summary>
+            Gets or sets the list of members that are in this status.
+            </summary>
+            <value>
+            The members.
+            </value>
         </member>
         <member name="T:BlueDeck.Models.Enums.DutyStatus">
             <summary>
@@ -3225,6 +3613,80 @@
             </remarks>
             <value>
             The pay grade for the rank.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Enums.VehicleManufacturer">
+            <summary>
+            Enumeration class for Vehicle Manufacturers
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleManufacturer.VehicleManufacturerId">
+            <summary>
+            Gets or sets the Vehicle manufacturer identifier.
+            </summary>
+            <value>
+            The Vehicle manufacturer identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleManufacturer.VehicleManufacturerName">
+            <summary>
+            Gets or sets the name of the manufacturer.
+            </summary>
+            <value>
+            The name of the manufacturer.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleManufacturer.Models">
+            <summary>
+            Gets or sets the manufacturer's models.
+            </summary>
+            <value>
+            The models.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Enums.VehicleModel">
+            <summary>
+            Enumeration Class for Vehicle Models
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleModel.VehicleModelId">
+            <summary>
+            Gets or sets the Vehicle model identifier.
+            </summary>
+            <value>
+            The Vehicle model identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleModel.VehicleModelName">
+            <summary>
+            Gets or sets the name of the Vehicle model.
+            </summary>
+            <value>
+            The name of the Vehicle model.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleModel.ManufacturerId">
+            <summary>
+            Gets or sets the vehicle manufacturer identifier.
+            </summary>
+            <value>
+            The vehicle manufacturer identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleModel.Manufacturer">
+            <summary>
+            Gets or sets the manufacturer.
+            </summary>
+            <value>
+            The manufacturer.
+            </value>        
+        </member>
+        <member name="P:BlueDeck.Models.Enums.VehicleModel.Vehicles">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            The existing vehicles of this manufacturer.
             </value>
         </member>
         <member name="T:BlueDeck.Models.ExtensionMethods.ExtensionMethods">
@@ -3516,6 +3978,22 @@
             The temporary duty position.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Member.AssignedVehicleId">
+            <summary>
+            Gets or sets the assigned vehicle identifier.
+            </summary>
+            <value>
+            The assigned vehicle identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Member.AssignedVehicle">
+            <summary>
+            Gets or sets the assigned vehicle.
+            </summary>
+            <value>
+            The assigned vehicle.
+            </value>    
+        </member>
         <member name="P:BlueDeck.Models.Member.PhoneNumbers">
             <summary>
             Gets or sets the Member's <see cref="P:BlueDeck.Models.Member.PhoneNumbers"/> collection.
@@ -3621,6 +4099,14 @@
             The PositionId PK.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Position.ParentComponentId">
+            <summary>
+            Gets or sets the parent component identifier.
+            </summary>
+            <value>
+            The parent component identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Position.ParentComponent">
             <summary>
             Gets or sets the ParentComponentId.
@@ -3671,6 +4157,14 @@
               <c>true</c> if this instance is an assistant manager of it's Parent Component.; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Position.Callsign">
+            <summary>
+            Gets or sets the callsign.
+            </summary>
+            <value>
+            The callsign.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Position.LineupPosition">
             <summary>
             Gets or sets the lineup position.
@@ -3680,6 +4174,54 @@
             </remarks>
             <value>
             The lineup position.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.CreatorId">
+            <summary>
+            Gets or sets the creator identifier.
+            </summary>
+            <value>
+            The creator identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.Creator">
+            <summary>
+            Gets or sets the creator.
+            </summary>
+            <value>
+            The creator.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.CreatedDate">
+            <summary>
+            Gets or sets the created date.
+            </summary>
+            <value>
+            The created date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+            <value>
+            The last modified.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.LastModifiedById">
+            <summary>
+            Gets or sets the last modified by identifier.
+            </summary>
+            <value>
+            The last modified by identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Position.LastModifiedBy">
+            <summary>
+            Gets or sets the last modified by.
+            </summary>
+            <value>
+            The last modified by.
             </value>
         </member>
         <member name="P:BlueDeck.Models.Position.Members">
@@ -3698,13 +4240,49 @@
             A collection of Member Entities that represents members assigned to this Position temporarily
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Position.AssignedVehicles">
+            <summary>
+            Gets or sets the assigned vehicles.
+            </summary>
+            <remarks>
+            Represents a list of <see cref="T:BlueDeck.Models.Vehicle"/> that have been assigned to this Position.
+            </remarks>
+            <value>
+            The assigned vehicles.
+            </value>
+        </member>
         <member name="M:BlueDeck.Models.Position.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Position"/> class.
             <remarks>
-            Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Position.Members"/> <see cref="T:List{T}"/> is initialized.
+            Parameter-less constructor used to ensure that the <see cref="T:BlueDeck.Models.Member"/> list  is initialized.
             </remarks>
             </summary>
+        </member>
+        <member name="T:BlueDeck.Models.Repositories.IAppStatusRepository">
+            <summary>
+            Type that represents Application Statuses for use in Drop-down lists.
+            </summary>
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IAppStatusRepository.GetApplicationStatusSelectListItems">
+            <summary>
+            Gets the application status select list items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusesWithMemberCount">
+            <summary>
+            Gets the application statuses with member count.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IAppStatusRepository.GetAppStatusWithMemberCount(System.Int32)">
+            <summary>
+            Gets the application status with member count.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IComponentRepository">
             <summary>
@@ -4103,6 +4681,30 @@
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository"/>
         </member>
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.Vehicles">
+            <summary>
+            Gets the vehicles.
+            </summary>
+            <value>
+            The vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.VehicleModels">
+            <summary>
+            Gets the vehicle models.
+            </summary>
+            <value>
+            The vehicle models.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.VehicleManufacturers">
+            <summary>
+            Gets the vehicle manufacturers.
+            </summary>
+            <value>
+            The vehicle manufacturers.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Repositories.IUnitOfWork.MemberRanks">
             <summary>
             Gets an <see cref="T:BlueDeck.Models.Repositories.IMemberRankRepository"/>
@@ -4179,6 +4781,61 @@
             <summary>
             Saves changes made in the Unit of Work to ensure consistent updates
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Models.Repositories.IVehicleManufacturerRepository">
+            <summary>
+            Interface for a repository for the Vehicle Manufacturer Entity.
+            </summary>
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleManufacturerRepository.GetVehicleManufacturerSelectListItems">
+            <summary>
+            Gets or sets the get vehicle manufacturer select list items.
+            </summary>
+            <value>
+            The get vehicle manufacturer select list items.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Repositories.IVehicleModelRepository">
+            <summary>
+            Interface for a repository for the Vehicle Model Entity.
+            </summary>
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleModelRepository.GetVehicleModelSelectListItems">
+            <summary>
+            Gets or sets the get vehicle model select list items.
+            </summary>
+            <value>
+            The get vehicle model select list items.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Repositories.IVehicleRepository">
+            <summary>
+            Interface for a repository for the Vehicle Entity.
+            </summary>
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleRepository.GetVehicleSelectListItems">
+            <summary>
+            Gets or sets the get vehicle select list items.
+            </summary>
+            <value>
+            The get vehicle select list items.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleRepository.GetVehiclesWithModels">
+            <summary>
+            Gets the vehicles with models.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleRepository.GetVehicleWithManufacturer(System.Int32)">
+            <summary>
+            Gets the vehicle with model/manufacturer details.
+            </summary>
+            <param name="_vehicleId">The vehicle identifier.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Types.ChartableComponent">
@@ -4648,6 +5305,105 @@
             Gets or sets the Rank Id
             </summary>
         </member>
+        <member name="T:BlueDeck.Models.Types.VehicleManufacturerSelectListItem">
+            <summary>
+            Type that represents vehicle manufacturers for use in Drop-down lists
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleManufacturerSelectListItem.VehicleManufacturerId">
+            <summary>
+            Gets or sets the vehicle manufacturer identifier.
+            </summary>
+            <value>
+            The vehicle manufacturer identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleManufacturerSelectListItem.VehicleManufacturerName">
+            <summary>
+            Gets or sets the name of the vehicle manufacturer.
+            </summary>
+            <value>
+            The name of the vehicle manufacturer.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleManufacturerSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleManufacturerSelectListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleManufacturerSelectListItem.#ctor(BlueDeck.Models.Enums.VehicleManufacturer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleManufacturerSelectListItem"/> class.
+            </summary>
+            <param name="_v">The v.</param>
+        </member>
+        <member name="T:BlueDeck.Models.Types.VehicleModelSelectListItem">
+            <summary>
+            Type that represents vehicle models for use in Drop-down lists
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleModelSelectListItem.VehicleModelId">
+            <summary>
+            Gets or sets the vehicle model identifier.
+            </summary>
+            <value>
+            The vehicle model identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleModelSelectListItem.VehicleModelName">
+            <summary>
+            Gets or sets the name of the vehicle model.
+            </summary>
+            <value>
+            The name of the vehicle model.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleModelSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleModelSelectListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleModelSelectListItem.#ctor(BlueDeck.Models.Enums.VehicleModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleModelSelectListItem"/> class.
+            </summary>
+            <param name="_v">The v.</param>
+        </member>
+        <member name="T:BlueDeck.Models.Types.VehicleSelectListItem">
+            <summary>
+            Type that contains basic information for a Vehicle for use in select lists
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleSelectListItem.VehicleId">
+            <summary>
+            Gets or sets the vehicle identifier.
+            </summary>
+            <value>
+            The vehicle identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleSelectListItem.VehicleName">
+            <summary>
+            Gets or sets the name of the vehicle.
+            </summary>
+            <remarks>
+            As of version 1.0, this will be the Year/Make/Model/Marked of the vehicle
+            </remarks>
+            <value>
+            The name of the vehicle.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleSelectListItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.VehicleSelectListItem.#ctor(BlueDeck.Models.Vehicle)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/> class.
+            </summary>
+            <param name="_v">The vehicle.</param>
+        </member>
         <member name="T:BlueDeck.Models.Vehicle">
             <summary>
             Vehicle Entity
@@ -4668,6 +5424,291 @@
             <value>
             The model year.
             </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.ModelId">
+            <summary>
+            Gets or sets the model identifier.
+            </summary>
+            <value>
+            The model identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.Model">
+            <summary>
+            Gets or sets the model.
+            </summary>
+            <value>
+            The model.
+            </value>        
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.VIN">
+            <summary>
+            Gets or sets the vin.
+            </summary>
+            <value>
+            The vin.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.TagNumber">
+            <summary>
+            Gets or sets the Vehicle's License plate number
+            </summary>
+            <value>
+            The tag number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.TagState">
+            <summary>
+            Gets or sets the state of the tag.
+            </summary>
+            <value>
+            The state of the tag.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.CruiserNumber">
+            <summary>
+            Gets or sets the cruiser number.
+            </summary>
+            <value>
+            The cruiser number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.IsMarked">
+            <summary>
+            Gets or sets a value indicating whether the vehicle is marked.
+            </summary>
+            <value>
+              <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToMemberId">
+            <summary>
+            Gets or sets the assigned to member identifier.
+            </summary>
+            <remarks>
+            This is the MemberId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            <value>
+            The assigned to member identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToMember">
+            <summary>
+            Gets or sets the assigned to member.
+            </summary>
+            <value>
+            The assigned to member.
+            </value>        
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToPositionId">
+            <summary>
+            Gets or sets the assigned to position identifier.
+            </summary>
+            <remarks>
+            This is the PositionId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            <value>
+            The assigned to position identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToPosition">
+            <summary>
+            Gets or sets the assigned to position.
+            </summary>
+            <value>
+            The assigned to position.
+            </value>        
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToComponentId">
+            <summary>
+            Gets or sets the assigned to component identifier.
+            </summary>
+            <value>
+            <remarks>
+            This is the MemberId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            The assigned to component identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.AssignedToComponent">
+            <summary>
+            Gets or sets the assigned to component.
+            </summary>
+            <value>
+            The assigned to component.
+            </value>        
+        </member>
+        <member name="M:BlueDeck.Models.Vehicle.ReassignToMemberId(System.Int32)">
+            <summary>
+            Reassigns the vehicle to the member with the provided identifier.
+            </summary>
+            <remarks>
+            Assigning the vehicle to a member will nullify any Position/Component assignment for the vehicle.
+            </remarks>
+            <param name="_memberId">The member identifier.</param>
+        </member>
+        <member name="M:BlueDeck.Models.Vehicle.ReassignToPositionId(System.Int32)">
+            <summary>
+            Reassigns the vehicle to the position witht he provided identifier.
+            </summary>
+            <remarks>
+            Assigning the vehicle to a Position will nullify any Member/Component assignment for the vehicle.
+            </remarks>
+            <param name="_positionId">The position identifier.</param>
+        </member>
+        <member name="M:BlueDeck.Models.Vehicle.ReassignToComponentId(System.Int32)">
+            <summary>
+            Reassigns the vehicle to the component with the provided identifier.
+            </summary>
+            <remarks>
+            Assigning the vehicle to a Componetn will nullify any Member/Position assignment for the vehicle.
+            </remarks>
+            <param name="_componentId">The component identifier.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel">
+            <summary>
+            View Model used in Views that Create or Edit <see cref="T:BlueDeck.Models.Vehicle"/> objects.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.VehicleId">
+            <summary>
+            Gets or sets the vehicle identifier (PK).
+            </summary>
+            <value>
+            The vehicle identifier.
+            </value>        
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.ModelYear">
+            <summary>
+            Gets or sets the model year.
+            </summary>
+            <value>
+            The model year.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.ModelId">
+            <summary>
+            Gets or sets the model identifier.
+            </summary>
+            <value>
+            The model identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.VIN">
+            <summary>
+            Gets or sets the vin.
+            </summary>
+            <value>
+            The vin.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.TagNumber">
+            <summary>
+            Gets or sets the Vehicle's License plate number
+            </summary>
+            <value>
+            The tag number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.TagState">
+            <summary>
+            Gets or sets the state of the tag.
+            </summary>
+            <value>
+            The state of the tag.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.CruiserNumber">
+            <summary>
+            Gets or sets the cruiser number.
+            </summary>
+            <value>
+            The cruiser number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.IsMarked">
+            <summary>
+            Gets or sets a value indicating whether the vehicle is marked.
+            </summary>
+            <value>
+              <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.AssignedToMemberId">
+            <summary>
+            Gets or sets the assigned to member identifier.
+            </summary>
+            <remarks>
+            This is the MemberId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            <value>
+            The assigned to member identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.AssignedToPositionId">
+            <summary>
+            Gets or sets the assigned to position identifier.
+            </summary>
+            <remarks>
+            This is the PositionId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            <value>
+            The assigned to position identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.AssignedToComponentId">
+            <summary>
+            Gets or sets the assigned to component identifier.
+            </summary>
+            <value>
+            <remarks>
+            This is the MemberId of the Member to whom this vehicle is assigned. As of version 1.0, a vehicle can be assigned to one Member, Position, or Component at a time.
+            </remarks>
+            The assigned to component identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.Models">
+            <summary>
+            Gets or sets the models.
+            </summary>
+            <value>
+            The models.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.Members">
+            <summary>
+            Gets or sets the members list for use in select lists
+            </summary>
+            <value>
+            The members.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.Positions">
+            <summary>
+            Gets or sets the positions for use in select lists.
+            </summary>
+            <value>
+            The positions.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.Components">
+            <summary>
+            Gets or sets the components for use in select lists.
+            </summary>
+            <value>
+            The components.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.#ctor(BlueDeck.Models.Vehicle)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel"/> class.
+            </summary>
+            <param name="_v">A vehicle object.</param>
         </member>
         <member name="P:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel.PositionId">
             <summary>
@@ -4724,6 +5765,262 @@
             <value>
               <c>true</c> if this instance is unique; otherwise, <c>false</c>.
             </value>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel">
+            <summary>
+            Viewmodel used for the Component Entity used in the Admin/ComponentIndex View
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.Components">
+            <summary>
+            Gets or sets the components.
+            </summary>
+            <value>
+            The components.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.PagingInfo">
+            <summary>
+            Gets or sets the paging information.
+            </summary>
+            <value>
+            The paging information.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.NameSort">
+            <summary>
+            Gets or sets the name sort.
+            </summary>
+            <value>
+            The name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.ParentComponentNameSort">
+            <summary>
+            Gets or sets the parent component name sort.
+            </summary>
+            <value>
+            The parent component name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.CurrentFilter">
+            <summary>
+            Gets or sets the current filter.
+            </summary>
+            <value>
+            The current filter.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.CurrentSort">
+            <summary>
+            Gets or sets the current sort.
+            </summary>
+            <value>
+            The current sort.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel.#ctor(System.Collections.Generic.List{BlueDeck.Models.Component})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminComponentIndexListViewModel"/> class.
+            </summary>
+            <param name="_components">The components.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel">
+            <summary>
+            Viewmodel for the Vehicle Entity used in the Admin/VehicleIndex view.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.Vehicles">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            The vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.PagingInfo">
+            <summary>
+            Gets or sets the paging information.
+            </summary>
+            <value>
+            The paging information.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.NumberSort">
+            <summary>
+            Gets or sets the name sort.
+            </summary>
+            <value>
+            The name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.ModelNameSort">
+            <summary>
+            Gets or sets the model name sort.
+            </summary>
+            <value>
+            The model name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.ManufacturerNameSort">
+            <summary>
+            Gets or sets the manufacturer name sort.
+            </summary>
+            <value>
+            The manufacturer name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.CurrentFilter">
+            <summary>
+            Gets or sets the current filter.
+            </summary>
+            <value>
+            The current filter.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.CurrentSort">
+            <summary>
+            Gets or sets the current sort.
+            </summary>
+            <value>
+            The current sort.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel.#ctor(System.Collections.Generic.List{BlueDeck.Models.Vehicle})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleIndexListViewModel"/> class.
+            </summary>
+            <param name="_vehicles">The vehicles.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel">
+            <summary>
+            Viewmodel for the Vehicle Entity used in the Admin/VehicleManufacturerIndex view.
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.VehicleManufacturers">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            The vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.PagingInfo">
+            <summary>
+            Gets or sets the paging information.
+            </summary>
+            <value>
+            The paging information.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.NameSort">
+            <summary>
+            Gets or sets the name sort.
+            </summary>
+            <value>
+            The name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.CurrentFilter">
+            <summary>
+            Gets or sets the current filter.
+            </summary>
+            <value>
+            The current filter.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.CurrentSort">
+            <summary>
+            Gets or sets the current sort.
+            </summary>
+            <value>
+            The current sort.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel.#ctor(System.Collections.Generic.List{BlueDeck.Models.Enums.VehicleManufacturer})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleManufacturerIndexListViewModel"/> class.
+            </summary>
+            <param name="_v">The vehicle manufacturers.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.VehicleModels">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            The vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.PagingInfo">
+            <summary>
+            Gets or sets the paging information.
+            </summary>
+            <value>
+            The paging information.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.NameSort">
+            <summary>
+            Gets or sets the name sort.
+            </summary>
+            <value>
+            The name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.ManufacturerNameSort">
+            <summary>
+            Gets or sets the manufacturer name sort.
+            </summary>
+            <value>
+            The manufacturer name sort.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.CurrentFilter">
+            <summary>
+            Gets or sets the current filter.
+            </summary>
+            <value>
+            The current filter.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.CurrentSort">
+            <summary>
+            Gets or sets the current sort.
+            </summary>
+            <value>
+            The current sort.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel.#ctor(System.Collections.Generic.List{BlueDeck.Models.Enums.VehicleModel})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AdminVehicleModelIndexListViewModel"/> class.
+            </summary>
+            <param name="_v">The vehicles.</param>
         </member>
         <member name="P:BlueDeck.Models.ViewModels.AssignMemberModalViewComponentViewModel.MemberId">
             <summary>
@@ -5417,6 +6714,19 @@
             </returns>
             <exception cref="T:System.ArgumentException">Property with this name not found</exception>
         </member>
+        <member name="T:BlueDeck.Persistence.Repositories.AppStatusRepository">
+            <summary>
+            Repository for CRUD actions for the Application Status Enumeration
+            </summary>
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IAppStatusRepository" />
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.AppStatusRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.AppStatusRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
         <member name="P:BlueDeck.Persistence.Repositories.AppStatusRepository.ApplicationDbContext">
             <summary>
             Gets the application database context.
@@ -5424,6 +6734,25 @@
             <value>
             The application database context.
             </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.AppStatusRepository.GetApplicationStatusSelectListItems">
+            <summary>
+            Gets the application status select list items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusesWithMemberCount">
+            <summary>
+            Gets the application statuses with member count.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.AppStatusRepository.GetAppStatusWithMemberCount(System.Int32)">
+            <summary>
+            Gets the application status with member count.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.ComponentRepository">
             <summary>
@@ -5955,6 +7284,106 @@
             </summary>
             <param name="entities">An <see cref="T:System.Collections.Generic.IEnumerable`1" /> of entities to remove.</param>
         </member>
+        <member name="T:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository">
+            <summary>
+            Repository for CRUD actions for the Vehicle Manufacturer Enumeration.
+            </summary>
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IVehicleManufacturerRepository" />
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository.GetVehicleManufacturerSelectListItems">
+            <summary>
+            Gets or sets the get vehicle manufacturer select list items.
+            </summary>
+            <returns></returns>
+            <value>
+            The get vehicle manufacturer select list items.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Persistence.Repositories.VehicleModelRepository">
+            <summary>
+            Repository for CRUD actions for the Vehicle Model Enumeration.
+            </summary>
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IVehicleModelRepository" />
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleModelRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.VehicleModelRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:BlueDeck.Persistence.Repositories.VehicleModelRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleModelRepository.GetVehicleModelSelectListItems">
+            <summary>
+            Gets or sets the get vehicle model select list items.
+            </summary>
+            <returns></returns>
+            <value>
+            The get vehicle model select list items.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Persistence.Repositories.VehicleRepository">
+            <summary>
+            Repository for CRUD actions for the Vehicle Entity
+            </summary>
+            <seealso cref="T:BlueDeck.Persistence.Repositories.Repository`1" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IVehicleRepository" />
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleRepository.#ctor(BlueDeck.Models.ApplicationDbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Persistence.Repositories.VehicleRepository"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:BlueDeck.Persistence.Repositories.VehicleRepository.ApplicationDbContext">
+            <summary>
+            Gets the application database context.
+            </summary>
+            <value>
+            The application database context.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleRepository.GetVehicleSelectListItems">
+            <summary>
+            Gets the vehicle select list items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleRepository.GetVehiclesWithModels">
+            <summary>
+            Gets the vehicles with models.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleRepository.GetVehicleWithManufacturer(System.Int32)">
+            <summary>
+            Gets the vehicle with model/manufacturer details.
+            </summary>
+            <param name="_vehicleId">The vehicle identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Persistence.UnitOfWork">
             <summary>
             An instance of <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/>
@@ -5993,6 +7422,30 @@
             The Interface representing the Member Entity.
             </value>
             <seealso cref="T:BlueDeck.Models.Repositories.IMemberRepository" />
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.Vehicles">
+            <summary>
+            Gets the vehicles.
+            </summary>
+            <value>
+            The vehicles.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.VehicleModels">
+            <summary>
+            Gets the vehicle models.
+            </summary>
+            <value>
+            The vehicle models.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Persistence.UnitOfWork.VehicleManufacturers">
+            <summary>
+            Gets the vehicle manufacturers.
+            </summary>
+            <value>
+            The vehicle manufacturers.
+            </value>
         </member>
         <member name="P:BlueDeck.Persistence.UnitOfWork.MemberRanks">
             <summary>

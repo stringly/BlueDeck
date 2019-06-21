@@ -315,6 +315,25 @@ namespace BlueDeck.Models {
         public Position TempPosition {get;set;}
 
         /// <summary>
+        /// Gets or sets the assigned vehicle identifier.
+        /// </summary>
+        /// <value>
+        /// The assigned vehicle identifier.
+        /// </value>
+        [Display(Name = "Assigned Vehicle")]
+
+        public int? AssignedVehicleId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the assigned vehicle.
+        /// </summary>
+        /// <value>
+        /// The assigned vehicle.
+        /// </value>    
+        [ForeignKey("AssignedVehicleId")]
+        public Vehicle AssignedVehicle { get; set; }
+
+        /// <summary>
         /// Gets or sets the Member's <see cref="PhoneNumbers"/> collection.
         /// </summary>
         /// <value>
