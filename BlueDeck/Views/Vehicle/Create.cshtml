@@ -1,15 +1,98 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model AddEditVehicleViewModel
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
-</head>
-<body>
-</body>
-</html>
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger alert-dismissible fade in">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong>
+            <span>@ViewBag.Message</span>
+        </div>
+    }
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Create a Vehicle</h2>
+        <p class="formHeader-description">
+            Provide the following information to add a new vehicle to the index.
+        </p>
+        <div>
+            <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>                
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            <label asp-for="CruiserNumber" class="control-label"></label>
+                            <input asp-for="CruiserNumber" class="form-control" />
+                            <span asp-validation-for="CruiserNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label asp-for="ModelYear" class="control-label"></label>
+                            <input asp-for="ModelYear" class="form-control" />
+                            <span asp-validation-for="ModelYear" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-5 form-group">
+                            <label asp-for="ModelId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.ModelId,
+                                                            new SelectList(Model.Models, "VehicleModelId", "VehicleModelName"),
+                                                            "Choose Make/Model",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="ModelId" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsMarked" /> @Html.DisplayNameFor(model => model.IsMarked)
+                                </label>
+                                <span class="note">
+                                    Only a single Member can be assigned.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 form-group">
+                            <label asp-for="VIN" class="control-label"></label>
+                            <input asp-for="VIN" class="form-control" />
+                            <span asp-validation-for="ModelYear" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label asp-for="TagNumber" class="control-label"></label>
+                            <input asp-for="TagNumber" class="form-control" />
+                            <span asp-validation-for="TagNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-2 form-group">
+                            <label asp-for="TagState" class="control-label"></label>
+                            <input asp-for="TagState" class="form-control" />
+                            <span asp-validation-for="TagState" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-5 form-group">
+                            <label asp-for="ParentComponentId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.ParentComponentId,
+                                                            new SelectList(Model.Components, "Id", "ComponentName"),
+                                                            "Choose Parent Component",
+                                                            new { @class = "form-control" })
+                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                        </div>
+                        <div id="lineupSelectionTarget"></div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

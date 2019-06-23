@@ -134,7 +134,7 @@ namespace BlueDeck.Controllers
             vm.Positions = unitOfWork.Positions.GetAllPositionSelectListItems().ToList();
             vm.Components = unitOfWork.Components.GetComponentSelectListItems().ToList();
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.Title = "Create New Position";
+            ViewBag.Title = "Create New Vehicle";
             ViewBag.ReturnUrl = returnUrl;
             return View(vm);
         }
