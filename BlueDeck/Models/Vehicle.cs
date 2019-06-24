@@ -27,6 +27,7 @@ namespace BlueDeck.Models
         /// The model year.
         /// </value>
         [Display(Name = "Model Year")]
+        [Range(1990, 2050)]
         public int ModelYear { get; set; }
 
         /// <summary>

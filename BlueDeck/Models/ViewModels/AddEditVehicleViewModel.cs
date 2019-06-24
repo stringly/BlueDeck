@@ -88,6 +88,7 @@ namespace BlueDeck.Models.ViewModels
         /// <value>
         ///   <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Marked Vehicle")]
         public bool IsMarked {get;set;}
 
         /// <summary>
@@ -99,6 +100,7 @@ namespace BlueDeck.Models.ViewModels
         /// <value>
         /// The assigned to member identifier.
         /// </value>
+        [Display(Name = "Assigned to Member")]
         public int? AssignedToMemberId { get; set; }
 
         /// <summary>
@@ -110,6 +112,7 @@ namespace BlueDeck.Models.ViewModels
         /// <value>
         /// The assigned to position identifier.
         /// </value>
+        [Display(Name = "Assigned to Position")]
         public int? AssignedToPositionId { get; set; }
 
         /// <summary>
@@ -121,6 +124,7 @@ namespace BlueDeck.Models.ViewModels
         /// </remarks>
         /// The assigned to component identifier.
         /// </value>
+        [Display(Name = "Assigned to Component")]
         public int? AssignedToComponentId { get; set; }
 
         /// <summary>
