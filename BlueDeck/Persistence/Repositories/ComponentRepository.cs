@@ -101,9 +101,9 @@ namespace BlueDeck.Persistence.Repositories
                
 
         /// <summary>
-        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
+        /// Gets the list of <see cref="ChartableComponent"/>s.
         /// </summary>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
+        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponent"/> objects</returns>
         public IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers()
         {
             List<ChartableComponent> results = new List<ChartableComponent>();
@@ -121,10 +121,10 @@ namespace BlueDeck.Persistence.Repositories
         }       
 
         /// <summary>
-        /// Gets the list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem" />s to populate a Component select list
+        /// Gets the list of <see cref="ComponentSelectListItem" />s to populate a Component select list
         /// </summary>
         /// <returns>
-        /// A <see cref="T:List{BlueDeck.Models.Types.ComponentSelectListItem}" />
+        /// A <see cref="List{ComponentSelectListItem}" />
         /// </returns>
         public List<ComponentSelectListItem> GetComponentSelectListItems()
         {

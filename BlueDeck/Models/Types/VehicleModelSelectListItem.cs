@@ -39,7 +39,7 @@ namespace BlueDeck.Models.Types
         public VehicleModelSelectListItem(VehicleModel _v)
         {
             VehicleModelId = _v.VehicleModelId;
-            VehicleModelName = $"{_v.VehicleModelName} {_v.Manufacturer.VehicleManufacturerName}";
+            VehicleModelName = $"{_v.Manufacturer.VehicleManufacturerName} {_v.VehicleModelName}";
         }
     }
 }

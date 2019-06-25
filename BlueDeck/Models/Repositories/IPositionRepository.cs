@@ -32,5 +32,12 @@ namespace BlueDeck.Models.Repositories
         List<PositionSelectListItem> GetPositionsUserCanEdit(int componentId);
         AdminPositionIndexListViewModel GetAdminPositionIndexListViewModel();
         Task<PositionApiResult> GetApiPosition(int id);
+
+        /// <summary>
+        /// Gets the position with vehicles.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        Position GetPositionWithVehicles(int id);
     }
 }

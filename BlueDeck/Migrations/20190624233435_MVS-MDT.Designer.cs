@@ -4,14 +4,16 @@ using BlueDeck.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlueDeck.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190624233435_MVS-MDT")]
+    partial class MVSMDT
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,6 +278,10 @@ namespace BlueDeck.Migrations
 
                     b.HasIndex("AppStatusId");
 
+                    b.HasIndex("AssignedVehicleId")
+                        .IsUnique()
+                        .HasFilter("[AssignedVehicleId] IS NOT NULL");
+
                     b.HasIndex("CreatorId");
 
                     b.HasIndex("DutyStatusId");
@@ -389,10 +395,6 @@ namespace BlueDeck.Migrations
 
                     b.HasIndex("AssignedToComponentId");
 
-                    b.HasIndex("AssignedToMemberId")
-                        .IsUnique()
-                        .HasFilter("[AssignedToMemberId] IS NOT NULL");
-
                     b.HasIndex("AssignedToPositionId");
 
                     b.HasIndex("ModelId");
@@ -440,6 +442,10 @@ namespace BlueDeck.Migrations
                     b.HasOne("BlueDeck.Models.Enums.AppStatus", "AppStatus")
                         .WithMany("Members")
                         .HasForeignKey("AppStatusId");
+
+                    b.HasOne("BlueDeck.Models.Vehicle", "AssignedVehicle")
+                        .WithOne("AssignedToMember")
+                        .HasForeignKey("BlueDeck.Models.Member", "AssignedVehicleId");
 
                     b.HasOne("BlueDeck.Models.Member", "Creator")
                         .WithMany("CreatedMembers")
@@ -513,10 +519,6 @@ namespace BlueDeck.Migrations
                     b.HasOne("BlueDeck.Models.Component", "AssignedToComponent")
                         .WithMany("AssignedVehicles")
                         .HasForeignKey("AssignedToComponentId");
-
-                    b.HasOne("BlueDeck.Models.Member", "AssignedToMember")
-                        .WithOne("AssignedVehicle")
-                        .HasForeignKey("BlueDeck.Models.Vehicle", "AssignedToMemberId");
 
                     b.HasOne("BlueDeck.Models.Position", "AssignedToPosition")
                         .WithMany("AssignedVehicles")

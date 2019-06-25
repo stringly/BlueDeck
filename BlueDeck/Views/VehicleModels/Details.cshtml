@@ -1,0 +1,38 @@
+﻿@model BlueDeck.Models.Enums.VehicleModel
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Manufacturer: <strong>@Model.VehicleModelName</strong></h2>
+        <p class="formHeader-description">
+            Showing Manufacturer Details
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2 form-group">
+                        @Html.LabelFor(model => model.VehicleModelId, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.VehicleModelId, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(model => model.VehicleModelName, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.VehicleModelName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(model => model.ManufacturerId, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.Manufacturer.VehicleManufacturerName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.VehicleModelId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@Model.VehicleModelId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

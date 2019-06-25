@@ -24,6 +24,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190620174301_vehicle.cs" />
     <Compile Remove="Migrations\20190620174301_vehicle.Designer.cs" />
+    <Compile Remove="Migrations\20190625015617_VehicleAssignNavigationFix.cs" />
+    <Compile Remove="Migrations\20190625015617_VehicleAssignNavigationFix.Designer.cs" />
+    <Compile Remove="Migrations\20190625015812_VehicleAssignNavigationFix.cs" />
+    <Compile Remove="Migrations\20190625015812_VehicleAssignNavigationFix.Designer.cs" />
+    <Compile Remove="Migrations\20190625015941_VehicleAssignNavigationFix.cs" />
+    <Compile Remove="Migrations\20190625015941_VehicleAssignNavigationFix.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

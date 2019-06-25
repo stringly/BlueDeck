@@ -15,7 +15,7 @@ namespace BlueDeck.Controllers
     /// Controller that handles CRUD actions for the <see cref="Vehicle"/> entity.
     /// </summary>
     /// <seealso cref="Controller" />
-    public class VehicleController : Controller
+    public class VehiclesController : Controller
     {
         private IUnitOfWork unitOfWork;
 
@@ -25,10 +25,10 @@ namespace BlueDeck.Controllers
         public int PageSize = 25;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="VehicleController"/> class.
+        /// Initializes a new instance of the <see cref="VehiclesController"/> class.
         /// </summary>
         /// <param name="unit">The injected <see cref="IUnitOfWork"/> obtained from the services middleware.</param>
-        public VehicleController(IUnitOfWork unit)
+        public VehiclesController(IUnitOfWork unit)
         {
             unitOfWork = unit;
         }
@@ -86,7 +86,7 @@ namespace BlueDeck.Controllers
             {
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
-                TotalItems = searchString == null ? unitOfWork.Positions.GetAll().Count() : vm.Vehicles.Count()
+                TotalItems = searchString == null ? unitOfWork.Vehicles.GetAll().Count() : vm.Vehicles.Count()
             };
             ViewBag.Title = "BlueDeck Vehicle Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
@@ -148,7 +148,7 @@ namespace BlueDeck.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Vehicles/Create")]
-        public ActionResult Create([Bind("ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
+        public ActionResult Create([Bind("ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,HasMVS,HasMDT,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -262,7 +262,7 @@ namespace BlueDeck.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Vehicles/Edit/{id:int}")]
-        public ActionResult Edit([Bind("ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
+        public ActionResult Edit([Bind("ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,HasMVS,HasMDT,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {

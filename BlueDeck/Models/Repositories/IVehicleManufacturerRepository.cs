@@ -17,5 +17,17 @@ namespace BlueDeck.Models.Repositories
         /// The get vehicle manufacturer select list items.
         /// </value>
         List<VehicleManufacturerSelectListItem> GetVehicleManufacturerSelectListItems();
+
+        /// <summary>
+        /// Gets the vehicle manufacturers with models.
+        /// </summary>
+        /// <returns></returns>
+        List<VehicleManufacturer> GetVehicleManufacturersWithModels();
+
+        /// <summary>
+        /// Gets the vehicle manufacturer with models.
+        /// </summary>
+        /// <returns></returns>
+        VehicleManufacturer GetVehicleManufacturerWithModels(int id);
     }
 }

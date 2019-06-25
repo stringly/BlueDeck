@@ -2219,30 +2219,184 @@
             <param name="form">The POSTed <see cref="T:BlueDeck.Models.ViewModels.AddPositionToComponentViewComponentViewModel"/></param>
             <returns></returns>
         </member>
-        <member name="T:BlueDeck.Controllers.VehicleController">
+        <member name="T:BlueDeck.Controllers.VehicleManufacturersController">
+            <summary>
+            Controller that handles CRUD actions for the VehicleModels Enumeration
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="F:BlueDeck.Controllers.VehicleManufacturersController.PageSize">
+            <summary>
+            Property that sets the length of the index view pages
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.VehicleManufacturersController"/> class.
+            </summary>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Index(System.String,System.String,System.Int32)">
+            <summary>
+            GET: VehicleManufacturers/Index        
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleManufacturers/Details/5        
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Create(System.String)">
+            <summary>
+            GET: VehicleManufacturers/Create        
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Create(BlueDeck.Models.Enums.VehicleManufacturer,System.String)">
+            <summary>
+             POST: VehicleManufacturers/Create
+            </summary>
+            <param name="vehicleManufacturer">The vehicle manufacturer.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleManufacturers/Edit/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional return Url </param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Edit(BlueDeck.Models.Enums.VehicleManufacturer,System.String)">
+            <summary>
+            POST: VehicleManufacturers/Edit/5
+            </summary>        
+            <param name="vehicleManufacturer">The vehicle manufacturer.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleManufacturers/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional return url for pass-through redirects.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleManufacturersController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: VehicleManufacturers/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.VehicleModelsController">
+            <summary>
+            Controller that handles CRUD actions for the VehicleModels Enumeration
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="F:BlueDeck.Controllers.VehicleModelsController.PageSize">
+            <summary>
+            Property that sets the length of the index view pages
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.VehicleModelsController"/> class.
+            </summary>
+            <param name="unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Index(System.String,System.String,System.Int32)">
+            <summary>
+            GET: VehicleModels/Index        
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Details(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleModels/Details/5        
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Create(System.String)">
+            <summary>
+            GET: VehicleModels/Create        
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Create(BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel,System.String)">
+            <summary>
+             POST: VehicleModels/Create
+            </summary>
+            <param name="vehicleModel"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Edit(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleModels/Edit/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional return Url </param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Edit(BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel,System.String)">
+            <summary>
+            POST: VehicleModels/Edit/5
+            </summary>        
+            <param name="vehicleModel">The vehicle manufacturer.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.Delete(System.Nullable{System.Int32},System.String)">
+            <summary>
+            GET: VehicleModels/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl">An optional return url for pass-through redirects.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.VehicleModelsController.DeleteConfirmed(System.Int32,System.String)">
+            <summary>
+            POST: VehicleModels/Delete/5
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BlueDeck.Controllers.VehiclesController">
             <summary>
             Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Vehicle"/> entity.
             </summary>
             <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
         </member>
-        <member name="F:BlueDeck.Controllers.VehicleController.PageSize">
+        <member name="F:BlueDeck.Controllers.VehiclesController.PageSize">
             <summary>
             Property that sets the length of the index view pages
             </summary>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
             <summary>
-            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.VehicleController"/> class.
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.VehiclesController"/> class.
             </summary>
             <param name="unit">The injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Index(System.String,System.String,System.Int32)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Index(System.String,System.String,System.Int32)">
             <summary>
             GET: Vehicles/Index
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Details(System.Nullable{System.Int32},System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Details(System.Nullable{System.Int32},System.String)">
             <summary>
             Detailses the specified identifier.
             </summary>
@@ -2250,13 +2404,13 @@
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Create(System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Create(System.String)">
             <summary>
             Creates this instance.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Create(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Create(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
             <summary>
             Creates the specified form.
             </summary>
@@ -2264,7 +2418,7 @@
             <param name="returnUrl">An optional returnUrl used for redirection.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Edit(System.Int32,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Edit(System.Int32,System.String)">
             <summary>
             GET: Vehicles/Edit/4
             </summary>
@@ -2275,7 +2429,7 @@
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Edit(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Edit(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
             <summary>
             POST: Vehicle/Edit/5
             </summary>
@@ -2286,7 +2440,7 @@
             <param name="returnUrl">An optional return URL used for pass-through redirects.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.Delete(System.Int32,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Delete(System.Int32,System.String)">
             <summary>
             GET: Vehicles/Delete/5
             </summary>
@@ -2294,7 +2448,7 @@
             <param name="returnUrl">An optional return URL used for pass-through redirects.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehicleController.DeleteConfirmed(System.Int32,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.DeleteConfirmed(System.Int32,System.String)">
             <summary>
             POST: Vehicle/Delete/5
             </summary>
@@ -3213,6 +3367,14 @@
             The get members user can edit.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ApplicationDbContext.GetVehiclesUserCanEdit">
+            <summary>
+            Gets or sets the get vehicles user can edit.
+            </summary>
+            <value>
+            The get vehicles user can edit.
+            </value>
+        </member>
         <member name="M:BlueDeck.Models.ApplicationDbContext.OnModelCreating(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <summary>
             Override this method to further configure the model that was discovered by convention from the entity types
@@ -3992,7 +4154,7 @@
             </summary>
             <value>
             The assigned vehicle.
-            </value>    
+            </value>
         </member>
         <member name="P:BlueDeck.Models.Member.PhoneNumbers">
             <summary>
@@ -4567,6 +4729,13 @@
             <param name="id">The identifier.</param>
             <param name="newPositionName">New name of the position.</param>
         </member>
+        <member name="M:BlueDeck.Models.Repositories.IPositionRepository.GetPositionWithVehicles(System.Int32)">
+            <summary>
+            Gets the position with vehicles.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Models.Repositories.IRepository`1">
             <summary>
             An interface that encapsulates data store interactions common to all Domain Entity Interactions. 
@@ -4797,6 +4966,18 @@
             The get vehicle manufacturer select list items.
             </value>
         </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleManufacturerRepository.GetVehicleManufacturersWithModels">
+            <summary>
+            Gets the vehicle manufacturers with models.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleManufacturerRepository.GetVehicleManufacturerWithModels(System.Int32)">
+            <summary>
+            Gets the vehicle manufacturer with models.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Models.Repositories.IVehicleModelRepository">
             <summary>
             Interface for a repository for the Vehicle Model Entity.
@@ -4810,6 +4991,19 @@
             <value>
             The get vehicle model select list items.
             </value>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleModelRepository.GetVehicleModelWithManufacturerAndVehicles(System.Int32)">
+            <summary>
+            Gets the vehicle model with manufacturer and vehicles.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleModelRepository.GetVehicleModelsWithManufacturerAndVehicles">
+            <summary>
+            Gets the vehicle models with manufacturer and vehicles.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IVehicleRepository">
             <summary>
@@ -4836,6 +5030,13 @@
             Gets the vehicle with model/manufacturer details.
             </summary>
             <param name="_vehicleId">The vehicle identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IVehicleRepository.GetVehiclesUserCanEdit(System.Int32)">
+            <summary>
+            Gets the vehicles user can edit.
+            </summary>
+            <param name="id">The identifier.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Types.ChartableComponent">
@@ -5481,6 +5682,22 @@
               <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Vehicle.HasMVS">
+            <summary>
+            Gets or sets a value indicating whether this instance has MVS.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Vehicle.HasMDT">
+            <summary>
+            Gets or sets a value indicating whether this instance has MDT.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.Vehicle.AssignedToMemberId">
             <summary>
             Gets or sets the assigned to member identifier.
@@ -5498,7 +5715,7 @@
             </summary>
             <value>
             The assigned to member.
-            </value>        
+            </value> 
         </member>
         <member name="P:BlueDeck.Models.Vehicle.AssignedToPositionId">
             <summary>
@@ -5564,6 +5781,56 @@
             Assigning the vehicle to a Componetn will nullify any Member/Position assignment for the vehicle.
             </remarks>
             <param name="_componentId">The component identifier.</param>
+        </member>
+        <member name="M:BlueDeck.Models.Vehicle.IssuedTo">
+            <summary>
+            Returns the name of the Member, Position, or Component responsible for the vehicle.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.VehicleModelId">
+            <summary>
+            Gets or sets the vehicle model identifier.
+            </summary>
+            <value>
+            The vehicle model identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.VehicleModelName">
+            <summary>
+            Gets or sets the name of the vehicle model.
+            </summary>
+            <value>
+            The name of the vehicle model.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.ManufacturerId">
+            <summary>
+            Gets or sets the manufacturer identifier.
+            </summary>
+            <value>
+            The manufacturer identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.Manufacturers">
+            <summary>
+            Gets or sets the manufacturers.
+            </summary>
+            <value>
+            The manufacturers.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel.#ctor(BlueDeck.Models.Enums.VehicleModel,System.Collections.Generic.List{BlueDeck.Models.Types.VehicleManufacturerSelectListItem})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.AddEditVehicleModelViewModel"/> class.
+            </summary>
+            <param name="_m">The m.</param>
+            <param name="_manufacturers">The manufacturers.</param>
         </member>
         <member name="T:BlueDeck.Models.ViewModels.AddEditVehicleViewModel">
             <summary>
@@ -5632,6 +5899,22 @@
             </summary>
             <value>
               <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.HasMVS">
+            <summary>
+            Gets or sets a value indicating whether this instance has MVS.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.HasMDT">
+            <summary>
+            Gets or sets a value indicating whether this instance has MDT.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:BlueDeck.Models.ViewModels.AddEditVehicleViewModel.AssignedToMemberId">
@@ -6800,16 +7083,16 @@
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithoutMembers">
             <summary>
-            Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
+            Gets the list of <see cref="T:BlueDeck.Models.Types.ChartableComponent"/>s.
             </summary>
-            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:BlueDeck.Models.Types.ChartableComponent"/> objects</returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentSelectListItems">
             <summary>
             Gets the list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem" />s to populate a Component select list
             </summary>
             <returns>
-            A <see cref="T:List{BlueDeck.Models.Types.ComponentSelectListItem}" />
+            A <see cref="T:System.Collections.Generic.List`1" />
             </returns>
         </member>
         <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">
@@ -7201,6 +7484,13 @@
             <param name="id">The identifier.</param>
             <param name="newPositionName">New name of the position.</param>
         </member>
+        <member name="M:BlueDeck.Persistence.Repositories.PositionRepository.GetPositionWithVehicles(System.Int32)">
+            <summary>
+            Gets the position with vehicles.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Persistence.Repositories.Repository`1">
             <summary>
             Represents CRUD actions common to DbContext entities
@@ -7314,6 +7604,19 @@
             The get vehicle manufacturer select list items.
             </value>
         </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository.GetVehicleManufacturersWithModels">
+            <summary>
+            Gets the vehicle manufacturers with models.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleManufacturerRepository.GetVehicleManufacturerWithModels(System.Int32)">
+            <summary>
+            Gets the vehicle manufacturer with models.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Persistence.Repositories.VehicleModelRepository">
             <summary>
             Repository for CRUD actions for the Vehicle Model Enumeration.
@@ -7343,6 +7646,19 @@
             <value>
             The get vehicle model select list items.
             </value>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleModelRepository.GetVehicleModelWithManufacturerAndVehicles(System.Int32)">
+            <summary>
+            Gets the vehicle model with manufacturer and vehicles.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleModelRepository.GetVehicleModelsWithManufacturerAndVehicles">
+            <summary>
+            Gets the vehicle models with manufacturer and vehicles.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.VehicleRepository">
             <summary>
@@ -7382,6 +7698,13 @@
             Gets the vehicle with model/manufacturer details.
             </summary>
             <param name="_vehicleId">The vehicle identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.VehicleRepository.GetVehiclesUserCanEdit(System.Int32)">
+            <summary>
+            Gets the vehicles user can edit.
+            </summary>
+            <param name="id">The identifier.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Persistence.UnitOfWork">

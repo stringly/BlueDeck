@@ -336,7 +336,7 @@ namespace BlueDeck.Controllers
             {
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
-                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.Vehicles.Count()
+                TotalItems = searchString == null ? unitOfWork.Vehicles.GetAll().Count() : vm.Vehicles.Count()
             };
             ViewBag.Title = "BlueDeck Admin - Vehicles Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
@@ -382,9 +382,9 @@ namespace BlueDeck.Controllers
             {
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
-                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.VehicleModels.Count()
+                TotalItems = searchString == null ? unitOfWork.VehicleModels.GetAll().Count() : vm.VehicleModels.Count()
             };
-            ViewBag.Title = "BlueDeck Admin - Vehicles Index";
+            ViewBag.Title = "BlueDeck Admin - Vehicle Models Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             vm.VehicleModels = vm.VehicleModels.Skip((page - 1) * PageSize).Take(PageSize);
@@ -428,9 +428,9 @@ namespace BlueDeck.Controllers
             {
                 CurrentPage = page,
                 ItemsPerPage = PageSize,
-                TotalItems = searchString == null ? unitOfWork.Components.GetAll().Count() : vm.VehicleManufacturers.Count()
+                TotalItems = searchString == null ? unitOfWork.VehicleManufacturers.GetAll().Count() : vm.VehicleManufacturers.Count()
             };
-            ViewBag.Title = "BlueDeck Admin - Vehicles Index";
+            ViewBag.Title = "BlueDeck Admin - Vehicle Manufacturers Index";
             ViewBag.Status = TempData["Status"]?.ToString() ?? "";
             ViewBag.Message = TempData["Message"]?.ToString() ?? "";
             vm.VehicleManufacturers = vm.VehicleManufacturers.Skip((page - 1) * PageSize).Take(PageSize);

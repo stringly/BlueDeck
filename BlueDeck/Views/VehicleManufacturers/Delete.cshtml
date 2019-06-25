@@ -1,0 +1,59 @@
+﻿@model BlueDeck.Models.Enums.VehicleManufacturer
+
+@{
+    bool canDelete = Model.Models.Count() > 0 ? false : true;
+}
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    @if (ViewBag.Status == "Warning!")
+    {
+        <div class="alert alert-danger">
+            <strong>@ViewBag.Status</strong> @ViewBag.Message
+        </div>
+    }
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Confirm Delete</h2>
+        @if (canDelete)
+        {
+            <p class="formHeader-description">
+                Are you certain that you want to delete @Model.VehicleManufacturerName? This action cannot be undone.
+            </p>
+        }
+        else
+        {
+            <p class="formHeader-description">
+                There are @Model.Models.Count() vehicle models in the database that are assigned this manufacturer. You cannot delete a manufacturer with active models.
+            </p>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        @Html.LabelFor(model => model.VehicleManufacturerId, new { @class = "control-label" })<br />
+                        @Html.DisplayFor(model => model.VehicleManufacturerId, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-md-5 form-group">
+                        @Html.LabelFor(model => model.VehicleManufacturerName, new { @class = "control-label" })<br />
+                        @Html.DisplayFor(model => model.VehicleManufacturerName, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                            <input type="hidden" asp-for="VehicleManufacturerId" />
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Edit" asp-route-id="@Model.VehicleManufacturerId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                            @if (canDelete)
+                            {
+                                <input type="submit" value="Delete" class="btn btn-danger pull-right" />
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

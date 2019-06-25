@@ -4,6 +4,8 @@ using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+using System;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -52,10 +54,16 @@ namespace BlueDeck.Persistence.Repositories
         /// <returns></returns>
         public List<Vehicle> GetVehiclesWithModels()
         {
-            return ApplicationDbContext.Vehicles
+            List<Vehicle> result = new List<Vehicle>();
+            result =  ApplicationDbContext.Vehicles
                         .Include(x => x.Model)
                         .ThenInclude(x => x.Manufacturer)
+                        .Include(x => x.AssignedToComponent)
+                        .Include(x => x.AssignedToPosition)
+                        .Include(x => x.AssignedToMember)
+                            .ThenInclude(x => x.Rank)
                         .ToList();
+            return result;
         }
 
         /// <summary>
@@ -70,6 +78,93 @@ namespace BlueDeck.Persistence.Repositories
                     .ThenInclude(x => x.Manufacturer)
                 .Where(x => x.VehicleId == _vehicleId)
                 .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets the vehicles user can edit.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public List<VehicleSelectListItem> GetVehiclesUserCanEdit(int id)
+        {
+            List<VehicleSelectListItem> result = new List<VehicleSelectListItem>();
+            SqlParameter param1 = new SqlParameter("@ComponentId", id);
+            List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
+            List<int> componentIds = new List<int>();
+            foreach(Component c in components)
+            {
+                componentIds.Add(c.ComponentId);
+            }            
+            List<Vehicle> componentVehicles = ApplicationDbContext.Vehicles.Where(x => componentIds.Contains((Int32)x.AssignedToComponentId))                
+                    .Include(x => x.Model)
+                        .ThenInclude(x => x.Manufacturer)
+                .ToList();
+                
+            
+          
+            ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(x => x.AssignedVehicles)
+                    .ThenInclude(x => x.Model)
+                        .ThenInclude(x => x.Manufacturer)
+                .Include(x => x.Members)
+                    .ThenInclude(x => x.AssignedVehicle)
+                        .ThenInclude(x => x.Model)
+                            .ThenInclude(x => x.Manufacturer)
+                .Include(x => x.TempMembers)
+                    .ThenInclude(x => x.AssignedVehicle)
+                        .ThenInclude(x => x.Model)
+                            .ThenInclude(x => x.Manufacturer)
+                .Load();
+
+            // loop through the components
+            foreach(Component c in components)
+            {
+                // first, add any vehicles assigned to the Component itself
+                if (c.AssignedVehicles != null)
+                {
+                    foreach (Vehicle v in c.AssignedVehicles)
+                    {
+                        result.Add(new VehicleSelectListItem(v));
+                    }
+                }
+                
+                // next, loop through the Component's positions
+                if(c.Positions != null)
+                {
+                    foreach (Position p in c.Positions)
+                    {
+                        if (p.AssignedVehicles != null)
+                        {
+                            foreach (Vehicle v in p.AssignedVehicles)
+                            {
+                                result.Add(new VehicleSelectListItem(v));
+                            }
+                        }
+                        if (p.Members != null)
+                        {
+                            foreach (Member m in p.Members)
+                            {
+                                if (m.AssignedVehicle != null)
+                                {
+                                    result.Add(new VehicleSelectListItem(m.AssignedVehicle));
+                                }                                
+                            }
+                        }
+                        if (p.TempMembers != null)
+                        {
+                            // do the same for TDY Members
+                            foreach (Member m in p.TempMembers)
+                            {
+                                if (m.AssignedVehicle != null)
+                                {
+                                    result.Add(new VehicleSelectListItem(m.AssignedVehicle));
+                                }                                
+                            }
+                        }
+                    }
+                }
+            }
+            return result;
         }
     }
 

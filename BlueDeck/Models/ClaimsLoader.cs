@@ -54,6 +54,21 @@ namespace BlueDeck.Models
                             List<PositionSelectListItem> canEditPositions = _unitOfWork.Positions.GetPositionsUserCanEdit(memberParentComponentId);
                             var f = new Claim("CanEditPositions", JsonConvert.SerializeObject(canEditPositions));
                             ci.AddClaim(f);
+                            // if the User is a Component Admin, then he can edit any vehicles assigned to Components, Positions, and Members subordinate to the user's position
+                            List<VehicleSelectListItem> canEditVehicles = _unitOfWork.Vehicles.GetVehiclesUserCanEdit(memberParentComponentId);
+                            var g = new Claim("CanEditVehicles", JsonConvert.SerializeObject(canEditVehicles));
+                            ci.AddClaim(g);
+                        }
+                        else
+                        {
+                            // This is supposed to cover vehicles that have been assigned to the User's Current Position
+                            Position p = _unitOfWork.Positions.GetPositionWithVehicles(dbUser.PositionId);
+                            if (p != null)
+                            {
+                                List<VehicleSelectListItem> canEditVehicles = p.AssignedVehicles.ConvertAll(x => new VehicleSelectListItem(x));
+                                var g = new Claim("CanEditVehicles", JsonConvert.SerializeObject(canEditVehicles));
+                                ci.AddClaim(g);
+                            }
                         }
                     }
                     ci.AddClaim(new Claim(ClaimTypes.GivenName, dbUser.FirstName));
@@ -61,6 +76,10 @@ namespace BlueDeck.Models
                     ci.AddClaim(new Claim("MemberId", dbUser.MemberId.ToString(), ClaimValueTypes.Integer32));
                     ci.AddClaim(new Claim("DisplayName", dbUser.GetTitleName()));
                     ci.AddClaim(new Claim("LDAPName", logonName));
+                    if(dbUser.AssignedVehicleId != null)
+                    {
+                        ci.AddClaim(new Claim("VehicleId", dbUser.AssignedVehicleId.ToString(), ClaimValueTypes.Integer32));
+                    }
                 }
                 else
                 {

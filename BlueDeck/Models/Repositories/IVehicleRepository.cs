@@ -29,6 +29,14 @@ namespace BlueDeck.Models.Repositories
         /// <param name="_vehicleId">The vehicle identifier.</param>
         /// <returns></returns>
         Vehicle GetVehicleWithManufacturer(int _vehicleId);
-        
+
+        /// <summary>
+        /// Gets the vehicles user can edit.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        List<VehicleSelectListItem> GetVehiclesUserCanEdit(int id);
+
+
     }
 }

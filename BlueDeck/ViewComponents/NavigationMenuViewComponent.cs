@@ -26,6 +26,7 @@ namespace BlueDeck.ViewComponents
                 "Positions", 
                 "Members", 
                 "Components",
+                "Vehicles"
             };
             if (User.IsInRole("ComponentAdmin"))
             {

@@ -4,6 +4,7 @@ using BlueDeck.Models.Enums;
 using BlueDeck.Models.Types;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -41,7 +42,29 @@ namespace BlueDeck.Persistence.Repositories
         /// </value>
         public List<VehicleManufacturerSelectListItem> GetVehicleManufacturerSelectListItems()
         {
-            return GetAll().ToList().ConvertAll(x => new VehicleManufacturerSelectListItem(x));
+            return GetAll().OrderBy(x => x.VehicleManufacturerName).ToList().ConvertAll(x => new VehicleManufacturerSelectListItem(x));
+        }
+
+        /// <summary>
+        /// Gets the vehicle manufacturers with models.
+        /// </summary>
+        /// <returns></returns>
+        public List<VehicleManufacturer> GetVehicleManufacturersWithModels()
+        {
+            return ApplicationDbContext.VehicleManufacturers.Include(x => x.Models).ToList();
+        }
+
+        /// <summary>
+        /// Gets the vehicle manufacturer with models.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public VehicleManufacturer GetVehicleManufacturerWithModels(int id)
+        {
+            return ApplicationDbContext.VehicleManufacturers
+                .Where(x => x.VehicleManufacturerId == id)
+                .Include(x => x.Models)
+                .FirstOrDefault();
         }
     }
 }

@@ -292,5 +292,19 @@ namespace BlueDeck.Persistence.Repositories
                     
 
         }
+
+        /// <summary>
+        /// Gets the position with vehicles.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        public Position GetPositionWithVehicles(int id)
+        {
+            return ApplicationDbContext.Positions.Where(x => x.PositionId == id)
+                .Include(x => x.AssignedVehicles)
+                    .ThenInclude(x => x.Model)
+                        .ThenInclude(x => x.Manufacturer)
+                .FirstOrDefault();
+        }
     }
 }

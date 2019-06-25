@@ -321,7 +321,6 @@ namespace BlueDeck.Models {
         /// The assigned vehicle identifier.
         /// </value>
         [Display(Name = "Assigned Vehicle")]
-
         public int? AssignedVehicleId { get; set; }
 
         /// <summary>
@@ -329,8 +328,7 @@ namespace BlueDeck.Models {
         /// </summary>
         /// <value>
         /// The assigned vehicle.
-        /// </value>    
-        [ForeignKey("AssignedVehicleId")]
+        /// </value>
         public Vehicle AssignedVehicle { get; set; }
 
         /// <summary>

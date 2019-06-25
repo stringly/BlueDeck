@@ -80,7 +80,7 @@
                                 new { @class = "form-control" })
                             <span asp-validation-for="ModelYear" class="text-danger"></span>
                         </div>
-                        <div class="col-md-5 form-group">
+                        <div class="col-md-4 form-group">
                             <label asp-for="ModelId" class="control-label"></label>
                             @Html.DropDownListFor(model => model.ModelId,
                                                             new SelectList(Model.Models, "VehicleModelId", "VehicleModelName"),
@@ -88,7 +88,7 @@
                                                             new { @class = "form-control" })
                             <span asp-validation-for="ModelId" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
                             <div class="form-checkbox">
                                 <label>
                                     <input asp-for="IsMarked" /> @Html.DisplayNameFor(model => model.IsMarked)
@@ -98,12 +98,32 @@
                                 </span>
                             </div>
                         </div>
+                        <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="HasMVS" /> @Html.DisplayNameFor(model => model.HasMVS)
+                                </label>
+                                <span class="note">
+                                    Vehicle is equipped with a Mobile Video System.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="HasMDT" /> @Html.DisplayNameFor(model => model.HasMDT)
+                                </label>
+                                <span class="note">
+                                    Vehicle is equipped with a Mobile Data Terminal.
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8 form-group">
                             <label asp-for="VIN" class="control-label"></label>
                             <input asp-for="VIN" class="form-control" />
-                            <span asp-validation-for="ModelYear" class="text-danger"></span>
+                            <span asp-validation-for="VIN" class="text-danger"></span>
                         </div>
                         <div class="col-md-2 form-group">
                             <label asp-for="TagNumber" class="control-label"></label>
@@ -112,7 +132,63 @@
                         </div>
                         <div class="col-md-2 form-group">
                             <label asp-for="TagState" class="control-label"></label>
-                            <input asp-for="TagState" class="form-control" />
+                            @Html.DropDownListFor(model => model.TagState,
+                                new SelectList(new List<SelectListItem> {
+                                    new SelectListItem() { Text="Alabama", Value="AL"},
+                                    new SelectListItem() { Text="Alaska", Value="AK"},
+                                    new SelectListItem() { Text="Arizona", Value="AZ"},
+                                    new SelectListItem() { Text="Arkansas", Value="AR"},
+                                    new SelectListItem() { Text="California", Value="CA"},
+                                    new SelectListItem() { Text="Colorado", Value="CO"},
+                                    new SelectListItem() { Text="Connecticut", Value="CT"},
+                                    new SelectListItem() { Text="District of Columbia", Value="DC"},
+                                    new SelectListItem() { Text="Delaware", Value="DE"},
+                                    new SelectListItem() { Text="Florida", Value="FL"},
+                                    new SelectListItem() { Text="Georgia", Value="GA"},
+                                    new SelectListItem() { Text="Hawaii", Value="HI"},
+                                    new SelectListItem() { Text="Idaho", Value="ID"},
+                                    new SelectListItem() { Text="Illinois", Value="IL"},
+                                    new SelectListItem() { Text="Indiana", Value="IN"},
+                                    new SelectListItem() { Text="Iowa", Value="IA"},
+                                    new SelectListItem() { Text="Kansas", Value="KS"},
+                                    new SelectListItem() { Text="Kentucky", Value="KY"},
+                                    new SelectListItem() { Text="Louisiana", Value="LA"},
+                                    new SelectListItem() { Text="Maine", Value="ME"},
+                                    new SelectListItem() { Text="Maryland", Value="MD"},
+                                    new SelectListItem() { Text="Massachusetts", Value="MA"},
+                                    new SelectListItem() { Text="Michigan", Value="MI"},
+                                    new SelectListItem() { Text="Minnesota", Value="MN"},
+                                    new SelectListItem() { Text="Mississippi", Value="MS"},
+                                    new SelectListItem() { Text="Missouri", Value="MO"},
+                                    new SelectListItem() { Text="Montana", Value="MT"},
+                                    new SelectListItem() { Text="Nebraska", Value="NE"},
+                                    new SelectListItem() { Text="Nevada", Value="NV"},
+                                    new SelectListItem() { Text="New Hampshire", Value="NH"},
+                                    new SelectListItem() { Text="New Jersey", Value="NJ"},
+                                    new SelectListItem() { Text="New Mexico", Value="NM"},
+                                    new SelectListItem() { Text="New York", Value="NY"},
+                                    new SelectListItem() { Text="North Carolina", Value="NC"},
+                                    new SelectListItem() { Text="North Dakota", Value="ND"},
+                                    new SelectListItem() { Text="Ohio", Value="OH"},
+                                    new SelectListItem() { Text="Oklahoma", Value="OK"},
+                                    new SelectListItem() { Text="Oregon", Value="OR"},
+                                    new SelectListItem() { Text="Pennsylvania", Value="PA"},
+                                    new SelectListItem() { Text="Rhode Island", Value="RI"},
+                                    new SelectListItem() { Text="South Carolina", Value="SC"},
+                                    new SelectListItem() { Text="South Dakota", Value="SD"},
+                                    new SelectListItem() { Text="Tennessee", Value="TN"},
+                                    new SelectListItem() { Text="Texas", Value="TX"},
+                                    new SelectListItem() { Text="Utah", Value="UT"},
+                                    new SelectListItem() { Text="Vermont", Value="VT"},
+                                    new SelectListItem() { Text="Virginia", Value="VA"},
+                                    new SelectListItem() { Text="Washington", Value="WA"},
+                                    new SelectListItem() { Text="West Virginia", Value="WV"},
+                                    new SelectListItem() { Text="Wisconsin", Value="WI"},
+                                    new SelectListItem() { Text="Wyoming", Value="WY"}
+
+                                }, "Value", "Text"),
+                                "Choose Tag State",
+                                new { @class = "form-control" })        
                             <span asp-validation-for="TagState" class="text-danger"></span>
                         </div>
                     </div>

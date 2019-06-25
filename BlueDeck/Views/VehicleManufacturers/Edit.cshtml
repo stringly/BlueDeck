@@ -1,0 +1,34 @@
+﻿@model BlueDeck.Models.Enums.VehicleManufacturer
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">Edit Manufacturer: <strong>@Model.VehicleManufacturerName</strong></h2>
+        <p class="formHeader-description">
+            Editing Manufacturer Details
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <form asp-action="Edit" asp-route-returnUrl="@ViewBag.ReturnUrl" asp-route-id="@Model.VehicleManufacturerId">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="VehicleManufacturerId" />
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label asp-for="VehicleManufacturerName" class="control-label"></label>
+                            <input asp-for="VehicleManufacturerName" class="form-control" />
+                            <span asp-validation-for="VehicleManufacturerName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.VehicleManufacturerId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <a asp-action="Delete" asp-route-id="@Model.VehicleManufacturerId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

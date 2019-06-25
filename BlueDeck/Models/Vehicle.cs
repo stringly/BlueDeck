@@ -90,7 +90,23 @@ namespace BlueDeck.Models
         /// <value>
         ///   <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
         /// </value>
-        public bool IsMarked {get;set;}
+        public bool IsMarked { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has MVS.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasMVS { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has MDT.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasMDT { get; set; }
 
         /// <summary>
         /// Gets or sets the assigned to member identifier.
@@ -108,7 +124,8 @@ namespace BlueDeck.Models
         /// </summary>
         /// <value>
         /// The assigned to member.
-        /// </value>        
+        /// </value> 
+        [ForeignKey("AssignedToMemberId")]
         public virtual Member AssignedToMember { get; set; }
 
         /// <summary>
@@ -128,6 +145,7 @@ namespace BlueDeck.Models
         /// <value>
         /// The assigned to position.
         /// </value>        
+        [ForeignKey("AssignedToPositionId")]
         public virtual Position AssignedToPosition { get; set; }
 
         /// <summary>
@@ -147,6 +165,7 @@ namespace BlueDeck.Models
         /// <value>
         /// The assigned to component.
         /// </value>        
+        [ForeignKey("AssignedToComponentId")]
         public virtual Component AssignedToComponent { get; set; }
 
         /// <summary>
@@ -189,6 +208,30 @@ namespace BlueDeck.Models
             AssignedToComponentId = Convert.ToInt32(_componentId);
             AssignedToPositionId = null;
             AssignedToMemberId = null;
+        }
+
+        /// <summary>
+        /// Returns the name of the Member, Position, or Component responsible for the vehicle.
+        /// </summary>
+        /// <returns></returns>
+        public string IssuedTo()
+        {
+            if (AssignedToMember != null)
+            {
+                return AssignedToMember.GetTitleName();
+            }
+            else if (AssignedToPosition != null)
+            {
+                return AssignedToPosition.Name;
+            }
+            else if (AssignedToComponent != null)
+            {
+                return AssignedToComponent.Name;
+            }
+            else
+            {
+                return "Unassigned";
+            }
         }
 
     }

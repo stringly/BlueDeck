@@ -1,0 +1,39 @@
+﻿@model AddEditVehicleModelViewModel
+
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h2 class="formHeader-heading">New Vehicle Model</h2>
+        <p class="formHeader-description">
+            Create new Vehicle Manufacturer
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+                <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-5 form-group">
+                            <label asp-for="VehicleModelName" class="control-label"></label>
+                            <input asp-for="VehicleModelName" class="form-control" />
+                            <span asp-validation-for="VehicleModelName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label asp-for="ManufacturerId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.ManufacturerId,
+                                new SelectList(Model.Manufacturers, "VehicleManufacturerId", "VehicleManufacturerName"),
+                                "Choose Manufacturer",
+                                new { @class = "form-control" })
+                            <span asp-validation-for="ManufacturerId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -28,7 +28,7 @@ namespace BlueDeck.Models.ViewModels
         /// The model year.
         /// </value>
         [Display(Name = "Model Year")]
-        [Required]
+        [Required(ErrorMessage = "Model Year is required.")]
         public int ModelYear { get; set; }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace BlueDeck.Models.ViewModels
         /// The model identifier.
         /// </value>
         [Display(Name = "Model")]
-        [Required]
+        [Required(ErrorMessage = "Model is required.")]
         public int ModelId { get; set; }
 
         /// <summary>
@@ -48,7 +48,9 @@ namespace BlueDeck.Models.ViewModels
         /// The vin.
         /// </value>
         [Display(Name = "VIN")]
-        [Required]
+        [StringLength(17, ErrorMessage = "Must be a valid 17-digit VIN.")]
+        [RegularExpression("[A-HJ-NPR-Z0-9]{13}[0-9]{4}", ErrorMessage = "Must be a valid VIN")]
+        [Required]        
         public string VIN { get; set; }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace BlueDeck.Models.ViewModels
         /// The tag number.
         /// </value>
         [Display(Name = "Tag Number")]
-        [Required]
+        [Required(ErrorMessage = "Tag Number is required.")]
         public string TagNumber { get; set; }
 
 
@@ -69,7 +71,7 @@ namespace BlueDeck.Models.ViewModels
         /// The state of the tag.
         /// </value>
         [Display(Name = "State")]
-        [Required]
+        [Required(ErrorMessage = "Tag State is required.")]
         public string TagState { get; set; }
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace BlueDeck.Models.ViewModels
         /// The cruiser number.
         /// </value>
         [Display(Name = "Cruiser Number")]
-        [Required]
+        [Required(ErrorMessage = "Cruiser/Vehicle Number is required.")]
         public string CruiserNumber { get; set; }
 
         /// <summary>
@@ -90,6 +92,24 @@ namespace BlueDeck.Models.ViewModels
         /// </value>
         [Display(Name = "Marked Vehicle")]
         public bool IsMarked {get;set;}
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has MVS.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "MVS Equipped")]
+        public bool HasMVS { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has MDT.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
+        /// </value>
+        [Display(Name = "MDT Equipped")]
+        public bool HasMDT { get; set; }
 
         /// <summary>
         /// Gets or sets the assigned to member identifier.

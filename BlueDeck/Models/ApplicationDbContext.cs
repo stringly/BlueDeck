@@ -181,6 +181,14 @@ namespace BlueDeck.Models {
         public DbQuery<MemberSelectListItem> GetMembersUserCanEdit { get; set; }
 
         /// <summary>
+        /// Gets or sets the get vehicles user can edit.
+        /// </summary>
+        /// <value>
+        /// The get vehicles user can edit.
+        /// </value>
+        public DbQuery<VehicleSelectListItem> GetVehiclesUserCanEdit { get; set; }
+
+        /// <summary>
         /// Override this method to further configure the model that was discovered by convention from the entity types
         /// exposed in <see cref="T:Microsoft.EntityFrameworkCore.DbSet`1" /> properties on your derived context. The resulting model may be cached
         /// and re-used for subsequent instances of your derived context.
