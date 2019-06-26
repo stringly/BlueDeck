@@ -164,7 +164,7 @@ namespace BlueDeck.Persistence.Repositories
                     }
                 }
             }
-            return result;
+            return result.OrderBy(x => x.VehicleId).ToList();
         }
     }
 

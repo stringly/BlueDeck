@@ -99,5 +99,12 @@ namespace BlueDeck.Models.Repositories
         AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel();
         Task<ComponentApiResult> GetApiComponent(int id);
         Component GetComponentForDemographics(int componentId);
+
+        /// <summary>
+        /// Gets the component with it's assigned vehicles.
+        /// </summary>
+        /// <param name="componentId">The component identifier.</param>
+        /// <returns></returns>
+        Component GetComponentWithVehicles(int componentId);
     }
 }

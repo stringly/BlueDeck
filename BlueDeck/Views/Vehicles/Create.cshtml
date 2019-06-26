@@ -225,7 +225,7 @@
                     <div class="row" id="assignToComponentGroup" style="display:none">
                         <div class="col-md-5 form-group">
                             <label asp-for="AssignedToComponentId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.AssignedToMemberId,
+                            @Html.DropDownListFor(model => model.AssignedToComponentId,
                                                             new SelectList(Model.Components, "Id", "ComponentName"),
                                                             "None",
                                                             new { @class = "form-control" })

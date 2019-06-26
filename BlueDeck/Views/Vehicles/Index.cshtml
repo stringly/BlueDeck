@@ -3,10 +3,16 @@
 @{
     var IsAdmin = User.IsInRole("GlobalAdmin");
     var IsComponentSupervisor = User.IsInRole("ComponentAdmin");
+    int currentVehicleId = 0;
     List<VehicleSelectListItem> CanEditVehicles = new List<VehicleSelectListItem>();
     if (User.HasClaim(x => x.Type == "CanEditVehicles"))
     {
-        CanEditVehicles = JsonConvert.DeserializeObject<List<VehicleSelectListItem>>(((ClaimsIdentity)User.Identity).FindFirst("CanEditVehicles").Value.ToString());
+        var rawString = ((ClaimsIdentity)User.Identity).FindFirst("CanEditVehicles").Value.ToString();
+        CanEditVehicles = JsonConvert.DeserializeObject<List<VehicleSelectListItem>>(rawString);
+    }
+    if (User.HasClaim(claim => claim.Type == "VehicleId"))
+    {
+        currentVehicleId = Convert.ToInt32(User.Claims.FirstOrDefault(claim => claim.Type == "VehicleId").Value.ToString());
     }
 
 }
@@ -175,6 +181,11 @@
                                 <a asp-action="Details" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Vehicles/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
                                 <a asp-action="Edit" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Vehicles/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Edit Vehicle" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
                                 <a asp-action="Delete" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Vehicles/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Delete Vehicle" class="glyphicon-ring"><span class="glyphicon glyphicon-trash glyphicon-bordered"></span></a>
+                            }
+                            else if (item.VehicleId == currentVehicleId)
+                            {
+                                <a asp-action="Details" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Vehicles/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="View Details" class="glyphicon-ring"><span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span></a>
+                                <a asp-action="Edit" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Vehicles/Index@(!String.IsNullOrEmpty(Context.Request.QueryString.ToString()) ? $"{Context.Request.QueryString}" : "")" title="Edit Vehicle" class="glyphicon-ring"><span class="glyphicon glyphicon-pencil glyphicon-bordered"></span></a>
                             }
                             else
                             {

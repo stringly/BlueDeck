@@ -872,6 +872,22 @@ namespace BlueDeck.Persistence.Repositories
                 .Load();
             return components.FirstOrDefault();
         }
+
+        /// <summary>
+        /// Gets the component with it's assigned vehicles.
+        /// </summary>
+        /// <param name="componentId">The component identifier.</param>
+        /// <returns></returns>
+        public Component GetComponentWithVehicles(int componentId)
+        {
+            return ApplicationDbContext.Components
+                .Where(x => x.ComponentId == componentId)
+                    .Include(x => x.AssignedVehicles)
+                        .ThenInclude(x => x.Model)
+                            .ThenInclude(x => x.Manufacturer)
+                .FirstOrDefault();
+                
+        }
     }
 
 }

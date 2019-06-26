@@ -8,6 +8,7 @@ using BlueDeck.Models.Repositories;
 using BlueDeck.Models.Enums;
 using Microsoft.AspNetCore.Http;
 using BlueDeck.Models.ViewModels;
+using System.Collections.Generic;
 
 namespace BlueDeck.Controllers
 {
@@ -52,7 +53,10 @@ namespace BlueDeck.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 vm.Vehicles = vm.Vehicles
-                    .Where(x => x.CruiserNumber.Contains(searchString) || x.Model.VehicleModelName.Contains(searchString) || x.Model.Manufacturer.VehicleManufacturerName.Contains(searchString));
+                    .Where(x => x.CruiserNumber.Contains(searchString) 
+                    || x.Model.VehicleModelName.Contains(searchString) 
+                    || x.Model.Manufacturer.VehicleManufacturerName.Contains(searchString)
+                    || x.IssuedTo().Contains(searchString));
             }
 
             switch (sortOrder)
@@ -245,7 +249,7 @@ namespace BlueDeck.Controllers
             vm.Positions = unitOfWork.Positions.GetAllPositionSelectListItems().ToList();
             vm.Components = unitOfWork.Components.GetComponentSelectListItems().ToList();
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.Title = "Create New Position";
+            ViewBag.Title = "Edit Vehicle";
             ViewBag.ReturnUrl = returnUrl;
             return View(vm);            
         }
@@ -262,7 +266,7 @@ namespace BlueDeck.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Vehicles/Edit/{id:int}")]
-        public ActionResult Edit([Bind("ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,HasMVS,HasMDT,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
+        public ActionResult Edit(int id, [Bind("VehicleId,ModelYear,ModelId,VIN,TagNumber,TagState,CruiserNumber,IsMarked,HasMVS,HasMDT,AssignedToMemberId,AssignedToPositionId,AssignedToComponentId")] AddEditVehicleViewModel form, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -279,13 +283,14 @@ namespace BlueDeck.Controllers
             }
             int errors = 0;
             // ensure that the cruiser number is not in use
-            if(unitOfWork.Vehicles.SingleOrDefault(x => x.CruiserNumber == form.CruiserNumber && x.VehicleId != form.VehicleId) != null)
+            if(unitOfWork.Vehicles.Find(x => x.CruiserNumber == form.CruiserNumber && x.VehicleId != id).Count() > 0)
             {
                 errors++;
                 ViewBag.Message = $"The cruiser number {form.CruiserNumber} is in use. Choose another.";
             }
             // ensure that the Tag Number is not in use
-            if(unitOfWork.Vehicles.SingleOrDefault(x => x.TagNumber == form.TagNumber && x.TagState == form.TagState && x.VehicleId != form.VehicleId) != null)
+            var test = unitOfWork.Vehicles.Find(x => x.TagNumber == form.TagNumber && x.TagState == form.TagState && x.VehicleId != id);
+            if (unitOfWork.Vehicles.Find(x => x.TagNumber == form.TagNumber && x.TagState == form.TagState && x.VehicleId != id).Count() > 0)
             {
                 errors++;
                 ViewBag.Message = $"The Tag Number {form.TagNumber}/{form.TagState} is in use. Choose another.";                
@@ -293,7 +298,7 @@ namespace BlueDeck.Controllers
 
             if(errors == 0)
             {
-                Vehicle toEdit = unitOfWork.Vehicles.Get(form.VehicleId);
+                Vehicle toEdit = unitOfWork.Vehicles.Get(id);
                 toEdit.ModelYear = form.ModelYear;
                 toEdit.ModelId = form.ModelId;
                 toEdit.VIN = form.VIN;

@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -20,29 +19,28 @@ namespace BlueDeck.Models
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)        
+        public Task<ClaimsPrincipal> TransformAsync(ClaimsPrincipal principal)        
         {
-            var identity = principal.Identities.FirstOrDefault(x => x.IsAuthenticated);
-            if(identity == null) return principal;
-
+            var identity = principal.Identities.FirstOrDefault(x => x.IsAuthenticated);  
             var user = identity.Name;
-            // Is this the Windows Logon name?
-            if (user == null) return principal;
-
-            if(principal.Identity is ClaimsIdentity)
+            var id = ((ClaimsIdentity)principal.Identity);
+            var ci = new ClaimsIdentity(id.Claims, id.AuthenticationType, id.NameClaimType, id.RoleClaimType);
+            bool adminFlag = false;
+            if (principal.Identity is ClaimsIdentity)
             {
                 string logonName = user.Split('\\')[1];
                 // pull user roles 
                 Member dbUser = _unitOfWork.Members.GetMemberWithRoles(logonName);
+                
                 if (dbUser != null)
                 {
-                    var ci = (ClaimsIdentity)principal.Identity;
                     foreach (Role ur in dbUser.CurrentRoles)
                     {
                         var c = new Claim(ci.RoleClaimType, ur.RoleType.RoleTypeName);
                         ci.AddClaim(c);
                         if (ur.RoleType.RoleTypeName == "ComponentAdmin")
                         {
+                            adminFlag = true;
                             int memberParentComponentId = dbUser.Position.ParentComponent.ComponentId;
                             // TODO: Repo method to get tree of componentIds for the user's parent component
                             List<ComponentSelectListItem> canEditComponents = _unitOfWork.Components.GetChildComponentsForComponentId(memberParentComponentId);
@@ -59,16 +57,30 @@ namespace BlueDeck.Models
                             var g = new Claim("CanEditVehicles", JsonConvert.SerializeObject(canEditVehicles));
                             ci.AddClaim(g);
                         }
-                        else
+                    }
+                    // here, I need to check if the user has the CanEditVehicles claim... if not, it means that they are not in the ComponentAdmin Role, so
+                    // I need to explicitly check if their Position entitles them to see certain vehicles
+                    // This is supposed to cover vehicles that have been assigned to the User's Current Position
+                    if (adminFlag == false) // adminFlag is set to true above if the ComponentAdmin role is present.
+                    {
+                        Position p = _unitOfWork.Positions.GetPositionWithVehicles(dbUser.PositionId);
+                        List<VehicleSelectListItem> canEditVehicles = new List<VehicleSelectListItem>();
+                        if (p != null)
                         {
-                            // This is supposed to cover vehicles that have been assigned to the User's Current Position
-                            Position p = _unitOfWork.Positions.GetPositionWithVehicles(dbUser.PositionId);
-                            if (p != null)
+                            canEditVehicles.AddRange(p.AssignedVehicles.ConvertAll(x => new VehicleSelectListItem(x)));
+                            if (p.IsManager || p.IsAssistantManager)
                             {
-                                List<VehicleSelectListItem> canEditVehicles = p.AssignedVehicles.ConvertAll(x => new VehicleSelectListItem(x));
-                                var g = new Claim("CanEditVehicles", JsonConvert.SerializeObject(canEditVehicles));
-                                ci.AddClaim(g);
+                                Component component = _unitOfWork.Components.GetComponentWithVehicles(p.ParentComponentId);
+                                if (component != null && component.AssignedVehicles != null)
+                                {
+                                    canEditVehicles.AddRange(component.AssignedVehicles.ConvertAll(x => new VehicleSelectListItem(x)));
+                                }
                             }
+                        }
+                        if (canEditVehicles.Count() > 0)
+                        {
+                            var g = new Claim("CanEditVehicles", JsonConvert.SerializeObject(canEditVehicles));
+                            ci.AddClaim(g);
                         }
                     }
                     ci.AddClaim(new Claim(ClaimTypes.GivenName, dbUser.FirstName));
@@ -82,17 +94,17 @@ namespace BlueDeck.Models
                     }
                 }
                 else
-                {
-                    var ci = (ClaimsIdentity)principal.Identity;
+                {                    
                     ci.AddClaim(new Claim("DisplayName", "Guest"));
                     ci.AddClaim(new Claim("MemberId", "0", ClaimValueTypes.Integer32));
                     ci.AddClaim(new Claim(ci.RoleClaimType, "Guest"));
                     ci.AddClaim(new Claim("LDAPName", logonName));
-                }
-                
+                }               
             }
+
+            var cp = new ClaimsPrincipal(ci);
                         
-            return principal;
+            return Task.FromResult(cp);
         }
     }
 }

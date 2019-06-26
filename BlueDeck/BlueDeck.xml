@@ -2429,7 +2429,7 @@
             <param name="returnUrl">The return URL.</param>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.VehiclesController.Edit(BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
+        <member name="M:BlueDeck.Controllers.VehiclesController.Edit(System.Int32,BlueDeck.Models.ViewModels.AddEditVehicleViewModel,System.String)">
             <summary>
             POST: Vehicle/Edit/5
             </summary>
@@ -4524,6 +4524,13 @@
             that a Component name isn't colliding with itself.
             </remarks>
             <param name="c">The Component to to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetComponentWithVehicles(System.Int32)">
+            <summary>
+            Gets the component with it's assigned vehicles.
+            </summary>
+            <param name="componentId">The component identifier.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository">
@@ -7117,6 +7124,13 @@
             in it's ParentComponent's Lineup.
             /// </remarks>
             <param name="c">The <seealso cref="T:BlueDeck.Models.Component"/> being added or edited.</param>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.ComponentRepository.GetComponentWithVehicles(System.Int32)">
+            <summary>
+            Gets the component with it's assigned vehicles.
+            </summary>
+            <param name="componentId">The component identifier.</param>
+            <returns></returns>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.MemberDutyStatusRepository">
             <summary>
