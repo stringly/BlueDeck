@@ -12,6 +12,7 @@ namespace BlueDeck.Models.ViewModels
         public string MemberLastNameSort { get; set; }
         public string IdNumberSort { get; set; }
         public string PositionNameSort { get; set; }
+        public string CruiserNumberSort { get; set;}
         public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
 

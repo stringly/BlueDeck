@@ -62,7 +62,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th style="text-align:center;">
+                        <th>
                             VehicleId
                         </th>
                         <th style="text-align:center;">
@@ -104,47 +104,59 @@
                         </th>
                         <th style="text-align:center;">
                             Marked
-                        </th>                        
+                        </th>
+                        <th style="text-align:center">
+                            MVS
+                        </th>
+                        <th style="text-align:center">
+                            MDT
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Vehicles)
                     {
-                        <tr>
-                            <td>
-                                @item.VehicleId
-                            </td>
-                            <td style="text-align:center;">
-                                @item.CruiserNumber
-                            </td>
-                            <td style="text-align:center;">
-                                @item.ModelYear
-                            </td>
-                            <td>
-                                @item.Model.VehicleModelName
-                            </td>
-                            <td>
-                                @item.Model.Manufacturer.VehicleManufacturerName
-                            </td>
-                            <td style="text-align:center;">
-                                @item.TagNumber
-                            </td>
-                            <td style="text-align:center;">
-                                @Html.DisplayFor(modelItem => item.IsMarked)
-                            </td>
-                            <td>
-                                <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="Edit Vehicle" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
-                                </a>
-                                <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="View Details" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
-                                </a>
-                                <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="Delete Vehicle" class="glyphicon-ring">
-                                    <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            @item.VehicleId
+                        </td>
+                        <td style="text-align:center;">
+                            @item.CruiserNumber
+                        </td>
+                        <td style="text-align:center;">
+                            @item.ModelYear
+                        </td>
+                        <td>
+                            @item.Model.VehicleModelName
+                        </td>
+                        <td>
+                            @item.Model.Manufacturer.VehicleManufacturerName
+                        </td>
+                        <td style="text-align:center;">
+                            @item.TagNumber
+                        </td>
+                        <td style="text-align:center;">
+                            @Html.DisplayFor(modelItem => item.IsMarked)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.HasMVS)
+                        </td>
+                        <td style="text-align:center">
+                            @Html.DisplayFor(modelItem => item.HasMDT)
+                        </td>
+                        <td>
+                            <a asp-controller="Vehicles" asp-action="Edit" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="Edit Vehicle" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
+                            </a>
+                            <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="View Details" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-list-alt glyphicon-bordered"></span>
+                            </a>
+                            <a asp-controller="Vehicles" asp-action="Delete" asp-route-id="@item.VehicleId" asp-route-returnUrl="/Admin/VehicleIndex" title="Delete Vehicle" class="glyphicon-ring">
+                                <span class="glyphicon glyphicon-trash glyphicon-bordered"></span>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

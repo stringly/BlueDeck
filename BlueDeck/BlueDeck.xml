@@ -468,6 +468,52 @@
             <param name="componentBeingEditedId">The component being edited identifier.</param>
             <returns></returns>
         </member>
+        <member name="T:BlueDeck.Controllers.DocumentsController">
+            <summary>
+            Controller that generates OpenXML Documents
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Mvc.Controller" />
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.#ctor(BlueDeck.Models.Repositories.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Controllers.DocumentsController"/> class.
+            </summary>
+            <param name="_unit">An injected <see cref="T:BlueDeck.Models.Repositories.IUnitOfWork"/> obtained from the services middleware.</param>
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.Index">
+            <summary>
+            GET: Documents/Index
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.Lineup(System.Int32)">
+            <summary>
+            Lineups the specified identifier.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.DownloadAlphaRoster(System.Int32)">
+            <summary>
+            Downloads an alphabetical roster for the Component with the provided identity.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.DownloadComponentRoster(System.Int32)">
+            <summary>
+            Downloads an Component roster for the Component with the provided identity.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.DownloadOrganizationChart(System.Int32)">
+            <summary>
+            Downloads an organization chart for the Component with the provided id.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Controllers.DutyStatusController">
             <summary>
             Controller that handles CRUD actions for the <see cref="T:BlueDeck.Models.Enums.DutyStatus"/> entity.
@@ -4140,14 +4186,6 @@
             The temporary duty position.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Member.AssignedVehicleId">
-            <summary>
-            Gets or sets the assigned vehicle identifier.
-            </summary>
-            <value>
-            The assigned vehicle identifier.
-            </value>
-        </member>
         <member name="P:BlueDeck.Models.Member.AssignedVehicle">
             <summary>
             Gets or sets the assigned vehicle.
@@ -4448,18 +4486,18 @@
         </member>
         <member name="T:BlueDeck.Models.Repositories.IComponentRepository">
             <summary>
-            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
+            An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository`1"/>
             </summary>
-            <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Component}" />
+            <seealso cref="T:BlueDeck.Models.Repositories.IRepository`1" />
         </member>
         <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithoutMembers">
             <summary>
-            Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
+            Gets the list of <see cref="T:BlueDeck.Models.Types.ChartableComponent"/>s.
             </summary>
             <remarks>
             This method is used to seed the GetOrgChart JQuery chart with a list of Components without Member details .
             </remarks>
-            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:BlueDeck.Models.Types.ChartableComponent"/> objects</returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembers(System.Int32)">
             <summary>
@@ -4468,7 +4506,14 @@
             <remarks>
             This method is used to seed the GetOrgChart JQuery chart with a list of Components with Member details.
             </remarks>
-            <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
+            <returns>A <see cref="T:System.Collections.Generic.IEnumerable`1"/> list of <see cref="T:BlueDeck.Models.Types.ChartableComponentWithMember"/> objects</returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetOrgChartComponentsWithMembersNoMarkup(System.Int32)">
+            <summary>
+            Gets the org chart components with members no markup.
+            </summary>
+            <param name="parentComponentId">The parent component identifier.</param>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetComponentSelectListItems">
             <summary>
@@ -4526,11 +4571,45 @@
             <param name="c">The Component to to check.</param>
             <returns></returns>
         </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetMembersRosterForComponentId(System.Int32)">
+            <summary>
+            Gets the members roster for component identifier.
+            </summary>
+            <param name="componentId">The component identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetAdminComponentIndexListViewModel">
+            <summary>
+            Gets the admin component index ListView model.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetApiComponent(System.Int32)">
+            <summary>
+            Gets the API component.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetComponentForDemographics(System.Int32)">
+            <summary>
+            Gets the component for demographics.
+            </summary>
+            <param name="componentId">The component identifier.</param>
+            <returns></returns>
+        </member>
         <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetComponentWithVehicles(System.Int32)">
             <summary>
             Gets the component with it's assigned vehicles.
             </summary>
             <param name="componentId">The component identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Models.Repositories.IComponentRepository.GetLineupGeneratorViewModel(System.Int32)">
+            <summary>
+            Gets the lineup generator view model.
+            </summary>
+            <param name="id">The identifier.</param>
             <returns></returns>
         </member>
         <member name="T:BlueDeck.Models.Repositories.IMemberDutyStatusRepository">
@@ -5202,6 +5281,126 @@
             </summary>
             <param name="_c">The Component.</param>
         </member>
+        <member name="T:BlueDeck.Models.Types.HomePageViewModelMemberListItem">
+            <summary>
+            Class that represents a Member or Position Item on the "My Coworkers" lists on the Home/Index view
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.MemberId">
+            <summary>
+            Gets or sets the member identifier.
+            </summary>
+            <value>
+            The member identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.MemberDisplayName">
+            <summary>
+            Gets or sets the display name of the member.
+            </summary>
+            <value>
+            The display name of the member.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.MemberRankImageUri">
+            <summary>
+            Gets or sets the member rank image URI.
+            </summary>
+            <value>
+            The member rank image URI.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.HomePageViewModelMemberListItem.EmailAddress">
+            <summary>
+            Gets or sets the email address.
+            </summary>
+            <value>
+            The email address.
+            </value>
+        </member>
+        <member name="T:BlueDeck.Models.Types.LineupMember">
+            <summary>
+            Class that represents a Member entity in the Lineup Generator view
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.Callsign">
+            <summary>
+            Gets or sets the callsign.
+            </summary>
+            <value>
+            The callsign.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.BadgeNumber">
+            <summary>
+            Gets or sets the bedge number.
+            </summary>
+            <value>
+            The bedge number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.Rank">
+            <summary>
+            Gets or sets the rank.
+            </summary>
+            <value>
+            The rank.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.MemberName">
+            <summary>
+            Gets or sets the name of the member.
+            </summary>
+            <value>
+            The name of the member.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.LeaveStatus">
+            <summary>
+            Gets or sets the leave status.
+            </summary>
+            <value>
+            The leave status.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.MVSStatus">
+            <summary>
+            Gets or sets the MVS status.
+            </summary>
+            <value>
+            The MVS status.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.CruiserNumber">
+            <summary>
+            Gets or sets the cruiser number.
+            </summary>
+            <value>
+            The cruiser number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.ShiftWorking">
+            <summary>
+            Gets or sets the shift working.
+            </summary>
+            <value>
+            The shift working.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.IsOverlap">
+            <summary>
+            Gets or sets a value indicating whether this instance is overlap.
+            </summary>
+            <value>
+              <c>true</c> if this instance is overlap; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.LineupMember.#ctor(BlueDeck.Models.Member)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMember"/> class.
+            </summary>
+            <param name="_member">The member.</param>
+        </member>
         <member name="T:BlueDeck.Models.Types.MappedField">
             <summary>
             Class used to map Table/Cell index and value
@@ -5601,6 +5800,30 @@
             The name of the vehicle.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Types.VehicleSelectListItem.CruiserNumber">
+            <summary>
+            Gets or sets the cruiser number.
+            </summary>
+            <value>
+            The cruiser number.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleSelectListItem.HasMVS">
+            <summary>
+            Gets or sets a value indicating whether this instance has MVS.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.VehicleSelectListItem.HasMDT">
+            <summary>
+            Gets or sets a value indicating whether this instance has MDT.
+            </summary>
+            <value>
+              <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
+            </value>
+        </member>
         <member name="M:BlueDeck.Models.Types.VehicleSelectListItem.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/> class.
@@ -5722,7 +5945,7 @@
             </summary>
             <value>
             The assigned to member.
-            </value> 
+            </value>         
         </member>
         <member name="P:BlueDeck.Models.Vehicle.AssignedToPositionId">
             <summary>
@@ -5741,7 +5964,7 @@
             </summary>
             <value>
             The assigned to position.
-            </value>        
+            </value>      
         </member>
         <member name="P:BlueDeck.Models.Vehicle.AssignedToComponentId">
             <summary>
@@ -5760,7 +5983,7 @@
             </summary>
             <value>
             The assigned to component.
-            </value>        
+            </value>                
         </member>
         <member name="M:BlueDeck.Models.Vehicle.ReassignToMemberId(System.Int32)">
             <summary>
@@ -5788,6 +6011,12 @@
             Assigning the vehicle to a Componetn will nullify any Member/Position assignment for the vehicle.
             </remarks>
             <param name="_componentId">The component identifier.</param>
+        </member>
+        <member name="M:BlueDeck.Models.Vehicle.GetDisplayName">
+            <summary>
+            Gets the display name.
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:BlueDeck.Models.Vehicle.IssuedTo">
             <summary>
@@ -6443,6 +6672,139 @@
             <param name="c">The <see cref="T:BlueDeck.Models.Component"/> being displayed by the view</param>
             <param name="l">A <see cref="T:List{T}"/> of all <see cref="T:BlueDeck.Models.Component"/>s in the repository </param>
         </member>
+        <member name="T:BlueDeck.Models.ViewModels.DocumentsIndexViewModel">
+            <summary>
+            View Model used in the Documents/Index View
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.DocumentsIndexViewModel.Components">
+            <summary>
+            Gets or sets the components.
+            </summary>
+            <value>
+            A list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/> used to populate select lists.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.DocumentsIndexViewModel.#ctor(System.Collections.Generic.List{BlueDeck.Models.Types.ComponentSelectListItem})">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.DocumentsIndexViewModel"/> class.
+            </summary>
+            <param name="_components">A list of <see cref="T:BlueDeck.Models.Types.ComponentSelectListItem"/>.</param>
+        </member>
+        <member name="T:BlueDeck.Models.ViewModels.LineupGeneratorViewModel">
+            <summary>
+            View Model used in the Documents/Lineup view
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.DistrictName">
+            <summary>
+            Gets or sets the name of the district.
+            </summary>
+            <value>
+            The name of the district.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.CommanderName">
+            <summary>
+            Gets or sets the name of the commander.
+            </summary>
+            <value>
+            The name of the commander.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.CommanderTitle">
+            <summary>
+            Gets or sets the commander title.
+            </summary>
+            <value>
+            The commander title.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.AssistantCommanderName">
+            <summary>
+            Gets or sets the name of the assistant commander.
+            </summary>
+            <value>
+            The name of the assistant commander.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.AssistantCommanderTitle">
+            <summary>
+            Gets or sets the assistant commander title.
+            </summary>
+            <value>
+            The assistant commander title.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.ComponentName">
+            <summary>
+            Gets or sets the name of the component.
+            </summary>
+            <value>
+            The name of the component.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.LineupDate">
+            <summary>
+            Gets or sets the lineup date.
+            </summary>
+            <value>
+            The lineup date.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.Vehicles">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            A list of <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/> used to populate drop-down lists.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.ShiftCommander">
+            <summary>
+            Gets or sets the shift commander.
+            </summary>
+            <value>
+            The shift commander.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.OIC">
+            <summary>
+            Gets or sets the oic.
+            </summary>
+            <value>
+            The oic.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.Members">
+            <summary>
+            Gets or sets the members.
+            </summary>
+            <value>
+            The members.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.IsOverlap">
+            <summary>
+            Gets or sets a value indicating whether this instance is overlap.
+            </summary>
+            <value>
+              <c>true</c> if this instance is overlap; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.ShiftWorking">
+            <summary>
+            Gets or sets the shift working.
+            </summary>
+            <value>
+            The shift working.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.LineupGeneratorViewModel"/> class.
+            </summary>
+        </member>
         <member name="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel">
             <summary>
             ViewModel used to display a Position and populate a selectlist of Component Names/Ids to facilitate adding a Position or changing the Component to which a position is assigned. 
@@ -6603,6 +6965,14 @@
             The org position number.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.AssignedVehicleId">
+            <summary>
+            Gets or sets the assigned vehicle identifier.
+            </summary>
+            <value>
+            The assigned vehicle identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.IsUser">
             <summary>
             Gets or sets a value indicating whether this Member is in the "User" <see cref="T:BlueDeck.Models.Role"/>
@@ -6748,25 +7118,34 @@
             The phone number types.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.MemberAddEditViewModel.Vehicles">
+            <summary>
+            Gets or sets the vehicles.
+            </summary>
+            <value>
+            A list of <see cref="T:BlueDeck.Models.Types.VehicleModelSelectListItem"/>
+            </value>
+        </member>
         <member name="M:BlueDeck.Models.ViewModels.MemberAddEditViewModel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
         </member>
-        <member name="M:BlueDeck.Models.ViewModels.MemberAddEditViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.PositionSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.ApplicationStatusSelectListItem})">
+        <member name="M:BlueDeck.Models.ViewModels.MemberAddEditViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.PositionSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.ApplicationStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.VehicleSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
             <param name="_member">A <see cref="T:BlueDeck.Models.Member"/>.</param>
-            <param name="_positionList">A <see cref="T:BlueDeck.Models.Types.PositionSelectListItem"/>.</param>
-            <param name="_rankList">A <see cref="T:BlueDeck.Models.Types.MemberRankSelectListItem"/>.</param>
-            <param name="_genderList">A <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/>.</param>
-            <param name="_raceList">A <see cref="T:BlueDeck.Models.Types.MemberRaceSelectListItem"/>.</param>
-            <param name="_dutyStatusList">A <see cref="T:BlueDeck.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
-            <param name="_phoneNumberTypes">A <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
+            <param name="_positionList">A List of <see cref="T:BlueDeck.Models.Types.PositionSelectListItem"/>.</param>
+            <param name="_rankList">A List of<see cref="T:BlueDeck.Models.Types.MemberRankSelectListItem"/>.</param>
+            <param name="_genderList">A List of <see cref="T:BlueDeck.Models.Types.MemberGenderSelectListItem"/>.</param>
+            <param name="_raceList">A List of <see cref="T:BlueDeck.Models.Types.MemberRaceSelectListItem"/>.</param>
+            <param name="_dutyStatusList">A List of <see cref="T:BlueDeck.Models.Types.MemberDutyStatusSelectListItem"/>.</param>
+            <param name="_phoneNumberTypes">A List of <see cref="T:BlueDeck.Models.Types.PhoneNumberTypeSelectListItem"/>.</param>
             <param name="_appStatusList">A List of  <see cref="T:BlueDeck.Models.Types.ApplicationStatusSelectListItem"/>.</param>
+            <param name="_vehicleList">A List of <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/></param>
         </member>
-        <member name="M:BlueDeck.Models.ViewModels.MemberAddEditViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.ApplicationStatusSelectListItem})">
+        <member name="M:BlueDeck.Models.ViewModels.MemberAddEditViewModel.#ctor(BlueDeck.Models.Member,System.Collections.Generic.List{BlueDeck.Models.Types.MemberRankSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberGenderSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberRaceSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.MemberDutyStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.PhoneNumberTypeSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.ApplicationStatusSelectListItem},System.Collections.Generic.List{BlueDeck.Models.Types.VehicleSelectListItem})">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.ViewModels.MemberAddEditViewModel"/> class.
             </summary>
@@ -7414,6 +7793,21 @@
             </remarks>
             <param name="memberId">The member identifier.</param>
             <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.GetMemberParentComponentId(System.Int32)">
+            <summary>
+            Gets a Member's parent component identifier.
+            </summary>
+            <param name="memberid">The memberid.</param>
+            <returns></returns>
+        </member>
+        <member name="M:BlueDeck.Persistence.Repositories.MemberRepository.ReassignMemberAndSetRole(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Reassigns the member and set role.
+            </summary>
+            <param name="MemberToReassignId">The member to reassign identifier.</param>
+            <param name="newPositionId">The new position identifier.</param>
+            <param name="IsTDY">if set to <c>true</c> [is tdy].</param>
         </member>
         <member name="T:BlueDeck.Persistence.Repositories.PhoneNumberTypeRepository">
             <summary>

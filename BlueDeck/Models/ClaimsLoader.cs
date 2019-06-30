@@ -88,9 +88,9 @@ namespace BlueDeck.Models
                     ci.AddClaim(new Claim("MemberId", dbUser.MemberId.ToString(), ClaimValueTypes.Integer32));
                     ci.AddClaim(new Claim("DisplayName", dbUser.GetTitleName()));
                     ci.AddClaim(new Claim("LDAPName", logonName));
-                    if(dbUser.AssignedVehicleId != null)
+                    if(dbUser.AssignedVehicle != null)
                     {
-                        ci.AddClaim(new Claim("VehicleId", dbUser.AssignedVehicleId.ToString(), ClaimValueTypes.Integer32));
+                        ci.AddClaim(new Claim("VehicleId", dbUser.AssignedVehicle.VehicleId.ToString(), ClaimValueTypes.Integer32));
                     }
                 }
                 else

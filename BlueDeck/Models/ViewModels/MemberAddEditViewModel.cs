@@ -198,6 +198,14 @@ namespace BlueDeck.Models.ViewModels
         public string OrgPositionNumber { get; set; }
 
         /// <summary>
+        /// Gets or sets the assigned vehicle identifier.
+        /// </summary>
+        /// <value>
+        /// The assigned vehicle identifier.
+        /// </value>
+        [Display(Name = "Assigned Vehicle")]
+        public int? AssignedVehicleId { get; set; }
+        /// <summary>
         /// Gets or sets a value indicating whether this Member is in the "User" <see cref="Role"/>
         /// </summary>
         /// <value>
@@ -351,6 +359,14 @@ namespace BlueDeck.Models.ViewModels
         public List<PhoneNumberTypeSelectListItem> PhoneNumberTypes { get; set; }
 
         /// <summary>
+        /// Gets or sets the vehicles.
+        /// </summary>
+        /// <value>
+        /// A list of <see cref="VehicleModelSelectListItem"/>
+        /// </value>
+        public List<VehicleSelectListItem> Vehicles { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
         /// </summary>
         public MemberAddEditViewModel()
@@ -361,13 +377,14 @@ namespace BlueDeck.Models.ViewModels
         /// Initializes a new instance of the <see cref="MemberAddEditViewModel"/> class.
         /// </summary>
         /// <param name="_member">A <see cref="Member"/>.</param>
-        /// <param name="_positionList">A <see cref="PositionSelectListItem"/>.</param>
-        /// <param name="_rankList">A <see cref="MemberRankSelectListItem"/>.</param>
-        /// <param name="_genderList">A <see cref="MemberGenderSelectListItem"/>.</param>
-        /// <param name="_raceList">A <see cref="MemberRaceSelectListItem"/>.</param>
-        /// <param name="_dutyStatusList">A <see cref="MemberDutyStatusSelectListItem"/>.</param>
-        /// <param name="_phoneNumberTypes">A <see cref="PhoneNumberTypeSelectListItem"/>.</param>
+        /// <param name="_positionList">A List of <see cref="PositionSelectListItem"/>.</param>
+        /// <param name="_rankList">A List of<see cref="MemberRankSelectListItem"/>.</param>
+        /// <param name="_genderList">A List of <see cref="MemberGenderSelectListItem"/>.</param>
+        /// <param name="_raceList">A List of <see cref="MemberRaceSelectListItem"/>.</param>
+        /// <param name="_dutyStatusList">A List of <see cref="MemberDutyStatusSelectListItem"/>.</param>
+        /// <param name="_phoneNumberTypes">A List of <see cref="PhoneNumberTypeSelectListItem"/>.</param>
         /// <param name="_appStatusList">A List of  <see cref="ApplicationStatusSelectListItem"/>.</param>
+        /// <param name="_vehicleList">A List of <see cref="VehicleSelectListItem"/></param>
         public MemberAddEditViewModel(Member _member, 
             List<PositionSelectListItem> _positionList, 
             List<MemberRankSelectListItem> _rankList, 
@@ -375,7 +392,8 @@ namespace BlueDeck.Models.ViewModels
             List<MemberRaceSelectListItem> _raceList,
             List<MemberDutyStatusSelectListItem> _dutyStatusList,
             List<PhoneNumberTypeSelectListItem> _phoneNumberTypes,
-            List<ApplicationStatusSelectListItem> _appStatusList)
+            List<ApplicationStatusSelectListItem> _appStatusList, 
+            List<VehicleSelectListItem> _vehicleList)
         {
             MemberId = _member?.MemberId;
             MemberRank = _member?.Rank?.RankId;
@@ -412,6 +430,8 @@ namespace BlueDeck.Models.ViewModels
             IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
             IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
             IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false; 
+            Vehicles = _vehicleList;
+            AssignedVehicleId = _member?.AssignedVehicle?.VehicleId;
         }
 
         /// <summary>
@@ -434,7 +454,8 @@ namespace BlueDeck.Models.ViewModels
             List<MemberRaceSelectListItem> _raceList,
             List<MemberDutyStatusSelectListItem> _dutyStatusList,
             List<PhoneNumberTypeSelectListItem> _phoneNumberTypes,
-            List<ApplicationStatusSelectListItem> _appStatusList)
+            List<ApplicationStatusSelectListItem> _appStatusList, 
+            List<VehicleSelectListItem> _vehicleList)
         {
             MemberId = _member?.MemberId;
             MemberRank = _member?.Rank?.RankId;
@@ -470,7 +491,8 @@ namespace BlueDeck.Models.ViewModels
             IsUser = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "User") ?? false;
             IsComponentAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "ComponentAdmin") ?? false;
             IsGlobalAdmin = _member?.CurrentRoles?.Any(x => x.RoleType.RoleTypeName == "GlobalAdmin") ?? false;
-           
+            Vehicles = _vehicleList;
+            AssignedVehicleId = _member?.AssignedVehicle?.VehicleId;
         }
 
     }

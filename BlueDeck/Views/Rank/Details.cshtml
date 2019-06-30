@@ -3,49 +3,47 @@
 
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     <div class="formHeader">
-        <h2 class="formHeader-heading">Rank: <strong>@Model.RankFullName</strong></h2>
+        <h4 class="formHeader-heading"><strong>Rank Details</strong></h4>
         <p class="formHeader-description">
-            Showing Rank Details
+            Showing details for "@Model.RankFullName"
         </p>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-3 form-group">
-                        @Html.LabelFor(model => model.RankId, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.RankId, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-md-5 form-group">
-                        @Html.LabelFor(model => model.RankFullName, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.RankFullName, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-md-2 form-group">
-                        @Html.LabelFor(model => model.RankShort, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.RankShort, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-md-2 form-group">
-                        @Html.LabelFor(model => model.PayGrade, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.PayGrade, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
-                        <div class="form-checkbox">
-                            <label>
-                                <input asp-for="IsSworn" disabled /> @Html.DisplayNameFor(model => model.IsSworn)
-                            </label>
-                            <span class="note">
-                                Rank is sworn officer.
-                            </span>
-                        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    @Html.LabelFor(model => model.RankId, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.RankId, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-5 form-group">
+                    @Html.LabelFor(model => model.RankFullName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.RankFullName, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-2 form-group">
+                    @Html.LabelFor(model => model.RankShort, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.RankShort, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-2 form-group">
+                    @Html.LabelFor(model => model.PayGrade, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.PayGrade, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="IsSworn" disabled /> @Html.DisplayNameFor(model => model.IsSworn)
+                        </label>
+                        <span class="note">
+                            Rank is sworn officer.
+                        </span>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                        <a asp-action="Edit" asp-route-id="@Model.RankId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@Model.RankId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
-                    </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                    <a asp-action="Edit" asp-route-id="@Model.RankId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@Model.RankId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
                 </div>
             </div>
         </div>

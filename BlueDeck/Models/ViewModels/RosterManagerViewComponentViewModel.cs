@@ -32,15 +32,21 @@ namespace BlueDeck.Models.ViewModels
             // I realized this was a problem when this ran for a Parent Component with a ComponentId HIGHER than the ComponentId of one of it's children.
             // To hack around this, I manually extract and push the "root" component (which means the Component on the "initial" list that has a NULL ParentComponent)
             // to the ComponentList Property and then remove it from the "intial" list prior to calling the SetComponentListOrder method.
-            RosterManagerViewModelComponent rootComponent = initial.Where(x => x.ParentComponent == null).First();
-            rootComponent.NestedLevel = 0;
-            ComponentList.Add(rootComponent);
-            initial.Remove(rootComponent);
-            if(initial.Count() > 0)
+            if(initial.Count > 1)
             {
-                SetComponentListOrder(initial.OrderBy(x => x.ParentComponentId).ToList());
-            }           
-
+                RosterManagerViewModelComponent rootComponent = initial.Where(x => x.ParentComponent == null).First();
+                rootComponent.NestedLevel = 0;
+                ComponentList.Add(rootComponent);
+                initial.Remove(rootComponent);
+                if(initial.Count() > 0)
+                {
+                    SetComponentListOrder(initial.OrderBy(x => x.ParentComponentId).ToList());
+                }
+            }
+            else
+            {
+                ComponentList.Add(initial.First());
+            }
         }
 
         private void SetComponentListOrder(List<RosterManagerViewModelComponent> initial)

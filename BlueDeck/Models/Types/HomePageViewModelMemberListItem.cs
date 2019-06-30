@@ -1,20 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BlueDeck.Models.Types
 {
+    /// <summary>
+    /// Class that represents a Member or Position Item on the "My Coworkers" lists on the Home/Index view
+    /// </summary>
     public class HomePageViewModelMemberListItem
     {
+        /// <summary>
+        /// Gets or sets the member identifier.
+        /// </summary>
+        /// <value>
+        /// The member identifier.
+        /// </value>
         public int MemberId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display name of the member.
+        /// </summary>
+        /// <value>
+        /// The display name of the member.
+        /// </value>
         public string MemberDisplayName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the member rank image URI.
+        /// </summary>
+        /// <value>
+        /// The member rank image URI.
+        /// </value>
         public string MemberRankImageUri { get; set; }
+
+        /// <summary>
+        /// Gets or sets the email address.
+        /// </summary>
+        /// <value>
+        /// The email address.
+        /// </value>
         public string EmailAddress { get; set; }
         public string ContactNumber { get; set; }
         public string PositionName { get; set; }
         public int PositionId { get; set; }
-        public int ParentComponentId {get;set;}
+        public int ParentComponentId { get; set; }
+        public int? AssignedVehicleId { get; set; }
+        public string AssignedVehicleNumber { get; set; }
         public string ParentComponentName {get;set;}
         public string TempPositionName { get; set; }
         public int? TempPositionId { get; set; }
@@ -45,7 +75,9 @@ namespace BlueDeck.Models.Types
             DutyStatus = member?.DutyStatus?.DutyStatusName ?? "-";
             IsExceptionToNormalDuty = member?.DutyStatus.IsExceptionToNormalDuty ?? false;
             Gender = member.Gender.Abbreviation;
-            Race = member.Race.Abbreviation;     
+            Race = member.Race.Abbreviation;
+            AssignedVehicleId = member?.AssignedVehicle?.VehicleId ?? null;
+            AssignedVehicleNumber = member?.AssignedVehicle?.CruiserNumber ?? "No Cruiser";
         }
         public HomePageViewModelMemberListItem(Position p)
         {
@@ -58,6 +90,8 @@ namespace BlueDeck.Models.Types
             PositionId = p.PositionId;
             DutyStatus = "-";
             LineupPosition = p.LineupPosition;
+            AssignedVehicleNumber = "-";
+            AssignedVehicleId = null;
 
         }
     }

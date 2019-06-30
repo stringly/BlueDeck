@@ -99,7 +99,18 @@
                     </tr>
                     <tr>
                         <th style="text-align:center">
-                            Cruiser #
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.CruiserNumberSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Cruiser Number">
+                                @Html.DisplayNameFor(model => model.Vehicles.First().CruiserNumber)
+                                @if (Model.CurrentSort == "cruiserNumber_desc")
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                                }
+                            </a>
                         </th>
                         <th style="text-align:center">
                             Year

@@ -76,6 +76,10 @@ namespace BlueDeck.Persistence.Repositories
             return ApplicationDbContext.Vehicles
                 .Include(x => x.Model)
                     .ThenInclude(x => x.Manufacturer)
+                .Include(x => x.AssignedToMember)
+                    .ThenInclude(x => x.Rank)
+                .Include(x => x.AssignedToPosition)
+                .Include(x => x.AssignedToComponent)
                 .Where(x => x.VehicleId == _vehicleId)
                 .FirstOrDefault();
         }

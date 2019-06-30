@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using BlueDeck.Models.APIModels;
 using System.Threading.Tasks;
+using System;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -887,6 +888,66 @@ namespace BlueDeck.Persistence.Repositories
                             .ThenInclude(x => x.Manufacturer)
                 .FirstOrDefault();
                 
+        }
+
+        public LineupGeneratorViewModel GetLineupGeneratorViewModel(int id)
+        {
+            Component c = ApplicationDbContext.Components
+                .Where(x => x.ComponentId == id)
+                .Include(x => x.Positions)
+                .Include(x => x.ParentComponent)
+                .FirstOrDefault();
+            ApplicationDbContext.Set<Position>().Where(x => x.ParentComponentId == c.ComponentId || x.ParentComponentId == c.ParentComponentId)
+                .Include(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(y => y.Members).ThenInclude(z => z.Gender)
+                .Include(y => y.Members).ThenInclude(x => x.Race)
+                .Include(y => y.Members).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.Members).ThenInclude(x => x.AssignedVehicle)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .Include(y => y.TempMembers).ThenInclude(z => z.Gender)
+                .Include(y => y.TempMembers).ThenInclude(x => x.Race)
+                .Include(y => y.TempMembers).ThenInclude(x => x.DutyStatus)
+                .Include(y => y.TempMembers).ThenInclude(x => x.AssignedVehicle)
+                .Load();
+
+            LineupGeneratorViewModel vm = new LineupGeneratorViewModel();
+            Component DistrictComponent = ApplicationDbContext.Components
+                .Where(x => x.ComponentId == c.ParentComponent.ParentComponentId)
+                .Include(x => x.ParentComponent)
+                .Include(x => x.Positions)
+                    .ThenInclude(y => y.Members).ThenInclude(z => z.Rank)
+                .Include(x => x.Positions)
+                    .ThenInclude(y => y.TempMembers).ThenInclude(z => z.Rank)
+                .FirstOrDefault();
+            Member DistrictCommander = DistrictComponent.GetManager();
+            Member AssistantCommander = DistrictComponent.GetAssistantManager();
+            Member ShiftCommander = DistrictComponent.ParentComponent.GetManager();
+            vm.CommanderName = DistrictCommander?.GetTitleName() ?? "VACANT";
+            vm.CommanderTitle = DistrictCommander?.Position?.Name ?? $"{DistrictComponent.Name} Commander";
+            vm.AssistantCommanderName = AssistantCommander?.GetTitleName() ?? "VACANT";
+            vm.AssistantCommanderTitle = AssistantCommander?.Position.Name ?? $"{DistrictComponent.Name} Asst. Commander";
+            vm.ComponentName = c.Name;
+            vm.DistrictName = DistrictComponent.Name;
+            vm.ShiftCommander = new LineupMember(c?.ParentComponent?.GetManager());
+            vm.OIC = new LineupMember(c?.GetManager());
+            vm.LineupDate = DateTime.Now;
+            vm.Vehicles = ApplicationDbContext.Vehicles.ToList().ConvertAll(x => new VehicleSelectListItem(x));            
+            vm.Members = new List<LineupMember>();
+            foreach (Position p in c.Positions)
+            {
+                if (p.IsManager == false)
+                {
+                    foreach (Member m in p.Members)
+                {
+                    vm.Members.Add(new LineupMember(m));
+                }
+                    foreach (Member m in p.TempMembers)
+                    {
+                        vm.Members.Add(new LineupMember(m));
+                    }
+                }                
+            } 
+            return vm;
         }
     }
 

@@ -15,14 +15,13 @@
 }
 <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
     <div class="formHeader">
-        <h2 class="formHeader-heading">@Model.GetTitleName()</h2>
-        <p class="formHeader-description"> Showing Member details.</p>
+        <h2 class="formHeader-heading"><strong>Member Details</strong></h2>
+        <p class="formHeader-description">Showing Member details for <strong>@Model.GetTitleName()</strong></p>
         <div>
             <a href="@ViewBag.ReturnUrl"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-sm-3 form-group">
@@ -83,6 +82,10 @@
                     <div class="col-sm-4 form-group">
                         @Html.LabelFor(model => model.TempPosition, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.TempPosition.Name, new { @class = "form-control", disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Assigned Vehicle</label>
+                        <input class="form-control" disabled value="@(Model.AssignedVehicle != null ? Model?.AssignedVehicle?.GetDisplayName() : "No Issued Vehicle")" />
                     </div>
                 </div>
                 <hr />
@@ -171,7 +174,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </div>
 

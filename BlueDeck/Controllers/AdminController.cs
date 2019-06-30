@@ -355,7 +355,7 @@ namespace BlueDeck.Controllers
         /// <returns></returns>
         public IActionResult VehicleModelIndex(string sortOrder, string searchString, int page = 1)
         {
-            AdminVehicleModelIndexListViewModel vm = new AdminVehicleModelIndexListViewModel(unitOfWork.VehicleModels.GetAll().ToList());
+            AdminVehicleModelIndexListViewModel vm = new AdminVehicleModelIndexListViewModel(unitOfWork.VehicleModels.GetVehicleModelsWithManufacturerAndVehicles());
             vm.CurrentSort = sortOrder;
             vm.NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             vm.CurrentFilter = searchString;
@@ -401,7 +401,7 @@ namespace BlueDeck.Controllers
         /// <returns></returns>
         public IActionResult VehicleManufacturerIndex(string sortOrder, string searchString, int page = 1)
         {
-            AdminVehicleManufacturerIndexListViewModel vm = new AdminVehicleManufacturerIndexListViewModel(unitOfWork.VehicleManufacturers.GetAll().ToList());
+            AdminVehicleManufacturerIndexListViewModel vm = new AdminVehicleManufacturerIndexListViewModel(unitOfWork.VehicleManufacturers.GetVehicleManufacturersWithModels());
             vm.CurrentSort = sortOrder;
             vm.NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             vm.CurrentFilter = searchString;

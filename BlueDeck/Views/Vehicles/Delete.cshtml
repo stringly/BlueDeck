@@ -1,15 +1,117 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model BlueDeck.Models.Vehicle
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
-</head>
-<body>
-</body>
-</html>
+<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 formContainer">
+    <div class="formHeader">
+        <h4 class="formHeader-heading"><strong>Delete Vehicle</strong></h4>
+        <p class="formHeader-description">
+            Are you certain that you want to delete Vehicle #@Model.CruiserNumber? This action cannot be undone.
+        </p>
+        <div>
+            <a href="@ViewBag.ReturnUrl"><i class="ion-md-arrow-round-back"></i> Back to List</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-3 form-group">
+                    @Html.LabelFor(model => model.CruiserNumber, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.CruiserNumber, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-3 form-group">
+                    @Html.LabelFor(model => model.ModelYear, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ModelYear, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-3 form-group">
+                    @Html.LabelFor(model => model.Model.Manufacturer, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Model.Manufacturer.VehicleManufacturerName, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-3 form-group">
+                    @Html.LabelFor(model => model.Model.VehicleModelName, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Model.VehicleModelName, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="IsMarked" disabled /> @Html.DisplayNameFor(model => model.IsMarked)
+                        </label>
+                        <span class="note">
+                            Vehicle is marked with Police livery.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="HasMVS" disabled /> @Html.DisplayNameFor(model => model.HasMVS)
+                        </label>
+                        <span class="note">
+                            Vehicle is equipped with a Mobile Video System.
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="HasMDT" disabled /> @Html.DisplayNameFor(model => model.HasMDT)
+                        </label>
+                        <span class="note">
+                            Vehicle is equipped with a Mobile Data Terminal.
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-8 form-group">
+                    @Html.LabelFor(model => model.VIN, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.VIN, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-2 form-group">
+                    @Html.LabelFor(model => model.TagNumber, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.TagNumber, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-2 form-group">
+                    @Html.LabelFor(model => model.TagState, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.TagState, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5 form-group">
+                    @if (Model.AssignedToMemberId != null)
+                    {
+                        @Html.LabelFor(model => model.AssignedToMemberId, new { @class = "control-label" })
+                        <input type="text" class="form-control" id="AssignedToMemberId" name="AssignedToMemberId" disabled value="@Model.AssignedToMember.GetTitleName()" />
+                    }
+                    else if (Model.AssignedToPositionId != null)
+                    {
+                        @Html.LabelFor(model => model.AssignedToPositionId, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.AssignedToPosition.Name, new { @class = "form-control", disabled = "disabled" })
+                    }
+                    else if (Model.AssignedToComponentId != null)
+                    {
+                        @Html.LabelFor(model => model.AssignedToComponentId, new { @class = "control-label" })
+                        @Html.TextBoxFor(model => model.AssignedToComponent.Name, new { @class = "form-control", disabled = "disabled" })
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl" asp-route-id="@Model.VehicleId">
+                        <input type="hidden" asp-for="VehicleId" />
+                        @if (!String.IsNullOrEmpty(ViewBag.ReturnUrl))
+                        {
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-primary">Cancel</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Index" class="btn btn-primary">Cancel</a>
+                        }
+                        <a asp-action="Edit" asp-route-id="@Model.VehicleId" class="btn btn-default">Edit</a>
+                        <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

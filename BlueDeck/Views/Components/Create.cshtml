@@ -12,7 +12,7 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Create a Component</h2>
+        <h4 class="formHeader-heading"><strong>Create Component</strong></h4>
         <p class="formHeader-description">
             A Component represents an organizational entity, such as a Bureau, Division, Section, etc.
         </p>
@@ -21,46 +21,44 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @Html.HiddenFor(model => model.LineupPosition)
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-5 form-group">
-                            <label asp-for="ComponentName" class="control-label"></label>
-                            <input asp-for="ComponentName" class="form-control" />
-                            <span asp-validation-for="ComponentName" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label asp-for="Acronym" class="control-label"></label>
-                            <input asp-for="Acronym" class="form-control" />
-                            <span asp-validation-for="Acronym" class="text-danger"></span>
-                        </div>
+        <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.LineupPosition)
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-5 form-group">
+                        <label asp-for="ComponentName" class="control-label"></label>
+                        <input asp-for="ComponentName" class="form-control" />
+                        <span asp-validation-for="ComponentName" class="text-danger"></span>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-5 form-group">
-                            <label asp-for="ParentComponentId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.ParentComponentId,
-                                                            new SelectList(Model.Components, "Id", "ComponentName"),
-                                                            "Choose Parent Component",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>
-                        </div>
-                        <div id="lineupSelectionTarget"></div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
-                            <input type="submit" value="Create" class="btn btn-primary" />
-                        </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="Acronym" class="control-label"></label>
+                        <input asp-for="Acronym" class="form-control" />
+                        <span asp-validation-for="Acronym" class="text-danger"></span>
                     </div>
                 </div>
-            </form>
-        </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-5 form-group">
+                        <label asp-for="ParentComponentId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.ParentComponentId,
+                                                        new SelectList(Model.Components, "Id", "ComponentName"),
+                                                        "Choose Parent Component",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                    </div>
+                    <div id="lineupSelectionTarget"></div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

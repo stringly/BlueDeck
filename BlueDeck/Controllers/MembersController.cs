@@ -63,6 +63,7 @@ namespace BlueDeck.Controllers
             vm.MemberFirstNameSort = sortOrder == "FirstName" ? "firstName_desc" : "FirstName";
             vm.IdNumberSort = sortOrder == "IDNumber" ? "idNumber_desc" : "IDNumber";
             vm.PositionNameSort = sortOrder == "PositionName" ? "positionName_desc" : "PositionName";
+            vm.CruiserNumberSort = sortOrder == "CruiserNumber" ? "cruiserNumber_desc" : "CruiserNumber";
             vm.CurrentFilter = searchString;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -77,6 +78,7 @@ namespace BlueDeck.Controllers
                     .Where(x => x.LastName.ToLower().Contains(lowerString)
                     || x.FirstName.ToLower().Contains(lowerString)
                     || x.PositionName.ToLower().Contains(lowerString)
+                    || (x.CruiserNumber != null && x.CruiserNumber.Contains(lowerString))
                     || x.IdNumber.Contains(lowerString));
             }
 
@@ -102,6 +104,12 @@ namespace BlueDeck.Controllers
                     break;
                 case "positionName_desc":
                     vm.Members = vm.Members.OrderByDescending(x => x.PositionName);
+                    break;
+                case "CruiserNumber":
+                    vm.Members = vm.Members.OrderBy(x => x.CruiserNumber);
+                    break;
+                case "cruiserNumber_desc":
+                    vm.Members = vm.Members.OrderByDescending(x => x.CruiserNumber);
                     break;
                 default:
                     vm.Members = vm.Members.OrderBy(x => x.LastName);
@@ -161,7 +169,8 @@ namespace BlueDeck.Controllers
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
-                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems(), 
+                unitOfWork.Vehicles.GetVehicleSelectListItems());
             ViewBag.Title = "Create New Member";
             ViewBag.ReturnUrl = returnUrl;
             return View(vm);
@@ -192,6 +201,7 @@ namespace BlueDeck.Controllers
             "PayrollID," +
             "HireDate," +
             "OrgPositionNumber," +
+            "AssignedVehicleId" +
             "AppStatusId," +
             "ContactNumbers," +
             "IsUser," +
@@ -208,6 +218,7 @@ namespace BlueDeck.Controllers
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
                 form.AppStatuses = unitOfWork.AppStatuses.GetApplicationStatusSelectListItems();
+                form.Vehicles = unitOfWork.Vehicles.GetVehicleSelectListItems();
                 ViewBag.Title = "Create Member - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";
@@ -263,7 +274,8 @@ namespace BlueDeck.Controllers
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
-                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems(),
+                unitOfWork.Vehicles.GetVehicleSelectListItems());
             ViewBag.Title = "Edit Member";
             ViewBag.ReturnUrl = returnUrl;
             return View(vm);
@@ -296,6 +308,7 @@ namespace BlueDeck.Controllers
             "PayrollID," +
             "HireDate," +
             "OrgPositionNumber," +
+            "AssignedVehicleId," +
             "AppStatusId," +
             "ContactNumbers," +
             "IsUser," +
@@ -317,6 +330,7 @@ namespace BlueDeck.Controllers
                 form.DutyStatus = unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems();
                 form.AppStatuses = unitOfWork.AppStatuses.GetApplicationStatusSelectListItems();
                 form.PhoneNumberTypes = unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems();
+                form.Vehicles = unitOfWork.Vehicles.GetVehicleSelectListItems();
                 ViewBag.Title = "Edit Member - Corrections Required";
                 ViewBag.Status = "Warning!";
                 ViewBag.Message = "You must correct the fields indicated.";

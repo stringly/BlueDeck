@@ -11,7 +11,7 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Confirm Delete</h2>
+        <h4 class="formHeader-heading"><strong>Delete Race</strong></h4>
         @if (canDelete)
         {
             <p class="formHeader-description">
@@ -26,35 +26,33 @@
         }
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-3 form-group">
-                        @Html.LabelFor(model => model.MemberRaceId, new { @class = "control-label" })<br />
-                        @Html.DisplayFor(model => model.MemberRaceId, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-md-5 form-group">
-                        @Html.LabelFor(model => model.MemberRaceFullName, new { @class = "control-label" })<br />
-                        @Html.DisplayFor(model => model.MemberRaceFullName, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-md-2 form-group">
-                        @Html.LabelFor(model => model.Abbreviation, new { @class = "control-label" })<br />
-                        @Html.DisplayFor(model => model.Abbreviation, new { @class = "form-control", disabled = "disabled" })
-                    </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    @Html.LabelFor(model => model.MemberRaceId, new { @class = "control-label" })<br />
+                    @Html.DisplayFor(model => model.MemberRaceId, new { @class = "form-control", disabled = "disabled" })
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
-                            <input type="hidden" asp-for="MemberRaceId" />
-                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Edit" asp-route-id="@Model.MemberRaceId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
-                            @if (canDelete)
-                            {
-                                <input type="submit" value="Delete" class="btn btn-danger pull-right" />
-                            }
-                        </form>
-                    </div>
+                <div class="col-md-5 form-group">
+                    @Html.LabelFor(model => model.MemberRaceFullName, new { @class = "control-label" })<br />
+                    @Html.DisplayFor(model => model.MemberRaceFullName, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-md-2 form-group">
+                    @Html.LabelFor(model => model.Abbreviation, new { @class = "control-label" })<br />
+                    @Html.DisplayFor(model => model.Abbreviation, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                        <input type="hidden" asp-for="MemberRaceId" />
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.MemberRaceId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-primary">Edit</a>
+                        @if (canDelete)
+                        {
+                            <input type="submit" value="Delete" class="btn btn-danger pull-right" />
+                        }
+                    </form>
                 </div>
             </div>
         </div>

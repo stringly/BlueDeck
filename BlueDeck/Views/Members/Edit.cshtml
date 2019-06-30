@@ -13,242 +13,243 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Edit Member Information</h2>
-        <p class="formHeader-description"> Showing details for @Model.DisplayName</p>
+        <h2 class="formHeader-heading"><strong>Edit Member</strong></h2>
+        <p class="formHeader-description">Editing Member details for <strong>@Model.DisplayName</strong></p>
         <div>
             <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="">
-                <div class="">
-                    <form asp-action="Edit" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
-                        <input type="hidden" asp-for="@Model.MemberId">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="FirstName" class="control-label"></label>
-                                    <input asp-for="FirstName" class="form-control" />
-                                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="MiddleName" class="control-label"></label>
-                                    <input asp-for="MiddleName" class="form-control" />
-                                    <span asp-validation-for="MiddleName" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="LastName" class="control-label"></label>
-                                    <input asp-for="LastName" class="form-control" />
-                                    <span asp-validation-for="LastName" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-2 form-group">
-                                    <label asp-for="IdNumber" class="control-label"></label>
-                                    <input asp-for="IdNumber" class="form-control" />
-                                    <span asp-validation-for="IdNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-4 form-group">
-                                    <label asp-for="MemberRank" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.MemberRank,
-                                                       new SelectList(Model.RankList, "MemberRankId", "RankName"),
-                                                       "Choose Rank",
-                                                       new { @class = "form-control" })
-                                    <span asp-validation-for="MemberRank" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="MemberGender" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.MemberGender,
-                                                                    new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
-                                                                    "Choose Gender",
-                                                                    new { @class = "form-control" })
-                                    <span asp-validation-for="MemberGender" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="MemberRace" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.MemberRace,
-                                                                    new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
-                                                                    "Choose Race",
-                                                                    new { @class = "form-control" })
-                                    <span asp-validation-for="MemberRace" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 form-group">
-                                    <label asp-for="PayrollID" class="control-label"></label>
-                                    <input asp-for="PayrollID" class="form-control" />
-                                    <span asp-validation-for="PayrollID" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="HireDate" class="control-label"></label>
-                                    <input asp-for="HireDate" class="form-control" />                                    
-                                    <span asp-validation-for="HireDate" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="OrgPositionNumber" class="control-label"></label>
-                                    <input asp-for="OrgPositionNumber" class="form-control" />
-                                    <span asp-validation-for="OrgPositionNumber" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 form-group">
-                                    <label asp-for="PositionId" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.PositionId,
-                                                                    new SelectList(Model.Positions, "PositionId", "PositionName"),
-                                                                    "Assign to Position",
-                                                                    new { @class = "form-control" })
-                                    <span asp-validation-for="PositionId" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-3 form-group">
-                                    <label asp-for="DutyStatusId" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.DutyStatusId,
-                                                                    new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
-                                                                    "Choose Duty Status",
-                                                                    new { @class = "form-control" })
-                                    <span asp-validation-for="DutyStatusId" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-4 form-group">
-                                    <label asp-for="TempPositionId" class="control-label"></label>
-                                    @Html.DropDownListFor(model => model.TempPositionId,
-                                                                    new SelectList(Model.Positions, "PositionId", "PositionName"),
-                                                                    "None",
-                                                                    new { @class = "form-control" })
-                                    <span asp-validation-for="TempPositionId" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row">
-                                <div class="col-sm-4 form-group">
-                                    <label asp-for="Email" class="control-label"></label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                                <div class="col-sm-8 form-group">
-                                    <label asp-for="ContactNumbers" class="control-label"></label>
-                                    @for (var i = 0; i < Model.ContactNumbers.Count; i++)
-                                    {
-                                        @if (Model.ContactNumbers[i].PhoneNumber != null)
-                                        {
-                                            <div class="input-group mygroup" id="contactGroup-@i">
-                                                @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
-                                                        new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                                        "Number Type",
-                                                        new { @class = "phoneNumberTypeList form-control" })
-
-                                                <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control phoneNumber" />
-                                                <span class="input-group-btn deleteNumber" data-contactid="@i">
-                                                    <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
-                                                </span>
-                                            </div>
-                                            <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
-                                            <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
-                                        }
-                                    }
-
-                                    <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
-                                        @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
-                                                new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
-                                                new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
-                                        <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control phoneNumber" />
-                                        <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
-                                        <span class="input-group-btn deleteNumber" style="visibility:hidden;">
-                                            <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
-                                        </span>
-                                    </div>
-
-                                    <div id="newPhoneTarget">
-
-                                    </div>
-                                    <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
-                                </div>
-                            </div>
-                            <hr />
-                            @if (IsAdmin)
+        <form asp-action="Edit" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
+            <input type="hidden" asp-for="@Model.MemberId">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="MiddleName" class="control-label"></label>
+                        <input asp-for="MiddleName" class="form-control" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label asp-for="IdNumber" class="control-label"></label>
+                        <input asp-for="IdNumber" class="form-control" />
+                        <span asp-validation-for="IdNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="MemberRank" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.MemberRank,
+                                            new SelectList(Model.RankList, "MemberRankId", "RankName"),
+                                            "Choose Rank",
+                                            new { @class = "form-control" })
+                        <span asp-validation-for="MemberRank" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="MemberGender" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.MemberGender,
+                                                        new SelectList(Model.GenderList, "MemberGenderId", "MemberGenderFullName"),
+                                                        "Choose Gender",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="MemberGender" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="MemberRace" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.MemberRace,
+                                                        new SelectList(Model.RaceList, "MemberRaceId", "RaceFullName"),
+                                                        "Choose Race",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="MemberRace" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="PayrollID" class="control-label"></label>
+                        <input asp-for="PayrollID" class="form-control" />
+                        <span asp-validation-for="PayrollID" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="HireDate" class="control-label"></label>
+                        <input asp-for="HireDate" class="form-control" />                                    
+                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="OrgPositionNumber" class="control-label"></label>
+                        <input asp-for="OrgPositionNumber" class="form-control" />
+                        <span asp-validation-for="OrgPositionNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="PositionId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.PositionId,
+                                                        new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                        "Assign to Position",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="PositionId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="DutyStatusId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.DutyStatusId,
+                                                        new SelectList(Model.DutyStatus, "MemberDutyStatusId", "MemberDutyStatusName"),
+                                                        "Choose Duty Status",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="DutyStatusId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="TempPositionId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.TempPositionId,
+                                                        new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                        "None",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="TempPositionId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label asp-for="AssignedVehicleId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.AssignedVehicleId,
+                                                        new SelectList(Model.Vehicles, "VehicleId", "VehicleName"),
+                                                        "None",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="AssignedVehicleId" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-8 form-group">
+                        <label asp-for="ContactNumbers" class="control-label"></label>
+                        @for (var i = 0; i < Model.ContactNumbers.Count; i++)
+                        {
+                            @if (Model.ContactNumbers[i].PhoneNumber != null)
                             {
-                                <div class="row">
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="LDAPName" class="control-label"></label>
-                                        <input asp-for="LDAPName" class="form-control" />
-                                        <span asp-validation-for="LDAPName" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="AppStatusId" class="control-label"></label>
-                                        @Html.DropDownListFor(model => model.AppStatusId,
-                                                                new SelectList(Model.AppStatuses, "Id", "Name"),
-                                                                "Choose Application Status",
-                                                                new { @class = "form-control" })
-                                        <span asp-validation-for="AppStatusId" class="text-danger"></span>
-                                    </div>
-                                    <div class="col-sm-2 form-group">
-                                        <div class="form-checkbox">
-                                            <label>
-                                                <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2 form-group">
-                                        <div class="form-checkbox">
-                                            <label>
-                                                <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2 form-group">
-                                        <div class="form-checkbox">
-                                            <label>
-                                                <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
-                                            </label>
-                                        </div>
-                                    </div>
+                                <div class="input-group mygroup" id="contactGroup-@i">
+                                    @Html.DropDownListFor(model => model.ContactNumbers[i].Type.PhoneNumberTypeId,
+                                            new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                            "Number Type",
+                                            new { @class = "phoneNumberTypeList form-control" })
+
+                                    <input asp-for="@Model.ContactNumbers[i].PhoneNumber" class="form-control phoneNumber" />
+                                    <span class="input-group-btn deleteNumber" data-contactid="@i">
+                                        <span class="btn btn-addon" data-contactid="@i"><i class="glyphicon glyphicon-trash" data-contactid="@i"></i></span>
+                                    </span>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="Creator" class="control-label"></label><br />
-                                        @Html.DisplayFor(model => model.Creator)
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="CreatedDate" class="control-label"></label><br />
-                                        @Html.DisplayFor(model => model.CreatedDate)
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="LastModifiedBy" class="control-label"></label><br />
-                                        @Html.DisplayFor(model => model.LastModifiedBy)
-                                    </div>
-                                    <div class="col-sm-3 form-group">
-                                        <label asp-for="LastModified" class="control-label"></label><br />
-                                        @Html.DisplayFor(model => model.LastModified)
-                                    </div>
-                                </div>
-                                <hr />
+                                <input type="hidden" asp-for="@Model.ContactNumbers[i].MemberContactNumberId" />
+                                <input type="hidden" asp-for="@Model.ContactNumbers[i].ToDelete" />
                             }
-                            else
-                            {
-                                <input type="hidden" asp-for="@Model.AppStatusId">
-                                <input type="hidden" asp-for="@Model.LDAPName">
-                                <input type="hidden" asp-for="@Model.IsUser">
-                                <input type="hidden" asp-for="@Model.IsComponentAdmin">
-                                <input type="hidden" asp-for="@Model.IsGlobalAdmin">
-                            }
-                            <div class="row">
-                                <div class="col-sm-12 form-group">
-                                    <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                                    <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Undo Changes</a>
-                                    <input type="submit" value="Save Changes" class="btn btn-primary" />
-                                    @if (IsAdmin)
-                                    {
-                                        <a asp-action="Delete" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
-                                    }
-                                </div>
+                        }
+
+                        <div class="input-group mygroup" id="contactGroup-@Model.ContactNumbers.Count">
+                            @Html.DropDownList($"ContactNumbers[{Model.ContactNumbers.Count()}].Type.PhoneNumberTypeId",
+                                    new SelectList(Model.PhoneNumberTypes, "PhoneNumberTypeId", "PhoneNumberTypeName"),
+                                    new { @class = "defaultPhoneTypeSelect phoneNumberTypeList form-control" })
+                            <input name="@($"ContactNumbers[{Model.ContactNumbers.Count}].PhoneNumber")" id="defaultNewPhone" class="form-control phoneNumber" />
+                            <input type="hidden" name="@($"ContactNumbers[{Model.ContactNumbers.Count}].MemberContactNumberId")" value="0" />
+                            <span class="input-group-btn deleteNumber" style="visibility:hidden;">
+                                <span class="btn btn-addon"><i class="glyphicon glyphicon-trash"></i></span>
+                            </span>
+                        </div>
+
+                        <div id="newPhoneTarget">
+
+                        </div>
+                        <input type="hidden" id="contactsCount" value="@Model.ContactNumbers.Count" />
+                    </div>
+                </div>
+                <hr />
+                @if (IsAdmin)
+                {
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LDAPName" class="control-label"></label>
+                            <input asp-for="LDAPName" class="form-control" />
+                            <span asp-validation-for="LDAPName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="AppStatusId" class="control-label"></label>
+                            @Html.DropDownListFor(model => model.AppStatusId,
+                                                    new SelectList(Model.AppStatuses, "Id", "Name"),
+                                                    "Choose Application Status",
+                                                    new { @class = "form-control" })
+                            <span asp-validation-for="AppStatusId" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsUser" /> @Html.DisplayNameFor(model => model.IsUser)
+                                </label>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-sm-2 form-group">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsComponentAdmin" /> @Html.DisplayNameFor(model => model.IsComponentAdmin)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <div class="form-checkbox">
+                                <label>
+                                    <input asp-for="IsGlobalAdmin" /> @Html.DisplayNameFor(model => model.IsGlobalAdmin)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="Creator" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.Creator)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="CreatedDate" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModifiedBy" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.LastModifiedBy)
+                        </div>
+                        <div class="col-sm-3 form-group">
+                            <label asp-for="LastModified" class="control-label"></label><br />
+                            @Html.DisplayFor(model => model.LastModified)
+                        </div>
+                    </div>
+                    <hr />
+                }
+                else
+                {
+                    <input type="hidden" asp-for="@Model.AppStatusId">
+                    <input type="hidden" asp-for="@Model.LDAPName">
+                    <input type="hidden" asp-for="@Model.IsUser">
+                    <input type="hidden" asp-for="@Model.IsComponentAdmin">
+                    <input type="hidden" asp-for="@Model.IsGlobalAdmin">
+                }
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Undo Changes</a>
+                        <input type="submit" value="Save Changes" class="btn btn-primary" />
+                        @if (IsAdmin)
+                        {
+                            <a asp-action="Delete" asp-route-id="@Model.MemberId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-danger pull-right">Delete</a>
+                        }
+                    </div>
                 </div>
-
             </div>
-        </div>
+        </form>
     </div>
 </div>
 

@@ -132,6 +132,12 @@
                             </a>
                         </th>
                         <th>
+                            <a asp-page="/Index" asp-route-sortOrder="@Model.CruiserNumberSort"
+                               asp-route-searchString="@Model.CurrentFilter" title="Sort by Cruiser Number">
+                                Cruiser Number
+                            </a>
+                        </th>
+                        <th>
                             @Html.DisplayNameFor(model => model.Members.First().Email)
                         </th>
                         <th></th>
@@ -152,6 +158,9 @@
                             </td>
                             <td>
                                 @item.PositionName
+                            </td>
+                            <td>
+                                @(item?.CruiserNumber ?? "No Cruiser")
                             </td>
                             <td>
                                 <a href="mailto:@item.Email" target="_top" title="Click to send and Email">

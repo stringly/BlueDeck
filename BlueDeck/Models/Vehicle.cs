@@ -90,6 +90,7 @@ namespace BlueDeck.Models
         /// <value>
         ///   <c>true</c> if this vehicle is marked; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "Is Marked")]
         public bool IsMarked { get; set; }
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace BlueDeck.Models
         /// <value>
         ///   <c>true</c> if this instance has MVS; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "MVS Equipped")]
         public bool HasMVS { get; set; }
 
         /// <summary>
@@ -106,6 +108,7 @@ namespace BlueDeck.Models
         /// <value>
         ///   <c>true</c> if this instance has MDT; otherwise, <c>false</c>.
         /// </value>
+        [Display(Name = "MDT Equipped")]
         public bool HasMDT { get; set; }
 
         /// <summary>
@@ -117,6 +120,8 @@ namespace BlueDeck.Models
         /// <value>
         /// The assigned to member identifier.
         /// </value>
+        [Display(Name = "Assigned To Member")]
+        [ForeignKey("AssignedToMember")]
         public int? AssignedToMemberId { get; set; }
 
         /// <summary>
@@ -124,8 +129,7 @@ namespace BlueDeck.Models
         /// </summary>
         /// <value>
         /// The assigned to member.
-        /// </value> 
-        [ForeignKey("AssignedToMemberId")]
+        /// </value>         
         public virtual Member AssignedToMember { get; set; }
 
         /// <summary>
@@ -137,6 +141,7 @@ namespace BlueDeck.Models
         /// <value>
         /// The assigned to position identifier.
         /// </value>
+        [ForeignKey("AssignedToPosition")]
         public int? AssignedToPositionId { get; set; }
 
         /// <summary>
@@ -144,8 +149,7 @@ namespace BlueDeck.Models
         /// </summary>
         /// <value>
         /// The assigned to position.
-        /// </value>        
-        [ForeignKey("AssignedToPositionId")]
+        /// </value>      
         public virtual Position AssignedToPosition { get; set; }
 
         /// <summary>
@@ -157,6 +161,7 @@ namespace BlueDeck.Models
         /// </remarks>
         /// The assigned to component identifier.
         /// </value>
+        [Display(Name ="Assigned To Component")]
         public int? AssignedToComponentId { get; set; }
 
         /// <summary>
@@ -164,8 +169,7 @@ namespace BlueDeck.Models
         /// </summary>
         /// <value>
         /// The assigned to component.
-        /// </value>        
-        [ForeignKey("AssignedToComponentId")]
+        /// </value>                
         public virtual Component AssignedToComponent { get; set; }
 
         /// <summary>
@@ -211,6 +215,29 @@ namespace BlueDeck.Models
         }
 
         /// <summary>
+        /// Gets the display name.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDisplayName()
+        {
+            if (Model != null)
+            {
+                if (Model.Manufacturer != null)
+                {
+                    return $"#{CruiserNumber} - {ModelYear} {Model.Manufacturer.VehicleManufacturerName} {Model.VehicleModelName} ({(IsMarked ? "Marked" : "Unmarked")})";
+                }
+                else
+                {
+                    return $"#{CruiserNumber} - {ModelYear} {Model.VehicleModelName} ({(IsMarked ? "Marked" : "Unmarked")})";
+                }
+            }
+            else
+            {
+                return $"Vehicle #{CruiserNumber}";
+            }
+        }
+
+        /// <summary>
         /// Returns the name of the Member, Position, or Component responsible for the vehicle.
         /// </summary>
         /// <returns></returns>
@@ -222,7 +249,7 @@ namespace BlueDeck.Models
             }
             else if (AssignedToPosition != null)
             {
-                return AssignedToPosition.Name;
+                return $"{AssignedToPosition.Name} ({AssignedToPosition.ParentComponent.Name})";
             }
             else if (AssignedToComponent != null)
             {

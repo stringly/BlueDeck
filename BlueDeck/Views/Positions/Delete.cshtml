@@ -20,7 +20,7 @@
     }
 
     <div class="formHeader">
-        <h2 class="formHeader-heading">Confirm Delete</h2>
+        <h4 class="formHeader-heading"><strong>Delete Position</strong></h4>
         <p class="formHeader-description">
             Are you certain you want to delete @Model.Name? This action cannot be undone.
         </p>
@@ -29,62 +29,67 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-5 form-group">
-                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-sm-3 form-group">
-                        @Html.LabelFor(model => model.Callsign, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.Callsign, new { @class = "form-control", disabled = "disabled" })
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        @Html.LabelFor(model => model.JobTitle, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", disabled = "disabled" })
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-5 form-group">
+                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-3 form-group">
+                    @Html.LabelFor(model => model.Callsign, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Callsign, new { @class = "form-control", disabled = "disabled" })
+                </div>
+                <div class="col-sm-4 form-group">
+                    @Html.LabelFor(model => model.JobTitle, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="IsUnique" disabled /> @Html.DisplayNameFor(model => model.IsUnique)
+                        </label>
+                        <span class="note">
+                            Only a single Member can be assigned.
+                        </span>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
-                        <div class="form-checkbox">
-                            <label>
-                                <input asp-for="IsUnique" disabled /> @Html.DisplayNameFor(model => model.IsUnique)
-                            </label>
-                            <span class="note">
-                                Only a single Member can be assigned.
-                            </span>
-                        </div>
-                    </div>
-                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
-                        <div class="form-checkbox">
-                            <label>
-                                <input asp-for="IsManager" disabled /> @Html.DisplayNameFor(model => model.IsManager)
-                            </label>
-                            <span class="note">
-                                This Position will be the Manager for it's Component.
-                            </span>
-                        </div>
+                <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                    <div class="form-checkbox">
+                        <label>
+                            <input asp-for="IsManager" disabled /> @Html.DisplayNameFor(model => model.IsManager)
+                        </label>
+                        <span class="note">
+                            This Position will be the Manager for it's Component.
+                        </span>
                     </div>
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        @Html.LabelFor(model => model.ParentComponent, new { @class = "control-label" })
-                        @Html.TextBoxFor(model => model.ParentComponent.Name, new { @class = "form-control", disabled = "disabled" })
-                    </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-4 form-group">
+                    @Html.LabelFor(model => model.ParentComponent, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.ParentComponent.Name, new { @class = "form-control", disabled = "disabled" })
                 </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
-                            <input type="hidden" asp-for="PositionId" />
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <form asp-action="Delete" asp-route-returnUrl="@ViewBag.ReturnUrl">
+                        <input type="hidden" asp-for="PositionId" />
+                        @if (!String.IsNullOrEmpty(ViewBag.ReturnUrl))
+                        {
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-primary">Cancel</a>
+                        }
+                        else
+                        {
                             <a asp-action="Index" class="btn btn-primary">Cancel</a>
-                            <a asp-action="Edit" asp-route-id="@Model.PositionId" class="btn btn-default">Edit</a>
-                            <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
-                        </form>
-                    </div>
+                        }
+                        <a asp-action="Edit" asp-route-id="@Model.PositionId" class="btn btn-default">Edit</a>
+                        <input type="submit" value="Confirm Delete" class="btn btn-danger pull-right" />
+                    </form>
                 </div>
             </div>
         </div>

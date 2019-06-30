@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 namespace BlueDeck.Models.Repositories
 {
     /// <summary>
-    /// An implementation of <see cref="T:BlueDeck.Models.Repositories.IRepository{T}"/>
+    /// An implementation of <see cref="IRepository{T}"/>
     /// </summary>
-    /// <seealso cref="T:BlueDeck.Models.Repositories.IRepository{BlueDeck.Models.Component}" />
+    /// <seealso cref="IRepository{Component}" />
     public interface IComponentRepository : IRepository<Component>
     {
         /// <summary>
-        /// Gets the list of <see cref="T:BlueDeck.Models.ChartableComponent"/>s.
+        /// Gets the list of <see cref="ChartableComponent"/>s.
         /// </summary>
         /// <remarks>
         /// This method is used to seed the GetOrgChart JQuery chart with a list of Components without Member details .
         /// </remarks>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponent"/> objects</returns>
+        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponent"/> objects</returns>
         IEnumerable<ChartableComponent> GetOrgChartComponentsWithoutMembers();
 
         /// <summary>
@@ -29,8 +29,14 @@ namespace BlueDeck.Models.Repositories
         /// <remarks>
         /// This method is used to seed the GetOrgChart JQuery chart with a list of Components with Member details.
         /// </remarks>
-        /// <returns>A <see cref="T:IEnumerable{T}"/> list of <see cref="T:BlueDeck.Models.ChartableComponentWithMember"/> objects</returns>
+        /// <returns>A <see cref="IEnumerable{T}"/> list of <see cref="ChartableComponentWithMember"/> objects</returns>
         List<ChartableComponentWithMember> GetOrgChartComponentsWithMembers(int parentComponentId);
+
+        /// <summary>
+        /// Gets the org chart components with members no markup.
+        /// </summary>
+        /// <param name="parentComponentId">The parent component identifier.</param>
+        /// <returns></returns>
         List<ChartableComponentWithMember> GetOrgChartComponentsWithMembersNoMarkup(int parentComponentId);
         List<Component> GetComponentAndChildren(int parentComponentId, List<Component> ccl);
         List<Component> GetComponentsAndChildrenSP(int parentComponentId);
@@ -95,9 +101,32 @@ namespace BlueDeck.Models.Repositories
         /// <returns></returns>
         bool ComponentNameNotAvailable(Component c);
         List<ComponentSelectListItem> GetChildComponentsForComponentId(int componentId);
+
+        /// <summary>
+        /// Gets the members roster for component identifier.
+        /// </summary>
+        /// <param name="componentId">The component identifier.</param>
+        /// <returns></returns>
         List<Member> GetMembersRosterForComponentId(int componentId);
+
+        /// <summary>
+        /// Gets the admin component index ListView model.
+        /// </summary>
+        /// <returns></returns>
         AdminComponentIndexListViewModel GetAdminComponentIndexListViewModel();
+
+        /// <summary>
+        /// Gets the API component.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         Task<ComponentApiResult> GetApiComponent(int id);
+
+        /// <summary>
+        /// Gets the component for demographics.
+        /// </summary>
+        /// <param name="componentId">The component identifier.</param>
+        /// <returns></returns>
         Component GetComponentForDemographics(int componentId);
 
         /// <summary>
@@ -106,5 +135,13 @@ namespace BlueDeck.Models.Repositories
         /// <param name="componentId">The component identifier.</param>
         /// <returns></returns>
         Component GetComponentWithVehicles(int componentId);
+
+        /// <summary>
+        /// Gets the lineup generator view model.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        LineupGeneratorViewModel GetLineupGeneratorViewModel(int id);
+        
     }
 }

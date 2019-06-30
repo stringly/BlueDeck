@@ -508,7 +508,8 @@ namespace BlueDeck.Controllers
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
-                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems(),
+                unitOfWork.Vehicles.GetVehicleSelectListItems());
             return ViewComponent("EditMemberModal", vm);
                 
         }
@@ -534,7 +535,8 @@ namespace BlueDeck.Controllers
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
-                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems(),
+                unitOfWork.Vehicles.GetVehicleSelectListItems());
                 return ViewComponent("EditMemberModal", vm);
             }
         }

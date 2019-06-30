@@ -11,10 +11,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>                    
+                    </button>
                     <span class="headerSpan componentNameLink" data-componentid="@c.ComponentId" title="Click to view Roster for this Component">@c.Name</span>
-                    
-                    
+                    @if (c.Name.Contains("Squad"))
+                    {
+                        <a asp-action="Lineup" asp-controller="Documents" asp-route-id="@c.ComponentId" style="color:white">Create Lineup</a>
+                    }
                 </div>
                 <div class="collapse navbar-collapse" id="componentNavBar-@c.ComponentId">
                     <ul class="nav navbar-nav navbar-right">

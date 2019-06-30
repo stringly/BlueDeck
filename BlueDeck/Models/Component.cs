@@ -170,9 +170,40 @@ namespace BlueDeck.Models {
         /// <returns>A <see cref="Member"/> object that represents the Component's manageer, or null if no manager is found.</returns>
         public Member GetManager()
         {
-            return Positions?.Where(x => x.IsManager == true).FirstOrDefault().Members.FirstOrDefault() ?? null;
+            if (Positions != null)
+            {
+                Member manager = Positions?.Where(x => x.IsManager == true).FirstOrDefault()?.Members?.FirstOrDefault();
+                if (manager == null)
+                {
+                    manager = Positions?.Where(x => x.IsManager == true).FirstOrDefault()?.TempMembers?.FirstOrDefault();
+                }
+                return manager;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
+        public Member GetAssistantManager()
+        {
+            if (Positions != null)
+            {
+                Member manager = Positions?.Where(x => x.IsAssistantManager == true).FirstOrDefault()?.Members?.FirstOrDefault();
+                if(manager == null)
+                {
+                    manager = Positions?.Where(x => x.IsAssistantManager == true).FirstOrDefault()?.TempMembers?.FirstOrDefault();
+                }
+                return manager;
+            }
+            else
+            {
+                return null;
+            }
+            
+
+        }
         /// <summary>
         /// Gets the worker count.
         /// </summary>

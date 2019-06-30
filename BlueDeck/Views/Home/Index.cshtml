@@ -51,43 +51,59 @@
                                 <tbody>
                                     @foreach (var worker in home.Members)
                                     {
-                                        <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
-                                            @if (worker.MemberId == 0)
+                                    <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
+                                        @if (worker.MemberId == 0)
+                                        {
+                                            if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                             {
-                                                if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
-                                                {
-                                                    <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
-                                                }
-                                                else
-                                                {
-                                                    <td class="col-25">Vacant</td>
-                                                }
+                                                <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                             }
                                             else
                                             {
-                                                <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                                <td class="col-25">Vacant</td>
                                             }
-                                            <td class="col-25">
-                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
-                                                <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
-                                            </td>
-                                            <td class="col-15">@worker.DutyStatus</td>
-                                            <td class="col-15">@worker.ContactNumber</td>
-                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                        </tr>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        }
+                                        <td class="col-25">
+                                            <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
+                                            <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                        </td>
+                                        @if (worker.AssignedVehicleId != null)
+                                        {
+                                            <td class="col-15"><a asp-action="Details" asp-controller="Vehicles" asp-route-id="@worker.AssignedVehicleId" asp-route-returnUrl="/Home/Index">@worker.AssignedVehicleNumber</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-15">@worker.AssignedVehicleNumber</td>
+                                        }
+                                        <td class="col-15">@worker.DutyStatus</td>
+                                        <td class="col-15">@worker.ContactNumber</td>
+                                        <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
                                     }
                                     @foreach (var worker in home.TempMembers)
                                     {
-                                        <tr class="homePageTDYInRow">
-                                            <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>                                            
-                                            <td class="col-25">
-                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
-                                                <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
-                                            </td>
-                                            <td class="col-15">@worker.DutyStatus</td>
-                                            <td class="col-15">@worker.ContactNumber</td>
-                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                        </tr>
+                                    <tr class="homePageTDYInRow">
+                                        <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        <td class="col-25">
+                                            <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
+                                            <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
+                                        </td>
+                                        @if (worker.AssignedVehicleId != null)
+                                        {
+                                            <td class="col-15"><a asp-action="Details" asp-controller="Vehicles" asp-route-id="@worker.AssignedVehicleId" asp-route-returnUrl="/Home/Index">@worker.AssignedVehicleNumber</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-15">@worker.AssignedVehicleNumber</td>
+                                        }
+                                        <td class="col-15">@worker.DutyStatus</td>
+                                        <td class="col-15">@worker.ContactNumber</td>
+                                        <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -124,46 +140,62 @@
                                 <tbody>
                                     @foreach (var worker in item.Members)
                                     {
-                                        <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
-                                            @if (worker.MemberId == 0)
+                                    <tr class="@(worker.TempPositionId != null ? "homePageTDYOutRow" : "")">
+                                        @if (worker.MemberId == 0)
+                                        {
+                                            if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
                                             {
-                                                if (User.IsInRole("ComponentAdmin") || User.IsInRole("GlobalAdmin"))
-                                                {
-                                                    <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
-                                                }
-                                                else
-                                                {
-                                                    <td class="col-25">Vacant</td>
-                                                }
+                                                <td class="col-25"><a asp-action="Edit" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">Vacant</a></td>
                                             }
                                             else
                                             {
-                                                <td class="col-25">
-                                                    <a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a>
-                                                    
-                                                </td>
+                                                <td class="col-25">Vacant</td>
                                             }
+                                        }
+                                        else
+                                        {
                                             <td class="col-25">
-                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
-                                                <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                                <a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a>
+
                                             </td>
-                                            <td class="col-15">@worker.DutyStatus</td>
-                                            <td class="col-15">@worker.ContactNumber</td>
-                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                        </tr>
+                                        }
+                                        <td class="col-25">
+                                            <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.PositionId" asp-route-returnUrl="/Home/Index">@worker.PositionName</a>
+                                            <small style="color: orangered;">@(worker.TempPositionId == null ? "" : $"(TDY to {worker.TempParentComponentName})")</small>
+                                        </td>
+                                        @if (worker.AssignedVehicleId != null)
+                                        {
+                                            <td class="col-15"><a asp-action="Details" asp-controller="Vehicles" asp-route-id="@worker.AssignedVehicleId" asp-route-returnUrl="/Home/Index">@worker.AssignedVehicleNumber</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-15">@worker.AssignedVehicleNumber</td>
+                                        }
+                                        <td class="col-15">@worker.DutyStatus</td>
+                                        <td class="col-15">@worker.ContactNumber</td>
+                                        <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
                                     }
                                     @foreach (var worker in item.TempMembers)
                                     {
-                                        <tr class="homePageTDYInRow">
-                                            <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
-                                            <td class="col-25">
-                                                <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
-                                                <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
-                                            </td>
-                                            <td class="col-15">@worker.DutyStatus</td>
-                                            <td class="col-15">@worker.ContactNumber</td>
-                                            <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
-                                        </tr>
+                                    <tr class="homePageTDYInRow">
+                                        <td class="col-25"><a asp-action="Details" asp-controller="Members" asp-route-id="@worker.MemberId" asp-route-returnUrl="/Home/Index">@worker.MemberDisplayName</a></td>
+                                        <td class="col-25">
+                                            <a asp-action="Details" asp-controller="Positions" asp-route-id="@worker.TempPositionId" asp-route-returnUrl="/Home/Index">@worker.TempPositionName</a>
+                                            <small style="color: green;">(TDY from @worker.ParentComponentName)</small>
+                                        </td>
+                                        @if (worker.AssignedVehicleId != null)
+                                        {
+                                            <td class="col-15"><a asp-action="Details" asp-controller="Vehicles" asp-route-id="@worker.AssignedVehicleId" asp-route-returnUrl="/Home/Index">@worker.AssignedVehicleNumber</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="col-15">@worker.AssignedVehicleNumber</td>
+                                        }
+                                        <td class="col-15">@worker.DutyStatus</td>
+                                        <td class="col-15">@worker.ContactNumber</td>
+                                        <td class="col-15"><a href="mailto:@worker.EmailAddress">@worker.EmailAddress</a></td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -323,7 +355,7 @@
                             <img style="height:35px; width:35px;" src="/lib/bluedeck/css/images/Roster.png">
                         </a>
                         <strong>Generate a Component Roster</strong><br />
-                        <small>Component Roster will list all Positions and Members of the selected component and all of it's subordinate Components, grouped by Component.</small>
+                        <small>Component Roster will list all Positions and Members of the selected component and all of its subordinate Components, grouped by Component.</small>
                     </div>
                 </div>
                 <div class="row">
@@ -332,7 +364,7 @@
                             <img style="height:50px; width:50px;" src="/lib/bluedeck/css/images/OrgChartIcon.png">
                         </a>
                         <strong>Generate an Organizational Chart</strong><br />
-                        <small>Component Roster will generate an organizational chart for the selected Component and all of it's subordinate components.</small>
+                        <small>Component Roster will generate an organizational chart for the selected Component and all of its subordinate components.</small>
                     </div>
                 </div>
             </div>
@@ -402,6 +434,10 @@
                         @Html.LabelFor(model => model.CurrentUser.TempPosition, new { @class = "control-label" })
                         @Html.TextBoxFor(model => model.CurrentUser.TempPosition.Name, new { @class = "form-control", disabled = "disabled" })
                     </div>
+                    <div class="col-sm-6 form-group">
+                        <label class="control-label">Assigned Vehicle</label>
+                        <input class="form-control" disabled value="@(Model.CurrentUser?.AssignedVehicle != null ? Model.CurrentUser?.AssignedVehicle?.GetDisplayName() : "No Issued Vehicle")" />                        
+                    </div>
                 </div>
                 <hr />
                 <div class="row">
@@ -461,14 +497,14 @@
             $("#selectedComponentMessage").text("");
             if ($(this).val() == "") {
                 document.getElementById("GenerateAlphaRoster").removeAttribute('href');
-                document.getElementById("GenerateAlphaRoster").removeAttribute('href');
-                document.getElementById("GenerateAlphaRoster").removeAttribute('href');
+                document.getElementById("GenerateComponentRoster").removeAttribute('href');
+                document.getElementById("GenerateOrgChart").removeAttribute('href');
             }
             else {
                 componentId = $(this).val();
                 document.getElementById("GenerateAlphaRoster").href = "Home/DownloadAlphaRoster/" + componentId;
-                document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster/" + componentId;;
-                document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart/" + componentId;;
+                document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster/" + componentId;
+                document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart/" + componentId;
             }
 
         });

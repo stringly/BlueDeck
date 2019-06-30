@@ -320,8 +320,8 @@ namespace BlueDeck.Models {
         /// <value>
         /// The assigned vehicle identifier.
         /// </value>
-        [Display(Name = "Assigned Vehicle")]
-        public int? AssignedVehicleId { get; set; }
+        //[Display(Name = "Assigned Vehicle")]        
+        //public int? AssignedVehicleId { get; set; }
 
         /// <summary>
         /// Gets or sets the assigned vehicle.
@@ -329,7 +329,7 @@ namespace BlueDeck.Models {
         /// <value>
         /// The assigned vehicle.
         /// </value>
-        public Vehicle AssignedVehicle { get; set; }
+        public virtual Vehicle AssignedVehicle { get; set; }
 
         /// <summary>
         /// Gets or sets the Member's <see cref="PhoneNumbers"/> collection.

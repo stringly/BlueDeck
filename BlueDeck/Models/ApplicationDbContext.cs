@@ -210,6 +210,10 @@ namespace BlueDeck.Models {
                 .HasOne(p => p.TempPosition)
                 .WithMany(m => m.TempMembers)
                 .HasForeignKey(p => p.TempPositionId);
+            //modelBuilder.Entity<Member>()
+            //    .HasOptional(m => m.AssignedVehicle)
+            //    .WithOne(v => v.AssignedToMember)
+            //    .HasForeignKey<Vehicle>(v => v.AssignedToMemberId);
             modelBuilder.Entity<Member>()
                 .HasOne(c => c.Creator)
                 .WithMany(m => m.CreatedMembers)
@@ -241,7 +245,7 @@ namespace BlueDeck.Models {
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.Model)
                 .WithMany(v => v.Vehicles)
-                .HasForeignKey(v => v.ModelId);
+                .HasForeignKey(v => v.ModelId);            
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.AssignedToPosition)
                 .WithMany(v => v.AssignedVehicles)

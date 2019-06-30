@@ -100,6 +100,9 @@ namespace BlueDeck.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Where(x => x.MemberId == memberId)
+                .Include(x => x.AssignedVehicle)
+                    .ThenInclude(x => x.Model)
+                        .ThenInclude(x => x.Manufacturer)
                 .Include(x => x.Position)
                     .ThenInclude(x => x.ParentComponent)
                 .Include(x => x.PhoneNumbers)
@@ -205,6 +208,8 @@ namespace BlueDeck.Persistence.Repositories
             m.RaceId = Convert.ToInt32(form.MemberRace);
             m.DutyStatusId = Convert.ToInt32(form.DutyStatusId);
             m.AppStatusId = Convert.ToInt32(form.AppStatusId);
+            m.AssignedVehicle = ApplicationDbContext.Vehicles.FirstOrDefault(x => x.VehicleId == form.AssignedVehicleId);
+            
             m.Email = form.Email;
             m.FirstName = form.FirstName;
             m.IdNumber = form.IdNumber;
@@ -359,6 +364,7 @@ namespace BlueDeck.Persistence.Repositories
         {
             return ApplicationDbContext.Members
                 .Include(x => x.Position).ThenInclude(x => x.ParentComponent)
+                .Include(x => x.AssignedVehicle)
                 .Include(x => x.CurrentRoles).ThenInclude(x => x.RoleType)
                 .Include(x => x.Gender)
                 .Include(x => x.Rank)                
@@ -380,6 +386,9 @@ namespace BlueDeck.Persistence.Repositories
                 .Where(x => x.MemberId == memberId)
                 .Include(x => x.Position)
                     .ThenInclude(x => x.ParentComponent)
+                .Include(x => x.AssignedVehicle)
+                    .ThenInclude(x => x.Model)
+                        .ThenInclude(x => x.Manufacturer)
                 .Include(x => x.Rank)
                 .Include(x => x.Gender)
                 .Include(x => x.Race)
@@ -395,6 +404,10 @@ namespace BlueDeck.Persistence.Repositories
 
             List<Component> components = ApplicationDbContext.Components.FromSql("dbo.GetComponentAndChildrenDemo @ComponentId", param1).ToList();
             ApplicationDbContext.Set<Position>().Where(x => components.Contains(x.ParentComponent))
+                .Include(y => y.Members)
+                    .ThenInclude(x => x.AssignedVehicle)
+                        .ThenInclude(x => x.Model)
+                            .ThenInclude(x => x.Manufacturer)
                 .Include(y => y.Members).ThenInclude(z => z.Rank)
                 .Include(y => y.Members).ThenInclude(z => z.Gender)
                 .Include(y => y.Members).ThenInclude(x => x.Race)
@@ -409,6 +422,12 @@ namespace BlueDeck.Persistence.Repositories
             result.GetExceptionToDutyMembers();
             return result;
         }
+
+        /// <summary>
+        /// Gets a Member's parent component identifier.
+        /// </summary>
+        /// <param name="memberid">The memberid.</param>
+        /// <returns></returns>
         public int GetMemberParentComponentId(int memberid)
         {
             Member m = ApplicationDbContext.Members
@@ -418,6 +437,12 @@ namespace BlueDeck.Persistence.Repositories
             return m.Position.ParentComponent.ComponentId;
         }
 
+        /// <summary>
+        /// Reassigns the member and set role.
+        /// </summary>
+        /// <param name="MemberToReassignId">The member to reassign identifier.</param>
+        /// <param name="newPositionId">The new position identifier.</param>
+        /// <param name="IsTDY">if set to <c>true</c> [is tdy].</param>
         public void ReassignMemberAndSetRole(int MemberToReassignId, int newPositionId, bool IsTDY = false)
         {
             Member memberToReassign = ApplicationDbContext.Members

@@ -187,7 +187,8 @@ namespace BlueDeck.Controllers
                 unitOfWork.MemberRaces.GetMemberRaceSelectListItems(),
                 unitOfWork.MemberDutyStatus.GetMemberDutyStatusSelectListItems(),
                 unitOfWork.PhoneNumberTypes.GetPhoneNumberTypeSelectListItems(),
-                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems());
+                unitOfWork.AppStatuses.GetApplicationStatusSelectListItems(),
+                unitOfWork.Vehicles.GetVehicleSelectListItems());
             ViewBag.Title = "Register";
             return View(vm);
         }

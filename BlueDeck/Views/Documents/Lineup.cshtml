@@ -1,0 +1,373 @@
+﻿@model LineupGeneratorViewModel
+@{
+    int memberIndex = 0;
+}
+<div class="col-xs-12 formContainer">
+    <div class="row">
+        <form asp-action="Lineup" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="DistrictName" class="control-label"></label>
+                        <input asp-for="DistrictName" class="form-control" />
+                        <span asp-validation-for="DistrictName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="control-label">@Model.CommanderTitle</label>
+                        <input asp-for="CommanderName" class="form-control" />
+                        <span asp-validation-for="CommanderName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label class="control-label">@Model.AssistantCommanderTitle</label>
+                        <input asp-for="AssistantCommanderName" class="form-control" />
+                        <span asp-validation-for="AssistantCommanderName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="ComponentName" class="control-label"></label>
+                        <input asp-for="ComponentName" class="form-control" />
+                        <span asp-validation-for="ComponentName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="LineupDate" class="control-label"></label>
+                        <input asp-for="LineupDate" class="form-control" />
+                        <span asp-validation-for="LineupDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="table-responsive lineupTable">
+                            <table class="table table-condensed">
+                                <caption>Shift Commander</caption>
+                                <tr>
+                                    <th>
+                                        Radio
+                                    </th>
+                                    <th>
+                                        ID#
+                                    </th>
+                                    <th>
+                                        Rank
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Car#
+                                    </th>
+                                    <th style="text-align:center" colspan="2">
+                                        Working
+                                    </th>
+                                    <th style="text-align:center">
+                                        MVS
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="radioCol">
+                                        <input asp-for="ShiftCommander.Callsign" class="form-control narrow" />
+                                    </td>
+                                    <td class="idCol">
+                                        <input asp-for="ShiftCommander.BadgeNumber" class="form-control narrow" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="ShiftCommander.Rank" class="form-control narrow" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="ShiftCommander.MemberName" class="form-control wide" />
+                                    </td>
+                                    <td>
+                                        <input type="hidden" asp-for="@Model.ShiftCommander.CruiserNumber">
+                                        <select id="ShiftCommanderCruiserDropDown" class="form-control cruiserNumber" value="@Model.ShiftCommander.CruiserNumber">
+                                            <option value="" data-mvs="false" data-mdt="false">None</option>
+                                            <option value="Manual">Custom</option>
+                                            @foreach (var vehicle in Model.Vehicles)
+                                            {
+                                                <option value="@vehicle.CruiserNumber" selected="@(Model.ShiftCommander.CruiserNumber == vehicle.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
+                                            }
+                                        </select>
+                                        <input type="text" id="ShiftCommanderCruiserTextBox" style="display:none" class="form-control cruiserTextBox" />
+                                    </td>
+                                    <td class="workingCol0">
+                                        <div class="btn-group-toggle" data-toggle="buttons">
+                                            <label class="@(Model.ShiftCommander.IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="ShiftCommander.IsOverlap" class="overlapToggle"/> O/L
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="workingCol1">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="dayShift" value="2" checked> D
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="eveShift" value="3"> E
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="midShift" value="1"> M
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="workingCol2">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="0"> F
+                                            </label>
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="1"> N/F
+                                            </label>
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="2"> N/S
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input asp-for="ShiftCommander.LeaveStatus" class="form-control extraWide" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="table-responsive lineupTable">
+                            <table class="table table-condensed">
+                                <caption>Squad OIC</caption>
+                                <tr>
+                                    <th>
+                                        Radio
+                                    </th>
+                                    <th>
+                                        ID#
+                                    </th>
+                                    <th>
+                                        Rank
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Car#
+                                    </th>
+                                    <th style="text-align:center" colspan="2">
+                                        Working
+                                    </th>
+                                    <th style="text-align:center">
+                                        MVS
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="radioCol">
+                                        <input asp-for="OIC.Callsign" class="form-control narrow" />
+                                    </td>
+                                    <td class="idCol">
+                                        <input asp-for="OIC.BadgeNumber" class="form-control narrow" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="OIC.Rank" class="form-control narrow" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="OIC.MemberName" class="form-control wide" />
+                                    </td>
+                                    <td>
+                                        <input type="hidden" asp-for="@Model.OIC.CruiserNumber">
+                                        <select id="OICCruiserNumberDropDown" class="form-control cruiserNumber">
+                                            <option value="None" selected="@(Model.OIC.CruiserNumber == null)" data-mvs="false" data-mdt="false">None</option>
+                                            <option value="Manual">Custom</option>
+                                            @foreach (var vehicle in Model.Vehicles)
+                                            {
+                                                <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == Model.OIC.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
+                                            }
+
+                                        </select>
+
+                                        <input type="text" id="OICCruiserNumberTextBox" style="display:none" class="form-control cruiserTextBox"  />
+                                    </td>
+                                    <td class="workingCol0">
+                                        <div class="btn-group-toggle" data-toggle="buttons">
+                                            <label class="@(Model.ShiftCommander.IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="OIC.IsOverlap" class="overlapToggle" /> O/L
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="workingCol1">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="OIC.ShiftWorking" id="dayShift" value="2" checked> D
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="OIC.ShiftWorking" id="eveShift" value="3"> E
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input type="radio" name="OIC.ShiftWorking" id="midShift" value="1"> M
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="workingCol2">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-secondary">
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 0 ? true : false)"  value="0"> F
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 1 ? true : false)" value="1"> N/F
+                                            </label>
+                                            <label class="btn btn-secondary">
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 2 ? true : false)" value="2"> N/S
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input asp-for="OIC.LeaveStatus" class="form-control extraWide" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="table-responsive lineupTable">
+                            <table class="table table-condensed">
+                                <caption>@Model.ComponentName</caption>
+                                <tr>
+                                    <th>
+                                        Radio
+                                    </th>
+                                    <th>
+                                        ID#
+                                    </th>
+                                    <th>
+                                        Rank
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Car#
+                                    </th>
+                                    <th style="text-align:center" colspan="2">
+                                        Working
+                                    </th>
+                                    <th style="text-align:center">
+                                        MVS
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                </tr>
+                                
+                                @foreach (var worker in Model.Members)
+                                {
+
+                                    <tr>
+                                        <td class="radioCol">
+                                            <input asp-for="@worker.Callsign" class="form-control narrow" />
+                                        </td>
+                                        <td class="idCol">
+                                            <input asp-for="@worker.BadgeNumber" class="form-control narrow" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="@worker.Rank" class="form-control narrow" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="@worker.MemberName" class="form-control wide" />
+                                        </td>
+                                        <td>
+                                            <input type="hidden" asp-for="@worker.CruiserNumber">
+                                            <select id="Worker-@memberIndex-CruiserNumberDropdown" data-workerNumber="@memberIndex" class="form-control cruiserNumber">
+                                                <option value="None" selected="@(worker.CruiserNumber  == null)" data-mvs="false" data-mdt="false">None</option>
+                                                <option value="Manual">Custom</option>
+                                                @foreach (var vehicle in Model.Vehicles)
+                                                {
+                                                    <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == worker.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
+                                                }
+                                            </select>
+                                            <input type="text" id="Worker-@memberIndex-CruiserNumberTextBox" style="display:none" class="form-control cruiserTextBox" />
+                                        </td>
+                                        <td class="workingCol0">
+                                            <div class="btn-group-toggle" data-toggle="buttons">
+                                                <label class="@(Model.ShiftCommander.IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                    <input asp-for="@worker.IsOverlap" class="overlapToggle" /> O/L
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="workingCol1">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-secondary">
+                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="dayShift" value="2" checked> D
+                                                </label>
+                                                <label class="btn btn-secondary">
+                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="eveShift" value="3"> E
+                                                </label>
+                                                <label class="btn btn-secondary">
+                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="midShift" value="1"> M
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td class="workingCol2">
+                                            <div class="btn-group" data-toggle="buttons">
+                                                <label class="btn btn-secondary">
+                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 0 ? true : false)" value="0"> F
+                                                </label>
+                                                <label class="btn btn-secondary">
+                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 1 ? true : false)" value="1"> N/F
+                                                </label>
+                                                <label class="btn btn-secondary">
+                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 2 ? true : false)" value="2"> N/S
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input asp-for="@worker.LeaveStatus" class="form-control extraWide" />
+                                        </td>
+                                    </tr>
+                                    @(memberIndex++)
+                                }
+                            </table>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var cruiserDropDowns = document.getElementsByClassName("cruiserNumber");
+        [].forEach.call(cruiserDropDowns, function (elem) {
+            elem.addEventListener("change", handleCruiserDropDownChange, false);
+        });
+        var cruiserTextBoxes = document.getElementsByClassName("cruiserTextBox");
+        [].forEach.call(cruiserTextBoxes, function (elem) {
+            elem.addEventListener("change", handleCruiserTextBoxChange, false);
+        });
+    })
+
+    function handleCruiserDropDownChange(e) {
+        var selectedVal = e.target.options[e.target.selectedIndex].value;
+        console.log("Cruiser #" + selectedVal);
+
+        switch (e.target.id) {
+            case "ShiftCommanderCruiserDropDown":             
+                console.log("Shift Commander Change");
+                if (selectedVal != "Custom") {
+                    $("#ShiftCommander_CruiserNumber").val(selectedVal);
+                }
+                
+                break;
+            case "OICCruiserNumberDropDown":
+                console.log("OIC Change");
+                $("#OIC_CruiserNumber").val(selectedVal);
+                break;
+            default:
+                var memberId = e.target.dataset.workernumber;
+                console.log("Worker #" + memberId + "Change");
+                $("#Worker-" + memberId + "-CruiserNumberDropDown").val(selectedVal);
+                break;
+        }
+    }
+
+    function handleCruiserTextBoxChange(e) {
+
+    }
+</script>

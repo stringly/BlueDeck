@@ -12,7 +12,7 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Create a Position</h2>
+        <h4 class="formHeader-heading"><strong>Create Position</strong></h4>
         <p class="formHeader-description">
             A Position represents a role in a Component to which Members can be assigned.
         </p>
@@ -21,128 +21,126 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @Html.HiddenFor(model => model.LineupPosition)
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-sm-5 form-group">
-                            <label asp-for="PositionName" class="control-label"></label>
-                            <input asp-for="PositionName" class="form-control" />
-                            <span asp-validation-for="PositionName" class="text-danger"></span>
-                        </div>
-                        <div class="col-sm-3 form-group">
-                            <label asp-for="Callsign" class="control-label"></label>
-                            <input asp-for="Callsign" class="form-control" />
-                            <span asp-validation-for="Callsign" class="text-danger"></span>
-                        </div>
-                        <div class="col-sm-4 form-group">
-                            <label asp-for="JobTitle" class="control-label"></label>
-                            <input asp-for="JobTitle" class="form-control" />
-                            <span asp-validation-for="JobTitle" class="text-danger"></span>
+        <form asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.LineupPosition)
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-5 form-group">
+                        <label asp-for="PositionName" class="control-label"></label>
+                        <input asp-for="PositionName" class="form-control" />
+                        <span asp-validation-for="PositionName" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-3 form-group">
+                        <label asp-for="Callsign" class="control-label"></label>
+                        <input asp-for="Callsign" class="form-control" />
+                        <span asp-validation-for="Callsign" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="JobTitle" class="control-label"></label>
+                        <input asp-for="JobTitle" class="form-control" />
+                        <span asp-validation-for="JobTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-10 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsUnique" /> @Html.DisplayNameFor(model => model.IsUnique)
+                            </label>
+                            <span class="note">
+                                Only a single Member can be assigned.
+                            </span>
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-10 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="IsUnique" /> @Html.DisplayNameFor(model => model.IsUnique)
-                                </label>
-                                <span class="note">
-                                    Only a single Member can be assigned.
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="IsManager" /> @Html.DisplayNameFor(model => model.IsManager)
-                                </label>
-                                <span class="note">
-                                    This Position will be the Manager for it's Component.
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="IsAssistantManager" /> @Html.DisplayNameFor(model => model.IsAssistantManager)
-                                </label>
-                                <span class="note">
-                                    This Position will be an Assistant Manager for it's Component.
-                                </span>
-                            </div>
+                    <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsManager" /> @Html.DisplayNameFor(model => model.IsManager)
+                            </label>
+                            <span class="note">
+                                This Position will be the Manager for it's Component.
+                            </span>
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <label asp-for="ParentComponentId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.ParentComponentId,
-                                                            new SelectList(Model.Components, "Id", "ComponentName"),
-                                                            "Choose Parent Component",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="ParentComponentId" class="text-danger"></span>
-                        </div>
-                        <div class="col-sm-7 form-group" id="lineupWait" style="display:none">
-                            <label class="control-label">Retrieving Positions</label><br />
-                            <span class="glyphicon glyphicon-refresh spinning"></span>
-                        </div>
-                        <div id="lineupSelectionTarget"></div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="form-group col-md-5">
-                            <label class="control-label">Assign Member</label>
-                            <div class="input-group">
-                                @Html.DropDownList("AvailableMembers", new SelectList(Model.AvailableMembers, "MemberId", "MemberName"),
-                                                                "Select Member to Assign",
-                                                                new { @class = "form-control" })
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="button" id="addSelectedMemberButton">
-                                        <i class="glyphicon glyphicon-plus"></i> Assign
-                                    </button>
-                                </div>
-                            </div>
-                            <span id="AvailableMembersMessage" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-7">
-                            <label asp-for="CurrentMembers" class="control-label">Current Members</label><small id="currentMembersSubText">@(Model.IsUnique == true ? " (This is a unique position, so only a single member can be assigned.)" : " (Multiple members can be assigned.)")</small>
-                            <ul class="list-unstyled" id="memberLineup">
-                                @if (Model.CurrentMembers == null || Model.CurrentMembers.Count() == 0)
-                                {
-                                    <li id="noMembersItem"><span>No Current Members</span></li>
-                                }
-                                else
-                                {
-                                    @for (int i = 0; i < Model.CurrentMembers.Count; i++)
-                                    {
-                                        <li class="memberLineupItem" id="memberLineupItem-@i" data-memberid="@Model.CurrentMembers[i].MemberId">
-                                            <button type="button" class="btn btn-small btn-danger unassignButton" data-membernumber="@i" data-positionid="@Model.PositionId" data-memberid="@Model.CurrentMembers[i].MemberId">
-                                                <i class="glyphicon glyphicon-remove"></i>
-                                            </button>
-                                            <span>@Model.CurrentMembers[i].MemberName</span>
-                                            <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberId" />
-                                            <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberName" />
-                                        </li>
-                                    }
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-4 form-group">
-                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                    <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsAssistantManager" /> @Html.DisplayNameFor(model => model.IsAssistantManager)
+                            </label>
+                            <span class="note">
+                                This Position will be an Assistant Manager for it's Component.
+                            </span>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label asp-for="ParentComponentId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.ParentComponentId,
+                                                        new SelectList(Model.Components, "Id", "ComponentName"),
+                                                        "Choose Parent Component",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="ParentComponentId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-7 form-group" id="lineupWait" style="display:none">
+                        <label class="control-label">Retrieving Positions</label><br />
+                        <span class="glyphicon glyphicon-refresh spinning"></span>
+                    </div>
+                    <div id="lineupSelectionTarget"></div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="form-group col-md-5">
+                        <label class="control-label">Assign Member</label>
+                        <div class="input-group">
+                            @Html.DropDownList("AvailableMembers", new SelectList(Model.AvailableMembers, "MemberId", "MemberName"),
+                                                            "Select Member to Assign",
+                                                            new { @class = "form-control" })
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="addSelectedMemberButton">
+                                    <i class="glyphicon glyphicon-plus"></i> Assign
+                                </button>
+                            </div>
+                        </div>
+                        <span id="AvailableMembersMessage" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-7">
+                        <label asp-for="CurrentMembers" class="control-label">Current Members</label><small id="currentMembersSubText">@(Model.IsUnique == true ? " (This is a unique position, so only a single member can be assigned.)" : " (Multiple members can be assigned.)")</small>
+                        <ul class="list-unstyled" id="memberLineup">
+                            @if (Model.CurrentMembers == null || Model.CurrentMembers.Count() == 0)
+                            {
+                                <li id="noMembersItem"><span>No Current Members</span></li>
+                            }
+                            else
+                            {
+                                @for (int i = 0; i < Model.CurrentMembers.Count; i++)
+                                {
+                                    <li class="memberLineupItem" id="memberLineupItem-@i" data-memberid="@Model.CurrentMembers[i].MemberId">
+                                        <button type="button" class="btn btn-small btn-danger unassignButton" data-membernumber="@i" data-positionid="@Model.PositionId" data-memberid="@Model.CurrentMembers[i].MemberId">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </button>
+                                        <span>@Model.CurrentMembers[i].MemberName</span>
+                                        <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberId" />
+                                        <input type="hidden" asp-for="@Model.CurrentMembers[i].MemberName" />
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Create" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

@@ -61,7 +61,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th style="text-align:center;">
+                        <th>
                             VehicleModelId
                         </th>
                         <th>
@@ -111,10 +111,10 @@
                             <td>
                                 @item.Manufacturer.VehicleManufacturerName
                             </td>
-                            <td>
+                            <td style="text-align:center;">
                                 @item.Vehicles.Count()
                             </td>
-                            <td>
+                            <td style="text-align:center;">
                                 <a asp-controller="VehicleModels" asp-action="Edit" asp-route-id="@item.VehicleModelId" asp-route-returnUrl="/Admin/VehicleModelIndex" title="Edit Model" class="glyphicon-ring">
                                     <span class="glyphicon glyphicon-pencil glyphicon-bordered"></span>
                                 </a>

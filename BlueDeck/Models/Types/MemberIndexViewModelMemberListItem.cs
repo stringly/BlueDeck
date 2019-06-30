@@ -21,6 +21,9 @@ namespace BlueDeck.Models.Types
         public int PositionId { get; set; }
         public string ParentComponentName { get; set; }
         public int ParentComponentId { get; set; }
+        [Display(Name = "Assigned Vehicle")]
+        public string CruiserNumber { get; set;}
+        public int? AssignedVehicleId { get; set;}
 
         public MemberIndexViewModelMemberListItem()
         {
@@ -37,6 +40,8 @@ namespace BlueDeck.Models.Types
             PositionId = m.Position.PositionId;
             ParentComponentName = m.Position?.ParentComponent?.Name ?? "None";
             ParentComponentId = m.Position?.ParentComponent?.ComponentId ?? 0;
+            CruiserNumber = m?.AssignedVehicle?.CruiserNumber ?? "No Cruiser";
+            AssignedVehicleId = m?.AssignedVehicle?.VehicleId;
         }
     }
 }

@@ -11,241 +11,239 @@
         </div>
     }
     <div class="formHeader">
-        <h2 class="formHeader-heading">Edit Vehicle</h2>
+        <h4 class="formHeader-heading"><strong>Edit Vehicle</strong></h4>
         <p class="formHeader-description">
-            Provide the following information to edit this vehicle.
+            Editing details for Vehicle #@Model.CruiserNumber.
         </p>
         <div>
             <a asp-action="Index"><i class="ion-md-arrow-round-back"></i> Back to List</a>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <form asp-action="Edit" asp-route-id="@Model.VehicleId" asp-route-returnUrl="@ViewBag.ReturnUrl" >
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="VehicleId" /> 
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4 form-group">
-                            <label asp-for="CruiserNumber" class="control-label"></label>
-                            <input asp-for="CruiserNumber" class="form-control" />
-                            <span asp-validation-for="CruiserNumber" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-3 form-group">
-                            <label asp-for="ModelYear" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.ModelYear,
-                                new SelectList(new List<SelectListItem> {
-                                    new SelectListItem {Text = "1990", Value = "1990"},
-                                    new SelectListItem {Text = "1991", Value = "1991"},
-                                    new SelectListItem {Text = "1992", Value = "1992"},
-                                    new SelectListItem {Text = "1993", Value = "1993"},
-                                    new SelectListItem {Text = "1994", Value = "1994"},
-                                    new SelectListItem {Text = "1995", Value = "1995"},
-                                    new SelectListItem {Text = "1996", Value = "1996"},
-                                    new SelectListItem {Text = "1997", Value = "1997"},
-                                    new SelectListItem {Text = "1998", Value = "1998"},
-                                    new SelectListItem {Text = "1999", Value = "1999"},
-                                    new SelectListItem {Text = "2000", Value = "2000"},
-                                    new SelectListItem {Text = "2001", Value = "2001"},
-                                    new SelectListItem {Text = "2002", Value = "2002"},
-                                    new SelectListItem {Text = "2003", Value = "2003"},
-                                    new SelectListItem {Text = "2004", Value = "2004"},
-                                    new SelectListItem {Text = "2005", Value = "2005"},
-                                    new SelectListItem {Text = "2006", Value = "2006"},
-                                    new SelectListItem {Text = "2007", Value = "2007"},
-                                    new SelectListItem {Text = "2008", Value = "2008"},
-                                    new SelectListItem {Text = "2009", Value = "2009"},
-                                    new SelectListItem {Text = "2010", Value = "2010"},
-                                    new SelectListItem {Text = "2011", Value = "2011"},
-                                    new SelectListItem {Text = "2012", Value = "2012"},
-                                    new SelectListItem {Text = "2013", Value = "2013"},
-                                    new SelectListItem {Text = "2014", Value = "2014"},
-                                    new SelectListItem {Text = "2015", Value = "2015"},
-                                    new SelectListItem {Text = "2016", Value = "2016"},
-                                    new SelectListItem {Text = "2017", Value = "2017"},
-                                    new SelectListItem {Text = "2018", Value = "2018"},
-                                    new SelectListItem {Text = "2019", Value = "2019"},
-                                    new SelectListItem {Text = "2020", Value = "2020"},
-                                    new SelectListItem {Text = "2021", Value = "2021"},
-                                    new SelectListItem {Text = "2022", Value = "2022"},
-                                    new SelectListItem {Text = "2023", Value = "2023"},
-                                    new SelectListItem {Text = "2024", Value = "2024"},
-                                    new SelectListItem {Text = "2025", Value = "2025"},
-                                    new SelectListItem {Text = "2026", Value = "2026"},
-                                    new SelectListItem {Text = "2027", Value = "2027"},
-                                    new SelectListItem {Text = "2028", Value = "2028"},
-                                    new SelectListItem {Text = "2029", Value = "2029"},
+        <form asp-action="Edit" asp-route-id="@Model.VehicleId" asp-route-returnUrl="@ViewBag.ReturnUrl" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="VehicleId" /> 
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        <label asp-for="CruiserNumber" class="control-label"></label>
+                        <input asp-for="CruiserNumber" class="form-control" />
+                        <span asp-validation-for="CruiserNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="ModelYear" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.ModelYear,
+                            new SelectList(new List<SelectListItem> {
+                                new SelectListItem {Text = "1990", Value = "1990"},
+                                new SelectListItem {Text = "1991", Value = "1991"},
+                                new SelectListItem {Text = "1992", Value = "1992"},
+                                new SelectListItem {Text = "1993", Value = "1993"},
+                                new SelectListItem {Text = "1994", Value = "1994"},
+                                new SelectListItem {Text = "1995", Value = "1995"},
+                                new SelectListItem {Text = "1996", Value = "1996"},
+                                new SelectListItem {Text = "1997", Value = "1997"},
+                                new SelectListItem {Text = "1998", Value = "1998"},
+                                new SelectListItem {Text = "1999", Value = "1999"},
+                                new SelectListItem {Text = "2000", Value = "2000"},
+                                new SelectListItem {Text = "2001", Value = "2001"},
+                                new SelectListItem {Text = "2002", Value = "2002"},
+                                new SelectListItem {Text = "2003", Value = "2003"},
+                                new SelectListItem {Text = "2004", Value = "2004"},
+                                new SelectListItem {Text = "2005", Value = "2005"},
+                                new SelectListItem {Text = "2006", Value = "2006"},
+                                new SelectListItem {Text = "2007", Value = "2007"},
+                                new SelectListItem {Text = "2008", Value = "2008"},
+                                new SelectListItem {Text = "2009", Value = "2009"},
+                                new SelectListItem {Text = "2010", Value = "2010"},
+                                new SelectListItem {Text = "2011", Value = "2011"},
+                                new SelectListItem {Text = "2012", Value = "2012"},
+                                new SelectListItem {Text = "2013", Value = "2013"},
+                                new SelectListItem {Text = "2014", Value = "2014"},
+                                new SelectListItem {Text = "2015", Value = "2015"},
+                                new SelectListItem {Text = "2016", Value = "2016"},
+                                new SelectListItem {Text = "2017", Value = "2017"},
+                                new SelectListItem {Text = "2018", Value = "2018"},
+                                new SelectListItem {Text = "2019", Value = "2019"},
+                                new SelectListItem {Text = "2020", Value = "2020"},
+                                new SelectListItem {Text = "2021", Value = "2021"},
+                                new SelectListItem {Text = "2022", Value = "2022"},
+                                new SelectListItem {Text = "2023", Value = "2023"},
+                                new SelectListItem {Text = "2024", Value = "2024"},
+                                new SelectListItem {Text = "2025", Value = "2025"},
+                                new SelectListItem {Text = "2026", Value = "2026"},
+                                new SelectListItem {Text = "2027", Value = "2027"},
+                                new SelectListItem {Text = "2028", Value = "2028"},
+                                new SelectListItem {Text = "2029", Value = "2029"},
 
-                                }, "Value", "Text"),
-                                "Choose Model Year",
-                                new { @class = "form-control" })
-                            <span asp-validation-for="ModelYear" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-4 form-group">
-                            <label asp-for="ModelId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.ModelId,
-                                                            new SelectList(Model.Models, "VehicleModelId", "VehicleModelName"),
-                                                            "Choose Make/Model",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="ModelId" class="text-danger"></span>
-                        </div>
-                        <div class="col-sm-5 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="IsMarked" /> @Html.DisplayNameFor(model => model.IsMarked)
-                                </label>
-                                <span class="note">
-                                    Vehicle is marked with Police livery.
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="HasMVS" /> @Html.DisplayNameFor(model => model.HasMVS)
-                                </label>
-                                <span class="note">
-                                    Vehicle is equipped with a Mobile Video System.
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 form-group" style="margin-bottom:0px">
-                            <div class="form-checkbox">
-                                <label>
-                                    <input asp-for="HasMDT" /> @Html.DisplayNameFor(model => model.HasMDT)
-                                </label>
-                                <span class="note">
-                                    Vehicle is equipped with a Mobile Data Terminal.
-                                </span>
-                            </div>
+                            }, "Value", "Text"),
+                            "Choose Model Year",
+                            new { @class = "form-control" })
+                        <span asp-validation-for="ModelYear" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label asp-for="ModelId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.ModelId,
+                                                        new SelectList(Model.Models, "VehicleModelId", "VehicleModelName"),
+                                                        "Choose Make/Model",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="ModelId" class="text-danger"></span>
+                    </div>
+                    <div class="col-sm-5 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="IsMarked" /> @Html.DisplayNameFor(model => model.IsMarked)
+                            </label>
+                            <span class="note">
+                                Vehicle is marked with Police livery.
+                            </span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8 form-group">
-                            <label asp-for="VIN" class="control-label"></label>
-                            <input asp-for="VIN" class="form-control" />
-                            <span asp-validation-for="VIN" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <label asp-for="TagNumber" class="control-label"></label>
-                            <input asp-for="TagNumber" class="form-control" />
-                            <span asp-validation-for="TagNumber" class="text-danger"></span>
-                        </div>
-                        <div class="col-md-2 form-group">
-                            <label asp-for="TagState" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.TagState,
-                                new SelectList(new List<SelectListItem> {
-                                    new SelectListItem() { Text="Alabama", Value="AL"},
-                                    new SelectListItem() { Text="Alaska", Value="AK"},
-                                    new SelectListItem() { Text="Arizona", Value="AZ"},
-                                    new SelectListItem() { Text="Arkansas", Value="AR"},
-                                    new SelectListItem() { Text="California", Value="CA"},
-                                    new SelectListItem() { Text="Colorado", Value="CO"},
-                                    new SelectListItem() { Text="Connecticut", Value="CT"},
-                                    new SelectListItem() { Text="District of Columbia", Value="DC"},
-                                    new SelectListItem() { Text="Delaware", Value="DE"},
-                                    new SelectListItem() { Text="Florida", Value="FL"},
-                                    new SelectListItem() { Text="Georgia", Value="GA"},
-                                    new SelectListItem() { Text="Hawaii", Value="HI"},
-                                    new SelectListItem() { Text="Idaho", Value="ID"},
-                                    new SelectListItem() { Text="Illinois", Value="IL"},
-                                    new SelectListItem() { Text="Indiana", Value="IN"},
-                                    new SelectListItem() { Text="Iowa", Value="IA"},
-                                    new SelectListItem() { Text="Kansas", Value="KS"},
-                                    new SelectListItem() { Text="Kentucky", Value="KY"},
-                                    new SelectListItem() { Text="Louisiana", Value="LA"},
-                                    new SelectListItem() { Text="Maine", Value="ME"},
-                                    new SelectListItem() { Text="Maryland", Value="MD"},
-                                    new SelectListItem() { Text="Massachusetts", Value="MA"},
-                                    new SelectListItem() { Text="Michigan", Value="MI"},
-                                    new SelectListItem() { Text="Minnesota", Value="MN"},
-                                    new SelectListItem() { Text="Mississippi", Value="MS"},
-                                    new SelectListItem() { Text="Missouri", Value="MO"},
-                                    new SelectListItem() { Text="Montana", Value="MT"},
-                                    new SelectListItem() { Text="Nebraska", Value="NE"},
-                                    new SelectListItem() { Text="Nevada", Value="NV"},
-                                    new SelectListItem() { Text="New Hampshire", Value="NH"},
-                                    new SelectListItem() { Text="New Jersey", Value="NJ"},
-                                    new SelectListItem() { Text="New Mexico", Value="NM"},
-                                    new SelectListItem() { Text="New York", Value="NY"},
-                                    new SelectListItem() { Text="North Carolina", Value="NC"},
-                                    new SelectListItem() { Text="North Dakota", Value="ND"},
-                                    new SelectListItem() { Text="Ohio", Value="OH"},
-                                    new SelectListItem() { Text="Oklahoma", Value="OK"},
-                                    new SelectListItem() { Text="Oregon", Value="OR"},
-                                    new SelectListItem() { Text="Pennsylvania", Value="PA"},
-                                    new SelectListItem() { Text="Rhode Island", Value="RI"},
-                                    new SelectListItem() { Text="South Carolina", Value="SC"},
-                                    new SelectListItem() { Text="South Dakota", Value="SD"},
-                                    new SelectListItem() { Text="Tennessee", Value="TN"},
-                                    new SelectListItem() { Text="Texas", Value="TX"},
-                                    new SelectListItem() { Text="Utah", Value="UT"},
-                                    new SelectListItem() { Text="Vermont", Value="VT"},
-                                    new SelectListItem() { Text="Virginia", Value="VA"},
-                                    new SelectListItem() { Text="Washington", Value="WA"},
-                                    new SelectListItem() { Text="West Virginia", Value="WV"},
-                                    new SelectListItem() { Text="Wisconsin", Value="WI"},
-                                    new SelectListItem() { Text="Wyoming", Value="WY"}
-
-                                }, "Value", "Text"),
-                                "Choose Tag State",
-                                new { @class = "form-control" })
-                            <span asp-validation-for="TagState" class="text-danger"></span>
+                    <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="HasMVS" /> @Html.DisplayNameFor(model => model.HasMVS)
+                            </label>
+                            <span class="note">
+                                Vehicle is equipped with a Mobile Video System.
+                            </span>
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-12 form-group">
-                            <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="member" checked="@((Model.AssignedToMemberId != null || (Model.AssignedToPositionId == null && Model.AssignedToComponentId == null)))">Assign to Member</label>
-                            <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="position" checked="@(Model.AssignedToPositionId != null)">Assign to Position</label>
-                            <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="component" checked="@(Model.AssignedToComponentId != null)">Assign to Component</label>
-                            <span class="note">A vehicle can be assigned to any single Member, Position, or Component at a time.</span>
-                        </div>
-                    </div>
-                    <div class="row" id="assignToMemberGroup" style="@(Model.AssignedToMemberId == null && (Model.AssignedToPositionId != null || Model.AssignedToComponentId != null) ? "display:none" : "")">
-                        <div class="col-md-5 form-group">
-                            <label asp-for="AssignedToMemberId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.AssignedToMemberId,
-                                                            new SelectList(Model.Members, "MemberId", "MemberName"),
-                                                            "None",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="AssignedToMemberId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row" id="assignToPositionGroup" style="@(Model.AssignedToPositionId == null ? "display:none" : "")">
-                        <div class="col-md-5 form-group">
-                            <label asp-for="AssignedToPositionId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.AssignedToPositionId,
-                                                            new SelectList(Model.Positions, "PositionId", "PositionName"),
-                                                            "None",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="AssignedToPositionId" class="text-danger"></span>
-                            <span class="note">A vehicle assigned to a Position will make the vehicle the responsibility of any member who occupies the position.</span>
-                        </div>
-                    </div>
-                    <div class="row" id="assignToComponentGroup" style="@(Model.AssignedToComponentId == null ? "display:none" : "")">
-                        <div class="col-md-5 form-group">
-                            <label asp-for="AssignedToComponentId" class="control-label"></label>
-                            @Html.DropDownListFor(model => model.AssignedToComponentId,
-                                                            new SelectList(Model.Components, "Id", "ComponentName"),
-                                                            "None",
-                                                            new { @class = "form-control" })
-                            <span asp-validation-for="AssignedToComponentId" class="text-danger"></span>
-                            <span class="note">A vehicle assigned to a Component will become the responsibility of the Manager of that Component.</span>
-                        </div>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-sm-12 form-group">
-                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
-                            <a asp-action="Edit" asp-route-id="@Model.VehicleId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
-                            <input type="submit" value="Save Changes" class="btn btn-primary" />
-                            <a asp-action="Delete" asp-route-id="@Model.VehicleId" class="btn btn-danger pull-right">Delete</a>
+                    <div class="col-sm-4 form-group" style="margin-bottom:0px">
+                        <div class="form-checkbox">
+                            <label>
+                                <input asp-for="HasMDT" /> @Html.DisplayNameFor(model => model.HasMDT)
+                            </label>
+                            <span class="note">
+                                Vehicle is equipped with a Mobile Data Terminal.
+                            </span>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="row">
+                    <div class="col-md-8 form-group">
+                        <label asp-for="VIN" class="control-label"></label>
+                        <input asp-for="VIN" class="form-control" />
+                        <span asp-validation-for="VIN" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label asp-for="TagNumber" class="control-label"></label>
+                        <input asp-for="TagNumber" class="form-control" />
+                        <span asp-validation-for="TagNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label asp-for="TagState" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.TagState,
+                            new SelectList(new List<SelectListItem> {
+                                new SelectListItem() { Text="Alabama", Value="AL"},
+                                new SelectListItem() { Text="Alaska", Value="AK"},
+                                new SelectListItem() { Text="Arizona", Value="AZ"},
+                                new SelectListItem() { Text="Arkansas", Value="AR"},
+                                new SelectListItem() { Text="California", Value="CA"},
+                                new SelectListItem() { Text="Colorado", Value="CO"},
+                                new SelectListItem() { Text="Connecticut", Value="CT"},
+                                new SelectListItem() { Text="District of Columbia", Value="DC"},
+                                new SelectListItem() { Text="Delaware", Value="DE"},
+                                new SelectListItem() { Text="Florida", Value="FL"},
+                                new SelectListItem() { Text="Georgia", Value="GA"},
+                                new SelectListItem() { Text="Hawaii", Value="HI"},
+                                new SelectListItem() { Text="Idaho", Value="ID"},
+                                new SelectListItem() { Text="Illinois", Value="IL"},
+                                new SelectListItem() { Text="Indiana", Value="IN"},
+                                new SelectListItem() { Text="Iowa", Value="IA"},
+                                new SelectListItem() { Text="Kansas", Value="KS"},
+                                new SelectListItem() { Text="Kentucky", Value="KY"},
+                                new SelectListItem() { Text="Louisiana", Value="LA"},
+                                new SelectListItem() { Text="Maine", Value="ME"},
+                                new SelectListItem() { Text="Maryland", Value="MD"},
+                                new SelectListItem() { Text="Massachusetts", Value="MA"},
+                                new SelectListItem() { Text="Michigan", Value="MI"},
+                                new SelectListItem() { Text="Minnesota", Value="MN"},
+                                new SelectListItem() { Text="Mississippi", Value="MS"},
+                                new SelectListItem() { Text="Missouri", Value="MO"},
+                                new SelectListItem() { Text="Montana", Value="MT"},
+                                new SelectListItem() { Text="Nebraska", Value="NE"},
+                                new SelectListItem() { Text="Nevada", Value="NV"},
+                                new SelectListItem() { Text="New Hampshire", Value="NH"},
+                                new SelectListItem() { Text="New Jersey", Value="NJ"},
+                                new SelectListItem() { Text="New Mexico", Value="NM"},
+                                new SelectListItem() { Text="New York", Value="NY"},
+                                new SelectListItem() { Text="North Carolina", Value="NC"},
+                                new SelectListItem() { Text="North Dakota", Value="ND"},
+                                new SelectListItem() { Text="Ohio", Value="OH"},
+                                new SelectListItem() { Text="Oklahoma", Value="OK"},
+                                new SelectListItem() { Text="Oregon", Value="OR"},
+                                new SelectListItem() { Text="Pennsylvania", Value="PA"},
+                                new SelectListItem() { Text="Rhode Island", Value="RI"},
+                                new SelectListItem() { Text="South Carolina", Value="SC"},
+                                new SelectListItem() { Text="South Dakota", Value="SD"},
+                                new SelectListItem() { Text="Tennessee", Value="TN"},
+                                new SelectListItem() { Text="Texas", Value="TX"},
+                                new SelectListItem() { Text="Utah", Value="UT"},
+                                new SelectListItem() { Text="Vermont", Value="VT"},
+                                new SelectListItem() { Text="Virginia", Value="VA"},
+                                new SelectListItem() { Text="Washington", Value="WA"},
+                                new SelectListItem() { Text="West Virginia", Value="WV"},
+                                new SelectListItem() { Text="Wisconsin", Value="WI"},
+                                new SelectListItem() { Text="Wyoming", Value="WY"}
+
+                            }, "Value", "Text"),
+                            "Choose Tag State",
+                            new { @class = "form-control" })
+                        <span asp-validation-for="TagState" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="member" checked="@((Model.AssignedToMemberId != null || (Model.AssignedToPositionId == null && Model.AssignedToComponentId == null)))">Assign to Member</label>
+                        <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="position" checked="@(Model.AssignedToPositionId != null)">Assign to Position</label>
+                        <label class="radio-inline"><input type="radio" class="assignmentSelectionRadioButton" name="assignOption" value="component" checked="@(Model.AssignedToComponentId != null)">Assign to Component</label>
+                        <span class="note">A vehicle can be assigned to any single Member, Position, or Component at a time.</span>
+                    </div>
+                </div>
+                <div class="row" id="assignToMemberGroup" style="@(Model.AssignedToMemberId == null && (Model.AssignedToPositionId != null || Model.AssignedToComponentId != null) ? "display:none" : "")">
+                    <div class="col-md-5 form-group">
+                        <label asp-for="AssignedToMemberId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.AssignedToMemberId,
+                                                        new SelectList(Model.Members, "MemberId", "MemberName"),
+                                                        "None",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="AssignedToMemberId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row" id="assignToPositionGroup" style="@(Model.AssignedToPositionId == null ? "display:none" : "")">
+                    <div class="col-md-5 form-group">
+                        <label asp-for="AssignedToPositionId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.AssignedToPositionId,
+                                                        new SelectList(Model.Positions, "PositionId", "PositionName"),
+                                                        "None",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="AssignedToPositionId" class="text-danger"></span>
+                        <span class="note">A vehicle assigned to a Position will make the vehicle the responsibility of any member who occupies the position.</span>
+                    </div>
+                </div>
+                <div class="row" id="assignToComponentGroup" style="@(Model.AssignedToComponentId == null ? "display:none" : "")">
+                    <div class="col-md-5 form-group">
+                        <label asp-for="AssignedToComponentId" class="control-label"></label>
+                        @Html.DropDownListFor(model => model.AssignedToComponentId,
+                                                        new SelectList(Model.Components, "Id", "ComponentName"),
+                                                        "None",
+                                                        new { @class = "form-control" })
+                        <span asp-validation-for="AssignedToComponentId" class="text-danger"></span>
+                        <span class="note">A vehicle assigned to a Component will become the responsibility of the Manager of that Component.</span>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                        <a asp-action="Edit" asp-route-id="@Model.VehicleId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                        <input type="submit" value="Save Changes" class="btn btn-primary" />
+                        <a asp-action="Delete" asp-route-id="@Model.VehicleId" class="btn btn-danger pull-right">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <script>
