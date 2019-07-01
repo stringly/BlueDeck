@@ -84,13 +84,16 @@
                                         <input type="hidden" asp-for="@Model.ShiftCommander.CruiserNumber">
                                         <select id="ShiftCommanderCruiserDropDown" class="form-control cruiserNumber" value="@Model.ShiftCommander.CruiserNumber">
                                             <option value="" data-mvs="false" data-mdt="false">None</option>
-                                            <option value="Manual">Custom</option>
+                                            <option value="Custom">Custom</option>
                                             @foreach (var vehicle in Model.Vehicles)
                                             {
                                                 <option value="@vehicle.CruiserNumber" selected="@(Model.ShiftCommander.CruiserNumber == vehicle.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
                                             }
                                         </select>
-                                        <input type="text" id="ShiftCommanderCruiserTextBox" style="display:none" class="form-control cruiserTextBox" />
+                                        <div class="inner-addon right-addon" id="ShiftCommanderCustomCruiserNumberGroup" style="display:none">
+                                            <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="ShiftCommanderResetCruiserNumber"></i>
+                                            <input type="text" id="ShiftCommanderCruiserNumberTextBox" class="form-control cruiserTextBox" />
+                                        </div>
                                     </td>
                                     <td class="workingCol0">
                                         <div class="btn-group-toggle" data-toggle="buttons">
@@ -177,15 +180,18 @@
                                         <input type="hidden" asp-for="@Model.OIC.CruiserNumber">
                                         <select id="OICCruiserNumberDropDown" class="form-control cruiserNumber">
                                             <option value="None" selected="@(Model.OIC.CruiserNumber == null)" data-mvs="false" data-mdt="false">None</option>
-                                            <option value="Manual">Custom</option>
+                                            <option value="Custom">Custom</option>
                                             @foreach (var vehicle in Model.Vehicles)
                                             {
                                                 <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == Model.OIC.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
                                             }
 
                                         </select>
-
-                                        <input type="text" id="OICCruiserNumberTextBox" style="display:none" class="form-control cruiserTextBox"  />
+                                        <div class="inner-addon right-addon" id="OICCustomCruiserNumberGroup" style="display:none">
+                                            <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="OICResetCruiserNumber"></i>
+                                            <input type="text" id="OICCruiserNumberTextBox" class="form-control cruiserTextBox" />
+                                        </div>
+                                        
                                     </td>
                                     <td class="workingCol0">
                                         <div class="btn-group-toggle" data-toggle="buttons">
@@ -273,16 +279,20 @@
                                             <input asp-for="@worker.MemberName" class="form-control wide" />
                                         </td>
                                         <td>
-                                            <input type="hidden" asp-for="@worker.CruiserNumber">
-                                            <select id="Worker-@memberIndex-CruiserNumberDropdown" data-workerNumber="@memberIndex" class="form-control cruiserNumber">
+                                            <input type="hidden" id="@($"worker_{@memberIndex}_CruiserNumber")" name="@($"worker[{memberIndex}].CruiserNumber")" />
+                                            <select id="Worker-@memberIndex-CruiserNumberDropDown" data-workerNumber="@memberIndex" class="form-control cruiserNumber">
                                                 <option value="None" selected="@(worker.CruiserNumber  == null)" data-mvs="false" data-mdt="false">None</option>
-                                                <option value="Manual">Custom</option>
+                                                <option value="Custom">Custom</option>
                                                 @foreach (var vehicle in Model.Vehicles)
                                                 {
                                                     <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == worker.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
                                                 }
                                             </select>
-                                            <input type="text" id="Worker-@memberIndex-CruiserNumberTextBox" style="display:none" class="form-control cruiserTextBox" />
+                                            <div class="inner-addon right-addon" id="Worker-@memberIndex-CustomCruiserNumberGroup" style="display:none" data-workernumber="@memberIndex">
+                                                <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="Worker-@memberIndex-ResetCruiserNumber" data-workernumber="@memberIndex"></i>
+                                                <input type="text" id="Worker-@memberIndex-CruiserNumberTextBox" class="form-control cruiserTextBox" data-workernumber="@memberIndex" />
+                                            </div>
+                                            
                                         </td>
                                         <td class="workingCol0">
                                             <div class="btn-group-toggle" data-toggle="buttons">
@@ -341,6 +351,10 @@
         [].forEach.call(cruiserTextBoxes, function (elem) {
             elem.addEventListener("change", handleCruiserTextBoxChange, false);
         });
+        var cruiserNumberResetButtons = document.getElementsByClassName("resetCruiserNumberButton");
+        [].forEach.call(cruiserNumberResetButtons, function (elem) {
+            elem.addEventListener("click", handleResetCruiserNumber, false);
+        })
     })
 
     function handleCruiserDropDownChange(e) {
@@ -350,24 +364,95 @@
         switch (e.target.id) {
             case "ShiftCommanderCruiserDropDown":             
                 console.log("Shift Commander Change");
-                if (selectedVal != "Custom") {
+                if (selectedVal === "Custom") {
+                    $("#ShiftCommanderCruiserDropDown").hide();
+                    $("#ShiftCommanderCustomCruiserNumberGroup").show();
+                }
+                else {
                     $("#ShiftCommander_CruiserNumber").val(selectedVal);
                 }
                 
                 break;
             case "OICCruiserNumberDropDown":
                 console.log("OIC Change");
-                $("#OIC_CruiserNumber").val(selectedVal);
+                if (selectedVal === "Custom") {
+                    $("#OICCruiserNumberDropDown").hide();
+                    $("#OICCustomCruiserNumberGroup").show();
+                }
+                else {
+                    $("#OIC_CruiserNumber").val(selectedVal);
+                }                
                 break;
             default:
                 var memberId = e.target.dataset.workernumber;
                 console.log("Worker #" + memberId + "Change");
-                $("#Worker-" + memberId + "-CruiserNumberDropDown").val(selectedVal);
+                if (selectedVal === "Custom") {
+                    $("#Worker-" + memberId + "-CruiserNumberDropDown").hide();
+                    $("#Worker-" + memberId + "-CustomCruiserNumberGroup").show();
+                }
+                else {
+                    $("#worker_" + memberId + "_CruiserNumber").val(selectedVal);
+                }
+                
+                break;
+        }
+    }
+
+    function handleResetCruiserNumber(e) {
+        switch (e.target.id) {
+            case "ShiftCommanderResetCruiserNumber":
+                console.log("Shift Commander Reset");
+                var previousValue = $("#ShiftCommander_CruiserNumber").val();
+                if (previousValue.length != 0 && $("#ShiftCommanderCruiserDropDown option[value='" + previousValue + "']").length > 0) {
+                    $("#ShiftCommanderCruiserDropDown").val(previousValue);
+                }
+                else {
+                    $("#ShiftCommanderCruiserDropDown").val("None");
+                }
+                $("#ShiftCommanderCruiserDropDown").show();
+                $("#ShiftCommanderCustomCruiserNumberGroup").hide();                
+                break;
+            case "OICResetCruiserNumber":
+                console.log("OIC Reset");
+                var previousValue = $("#OIC_CruiserNumber").val();
+                if (previousValue.length != 0 && $("#OICCruiserNumberDropDown option[value='"+ previousValue +"']").length > 0) {
+                    $("#OICCruiserNumberDropDown").val(previousValue);
+                }
+                else {
+                    $("#OICCruiserNumberDropDown").val("None");
+                }
+                $("#OICCruiserNumberDropDown").show();
+                $("#OICCustomCruiserNumberGroup").hide();             
+                break;
+            default:
+                var memberId = e.target.dataset.workernumber;
+                console.log("Worker #" + memberId + "Change");
+                var previousValue = $("#worker_" + memberId + "_CruiserNumber").val();
+                if (previousValue.length != 0 && $("#Worker-" + memberId + "-CruiserNumberDropDown option[value='" + previousValue + "']").length > 0) {
+                    $("#Worker-" + memberId + "-CruiserNumberDropDown").val(previousValue);
+                }
+                else {
+                    $("#Worker-" + memberId + "-CruiserNumberDropDown").val("None");
+                }
+                $("#Worker-" + memberId + "-CruiserNumberDropDown").show();
+                $("#Worker-" + memberId + "-CustomCruiserNumberGroup").hide();
                 break;
         }
     }
 
     function handleCruiserTextBoxChange(e) {
-
+        var currentVal = e.target.value;
+        switch (e.target.id) {
+            case "ShiftCommanderResetCruiserNumber":
+                $("#ShiftCommander_CruiserNumber").val(currentVal);
+                break;
+            case "OICResetCruiserNumber":
+                $("#OIC_CruiserNumber").val(currentVal);
+                break;
+            default:
+                var memberId = e.target.dataset.workernumber;
+                $("#worker_" + memberId + "_CruiserNumber").val(currentVal);
+                break;
+        }
     }
 </script>

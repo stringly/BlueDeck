@@ -1714,3 +1714,39 @@ ol, ul {
 .lineupTable .cruiserNumber {
     width: 75px;
 }
+
+.lineupTable .cruiserTextBox {
+    width: 75px;
+    padding-right: 20px;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+    /* style icon */
+    .inner-addon .glyphicon {
+        position: absolute;
+        padding: 5px;
+        cursor: pointer;
+        left: 55px;
+    }
+
+/* align icon */
+.left-addon .glyphicon {
+    left: 0px;
+}
+
+.right-addon .glyphicon {
+    right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+    padding-left: 30px;
+}
+
+.right-addon input {
+    padding-right: 30px;
+}
