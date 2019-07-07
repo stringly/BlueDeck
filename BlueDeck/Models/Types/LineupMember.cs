@@ -127,7 +127,7 @@ namespace BlueDeck.Models.Types
                 {
                     if (_member.AssignedVehicle.HasMVS == true)
                     {
-                        MVSStatus = 1;
+                        MVSStatus = 2;
                     }
                     else
                     {

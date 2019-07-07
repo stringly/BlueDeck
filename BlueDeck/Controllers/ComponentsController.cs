@@ -239,14 +239,14 @@ namespace BlueDeck.Controllers
                 return NotFound();
             }
 
-            Component component = unitOfWork.Components.SingleOrDefault(x => x.ComponentId == id);
+            Component component = unitOfWork.Components.GetComponentWithParentComponent(Convert.ToInt32(id));
             if (component == null)
             {
                 return NotFound();
             }
             if (User.IsInRole("GlobalAdmin"))
             {
-                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());
+                ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, unitOfWork.Components.GetComponentSelectListItems());                
                 ViewBag.Title = "Edit Component";
                 ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
@@ -256,6 +256,12 @@ namespace BlueDeck.Controllers
                 List<ComponentSelectListItem> components =
                     JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(User.Claims.FirstOrDefault(claim => claim.Type == "CanEditComponents").Value.ToString());
                 ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(component, components);
+                ComponentSelectListItem parent = new ComponentSelectListItem(component.ParentComponent);
+                if (!components.Contains(parent))
+                {
+                    vm.Components = new List<ComponentSelectListItem>();                    
+                    vm.Components.Add(parent);
+                }
                 ViewBag.Title = "Edit Component";
                 ViewBag.ReturnUrl = returnUrl;
                 return View(vm);
@@ -310,6 +316,15 @@ namespace BlueDeck.Controllers
                                 claim => claim.Type == "CanEditComponents")
                                 .Value
                                 .ToString());
+                    ComponentSelectListItem parent = new ComponentSelectListItem(c.ParentComponent);
+                    if (!form.Components.Contains(parent))
+                    {
+                        // if the user does not have ComponentAdmin over the current Component's Parent,
+                        // then we do not want to allow them to change the Component's Parent.
+                        // So we remove the current component list and replace it with a single item.
+                        form.Components = new List<ComponentSelectListItem>();
+                        form.Components.Add(parent);
+                    }
                 }
                 ViewBag.Title = "Edit Component - Corrections Required";
                 ViewBag.Status = "Warning!";

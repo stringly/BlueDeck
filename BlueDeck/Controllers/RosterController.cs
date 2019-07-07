@@ -621,6 +621,15 @@ namespace BlueDeck.Controllers
         {
             Component c = new Component();
             List<ComponentSelectListItem> components = new List<ComponentSelectListItem>();
+            if (componentId != 0)
+            {
+                c = unitOfWork.Components.GetComponentWithParentComponent(componentId);
+            }
+            if (parentComponentId != 0)
+            {
+                Component parent = unitOfWork.Components.Get(parentComponentId);
+                c.ParentComponent = parent;
+            }
             if (User.IsInRole("GlobalAdmin"))
             {
                 components = unitOfWork.Components.GetComponentSelectListItems();
@@ -632,21 +641,19 @@ namespace BlueDeck.Controllers
                             claim => claim.Type == "CanEditComponents")
                             .Value
                             .ToString());
+                ComponentSelectListItem parent = new ComponentSelectListItem(c.ParentComponent);
+                if (!components.Contains(parent))
+                {
+                    components = new List<ComponentSelectListItem>();
+                    components.Add(parent);
+                }
             }
             else
             {
                 return Forbid();
             }
 
-            if (componentId != 0)
-            {
-                c = unitOfWork.Components.Get(componentId);                                
-            }
-            if (parentComponentId != 0)
-            {
-                Component parent = unitOfWork.Components.Get(parentComponentId);
-                c.ParentComponent = parent;
-            }
+
             ComponentWithComponentListViewModel vm = new ComponentWithComponentListViewModel(c, components);
             return ViewComponent("ComponentAddEditModal", vm);
         }
@@ -700,7 +707,25 @@ namespace BlueDeck.Controllers
             }
             else
             {
-                form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                Component c = unitOfWork.Components.GetComponentWithParentComponent(Convert.ToInt32(form.ComponentId));
+                if (User.IsInRole("GlobalAdmin"))
+                {
+                    form.Components = unitOfWork.Components.GetComponentSelectListItems();
+                }
+                else if (User.IsInRole("ComponentAdmin"))
+                {
+                    form.Components = JsonConvert.DeserializeObject<List<ComponentSelectListItem>>(
+                            User.Claims.FirstOrDefault(
+                                claim => claim.Type == "CanEditComponents")
+                                .Value
+                                .ToString());
+                    ComponentSelectListItem parent = new ComponentSelectListItem(c.ParentComponent);
+                    if (!form.Components.Contains(parent))
+                    {
+                        form.Components = new List<ComponentSelectListItem>();
+                        form.Components.Add(parent);
+                    }
+                }
                 return ViewComponent("ComponentAddEditModal", form);
             }
         }

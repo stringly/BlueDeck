@@ -58,7 +58,6 @@ namespace BlueDeck.Models.ViewModels
         public System.DateTime? LastModified { get; set; }
         public int? LastModifiedById { get; set; }
         public int? CreatedById { get; set; }
-
         /// <summary>
         /// Gets or sets the list of all Component Names/Ids in the repository.  Used to populate an HTML select list.
         /// </summary>

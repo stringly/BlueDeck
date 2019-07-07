@@ -261,13 +261,13 @@
                                     </td>
                                     <td class="workingCol2">
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-secondary">
+                                            <label class="@(Model.OIC.MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                 <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 2 ? true : false)" value="2" class="FunctionalMVS"> F
                                             </label>
-                                            <label class="btn btn-secondary">
+                                            <label class="@(Model.OIC.MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                 <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 1 ? true : false)" value="1" class="NonfunctionalMVS"> N/F
                                             </label>
-                                            <label class="btn btn-secondary">
+                                            <label class="@(Model.OIC.MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                 <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 0 ? true : false)" value="0" class="NoMVS"> N/S
                                             </label>
                                         </div>
@@ -373,13 +373,13 @@
                                         </td>
                                         <td class="workingCol2">
                                             <div class="btn-group" data-toggle="buttons">
-                                                <label class="btn btn-secondary">
+                                                <label class="@(Model.Members[i].MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                     <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 2 ? true : false)" value="2" class="FunctionalMVS"> F
                                                 </label>
-                                                <label class="btn btn-secondary">
+                                                <label class="@(Model.Members[i].MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                     <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 1 ? true : false)" value="1" class="NonfunctionalMVS"> N/F
                                                 </label>
-                                                <label class="btn btn-secondary">
+                                                <label class="@(Model.Members[i].MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                     <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 0 ? true : false)" value="0" class="NoMVS"> N/S
                                                 </label>
                                             </div>
@@ -722,7 +722,7 @@
                 }
                 else {
                     $("#ShiftCommander_CruiserNumber").val(selectedVal);
-                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == "True") {
                         row.getElementsByClassName("FunctionalMVS")[0].checked = true;
                         $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
                     }
@@ -741,7 +741,7 @@
                 }
                 else {
                     $("#OIC_CruiserNumber").val(selectedVal);
-                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == "True") {
                         row.getElementsByClassName("FunctionalMVS")[0].checked = true;
                         $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
                     }
@@ -760,7 +760,7 @@
                 }
                 else {
                     $("#Members_" + memberId + "_CruiserNumber").val(selectedVal);
-                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == "True") {
                         row.getElementsByClassName("FunctionalMVS")[0].checked = true;
                         $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
                     }

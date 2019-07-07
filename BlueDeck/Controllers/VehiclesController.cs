@@ -183,7 +183,7 @@ namespace BlueDeck.Controllers
 
             if(errors == 0)
             {
-                
+
                 Vehicle v = new Vehicle()
                 {
                     ModelYear = form.ModelYear,
@@ -192,7 +192,9 @@ namespace BlueDeck.Controllers
                     TagNumber = form.TagNumber,
                     TagState = form.TagState,
                     CruiserNumber = form.CruiserNumber,
-                    IsMarked = form.IsMarked,                    
+                    IsMarked = form.IsMarked,
+                    HasMVS = form.HasMVS,
+                    HasMDT = form.HasMDT
                 };
                 if (form.AssignedToMemberId != null)
                 {
@@ -320,6 +322,8 @@ namespace BlueDeck.Controllers
                 toEdit.AssignedToMemberId = form.AssignedToMemberId;
                 toEdit.AssignedToPositionId = form.AssignedToPositionId;
                 toEdit.AssignedToComponentId = form.AssignedToComponentId;
+                toEdit.HasMDT = form.HasMDT;
+                toEdit.HasMVS = form.HasMVS;
                 unitOfWork.Complete();
 
                 if (!String.IsNullOrEmpty(returnUrl))

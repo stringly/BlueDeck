@@ -486,7 +486,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BlueDeck.Controllers.DocumentsController.Lineup(System.Int32)">
+        <member name="M:BlueDeck.Controllers.DocumentsController.Lineup(System.Int32,System.String)">
             <summary>
             Lineups the specified identifier.
             </summary>

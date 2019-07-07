@@ -15,7 +15,7 @@
                     <span class="headerSpan componentNameLink" data-componentid="@c.ComponentId" title="Click to view Roster for this Component">@c.Name</span>
                     @if (c.Name.Contains("Squad"))
                     {
-                        <a asp-action="Lineup" asp-controller="Documents" asp-route-id="@c.ComponentId" style="color:white">Create Lineup</a>
+                        <a asp-action="Lineup" asp-controller="Documents" asp-route-id="@c.ComponentId" asp-route-returnUrl="/Roster?id=@c.ComponentId" style="color:white">Create Lineup</a>
                     }
                 </div>
                 <div class="collapse navbar-collapse" id="componentNavBar-@c.ComponentId">

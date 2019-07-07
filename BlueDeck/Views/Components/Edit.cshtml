@@ -44,7 +44,6 @@
                         <label asp-for="ParentComponentId" class="control-label"></label>
                         @Html.DropDownListFor(model => model.ParentComponentId,
                                                         new SelectList(Model.Components, "Id", "ComponentName"),
-                                                        "Choose Parent Component",
                                                         new { @class = "form-control" })
                         <span asp-validation-for="ParentComponentId" class="text-danger"></span>
                     </div>

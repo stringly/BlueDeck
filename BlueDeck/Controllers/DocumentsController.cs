@@ -45,9 +45,11 @@ namespace BlueDeck.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("Documents/Lineup/{id:int}")]
-        public IActionResult Lineup(int id)
+        public IActionResult Lineup(int id, string returnUrl)
         {                        
             LineupGeneratorViewModel vm = unitOfWork.Components.GetLineupGeneratorViewModel(id);
+            ViewBag.Title = "Create Lineup";
+            ViewBag.ReturnUrl = returnUrl;
             return View(vm);           
             
         }
