@@ -57,23 +57,23 @@ namespace BlueDeck.Controllers
         /// </summary>
         /// <param name="id">The identity of the Component.</param>
         /// <returns></returns>
-        //[HttpPost]
-        //[Route("Documents/Lineup")]
-        //public IActionResult Lineup([Bind] LineupGeneratorViewModel form)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        LineupGenerator gen = new LineupGenerator(form);
-        //        string fileName = $"Lineup {form.ComponentName} {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
-        //        return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
-        //    }
-        //    else
-        //    {
-        //        // TODO: repopulate Select Lists
-        //        form.Vehicles = unitOfWork.Vehicles.GetVehicleSelectListItems();
-        //        return View(form);
-        //    }
-        //}
+        [HttpPost]
+        [Route("Documents/Lineup/{id:int}")]
+        public IActionResult Lineup(int id,[Bind("DistrictName,CommanderName,CommanderTitle,AssistantCommanderName,AssistantCommanderTitle,ComponentName,LineupDate,ShiftCommander,OIC,Members,ShiftWorking")] LineupGeneratorViewModel form)
+        {
+            if (ModelState.IsValid)
+            {
+                LineupGenerator gen = new LineupGenerator(form);
+                string fileName = $"Lineup {form.ComponentName} {DateTime.Now.ToString("MM'-'dd'-'yy")}.docx";
+                return File(gen.Generate(), "application/vnd.openxmlformats-officedocument.wordprocessingml.document", fileName);
+            }
+            else
+            {
+                // TODO: repopulate Select Lists
+                form.Vehicles = unitOfWork.Vehicles.GetVehicleSelectListItems();
+                return View(form);
+            }
+        }
 
         /// <summary>
         /// Downloads an alphabetical roster for the Component with the provided identity.

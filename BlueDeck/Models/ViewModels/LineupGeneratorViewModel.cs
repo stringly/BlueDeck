@@ -13,6 +13,14 @@ namespace BlueDeck.Models.ViewModels
     public class LineupGeneratorViewModel
     {
         /// <summary>
+        /// Gets or sets the component identifier.
+        /// </summary>
+        /// <value>
+        /// The component identifier.
+        /// </value>
+        public int ComponentId { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the district.
         /// </summary>
         /// <value>
@@ -83,6 +91,14 @@ namespace BlueDeck.Models.ViewModels
         public List<VehicleSelectListItem> Vehicles { get; set; }
 
         /// <summary>
+        /// Gets or sets the statuses.
+        /// </summary>
+        /// <value>
+        /// The statuses.
+        /// </value>
+        public List<LineupMemberStatus> Statuses { get; set; }
+
+        /// <summary>
         /// Gets or sets the shift commander.
         /// </summary>
         /// <value>
@@ -125,7 +141,26 @@ namespace BlueDeck.Models.ViewModels
         /// Initializes a new instance of the <see cref="LineupGeneratorViewModel"/> class.
         /// </summary>
         public LineupGeneratorViewModel()
-        {            
+        {
+            Statuses = new List<LineupMemberStatus>()
+            {
+                new LineupMemberStatus(){ StatusId = 0, Status = "On Duty", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 1, Status = "RDO", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 2, Status = "TDY", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 3, Status = "Training", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 4, Status = "Leave (Annual)", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 5, Status = "Leave (Comp)", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 6, Status = "Leave (Military)", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 7, Status = "Leave (FMLA)", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 8, Status = "Leave (Other)", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 9, Status = "Light Duty", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 10, Status = "No Duty", IsOnDuty = false},
+                new LineupMemberStatus(){ StatusId = 11, Status = "Admin Duty", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 12, Status = "Desk", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 13, Status = "On FTO", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 15, Status = "Early Car", IsOnDuty = true},
+                new LineupMemberStatus(){ StatusId = 16, Status = "Power Car", IsOnDuty = true},
+            };
         }
     }
 }

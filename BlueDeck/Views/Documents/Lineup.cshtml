@@ -1,39 +1,63 @@
 ﻿@model LineupGeneratorViewModel
-@{
-    int memberIndex = 0;
-}
+
 <div class="col-xs-12 formContainer">
     <div class="row">
         <form asp-action="Lineup" class="row-border" asp-route-returnUrl="@ViewBag.ReturnUrl">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-sm-3 form-group">
-                        <label asp-for="DistrictName" class="control-label"></label>
-                        <input asp-for="DistrictName" class="form-control" />
-                        <span asp-validation-for="DistrictName" class="text-danger"></span>
+                <div class="lineupDetail">
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="DistrictName" class="control-label"></label>
+                            <input asp-for="DistrictName" class="form-control" />
+                            <span asp-validation-for="DistrictName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="hidden" asp-for="@Model.CommanderTitle">
+                            <label class="control-label">@Model.CommanderTitle</label>
+                            <input asp-for="CommanderName" class="form-control" />
+                            <span asp-validation-for="CommanderName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <input type="hidden" asp-for="@Model.AssistantCommanderTitle">
+                            <label class="control-label">@Model.AssistantCommanderTitle</label>
+                            <input asp-for="AssistantCommanderName" class="form-control" />
+                            <span asp-validation-for="AssistantCommanderName" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="col-sm-3 form-group">
-                        <label class="control-label">@Model.CommanderTitle</label>
-                        <input asp-for="CommanderName" class="form-control" />
-                        <span asp-validation-for="CommanderName" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="ComponentName" class="control-label"></label>
+                            <input asp-for="ComponentName" class="form-control" />
+                            <span asp-validation-for="ComponentName" class="text-danger"></span>
+                        </div>
+                        <div class="col-sm-4 form-group">
+                            <label asp-for="LineupDate" class="control-label"></label>
+                            <input asp-for="LineupDate" class="form-control" />
+                            <span asp-validation-for="LineupDate" class="text-danger"></span>
+                        </div>
                     </div>
-                    <div class="col-sm-3 form-group">
-                        <label class="control-label">@Model.AssistantCommanderTitle</label>
-                        <input asp-for="AssistantCommanderName" class="form-control" />
-                        <span asp-validation-for="AssistantCommanderName" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 form-group">
-                        <label asp-for="ComponentName" class="control-label"></label>
-                        <input asp-for="ComponentName" class="form-control" />
-                        <span asp-validation-for="ComponentName" class="text-danger"></span>
-                    </div>
-                    <div class="col-sm-3 form-group">
-                        <label asp-for="LineupDate" class="control-label"></label>
-                        <input asp-for="LineupDate" class="form-control" />
-                        <span asp-validation-for="LineupDate" class="text-danger"></span>
+                    <div class="row lineupOptions">
+                        <div class="col-sm-4 form-group">
+                            <label class="control-label">Shift Working:</label>
+                            <select class="form-control" id="shiftWorkingAll">
+                                <option value="">Select Shift</option>
+                                <option value="2">Daywork</option>
+                                <option value="3">Evenings</option>
+                                <option value="1">Midnights</option>
+                            </select>
+                            <small>Select a shift to set the "Working" column for all members.</small>
+                        </div>
+                        <div class="col-sm-2 form-checkbox">
+                            <div class="checkbox">
+                                <label><input type="checkbox" id="overlapAll" /> Overlap</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 form-group">
+                            <label class="control-label">Reset Callsigns:</label>
+                            <button id="resetCallsignsButton" type="button" class="btn btn-default">Reset Callsigns</button>
+                            <small></small>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -42,6 +66,9 @@
                             <table class="table table-condensed">
                                 <caption>Shift Commander</caption>
                                 <tr>
+                                    <th>
+                                        Status
+                                    </th>
                                     <th>
                                         Radio
                                     </th>
@@ -64,12 +91,20 @@
                                         MVS
                                     </th>
                                     <th>
-                                        Status
+                                        Note
                                     </th>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <select class="form-control wide statusSelect">
+                                            @foreach (var status in Model.Statuses)
+                                            {
+                                                <option value="@status.StatusId" selected="@(Model.ShiftCommander.StatusId == status.StatusId)" data-isonduty="@status.IsOnDuty" data-statusText="@status.Status">@status.Status</option>
+                                            }
+                                        </select> 
+                                    </td>
                                     <td class="radioCol">
-                                        <input asp-for="ShiftCommander.Callsign" class="form-control narrow" />
+                                        <input asp-for="ShiftCommander.Callsign" class="form-control narrow callsign" data-resetValue="@Model.ShiftCommander.Callsign" />
                                     </td>
                                     <td class="idCol">
                                         <input asp-for="ShiftCommander.BadgeNumber" class="form-control narrow" />
@@ -98,38 +133,38 @@
                                     <td class="workingCol0">
                                         <div class="btn-group-toggle" data-toggle="buttons">
                                             <label class="@(Model.ShiftCommander.IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
-                                                <input asp-for="ShiftCommander.IsOverlap" class="overlapToggle"/> O/L
+                                                <input asp-for="ShiftCommander.IsOverlap" class="overlapToggle" /> O/L
                                             </label>
                                         </div>
                                     </td>
                                     <td class="workingCol1">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="dayShift" value="2" checked> D
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" class="dayShift" value="2"> D
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="eveShift" value="3"> E
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" class="eveShift" value="3"> E
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="ShiftCommander.ShiftWorking" id="midShift" value="1"> M
+                                                <input type="radio" name="ShiftCommander.ShiftWorking" class="midShift" value="1" id="test"> M
                                             </label>
                                         </div>
                                     </td>
                                     <td class="workingCol2">
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="@(Model.ShiftCommander.MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
-                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="0"> F
-                                            </label>
                                             <label class="@(Model.ShiftCommander.MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
-                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="1"> N/F
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="2" class="FunctionalMVS"> F
                                             </label>
                                             <label class="@(Model.ShiftCommander.MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
-                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="2"> N/S
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="1" class="NonfunctionalMVS"> N/F
+                                            </label>
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                <input asp-for="ShiftCommander.MVSStatus" type="radio" value="0" class="NoMVS"> N/S
                                             </label>
                                         </div>
                                     </td>
                                     <td>
-                                        <input asp-for="ShiftCommander.LeaveStatus" class="form-control extraWide" />
+                                        <input asp-for="ShiftCommander.StatusNote" class="form-control extraWide statusNoteBox" />
                                     </td>
                                 </tr>
                             </table>
@@ -138,6 +173,9 @@
                             <table class="table table-condensed">
                                 <caption>Squad OIC</caption>
                                 <tr>
+                                    <th>
+                                        Status
+                                    </th>
                                     <th>
                                         Radio
                                     </th>
@@ -160,12 +198,20 @@
                                         MVS
                                     </th>
                                     <th>
-                                        Status
+                                        Note
                                     </th>
                                 </tr>
                                 <tr>
+                                    <td>
+                                        <select class="form-control wide statusSelect">
+                                            @foreach (var status in Model.Statuses)
+                                            {
+                                                <option value="@status.StatusId" selected="@(Model.OIC.StatusId == status.StatusId)" data-isonduty="@status.IsOnDuty" data-statusText="@status.Status">@status.Status</option>
+                                            }
+                                        </select>
+                                    </td>
                                     <td class="radioCol">
-                                        <input asp-for="OIC.Callsign" class="form-control narrow" />
+                                        <input asp-for="OIC.Callsign" class="form-control narrow callsign" data-resetValue="@Model.OIC.Callsign" />
                                     </td>
                                     <td class="idCol">
                                         <input asp-for="OIC.BadgeNumber" class="form-control narrow" />
@@ -191,7 +237,7 @@
                                             <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="OICResetCruiserNumber"></i>
                                             <input type="text" id="OICCruiserNumberTextBox" class="form-control cruiserTextBox" />
                                         </div>
-                                        
+
                                     </td>
                                     <td class="workingCol0">
                                         <div class="btn-group-toggle" data-toggle="buttons">
@@ -201,33 +247,33 @@
                                         </div>
                                     </td>
                                     <td class="workingCol1">
-                                        <div class="btn-group" data-toggle="buttons">
+                                        <div class="btn-group shiftWorkingGroup" data-toggle="buttons">
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="OIC.ShiftWorking" id="dayShift" value="2" checked> D
+                                                <input type="radio" name="OIC.ShiftWorking" class="dayShift" value="2"> D
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="OIC.ShiftWorking" id="eveShift" value="3"> E
+                                                <input type="radio" name="OIC.ShiftWorking" class="eveShift" value="3"> E
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input type="radio" name="OIC.ShiftWorking" id="midShift" value="1"> M
+                                                <input type="radio" name="OIC.ShiftWorking" class="midShift" value="1"> M
                                             </label>
                                         </div>
                                     </td>
                                     <td class="workingCol2">
                                         <div class="btn-group" data-toggle="buttons">
                                             <label class="btn btn-secondary">
-                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 0 ? true : false)"  value="0"> F
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 2 ? true : false)" value="2" class="FunctionalMVS"> F
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 1 ? true : false)" value="1"> N/F
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 1 ? true : false)" value="1" class="NonfunctionalMVS"> N/F
                                             </label>
                                             <label class="btn btn-secondary">
-                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 2 ? true : false)" value="2"> N/S
+                                                <input asp-for="OIC.MVSStatus" type="radio" checked="@(Model.OIC.MVSStatus == 0 ? true : false)" value="0" class="NoMVS"> N/S
                                             </label>
                                         </div>
                                     </td>
                                     <td>
-                                        <input asp-for="OIC.LeaveStatus" class="form-control extraWide" />
+                                        <input asp-for="OIC.StatusNote" class="form-control extraWide statusNoteBox" />
                                     </td>
                                 </tr>
                             </table>
@@ -236,6 +282,9 @@
                             <table class="table table-condensed">
                                 <caption>@Model.ComponentName</caption>
                                 <tr>
+                                    <th>
+                                        Status
+                                    </th>
                                     <th>
                                         Radio
                                     </th>
@@ -258,83 +307,100 @@
                                         MVS
                                     </th>
                                     <th>
-                                        Status
+                                        Note
                                     </th>
                                 </tr>
-                                
-                                @foreach (var worker in Model.Members)
+
+                                @for (var i = 0; i < Model.Members.Count; i++)
                                 {
 
                                     <tr>
+                                        <td>
+                                            <select class="form-control wide statusSelect">
+                                                @foreach (var status in Model.Statuses)
+                                                {
+                                                    <option value="@status.StatusId" selected="@(Model.Members[i].StatusId == status.StatusId)" data-isonduty="@status.IsOnDuty" data-statusText="@status.Status">@status.Status</option>
+                                                }
+                                            </select>
+                                        </td>
                                         <td class="radioCol">
-                                            <input asp-for="@worker.Callsign" class="form-control narrow" />
+                                            <input asp-for="@Model.Members[i].Callsign" class="form-control narrow callsign" data-resetValue="@Model.Members[i].Callsign" />
                                         </td>
                                         <td class="idCol">
-                                            <input asp-for="@worker.BadgeNumber" class="form-control narrow" />
+                                            <input asp-for="@Model.Members[i].BadgeNumber" class="form-control narrow" />
                                         </td>
                                         <td>
-                                            <input asp-for="@worker.Rank" class="form-control narrow" />
+                                            <input asp-for="@Model.Members[i].Rank" class="form-control narrow" />
                                         </td>
                                         <td>
-                                            <input asp-for="@worker.MemberName" class="form-control wide" />
+                                            <input asp-for="@Model.Members[i].MemberName" class="form-control wide" />
                                         </td>
                                         <td>
-                                            <input type="hidden" id="@($"worker_{@memberIndex}_CruiserNumber")" name="@($"worker[{memberIndex}].CruiserNumber")" />
-                                            <select id="Worker-@memberIndex-CruiserNumberDropDown" data-workerNumber="@memberIndex" class="form-control cruiserNumber">
-                                                <option value="None" selected="@(worker.CruiserNumber  == null)" data-mvs="false" data-mdt="false">None</option>
+                                            <input type="hidden" id="@($"Members_{i}_CruiserNumber")" name="@($"Members[{i}].CruiserNumber")" />
+                                            <select id="Worker-@i-CruiserNumberDropDown" data-workerNumber="@i" class="form-control cruiserNumber">
+                                                <option value="None" selected="@(Model.Members[i].CruiserNumber  == null)" data-mvs="false" data-mdt="false">None</option>
                                                 <option value="Custom">Custom</option>
                                                 @foreach (var vehicle in Model.Vehicles)
                                                 {
-                                                    <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == worker.CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
+                                                    <option value="@vehicle.CruiserNumber" selected="@(vehicle.CruiserNumber == Model.Members[i].CruiserNumber)" data-mvs="@vehicle.HasMVS" data-mdt="@vehicle.HasMDT">@vehicle.CruiserNumber</option>
                                                 }
                                             </select>
-                                            <div class="inner-addon right-addon" id="Worker-@memberIndex-CustomCruiserNumberGroup" style="display:none" data-workernumber="@memberIndex">
-                                                <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="Worker-@memberIndex-ResetCruiserNumber" data-workernumber="@memberIndex"></i>
-                                                <input type="text" id="Worker-@memberIndex-CruiserNumberTextBox" class="form-control cruiserTextBox" data-workernumber="@memberIndex" />
+                                            <div class="inner-addon right-addon" id="Worker-@i-CustomCruiserNumberGroup" style="display:none" data-workernumber="@i">
+                                                <i class="glyphicon glyphicon-remove resetCruiserNumberButton" id="Worker-@i-ResetCruiserNumber" data-workernumber="@i"></i>
+                                                <input type="text" id="Worker-@i-CruiserNumberTextBox" class="form-control cruiserTextBox" data-workernumber="@i" />
                                             </div>
-                                            
+
                                         </td>
                                         <td class="workingCol0">
                                             <div class="btn-group-toggle" data-toggle="buttons">
-                                                <label class="@(Model.ShiftCommander.IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
-                                                    <input asp-for="@worker.IsOverlap" class="overlapToggle" /> O/L
+                                                <label class="@(Model.Members[i].IsOverlap == true ? "btn btn-secondary active" : "btn btn-secondary")">
+                                                    <input asp-for="@Model.Members[i].IsOverlap" class="overlapToggle" /> O/L
                                                 </label>
                                             </div>
                                         </td>
                                         <td class="workingCol1">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="dayShift" value="2" checked> D
+                                                    <input type="radio" name="Members[@i].ShiftWorking" class="dayShift" value="2"> D
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="eveShift" value="3"> E
+                                                    <input type="radio" name="Members[@i].ShiftWorking" class="eveShift" value="3"> E
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input type="radio" name="Members[@memberIndex].ShiftWorking" id="midShift" value="1"> M
+                                                    <input type="radio" name="Members[@i].ShiftWorking" class="midShift" value="1"> M
                                                 </label>
                                             </div>
                                         </td>
                                         <td class="workingCol2">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-secondary">
-                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 0 ? true : false)" value="0"> F
+                                                    <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 2 ? true : false)" value="2" class="FunctionalMVS"> F
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 1 ? true : false)" value="1"> N/F
+                                                    <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 1 ? true : false)" value="1" class="NonfunctionalMVS"> N/F
                                                 </label>
                                                 <label class="btn btn-secondary">
-                                                    <input asp-for="@worker.MVSStatus" type="radio" checked="@(worker.MVSStatus == 2 ? true : false)" value="2"> N/S
+                                                    <input asp-for="@Model.Members[i].MVSStatus" type="radio" checked="@(Model.Members[i].MVSStatus == 0 ? true : false)" value="0" class="NoMVS"> N/S
                                                 </label>
                                             </div>
                                         </td>
                                         <td>
-                                            <input asp-for="@worker.LeaveStatus" class="form-control extraWide" />
+                                            <input asp-for="@Model.Members[i].StatusNote" class="form-control extraWide statusNoteBox" />
                                         </td>
-                                    </tr>
-                                    @(memberIndex++)
+                                    </tr>                                    
                                 }
                             </table>
-                        </div>                        
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <div class="lineupDetail">
+                            <a href="@ViewBag.ReturnUrl" class="btn btn-default">Cancel</a>
+                            <a asp-action="Lineup" asp-route-id="@Model.ComponentId" asp-route-returnUrl="@ViewBag.ReturnUrl" class="btn btn-warning">Reset</a>
+                            <input type="submit" value="Generate Lineup" class="btn btn-primary" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -355,12 +421,298 @@
         [].forEach.call(cruiserNumberResetButtons, function (elem) {
             elem.addEventListener("click", handleResetCruiserNumber, false);
         })
+        var statusSelectLists = document.getElementsByClassName("statusSelect");
+        [].forEach.call(statusSelectLists, function (elem) {
+            elem.addEventListener("change", handleStatusSelectChange, false);
+        });
+        document.getElementById("shiftWorkingAll").addEventListener("change", handleShiftWorkingAllChange, false);
+        document.getElementById("overlapAll").addEventListener("change", handleOverlapAllChange, false);
+        document.getElementById("resetCallsignsButton").addEventListener("click", ResetCallsigns, false);
     })
+
+    function handleShiftWorkingAllChange(e) {
+        var selectedVal = e.target.options[e.target.selectedIndex].value;
+        switch (selectedVal) {
+            case "1":                
+                var midButtons = document.getElementsByClassName("midShift");
+                for (var i = 0; i < midButtons.length; i++) {
+                    // check to ensure that the "status" in the same row is "OnDuty"
+                    if (isRowOnDuty(midButtons[i])) {
+                        midButtons[i].checked = true;
+                        $(midButtons[i].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                }
+                updateCallsigns(1);
+                break;
+            case "2":
+                var dayButtons = document.getElementsByClassName("dayShift");
+                for (var i = 0; i < dayButtons.length; i++) {
+                    if (isRowOnDuty(dayButtons[i])) {
+                        dayButtons[i].checked = true;
+                        $(dayButtons[i].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                }
+                updateCallsigns(2);
+                break;
+            case "3":
+                var eveButtons = document.getElementsByClassName("eveShift");
+                for (var i = 0; i < eveButtons.length; i++) {
+                    if (isRowOnDuty(eveButtons[i])) {
+                        eveButtons[i].checked = true;
+                        $(eveButtons[i].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                }
+                updateCallsigns(3);
+                break;
+        }
+    }
+    function isRowOnDuty(elem) {
+        var row = $(elem).closest("tr");
+        var statusOption = row.find(".statusSelect").find(":selected");
+        return (statusOption.data("isonduty") == "True");
+    }
+    function handleOverlapAllChange(e) {
+        var shift = document.getElementById("shiftWorkingAll").options[document.getElementById("shiftWorkingAll").selectedIndex].value;
+        var overlapButtons = document.getElementsByClassName("overlapToggle");
+        if (e.target.checked) {
+            for (var i = 0; i < overlapButtons.length; i++) {
+                if (isRowOnDuty(overlapButtons[i])) {
+                    overlapButtons[i].checked = true;
+                    $(overlapButtons[i].parentElement).addClass("active");                
+                }
+            }
+            if (shift) {
+                updateCallsigns(shift);
+            }
+        }
+        else {            
+            for (var i = 0; i < overlapButtons.length; i++) {
+                if (isRowOnDuty(overlapButtons[i])) {
+                    overlapButtons[i].checked = false;
+                    $(overlapButtons[i].parentElement).removeClass("active");
+                }                
+            }
+            if (shift) {
+                updateCallsigns(shift);
+            }
+        }
+
+    }
+
+    function updateCallsigns(shift) {
+        var callsigns = document.getElementsByClassName("callsign");
+        var isOverlap = document.getElementById("overlapAll").checked;
+        for (i = 0; i < callsigns.length; i++) {
+            if (/^[a-zA-Z]\d\d?$/.test(callsigns[i].value)) {
+                // callsign is non-overlap beat with no shift
+                console.log("Non-overlap, beat, no shift");
+                if (!isOverlap) {
+                    callsigns[i].value = [callsigns[i].value.slice(0, 0), shift, callsigns[i].value.slice(0)].join('');
+                }
+                else {
+                    // determine if A[n] or A[n][n]
+                    if (callsigns[i].value.length < 3) {
+                        // A[n]
+                        sector = callsigns[i].value.substring(0, 1);
+                        beat = callsigns[i].value.substring(1, 2);
+                        callsigns[i].value = sector + shift + "0" + beat;
+                    }
+                    else {
+                        // A[n]
+                        sector = callsigns[i].value.substring(0, 1);
+                        beat = callsigns[i].value.substring(1, callsigns[i].value.length);
+                        callsigns[i].value = sector + shift + beat;
+                    }
+                }
+                
+            }
+            else if (/^\d[a-zA-Z]\d\d?$/.test(callsigns[i].value)) {
+                // callsign is non-overlap beat AND shift
+                console.log("Non-overlap, beat AND shift");
+                sector = callsigns[i].value[1];
+                beat = callsigns[i].value.substring(2, callsigns[i].value.length);
+                if (!isOverlap) {
+                    callsigns[i].value = shift + sector + beat;
+                }
+                else {
+                    if (beat.length > 1) {
+                        console.log(sector + shift + beat);
+                        callsigns[i].value = sector + shift + beat;
+                    }
+                    else {
+                        callsigns[i].value = sector + shift + "0" + beat;
+                    }
+                }
+                //str = callsigns[i].value.substring(1, callsigns[i].value.length);
+                //callsigns[i].value = shift + str;
+            }
+            else if (/^[a-zA-Z]\d\d\d$/.test(callsigns[i].value)) {
+                // callsign is overlap beat and shift
+                console.log("Overlap, beat and shift");
+                if (!isOverlap) {
+                    if (callsigns[i].value[2] != "0") {
+                        // 2-digit callsign
+                        sector = sector = callsigns[i].value[0];
+                        beat = callsigns[i].value.substring(2, callsigns[i].value.length);
+                        console.log(shift + sector + beat);
+                        callsigns[i].value = shift + sector + beat;
+                }
+                    else {
+                        // single-digit callsign
+                        sector = sector = callsigns[i].value[0];
+                        beat = callsigns[i].value[3];
+                        callsigns[i].value = shift + sector + beat;
+                    }
+                }
+                else {
+                    if (callsigns[i].value[2] != "0") {
+                        // 2-digit callsign
+                        sector = callsigns[i].value[0];
+                        beat = callsigns[i].value.substring(2, callsigns[i].value.length);
+                        callsigns[i].value = sector + shift + beat;
+                }
+                    else {
+                        // single-digit callsign                        
+                        sector = callsigns[i].value[0];
+                        beat = callsigns[i].value[3];
+                        callsigns[i].value = sector + shift + "0" + beat;
+                    }
+                }
+                
+            }
+            else {
+                console.log("Callsign format not recognized.");
+            }
+        }
+    }
+
+    function ResetCallsigns() {
+        document.getElementById("shiftWorkingAll").selectedIndex = 0;
+        document.getElementById("overlapAll").checked = false;
+        var callsigns = document.getElementsByClassName("callsign");        
+        for (var i = 0; i < callsigns.length; i++) {
+            callsigns[i].value = callsigns[i].dataset.resetvalue;
+        }
+        var overlapButtons = document.getElementsByClassName("overlapToggle");
+        for (var i = 0; i < overlapButtons.length; i++) {
+            overlapButtons[i].checked = false;
+            $(overlapButtons[i].parentElement).removeClass("active");
+        }
+        var midButtons = document.getElementsByClassName("midShift");
+        for (var i = 0; i < midButtons.length; i++) {
+            midButtons[i].checked = false;
+            $(midButtons[i].parentElement).removeClass("active").siblings().removeClass("active");
+
+        }
+        var dayButtons = document.getElementsByClassName("dayShift");
+        for (var i = 0; i < dayButtons.length; i++) {
+            dayButtons[i].checked = false;
+            $(dayButtons[i].parentElement).removeClass("active").siblings().removeClass("active");
+
+        }
+        var eveButtons = document.getElementsByClassName("eveShift");
+        for (var i = 0; i < eveButtons.length; i++) {
+            eveButtons[i].checked = false;
+            $(eveButtons[i].parentElement).removeClass("active").siblings().removeClass("active");
+        }        
+    }
+
+    function updateSingleCallsign(elem) {
+        var preservedCallsign = elem.dataset.resetvalue;
+        var selectedShift = document.getElementById("shiftWorkingAll").options[document.getElementById("shiftWorkingAll").selectedIndex].value;
+        var isOverlap = document.getElementById("overlapAll").checked; 
+        if (!preservedCallsign) {
+            return;
+        }
+        else {
+            if (!selectedShift || elem.id == "ShiftCommander_Callsign") {
+                elem.value = preservedCallsign;
+                return;
+            }
+            if (!isOverlap) {
+                elem.value = selectedShift + preservedCallsign;
+            }
+            else {
+                if (preservedCallsign.length > 2) {
+                    var sector = preservedCallsign[0];
+                    var beat = preservedCallsign.substring(1, preservedCallsign.length);
+                    elem.value = sector + selectedShift + beat;
+                }
+                else {
+                    var sector = preservedCallsign[0];
+                    var beat = preservedCallsign[1];
+                    elem.value = sector + selectedShift + "0" + beat;
+                }
+            }
+        }        
+    }
+
+    function handleStatusSelectChange(e) {
+        var cell = e.target.parentNode;
+        var row = cell.parentNode;
+        var statusBox = row.getElementsByClassName("statusNoteBox")[0];
+        var callsignBox = row.getElementsByClassName("callsign")[0]
+        if (e.target.options[e.target.selectedIndex].dataset.isonduty == "True") {
+            callsignBox.disabled = false;
+            if (callsignBox.value.length == 0) {
+                updateSingleCallsign(callsignBox);
+                shiftWorkingAll = document.getElementById("shiftWorkingAll");
+                isOverlapAll = document.getElementById("overlapAll").checked;
+                if (isOverlapAll) {
+                    row.getElementsByClassName("overlapToggle")[0].checked = true;
+                    $(row.getElementsByClassName("overlapToggle")[0].parentElement).addClass("active");
+                }
+                else {
+                    row.getElementsByClassName("overlapToggle")[0].checked = false;
+                    $(row.getElementsByClassName("overlapToggle")[0].parentElement).removeClass("active");
+                }
+                if (shiftWorkingAll) {
+                    switch (shiftWorkingAll.value) {
+                        case "1":
+                            $(row.getElementsByClassName("midShift")[0].parentElement).addClass("active")
+                            row.getElementsByClassName("midShift")[0].checked = true;
+                            break;
+                        case "2":
+                            $(row.getElementsByClassName("dayShift")[0].parentElement).addClass("active")
+                            row.getElementsByClassName("dayShift")[0].checked = true;
+                            break;
+                        case "3":
+                            $(row.getElementsByClassName("eveShift")[0].parentElement).addClass("active")
+                            row.getElementsByClassName("eveShift")[0].checked = true;
+                            break;                     
+                    }
+                }
+
+            }
+            if (e.target.options[e.target.selectedIndex].dataset.statustext == "On Duty") {
+                statusBox.value = "";
+            }
+            else {
+                statusBox.value = e.target.options[e.target.selectedIndex].dataset.statustext;
+            }
+            
+        }
+        else {
+            callsignBox.value = ""
+            callsignBox.disabled = true;
+            statusBox.value = e.target.options[e.target.selectedIndex].dataset.statustext;
+            row.getElementsByClassName("overlapToggle")[0].checked = false;
+            $(row.getElementsByClassName("overlapToggle")[0].parentElement).removeClass("active");
+            row.getElementsByClassName("midShift")[0].checked = false;
+            $(row.getElementsByClassName("midShift")[0].parentElement).removeClass("active");
+            row.getElementsByClassName("dayShift")[0].checked = false;
+            $(row.getElementsByClassName("dayShift")[0].parentElement).removeClass("active");
+            row.getElementsByClassName("eveShift")[0].checked = false;
+            $(row.getElementsByClassName("eveShift")[0].parentElement).removeClass("active");
+        }
+
+    }
 
     function handleCruiserDropDownChange(e) {
         var selectedVal = e.target.options[e.target.selectedIndex].value;
         console.log("Cruiser #" + selectedVal);
-
+        var cell = e.target.parentNode;
+        var row = cell.parentNode;
         switch (e.target.id) {
             case "ShiftCommanderCruiserDropDown":             
                 console.log("Shift Commander Change");
@@ -370,6 +722,14 @@
                 }
                 else {
                     $("#ShiftCommander_CruiserNumber").val(selectedVal);
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                        row.getElementsByClassName("FunctionalMVS")[0].checked = true;
+                        $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                    else {
+                        row.getElementsByClassName("NoMVS")[0].checked = true;
+                        $(row.getElementsByClassName("NoMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
                 }
                 
                 break;
@@ -381,6 +741,14 @@
                 }
                 else {
                     $("#OIC_CruiserNumber").val(selectedVal);
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                        row.getElementsByClassName("FunctionalMVS")[0].checked = true;
+                        $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                    else {
+                        row.getElementsByClassName("NoMVS")[0].checked = true;
+                        $(row.getElementsByClassName("NoMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
                 }                
                 break;
             default:
@@ -391,7 +759,15 @@
                     $("#Worker-" + memberId + "-CustomCruiserNumberGroup").show();
                 }
                 else {
-                    $("#worker_" + memberId + "_CruiserNumber").val(selectedVal);
+                    $("#Members_" + memberId + "_CruiserNumber").val(selectedVal);
+                    if (e.target.options[e.target.selectedIndex].dataset.mvs == true) {
+                        row.getElementsByClassName("FunctionalMVS")[0].checked = true;
+                        $(row.getElementsByClassName("FunctionalMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
+                    else {
+                        row.getElementsByClassName("NoMVS")[0].checked = true;
+                        $(row.getElementsByClassName("NoMVS")[0].parentElement).addClass("active").siblings().removeClass("active");
+                    }
                 }
                 
                 break;
@@ -427,7 +803,7 @@
             default:
                 var memberId = e.target.dataset.workernumber;
                 console.log("Worker #" + memberId + "Change");
-                var previousValue = $("#worker_" + memberId + "_CruiserNumber").val();
+                var previousValue = $("#Members_" + memberId + "_CruiserNumber").val();
                 if (previousValue.length != 0 && $("#Worker-" + memberId + "-CruiserNumberDropDown option[value='" + previousValue + "']").length > 0) {
                     $("#Worker-" + memberId + "-CruiserNumberDropDown").val(previousValue);
                 }
@@ -443,16 +819,18 @@
     function handleCruiserTextBoxChange(e) {
         var currentVal = e.target.value;
         switch (e.target.id) {
-            case "ShiftCommanderResetCruiserNumber":
+            case "ShiftCommanderCruiserNumberTextBox":
                 $("#ShiftCommander_CruiserNumber").val(currentVal);
                 break;
-            case "OICResetCruiserNumber":
+            case "OICCruiserNumberTextBox":
                 $("#OIC_CruiserNumber").val(currentVal);
                 break;
             default:
                 var memberId = e.target.dataset.workernumber;
-                $("#worker_" + memberId + "_CruiserNumber").val(currentVal);
+                $("#Members_" + memberId + "_CruiserNumber").val(currentVal);
                 break;
         }
     }
+
+
 </script>

@@ -9,6 +9,7 @@ using System.Linq;
 using BlueDeck.Models.APIModels;
 using System.Threading.Tasks;
 using System;
+using BlueDeck.Models.Enums;
 
 namespace BlueDeck.Persistence.Repositories
 {
@@ -922,6 +923,7 @@ namespace BlueDeck.Persistence.Repositories
             Member DistrictCommander = DistrictComponent.GetManager();
             Member AssistantCommander = DistrictComponent.GetAssistantManager();
             Member ShiftCommander = DistrictComponent.ParentComponent.GetManager();
+            vm.ComponentId = c.ComponentId;
             vm.CommanderName = DistrictCommander?.GetTitleName() ?? "VACANT";
             vm.CommanderTitle = DistrictCommander?.Position?.Name ?? $"{DistrictComponent.Name} Commander";
             vm.AssistantCommanderName = AssistantCommander?.GetTitleName() ?? "VACANT";
@@ -946,7 +948,8 @@ namespace BlueDeck.Persistence.Repositories
                         vm.Members.Add(new LineupMember(m));
                     }
                 }                
-            } 
+            }            
+
             return vm;
         }
     }

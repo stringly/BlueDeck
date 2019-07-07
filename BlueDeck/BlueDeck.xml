@@ -493,6 +493,13 @@
             <param name="id">The identifier.</param>
             <returns></returns>
         </member>
+        <member name="M:BlueDeck.Controllers.DocumentsController.Lineup(System.Int32,BlueDeck.Models.ViewModels.LineupGeneratorViewModel)">
+            <summary>
+            Downloads an Component roster for the Component with the provided identity.
+            </summary>
+            <param name="id">The identity of the Component.</param>
+            <returns></returns>
+        </member>
         <member name="M:BlueDeck.Controllers.DocumentsController.DownloadAlphaRoster(System.Int32)">
             <summary>
             Downloads an alphabetical roster for the Component with the provided identity.
@@ -3645,6 +3652,31 @@
             <param name="_componentId">The component id. This is required for the Table's BookMarkStart/End.</param>
             <returns></returns>
         </member>
+        <member name="T:BlueDeck.Models.DocGenerators.LineupGenerator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.DocGenerators.LineupGenerator.Model">
+            <summary>
+            Gets or sets the model.
+            </summary>
+            <value>
+            The model.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.DocGenerators.LineupGenerator.#ctor(BlueDeck.Models.ViewModels.LineupGeneratorViewModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.DocGenerators.LineupGenerator"/> class.
+            </summary>
+            <param name="_model">The model.</param>
+        </member>
+        <member name="M:BlueDeck.Models.DocGenerators.LineupGenerator.Generate">
+            <summary>
+            Generates this instance.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:BlueDeck.Models.Enums.AppStatus">
             <summary>
             Enumeration Class for Application Statuses
@@ -5355,7 +5387,7 @@
             The name of the member.
             </value>
         </member>
-        <member name="P:BlueDeck.Models.Types.LineupMember.LeaveStatus">
+        <member name="P:BlueDeck.Models.Types.LineupMember.StatusNote">
             <summary>
             Gets or sets the leave status.
             </summary>
@@ -5395,11 +5427,71 @@
               <c>true</c> if this instance is overlap; otherwise, <c>false</c>.
             </value>
         </member>
+        <member name="P:BlueDeck.Models.Types.LineupMember.StatusId">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.LineupMember.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMember"/> class.
+            </summary>
+        </member>
         <member name="M:BlueDeck.Models.Types.LineupMember.#ctor(BlueDeck.Models.Member)">
             <summary>
             Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMember"/> class.
             </summary>
             <param name="_member">The member.</param>
+        </member>
+        <member name="T:BlueDeck.Models.Types.LineupMemberStatus">
+            <summary>
+            Type used to set the Working Status of a <see cref="T:BlueDeck.Models.Types.LineupMember"/>
+            </summary>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMemberStatus.StatusId">
+            <summary>
+            Gets or sets the status identifier.
+            </summary>
+            <value>
+            The status identifier.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMemberStatus.IsOnDuty">
+            <summary>
+            Gets or sets a value indicating whether this instance is on duty.
+            </summary>
+            <value>
+              <c>true</c> if this instance is on duty; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.Types.LineupMemberStatus.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="M:BlueDeck.Models.Types.LineupMemberStatus.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMemberStatus"/> class.
+            </summary>
+        </member>
+        <member name="M:BlueDeck.Models.Types.LineupMemberStatus.#ctor(BlueDeck.Models.Enums.DutyStatus)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMemberStatus"/> class.
+            </summary>
+            <param name="_dutyStatus">The duty status.</param>
+        </member>
+        <member name="M:BlueDeck.Models.Types.LineupMemberStatus.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BlueDeck.Models.Types.LineupMemberStatus"/> class.
+            </summary>
+            <param name="_statusName">Name of the status.</param>
+            <param name="_isOnDuty">if set to <c>true</c> [is on duty].</param>
         </member>
         <member name="T:BlueDeck.Models.Types.MappedField">
             <summary>
@@ -6696,6 +6788,14 @@
             View Model used in the Documents/Lineup view
             </summary>
         </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.ComponentId">
+            <summary>
+            Gets or sets the component identifier.
+            </summary>
+            <value>
+            The component identifier.
+            </value>
+        </member>
         <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.DistrictName">
             <summary>
             Gets or sets the name of the district.
@@ -6758,6 +6858,14 @@
             </summary>
             <value>
             A list of <see cref="T:BlueDeck.Models.Types.VehicleSelectListItem"/> used to populate drop-down lists.
+            </value>
+        </member>
+        <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.Statuses">
+            <summary>
+            Gets or sets the statuses.
+            </summary>
+            <value>
+            The statuses.
             </value>
         </member>
         <member name="P:BlueDeck.Models.ViewModels.LineupGeneratorViewModel.ShiftCommander">
