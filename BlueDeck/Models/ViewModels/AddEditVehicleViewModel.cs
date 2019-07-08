@@ -203,6 +203,8 @@ namespace BlueDeck.Models.ViewModels
             AssignedToMemberId = _v.AssignedToMemberId;
             AssignedToPositionId = _v.AssignedToPositionId;
             AssignedToComponentId = _v.AssignedToComponentId;
+            HasMDT = _v.HasMDT;
+            HasMVS = _v.HasMVS;
         }
 
     }

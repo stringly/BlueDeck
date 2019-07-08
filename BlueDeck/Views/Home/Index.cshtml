@@ -328,8 +328,8 @@
                 <br />
                 <h4>Generate Documents</h4>
                 <hr />
-                <div class="row">                    
-                    <div class="col-sm-10 form-group">
+                <div class="row">
+                    <div class="col-sm-10 col-md-8 col-lg-6 form-group">
                         <label class="control-label">Select a Component:</label>
                         @Html.DropDownList("SelectedComponent",
                                 new SelectList(Model.Components, "Id", "ComponentName"),
@@ -365,6 +365,15 @@
                         </a>
                         <strong>Generate an Organizational Chart</strong><br />
                         <small>Component Roster will generate an organizational chart for the selected Component and all of its subordinate components.</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10 form-group HomePageDocumentButtonGroup">
+                        <a style="line-height:43px" class="btn btn-default bigSquareButton pull-left" id="GenerateLineup">
+                            <img style="height:25px; width:25px;" src="~/lib/bluedeck/css/images/clipboard-512.png">
+                        </a>
+                        <strong>Generate a Daily Squad Lineup</strong><br />
+                        <small>A Daily Squad Lineup will show duty status, callsign, and cruiser information for officers assigned to a patrol squad.</small>
                     </div>
                 </div>
             </div>
@@ -492,6 +501,7 @@
         document.getElementById("GenerateAlphaRoster").addEventListener('click', handleAlphaRosterClick, false);
         document.getElementById("GenerateComponentRoster").addEventListener('click', handleComponentRosterClick, false);
         document.getElementById("GenerateOrgChart").addEventListener('click', handleOrgChartClick, false);
+        document.getElementById("GenerateLineup").addEventListener('click', handleGenerateLineupClick, false);
         
         $("#SelectedComponent").change(function () {
             $("#selectedComponentMessage").text("");
@@ -499,12 +509,14 @@
                 document.getElementById("GenerateAlphaRoster").removeAttribute('href');
                 document.getElementById("GenerateComponentRoster").removeAttribute('href');
                 document.getElementById("GenerateOrgChart").removeAttribute('href');
+                document.getElementById("#GenerateLineup").removeAttribute('href');
             }
             else {
                 componentId = $(this).val();
                 document.getElementById("GenerateAlphaRoster").href = "Home/DownloadAlphaRoster/" + componentId;
                 document.getElementById("GenerateComponentRoster").href = "Home/DownloadComponentRoster/" + componentId;
                 document.getElementById("GenerateOrgChart").href = "Home/DownloadOrganizationChart/" + componentId;
+                document.getElementById("GenerateLineup").href = "/Documents/Lineup/" + componentId + "?returnUrl=/Home/Index";
             }
 
         });
@@ -553,19 +565,25 @@
     function handleAlphaRosterClick(e) {
         var componentId = $("#SelectedComponent").val();
         if (componentId == "") {
-            $("#selectedComponentMessage").text("Select a Component")
+            $("#selectedComponentMessage").text("Select a Component");
         }
     }
     function handleComponentRosterClick(e) {
         var componentId = $("#SelectedComponent").val();
         if (componentId == "") {
-            $("#selectedComponentMessage").text("Select a Component")
+            $("#selectedComponentMessage").text("Select a Component");
         }
     }
     function handleOrgChartClick(e) {
         var componentId = $("#SelectedComponent").val();
         if (componentId == "") {
-            $("#selectedComponentMessage").text("Select a Component")
+            $("#selectedComponentMessage").text("Select a Component");
+        }
+    }
+    function handleGenerateLineupClick(e) {
+        var componentId = $("#SelectedComponent").val();
+        if (componentId == "") {
+            $("#selectedComponentMessage").text("Select a Component");
         }
     }
 </script>

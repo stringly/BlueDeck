@@ -37,7 +37,7 @@
                             <span asp-validation-for="LineupDate" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="row lineupOptions">
+                    <div class="row lineupOptions blankslate">
                         <div class="col-sm-4 form-group">
                             <label class="control-label">Shift Working:</label>
                             <select class="form-control" id="shiftWorkingAll">
@@ -57,7 +57,7 @@
                             <label class="control-label">Reset Callsigns:</label>
                             <button id="resetCallsignsButton" type="button" class="btn btn-default">Reset Callsigns</button>
                             <small></small>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
                 <div class="row">
@@ -152,10 +152,10 @@
                                     </td>
                                     <td class="workingCol2">
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="@(Model.ShiftCommander.MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                 <input asp-for="ShiftCommander.MVSStatus" type="radio" value="2" class="FunctionalMVS"> F
                                             </label>
-                                            <label class="@(Model.ShiftCommander.MVSStatus == 2 ? "btn btn-secondary active" : "btn btn-secondary")">
+                                            <label class="@(Model.ShiftCommander.MVSStatus == 1 ? "btn btn-secondary active" : "btn btn-secondary")">
                                                 <input asp-for="ShiftCommander.MVSStatus" type="radio" value="1" class="NonfunctionalMVS"> N/F
                                             </label>
                                             <label class="@(Model.ShiftCommander.MVSStatus == 0 ? "btn btn-secondary active" : "btn btn-secondary")">
